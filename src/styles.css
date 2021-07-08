@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+*
+{
+  background-color: #0d00a4;
+  color: #ff9e00;
+}
+
+.btn-outline{
+  border-color: #ff9e00 !important;
+}
