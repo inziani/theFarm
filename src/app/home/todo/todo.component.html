@@ -1,7 +1,4 @@
 
-
-
-
 <div class="container">
   <div class="row">
     <!-- Left side navigation bar -->
@@ -13,11 +10,10 @@
     <div class="col-10">
       <div class="row">
         <div class="col-12">
-
-          <div class="card mb-3" >
+          <div class="card mb-3 border-0" >
             <div class="row g-0">
               <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <img src="#" class="img-fluid rounded-start" alt="profilepics" style="width: 150px; height: 150px;">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -28,42 +24,42 @@
               </div>
             </div>
           </div>
-
-
-
-
         </div>
       </div>
+      <br>
+      <br>
+      <br>
       <!-- Activitys Management cards -->
           <div class="row">
             <div class="col-sm-4">
-              <div class="card">
+              <div class="card border-0">
                 <div class="card-body">
                   <h5 class="card-title">New Activity</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Create new activity</a>
+                  <a class="btn btn-primary" routerLink="/newActivity">Create new activity</a>
                 </div>
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="card">
+              <div class="card border-0">
                 <div class="card-body">
                   <h5 class="card-title">Work in progress</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">View WIP Activitys</a>
+                  <a class="btn btn-primary">View WIP Activitys</a>
                 </div>
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="card">
+              <div class="card border-0">
                 <div class="card-body">
                   <h5 class="card-title">Completed Activities</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">View completed activitys</a>
+                  <a class="btn btn-primary">View completed activitys</a>
                 </div>
               </div>
             </div>
           </div>
+          <br>
           <br>
 
           <!--  Table to display the activitys -->
@@ -71,36 +67,24 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Activity</th>
+                  <th scope="col">#id</th>
+                  <th scope="col">Activity Title</th>
                   <th scope="col">Description</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Date</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody  *ngFor="let activity of activityList">
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry the Bird</td>
-                  <td>@facebook</td>
-                  <td>@twitter</td>
+                  <th scope="row">{{ activity.id }}</th>
+                  <td>{{ activity.name }}</td>
+                  <td>{{ activity.description }}</td>
+                  <th><button class="btn btn-success">Created</button></th>
+                  <td>{{ todaysDate | date: 'fullDate' }} </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-
     </div>
   </div>
 </div>

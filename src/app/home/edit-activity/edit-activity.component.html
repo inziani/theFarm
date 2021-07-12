@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card mx-auto mt-5" style="width: 40rem; border-color: #ff9e00;">
+        <div class="card-body">
+          <h5 class="card-title text-center">Activity Details</h5>
+          <form (ngSubmit)="addActivity(newActivityForm)" #newActivityForm="ngForm">
+
+            <div id="newActivityData"  ngModelGroup="newActivityData"
+            #newActivityData="ngModelGroup">
+
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                id="title"
+                aria-describedby="title"
+                ngModel
+                name="title"
+                required
+                #title="ngModel">
+                <!-- <span class="help-block" *ngIf="!title.valid && title.touched">Activity title cannot be blank</span> -->
+                <!-- <p>{{ activity.id }}</p>
+                <p>{{ activity.title }}</p>
+                <p>{{ activity.description }}</p> -->
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="desciption" class="form-label">Description</label>
+              <textarea
+              class="form-control"
+              id="description"
+              cols="83" rows="10"
+              style="background-color: white;"
+              ngModel
+              name="description"
+              required
+              #description="ngModel">
+              <!-- <span class="help-block" *ngIf="!description.valid && description.touched">Activity Description cannot be blank</span> -->
+            </textarea>
+            </div>
+            <p *ngIf="!newActivityData.valid && newActivityData.touched">No fields should be blank</p>
+            <div class="text-center">
+              <button
+              type="submit"
+              class="btn btn-outline"
+              style="color: #ff9e00; position: center;"
+              [disabled]="!newActivityForm.valid">Submit</button>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let activity of activityList">
+  <p>{{ activity.id }}</p>
+  <p>{{ activity.name }}</p>
+  <p>{{ activity.description }}</p>
+</div>
