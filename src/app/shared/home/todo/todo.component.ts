@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
-import { Activity } from 'src/app/shared/activity.model';
+import { Activity } from 'src/app/shared/models/activity.model';
 
 @Component({
   selector: 'app-todo',

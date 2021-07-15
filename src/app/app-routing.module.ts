@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { EditActivityComponent } from "./home/edit-activity/edit-activity.component";
-import { HomeComponent } from "./home/home.component";
-import { LoginComponent } from "./home/login/login.component";
-import { ProfileComponent } from "./home/profile/profile.component";
-import { SignupComponent } from "./home/signup/signup.component";
-import { TodoComponent } from "./home/todo/todo.component";
+import { EditActivityComponent } from "./shared/home/edit-activity/edit-activity.component";
+import { HomeComponent } from "./shared/home/home.component";
+import { LoginComponent } from "./shared/home/login/login.component";
+import { ProfileComponent } from "./shared/home/profile/profile.component";
+import { SignupComponent } from "./shared/home/signup/signup.component";
+import { TodoComponent } from "./shared/home/todo/todo.component";
 
 
 const appRoutes: Routes = [

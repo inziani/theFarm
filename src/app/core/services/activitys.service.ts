@@ -1,7 +1,7 @@
 import { Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 
-import { Activity } from "src/app/shared/activity.model";
+import { Activity } from "src/app/shared/models/activity.model";
 
 @Injectable({providedIn:'root'})
 export class ActivitysService{

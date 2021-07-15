@@ -1,0 +1,62 @@
+
+<div class="container">
+  <div class="row">
+    <!-- Left side navigation bar -->
+    <div class="col-2">
+      <p>left side navigation</p>
+      <div><h1>Hello Madam Sophia</h1></div>
+    </div>
+    <!-- Right side display page -->
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-3 border-0" >
+            <div class="row g-0">
+              <div class="col-md-2 mt-4" >
+                <img [src]="'../assets/images/vri.png'" class="img-responsive roundrect p-3" alt="image" style="width: 150px; height: 150px;">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body ms-5 mx-3">
+                  <h5 class="card-title">Welcome back Robai!</h5>
+                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum vel tempora sint molestiae velit, molestias corporis perferendis iste voluptatibus earum! Consequatur quis veritatis aut itaque quas vero aperiam nihil quos.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+              <div class="col-md-3">
+              <div class="card-body">
+                <a class="btn btn-outline  mt-5 mx-3" style="color: #ff9e00;" routerLink="/newActivity">
+                  <fa-icon [icon]="['fas', 'edit']"></fa-icon>  New Activity
+                </a>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          <!--  Table to display the activitys -->
+          <div>
+            <table class="table table-bordered" style="width: 100%">
+              <thead>
+                <tr>
+                  <th scope="col">#id</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody  *ngFor="let activity of activityList">
+                <tr>
+                  <th scope="row" style="width: 5%;">{{ activity.id }}</th>
+                  <td style="width: 15%;">{{ activity.name }}</td>
+                  <th style="width: 10%;"><button class="btn btn-success">Created</button></th>
+                  <td style="width: 45%;">{{ activity.description }}</td>
+                  <td style="width: 30%;">{{ todaysDate | date: 'fullDate' }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+  </div>
+</div>
+

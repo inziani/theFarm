@@ -3,14 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { TodoComponent } from './home/todo/todo.component';
-import { LoginComponent } from './home/login/login.component';
-import { SignupComponent } from './home/signup/signup.component';
-import { HeaderComponent } from './home/header/header.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faSquare, faEdit } from '@fortawesome/free-solid-svg-icons';
+
+
+import { HomeComponent } from './shared/home/home.component';
+import { TodoComponent } from './shared/home/todo/todo.component';
+import { LoginComponent } from './shared/home/login/login.component';
+import { SignupComponent } from './shared/home/signup/signup.component';
+import { HeaderComponent } from './core/header/header.component';
 import { appRoutingModule } from './app-routing.module';
-import { ProfileComponent } from './home/profile/profile.component';
-import { EditActivityComponent } from './home/edit-activity/edit-activity.component';
+import { ProfileComponent } from './shared/home/profile/profile.component';
+import { EditActivityComponent } from './shared/home/edit-activity/edit-activity.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +29,16 @@ import { EditActivityComponent } from './home/edit-activity/edit-activity.compon
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     appRoutingModule,
     FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private library: FaIconLibrary){
+    library.addIcons(faSquare, faEdit);
+
+  }
+ }
