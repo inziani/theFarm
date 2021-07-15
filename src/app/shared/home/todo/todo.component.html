@@ -21,6 +21,7 @@
                   <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum vel tempora sint molestiae velit, molestias corporis perferendis iste voluptatibus earum! Consequatur quis veritatis aut itaque quas vero aperiam nihil quos.</p>
                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
+                <br>
               </div>
               <div class="col-md-3">
               <div class="card-body">
@@ -49,7 +50,7 @@
                 <tr>
                   <th scope="row" style="width: 5%;">{{ activity.id }}</th>
                   <td style="width: 15%;">{{ activity.name }}</td>
-                  <th style="width: 10%;"><button class="btn btn-success">Created</button></th>
+                  <th style="width: 10%;"><button class="btn btn-primary" style="color: #ff9e00;" >Created</button></th>
                   <td style="width: 45%;">{{ activity.description }}</td>
                   <td style="width: 30%;">{{ todaysDate | date: 'fullDate' }} </td>
                 </tr>
