@@ -15,6 +15,7 @@ import { HeaderComponent } from './core/header/header.component';
 import { appRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './shared/home/profile/profile.component';
 import { EditActivityComponent } from './shared/home/edit-activity/edit-activity.component';
+import { DowndownDirective } from './shared/directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EditActivityComponent } from './shared/home/edit-activity/edit-activity
     SignupComponent,
     HeaderComponent,
     ProfileComponent,
-    EditActivityComponent
+    EditActivityComponent,
+    DowndownDirective
   ],
   imports: [
     BrowserModule,

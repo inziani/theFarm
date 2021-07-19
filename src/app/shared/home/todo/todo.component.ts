@@ -17,6 +17,7 @@ export class TodoComponent implements OnInit {
 
   activityList!: Activity[];
   todaysDate = new Date();
+  activityStatus = ['Created', 'WIP', 'Closed'];
 
   private subscription!: Subscription;
 
