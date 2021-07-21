@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -24,7 +25,8 @@ export class TodoComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private activitysService: ActivitysService ){
+    private activitysService: ActivitysService,
+    private http: HttpClient ){
 
     }
 

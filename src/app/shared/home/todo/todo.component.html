@@ -22,7 +22,7 @@
                 <div class="card-body ms-5 mx-3">
                   <h5 class="card-title">Welcome back Robai!</h5>
                   <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum vel tempora sint molestiae velit, molestias corporis perferendis iste voluptatibus earum! Consequatur quis veritatis aut itaque quas vero aperiam nihil quos.</p>
-                  <p class="card-text"><small class="text-muted">Last updated at  {{ todaysDate | date: 'mediumTime' }}</small></p>
+                  <p class="card-text"><small class="text-muted" style="font-size: smaller;">Last updated on {{ todaysDate | date: 'fullDate' }}  at  {{ todaysDate | date: 'mediumTime' }}</small></p>
                 </div>
                 <br>
               </div>
@@ -44,33 +44,25 @@
                 <tr>
                   <th scope="col">#id</th>
                   <th scope="col">Title</th>
-                  <th scope="col">Status</th>
                   <th scope="col">Description</th>
                   <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Maintainance</th>
                 </tr>
               </thead>
               <tbody  *ngFor="let activity of activityList">
                 <tr>
                   <th scope="row" style="width: 5%;">{{ activity.id }}</th>
-                  <td style="width: 15%;">{{ activity.name }}</td>
-
-                  <th style="width: 10%;">
-                    <div class="dropdown"
-                    appDropDown>
-                    <button class="btn btn-primary dropdown-toggle"
-                    type="button"
-                    data-toggle="dropdown"
-                    style="color: #ff9e00;"
-                    >Select Status</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Created</a>
-                      <a class="dropdown-item" href="#">WIP</a>
-                      <a class="dropdown-item" href="#">Closed</a>
-                    </div>
-                    </div>
-                  </th>
-                  <td style="width: 45%;">{{ activity.description }}</td>
-                  <td style="width: 30%;">{{ todaysDate | date: 'fullDate' }} </td>
+                  <td style="width: 5%;">{{ activity.name }}</td>
+                  <td style="width: 40%;">{{ activity.description }}</td>
+                  <td style="width: 15%;">{{ todaysDate | date: 'mediumDate' }} </td>
+                  <td style="width: 10%;">Status</td>
+                  <td style="width: 30%;">
+                    <button type="submit" class="btn btn-success mx-2" style="color: #ff9e00; position: center;"
+                      ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</button>
+                    <button type="submit" class="btn btn-danger" style="color: #ff9e00; position: center;"
+                      routerLink="/activitys"><fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete</button>
+                </td>
                 </tr>
               </tbody>
             </table>

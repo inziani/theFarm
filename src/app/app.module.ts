@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 import { HomeComponent } from './shared/home/home.component';
@@ -16,6 +18,7 @@ import { appRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './shared/home/profile/profile.component';
 import { EditActivityComponent } from './shared/home/edit-activity/edit-activity.component';
 import { DowndownDirective } from './shared/directives/dropdown.directive';
+
 
 @NgModule({
   declarations: [
@@ -33,14 +36,15 @@ import { DowndownDirective } from './shared/directives/dropdown.directive';
     BrowserModule,
     FontAwesomeModule,
     appRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private library: FaIconLibrary){
-    library.addIcons(faSquare, faEdit);
+    library.addIcons(faSquare, faEdit, faTrash);
 
   }
  }
