@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 import { HomeComponent } from './shared/home/home.component';
@@ -44,7 +44,7 @@ import { DowndownDirective } from './shared/directives/dropdown.directive';
 })
 export class AppModule {
   constructor(private library: FaIconLibrary){
-    library.addIcons(faSquare, faEdit, faTrash);
+    library.addIcons(faSquare, faEdit, faTrash, faPlus);
 
   }
  }
