@@ -4,11 +4,10 @@
       <div class="card mx-auto mt-5" style="width: 40rem; border-color: #ff9e00;">
         <div class="card-body">
           <h5 class="card-title text-center">Activity Details</h5>
-          <form (ngSubmit)="addActivity(newActivityForm)" #newActivityForm="ngForm">
 
+          <form (ngSubmit)="addActivity(newActivityForm.value)" #newActivityForm="ngForm">
             <div id="newActivityData"  ngModelGroup="newActivityData"
             #newActivityData="ngModelGroup">
-
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <div class="form-group">
@@ -22,20 +21,63 @@
                 #title="ngModel">
               </div>
             </div>
+
+            <div class="mb-3">
+              <label for="slug" class="form-label">Slug</label>
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                id="slug" aria-describedby="slug"
+                ngModel
+                name="slug"
+                required
+                #slug="ngModel">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="activityCategory" class="form-label">Activity Category</label>
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                id="activityCategory"
+                aria-describedby="activityCategory"
+                ngModel
+                name="activityCategory"
+                required
+                #activityCategory="ngModel">
+              </div>
+            </div>
+
             <div class="mb-3">
               <label for="desciption" class="form-label">Description</label>
               <textarea
               class="form-control"
               id="description"
-              cols="83" rows="10"
+              cols="83" rows="5"
               style="background-color: white;"
               ngModel
               name="description"
               required
               #description="ngModel">
-              <!-- <span class="help-block" *ngIf="!description.valid && description.touched">Activity Description cannot be blank</span> -->
             </textarea>
             </div>
+
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                placeholder="Created"
+                id="status"
+                aria-describedby="status"
+                ngModel
+                name="status"
+                required
+                #status="ngModel">
+              </div>
+            </div>
+
             <p *ngIf="!newActivityData.valid && newActivityData.touched">No fields should be blank</p>
             <div class="text-center">
               <button
@@ -44,8 +86,8 @@
               style="color: #ff9e00; position: center;"
               [disabled]="!newActivityForm.valid"
               >Submit</button>
-              <button type="submit" class="btn btn-outline" style="color: #ff9e00; position: center;"
-              routerLink="/activitys">Back</button>
+              <button type="button" class="btn btn-outline" style="color: #ff9e00; position: center;"
+              routerLink="/activity">Back</button>
             </div>
             </div>
           </form>
@@ -56,6 +98,6 @@
 </div>
 <div *ngFor="let activity of activityList">
   <p>{{ activity.id }}</p>
-  <p>{{ activity.name }}</p>
+  <p>{{ activity.title }}</p>
   <p>{{ activity.description }}</p>
 </div>

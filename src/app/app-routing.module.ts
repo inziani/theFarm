@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { EditActivityComponent } from "./shared/home/edit-activity/edit-activity.component";
 import { HomeComponent } from "./shared/home/home.component";
-import { LoginComponent } from "./shared/home/login/login.component";
+import { LoginComponent } from "./core/authentication/login/login.component";
 import { ProfileComponent } from "./shared/home/profile/profile.component";
-import { SignupComponent } from "./shared/home/signup/signup.component";
+import { SignupComponent } from "./core/authentication/signup/signup.component";
 import { TodoComponent } from "./shared/home/todo/todo.component";
 
 
@@ -14,7 +14,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'activitys', component: TodoComponent },
+  { path: 'activity', component: TodoComponent },
   { path: 'newActivity', component: EditActivityComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 

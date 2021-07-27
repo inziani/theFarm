@@ -8,3 +8,8 @@
 .btn-outline{
   border-color: #ff9e00 !important;
 }
+
+::placeholder {
+  color: blue;
+  opacity: 1;
+}

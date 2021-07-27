@@ -9,8 +9,8 @@ export class ActivitysService{
   activityListChanged = new Subject<Activity[]>();
 
   private activityList: Activity[]= [
-    new Activity(0, 'One', 'Subscription'),
-    new Activity(1, 'Two', 'Subject')
+    new Activity(0, 'Slug', 'Title', 'Description', 'Activity Category', 'Created'),
+    new Activity(1, 'Django Slug', 'Django Backend', 'Django interface with Angular Frontend', 'Official', 'Created')
   ]
 
   constructor(){

@@ -42,7 +42,7 @@
             <table class="table table-bordered" style="width: 100%">
               <thead>
                 <tr>
-                  <th scope="col">#id</th>
+                  <th scope="col">#</th>
                   <th scope="col">Title</th>
                   <th scope="col">Description</th>
                   <th scope="col">Date</th>
@@ -53,7 +53,7 @@
               <tbody  *ngFor="let activity of activityList">
                 <tr>
                   <th scope="row" style="width: 5%;">{{ activity.id }}</th>
-                  <td style="width: 5%;">{{ activity.name }}</td>
+                  <td style="width: 5%;">{{ activity.title }}</td>
                   <td style="width: 40%;">{{ activity.description }}</td>
                   <td style="width: 15%;">{{ todaysDate | date: 'mediumDate' }} </td>
                   <td style="width: 10%;">Status</td>

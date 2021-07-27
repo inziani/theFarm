@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UsersService } from './core/services/users.service';
 
 
 import { AppComponent } from './app.component';
@@ -11,8 +12,8 @@ import { faSquare, faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-i
 
 import { HomeComponent } from './shared/home/home.component';
 import { TodoComponent } from './shared/home/todo/todo.component';
-import { LoginComponent } from './shared/home/login/login.component';
-import { SignupComponent } from './shared/home/signup/signup.component';
+import { LoginComponent } from './core/authentication/login/login.component';
+import { SignupComponent } from './core/authentication/signup/signup.component';
 import { HeaderComponent } from './core/header/header.component';
 import { appRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './shared/home/profile/profile.component';
@@ -39,7 +40,7 @@ import { DowndownDirective } from './shared/directives/dropdown.directive';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
