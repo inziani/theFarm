@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,9 @@ import { Activity } from 'src/app/shared/models/activity.model';
 
 })
 export class TodoComponent implements OnInit {
+
+  baseUrl = "http://127.0.0.1:8000";
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
 
 
@@ -33,7 +36,8 @@ export class TodoComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.fetchActivityData();
+    // this.fetchActivityData();
+    this.onFetchActivityData();
     this.activityList = this.activitysService.getActivitysList();
     this.subscription = this.activitysService.activityListChanged.subscribe(
       (activityList: Activity[])=>{
@@ -44,11 +48,18 @@ export class TodoComponent implements OnInit {
   private fetchActivityData()
   // Fetch data and log it on the console
   {
-    this.http.get
-    ('http://127.0.0.1:8000/activitys/')
-    .subscribe(responseData =>{
-      console.log(responseData);
-    });
+    this.activitysService.getRequest();
+  }
+
+  onFetchActivityData(){
+    this.activitysService.getRequest().subscribe(
+      data => {
+        this.activityList = data;
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   onCreateActivity(sendActivityData: {

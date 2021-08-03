@@ -1,19 +1,24 @@
 import { Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
 
 import { Activity } from "src/app/shared/models/activity.model";
 
 @Injectable({providedIn:'root'})
+
 export class ActivitysService{
+
+  baseUrl = "http://127.0.0.1:8000";
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   activityListChanged = new Subject<Activity[]>();
 
   private activityList: Activity[]= [
-    new Activity(0, 'Slug', 'Title', 'Description', 'Activity Category', 'Created'),
-    new Activity(1, 'Django Slug', 'Django Backend', 'Django interface with Angular Frontend', 'Official', 'Created')
+    // new Activity(0, 'Slug', 'Title', 'Description', 'Activity Category', 'Created', '', 19, ''),
+    // new Activity(1, 'Django Slug', 'Django Backend', 'Django interface with Angular Frontend', 'Official', 'Created')
   ]
 
-  constructor(){
+  constructor(private http: HttpClient){
 
   }
 
@@ -25,5 +30,11 @@ export class ActivitysService{
 
   getActivitysList(){
     return this.activityList;
+  }
+
+  getRequest(): Observable<any>{
+     return this.http.get(this.baseUrl + '/activitys/', {headers: this.httpHeaders});
+
+
   }
 }

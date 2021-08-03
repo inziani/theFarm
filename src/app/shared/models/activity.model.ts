@@ -7,10 +7,10 @@ export class Activity
     public title: string,
     public description: string ,
     public activity_category: string,
-    // public owner: string,
+    public owner: string,
     public status: string,
-    // public date_created: Date,
-    // public date_changed: Date
+    public date_created: Date,
+    public date_changed: Date
     ){
 
   }

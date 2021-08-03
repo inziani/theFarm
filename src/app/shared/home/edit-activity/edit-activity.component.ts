@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-activity',
@@ -13,6 +13,10 @@ import { HttpClient } from '@angular/common/http';
 
 })
 export class EditActivityComponent implements OnInit {
+
+  baseUrl = "http://127.0.0.1:8000";
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+
   activity = {
     id: 0,
     title: '',
@@ -55,7 +59,7 @@ export class EditActivityComponent implements OnInit {
     // const newActivity = new Activity(this.activity.id, this.activity.title, this.activity.slug, this.activity.description, this.activity.activityCategory, this.activity.status);
     // this.activitysService.addActivityonList(newActivity);
     // HTTP request - post data to Django REST API
-    this.http.post('http://127.0.0.1:8000/activitys/',newActivityFormData)
+    this.http.post(this.baseUrl+'/activitys/',newActivityFormData)
     .subscribe(responseData =>{
       console.log(responseData);
     })

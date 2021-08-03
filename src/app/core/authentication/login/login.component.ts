@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsersService } from 'src/app/core/services/users.service';
@@ -22,8 +23,9 @@ export class LoginComponent implements OnInit {
     this.user = new User('', '');
   }
 
-  userLogIn(userLogInForm: User){
-    this.usersService
+  userLogIn(userLogInForm: NgForm){
+    console.log(userLogInForm.value);
+    userLogInForm.reset();
 
   };
 

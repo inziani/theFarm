@@ -18,7 +18,7 @@
               <div class="col-md-2 mt-4" >
                 <img [src]="'../assets/images/vri.png'" class="img-responsive roundrect p-3" alt="image" style="width: 150px; height: 150px;">
               </div>
-              <div class="col-md-7">
+              <div class="col-md-7 fs-6 fw-light">
                 <div class="card-body ms-5 mx-3">
                   <h5 class="card-title">Welcome back Robai!</h5>
                   <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum vel tempora sint molestiae velit, molestias corporis perferendis iste voluptatibus earum! Consequatur quis veritatis aut itaque quas vero aperiam nihil quos.</p>
@@ -28,7 +28,7 @@
               </div>
               <div class="col-md-3">
               <div class="card-body">
-                <a class="btn btn-outline  mt-5 mx-3" style="color: #ff9e00;" routerLink="/newActivity">
+                <a class="btn btn-outline  mt-5 mx-3 fw-light fs-6" style="color: #ff9e00;" routerLink="/newActivity">
                   <fa-icon [icon]="['fas', 'plus']"></fa-icon>  New Activity
                 </a>
               </div>
@@ -39,13 +39,14 @@
       </div>
           <!--  Table to display the activitys -->
           <div>
-            <table class="table table-bordered" style="width: 100%">
+            <table class="table table-bordered fw-light fs-6" style="width: 100%; height: fit-content;" >
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Title</th>
                   <th scope="col">Description</th>
-                  <th scope="col">Date</th>
+                  <th scope="col">Created</th>
+                  <th scope="col">Changed</th>
                   <th scope="col">Status</th>
                   <th scope="col">Maintainance</th>
                 </tr>
@@ -54,19 +55,25 @@
                 <tr>
                   <th scope="row" style="width: 5%;">{{ activity.id }}</th>
                   <td style="width: 5%;">{{ activity.title }}</td>
-                  <td style="width: 40%;">{{ activity.description }}</td>
-                  <td style="width: 15%;">{{ todaysDate | date: 'mediumDate' }} </td>
-                  <td style="width: 10%;">Status</td>
+                  <td style="width: 35%;">{{ activity.description }}</td>
+                  <td style="width: 10%;">{{ activity.date_created | date: 'mediumDate' }} </td>
+                  <td style="width: 10%;">{{ activity.date_changed | date: 'mediumDate' }} </td>
+                  <td style="width: 10%;">{{ activity.status }}</td>
                   <td style="width: 30%;">
-                    <button type="submit" class="btn btn-success mx-2" style="color: #ff9e00; position: center;"
+                    <button type="button" class="btn btn-success mx-2 fw-light fs-6 btn-sm" style="color: #ff9e00; position: center;"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal"
                       ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</button>
-                    <button type="submit" class="btn btn-danger" style="color: #ff9e00; position: center;"
+
+                    <button type="button" class="btn btn-danger fw-light fs-6 btn-sm" style="color: #ff9e00; position: center;"
                       routerLink="/activitys"><fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete</button>
                 </td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <form>
+            
+          </form>
     </div>
   </div>
 </div>

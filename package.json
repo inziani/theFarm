@@ -35,6 +35,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "goog-webfont-dl": "^1.0.4",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.1.0",
@@ -46,5 +47,7 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.1.2"
-  }
+  },
+  "dl-font-poppins": "goog-webfont-dl -o src/font-poppins.css -p assets/Poppins -d src/assets/Poppins -a \"Poppins\"",
+  "postinstall": "npm run dl-font-poppins && npm run dl-font-poppins"
 }
