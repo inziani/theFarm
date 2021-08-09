@@ -16,15 +16,17 @@ export class EditActivityComponent implements OnInit {
 
   baseUrl = "http://127.0.0.1:8000";
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  activityObject = <Activity>{};
+  activity!: Activity;
 
-  activity = {
-    id: 0,
-    title: '',
-    slug: '',
-    description: '',
-    activityCategory:'',
-    status: ''
-  }
+  // activity = {
+  //   id: 0,
+  //   title: '',
+  //   slug: '',
+  //   description: '',
+  //   activityCategory:'',
+  //   status: ''
+  // }
 
   activityList: Activity[];
 
@@ -41,29 +43,48 @@ export class EditActivityComponent implements OnInit {
   }
 
   // addActivity(newActivityForm: NgForm)
-  addActivity(newActivityFormData: {
-    // id: number,
-    title: string,
-    description: string,
-    slug: string,
-    status: string,
-    activity_category: string
-  })
-  {
-    // this.activity.id = this.activityList.length+1
-    // this.activity.slug = newActivityForm.value.newActivityData.slug;
-    // this.activity.title = newActivityForm.value.newActivityData.title;
-    // this.activity.description = newActivityForm.value.newActivityData.description;
-    // this.activity.activityCategory = newActivityForm.value.newActivityData.activityCategory;
-    // this.activity.status = newActivityForm.value.newActivityData.status;
-    // const newActivity = new Activity(this.activity.id, this.activity.title, this.activity.slug, this.activity.description, this.activity.activityCategory, this.activity.status);
-    // this.activitysService.addActivityonList(newActivity);
-    // HTTP request - post data to Django REST API
-    this.http.post(this.baseUrl+'/activitys/',newActivityFormData)
-    .subscribe(responseData =>{
-      console.log(responseData);
+  // onAddActivity(newActivityFormData: {
+  //   // id: number,
+  //   title: string,
+  //   description: string,
+  //   slug: string,
+  //   status: string,
+  //   activity_category: string
+  // })
+  // {
+  //   // this.activity.id = this.activityList.length+1
+  //   // this.activity.slug = newActivityForm.value.newActivityData.slug;
+  //   // this.activity.title = newActivityForm.value.newActivityData.title;
+  //   // this.activity.description = newActivityForm.value.newActivityData.description;
+  //   // this.activity.activityCategory = newActivityForm.value.newActivityData.activityCategory;
+  //   // this.activity.status = newActivityForm.value.newActivityData.status;
+  //   // const newActivity = new Activity(this.activity.id, this.activity.title, this.activity.slug, this.activity.description, this.activity.activityCategory, this.activity.status);
+  //   // this.activitysService.addActivityonList(newActivity);
+  //   // HTTP request - post data to Django REST API
+  //   this.http.post(this.baseUrl+'/activitys/',newActivityFormData)
+  //   .subscribe(responseData =>{
+  //     console.log(responseData);
+  //   })
+  //   // newActivityForm.reset();
+  // }
+
+  onFetchActivityData(){
+    this.activitysService.getRequest().subscribe(
+      data => {
+        this.activityList = data;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  };
+
+  onAddActivity(newActivityFormData: Activity){
+    this.activitysService.addNewActivity(newActivityFormData).subscribe(data =>{
+      console.log(data);
+      this.activityList.push(data);
+      console.log(this.activityList);
     })
-    // newActivityForm.reset();
-  }
+  };
 
 }

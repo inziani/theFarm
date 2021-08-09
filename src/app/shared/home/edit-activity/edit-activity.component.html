@@ -5,7 +5,7 @@
         <div class="card-body">
           <h5 class="card-title text-center">Activity Details</h5>
 
-          <form (ngSubmit)="addActivity(newActivityForm.value)" #newActivityForm="ngForm">
+          <form (ngSubmit)="onAddActivity(newActivityForm.value)" #newActivityForm="ngForm">
             <div id="newActivityData"  ngModelGroup="newActivityData"
             #newActivityData="ngModelGroup">
             <div class="mb-3">

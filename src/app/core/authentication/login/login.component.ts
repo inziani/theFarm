@@ -1,8 +1,8 @@
 import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UsersService } from 'src/app/core/services/users.service';
 import { User } from 'src/app/shared/models/user.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +17,13 @@ export class LoginComponent implements OnInit {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  constructor(private usersService: UsersService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.user = new User('', '');
   }
 
-  userLogIn(userLogInForm: NgForm){
+  logIn(userLogInForm: NgForm){
     console.log(userLogInForm.value);
     userLogInForm.reset();
 

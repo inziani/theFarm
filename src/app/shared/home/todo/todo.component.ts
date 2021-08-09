@@ -16,11 +16,10 @@ import { Activity } from 'src/app/shared/models/activity.model';
 })
 export class TodoComponent implements OnInit {
 
-  baseUrl = "http://127.0.0.1:8000";
-  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
 
-
+  activity!: Activity;
+  activityObject = <Activity>{};
   activityList!: Activity[];
   todaysDate = new Date();
   activityStatus = ['Created', 'WIP', 'Closed'];
@@ -45,11 +44,11 @@ export class TodoComponent implements OnInit {
       }
     )
   }
-  private fetchActivityData()
-  // Fetch data and log it on the console
-  {
-    this.activitysService.getRequest();
-  }
+  // private fetchActivityData()
+  // // Fetch data and log it on the console
+  // {
+  //   this.activitysService.getRequest();
+  // }
 
   onFetchActivityData(){
     this.activitysService.getRequest().subscribe(
@@ -61,6 +60,21 @@ export class TodoComponent implements OnInit {
       }
     )
   }
+  editActivity(activity: Activity){
+    this.activitysService.getSingleActivityRequest(activity.id).subscribe(
+      data => {
+        console.log(data);
+        this.activityObject = data;
+        // this.activity.id = data.id;
+        console.log(this.activityObject);
+        console.log(this.activityObject.id);
+        console.log(this.activityObject.title);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  };
 
   onCreateActivity(sendActivityData: {
     id: number,

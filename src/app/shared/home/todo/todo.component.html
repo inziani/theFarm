@@ -39,7 +39,7 @@
       </div>
           <!--  Table to display the activitys -->
           <div>
-            <table class="table table-bordered fw-light fs-6" style="width: 100%; height: fit-content;" >
+            <table class="table table-bordered fw-light fs-6" style="width: 130%; height: fit-content;" >
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -53,19 +53,28 @@
               </thead>
               <tbody  *ngFor="let activity of activityList">
                 <tr>
-                  <th scope="row" style="width: 5%;">{{ activity.id }}</th>
-                  <td style="width: 5%;">{{ activity.title }}</td>
-                  <td style="width: 35%;">{{ activity.description }}</td>
-                  <td style="width: 10%;">{{ activity.date_created | date: 'mediumDate' }} </td>
-                  <td style="width: 10%;">{{ activity.date_changed | date: 'mediumDate' }} </td>
-                  <td style="width: 10%;">{{ activity.status }}</td>
-                  <td style="width: 30%;">
-                    <button type="button" class="btn btn-success mx-2 fw-light fs-6 btn-sm" style="color: #ff9e00; position: center;"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal"
-                      ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</button>
+                  <th scope="row">{{ activity.id }}</th>
+                  <td style="width: fit-content;">{{ activity.title }}</td>
+                  <td style="width: 33%;">{{ activity.description }}</td>
+                  <td style="width: 15%;">{{ activity.date_created | date: 'mediumDate' }} </td>
+                  <td style="width: 15%;">{{ activity.date_changed | date: 'mediumDate' }} </td>
+                  <td style="width: 15%;">{{ activity.status }}</td>
+                  <td style="width: 20%;">
+                    <button 
+                    type="button" 
+                    class="btn btn-success mx-2 fw-light fs-6 btn-sm" 
+                    style="color: #ff9e00; position: center;"
+                    (click)="editActivity(activity)"
+                    routerLink="/newActivity"
+                 > 
+                    <fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</button>
 
-                    <button type="button" class="btn btn-danger fw-light fs-6 btn-sm" style="color: #ff9e00; position: center;"
-                      routerLink="/activitys"><fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete</button>
+                    <button 
+                    type="button" 
+                    class="btn btn-danger fw-light fs-6 btn-sm" 
+                    style="color: #ff9e00; position: center;"
+                    >
+                      <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete</button>
                 </td>
                 </tr>
               </tbody>

@@ -32,9 +32,17 @@ export class ActivitysService{
     return this.activityList;
   }
 
-  getRequest(): Observable<any>{
-     return this.http.get(this.baseUrl + '/activitys/', {headers: this.httpHeaders});
+  getRequest(): Observable<Activity[]>{
+     return this.http.get<Activity[]>(this.baseUrl + '/activitys/', {headers: this.httpHeaders});
+  }
 
+  getSingleActivityRequest(id: number): Observable<Activity>{
+    return this.http.get<Activity>(this.baseUrl + '/activitys/' + id + '/', {headers: this.httpHeaders});
+
+  };
+
+  addNewActivity(activity: Activity): Observable<Activity>{
+    return this.http.post<Activity>(this.baseUrl + '/activitys/', {headers: this.httpHeaders});
 
   }
 }
