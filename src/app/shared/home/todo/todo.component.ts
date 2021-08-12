@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-todo',
@@ -84,7 +85,7 @@ export class TodoComponent implements OnInit {
     activity_category: string,
     status: string }){
     // Send http request with activitydata to Django API
-    this.http.post('http://127.0.0.1:8000/activitys/', sendActivityData)
+    this.http.post(`${environment.apiUrl}/activitys/`, sendActivityData)
     .subscribe(responseData =>{
       console.log(responseData)
     });

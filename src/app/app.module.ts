@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UsersService } from './core/services/users.service';
 
 
@@ -19,6 +19,8 @@ import { appRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './shared/home/profile/profile.component';
 import { EditActivityComponent } from './shared/home/edit-activity/edit-activity.component';
 import { DowndownDirective } from './shared/directives/dropdown.directive';
+import { AuthenticationService } from './core/services/authentication.service';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 
 @NgModule({
@@ -40,7 +42,7 @@ import { DowndownDirective } from './shared/directives/dropdown.directive';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UsersService],
+  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

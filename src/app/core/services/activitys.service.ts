@@ -2,7 +2,10 @@ import { Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
 
+
+
 import { Activity } from "src/app/shared/models/activity.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn:'root'})
 
@@ -33,16 +36,16 @@ export class ActivitysService{
   }
 
   getRequest(): Observable<Activity[]>{
-     return this.http.get<Activity[]>(this.baseUrl + '/activitys/', {headers: this.httpHeaders});
+     return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
   }
 
   getSingleActivityRequest(id: number): Observable<Activity>{
-    return this.http.get<Activity>(this.baseUrl + '/activitys/' + id + '/', {headers: this.httpHeaders});
+    return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
 
   };
 
   addNewActivity(activity: Activity): Observable<Activity>{
-    return this.http.post<Activity>(this.baseUrl + '/activitys/', {headers: this.httpHeaders});
+    return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
 
   }
 }

@@ -6,11 +6,12 @@ import { LoginComponent } from "./core/authentication/login/login.component";
 import { ProfileComponent } from "./shared/home/profile/profile.component";
 import { SignupComponent } from "./core/authentication/signup/signup.component";
 import { TodoComponent } from "./shared/home/todo/todo.component";
+import { AuthenticationGuard } from "./_helpers/authentication.guard";
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent },
