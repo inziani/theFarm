@@ -14,10 +14,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit { 
-  loading: boolean = false;
- 
-  
 
+ 
   constructor(
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
@@ -27,18 +25,27 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
     
   }
 
   logIn(form: NgForm){
-    this.loading = true;
+    if(!form.valid){
+      return
+    }
+    const email= form.value.email;
+    const password = form.value.password;
+    this.authenticationService.onLoginTokenObtained(email, password)
+    console.log(email, password);
     // console.log(form.value);
-    return this.authenticationService.onLoginTokenObtained(form.value, form.value).subscribe();
-    
-    form.reset();
-
-    
+    // // },
+    // // error =>{
+    // //   console.error();
+    // // });
+    // // form.reset();
 
   };
+
+  
 
 }
