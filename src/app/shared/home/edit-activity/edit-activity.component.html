@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
+
+      <div class="alert alert-danger" *ngIf="error">
+        <h5> An Error occured</h5>
+        <p>{{ error }}</p>
+      </div>
       <div class="card mx-auto mt-5" style="width: 40rem; border-color: #ff9e00;">
         <div class="card-body">
           <h5 class="card-title text-center">Activity Details</h5>
-
           <form (ngSubmit)="onAddActivity(newActivityForm.value)" #newActivityForm="ngForm">
             <div id="newActivityData"  ngModelGroup="newActivityData"
             #newActivityData="ngModelGroup">
@@ -54,7 +58,7 @@
               <textarea
               class="form-control"
               id="description"
-              cols="83" rows="5"
+              cols="83" rows="3"
               style="background-color: white;"
               ngModel
               name="description"

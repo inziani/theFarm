@@ -52,7 +52,7 @@ export class TodoComponent implements OnInit {
   // }
 
   onFetchActivityData(){
-    this.activitysService.getRequest().subscribe(
+    this.activitysService.getActivityRequest().subscribe(
       data => {
         this.activityList = data;
       },

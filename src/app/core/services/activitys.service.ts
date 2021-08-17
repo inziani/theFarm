@@ -11,9 +11,8 @@ import { environment } from "src/environments/environment";
 
 export class ActivitysService{
 
-  baseUrl = "http://127.0.0.1:8000";
+  error = new Subject<string>();
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
-
   activityListChanged = new Subject<Activity[]>();
 
   private activityList: Activity[]= [
@@ -35,17 +34,20 @@ export class ActivitysService{
     return this.activityList;
   }
 
-  getRequest(): Observable<Activity[]>{
+  getActivityRequest(): Observable<Activity[]>{
      return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
   }
 
   getSingleActivityRequest(id: number): Observable<Activity>{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
-
   };
 
   addNewActivity(activity: Activity): Observable<Activity>{
     return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
 
+  }
+  deleteActivity(){
+    return this.http.delete(`${environment.apiUrl}/activitys/`);
+    
   }
 }

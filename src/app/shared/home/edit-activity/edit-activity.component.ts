@@ -14,20 +14,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class EditActivityComponent implements OnInit {
 
-  baseUrl = "http://127.0.0.1:8000";
-  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   activityObject = <Activity>{};
   activity!: Activity;
-
-  // activity = {
-  //   id: 0,
-  //   title: '',
-  //   slug: '',
-  //   description: '',
-  //   activityCategory:'',
-  //   status: ''
-  // }
-
+  error = null;
   activityList: Activity[];
 
 
@@ -69,7 +58,7 @@ export class EditActivityComponent implements OnInit {
   // }
 
   onFetchActivityData(){
-    this.activitysService.getRequest().subscribe(
+    this.activitysService.getActivityRequest().subscribe(
       data => {
         this.activityList = data;
       },
@@ -80,11 +69,22 @@ export class EditActivityComponent implements OnInit {
   };
 
   onAddActivity(newActivityFormData: Activity){
+    console.log(newActivityFormData);
     this.activitysService.addNewActivity(newActivityFormData).subscribe(data =>{
       console.log(data);
-      this.activityList.push(data);
-      console.log(this.activityList);
+      // this.activityList.push(data);
+      // console.log(this.activityList);
+    },
+    error =>{
+      this.error = error.message;
+
     })
   };
+
+  onDeleteActivity(){
+    this.activitysService.deleteActivity().subscribe(()=>{
+      this.activityList = [];
+    });
+  }
 
 }

@@ -29,7 +29,7 @@ export class AuthenticationService {
 
   // the actual jwt token
   // public token: AuthenticationResponse = {'access': '','refresh': ''};
-  public tokenData = [];
+  // public tokenData = [];
   public token: string = ''
 
   // the token expiration date
@@ -54,13 +54,14 @@ export class AuthenticationService {
 
   }
 
+
   onLoginTokenObtained(email: string, password: string){
     // console.log(email, password);
     // return this.http.post<User>(`${environment.apiUrl}/api/token/`, { email: email, password: password}, this.httpOptions).pipe(tap(res=> this.setSession),shareReplay()) ;
   //  return this.http.get<User[]>(`${environment.apiUrl}/users/`).subscribe(returnedData =>{
   return this.http.post<AuthenticationResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).subscribe(returnedData =>{
      console.log(returnedData);
-    //  this.tokenData = returnedData;
+    // this.token = returnedData;
      this.updateToken(returnedData);
 
    }, 
