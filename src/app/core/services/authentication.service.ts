@@ -7,8 +7,6 @@ import { catchError, map, shareReplay,tap } from 'rxjs/operators';
 import * as moment from 'moment';
 import * as jwtDecode from 'jwt-decode';
 
-
-
 import { environment } from 'src/environments/environment';
 import { User } from '@app/shared/models/user.model';
 
@@ -28,39 +26,37 @@ interface SignUpResponse{
 
 export class AuthenticationService {
   
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
-  public loggedInUser = new Subject<User>();
+  // private currentUserSubject: BehaviorSubject<User>;
+  // public currentUser: Observable<User>;
+  // public loggedInUser = new Subject<User>();
 
-  // http options used to make the API calls
+  // // http options used to make the API calls
   private httpOptions: any;
 
-  // the actual jwt token
-  public token!: string;
-  public tokenId!: string;
+  // // the actual jwt token
+  // public token!: string;
+  // public tokenId!: string;
 
-  // the token expiration date
-  public token_expires!: Date;
+  // // the token expiration date
+  // public token_expires!: Date;
 
-  //  the email address of the user logged in 
-  public user_id!: number;
+  // //  the email address of the user logged in 
+  // public user_id!: number;
 
-  //  error message received on loging in
+  // //  error message received on loging in
 
-  public errors: any[] = [];
+  // public errors: any[] = [];
 
   constructor(private http: HttpClient) { 
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
-    this.currentUser = this.currentUserSubject.asObservable();
-    
-
+    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
+    // this.currentUser = this.currentUserSubject.asObservable();
     this.httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
     
   }
-  public get currentUserValue(): User{
-    return this.currentUserSubject.value;
+  // public get currentUserValue(): User{
+  //   return this.currentUserSubject.value;
 
-  }
+  // }
 
   onUserSignOn(username: string, email: string, password: string){
     return this.http.post<SignUpResponse>(`${environment.apiUrl}/register/`, JSON.stringify({ 
@@ -79,45 +75,24 @@ export class AuthenticationService {
       }));
   };
 
-  onLogin(email: string, password: string){
-  return this.http.post<AuthenticationResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(tap(returnedData =>{
-     this.updateToken(returnedData);
-   }), shareReplay());
-}
-
-   private updateToken(returnedData: any){
-    // const base64Url = JSON.stringify(returnedData).split('.')[1];
-    // const base64 = base64Url.replace('-', '+').replace('_', '/');
-    // const parsed = JSON.parse(window.atob(base64));
-    // console.log(parsed);
-    // this.token_expires = new Date(parsed.exp*1000);
-    // return console.log(JSON.parse(window.atob(base64)));
-    this.tokenId = returnedData
-    const toke = returnedData;
-    // this.token = returnedData;
-    // const decoded = this.token.split('.')[1];
-    const tokened = JSON.stringify(toke);
-    // this.errors = [];
-    // console.log(this.token);
-    // console.log(decoded);
-
-    const token_parts = tokened.split(/\./);
-    const token_decoded = JSON.parse(window.atob(token_parts[1]));
-    this.token_expires = new Date(token_decoded.exp*1000);
-    this.user_id = token_decoded.user_id;
-    this.token = token_decoded.jti;
-    console.log(this.token);
-
-    // decode the token to read the username, email and expiration stamp
-  
-  }
-
 
   private setSession(authenticationResult: any){
+    const id_token = authenticationResult.id_token;
+    const payload = <jwtDecode.JwtPayload>jwtDecode;
+    // const expiresAt = moment.unix(payload.exp);
     const expiresAt = moment().add(authenticationResult.expiresIn, 'second');
     localStorage.setItem('id_token', authenticationResult.idToken)
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    console.log(authenticationResult)
+  }
 
+  get token(): string{
+    return localStorage.getItem('token')!;
+  }
+
+  onLogin(email: string, password: string){
+    return this.http.post<AuthenticationResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(tap(response =>
+       this.setSession(response)), shareReplay());
   }
 
   onLogout(){
@@ -127,18 +102,27 @@ export class AuthenticationService {
     
   }
 
+  getExpiration(){
+    const expiration = localStorage.getItem('expires_at');
+    const expiresAt = JSON.parse(expiration!);
+    return moment(expiresAt);
+  }
+
+  refreshToken(){
+    if(moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())){
+      return this.http.post(`${environment.apiUrl}/api/token/refresh/`, { token: this.token}).
+      pipe(tap(response=>this.setSession(response)),
+      shareReplay(),).subscribe();
+    }
+    return
+  }
+
   public isLoggedIn(){
     return moment().isBefore(this.getExpiration());
   }
 
   isLoggedOut(){
     return !this.isLoggedIn;
-  }
-
-  getExpiration(){
-    const expiration = localStorage.getItem('expires_at');
-    const expiresAt = JSON.parse(expiration!);
-    return moment(expiresAt);
   }
 
 }

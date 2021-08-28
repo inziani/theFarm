@@ -13,6 +13,14 @@ import {
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { Observable } from 'rxjs';
 
+interface JwtPayload{
+  user_id: number;
+  username: string;
+  email: string;
+  exp: number
+
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,22 +28,25 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
     ){
 
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const currentUser = this.authenticationService.currentUserValue;
-      if (currentUser){
+      if (this.authenticationService.isLoggedIn()){
+        this.authenticationService.refreshToken();
         // If user is logged in we return true
         return true;
       }
-      //  User is not logged in so redirect the user to the login page with the return url
+      else{
+         //  User is not logged in so redirect the user to the login page with the return url
+      this.authenticationService.onLogout();
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url}});
       return false;
-    
+
+      }
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,

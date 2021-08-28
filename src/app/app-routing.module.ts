@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'activity', component: TodoComponent },
+  { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
   { path: 'newActivity', component: EditActivityComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 

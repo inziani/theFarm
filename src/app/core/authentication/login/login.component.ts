@@ -13,10 +13,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit { 
 
   isLoginMode = true;
   isLoading = false;
+  error: string = '';
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
@@ -42,10 +44,14 @@ export class LoginComponent implements OnInit {
     const email= form.value.email;
     const password = form.value.password;
     this.isLoading = true;
-    this.authenticationService.onLogin(email, password).subscribe(signInData =>{
-      // console.log(signInData);
+    this.authenticationService.onLogin(email, password).subscribe(
+      sucess =>{
+      this.router.navigate(['activity']);},  
+      error => {
+      this.error = 'Login Unsuccessful! Try again'
       this.isLoading = false;
-    })
+      console.log(this.error);
+    });
     form.reset();
   };
 }
