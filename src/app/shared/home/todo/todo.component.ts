@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@app/core/services/authentication.service';
 import { Subscription } from 'rxjs';
 
 
@@ -31,7 +32,8 @@ export class TodoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private activitysService: ActivitysService,
-    private http: HttpClient ){
+    private http: HttpClient,
+    private autheticationService: AuthenticationService ){
 
     }
 
@@ -76,22 +78,7 @@ export class TodoComponent implements OnInit {
       }
     )
   };
-
-  onCreateActivity(sendActivityData: {
-    id: number,
-    slug: string,
-    title: string,
-    description: string,
-    activity_category: string,
-    status: string }){
-    // Send http request with activitydata to Django API
-    this.http.post(`${environment.apiUrl}/activitys/`, sendActivityData)
-    .subscribe(responseData =>{
-      console.log(responseData)
-    });
-
-  }
-
+  
   onNewActivity(){
     this.router.navigate(['newActivity'], { relativeTo: this.route});
   }

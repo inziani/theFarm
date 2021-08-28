@@ -15,9 +15,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit { 
 
+  isLoginMode = true;
+  isLoading = false;
+
+  onSwitchMode(){
+    this.isLoginMode = !this.isLoginMode;
+
+  }
  
   constructor(
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
     ) { 
@@ -25,7 +32,6 @@ export class LoginComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
     
   }
 
@@ -35,17 +41,11 @@ export class LoginComponent implements OnInit {
     }
     const email= form.value.email;
     const password = form.value.password;
-    this.authenticationService.onLoginTokenObtained(email, password)
-    console.log(email, password);
-    // console.log(form.value);
-    // // },
-    // // error =>{
-    // //   console.error();
-    // // });
-    // // form.reset();
-
+    this.isLoading = true;
+    this.authenticationService.onLogin(email, password).subscribe(signInData =>{
+      // console.log(signInData);
+      this.isLoading = false;
+    })
+    form.reset();
   };
-
-  
-
 }

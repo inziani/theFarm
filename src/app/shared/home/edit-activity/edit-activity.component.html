@@ -9,9 +9,8 @@
       <div class="card mx-auto mt-5" style="width: 40rem; border-color: #ff9e00;">
         <div class="card-body">
           <h5 class="card-title text-center">Activity Details</h5>
-          <form (ngSubmit)="onAddActivity(newActivityForm.value)" #newActivityForm="ngForm">
-            <div id="newActivityData"  ngModelGroup="newActivityData"
-            #newActivityData="ngModelGroup">
+          <form (ngSubmit)="onAddActivity(newActivityForm)" #newActivityForm="ngForm">
+            <!-- <div id="newActivityData"  ngModelGroup="newActivityData" #newActivityData="ngModelGroup"> -->
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <div class="form-group">
@@ -52,7 +51,6 @@
                 #activityCategory="ngModel">
               </div>
             </div>
-
             <div class="mb-3">
               <label for="desciption" class="form-label">Description</label>
               <textarea
@@ -66,7 +64,6 @@
               #description="ngModel">
             </textarea>
             </div>
-
             <div class="mb-3">
               <label for="status" class="form-label">Status</label>
               <div class="form-group">
@@ -81,8 +78,7 @@
                 #status="ngModel">
               </div>
             </div>
-
-            <p *ngIf="!newActivityData.valid && newActivityData.touched">No fields should be blank</p>
+            <!-- <p *ngIf="!newActivityData.valid && newActivityData.touched">No fields should be blank</p> -->
             <div class="text-center">
               <button
               type="submit"
@@ -93,7 +89,7 @@
               <button type="button" class="btn btn-outline" style="color: #ff9e00; position: center;"
               routerLink="/activity">Back</button>
             </div>
-            </div>
+            <!-- </div> -->
           </form>
         </div>
       </div>

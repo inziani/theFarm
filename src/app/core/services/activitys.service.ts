@@ -42,8 +42,9 @@ export class ActivitysService{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
   };
 
-  addNewActivity(activity: Activity): Observable<Activity>{
-    return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
+  addNewActivity(title: string, slug: number, activityCategory:string, description: string, status: string): Observable<Activity>{
+    return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({
+      title, slug, activityCategory, description,status }), { headers: this.httpHeaders });
 
   }
   deleteActivity(){

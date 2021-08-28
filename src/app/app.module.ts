@@ -21,6 +21,7 @@ import { EditActivityComponent } from './shared/home/edit-activity/edit-activity
 import { DowndownDirective } from './shared/directives/dropdown.directive';
 import { AuthenticationService } from './core/services/authentication.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { LoadingSpinnerComponent } from './shared/home/loading-spinner/loading-spinner';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
     HeaderComponent,
     ProfileComponent,
     EditActivityComponent,
-    DowndownDirective
+    DowndownDirective,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

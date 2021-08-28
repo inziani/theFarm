@@ -68,12 +68,15 @@ export class EditActivityComponent implements OnInit {
     )
   };
 
-  onAddActivity(newActivityFormData: Activity){
-    console.log(newActivityFormData);
-    this.activitysService.addNewActivity(newActivityFormData).subscribe(data =>{
+  onAddActivity(form: NgForm){
+    const title = form.value.title;
+    const slug = form.value.slug;
+    const activityCategory = form.value.activityCategory;
+    const description = form.value.description;
+    const status = form.value.status;
+    // console.log(form.value);
+    this.activitysService.addNewActivity(title, slug, activityCategory, description, status).subscribe(data =>{
       console.log(data);
-      // this.activityList.push(data);
-      // console.log(this.activityList);
     },
     error =>{
       this.error = error.message;
