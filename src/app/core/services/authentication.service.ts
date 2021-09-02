@@ -5,10 +5,14 @@ import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map, shareReplay,tap } from 'rxjs/operators';
 
 import * as moment from 'moment';
-import * as jwtDecode from 'jwt-decode';
+// import * as jwtDecode from 'jwt-decode';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 import { environment } from 'src/environments/environment';
 import { User } from '@app/shared/models/user.model';
+import { KeyValuePipe } from '@angular/common';
+import { RestDataSource } from '@app/shared/data/rest.datasource';
+
 
 interface AuthenticationResponse{
   refresh: string,
@@ -34,11 +38,11 @@ export class AuthenticationService {
   private httpOptions: any;
 
   // // the actual jwt token
-  // public token!: string;
-  // public tokenId!: string;
+  public token!: any;
 
-  // // the token expiration date
-  // public token_expires!: Date;
+  // the token expiration date
+  // public expiresAt!: any;
+  public token_expires!: Date;
 
   // //  the email address of the user logged in 
   // public user_id!: number;
@@ -47,16 +51,14 @@ export class AuthenticationService {
 
   // public errors: any[] = [];
 
-  constructor(private http: HttpClient) { 
-    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')!));
-    // this.currentUser = this.currentUserSubject.asObservable();
+  constructor(
+    private http: HttpClient,
+    private dataSource: RestDataSource ) 
+    { 
     this.httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
     
   }
-  // public get currentUserValue(): User{
-  //   return this.currentUserSubject.value;
-
-  // }
+  
 
   onUserSignOn(username: string, email: string, password: string){
     return this.http.post<SignUpResponse>(`${environment.apiUrl}/register/`, JSON.stringify({ 
@@ -76,30 +78,29 @@ export class AuthenticationService {
   };
 
 
-  private setSession(authenticationResult: any){
-    const id_token = authenticationResult.id_token;
-    const payload = <jwtDecode.JwtPayload>jwtDecode;
-    // const expiresAt = moment.unix(payload.exp);
-    const expiresAt = moment().add(authenticationResult.expiresIn, 'second');
-    localStorage.setItem('id_token', authenticationResult.idToken)
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-    console.log(authenticationResult)
+  private setSession(authResult: any){
+    // console.log(this.token);
+    return this.token = authResult;
+    
+  
+  
   }
 
-  get token(): string{
-    return localStorage.getItem('token')!;
+  onLogin(email: string, password: string): Observable<any>{
+    return this.dataSource.getToken( email, password );
+    // return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(shareReplay(),
+    // map((res:any ) => { this.token = res.access;
+    // return this.token;}
+    // ));
   }
-
-  onLogin(email: string, password: string){
-    return this.http.post<AuthenticationResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(tap(response =>
-       this.setSession(response)), shareReplay());
+  get authenticated(){
+    return this.dataSource.authToken!=null;
   }
 
   onLogout(){
     // remove user from the local storage to log user out
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    
+     this.dataSource.authToken = 'null';
+
   }
 
   getExpiration(){

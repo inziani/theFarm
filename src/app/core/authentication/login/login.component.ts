@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   isLoginMode = true;
   isLoading = false;
   error: string = '';
+  token!: string;
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
@@ -37,21 +38,51 @@ export class LoginComponent implements OnInit {
     
   }
 
-  logIn(form: NgForm){
+   logIn(form: NgForm){
     if(!form.valid){
       return
     }
     const email= form.value.email;
     const password = form.value.password;
     this.isLoading = true;
-    this.authenticationService.onLogin(email, password).subscribe(
-      sucess =>{
-      this.router.navigate(['activity']);},  
+    this.authenticationService.onLogin(email, password)
+    .subscribe(
+      success => {
+        console.log(success);
+        if(success){
+          this.router.navigate(['activity']);
+        }
+      },
       error => {
       this.error = 'Login Unsuccessful! Try again'
       this.isLoading = false;
       console.log(this.error);
-    });
+    }
+    );
     form.reset();
   };
+
+  // logIn(form: NgForm){
+  //   if(!form.valid){
+  //     return
+  //   }
+  //   const email= form.value.email;
+  //   const password = form.value.password;
+  //   this.isLoading = true;
+  //   this.authenticationService.onLogin(email, password)
+  //   .subscribe(
+  //     success =>{
+  //       console.log(success);
+  //       if(success){
+  //         this.router.navigate(['activity']);
+  //       }
+  //     },
+  //     error => {
+  //     this.error = 'Login Unsuccessful! Try again'
+  //     this.isLoading = false;
+  //     console.log(this.error);
+  //   }
+  //   );
+  //   form.reset();
+  // };
 }

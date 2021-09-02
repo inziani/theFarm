@@ -45,8 +45,8 @@ export class ActivitysService{
   addNewActivity(title: string, slug: number, activityCategory:string, description: string, status: string): Observable<Activity>{
     return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({
       title, slug, activityCategory, description,status }), { headers: this.httpHeaders });
-
   }
+  
   deleteActivity(){
     return this.http.delete(`${environment.apiUrl}/activitys/`);
     

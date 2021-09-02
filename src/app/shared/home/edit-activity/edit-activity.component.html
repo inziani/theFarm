@@ -24,33 +24,6 @@
                 #title="ngModel">
               </div>
             </div>
-
-            <div class="mb-3">
-              <label for="slug" class="form-label">Slug</label>
-              <div class="form-group">
-                <input type="text"
-                class="form-control"
-                id="slug" aria-describedby="slug"
-                ngModel
-                name="slug"
-                required
-                #slug="ngModel">
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="activityCategory" class="form-label">Activity Category</label>
-              <div class="form-group">
-                <input type="text"
-                class="form-control"
-                id="activityCategory"
-                aria-describedby="activityCategory"
-                ngModel
-                name="activityCategory"
-                required
-                #activityCategory="ngModel">
-              </div>
-            </div>
             <div class="mb-3">
               <label for="desciption" class="form-label">Description</label>
               <textarea
@@ -63,6 +36,18 @@
               required
               #description="ngModel">
             </textarea>
+            </div>
+            <div class="mb-3">
+              <label for="slug" class="form-label">Slug</label>
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                id="slug" aria-describedby="slug"
+                ngModel
+                name="slug"
+                required
+                #slug="ngModel">
+              </div>
             </div>
             <div class="mb-3">
               <label for="status" class="form-label">Status</label>
@@ -78,6 +63,21 @@
                 #status="ngModel">
               </div>
             </div>
+
+            <div class="mb-3">
+              <label for="activityCategory" class="form-label">Activity Category</label>
+              <div class="form-group">
+                <input type="text"
+                class="form-control"
+                id="activity_category"
+                aria-describedby="activity_category"
+                ngModel
+                name="activity_category"
+                required
+                #activityCategory="ngModel">
+              </div>
+            </div>
+
             <!-- <p *ngIf="!newActivityData.valid && newActivityData.touched">No fields should be blank</p> -->
             <div class="text-center">
               <button

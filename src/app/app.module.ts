@@ -22,6 +22,7 @@ import { DowndownDirective } from './shared/directives/dropdown.directive';
 import { AuthenticationService } from './core/services/authentication.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { LoadingSpinnerComponent } from './shared/home/loading-spinner/loading-spinner';
+import { RestDataSource } from './shared/data/rest.datasource';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { LoadingSpinnerComponent } from './shared/home/loading-spinner/loading-s
     FormsModule,
     HttpClientModule
   ],
-  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
+  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, RestDataSource],
   bootstrap: [AppComponent]
 })
 export class AppModule {
