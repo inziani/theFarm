@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       success => {
         console.log(success);
         if(success){
-          this.router.navigate(['activity']);
+          this.router.navigate(['home']);
         }
       },
       error => {

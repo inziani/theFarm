@@ -77,13 +77,9 @@ export class AuthenticationService {
       }));
   };
 
-
   private setSession(authResult: any){
     // console.log(this.token);
     return this.token = authResult;
-    
-  
-  
   }
 
   onLogin(email: string, password: string): Observable<any>{
@@ -96,6 +92,16 @@ export class AuthenticationService {
   get authenticated(){
     return this.dataSource.authToken!=null;
   }
+
+  get refreshedToken(){
+    return this.dataSource.refreshToken!=null;
+  }
+
+  get userDetails(){
+    return this.dataSource.user;
+
+  }
+
 
   onLogout(){
     // remove user from the local storage to log user out

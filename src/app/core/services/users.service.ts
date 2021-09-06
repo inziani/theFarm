@@ -10,8 +10,5 @@ import { User } from 'src/app/shared/models/user.model';
 export class UsersService {
 
   constructor(private http: HttpClient) { }
-
-  getAllUsers(){
-    return this.http.get<User[]>(`${environment.apiUrl}/users/`);
-  }
+ 
 }
