@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/core/services/authentication.service';
+import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { Subscription } from 'rxjs';
 
 
@@ -25,6 +26,7 @@ export class TodoComponent implements OnInit {
   activityList!: Activity[];
   todaysDate = new Date();
   activityStatus = ['Created', 'WIP', 'Closed'];
+  randomQuote!: any;
 
   private subscription!: Subscription;
 
@@ -33,13 +35,15 @@ export class TodoComponent implements OnInit {
     private route: ActivatedRoute,
     private activitysService: ActivitysService,
     private http: HttpClient,
-    private autheticationService: AuthenticationService ){
+    private autheticationService: AuthenticationService,
+    private dataSource: RestDataSource ){
 
     }
 
   ngOnInit(): void {
     // this.fetchActivityData();
     this.onFetchActivityData();
+    this.onFetchRandomQuotes();
     this.activityList = this.activitysService.getActivitysList();
     this.subscription = this.activitysService.activityListChanged.subscribe(
       (activityList: Activity[])=>{
@@ -52,6 +56,15 @@ export class TodoComponent implements OnInit {
   // {
   //   this.activitysService.getRequest();
   // }
+
+  onFetchRandomQuotes(){
+    this.dataSource.fetchRandomQuotes().subscribe(
+      quote =>{
+        console.log(quote);
+      this.randomQuote = quote;
+
+    });
+  }
 
   onFetchActivityData(){
     this.activitysService.getActivityRequest().subscribe(

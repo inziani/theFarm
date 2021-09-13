@@ -3,16 +3,21 @@
 <div class="container-fluid">
   <p>home works! with route</p>
 
-  test - {{ user }}
+  test - {{ payloadToken }}
 
   <h4> Welcome to subsistence farmer,</h4>
   <h5> Users from the secure API end point</h5>
+  <h4> UserID {{ userId }}</h4>
+  <h3> Name {{ userName }}</h3>
+
+  <h3> Token expiry date {{ tokenExpiry }}</h3>
   <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
   <ul *ngIf="users">
     <li *ngFor="let user of users">
      First Name - {{ user.first_name }} 
      Last Name - {{ user.last_name }}
      Username - {{ user.username }}
+     user id - {{ user.id }}
     </li>
   </ul>
 </div>

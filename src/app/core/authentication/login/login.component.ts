@@ -48,8 +48,9 @@ export class LoginComponent implements OnInit {
     this.authenticationService.onLogin(email, password)
     .subscribe(
       success => {
-        console.log(success);
+        // console.log(success);
         if(success){
+          // console.log(success)
           this.router.navigate(['home']);
         }
       },

@@ -8,6 +8,8 @@ import {
 import { concat, Observable, ReplaySubject } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
+
+import { environment } from '@environments/environment';
 // import { Platform }  from '@ionic/angular';
 
 @Injectable()
@@ -22,6 +24,7 @@ export class JwtInterceptor implements HttpInterceptor {
     private injector: Injector) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
     // Add authorization header with jwt token
     this.authenticationService = this.injector.get(AuthenticationService);
     this.token = this.dataSource.authToken;

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+
+import { first } from 'rxjs/operators';
+
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { UsersService } from '@app/core/services/users.service';
-import { first } from 'rxjs/operators';
 import { RestDataSource } from '../data/rest.datasource';
 import { User } from '../models/user.model';
+
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 
 @Component({
@@ -14,22 +18,32 @@ import { User } from '../models/user.model';
 export class HomeComponent implements OnInit {
   loading: boolean = false;
   users: User[]= [];
-  user!: string;
+  payloadToken!: any;
+  payloadTokenRefresh!: any;
+  public tokenExpiry!: Date; 
+  public userId!: number;
+  public userName!: any;
 
+  
 
   constructor(
     private usersService: UsersService,
     private dataSource: RestDataSource,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
     ) { }
 
   ngOnInit(): void {
     this.loading = true;
-    this.dataSource.getAllUsers().pipe(first()).subscribe(users =>{
+    this.dataSource.getAllUsers().pipe(first()).subscribe(usersData =>{
       this.loading = false;
-      this.users = users;
-      this.user = this.authenticationService.userDetails;
+      this.users = usersData;
     });
+    this.payloadToken = this.dataSource.jwtPayloadData(this.dataSource.authToken);
+    // this.payloadTokenRefresh = this.dataSource.jwtPayloadData(this.dataSource.authTokenRefresh);
+
+    this.userId = this.dataSource.userId;
+    this.tokenExpiry = this.dataSource.expiryDate;
   }
+
 
 }

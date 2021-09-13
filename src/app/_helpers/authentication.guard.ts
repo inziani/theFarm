@@ -36,9 +36,8 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       //  User is not logged in so redirect the user to the login page with the return url
-      if (this.authenticationService.authenticated){
-        this.authenticationService.refreshedToken;
-        // this.router.navigate(['login'])
+      if 
+      (this.authenticationService.authenticated){
         return true;
       }
       else{
@@ -46,7 +45,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
       // this.authenticationService.authenticated;
       // this.authenticationService.refreshedToken;
       // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url}});
-      this.authenticationService.onLogout;
+      // this.authenticationService.onLogout;
       this.router.navigate(['login']);
       return false;
 

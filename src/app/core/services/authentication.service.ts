@@ -29,10 +29,6 @@ interface SignUpResponse{
 })
 
 export class AuthenticationService {
-  
-  // private currentUserSubject: BehaviorSubject<User>;
-  // public currentUser: Observable<User>;
-  // public loggedInUser = new Subject<User>();
 
   // // http options used to make the API calls
   private httpOptions: any;
@@ -41,11 +37,12 @@ export class AuthenticationService {
   public token!: any;
 
   // the token expiration date
-  // public expiresAt!: any;
+  
   public token_expires!: Date;
 
-  // //  the email address of the user logged in 
-  // public user_id!: number;
+  // User Details
+  public userDetails: any;
+ 
 
   // //  error message received on loging in
 
@@ -56,7 +53,9 @@ export class AuthenticationService {
     private dataSource: RestDataSource ) 
     { 
     this.httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-    
+    // this.userDetails = this.jwtPayloadData(this.dataSource.authToken);
+    this.userDetails = this.dataSource.authToken;
+  
   }
   
 
@@ -84,11 +83,8 @@ export class AuthenticationService {
 
   onLogin(email: string, password: string): Observable<any>{
     return this.dataSource.getToken( email, password );
-    // return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(shareReplay(),
-    // map((res:any ) => { this.token = res.access;
-    // return this.token;}
-    // ));
   }
+
   get authenticated(){
     return this.dataSource.authToken!=null;
   }
@@ -97,10 +93,7 @@ export class AuthenticationService {
     return this.dataSource.refreshToken!=null;
   }
 
-  get userDetails(){
-    return this.dataSource.user;
 
-  }
 
 
   onLogout(){
