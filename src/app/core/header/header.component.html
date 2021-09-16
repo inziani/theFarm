@@ -14,7 +14,7 @@
           <a class="nav-link" style="color: #ff9e00;">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: #ff9e00;" routerLink="/home">Contact Us</a>
+          <a class="nav-link" style="color: #ff9e00;" routerLink="/home">Contact Us - {{ isAuthenticated }} - {{ user }}</a>
         </li>
       </ul>
       <form class="d-flex ms-5">
@@ -28,13 +28,13 @@
             Profile
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#0d00a4 ;">
-            <li><a routerLink="/login" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Log In</a></li>
-            <li><a routerLink="/signup" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Sign Up</a></li>
-            <li><a routerLink="/profile" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Edit Profile</a>
+            <li><a routerLink="/login" *ngIf="!isAuthenticated"  class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Log In</a></li>
+            <li><a routerLink="/signup" *ngIf="!isAuthenticated" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Sign Up</a></li>
+            <li><a routerLink="/profile" *ngIf="isAuthenticated" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Edit Profile</a>
             </li>
-            <li><a routerLink="/activity" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Activitys</a>
+            <li><a routerLink="/activity" *ngIf="isAuthenticated" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Activitys</a>
             </li>
-            <li><a class="dropdown-item" href="#" style="color: #ff9e00;">Sign Out</a></li>
+            <li><a class="dropdown-item" *ngIf="isAuthenticated" style="color: #ff9e00;" (click)="onLogOut()" >Sign Out</a></li>
           </ul>
         
         </li>

@@ -63,27 +63,4 @@ export class LoginComponent implements OnInit {
     form.reset();
   };
 
-  // logIn(form: NgForm){
-  //   if(!form.valid){
-  //     return
-  //   }
-  //   const email= form.value.email;
-  //   const password = form.value.password;
-  //   this.isLoading = true;
-  //   this.authenticationService.onLogin(email, password)
-  //   .subscribe(
-  //     success =>{
-  //       console.log(success);
-  //       if(success){
-  //         this.router.navigate(['activity']);
-  //       }
-  //     },
-  //     error => {
-  //     this.error = 'Login Unsuccessful! Try again'
-  //     this.isLoading = false;
-  //     console.log(this.error);
-  //   }
-  //   );
-  //   form.reset();
-  // };
 }

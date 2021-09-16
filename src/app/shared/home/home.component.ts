@@ -18,6 +18,8 @@ import jwtDecode, { JwtPayload } from 'jwt-decode';
 export class HomeComponent implements OnInit {
   loading: boolean = false;
   users: User[]= [];
+  decodedPayloadToken!: any;
+  decodedPayloadTokenRefresh!: any;
   payloadToken!: any;
   payloadTokenRefresh!: any;
   public tokenExpiry!: Date; 
@@ -38,11 +40,14 @@ export class HomeComponent implements OnInit {
       this.loading = false;
       this.users = usersData;
     });
-    this.payloadToken = this.dataSource.jwtPayloadData(this.dataSource.authToken);
-    // this.payloadTokenRefresh = this.dataSource.jwtPayloadData(this.dataSource.authTokenRefresh);
-
+    this.decodedPayloadToken = this.dataSource.jwtPayloadData(this.dataSource.authToken);
+    this.decodedPayloadTokenRefresh = this.dataSource.jwtPayloadData(this.dataSource.authTokenRefresh);
+    this.payloadToken = this.dataSource.authToken;
+    this.payloadTokenRefresh = this.dataSource.authTokenRefresh;
     this.userId = this.dataSource.userId;
     this.tokenExpiry = this.dataSource.expiryDate;
+    
+
   }
 
 

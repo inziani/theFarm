@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { catchError, map, shareReplay,tap } from 'rxjs/operators';
 
 // import * as jwtDecode from 'jwt-decode';
@@ -15,6 +15,7 @@ import { RandomQuote } from "../home/interfaces/random-quote";
 
 import { environment } from "@environments/environment";
 import { ActivityCategory } from "../models/activity-category.models";
+import { Router } from "@angular/router";
 
 interface AuthenticationResponse{
     refresh: string,
@@ -25,16 +26,20 @@ interface AuthenticationResponse{
 
 export class RestDataSource{
    public authToken!: string;
-  //  public authTokenRefresh!: string;
+   public authTokenRefresh!: string;
    public authTokenExpiry!: Date;
-   public user!: string;
+  //  public user = new Subject<any>();
+   public user = new BehaviorSubject<any>(null);
    public httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
    public activityCategoryList!: ActivityCategory[];
    public payload: any;
    public userId!: number;
    public expiryDate!: Date;
    
-   constructor(private http : HttpClient){
+   constructor(
+     private http : HttpClient,
+     private router: Router
+     ){
 
     
     }
@@ -43,15 +48,43 @@ export class RestDataSource{
       return this.http.get<User[]>(`${environment.apiUrl}/users/`);
     }
 
+    // getToken(email: string, password: string): Observable<any>{
+    //     return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(
+    //     map((response: any ) => { 
+    //       this.authToken = response.access;
+    //       console.log('access:',this.authToken);
+    //       this.authTokenRefresh = response.refresh;
+    //       console.log('refresh:', this.authTokenRefresh);
+    //     return this.authTokenRefresh;},
+    //     ));
+    //   }
+
     getToken(email: string, password: string): Observable<any>{
-        return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(
-        map((response: any ) => { 
-          this.authToken = response.access;
-          console.log(this.authToken);
-          // this.authTokenRefresh = response.refesh;
-        return this.authToken;},
-        ));
-      }
+      return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(
+      map((response: any ) => { 
+        this.authToken = response.access;
+        console.log('access:',this.authToken);
+        this.authTokenRefresh = response.refresh;
+        console.log('refresh:', this.authTokenRefresh);
+      return this.authTokenRefresh;},
+      ), 
+      tap(respData=>{
+        this.storeUser(respData)
+      }));
+    }
+
+    private storeUser(token: any){
+      type customJwtPayLoad = JwtPayload & { userPayloadData: string }
+      let decodedToken = jwtDecode<customJwtPayLoad>(token);
+      this.payload = JSON.stringify(decodedToken);
+      let finaldecodedToken = JSON.parse(this.payload);
+      this.userId = finaldecodedToken.user_id;
+      this.expiryDate = new Date(finaldecodedToken.exp*1000);
+      this.user.next(this.userId);
+      console.log(this.user);
+      localStorage.setItem('UserData', this.payload);
+      return this.payload;
+    }
 
 
     refreshToken(): Observable<any>{
@@ -61,18 +94,27 @@ export class RestDataSource{
         ));
     }
 
-    jwtPayloadData(token: any){
+    removeToken(){
+      this.user.next(null);
+      this.router.navigate(['/login'])
+
+    }
+
+     jwtPayloadData(token: any){
       type customJwtPayLoad = JwtPayload & { userPayloadData: string }
       let decodedToken = jwtDecode<customJwtPayLoad>(token);
       this.payload = JSON.stringify(decodedToken);
       let finaldecodedToken = JSON.parse(this.payload);
       this.userId = finaldecodedToken.user_id;
       this.expiryDate = new Date(finaldecodedToken.exp*1000);
+      this.user.next(this.userId);
+      console.log(this.user);
       return this.payload;
     }
 
+
     fetchRandomQuotes(){
-      return this.http.get<RandomQuote>(`${environment.randomQuotesURL}`, this.httpOptions );
+      return this.http.get<RandomQuote>(`${environment.randomQuotesURL}`, this.httpOptions,);
     }
 
     addActivityCategory(title: string, description: string, category: string){
