@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
  public  isAuthenticated = false;
  private userSubscription!: Subscription;
  public user!: any;
-
+//  public test: any;
   constructor(
     private dataSource: RestDataSource,
     private route: Router
@@ -23,8 +23,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       user => {
         this.isAuthenticated = !!user;
         this.user = user;
-        console.log(user);
+        //console.log(user);
       });
+    // this.test = JSON.stringify(this.dataSource.refreshToken());
   }
 
   onSignUp(){

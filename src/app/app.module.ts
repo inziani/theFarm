@@ -23,6 +23,7 @@ import { AuthenticationService } from './core/services/authentication.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { LoadingSpinnerComponent } from './shared/home/loading-spinner/loading-spinner';
 import { RestDataSource } from './shared/data/rest.datasource';
+import { ActivityCategorysComponent } from './shared/home/activity-categorys/activity-categorys.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { RestDataSource } from './shared/data/rest.datasource';
     ProfileComponent,
     EditActivityComponent,
     DowndownDirective,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ActivityCategorysComponent
   ],
   imports: [
     BrowserModule,

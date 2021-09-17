@@ -66,11 +66,12 @@ export class RestDataSource{
         console.log('access:',this.authToken);
         this.authTokenRefresh = response.refresh;
         console.log('refresh:', this.authTokenRefresh);
-      return this.authTokenRefresh;},
+      return this.authTokenRefresh;
+    },
       ), 
       tap(respData=>{
         this.storeUser(respData)
-      }));
+      }), shareReplay());
     }
 
     private storeUser(token: any){
@@ -81,17 +82,18 @@ export class RestDataSource{
       this.userId = finaldecodedToken.user_id;
       this.expiryDate = new Date(finaldecodedToken.exp*1000);
       this.user.next(this.userId);
-      console.log(this.user);
-      localStorage.setItem('UserData', this.payload);
+      //console.log(this.user);
+      localStorage.setItem('userData', this.payload);
       return this.payload;
     }
 
 
     refreshToken(): Observable<any>{
-      return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/refresh/`, this.httpOptions).pipe(
-        map((response:any ) => { this.authToken = response.refresh;
-        return this.authToken;}
-        ));
+      const userData = JSON.parse(localStorage.getItem('userData')!);
+      return this.http.post<any>(`${environment.apiUrl}/api/token/refresh/`, {userData}, this.httpOptions).pipe(
+        map((response:any ) => { this.authTokenRefresh = response.refresh;
+        return this.authTokenRefresh;}), shareReplay());
+      // return this.http.post<any>(`${environment.apiUrl}/api/token/refresh/`, {userData}, this.httpOptions);
     }
 
     removeToken(){
@@ -108,7 +110,7 @@ export class RestDataSource{
       this.userId = finaldecodedToken.user_id;
       this.expiryDate = new Date(finaldecodedToken.exp*1000);
       this.user.next(this.userId);
-      console.log(this.user);
+     // console.log(this.user);
       return this.payload;
     }
 

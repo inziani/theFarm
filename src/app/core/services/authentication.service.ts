@@ -94,8 +94,6 @@ export class AuthenticationService {
   }
 
 
-
-
   onLogout(){
     // remove user from the local storage to log user out
      this.dataSource.authToken = 'null';
