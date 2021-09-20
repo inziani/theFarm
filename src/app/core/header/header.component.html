@@ -11,7 +11,7 @@
           <a class="nav-link active" aria-current="page" style="color: #ff9e00;" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="color: #ff9e00;">About</a>
+          <a class="nav-link" style="color: #ff9e00;" routerLink="/home">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" style="color: #ff9e00;" routerLink="/home">Contact Us - {{ isAuthenticated }} - {{ user }}
@@ -43,9 +43,41 @@
             </li>
             <li><a class="dropdown-item" *ngIf="isAuthenticated" style="color: #ff9e00;" (click)="onLogOut()" >Sign Out</a></li>
           </ul>
-        
         </li>
       </ul>
     </div>
+  </div>
+</nav>
+
+<!-- CSS Navbar -->
+
+<nav class="navbar">
+  <div class="nav-center">
+    <!-- Nav header -->
+    <div class="nav-header">
+      <p>smallFarms</p>
+      <button class="nav-toggle" id="nav-toggle"><fa-icon [icon]="['fas', 'bars']"></fa-icon></button>
+    </div>
+    <!-- End of Nav header -->
+      <!-- Nav links -->
+      <ul class="nav-links" id="nav-links">
+        <li> 
+         <a  class="nav-link" routerLink="/home" >Home</a>
+        </li>
+        <li> 
+         <a class="nav-link" routerLink="/home">About</a>
+        </li>
+        <li> 
+        <a class="nav-link" routerLink="/home">Contact Us</a>
+        </li>
+    </ul>
+    <!-- End of Nav Links -->
+    <!-- Nav Icons -->
+    <ul class="nav-icons">
+      <li><a href="https://www.twitter.com/@robaimusirivi/" class="nav-icon"><fa-icon [icon]="['fab', 'twitter']"></fa-icon></a><li>
+      <li><a href="https://ke.linkedin.com/" class="nav-icon"><fa-icon [icon]="['fab', 'linkedin']"></fa-icon></a></li>
+      <li><a href="https://telegram.org/" class="nav-icon"><fa-icon [icon]="['fab', 'telegram']"></fa-icon></a></li>
+  </ul>
+  <!-- End of Nav Icons -->
   </div>
 </nav>

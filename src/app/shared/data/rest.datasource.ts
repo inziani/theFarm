@@ -25,6 +25,7 @@ interface AuthenticationResponse{
 @Injectable()
 
 export class RestDataSource{
+   public todaysDate = new Date();
    public authToken!: string;
    public authTokenRefresh!: string;
    public authTokenExpiry!: Date;

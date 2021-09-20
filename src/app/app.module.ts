@@ -7,7 +7,8 @@ import { UsersService } from './core/services/users.service';
 
 import { AppComponent } from './app.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faEdit, faTrash, faPlus,faHome, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faTelegram, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 
 import { HomeComponent } from './shared/home/home.component';
@@ -24,6 +25,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { LoadingSpinnerComponent } from './shared/home/loading-spinner/loading-spinner';
 import { RestDataSource } from './shared/data/rest.datasource';
 import { ActivityCategorysComponent } from './shared/home/activity-categorys/activity-categorys.component';
+import { FooterComponent } from './core/footer/footer/footer.component';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { ActivityCategorysComponent } from './shared/home/activity-categorys/act
     EditActivityComponent,
     DowndownDirective,
     LoadingSpinnerComponent,
-    ActivityCategorysComponent
+    ActivityCategorysComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { ActivityCategorysComponent } from './shared/home/activity-categorys/act
 })
 export class AppModule {
   constructor(private library: FaIconLibrary){
-    library.addIcons(faSquare, faEdit, faTrash, faPlus);
+    library.addIcons(faSquare, faEdit, faTrash, faPlus, faHome, faTwitter, faLinkedin, faTelegram, faBars);
 
   }
  }
