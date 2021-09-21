@@ -1,6 +1,9 @@
 
 
-<div class="container-fluid">
+<app-header></app-header>
+
+<div class="container">
+  
   <p>home works! with route</p>
 
   access - {{ payloadToken }}
@@ -17,7 +20,7 @@
   <h3> Name {{ userName }}</h3>
 
   <h3> Token expiry date {{ tokenExpiry }}</h3>
-  <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+  <!-- <div *ngIf="loading" class="spinner-border spinner-border-sm"></div> -->
   <ul *ngIf="users">
     <li *ngFor="let user of users">
      First Name - {{ user.first_name }} 
@@ -27,3 +30,4 @@
     </li>
   </ul>
 </div>
+<app-footer></app-footer>

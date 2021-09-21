@@ -3,6 +3,7 @@
 {
   background-color: #0d00a4;
   color: #ff9e00;
+  
 }
 
 .btn-outline{
@@ -58,12 +59,16 @@
   
   a{
     text-decoration: none;
+    
   }
   
-  img{
+  /* img{
     width: 100%;
+    object-fit: cover;
     display: block;
-  }
+    max-height: 100vh;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  } */
   
   h1,h2,h3,h4{
     line-height:  1.25em;
@@ -82,8 +87,11 @@
   
   p {
     margin-bottom: 1.25rem;
-    /* color: var(--clr-grey-5); */
+    /* color:#ff9e00 ; */
+
   }
+
+
   
 
   @media screen and (min-width: 800px) {

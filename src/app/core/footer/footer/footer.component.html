@@ -1,29 +1,52 @@
-<div class="mt-5">
-    <!-- <p class="mt-5">footer works!</p> -->
-<footer class="section footer">
+<!-- <div class="container"> -->
+<div class="footer">
+    <img [src]="'../assets/images/20200920_142037.jpg'" class="img-responsive" alt="image" style="width:100%; height: 70vh;" >
     <!-- Footer links -->
-    <ul class="footer-links">
-        <li> 
-         <a  class="footer-link" routerLink="/home">Home</a>
-        </li>
-        <li> 
-         <a class="footer-link" routerLink="/home">About</a>
-        </li>
-        <li> 
-        <a class="footer-link" routerLink="/home">Contact Us</a>
-        </li>
-    </ul>
-    <!-- End of footer Links -->
-    <!-- Footer Icons  -->
-    <ul class="footer-icons">
-        <li><a href="https://www.twitter.com/@robaimusirivi/" class="footer-icons"><fa-icon [icon]="['fab', 'twitter']"></fa-icon></a><li>
-        <li><a href="https://ke.linkedin.com/" class="footer-icons"><fa-icon [icon]="['fab', 'linkedin']"></fa-icon></a></li>
-        <li><a href="https://telegram.org/" class="footer-icons"><fa-icon [icon]="['fab', 'telegram']"></fa-icon></a></li>
-    </ul>
+    <div class="footer-content">
+        <h4 class="mt-5">Contact us...</h4>
+        <div class="row mt-5 px-5">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <!-- <label for="exampleFormControlInput1" class="form-label">Email address</label> -->
+                    <input type="email" class="form-control" id="email" placeholder="Your email address" style="color: black;">
+                  </div>
+                  <div class="mb-3">
+                    <!-- <label for="exampleFormControlTextarea1" class="form-label"></label> -->
+                    <textarea class="form-control" id="message" rows="3" placeholder="Your message" style="color: black;background-color: whitesmoke;"
+                     ></textarea>
+                    <div class="d-grid gap-2">
+                        <!-- <button class="btn btn-primary" type="button">Button</button> -->
+                        <button class="btn btn-outline mt-3" type="button" style="color: #ff8c00;">Send</button>
+                      </div>
+                  </div>
+            </div>
+            <div class="col-md-6">
+                <ul class="footer-links">
+                    <li> 
+                     <a  class="footer-link" routerLink="/home">Help</a>
+                    </li>
+                    <li> 
+                     <a class="footer-link" routerLink="/home">FAQ's</a>
+                    </li>
+                    <li> 
+                    <a class="footer-link" routerLink="/home">Media</a>
+                    </li>
+                </ul>
+                <!-- End of footer Links -->
+                <!-- Footer Icons  -->
+                <ul class="footer-icons">
+                    <li><a href="https://www.twitter.com/@robaimusirivi/" class="footer-icons"><fa-icon [icon]="['fab', 'twitter']"></fa-icon></a><li>
+                    <li><a href="https://ke.linkedin.com/" class="footer-icons"><fa-icon [icon]="['fab', 'linkedin']"></fa-icon></a></li>
+                    <li><a href="https://telegram.org/" class="footer-icons"><fa-icon [icon]="['fab', 'telegram']"></fa-icon></a></li>
+                    <li><a href=" https://wa.me/qr/MQMGEQDOMLVVN1/" class="footer-icons"><fa-icon [icon]="['fab', 'whatsapp']"></fa-icon></a></li>
+                </ul>
+
+            </div>
+        </div>
+   
     <small> <p class="copyright">copyright &copy; small farms <span>{{ date | date: 'yyyy' }}</span>, all rights reserved</p></small>
    
-</footer>
-
-
-
+<!-- </footer> -->
 </div>
+</div>
+<!-- </div> -->

@@ -8,7 +8,7 @@ import { UsersService } from './core/services/users.service';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare, faEdit, faTrash, faPlus,faHome, faBars } from '@fortawesome/free-solid-svg-icons';
-import { faTelegram, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faTelegram, faTwitter, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 
 
 import { HomeComponent } from './shared/home/home.component';
@@ -55,7 +55,7 @@ import { FooterComponent } from './core/footer/footer/footer.component';
 })
 export class AppModule {
   constructor(private library: FaIconLibrary){
-    library.addIcons(faSquare, faEdit, faTrash, faPlus, faHome, faTwitter, faLinkedin, faTelegram, faBars);
+    library.addIcons(faSquare, faEdit, faTrash, faPlus, faHome, faTwitter, faLinkedin, faTelegram, faBars, faWhatsapp);
 
   }
  }
