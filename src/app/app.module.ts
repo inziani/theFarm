@@ -6,6 +6,7 @@ import { UsersService } from './core/services/users.service';
 
 
 import { AppComponent } from './app.component';
+import { MaterialModule } from './material.module';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare, faEdit, faTrash, faPlus,faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faTelegram, faTwitter, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
@@ -26,6 +27,7 @@ import { LoadingSpinnerComponent } from './shared/home/loading-spinner/loading-s
 import { RestDataSource } from './shared/data/rest.datasource';
 import { ActivityCategorysComponent } from './shared/home/activity-categorys/activity-categorys.component';
 import { FooterComponent } from './core/footer/footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -48,7 +50,10 @@ import { FooterComponent } from './core/footer/footer/footer.component';
     FontAwesomeModule,
     appRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+  
   ],
   providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, RestDataSource],
   bootstrap: [AppComponent]
