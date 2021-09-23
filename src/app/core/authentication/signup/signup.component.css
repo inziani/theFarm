@@ -1,5 +1,11 @@
-::placeholder {
-    color: #0d00a4;
-    opacity: 1;
-  }
-  
+
+mat-form-field{
+   width: 300px;
+}
+
+.signup-form{
+
+   background-color:#03045e;
+   font-size: 15px;
+   color: #fb8500;
+}

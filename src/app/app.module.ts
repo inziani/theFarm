@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -8,7 +11,7 @@ import { UsersService } from './core/services/users.service';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faEdit, faTrash, faPlus,faHome, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faEdit, faTrash, faPlus, faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faTelegram, faTwitter, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 
 
@@ -53,14 +56,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-  
+    FlexLayoutModule
+
   ],
-  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, RestDataSource],
+  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, RestDataSource],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private library: FaIconLibrary){
+  constructor(private library: FaIconLibrary) {
     library.addIcons(faSquare, faEdit, faTrash, faPlus, faHome, faTwitter, faLinkedin, faTelegram, faBars, faWhatsapp);
 
   }
- }
+}
