@@ -1,13 +1,38 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <p>I am the side Nav</p>
+    <a routerLink="/home">Home</a>
+    <a routerLink="/home">Profile</a>
+    <a routerLink="/home">Project Management</a>
+    <a routerLink="/home">Finance</a>
+    <a routerLink="/signout">Log Out </a>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <div><button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button></div>
+      <div><a routerLink="/home">
+          <h4>smallFarmers</h4>
+        </a></div>
+      <div fxFlex fxLayout fxLayoutAlign="flex-end">
+        <ul fxLayout fxLayoutGap="0.5rem" class="navigation-items">
+          <li><a routerLink="/home">Home</a></li>
+          <li><a routerLink="/home">About</a></li>
+          <li><a routerLink="/home">Contact Us</a></li>
+          <li><a routerLink="/signin">Log In </a></li>
+          <li><a routerLink="/signup">Sign Up</a></li>
+        </ul>
 
-<!-- <div class="container-fluid"> -->
-  <div class="row">
-    <div class="col-xs-12">
-      <!-- <app-header></app-header> -->
+
+
+
+
+
+      </div>
+    </mat-toolbar>
+    <main>
       <router-outlet></router-outlet>
-      <!-- <app-footer></app-footer> -->
-    </div>
-  </div>
-<!-- </div> -->
-
-
-
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

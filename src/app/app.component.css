@@ -1,5 +1,45 @@
-.body{
-  background-color: #3f37c9;
+body{
+
   line-height: 1.5;
   font-size: 0.875rem;
+  margin: 0;
+}
+
+html{
+  font-family: 'Roboto', sans-serif;
+}
+.mat-toolbar{
+  background-color: #03045e;
+  color: #ff9e00;
+}
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-sidenav{
+
+  background-color: #03045e;
+  color: #ff9e00;
+  height: 100%;
+
+}
+
+.mat-sidenav{
+width: 250px;
+}
+
+a{
+  text-decoration: none;
+  color: #ff9e00;
+  font-size: 0.875rem;
+  font-weight:lighter;
+}
+a:hover, a:active{
+  color:#bfd7ff;
+
+}
+.navigation-items{
+list-style: none;
+padding: 0;
+margin: none;
+}
+h4{
+  font-weight: lighter;
 }
