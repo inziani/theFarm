@@ -31,6 +31,7 @@ import { RestDataSource } from './shared/data/rest.datasource';
 import { ActivityCategorysComponent } from './shared/home/activity-categorys/activity-categorys.component';
 import { FooterComponent } from './core/footer/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SideNavComponent } from './core/side-nav/side-nav.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DowndownDirective,
     LoadingSpinnerComponent,
     ActivityCategorysComponent,
-    FooterComponent
+    FooterComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,

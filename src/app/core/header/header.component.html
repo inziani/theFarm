@@ -56,6 +56,29 @@
 
 <!-- Angular Material Navigation Bar -->
 
-
+<mat-toolbar>
+  <!-- <div fxHide.gt-xs><button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button></div> -->
+  <div><button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button></div>
+  <div><a routerLink="/home">
+      <h4 class="nav-caption">smallFarmers</h4>
+    </a></div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="0.5rem" class="navigation-items">
+      <li><a routerLink="/home"> Home
+          <!-- <mat-icon>home</mat-icon><span class="nav-caption">Home</span> -->
+        </a></li>
+      <li><a routerLink="/home">About</a></li>
+      <li><a routerLink="/home">Contact Us</a></li>
+      <li><a routerLink="/signin">Log In </a></li>
+      <li><a routerLink="/signup"> Sign Up
+          <!-- <mat-icon>face</mat-icon><span class="nav-caption">Sign Up</span> -->
+        </a></li>
+    </ul>
+  </div>
+</mat-toolbar>
 
 <!-- End of Angular Material Navigation Bar -->
