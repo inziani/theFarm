@@ -4,6 +4,8 @@
 }
 .home-page{
     text-align: center;
+    margin-left: 2px;
+    margin-right: 2px;
 
 }
 
@@ -21,4 +23,10 @@ background-color:transparent;
 color: orange;
 margin-left: 2px;
 margin-right: 2px;
+}
+
+.mat-divider{
+    color: teal;
+    border-top-color: rgba(0,0,0,.12);
+
 }
