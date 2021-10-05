@@ -1,5 +1,24 @@
 .container{
     height: 100vh;
     width: 100%;
-    
+}
+.home-page{
+    text-align: center;
+
+}
+
+.home-page-modules{
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+
+.mat-card{
+
+margin-bottom: 8px;
+background-color:transparent;
+color: orange;
+margin-left: 2px;
+margin-right: 2px;
 }

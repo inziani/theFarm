@@ -9,6 +9,8 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatListModule } from "@angular/material/list";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatCardModule } from "@angular/material/card";
 
 @NgModule({
     declarations: [],
@@ -21,7 +23,9 @@ import { MatListModule } from "@angular/material/list";
         MatDatepickerModule,
         MatSidenavModule,
         MatToolbarModule,
-        MatListModule
+        MatListModule,
+        MatGridListModule,
+        MatCardModule
     ],
     exports: [
         MatButtonModule,
@@ -32,7 +36,9 @@ import { MatListModule } from "@angular/material/list";
         MatDatepickerModule,
         MatSidenavModule,
         MatToolbarModule,
-        MatListModule
+        MatListModule,
+        MatGridListModule,
+        MatCardModule
     ]
 })
 export class MaterialModule {

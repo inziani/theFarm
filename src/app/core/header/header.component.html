@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg">
+<!-- Bootstrap Navigation  -->
+<!-- <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" style="color: #ff9e00;" routerLink="/home">smallFarms</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -37,8 +38,6 @@
             Profile
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#0d00a4 ;">
-            <!-- <li><a routerLink="/login" *ngIf="!isAuthenticated"  class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Log In</a></li>
-            <li><a routerLink="/signup" *ngIf="!isAuthenticated" class="dropdown-item" style="color: #ff9e00; cursor: pointer;">Sign Up</a></li> -->
             <li><a routerLink="/profile" *ngIf="isAuthenticated" class="dropdown-item"
                 style="color: #ff9e00; cursor: pointer;">Edit Profile</a>
             </li>
@@ -52,15 +51,12 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->
+<!-- End of Bootstrap Navigation Bar -->
 
 <!-- Angular Material Navigation Bar -->
-
 <mat-toolbar>
-  <!-- <div fxHide.gt-xs><button mat-icon-button (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-          </button></div> -->
-  <div><button mat-icon-button (click)="sidenav.toggle()">
+  <div><button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button></div>
   <div><a routerLink="/home">
@@ -69,13 +65,11 @@
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="0.5rem" class="navigation-items">
       <li><a routerLink="/home"> Home
-          <!-- <mat-icon>home</mat-icon><span class="nav-caption">Home</span> -->
         </a></li>
       <li><a routerLink="/home">About</a></li>
-      <li><a routerLink="/home">Contact Us</a></li>
-      <li><a routerLink="/signin">Log In </a></li>
-      <li><a routerLink="/signup"> Sign Up
-          <!-- <mat-icon>face</mat-icon><span class="nav-caption">Sign Up</span> -->
+      <li><a routerLink="/home">Contact Us {{ isAuthenticated }} - {{ user }}</a></li>
+      <li><a routerLink="/login" *ngIf="!isAuthenticated">Log In </a></li>
+      <li><a routerLink="/signup" *ngIf="!isAuthenticated"> Sign Up
         </a></li>
     </ul>
   </div>

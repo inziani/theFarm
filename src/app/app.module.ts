@@ -25,6 +25,7 @@ import { ProfileComponent } from './shared/home/profile/profile.component';
 import { EditActivityComponent } from './shared/home/edit-activity/edit-activity.component';
 import { DowndownDirective } from './shared/directives/dropdown.directive';
 import { AuthenticationService } from './core/services/authentication.service';
+import { NavigationServiceService } from './core/services/navigation-service.service';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { LoadingSpinnerComponent } from './shared/home/loading-spinner/loading-spinner';
 import { RestDataSource } from './shared/data/rest.datasource';
@@ -61,7 +62,7 @@ import { SideNavComponent } from './core/side-nav/side-nav.component';
     FlexLayoutModule
 
   ],
-  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, RestDataSource],
+  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, RestDataSource, NavigationServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

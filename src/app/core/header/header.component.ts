@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { Subscription } from 'rxjs';
@@ -9,10 +9,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
- public  isAuthenticated = false;
- private userSubscription!: Subscription;
- public user!: any;
-//  public test: any;
+  @Output() sideNavToggle = new EventEmitter<void>();
+
+  public isAuthenticated = false;
+  private userSubscription!: Subscription;
+  public user!: any;
   constructor(
     private dataSource: RestDataSource,
     private route: Router
@@ -23,21 +24,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
       user => {
         this.isAuthenticated = !!user;
         this.user = user;
-        //console.log(user);
       });
-    // this.test = JSON.stringify(this.dataSource.refreshToken());
   }
 
-  onSignUp(){
+  onSignUp() {
     this.route.navigate(['signup']);
 
   }
 
-  onLogOut(){
+  onToggleSidenav() {
+
+    this.sideNavToggle.emit();
+
+  }
+
+  onLogOut() {
     this.dataSource.removeToken();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
 
     this.userSubscription.unsubscribe();
   }

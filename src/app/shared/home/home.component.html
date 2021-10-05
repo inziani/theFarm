@@ -1,9 +1,83 @@
+<div class="home-page" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="20px" fxLayoutAlign="center center">
+  <section>
+    <h2>Welcome to smallFarmers</h2>
+    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam rem perferendis, pariatur adipisci reprehenderit
+      nemo dolores, corporis porro nihil reiciendis cum hic dignissimos rerum vel. Nisi ea consequatur in blanditiis
+      illum deleniti provident sed! Quo quae expedita obcaecati similique excepturi voluptate atque, voluptatum
+      inventore. Error in saepe aliquam beatae et!</p>
+  </section>
+</div>
+<div class="home-page-modules" fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="1.5rem"
+  fxLayoutAlign="center center">
+  <section>
+    <mat-card class="example-card" fxFlex="300px">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Project Management</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <img mat-card-image src="../assets/images/pm.jpg" alt="project management">
+      <mat-card-content>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni deleniti odit eius ullam obcaecati provident
+          neque sint placeat laboriosam quam!
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <section>
+    <mat-card class="example-card" fxFlex="300px">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Finance</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <img mat-card-image src="../assets/images/finance.jpg" alt="finance" style="height: 200px;">
+      <mat-card-content>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni deleniti odit eius ullam obcaecati provident
+          neque sint placeat laboriosam quam!
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <section>
+    <mat-card class="example-card" fxFlex="300px">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Human Resources</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <img mat-card-image src="../assets/images/hr.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni deleniti odit eius ullam obcaecati provident
+          neque sint placeat laboriosam quam!
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  <section>
+    <mat-card class="example-card" fxFlex="300px">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Materials Management</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <img mat-card-image src="../assets/images/stock.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni deleniti odit eius ullam obcaecati provident
+          neque sint placeat laboriosam quam!
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>
 
-
-<app-header></app-header>
 
 <div class="container">
-  
+
   <p>home works! with route</p>
 
   access - {{ payloadToken }}
@@ -23,10 +97,10 @@
   <!-- <div *ngIf="loading" class="spinner-border spinner-border-sm"></div> -->
   <ul *ngIf="users">
     <li *ngFor="let user of users">
-     First Name - {{ user.first_name }} 
-     Last Name - {{ user.last_name }}
-     Username - {{ user.username }}
-     user id - {{ user.id }}
+      First Name - {{ user.first_name }}
+      Last Name - {{ user.last_name }}
+      Username - {{ user.username }}
+      user id - {{ user.id }}
     </li>
   </ul>
 </div>
