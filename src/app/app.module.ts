@@ -33,6 +33,8 @@ import { ActivityCategorysComponent } from './shared/home/activity-categorys/act
 import { FooterComponent } from './core/footer/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideNavComponent } from './core/side-nav/side-nav.component';
+import { ModulesComponent } from './modules/modules.component';
+import { HomePageComponent } from './core/home-page/home-page.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { SideNavComponent } from './core/side-nav/side-nav.component';
     LoadingSpinnerComponent,
     ActivityCategorysComponent,
     FooterComponent,
-    SideNavComponent
+    SideNavComponent,
+    ModulesComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

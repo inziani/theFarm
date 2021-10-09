@@ -1,0 +1,16 @@
+
+.home-page-modules{
+    text-align: center;
+    margin-top: 10px;
+    height: 100vh;
+
+}
+
+.mat-card{
+margin-bottom: 8px;
+background-color:transparent;
+color: #ff9e00;
+margin-left: 2px;
+margin-right: 2px;
+
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 
 @Component({
@@ -8,8 +9,8 @@ import { RestDataSource } from '@app/shared/data/rest.datasource';
 })
 export class FooterComponent implements OnInit {
   public date!: Date;
-  
-  
+
+
 
   constructor(
     private dataSource: RestDataSource
@@ -17,6 +18,10 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.date = this.dataSource.todaysDate
+  }
+
+  submitContactForm(form: NgForm) {
+    console.log('This is so much work!');
   }
 
 }

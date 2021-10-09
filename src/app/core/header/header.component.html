@@ -56,13 +56,13 @@
 
 <!-- Angular Material Navigation Bar -->
 <mat-toolbar>
-  <div><button mat-icon-button (click)="onToggleSidenav()">
+  <div><button class="mt-5" mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button></div>
   <div><a routerLink="/home">
-      <h4 class="nav-caption">smallFarmers</h4>
+      <h4 class="nav-caption mt-5">smallFarmers</h4>
     </a></div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs class="mt-5">
     <ul fxLayout fxLayoutGap="0.5rem" class="navigation-items">
       <li><a routerLink="/home"> Home
         </a></li>
@@ -74,5 +74,6 @@
     </ul>
   </div>
 </mat-toolbar>
+<app-home-page></app-home-page>
 
 <!-- End of Angular Material Navigation Bar -->
