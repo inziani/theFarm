@@ -16,6 +16,9 @@ interface ServiceCatalogue {
 })
 export class FooterComponent implements OnInit {
 
+  public zoomingIn: string = 'zoom in'
+  public zoomingOut: string = 'zoom out'
+
   public date!: Date;
   public services: ServiceCatalogue[] =
     [

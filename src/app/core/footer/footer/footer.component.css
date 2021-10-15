@@ -1,4 +1,13 @@
 
+.container .cardWrap div{
+height: 60vh;
+width: 60vh;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
 
 .mat-option {
   background-color:#03045e;
@@ -7,7 +16,7 @@
 }
 
 .mat-raised-button{
-  width: 75%;
+  width: 50%;
 }
 .mat-primary{
   background-color: #ff9e00;
@@ -27,12 +36,20 @@ background-color:transparent;
 color: #ff9e00;
 margin-left: 2px;
 margin-right: 2px;
-
+width: 100%;
+height: 80vh;
 }
 .footer{
     text-align: center;
-    height: 100vh;
+    margin-top: 5rem;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
 
+body{
+height: 100vh;
 }
 
   .footer-link{

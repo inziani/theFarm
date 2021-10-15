@@ -1,17 +1,17 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { EditActivityComponent } from "./shared/home/edit-activity/edit-activity.component";
-import { HomeComponent } from "./shared/home/home.component";
+import { EditActivityComponent } from "./core/application-components/edit-activity/edit-activity.component";
+import { HomePageComponent } from "./core/home-page/home-page.component";
 import { LoginComponent } from "./core/authentication/login/login.component";
-import { ProfileComponent } from "./shared/home/profile/profile.component";
+import { ProfileComponent } from "./core/application-components/profile/profile.component";
 import { SignupComponent } from "./core/authentication/signup/signup.component";
-import { TodoComponent } from "./shared/home/todo/todo.component";
+import { TodoComponent } from "./core/application-components/todo/todo.component";
 import { AuthenticationGuard } from "./_helpers/authentication.guard";
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
@@ -26,6 +26,6 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 
-export class appRoutingModule{
+export class appRoutingModule {
 
 }
