@@ -24,7 +24,7 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   formGroup = new AuthenticationFormGroup();
-  userLogin!: LoginCredentials;
+  userLogin: LoginCredentials = new LoginCredentials("", "");
   formSubmitted: boolean = false;
 
   isLoginMode = true;
@@ -75,14 +75,39 @@ export class LoginComponent implements OnInit {
     form.reset();
   };
 
-  // submitForm() {
-  //   Object.keys(this.formGroup.controls).forEach(c: => this.userLogin[c] = this.formGroup.controls[c].value);
-  //   this.formSubmitted = true;
-  //   this.formGroup.reset();
-  //   this.formSubmitted = false;
+  submitForm() {
+    // if (!this.formGroup.valid) {
+    //   return
+    // }
+    Object.keys(this.formGroup.controls).forEach(c =>
+      this.userLogin['password'] = this.formGroup.controls['password'].value);
+    this.userLogin['email'] = this.formGroup.controls['email'].value;
+    // console.log(this.userLogin);
+    // Object.keys(this.formGroup.controls).forEach(c => this.userLogin[c] = this.formGroup.controls[c].value);
+    // console.log(this.userLogin.email, this.userLogin.password);
+    this.formSubmitted = true;
+    this.authenticationService.onLogin(this.userLogin.email, this.userLogin.password)
+      .subscribe(
+        success => {
+          // console.log(success);
+          if (success) {
+            alert("Welcome to small farmers.")
+            this.router.navigate(['home']);
+          }
+        },
+        error => {
+          this.error = 'Login Unsuccessful! Try again';
+          alert(this.error);
+          this.isLoading = false;
+          // console.log(this.error);
+        }
+      );
+
+    this.formGroup.reset();
+    this.formSubmitted = false;
 
 
 
-  // }
+  }
 
 }

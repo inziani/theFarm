@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, RequiredValidator, Validators } from "@angular/forms";
-import { ObjectUnsubscribedError } from "rxjs";
+
 
 
 
@@ -19,8 +19,11 @@ export class AuthenticationFormControl extends FormControl {
         if (this.errors) {
             for (let errorName in this.errors) {
                 switch (errorName) {
+                    case "email":
+                        messages.push(`Please enter a valid ${this.label} address`);
+                        break;
                     case "required":
-                        messages.push(`You must enter a ${this.label}`);
+                        messages.push(` This ${this.label} is required`);
                         break;
                     case "minLength":
                         messages.push(`A ${this.label} must be atleast ${this.errors['minLength'].requiredLength} characters`);
@@ -44,36 +47,40 @@ export class AuthenticationFormGroup extends FormGroup {
 
     constructor() {
         super({
-            email: new AuthenticationFormControl("Email", "email", "", Validators.required),
-            password: new AuthenticationFormControl("Password", "password", "",
-                Validators.compose([
+            email: new AuthenticationFormControl("Email", "email", "", Validators.compose(
+                [
                     Validators.required,
-                    Validators.pattern("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/"),
-                    Validators.minLength(8),
-                    Validators.maxLength(12)
+                    Validators.email
+                ]
+            )),
+            // email: new AuthenticationFormControl("Email", "email", "", Validators.required),
+            password: new AuthenticationFormControl("Password", "password", "", Validators.required),
 
-                ]))
+            // password: new AuthenticationFormControl("Password", "password", "",
+            //     Validators.compose([
+            //         Validators.required,
+            //         Validators.pattern("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/"),
+            //         Validators.minLength(8),
+            //         Validators.maxLength(12)
+            //     ]))
         });
-
     }
 
-    get auhenticationControls(): AuthenticationFormControl[] {
+    get authenticationControls(): AuthenticationFormControl[] {
         return Object.keys(this.controls).map(k => this.controls[k] as AuthenticationFormControl);
     }
 
-    getValidationMessages(name: string): string[] {
-        return (this.controls['name'] as AuthenticationFormControl).getValidationMessages();
+    getEmailValidationMessages(email: string): string[] {
+        return (this.controls['email'] as AuthenticationFormControl).getValidationMessages();
+    }
+
+    getPasswordValidationMessages(password: string): string[] {
+        return (this.controls['password'] as AuthenticationFormControl).getValidationMessages();
     }
 
     getFormValidationMessages(): string[] {
         let messages: string[] = [];
         Object.values(this.controls).forEach(c => messages.push(...(c as AuthenticationFormControl).getValidationMessages()));
         return messages;
-
-
-
-
     }
-
-
 }
