@@ -11,19 +11,18 @@
         </div>
         <div class="mb-3">
 
-          <div class="form-group" *ngFor="let control of formGroup.authenticationControls">
-            <!-- <label>{{control.label}}</label> -->
+          <!-- <div class="form-group" *ngFor="let control of formGroup.authenticationControls">
+            <label>{{control.label}}</label>
             <input class="form-control mt-5" name="{{control.modelProperty}}"
               formControlName="{{control.modelProperty}}" placeholder="{{control.label}}"
               style="background-color:#ff9e00; border: none;" />
             <ul class="text-danger list-unstyled" *ngIf="(formSubmitted || control.dirty) && control.invalid">
               <li *ngFor="let error of control.getValidationMessages()"> {{ error }} </li>
             </ul>
-          </div>
+          </div> -->
 
 
-
-          <!-- <div class="form-group">
+          <div class="form-group">
 
             <input type="text" id="email" class="form-control" name="email" formControlName="email" placeholder="email"
               style="background-color:#ff9e00; border: none;" aria-describedby="email">
@@ -32,12 +31,11 @@
               *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
               <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
             </ul>
-          </div> -->
+          </div>
         </div>
 
-        <!-- <div class="mb-3 mt-5">
+        <div class="mb-3 mt-5">
           <div class="form-group">
-
             <input type="password" id="password" class="form-control" name="password" formControlName="password"
               placeholder="Password" style="background-color: #ff9e00; border: none;" aria-describedby="password">
 
@@ -46,12 +44,11 @@
               <li *ngFor="let error of formGroup.getPasswordValidationMessages('password')">{{ error }}</li>
             </ul>
           </div>
-        </div> -->
+        </div>
         <div class="text-center">
           <button type="submit" class="btn btn-outline w-100 mt-4"
             style="background-color:#ff9e00; color: #0d00a4; position: center; border-width: 1px;"
             [disabled]="!formSubmitted && formGroup.invalid">Login</button>
-          <!-- [class.btn-primary]="formSubmitted && formGroup.invalid" -->
           <a href="#" class="text-decoration-none">
             <p class="mt-4" style="color:#ff9e00;">Forgot Username or Password?</p>
           </a>

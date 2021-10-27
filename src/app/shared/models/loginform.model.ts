@@ -1,9 +1,6 @@
 import { FormControl, FormGroup, RequiredValidator, Validators } from "@angular/forms";
 
-
-
-
-export class AuthenticationFormControl extends FormControl {
+export class LoginFormControl extends FormControl {
 
     label: string;
     modelProperty: string;
@@ -34,7 +31,6 @@ export class AuthenticationFormControl extends FormControl {
                     case "pattern":
                         messages.push(`This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `);
                         break;
-
                 }
 
             }
@@ -43,44 +39,36 @@ export class AuthenticationFormControl extends FormControl {
     }
 }
 
-export class AuthenticationFormGroup extends FormGroup {
+export class LoginFormGroup extends FormGroup {
 
     constructor() {
         super({
-            email: new AuthenticationFormControl("Email", "email", "", Validators.compose(
+            email: new LoginFormControl("Email", "email", "", Validators.compose(
                 [
                     Validators.required,
-                    Validators.email
+                    Validators.email,
                 ]
             )),
-            // email: new AuthenticationFormControl("Email", "email", "", Validators.required),
-            password: new AuthenticationFormControl("Password", "password", "", Validators.required),
-
-            // password: new AuthenticationFormControl("Password", "password", "",
-            //     Validators.compose([
-            //         Validators.required,
-            //         Validators.pattern("/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/"),
-            //         Validators.minLength(8),
-            //         Validators.maxLength(12)
-            //     ]))
+            password: new LoginFormControl("Password", "password", "", Validators.required),
         });
     }
 
-    get authenticationControls(): AuthenticationFormControl[] {
-        return Object.keys(this.controls).map(k => this.controls[k] as AuthenticationFormControl);
+
+    get loginFormControls(): LoginFormControl[] {
+        return Object.keys(this.controls).map(k => this.controls[k] as LoginFormControl);
     }
 
     getEmailValidationMessages(email: string): string[] {
-        return (this.controls['email'] as AuthenticationFormControl).getValidationMessages();
+        return (this.controls['email'] as LoginFormControl).getValidationMessages();
     }
 
     getPasswordValidationMessages(password: string): string[] {
-        return (this.controls['password'] as AuthenticationFormControl).getValidationMessages();
+        return (this.controls['password'] as LoginFormControl).getValidationMessages();
     }
 
     getFormValidationMessages(): string[] {
         let messages: string[] = [];
-        Object.values(this.controls).forEach(c => messages.push(...(c as AuthenticationFormControl).getValidationMessages()));
+        Object.values(this.controls).forEach(c => messages.push(...(c as LoginFormControl).getValidationMessages()));
         return messages;
     }
 }

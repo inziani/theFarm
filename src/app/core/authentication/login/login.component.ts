@@ -1,7 +1,7 @@
 import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationFormControl, AuthenticationFormGroup } from '@app/shared/models/form.model';
-import { LoginCredentials } from '@app/shared/models/login.model';
+import { LoginFormControl, LoginFormGroup } from '@app/shared/models/loginform.model';
+import { LoginCredentials } from '@app/shared/models/authentication.model';
 
 
 
@@ -23,7 +23,7 @@ import { NgForm } from '@angular/forms';
 
 export class LoginComponent implements OnInit {
 
-  formGroup = new AuthenticationFormGroup();
+  formGroup = new LoginFormGroup();
   userLogin: LoginCredentials = new LoginCredentials("", "");
   formSubmitted: boolean = false;
 
@@ -60,7 +60,6 @@ export class LoginComponent implements OnInit {
     this.authenticationService.onLogin(email, password)
       .subscribe(
         success => {
-          // console.log(success);
           if (success) {
             alert("Welcome to small farmers.")
             this.router.navigate(['home']);
@@ -69,27 +68,22 @@ export class LoginComponent implements OnInit {
         error => {
           this.error = 'Login Unsuccessful! Try again'
           this.isLoading = false;
-          console.log(this.error);
         }
       );
     form.reset();
   };
 
   submitForm() {
-    // if (!this.formGroup.valid) {
-    //   return
-    // }
+    if (!this.formGroup.valid) {
+      return
+    }
     Object.keys(this.formGroup.controls).forEach(c =>
       this.userLogin['password'] = this.formGroup.controls['password'].value);
     this.userLogin['email'] = this.formGroup.controls['email'].value;
-    // console.log(this.userLogin);
-    // Object.keys(this.formGroup.controls).forEach(c => this.userLogin[c] = this.formGroup.controls[c].value);
-    // console.log(this.userLogin.email, this.userLogin.password);
     this.formSubmitted = true;
     this.authenticationService.onLogin(this.userLogin.email, this.userLogin.password)
       .subscribe(
         success => {
-          // console.log(success);
           if (success) {
             alert("Welcome to small farmers.")
             this.router.navigate(['home']);
@@ -99,15 +93,10 @@ export class LoginComponent implements OnInit {
           this.error = 'Login Unsuccessful! Try again';
           alert(this.error);
           this.isLoading = false;
-          // console.log(this.error);
         }
       );
 
     this.formGroup.reset();
     this.formSubmitted = false;
-
-
-
   }
-
 }
