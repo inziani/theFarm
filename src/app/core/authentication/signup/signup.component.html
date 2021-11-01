@@ -76,6 +76,25 @@
       <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
         fxLayoutAlign="center center">
         <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <input type="text" matInput placeholder="gender" id="gender" name="gender" formControlName="gender">
+          <ul class="text-danger list-unstyled"
+            *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
+            <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
+          </ul>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input type="text" matInput placeholder="City" id="city" name="city" formControlName="city">
+          <ul class="text-danger list-unstyled"
+            *ngIf="(formSubmitted || formGroup.controls['city'].dirty) && formGroup.controls['city'].invalid">
+            <li *ngFor="let error of formGroup.getEmailValidationMessages('city')">{{ error}}</li>
+          </ul>
+        </mat-form-field>
+      </div>
+      <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
+        fxLayoutAlign="center center">
+        <mat-form-field>
           <mat-label>Password</mat-label>
           <input type="password" matInput hintLabel="Your password should have a minimum of 12 characters"
             placeholder="Password" id="password" name="password" formControlName="password">

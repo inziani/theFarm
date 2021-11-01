@@ -41,6 +41,8 @@ import { SideNavComponent } from './core/side-nav/side-nav.component';
 import { ModulesComponent } from './core/modules/modules.component';
 import { HomePageComponent } from './core/home-page/home-page.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog.component';
+
 
 
 
@@ -60,7 +62,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     FooterComponent,
     SideNavComponent,
     ModulesComponent,
-    HomePageComponent
+    HomePageComponent,
+    LoginDialogComponent
+
   ],
   imports: [
     BrowserModule,
@@ -72,11 +76,14 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+
 
   ],
   providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, RestDataSource, NavigationServiceService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginDialogComponent]
+
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {

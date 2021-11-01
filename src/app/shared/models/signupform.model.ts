@@ -58,6 +58,8 @@ export class SignUpFormGroup extends FormGroup {
                 Validators.required,
                 Validators.email
             ])),
+            gender: new SignUpFormControl("Gender", "gender", "", Validators.required),
+            city: new SignUpFormControl("City", "city", "", Validators.required),
             password: new SignUpFormControl("Password", "Password", "",
                 Validators.compose([
                     Validators.required,
@@ -104,6 +106,14 @@ export class SignUpFormGroup extends FormGroup {
 
     getEmailValidationMessages(email: string): string[] {
         return (this.controls['email'] as SignUpFormControl).getValidationMessages();
+    }
+
+    getGenderValidationMessages(gender: string): string[] {
+        return (this.controls['gender'] as SignUpFormControl).getValidationMessages();
+    }
+
+    getCityValidationMessages(city: string): string[] {
+        return (this.controls['city'] as SignUpFormControl).getValidationMessages();
     }
 
     getPasswordValidationMessages(password: string): string[] {

@@ -12,6 +12,8 @@ import { MatListModule } from "@angular/material/list";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatCardModule } from "@angular/material/card";
 import { MatSelectModule } from "@angular/material/select";
+import { MatTreeModule } from "@angular/material/tree";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
     declarations: [],
@@ -27,7 +29,9 @@ import { MatSelectModule } from "@angular/material/select";
         MatListModule,
         MatGridListModule,
         MatCardModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTreeModule,
+        MatDialogModule
     ],
     exports: [
         MatButtonModule,
@@ -41,7 +45,9 @@ import { MatSelectModule } from "@angular/material/select";
         MatListModule,
         MatGridListModule,
         MatCardModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTreeModule,
+        MatDialogModule
     ]
 })
 export class MaterialModule {

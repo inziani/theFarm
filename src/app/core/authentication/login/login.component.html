@@ -11,17 +11,6 @@
         </div>
         <div class="mb-3">
 
-          <!-- <div class="form-group" *ngFor="let control of formGroup.authenticationControls">
-            <label>{{control.label}}</label>
-            <input class="form-control mt-5" name="{{control.modelProperty}}"
-              formControlName="{{control.modelProperty}}" placeholder="{{control.label}}"
-              style="background-color:#ff9e00; border: none;" />
-            <ul class="text-danger list-unstyled" *ngIf="(formSubmitted || control.dirty) && control.invalid">
-              <li *ngFor="let error of control.getValidationMessages()"> {{ error }} </li>
-            </ul>
-          </div> -->
-
-
           <div class="form-group">
 
             <input type="text" id="email" class="form-control" name="email" formControlName="email" placeholder="email"
@@ -38,6 +27,7 @@
           <div class="form-group">
             <input type="password" id="password" class="form-control" name="password" formControlName="password"
               placeholder="Password" style="background-color: #ff9e00; border: none;" aria-describedby="password">
+
 
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">

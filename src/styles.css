@@ -10,3 +10,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     color: #ff9e00;
     background-color: #03045e;
   }
+
+  .mat-dialog-container{
+
+    background-color: #03045e;
+    color: #ff9e00;
+
+  }

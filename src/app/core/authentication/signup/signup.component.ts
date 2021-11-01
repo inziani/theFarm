@@ -16,7 +16,7 @@ import { SignUpCredentials } from '@app/shared/models/authentication.model';
 export class SignupComponent implements OnInit {
 
   formGroup = new SignUpFormGroup();
-  userSignUp: SignUpCredentials = new SignUpCredentials("", "", "", "", "", "", "", "");
+  userSignUp: SignUpCredentials = new SignUpCredentials("", "", new Date(), NaN, "", "", "", "", "", "");
   public maxDate!: Date;
 
   isLoading = false;
@@ -39,10 +39,16 @@ export class SignupComponent implements OnInit {
       return
     }
     this.isLoading = true;
+    const firstName = form.value.firstName;
+    const lastName = form.value.lastName;
+    const birthday = form.value.birthday;
+    const phoneNumber = form.value.firstName;
     const username = form.value.username;
+    const gender = form.value.lastName;
+    const city = form.value.birthday;
     const email = form.value.email;
     const password = form.value.email;
-    this.authenticationService.onUserSignOn(username, email, password).subscribe(signUpData => {
+    this.authenticationService.onUserSignOn(firstName, lastName, birthday, phoneNumber, username, gender, city, email, password).subscribe(signUpData => {
       // console.log(signUpData);
       this.isLoading = false;
       this.router.navigate(['/login']);
@@ -65,6 +71,8 @@ export class SignupComponent implements OnInit {
     this.userSignUp['birthday'] = this.formGroup.controls['lastName'].value;
     this.userSignUp['phoneNumber'] = this.formGroup.controls['phoneNumber'].value;
     this.userSignUp['username'] = this.formGroup.controls['username'].value;
+    this.userSignUp['gender'] = this.formGroup.controls['gender'].value;
+    this.userSignUp['city'] = this.formGroup.controls['city'].value;
     this.userSignUp['email'] = this.formGroup.controls['email'].value;
     this.userSignUp['password'] = this.formGroup.controls['password'].value;
     this.userSignUp['confirmPassword'] = this.formGroup.controls['confirmPassword'].value;
@@ -76,12 +84,25 @@ export class SignupComponent implements OnInit {
       this.userSignUp.birthday,
       this.userSignUp.phoneNumber,
       this.userSignUp.username,
+      this.userSignUp.gender,
+      this.userSignUp.city,
       this.userSignUp.email,
-      this.userSignUp.password
+      this.userSignUp.password,
+      this.userSignUp.confirmPassword
     );
 
     this.formSubmitted = true;
-    this.authenticationService.onUserSignOn(this.userSignUp.username, this.userSignUp.email, this.userSignUp.password,)
+    this.authenticationService.onUserSignOn(
+      this.userSignUp.firstName,
+      this.userSignUp.lastName,
+      this.userSignUp.birthday,
+      this.userSignUp.phoneNumber,
+      this.userSignUp.username,
+      this.userSignUp.gender,
+      this.userSignUp.city,
+      this.userSignUp.email,
+      this.userSignUp.password
+    )
       .subscribe(
         success => {
           if (success) {
