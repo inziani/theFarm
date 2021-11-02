@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { SignUpFormControl, SignUpFormGroup } from '@app/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/shared/models/authentication.model';
+import { Gender } from '@app/shared/interfaces/gender';
 
 
 @Component({
@@ -14,6 +15,11 @@ import { SignUpCredentials } from '@app/shared/models/authentication.model';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+
+  gender: Gender[] = [
+    { value: 'female', viewValue: 'Female' },
+    { value: 'male', viewValue: 'Male' }
+  ];
 
   formGroup = new SignUpFormGroup();
   userSignUp: SignUpCredentials = new SignUpCredentials("", "", new Date(), NaN, "", "", "", "", "", "");

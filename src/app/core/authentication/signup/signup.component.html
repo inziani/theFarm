@@ -77,7 +77,16 @@
         fxLayoutAlign="center center">
         <mat-form-field>
           <mat-label>Gender</mat-label>
-          <input type="text" matInput placeholder="gender" id="gender" name="gender" formControlName="gender">
+          <mat-select formControlName="gender">
+            <mat-option *ngFor="let gender of gender" [value]="gender.value">
+              {{ gender.viewValue }}
+            </mat-option>
+
+          </mat-select>
+
+          <!-- <input type="text" matInput placeholder="gender" id="gender" name="gender" formControlName="gender"> -->
+
+
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
             <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
