@@ -83,7 +83,6 @@ export class SignUpFormGroup extends FormGroup {
     }
 
 
-
     getfirstNameValidationMessages(firstName: string): string[] {
         return (this.controls['firstName'] as SignUpFormControl).getValidationMessages();
     }
@@ -100,8 +99,8 @@ export class SignUpFormGroup extends FormGroup {
         return (this.controls['phoneNumber'] as SignUpFormControl).getValidationMessages();
     }
 
-    getUserNameValidationMessages(email: string): string[] {
-        return (this.controls['phoneNumber'] as SignUpFormControl).getValidationMessages();
+    getUserNameValidationMessages(username: string): string[] {
+        return (this.controls['username'] as SignUpFormControl).getValidationMessages();
     }
 
     getEmailValidationMessages(email: string): string[] {

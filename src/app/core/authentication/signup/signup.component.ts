@@ -17,8 +17,8 @@ import { Gender } from '@app/shared/interfaces/gender';
 export class SignupComponent implements OnInit {
 
   gender: Gender[] = [
-    { value: 'female', viewValue: 'Female' },
-    { value: 'male', viewValue: 'Male' }
+    { value: 'Female', viewValue: 'Female' },
+    { value: 'Male', viewValue: 'Male' }
   ];
 
   formGroup = new SignUpFormGroup();
