@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '@app/shared/models/user.model';
 import { KeyValuePipe } from '@angular/common';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { SignUpCredentials } from '@app/shared/models/authentication.model';
 
 
 interface AuthenticationResponse {
@@ -32,6 +33,7 @@ export class AuthenticationService {
 
   // // http options used to make the API calls
   private httpOptions: any;
+  public headers: any;
 
   // // the actual jwt token
   public token!: any;
@@ -52,6 +54,7 @@ export class AuthenticationService {
     private http: HttpClient,
     private dataSource: RestDataSource) {
     this.httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    // this.headers = new Headers({ "Content-Type": "application/json" });
     // this.userDetails = this.jwtPayloadData(this.dataSource.authToken);
     this.userDetails = this.dataSource.authToken;
 
@@ -67,17 +70,18 @@ export class AuthenticationService {
     gender: string,
     city: string,
     email: string,
-    password: string) {
+    password: string): Observable<any> {
     return this.http.post<SignUpResponse>(`${environment.apiUrl}/register/`, JSON.stringify({
-      firstName: firstName,
-      lastName: lastName,
-      birthday: birthday,
-      phoneNumber: phoneNumber,
-      username: username,
-      gender: gender,
-      city: city,
-      email: email,
-      password: password
+      firstName,
+      lastName,
+      birthday,
+      phoneNumber,
+      username,
+      gender,
+      city,
+      email,
+      password
+      //  this.httpOptions
     }), this.httpOptions).pipe(catchError(errorResponse => {
       let errorMessage = "An unknown error occurred";
       if (!errorResponse.error || !errorResponse.error.error) {

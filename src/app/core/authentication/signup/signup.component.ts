@@ -22,7 +22,10 @@ export class SignupComponent implements OnInit {
   ];
 
   formGroup = new SignUpFormGroup();
+
+
   userSignUp: SignUpCredentials = new SignUpCredentials("", "", new Date(), NaN, "", "", "", "", "", "");
+  test: SignUpCredentials[] = [];
   public maxDate!: Date;
 
   isLoading = false;
@@ -55,7 +58,7 @@ export class SignupComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.email;
     this.authenticationService.onUserSignOn(firstName, lastName, birthday, phoneNumber, username, gender, city, email, password).subscribe(signUpData => {
-      // console.log(signUpData);
+      console.log(signUpData);
       this.isLoading = false;
       this.router.navigate(['/login']);
     },
@@ -71,32 +74,8 @@ export class SignupComponent implements OnInit {
     if (!this.formGroup.valid) {
       return
     }
-    Object.keys(this.formGroup.controls).forEach(c =>
-      this.userSignUp['firstName'] = this.formGroup.controls['firstName'].value);
-    this.userSignUp['lastName'] = this.formGroup.controls['email'].value;
-    this.userSignUp['birthday'] = this.formGroup.controls['lastName'].value;
-    this.userSignUp['phoneNumber'] = this.formGroup.controls['phoneNumber'].value;
-    this.userSignUp['username'] = this.formGroup.controls['username'].value;
-    this.userSignUp['gender'] = this.formGroup.controls['gender'].value;
-    this.userSignUp['city'] = this.formGroup.controls['city'].value;
-    this.userSignUp['email'] = this.formGroup.controls['email'].value;
-    this.userSignUp['password'] = this.formGroup.controls['password'].value;
-    this.userSignUp['confirmPassword'] = this.formGroup.controls['confirmPassword'].value;
-
-
-    console.log(
-      this.userSignUp.firstName,
-      this.userSignUp.lastName,
-      this.userSignUp.birthday,
-      this.userSignUp.phoneNumber,
-      this.userSignUp.username,
-      this.userSignUp.gender,
-      this.userSignUp.city,
-      this.userSignUp.email,
-      this.userSignUp.password,
-      this.userSignUp.confirmPassword
-    );
-
+    this.userSignUp = this.formGroup.value;
+    console.log(this.userSignUp);
     this.formSubmitted = true;
     this.authenticationService.onUserSignOn(
       this.userSignUp.firstName,
@@ -122,7 +101,6 @@ export class SignupComponent implements OnInit {
           this.isLoading = false;
         }
       );
-
     this.formGroup.reset();
     this.formSubmitted = false;
   }
