@@ -83,7 +83,7 @@ export class RestDataSource {
     this.userId = finaldecodedToken.user_id;
     this.expiryDate = new Date(finaldecodedToken.exp * 1000);
     this.user.next(this.userId);
-    //console.log(this.user);
+    console.log(this.payload);
     localStorage.setItem('userData', this.payload);
     return this.payload;
   }
@@ -113,7 +113,7 @@ export class RestDataSource {
     this.userId = finaldecodedToken.user_id;
     this.expiryDate = new Date(finaldecodedToken.exp * 1000);
     this.user.next(this.userId);
-    // console.log(this.user);
+    console.log(this.user);
     return this.payload;
   }
 
@@ -128,5 +128,8 @@ export class RestDataSource {
 
   getActivityCategory(): Observable<ActivityCategory[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
+  }
+  fetchUsers(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/register`, this.httpOptions);
   }
 }

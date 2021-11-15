@@ -19,8 +19,6 @@ import { environment } from 'src/environments/environment';
 })
 export class TodoComponent implements OnInit {
 
-
-
   activity!: Activity;
   activityObject = <Activity>{};
   activityList!: Activity[];
@@ -36,9 +34,9 @@ export class TodoComponent implements OnInit {
     private activitysService: ActivitysService,
     private http: HttpClient,
     private autheticationService: AuthenticationService,
-    private dataSource: RestDataSource ){
+    private dataSource: RestDataSource) {
 
-    }
+  }
 
   ngOnInit(): void {
     // this.fetchActivityData();
@@ -46,7 +44,7 @@ export class TodoComponent implements OnInit {
     this.onFetchRandomQuotes();
     this.activityList = this.activitysService.getActivitysList();
     this.subscription = this.activitysService.activityListChanged.subscribe(
-      (activityList: Activity[])=>{
+      (activityList: Activity[]) => {
         this.activityList = activityList;
       }
     )
@@ -57,16 +55,16 @@ export class TodoComponent implements OnInit {
   //   this.activitysService.getRequest();
   // }
 
-  onFetchRandomQuotes(){
+  onFetchRandomQuotes() {
     this.dataSource.fetchRandomQuotes().subscribe(
-      quote =>{
+      quote => {
         console.log(quote);
-      this.randomQuote = quote;
+        this.randomQuote = quote;
 
-    });
+      });
   }
 
-  onFetchActivityData(){
+  onFetchActivityData() {
     this.activitysService.getActivityRequest().subscribe(
       data => {
         this.activityList = data;
@@ -76,7 +74,7 @@ export class TodoComponent implements OnInit {
       }
     )
   }
-  editActivity(activity: Activity){
+  editActivity(activity: Activity) {
     this.activitysService.getSingleActivityRequest(activity.id).subscribe(
       data => {
         console.log(data);
@@ -91,12 +89,12 @@ export class TodoComponent implements OnInit {
       }
     )
   };
-  
-  onNewActivity(){
-    this.router.navigate(['newActivity'], { relativeTo: this.route});
+
+  onNewActivity() {
+    this.router.navigate(['newActivity'], { relativeTo: this.route });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 

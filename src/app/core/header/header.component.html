@@ -56,7 +56,7 @@
 
 <!-- Angular Material Navigation Bar -->
 <mat-toolbar>
-  <div><button class="mt-5" mat-icon-button (click)="onToggleSidenav()">
+  <div><button class="mt-5" mat-icon-button (click)="onToggleSidenav()" *ngIf="isAuthenticated">
       <mat-icon>menu</mat-icon>
     </button></div>
   <div><a routerLink="/home">
@@ -64,13 +64,15 @@
     </a></div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs class="mt-5">
     <ul fxLayout fxLayoutGap="0.5rem" class="navigation-items">
-      <li><a routerLink="/home"> Home
-        </a></li>
-      <li><a routerLink="/home">About</a></li>
-      <li><a routerLink="/home">Contact Us {{ isAuthenticated }} - {{ user }}</a></li>
+      <li><a routerLink="/home" *ngIf="!isAuthenticated">Home</a></li>
+      <li><a routerLink="/home" *ngIf="!isAuthenticated">About</a></li>
+      <li><a routerLink="/home" *ngIf="!isAuthenticated">Contact Us</a></li>
       <li><a routerLink="/login" *ngIf="!isAuthenticated">Log In </a></li>
-      <li><a routerLink="/signup" *ngIf="!isAuthenticated"> Sign Up
-        </a></li>
+      <li><a routerLink="/signup" *ngIf="!isAuthenticated"> Sign Up</a></li>
+      <li><a routerLink="/profile" *ngIf="isAuthenticated">You are loggeg in as {{ isAuthenticated }} - {{ user }} {{
+          userName }}</a>
+      </li>
+      <!-- <div *ngFor="let userList in userList"> {{ userList }} </div> -->
     </ul>
   </div>
 </mat-toolbar>

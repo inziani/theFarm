@@ -25,13 +25,14 @@ export class SideNavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
 
   treeControl = new NestedTreeControl<UserProfile>(node => node.children);
-  treeDataSource = new MatTreeNestedDataSource<UserProfile>();
+  dataSource = new MatTreeNestedDataSource<UserProfile>();
+
 
   constructor(
-    private dataSource: RestDataSource
+    private restDataSource: RestDataSource
   ) {
 
-    this.treeDataSource.data = ProfileTree;
+    this.dataSource.data = ProfileTree;
   }
 
   hasChild = (_: number, node: UserProfile) => !!node.children && node.children.length > 0;
@@ -45,7 +46,7 @@ export class SideNavComponent implements OnInit {
 
   onLogOut() {
 
-    this.dataSource.removeToken();
+    this.restDataSource.removeToken();
 
   }
 
