@@ -3,7 +3,7 @@ export class Activity
   constructor(
 
     public id: number,
-    public slug: string,
+    public slug: number,
     public title: string,
     public description: string ,
     public activity_category: string,

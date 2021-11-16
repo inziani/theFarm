@@ -1,9 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { Subscription } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, SortDirection } from '@angular/material/sort';
 
 
 
@@ -17,12 +19,17 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./todo.component.css'],
 
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent implements OnInit, AfterViewInit {
 
   activity!: Activity;
   activityObject = <Activity>{};
   activityList!: Activity[];
   todaysDate = new Date();
+  activityColumnHeaders: string[] = ['id', 'title', 'description', 'date_created', 'date_changed', 'maintenance'];
+  resultsLength = 0;
+  // activityDatabase: ActivityHttpDatabase | null;
+  isLoadingResults = true;
+  isRateLimitReached = false;
   activityStatus = ['Created', 'WIP', 'Closed'];
   randomQuote!: any;
 
@@ -31,10 +38,17 @@ export class TodoComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private activitysService: ActivitysService,
     private http: HttpClient,
-    private autheticationService: AuthenticationService,
+    private activitysService: ActivitysService,
     private dataSource: RestDataSource) {
+
+  }
+  ngAfterViewInit() {
+    // this.activityDatabase = new ActivityHttpDatabase(this.http);
+
+
+
+
 
   }
 
@@ -49,11 +63,6 @@ export class TodoComponent implements OnInit {
       }
     )
   }
-  // private fetchActivityData()
-  // // Fetch data and log it on the console
-  // {
-  //   this.activitysService.getRequest();
-  // }
 
   onFetchRandomQuotes() {
     this.dataSource.fetchRandomQuotes().subscribe(
@@ -65,9 +74,11 @@ export class TodoComponent implements OnInit {
   }
 
   onFetchActivityData() {
-    this.activitysService.getActivityRequest().subscribe(
-      data => {
-        this.activityList = data;
+    this.dataSource.fetchActivityList().subscribe(
+      activityList => {
+        this.activityList = activityList;
+        console.log(this.activityList, 'testing');
+
       },
       error => {
         console.log(error);

@@ -29,10 +29,10 @@ export class RestDataSource {
   public authToken!: string;
   public authTokenRefresh!: string;
   public authTokenExpiry!: Date;
-  //  public user = new Subject<any>();
   public user = new BehaviorSubject<any>(null);
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   public activityCategoryList!: ActivityCategory[];
+  public activityList!: Activity[];
   public payload: any;
   public userId!: number;
   public expiryDate!: Date;
@@ -41,24 +41,11 @@ export class RestDataSource {
     private http: HttpClient,
     private router: Router
   ) {
-
-
   }
 
   getAllUsers() {
     return this.http.get<User[]>(`${environment.apiUrl}/users/`);
   }
-
-  // getToken(email: string, password: string): Observable<any>{
-  //     return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({email, password}), this.httpOptions).pipe(
-  //     map((response: any ) => {
-  //       this.authToken = response.access;
-  //       console.log('access:',this.authToken);
-  //       this.authTokenRefresh = response.refresh;
-  //       console.log('refresh:', this.authTokenRefresh);
-  //     return this.authTokenRefresh;},
-  //     ));
-  //   }
 
   getToken(email: string, password: string): Observable<any> {
     return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({ email, password }), this.httpOptions).pipe(
@@ -126,10 +113,15 @@ export class RestDataSource {
     return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys`, JSON.stringify({ title, description, category }), this.httpOptions)
   };
 
-  getActivityCategory(): Observable<ActivityCategory[]> {
+  fetchActivityCategory(): Observable<ActivityCategory[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
   }
+
   fetchUsers(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/register`, this.httpOptions);
+  }
+
+  fetchActivityList(): Observable<Activity[]>{
+     return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
 }

@@ -15,10 +15,7 @@ export class ActivitysService{
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   activityListChanged = new Subject<Activity[]>();
 
-  private activityList: Activity[]= [
-    // new Activity(0, 'Slug', 'Title', 'Description', 'Activity Category', 'Created', '', 19, ''),
-    // new Activity(1, 'Django Slug', 'Django Backend', 'Django interface with Angular Frontend', 'Official', 'Created')
-  ]
+  private activityList: Activity[]= []
 
   constructor(private http: HttpClient){
 
@@ -34,9 +31,9 @@ export class ActivitysService{
     return this.activityList;
   }
 
-  getActivityRequest(): Observable<Activity[]>{
-     return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
-  }
+  // getActivityRequest(): Observable<Activity[]>{
+  //    return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
+  // }
 
   getSingleActivityRequest(id: number): Observable<Activity>{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
@@ -46,9 +43,9 @@ export class ActivitysService{
     return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({
       title, slug, activityCategory, description,status }), { headers: this.httpHeaders });
   }
-  
+
   deleteActivity(){
     return this.http.delete(`${environment.apiUrl}/activitys/`);
-    
+
   }
 }

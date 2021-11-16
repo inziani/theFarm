@@ -6,15 +6,6 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { UserProfile } from '@app/shared/interfaces/sidenav-trees';
 
-const ProfileTree: UserProfile[] = [
-  {
-    name: 'Profile',
-    children: [
-      { name: 'Account' },
-      { name: 'Tasks' },
-    ]
-  }
-]
 
 @Component({
   selector: 'app-side-nav',
@@ -23,19 +14,19 @@ const ProfileTree: UserProfile[] = [
 })
 export class SideNavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
+  openPanel: boolean = false;
 
-  treeControl = new NestedTreeControl<UserProfile>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<UserProfile>();
 
 
   constructor(
     private restDataSource: RestDataSource
   ) {
 
-    this.dataSource.data = ProfileTree;
+
+
   }
 
-  hasChild = (_: number, node: UserProfile) => !!node.children && node.children.length > 0;
+
 
   ngOnInit(): void {
   }

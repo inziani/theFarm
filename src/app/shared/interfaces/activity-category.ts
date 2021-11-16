@@ -4,3 +4,4 @@ export interface ActivityCategoryInterface{
     category: string
 
 }
+

@@ -1,4 +1,29 @@
-.roundrect{
-
+.roundrect {
   border-radius: 50%;
+}
+
+.main-table-container {
+  position: relative;
+
+}
+
+.table-container {
+  position: relative;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  color: #ff9e00;
+  font-weight: lighter;
+}
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
 }

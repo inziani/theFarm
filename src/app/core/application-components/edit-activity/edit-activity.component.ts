@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RestDataSource } from '@app/shared/data/rest.datasource';
 
 @Component({
   selector: 'app-edit-activity',
@@ -22,7 +23,8 @@ export class EditActivityComponent implements OnInit {
 
   constructor(
     private activitysService: ActivitysService,
-    private http: HttpClient ) {
+    private dataSource: RestDataSource,
+     ){
     this.activityList =[];
   }
 
@@ -31,34 +33,8 @@ export class EditActivityComponent implements OnInit {
 
   }
 
-  // addActivity(newActivityForm: NgForm)
-  // onAddActivity(newActivityFormData: {
-  //   // id: number,
-  //   title: string,
-  //   description: string,
-  //   slug: string,
-  //   status: string,
-  //   activity_category: string
-  // })
-  // {
-  //   // this.activity.id = this.activityList.length+1
-  //   // this.activity.slug = newActivityForm.value.newActivityData.slug;
-  //   // this.activity.title = newActivityForm.value.newActivityData.title;
-  //   // this.activity.description = newActivityForm.value.newActivityData.description;
-  //   // this.activity.activityCategory = newActivityForm.value.newActivityData.activityCategory;
-  //   // this.activity.status = newActivityForm.value.newActivityData.status;
-  //   // const newActivity = new Activity(this.activity.id, this.activity.title, this.activity.slug, this.activity.description, this.activity.activityCategory, this.activity.status);
-  //   // this.activitysService.addActivityonList(newActivity);
-  //   // HTTP request - post data to Django REST API
-  //   this.http.post(this.baseUrl+'/activitys/',newActivityFormData)
-  //   .subscribe(responseData =>{
-  //     console.log(responseData);
-  //   })
-  //   // newActivityForm.reset();
-  // }
-
   onFetchActivityData(){
-    this.activitysService.getActivityRequest().subscribe(
+    this.dataSource.fetchActivityList().subscribe(
       data => {
         this.activityList = data;
       },

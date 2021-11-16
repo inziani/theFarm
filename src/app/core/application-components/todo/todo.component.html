@@ -1,91 +1,40 @@
-      <app-header></app-header>
-      <!-- <router-outlet></router-outlet> -->
-      <!-- <app-footer></app-footer> -->
-<div class="container">
-  <div class="row">
 
-    <!-- Left side navigation bar -->
-
-    <div class="col-2">
-      <p>left side navigation</p>
-    </div>
-
-
-    <!-- Right side display page -->
-    <div class="col-8">
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-3 border-0" >
-            <div class="row g-0">
-              <div class="col-md-2 mt-4" >
-                <img [src]="'../assets/images/vri.png'" class="img-responsive roundrect p-3" alt="image" style="width: 150px; height: 150px;">
-              </div>
-              <div class="col-md-7 fs-6 fw-light">
-                <div class="card-body ms-5 mx-3">
-                  <h5 class="card-title">Welcome back Robai!</h5>
-                  <p class="card-text">Random Quote -  {{ randomQuote }}</p>
-                  <p class="card-text"><small class="text-muted" style="font-size: smaller;">Last updated on {{ todaysDate | date: 'fullDate' }}  at  {{ todaysDate | date: 'mediumTime' }}</small></p>
-                </div>
-                <br>
-              </div>
-              <div class="col-md-3">
-              <div class="card-body">
-                <a class="btn btn-outline  mt-5 mx-3 fw-light fs-6" style="color: #ff9e00;" routerLink="/newActivity">
-                  <fa-icon [icon]="['fas', 'plus']"></fa-icon>  New Activity
-                </a>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-          <!--  Table to display the activitys -->
-          <div>
-            <table class="table table-bordered fw-light fs-6" style="width: 130%; height: fit-content;" >
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Created</th>
-                  <th scope="col">Changed</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Maintainance</th>
-                </tr>
-              </thead>
-              <tbody  *ngFor="let activity of activityList">
-                <tr>
-                  <th scope="row">{{ activity.id }}</th>
-                  <td style="width: fit-content;">{{ activity.title }}</td>
-                  <td style="width: 33%;">{{ activity.description }}</td>
-                  <td style="width: 15%;">{{ activity.date_created | date: 'mediumDate' }} </td>
-                  <td style="width: 15%;">{{ activity.date_changed | date: 'mediumDate' }} </td>
-                  <td style="width: 15%;">{{ activity.status }}</td>
-                  <td style="width: 20%;">
-                    <button 
-                    type="button" 
-                    class="btn btn-success mx-2 fw-light fs-6 btn-sm" 
-                    style="color: #ff9e00; position: center;"
-                    (click)="editActivity(activity)"
-                    routerLink="/newActivity"
-                 > 
-                    <fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</button>
-
-                    <button 
-                    type="button" 
-                    class="btn btn-danger fw-light fs-6 btn-sm" 
-                    style="color: #ff9e00; position: center;"
-                    >
-                      <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete</button>
-                </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <form>
-            
-          </form>
-    </div>
+<div class="main-table-container mat-elevetion-z8">
+  <div class="table-container">
+    <table mat-table [dataSource]="activityList" class="main-table" matSort matSortActive="date_created"
+      matSortDisableClear matSortDirection="desc">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let row">{{ row.id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let row">{{ row.title}}</td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let row">{{ row.description}}</td>
+      </ng-container>
+      <ng-container matColumnDef="date_created">
+        <th mat-header-cell *matHeaderCellDef>Created</th>
+        <td mat-cell *matCellDef="let row">{{ row.date_created}}</td>
+      </ng-container>
+      <ng-container matColumnDef="date_changed">
+        <th mat-header-cell *matHeaderCellDef>Changed</th>
+        <td mat-cell *matCellDef="let row">{{ row.date_changed}}</td>
+      </ng-container>
+      <ng-container matColumnDef="maintenance">
+        <th mat-header-cell *matHeaderCellDef>Maintenance</th>
+        <!-- <td mat-cell>
+          <mat-icon>edit</mat-icon><span>Edit</span>
+        </td>
+        <td mat-cell>
+          <mat-icon>delete_outline</mat-icon><span>Delete</span>
+        </td> -->
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="activityColumnHeaders"></tr>
+        <tr mat-row *matRowDef="let row; columns: activityColumnHeaders;"></tr>
+        </table>
+    <mat-paginator [length]="resultsLength" [pageSize]="15" aria-label="Page Testing"></mat-paginator>
   </div>
 </div>
-

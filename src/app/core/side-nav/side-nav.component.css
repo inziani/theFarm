@@ -1,35 +1,11 @@
-.mat-tree {
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+.mat-expansion-panel {
   background-color: #03045e;
   color: #ff9e00;
 }
-
-.example-tree-invisible {
-  display: none;
-}
-
-.example-tree ul,
-.example-tree li {
-  margin-top: 0;
-  margin-bottom: 0;
-  list-style-type: none;
-  color: #ff9e00;
-}
-
-/*
- * This padding sets alignment of the nested nodes.
- */
-.example-tree .mat-nested-tree-node div[role="group"] {
-  padding-left: 40px;
-  color: #ff9e00;
-}
-
-/*
- * Padding for leaf nodes.
- * Leaf nodes need to have padding so as to align with other non-leaf nodes
- * under the same parent.
- */
-.example-tree div[role="group"] > .mat-tree-node {
-  padding-left: 40px;
+.panel-title {
   color: #ff9e00;
 }
 
@@ -57,17 +33,25 @@ html {
 
 .mat-nav-list {
   margin-top: 50%;
+  margin-left: 10px;
 }
 
 .mat-sidenav {
   width: 250px;
 }
-
+ul {
+  list-style-type: none;
+}
+p {
+  font-size: 0.875rem;
+  font-weight: lighter;
+}
 a {
   text-decoration: none;
   color: #ff9e00;
   font-size: 0.875rem;
   font-weight: lighter;
+  cursor: pointer;
 }
 a:hover,
 a:active {

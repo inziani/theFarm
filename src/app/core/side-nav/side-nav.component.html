@@ -3,9 +3,9 @@
     <a mat-list-item routerLink="/home" (click)="onClose()">
         <mat-icon>home</mat-icon><span class="nav-caption">Home</span>
     </a>
-    <a mat-list-item routerLink="/profile" (click)="onClose()">
+    <!-- <a mat-list-item routerLink="/profile" (click)="onClose()">
         <mat-icon>manage_accounts</mat-icon><span class="nav-caption">Profile</span>
-    </a>
+    </a> -->
     <a mat-list-item routerLink="/home" (click)="onClose()">
         <mat-icon>construction</mat-icon><span class="nav-caption">Project Management</span>
     </a>
@@ -25,31 +25,30 @@
 
 <!-- Use expansion panel instead of mat tree for the user profile -->
 
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree" style="color: #ff9e00;">
-  <!-- This is the tree node template for leaf nodes -->
-  <!-- There is inline padding applied to this node using styles.
-    This padding value depends on the mat-icon-button width. -->
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-    {{node.name}}
-  </mat-tree-node>
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-    {{node.name}}
-  </mat-tree-node>
-  <!-- This is the tree node template for expandable nodes -->
-  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-    <div class="mat-tree-node">
-      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
-        <mat-icon class="mat-icon-rtl-mirror">
-          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-        </mat-icon>
-      </button>
-      {{node.name}}
-    </div>
-    <!-- There is inline padding applied to this div using styles.
-          This padding value depends on the mat-icon-button width.  -->
-    <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
-      <ng-container matTreeNodeOutlet></ng-container>
-    </div>
-  </mat-nested-tree-node>
-</mat-tree>
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="panel-title">
+        <mat-icon>manage_accounts</mat-icon><span class="nav-caption">
+          <p>Profile</p>
+        </span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <a>
+        <li routerLink="/profile" (click)="onClose()">
+          <!-- <mat-icon>account_circle</mat-icon><span class="nav-caption">
 
+          </span> -->
+          <p>Account</p>
+        </li>
+      </a>
+      <a>
+        <li routerLink="/activity" (click)="onClose()">
+          <p>Tasks</p>
+        </li>
+      </a>
+
+</ul>
+</mat-expansion-panel>
+</mat-accordion>
