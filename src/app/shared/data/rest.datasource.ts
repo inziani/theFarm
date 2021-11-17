@@ -30,7 +30,13 @@ export class RestDataSource {
   public authTokenRefresh!: string;
   public authTokenExpiry!: Date;
   public user = new BehaviorSubject<any>(null);
-  public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  public httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+
+
+    })
+  };
   public activityCategoryList!: ActivityCategory[];
   public activityList!: Activity[];
   public payload: any;

@@ -1,4 +1,10 @@
 body {
-  background-color: #03045e;
+  /* background-color: #03045e; */
   height: 100vh;
+}
+:host{
+
+  background-color: #03045e;
+  display: block;
+  height: 100vh
 }

@@ -1,17 +1,19 @@
 import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '@app/core/services/authentication.service';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+
 import { Subscription } from 'rxjs';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
+import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
 
-
+import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
-import { environment } from 'src/environments/environment';
+import { EditActivityComponent } from '../edit-activity/edit-activity.component';
+
 
 @Component({
   selector: 'app-todo',
@@ -25,14 +27,15 @@ export class TodoComponent implements OnInit, AfterViewInit {
   activityObject = <Activity>{};
   activityList!: Activity[];
   todaysDate = new Date();
-  activityColumnHeaders: string[] = ['id', 'title', 'description', 'date_created', 'date_changed', 'maintenance'];
+  activityColumnHeaders: string[] = ['id', 'title', 'description', 'slug','date_created', 'date_changed','status', 'maintenance', 'owner'];
   resultsLength = 0;
-  // activityDatabase: ActivityHttpDatabase | null;
   isLoadingResults = true;
   isRateLimitReached = false;
   activityStatus = ['Created', 'WIP', 'Closed'];
   randomQuote!: any;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   private subscription!: Subscription;
 
   constructor(
@@ -40,14 +43,14 @@ export class TodoComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private activitysService: ActivitysService,
-    private dataSource: RestDataSource) {
+    private dataSource: RestDataSource,
+    private dialogue: MatDialog) {
 
   }
   ngAfterViewInit() {
-    // this.activityDatabase = new ActivityHttpDatabase(this.http);
-
-
-
+    this.dataSource.fetchActivityList().subscribe(activityList =>
+      this.activityList = activityList);
+    console.log(this.activityList);
 
 
   }
@@ -101,8 +104,9 @@ export class TodoComponent implements OnInit, AfterViewInit {
     )
   };
 
-  onNewActivity() {
-    this.router.navigate(['newActivity'], { relativeTo: this.route });
+  addTask() {
+    this.dialogue.open(EditActivityComponent);
+    // this.router.navigate(['newActivity'], { relativeTo: this.route });
   }
 
   ngOnDestroy() {

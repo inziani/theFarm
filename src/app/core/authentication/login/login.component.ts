@@ -1,16 +1,14 @@
 import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
 import { LoginFormControl, LoginFormGroup } from '@app/shared/models/loginform.model';
 import { LoginCredentials } from '@app/shared/models/authentication.model';
 import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dialog.component';
 
-
-
-
-import { User } from 'src/app/shared/models/user.model';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
 
@@ -105,4 +103,5 @@ export class LoginComponent implements OnInit {
     this.formGroup.reset();
     this.formSubmitted = false;
   }
+
 }

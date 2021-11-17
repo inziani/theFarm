@@ -14,10 +14,7 @@ import { environment } from '@environments/environment';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  // private ready$ = new ReplaySubject<void>(1);
-  // private authenticationService!: AuthenticationService;
-  // private token!: string;
-
+  emptyToken: string = ''
 
   constructor(
     private dataSource: RestDataSource,
@@ -25,30 +22,18 @@ export class JwtInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    // Add authorization header with jwt token
-    // this.token = this.dataSource.authToken;
-    // console.log(this.token);
     if (this.dataSource.authToken) {
       const cloned = request.clone({
         setHeaders: {
-
           Authorization: `Bearer ${this.dataSource.authToken}`
-
         }
-      });
 
+      });
       return next.handle(cloned);
     }
     else {
-      // const refreshed = request.clone({
-      //   setHeaders:{ Authorization: `Bearer ${this.dataSource.refreshToken()}`}
-      // })
 
-      // return next.handle(refreshed);
       return next.handle(request);
-
-
     }
   }
 }
