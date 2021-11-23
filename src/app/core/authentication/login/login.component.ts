@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
 
 
 
@@ -89,7 +90,6 @@ export class LoginComponent implements OnInit {
         success => {
           if (success) {
             this.dialogue.open(LoginDialogComponent);
-            // alert("Welcome to small farmers.")
             this.router.navigate(['home']);
           }
         },

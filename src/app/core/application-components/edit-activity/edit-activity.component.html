@@ -1,8 +1,80 @@
-<app-header></app-header>
+<section class="activity-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
+  fxLayoutAlign="center center">
+  <h1 mat-dialog-title class="mt-4">Create new task</h1>
+  <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
+    <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+      <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
+        <ul>
+          <li *ngFor="let error of formGroup.getFormValidationMessages()">
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div fxLayout='column' fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
+        fxLayoutAlign="center center">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input type="text" matInput placeholder="Title" id="firstName" name="title" formControlName="title">
+          <ul class="text-danger list-unstyled"
+            *ngIf="(formSubmitted || formGroup.controls['title'].dirty) && formGroup.controls['title'].invalid">
+            <li *ngFor="let error of formGroup.getTitleNameValidationMessages('title')">{{ error}}</li>
+          </ul>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input type="text" matInput placeholder="Description" id="description" name="description"
+            formControlName="description">
+          <ul class="text-danger list-unstyled"
+            *ngIf="(formSubmitted || formGroup.controls['description'].dirty) && formGroup.controls['description'].invalid">
+            <li *ngFor="let error of formGroup.getDescriptionValidationMessages('description')">{{ error}}</li>
+          </ul>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" placeholder="Status" id="status" name="status">
+            <mat-option *ngFor="let status of status" [value]="status.value">
+              {{ status.viewValue }}
+            </mat-option>
+          </mat-select>
+          <ul class="text-danger list-unstyled"
+            *ngIf="(formSubmitted || formGroup.controls['status'].dirty) && formGroup.controls['status'].invalid">
+            <li *ngFor="let error of formGroup.getStatusValidationMessages('status')">{{ error }}</li>
+          </ul>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Activity Category</mat-label>
+          <mat-select formControlName="activityCategory" placeholder="Activity Category" id="activityCategory"
+            name="activityCategory">
+            <mat-option *ngFor="let category of activityCategory" [value]="category.title">
+              {{ category.title }}
+            </mat-option>
+          </mat-select>
+          <ul class="text-danger list-unstyled"
+            *ngIf="(formSubmitted || formGroup.controls['activityCategory'].dirty) && formGroup.controls['activityCategory'].invalid">
+            <li *ngFor="let error of formGroup.getActivityCategoryValidationMessages('activityCategory')">{{ error}}
+            </li>
+          </ul>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
+        <div mat-dialogue-actions>
+          <button type="submit" mat-raised-button color="primary"
+            [disabled]="!formSubmitted && formGroup.invalid">Submit</button>
+          <button type="submit" mat-raised-button color="primary" mat-dialog-close="close()">Close</button>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+</section>
+
+<!-- <app-header></app-header> -->
+<!--
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-
       <div class="alert alert-danger" *ngIf="error">
         <h5> An Error occured</h5>
         <p>{{ error }}</p>
@@ -11,7 +83,7 @@
         <div class="card-body">
           <h5 class="card-title text-center">Activity Details</h5>
           <form (ngSubmit)="onAddActivity(newActivityForm)" #newActivityForm="ngForm">
-            <!-- <div id="newActivityData"  ngModelGroup="newActivityData" #newActivityData="ngModelGroup"> -->
+
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <div class="form-group">
@@ -79,7 +151,7 @@
               </div>
             </div>
 
-            <!-- <p *ngIf="!newActivityData.valid && newActivityData.touched">No fields should be blank</p> -->
+
             <div class="text-center">
               <button
               type="submit"
@@ -90,7 +162,7 @@
               <button type="button" class="btn btn-outline" style="color: #ff9e00; position: center;"
               routerLink="/activity">Back</button>
             </div>
-            <!-- </div> -->
+
           </form>
         </div>
       </div>
@@ -101,4 +173,4 @@
   <p>{{ activity.id }}</p>
   <p>{{ activity.title }}</p>
   <p>{{ activity.description }}</p>
-</div>
+</div> -->

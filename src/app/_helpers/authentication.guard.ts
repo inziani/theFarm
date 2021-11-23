@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { 
-  ActivatedRouteSnapshot, 
-  CanActivate, CanActivateChild, 
-  CanDeactivate, 
-  CanLoad, 
-  Route, 
-  Router, 
-  RouterStateSnapshot, 
-  UrlSegment, 
-  UrlTree } 
+import {
+  ActivatedRouteSnapshot,
+  CanActivate, CanActivateChild,
+  CanDeactivate,
+  CanLoad,
+  Route,
+  Router,
+  RouterStateSnapshot,
+  UrlSegment,
+  UrlTree }
   from '@angular/router';
+
 import { AuthenticationService } from '@app/core/services/authentication.service';
+
 import { Observable } from 'rxjs';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 interface JwtPayload{
   user_id: number;
@@ -35,17 +38,12 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      //  User is not logged in so redirect the user to the login page with the return url
-      if 
+      if
       (this.authenticationService.authenticated){
         return true;
       }
       else{
-         // If user is logged in we return true and refresh the token
-      // this.authenticationService.authenticated;
-      // this.authenticationService.refreshedToken;
-      // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url}});
-      // this.authenticationService.onLogout;
+
       this.router.navigate(['login']);
       return false;
 

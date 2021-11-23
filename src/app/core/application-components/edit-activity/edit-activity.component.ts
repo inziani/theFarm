@@ -1,11 +1,17 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+
+import { MatInput } from '@angular/material/input';
+import { MatDialogActions } from "@angular/material/dialog";
+import { MatDialogClose } from "@angular/material/dialog";
+import { MatDialogTitle } from "@angular/material/dialog";
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-category';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { Status } from '@app/shared/interfaces/activity-status';
+import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activityform-model';
 
 @Component({
   selector: 'app-edit-activity',
@@ -15,11 +21,22 @@ import { RestDataSource } from '@app/shared/data/rest.datasource';
 })
 export class EditActivityComponent implements OnInit {
 
-  activityObject = <Activity>{};
-  activity!: Activity;
+  activityCategory!: ActivityCategoryInterface[];
+  activity: Activity = new Activity('title', 'description', 'activity_category', 'owner', 'status')
+  isLoading = false;
+  formSubmitted: boolean = false;
+
   error = null;
   activityList: Activity[];
 
+  status: Status[] = [
+    { value: 'Created', viewValue: 'Created'},
+    { value: 'Work in progress', viewValue: 'Work in progress' },
+    { value: 'Completed',viewValue: 'Completed' },
+    { value: 'Closed' , viewValue: 'Closed'}
+  ];
+
+ formGroup = new ActivityFormGroup();
 
   constructor(
     private activitysService: ActivitysService,
@@ -30,6 +47,11 @@ export class EditActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this.activityList = this.activitysService.getActivitysList();
+    this.dataSource.fetchActivityCategory().subscribe(category => {
+      this.activityCategory = category;
+      console.log(this.activityCategory);
+    })
+
 
   }
 
@@ -59,6 +81,10 @@ export class EditActivityComponent implements OnInit {
 
     })
   };
+
+  submitForm() {
+
+  }
 
   onDeleteActivity(){
     this.activitysService.deleteActivity().subscribe(()=>{

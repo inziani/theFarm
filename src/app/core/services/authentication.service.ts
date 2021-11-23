@@ -4,15 +4,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
-import * as moment from 'moment';
-// import * as jwtDecode from 'jwt-decode';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+
+
 
 import { environment } from 'src/environments/environment';
-import { User } from '@app/shared/models/user.model';
-import { KeyValuePipe } from '@angular/common';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { SignUpCredentials } from '@app/shared/models/authentication.model';
+
 
 
 interface AuthenticationResponse {
@@ -31,37 +28,36 @@ interface SignUpResponse {
 
 export class AuthenticationService {
 
-  // // http options used to make the API calls
-  private httpOptions: any;
-  public headers: any;
-
-  // // the actual jwt token
-  public token!: any;
-
-  // the token expiration date
-
-  public token_expires!: Date;
-
-  // User Details
-  public userDetails: any;
+  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  userDetails = new BehaviorSubject<any>(null);
 
 
-  // //  error message received on loging in
-
-  // public errors: any[] = [];
 
   constructor(
     private http: HttpClient,
     private dataSource: RestDataSource) {
-    this.httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    // this.headers = new Headers({ "Content-Type": "application/json" });
-    // this.userDetails = this.jwtPayloadData(this.dataSource.authToken);
-    this.userDetails = this.dataSource.authToken;
 
   }
 
+  onLogin(email: string, password: string): Observable<any> {
+    return this.dataSource.getToken(email, password);
 
-  onUserSignOn(
+  }
+
+  onLogout() {
+    // remove user from the local storage to log user out
+     this.dataSource.authToken = 'null';
+     this.dataSource.authTokenRefresh = 'null';
+
+  }
+
+   get authenticated() {
+    return this.dataSource.authToken != null;
+   }
+  get refreshedToken() {
+    return this.dataSource.refreshToken != null;
+  }
+   onUserSignOn(
     firstName: string,
     lastName: string,
     birthday: Date,
@@ -81,7 +77,7 @@ export class AuthenticationService {
       city,
       email,
       password
-      //  this.httpOptions
+
     }), this.httpOptions).pipe(catchError(errorResponse => {
       let errorMessage = "An unknown error occurred";
       if (!errorResponse.error || !errorResponse.error.error) {
@@ -95,51 +91,27 @@ export class AuthenticationService {
     }));
   };
 
-  private setSession(authResult: any) {
-    // console.log(this.token);
-    return this.token = authResult;
-  }
 
-  onLogin(email: string, password: string): Observable<any> {
-    return this.dataSource.getToken(email, password);
-  }
 
-  get authenticated() {
-    return this.dataSource.authToken != null;
-  }
-
-  get refreshedToken() {
-    return this.dataSource.refreshToken != null;
   }
 
 
-  onLogout() {
-    // remove user from the local storage to log user out
-    this.dataSource.authToken = 'null';
 
-  }
 
-  getExpiration() {
-    const expiration = localStorage.getItem('expires_at');
-    const expiresAt = JSON.parse(expiration!);
-    return moment(expiresAt);
-  }
+  // private setSession(authResult: any) {
+  //   // console.log(this.token);
+  //   return this.token = authResult;
+  // }
 
-  refreshToken() {
-    if (moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())) {
-      return this.http.post(`${environment.apiUrl}/api/token/refresh/`, { token: this.token }).
-        pipe(tap(response => this.setSession(response)),
-          shareReplay()).subscribe();
-    }
-    return
-  }
 
-  public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
-  }
 
-  isLoggedOut() {
-    return !this.isLoggedIn;
-  }
 
-}
+
+
+
+
+
+
+
+
+

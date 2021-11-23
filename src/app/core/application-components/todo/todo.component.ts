@@ -1,18 +1,20 @@
 import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Event, Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { merge, Observable, observable, Subscription } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
 
+
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -27,16 +29,19 @@ export class TodoComponent implements OnInit, AfterViewInit {
   activityObject = <Activity>{};
   activityList!: Activity[];
   todaysDate = new Date();
-  activityColumnHeaders: string[] = ['id', 'title', 'description', 'slug','date_created', 'date_changed','status', 'maintenance', 'owner'];
+  activityColumnHeaders: string[] = ['id', 'title', 'description','date_created', 'date_changed','status', 'maintenance', 'owner'];
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
-  activityStatus = ['Created', 'WIP', 'Closed'];
+  sourceData = new MatTableDataSource<Activity>();
+  filter = "";
+
   randomQuote!: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   private subscription!: Subscription;
+
 
   constructor(
     private router: Router,
@@ -45,13 +50,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
     private activitysService: ActivitysService,
     private dataSource: RestDataSource,
     private dialogue: MatDialog) {
-
-  }
-  ngAfterViewInit() {
-    this.dataSource.fetchActivityList().subscribe(activityList =>
-      this.activityList = activityList);
-    console.log(this.activityList);
-
 
   }
 
@@ -65,7 +63,24 @@ export class TodoComponent implements OnInit, AfterViewInit {
         this.activityList = activityList;
       }
     )
+
+    this.dataSource.fetchActivityList().subscribe(activityList =>
+      this.sourceData.data = activityList);
+    // console.log(this.activityList);
   }
+
+  ngAfterViewInit() {
+    this.sourceData.sort = this.sort;
+    this.sourceData.paginator = this.paginator;
+
+  }
+
+  doFilter(filterValue: any) {
+    this.sourceData.filter = (JSON.stringify(filterValue)).trim().toLowerCase();
+    console.log(filterValue);
+
+  }
+
 
   onFetchRandomQuotes() {
     this.dataSource.fetchRandomQuotes().subscribe(
@@ -80,7 +95,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
     this.dataSource.fetchActivityList().subscribe(
       activityList => {
         this.activityList = activityList;
-        console.log(this.activityList, 'testing');
+        console.log(this.activityList);
 
       },
       error => {
@@ -88,25 +103,25 @@ export class TodoComponent implements OnInit, AfterViewInit {
       }
     )
   }
-  editActivity(activity: Activity) {
-    this.activitysService.getSingleActivityRequest(activity.id).subscribe(
-      data => {
-        console.log(data);
-        this.activityObject = data;
-        // this.activity.id = data.id;
-        console.log(this.activityObject);
-        console.log(this.activityObject.id);
-        console.log(this.activityObject.title);
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  };
+  // editActivity(activity: Activity) {
+  //   this.activitysService.getSingleActivityRequest(activity.id).subscribe(
+  //     data => {
+  //       console.log(data);
+  //       this.activityObject = data;
+  //       // this.activity.id = data.id;
+  //       console.log(this.activityObject);
+  //       // console.log(this.activityObject.id);
+  //       console.log(this.activityObject.title);
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     }
+  //   )
+  // };
 
   addTask() {
     this.dialogue.open(EditActivityComponent);
-    // this.router.navigate(['newActivity'], { relativeTo: this.route });
+
   }
 
   ngOnDestroy() {
