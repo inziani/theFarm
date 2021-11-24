@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { MatInput } from '@angular/material/input';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialogActions } from "@angular/material/dialog";
 import { MatDialogClose } from "@angular/material/dialog";
 import { MatDialogTitle } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
@@ -12,6 +14,7 @@ import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-categ
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { Status } from '@app/shared/interfaces/activity-status';
 import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activityform-model';
+
 
 @Component({
   selector: 'app-edit-activity',
@@ -21,28 +24,33 @@ import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activ
 })
 export class EditActivityComponent implements OnInit {
 
+  title = "Create new task"
+
   activityCategory!: ActivityCategoryInterface[];
-  activity: Activity = new Activity('title', 'description', 'activity_category', 'owner', 'status')
+  activity: Activity = new Activity('title', 'description', 'activity_category', 'status')
   isLoading = false;
   formSubmitted: boolean = false;
 
-  error = null;
+
+  error = '';
   activityList: Activity[];
 
   status: Status[] = [
-    { value: 'Created', viewValue: 'Created'},
+    { value: 'Created', viewValue: 'Created' },
     { value: 'Work in progress', viewValue: 'Work in progress' },
-    { value: 'Completed',viewValue: 'Completed' },
-    { value: 'Closed' , viewValue: 'Closed'}
+    { value: 'Completed', viewValue: 'Completed' },
+    { value: 'Closed', viewValue: 'Closed' }
   ];
 
- formGroup = new ActivityFormGroup();
+  formGroup = new ActivityFormGroup();
 
   constructor(
     private activitysService: ActivitysService,
     private dataSource: RestDataSource,
-     ){
-    this.activityList =[];
+    private dialogRef: MatDialogRef<EditActivityComponent>,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any
+  ) {
+    this.activityList = [];
   }
 
   ngOnInit(): void {
@@ -55,7 +63,7 @@ export class EditActivityComponent implements OnInit {
 
   }
 
-  onFetchActivityData(){
+  onFetchActivityData() {
     this.dataSource.fetchActivityList().subscribe(
       data => {
         this.activityList = data;
@@ -66,23 +74,55 @@ export class EditActivityComponent implements OnInit {
     )
   };
 
-  onAddActivity(form: NgForm){
-    const title = form.value.title;
-    const slug = form.value.slug;
-    const activityCategory = form.value.activityCategory;
-    const description = form.value.description;
-    const status = form.value.status;
-    // console.log(form.value);
-    this.activitysService.addNewActivity(title, slug, activityCategory, description, status).subscribe(data =>{
-      console.log(data);
-    },
-    error =>{
-      this.error = error.message;
+  onAddActivity() {
+    this.dialogRef.close(this.formGroup.value);
+    this.activity = this.formGroup.value;
 
-    })
-  };
+    this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activityCategory).subscribe(success => {
+      if (success) {
+        // this.dialogue.open(LoginDialogComponent);
+        // this.router.navigate(['home']);
+        console.log(success);
+      }
+    },
+      error => {
+        this.error = 'Login Unsuccessful! Try again';
+        alert(this.error);
+        this.isLoading = false;
+      }
+    );
+    console.log(this.formGroup.value);
+};
+
+
+  close() {
+
+    this.dialogRef.close();
+
+  }
+
+
+
+
+
+  // onAddActivity(form: NgForm){
+  //   const title = form.value.title;
+  //   const slug = form.value.slug;
+  //   const activityCategory = form.value.activityCategory;
+  //   const description = form.value.description;
+  //   const status = form.value.status;
+  //   // console.log(form.value);
+  //   this.activitysService.addNewActivity(title, slug, activityCategory, description, status).subscribe(data =>{
+  //     console.log(data);
+  //   },
+  //   error =>{
+  //     this.error = error.message;
+
+  //   })
+  // };
 
   submitForm() {
+    // console.log('dialogue data');
 
   }
 

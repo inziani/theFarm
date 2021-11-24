@@ -6,7 +6,7 @@ import { merge, Observable, observable, Subscription } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
-import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, _closeDialogVia } from '@angular/material/dialog';
 
 
 
@@ -35,6 +35,8 @@ export class TodoComponent implements OnInit, AfterViewInit {
   isRateLimitReached = false;
   sourceData = new MatTableDataSource<Activity>();
   filter = "";
+
+  dialogueData: any;
 
   randomQuote!: any;
 
@@ -66,7 +68,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
     this.dataSource.fetchActivityList().subscribe(activityList =>
       this.sourceData.data = activityList);
-    // console.log(this.activityList);
+
   }
 
   ngAfterViewInit() {
@@ -80,7 +82,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
     console.log(filterValue);
 
   }
-
 
   onFetchRandomQuotes() {
     this.dataSource.fetchRandomQuotes().subscribe(
@@ -119,9 +120,21 @@ export class TodoComponent implements OnInit, AfterViewInit {
   //   )
   // };
 
-  addTask() {
-    this.dialogue.open(EditActivityComponent);
+  openDialog() {
 
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    // dialogConfig.direction = 'rtl'
+
+    const dialogRef = this.dialogue.open(EditActivityComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(newActivity => {
+      // this.dialogueData = newActivity
+      // console.log(newActivity);
+    })
   }
 
   ngOnDestroy() {

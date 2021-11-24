@@ -82,7 +82,7 @@ import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog
   ],
   providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, RestDataSource, NavigationServiceService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
   bootstrap: [AppComponent],
-  entryComponents: [LoginDialogComponent]
+  entryComponents: [LoginDialogComponent, SignupComponent, EditActivityComponent]
 
 })
 export class AppModule {
