@@ -31,8 +31,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
   todaysDate = new Date();
   activityColumnHeaders: string[] = ['id', 'title', 'description','date_created', 'date_changed','status', 'maintenance', 'owner'];
   resultsLength = 0;
-  isLoadingResults = true;
-  isRateLimitReached = false;
   sourceData = new MatTableDataSource<Activity>();
   filter = "";
 
@@ -46,9 +44,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
+
     private activitysService: ActivitysService,
     private dataSource: RestDataSource,
     private dialogue: MatDialog) {
@@ -132,8 +128,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialogue.open(EditActivityComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(newActivity => {
-      // this.dialogueData = newActivity
-      // console.log(newActivity);
     })
   }
 

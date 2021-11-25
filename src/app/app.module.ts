@@ -42,6 +42,8 @@ import { ModulesComponent } from './core/modules/modules.component';
 import { HomePageComponent } from './core/home-page/home-page.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog.component';
+import { EditCategoryComponent } from './core/application-components/edit-category/edit-category.component';
+// import { ActivityCategoryComponent } from './activity-category/activity-category.component';
 
 
 
@@ -63,7 +65,9 @@ import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog
     SideNavComponent,
     ModulesComponent,
     HomePageComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    EditCategoryComponent,
+    // ActivityCategoryComponent
 
   ],
   imports: [

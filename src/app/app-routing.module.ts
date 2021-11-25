@@ -7,6 +7,7 @@ import { ProfileComponent } from "./core/application-components/profile/profile.
 import { SignupComponent } from "./core/authentication/signup/signup.component";
 import { TodoComponent } from "./core/application-components/todo/todo.component";
 import { AuthenticationGuard } from "./_helpers/authentication.guard";
+import { ActivityCategorysComponent } from "./core/application-components/activity-categorys/activity-categorys.component";
 
 
 const appRoutes: Routes = [
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
-  { path: 'newActivity', component: EditActivityComponent },
+  { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
+  { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 
 ]
