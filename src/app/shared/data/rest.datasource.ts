@@ -118,15 +118,15 @@ export class RestDataSource {
     return this.http.get<RandomQuote>(`${environment.randomQuotesURL}`, this.httpOptions,);
   }
 
-  addActivityCategory(title: string, description: string, status: string, activityCategory: string) {
-    return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys/`, JSON.stringify({ title, description, status, activityCategory }), this.httpOptions)
+  addActivityCategory(title: string, description: string, category: string) {
+    return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys/`, JSON.stringify({ title, description, category }), this.httpOptions)
   };
 
-   addActivity(title: string, description: string, status: string, activityCategory: string) {
+  addActivity(title: string, description: string, status: string, activityCategory: string) {
     return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activityCategory }), this.httpOptions)
   };
 
-  fetchActivityCategory(): Observable<ActivityCategory[]> {
+  fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
   }
 

@@ -1,9 +1,8 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
+export class ActivityCategoryFormControl extends FormControl{
 
-export class ActivityFormControl extends FormControl{
-
-    label: string;
+  label: string;
     modelProperty: string;
 
     constructor(label: string, property: string, value: any, validator: any) {
@@ -43,49 +42,49 @@ export class ActivityFormControl extends FormControl{
     }
 }
 
-export class ActivityFormGroup extends FormGroup{
+export class ActivityCategoryFormGroup extends FormGroup{
 
    constructor() {
         super({
 
-          title: new ActivityFormControl("Title", "title", "", Validators.compose([
+          title: new ActivityCategoryFormControl("Title", "title", "", Validators.compose([
             Validators.required,
             Validators.maxLength(32)
           ])),
-          description: new ActivityFormControl("Description", "description", "", Validators.compose([
+          description: new ActivityCategoryFormControl("Description", "description", "", Validators.compose([
             Validators.required,
             Validators.maxLength(132)
             ])),
-          status: new ActivityFormControl("Status", "status", "", Validators.required),
-          activityCategory: new ActivityFormControl("Activity Category", "activityCategory", "", Validators.required),
+          category: new ActivityCategoryFormControl("Category", "category", "", Validators.required),
+
         });
     }
 
-    get ActivityFormControl(): ActivityFormControl[] {
-        return Object.keys(this.controls).map(k => this.controls[k] as ActivityFormControl);
+    get ActivityCategoryFormControl(): ActivityCategoryFormControl[] {
+        return Object.keys(this.controls).map(k => this.controls[k] as ActivityCategoryFormControl);
     }
 
     getTitleNameValidationMessages(title: string): string[] {
-        return (this.controls['title'] as ActivityFormControl).getValidationMessages();
+        return (this.controls['title'] as ActivityCategoryFormControl).getValidationMessages();
     }
 
     getDescriptionValidationMessages(description: string): string[] {
-        return (this.controls['description'] as ActivityFormControl).getValidationMessages();
+        return (this.controls['description'] as ActivityCategoryFormControl).getValidationMessages();
     }
 
-    getStatusValidationMessages(status: string): string[] {
-        return (this.controls['status'] as ActivityFormControl).getValidationMessages();
-    }
 
-    getActivityCategoryValidationMessages(activityCategory: string): string[] {
-        return (this.controls['activityCategory'] as ActivityFormControl).getValidationMessages();
+    getActivityCategoryValidationMessages(category: string): string[] {
+        return (this.controls['category'] as ActivityCategoryFormControl).getValidationMessages();
     }
 
     getFormValidationMessages(): string[] {
         let messages: string[] = [];
-        Object.values(this.controls).forEach(c => messages.push(...(c as ActivityFormControl).getValidationMessages()));
+        Object.values(this.controls).forEach(c => messages.push(...(c as ActivityCategoryFormControl).getValidationMessages()));
         return messages;
     }
 
 
 }
+
+
+

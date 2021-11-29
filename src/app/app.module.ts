@@ -86,7 +86,14 @@ import { EditCategoryComponent } from './core/application-components/edit-catego
   ],
   providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, RestDataSource, NavigationServiceService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
   bootstrap: [AppComponent],
-  entryComponents: [LoginDialogComponent, SignupComponent, EditActivityComponent]
+  entryComponents: [
+    LoginDialogComponent,
+    SignupComponent,
+    EditActivityComponent,
+    EditCategoryComponent,
+
+
+  ]
 
 })
 export class AppModule {

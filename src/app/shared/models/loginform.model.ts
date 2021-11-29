@@ -49,8 +49,12 @@ export class LoginFormGroup extends FormGroup {
                     Validators.email,
                 ]
             )),
-            password: new LoginFormControl("Password", "password", "", Validators.required),
+          password: new LoginFormControl("Password", "password", "", Validators.required),
+
+
         });
+
+
     }
 
 

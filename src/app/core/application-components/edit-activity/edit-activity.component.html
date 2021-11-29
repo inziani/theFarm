@@ -33,7 +33,7 @@
     <mat-label>Activity Category</mat-label>
     <mat-select formControlName="activityCategory" placeholder="Activity Category" id="activityCategory"
       name="activityCategory">
-      <mat-option *ngFor="let category of activityCategory" [value]="category.title">
+      <mat-option *ngFor="let category of categoryTitle" [value]="category.id">
         {{ category.title }}
       </mat-option>
     </mat-select>

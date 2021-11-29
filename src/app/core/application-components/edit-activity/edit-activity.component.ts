@@ -1,12 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { map } from 'rxjs/operators';
+
 import { MatInput } from '@angular/material/input';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogActions } from "@angular/material/dialog";
 import { MatDialogClose } from "@angular/material/dialog";
 import { MatDialogTitle } from "@angular/material/dialog";
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+// import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
@@ -23,10 +25,12 @@ import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activ
 
 })
 export class EditActivityComponent implements OnInit {
+  selectedValue: any;
 
   title = "Create new task"
 
-  activityCategory!: ActivityCategoryInterface[];
+  public activityCategory!: ActivityCategoryInterface[];
+  categoryTitle: any = [];
   activity: Activity = new Activity('title', 'description', 'activity_category', 'status')
   isLoading = false;
   formSubmitted: boolean = false;
@@ -57,11 +61,18 @@ export class EditActivityComponent implements OnInit {
     this.activityList = this.activitysService.getActivitysList();
     this.dataSource.fetchActivityCategory().subscribe(category => {
       this.activityCategory = category;
-      console.log(this.activityCategory);
-    })
+      // this.categoryTitle = [];
+      // Object.values(this.activityCategory).forEach(c => { this.categoryTitle.push(c) });
+      // console.log('categoryTitle -', this.categoryTitle);
+
+
+    });
 
 
   }
+
+
+
 
   onFetchActivityData() {
     this.dataSource.fetchActivityList().subscribe(
@@ -91,7 +102,7 @@ export class EditActivityComponent implements OnInit {
         this.isLoading = false;
       }
     );
-    console.log(this.formGroup.value);
+    // console.log(this.formGroup.value);
 };
 
 
