@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 
 import { ActivityCategoryFormGroup } from '@app/shared/models/activity-category-form.model';
 import { Category } from '@app/shared/interfaces/activity-category';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivityCategory } from '@app/shared/models/activity-category.models';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-edit-category',
@@ -27,19 +28,22 @@ export class EditCategoryComponent implements OnInit {
   ];
 
   constructor(
-
-
     private dataSource: RestDataSource,
     private dialogRef: MatDialogRef<EditCategoryComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: any
+    @Inject(MAT_DIALOG_DATA) public dialogDataCategory: any
 
+  ) {
 
-  ) { }
+    console.log("in constructor", dialogDataCategory);
 
-  ngOnInit(): void {
   }
 
-    onAddActivityCategory() {
+  ngOnInit(): void {
+
+  }
+
+  onAddActivityCategory() {
+
     this.dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
 
@@ -56,7 +60,8 @@ export class EditCategoryComponent implements OnInit {
         this.isLoading = false;
       }
     );
-    console.log(this.formGroup.value);
+
+    // console.log(this.formGroup.value);
 };
 
 }

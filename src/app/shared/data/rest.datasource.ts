@@ -39,11 +39,14 @@ export class RestDataSource {
 
     })
   };
+
+  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   public activityCategoryList!: ActivityCategory[];
   public activityList!: Activity[];
   public payload: any;
   public userId!: number;
   public expiryDate!: Date;
+
 
   constructor(
     private http: HttpClient,
@@ -122,13 +125,16 @@ export class RestDataSource {
     return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys/`, JSON.stringify({ title, description, category }), this.httpOptions)
   };
 
-  addActivity(title: string, description: string, status: string, activityCategory: string) {
-    return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activityCategory }), this.httpOptions)
+  addActivity(title: string, description: string, status: string, activity_category: string) {
+    return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activity_category }), this.httpOptions)
   };
 
   fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
   }
+  fetchSingleActivityCategory(id: number): Observable<ActivityCategoryInterface>{
+    return this.http.get<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', {headers: this.httpHeaders});
+  };
 
   fetchUsers(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/register`, this.httpOptions);
@@ -141,6 +147,10 @@ export class RestDataSource {
   fetchActivityList(): Observable<Activity[]>{
      return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
+
+   fetchSingleActivityRequest(id: number): Observable<Activity>{
+    return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
+  };
 
 
 }

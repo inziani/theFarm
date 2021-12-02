@@ -27,17 +27,18 @@ import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activ
 export class EditActivityComponent implements OnInit {
   selectedValue: any;
 
-  title = "Create new task"
+  title: string = "Create new task";
 
-  public activityCategory!: ActivityCategoryInterface[];
-  categoryTitle: any = [];
-  activity: Activity = new Activity('title', 'description', 'activity_category', 'status')
+  activityCategory!: ActivityCategoryInterface[];
+
+  activity!: Activity;
+    // = new Activity('title', 'description', 'activity_category', 'status')
   isLoading = false;
   formSubmitted: boolean = false;
 
 
-  error = '';
-  activityList: Activity[];
+  error!: string;
+  activityList!: Activity[];
 
   status: Status[] = [
     { value: 'Created', viewValue: 'Created' },
@@ -54,24 +55,17 @@ export class EditActivityComponent implements OnInit {
     private dialogRef: MatDialogRef<EditActivityComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: any
   ) {
-    this.activityList = [];
+    // this.activityList = [];
   }
 
   ngOnInit(): void {
     this.activityList = this.activitysService.getActivitysList();
     this.dataSource.fetchActivityCategory().subscribe(category => {
       this.activityCategory = category;
-      // this.categoryTitle = [];
-      // Object.values(this.activityCategory).forEach(c => { this.categoryTitle.push(c) });
-      // console.log('categoryTitle -', this.categoryTitle);
-
+      // console.log(this.activityCategory);
 
     });
-
-
   }
-
-
 
 
   onFetchActivityData() {
@@ -89,15 +83,16 @@ export class EditActivityComponent implements OnInit {
     this.dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
 
-    this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activityCategory).subscribe(success => {
+    this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
       if (success) {
         // this.dialogue.open(LoginDialogComponent);
         // this.router.navigate(['home']);
+        alert('Category added successfully');
         console.log(success);
       }
     },
       error => {
-        this.error = 'Login Unsuccessful! Try again';
+        this.error = 'The activity was not added.';
         alert(this.error);
         this.isLoading = false;
       }

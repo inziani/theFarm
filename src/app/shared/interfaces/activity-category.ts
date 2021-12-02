@@ -2,7 +2,7 @@ export interface ActivityCategoryInterface{
     id: number,
     title: string,
     description: string,
-    category: string
+    activity_category: string
 
 }
 

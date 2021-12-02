@@ -2,13 +2,14 @@
   <div class="table-container">
     <h1 class="to-do-list">Task Categories</h1>
     <div class="mx-5 text-center">
-      <p>Quote for the day...{{ randomQuote }}</p>
+<!-- <p>Quote for the day...{{ randomQuote }}</p> -->
+
       <a>
-        <mat-icon (click)="openDialog()">add_box</mat-icon>
+        <mat-icon (click)="openDialogueData()">add_box</mat-icon>
       </a>
     </div>
     <table mat-table [dataSource]="sourceData" class="example-table" matSort matSortActive="date_created"
-      matSortDisableClear matSortDirection="desc">
+      matSortDisableClear matSortDirection="desc" #refreshTable >
       <!-- id Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
@@ -42,6 +43,20 @@
           Changed
         </th>
         <td mat-cell *matCellDef="let row">{{row.date_changed | date}}</td>
+      </ng-container>
+      <!-- Maintenance Column -->
+      <ng-container matColumnDef="maintenance">
+        <th mat-header-cell *matHeaderCellDef disableClear>
+          Maintenance
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <a (click)="editCategoryDialog(row.id)">
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a>
+            <mat-icon>delete_outline</mat-icon>
+          </a>
+        </td>
       </ng-container>
       <!-- Owner Column -->
       <ng-container matColumnDef="owner">

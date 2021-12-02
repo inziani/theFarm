@@ -1,3 +1,10 @@
+.mat-select-panel {
+    background: #fb8500;
+}
+.mat-option-text {
+   color: #03045e;
+    }
+
 
 .button-class{
    /* display: inline-block;
