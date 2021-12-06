@@ -46,6 +46,7 @@ export class RestDataSource {
   public payload: any;
   public userId!: number;
   public expiryDate!: Date;
+  public singleCatergory!: any;
 
 
   constructor(
@@ -132,9 +133,11 @@ export class RestDataSource {
   fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
   }
-  fetchSingleActivityCategory(id: number): Observable<ActivityCategoryInterface>{
-    return this.http.get<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', {headers: this.httpHeaders});
-  };
+
+  fetchSingleActivityCategory(id: number): Observable<ActivityCategoryInterface> {
+    return this.http.get<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', { headers: this.httpHeaders });
+  }
+
 
   fetchUsers(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/register`, this.httpOptions);

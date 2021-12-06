@@ -6,6 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-category';
 import { ActivityCategory } from '@app/shared/models/activity-category.models';
+import { map } from 'rxjs/operators';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
@@ -18,9 +19,8 @@ export class ActivityCategorysComponent implements OnInit {
 
   randomQuote: string = 'God always makes a way';
   receivedId!: number;
+  receivedData: any;
   activityCategoryList!: ActivityCategory[];
-
-
   activityCategoryColumnHeaders: string[] = ['id', 'title', 'description', 'category','date_created', 'date_changed','maintenance','owner'];
   sourceData = new MatTableDataSource<ActivityCategoryInterface>();
   resultsLength = 0;
@@ -37,13 +37,14 @@ export class ActivityCategorysComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource.fetchActivityCategory().subscribe(categorys => {
       this.sourceData.data = categorys;
-      // console.log(this.sourceData);
+
     })
   }
 
    ngAfterViewInit() {
     this.sourceData.sort = this.sort;
-     this.sourceData.paginator = this.paginator;
+    this.sourceData.paginator = this.paginator;
+
 
 
   }
@@ -87,48 +88,41 @@ export class ActivityCategorysComponent implements OnInit {
   }
 
   editCategoryDialog(id: number) {
-
+    // ***create dialog object
     const dialogConfig = new MatDialogConfig();
-
+    // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
     // dialogConfig.direction = 'rtl'
 
+    // ****fetch data from the API
     this.dataSource.fetchSingleActivityCategory(id).subscribe((response) => {
-      this.receivedId = response.id;
-      // dialogConfig.data = this.receivedId;
-      dialogConfig.data = this.receivedId;
-      console.log('Expected response - ', response );
-    });
+      let category = response;
+      // this.receivedData = response;
+      // dialogConfig.data = this.receivedData;
+      dialogConfig.data = category;
 
-    // Open Dialog
-    const dialogRef = this.dialogue.open(EditCategoryComponent, dialogConfig);
+      // ***Open Dialog
+      const dialogRef = this.dialogue.open(EditCategoryComponent, dialogConfig);
 
-    // Returned data from dialogue
-    dialogRef.afterClosed().subscribe(result => {
+    // ***Returned data from dialogue
+      dialogRef.afterClosed().subscribe(result => {
+
       if (result == undefined) {
         return;
       }
+      else {
 
-      console.log(result);
-      // if (result == 'edit') {
-      //   this.editCategory(result.data);
-      // }
-      // else if (result == 'delete') {
-      //   this.deleteCategory(result.data)
-      // }
+        console.log('Editable Data after else button', result);
+
+        }
+
+    });
+
     });
 
   }
-  // editCategory(row_obj: any) {
-  //   console.log(this.sourceData.filter[row_obj]);
-
-  // }
-
-  // deleteCategory(id: number) {
-  //   console.log(id);
-  // }
 
   }
 

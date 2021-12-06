@@ -20,6 +20,8 @@ export class EditCategoryComponent implements OnInit {
   activityCategory!: ActivityCategory;
   error!: string;
   title: string = 'Create task category';
+  editTitle: string = 'Edit task category';
+  categorydata!: any;
 
 
   category: Category[] = [
@@ -34,19 +36,16 @@ export class EditCategoryComponent implements OnInit {
 
   ) {
 
-    console.log("in constructor", dialogDataCategory);
-
+    // console.log('What data is this?', dialogDataCategory);
   }
 
   ngOnInit(): void {
-
+    this.formGroup.patchValue(this.dialogDataCategory);
   }
 
   onAddActivityCategory() {
-
     this.dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
-
     this.dataSource.addActivityCategory(this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe(success => {
       if (success) {
         // this.dialogue.open(LoginDialogComponent);
@@ -60,8 +59,6 @@ export class EditCategoryComponent implements OnInit {
         this.isLoading = false;
       }
     );
-
-    // console.log(this.formGroup.value);
 };
 
 }
