@@ -1,5 +1,4 @@
 <h2 mat-dialog-title>{{ title }}</h2>
-
 <mat-dialog-content>
   <p>The Dialogue data should be here... {{ dialogDataCategory }}</p>
 </mat-dialog-content>
@@ -43,8 +42,7 @@
 <mat-dialog-actions>
 
   <button type="submit" mat-raised-button color="primary" [disabled]="!formSubmitted && formGroup.invalid"
-    (click)="onDeleteActivityCategory()">Submit</button>
+    (click)="onAddActivityCategory()">Submit</button>
   <button type="submit" mat-raised-button color="primary" mat-dialog-close="true">Close</button>
 
 </mat-dialog-actions>
-

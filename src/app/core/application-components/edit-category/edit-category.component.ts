@@ -1,11 +1,14 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
+
 import { ActivityCategoryFormGroup } from '@app/shared/models/activity-category-form.model';
 import { Category } from '@app/shared/interfaces/activity-category';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivityCategory } from '@app/shared/models/activity-category.models';
-import { MatTable } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-edit-category',
@@ -19,8 +22,7 @@ export class EditCategoryComponent implements OnInit {
   formSubmitted: boolean = false;
   activityCategory!: ActivityCategory;
   error!: string;
-  title: string = 'Create task category';
-  editTitle: string = 'Edit task category';
+  title: string = 'Edit task category';
   categorydata!: any;
 
 
@@ -31,34 +33,59 @@ export class EditCategoryComponent implements OnInit {
 
   constructor(
     private dataSource: RestDataSource,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<EditCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogDataCategory: any
 
   ) {
 
-    // console.log('What data is this?', dialogDataCategory);
+
   }
 
   ngOnInit(): void {
     this.formGroup.patchValue(this.dialogDataCategory);
   }
 
-  onAddActivityCategory() {
+  onEditActivityCategory() {
     this.dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
-    this.dataSource.addActivityCategory(this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe(success => {
+    this.dataSource.editActivityCategory(this.dialogDataCategory.id, this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe(success => {
       if (success) {
         // this.dialogue.open(LoginDialogComponent);
         // this.router.navigate(['home']);
-        console.log(success);
+        console.log('Patch call successful', success);
+        alert('Patch call successful')
       }
     },
       error => {
         this.error = 'Login Unsuccessful! Try again';
         alert(this.error);
         this.isLoading = false;
-      }
+      },
+
     );
-};
+
+  }
+
+  onDeleteActivityCategory() {
+    this.dialogRef.close(this.formGroup.value);
+    this.activityCategory = this.formGroup.value;
+    this.dataSource.deleteActivityCategory(this.dialogDataCategory.id).subscribe(success => {
+      if (success) {
+        this.dialog.open(DeleteDialogComponent);
+        // this.router.navigate(['home']);
+        console.log('Patch call successful', success);
+        alert('delete call successful');
+      }
+    },
+      error => {
+        this.error = 'Login Unsuccessful! Try again';
+        alert(this.error);
+        this.isLoading = false;
+      },
+
+    );
+
+  }
 
 }

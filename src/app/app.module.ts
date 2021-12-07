@@ -43,6 +43,9 @@ import { HomePageComponent } from './core/home-page/home-page.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog.component';
 import { EditCategoryComponent } from './core/application-components/edit-category/edit-category.component';
+import { CreateCategoryComponent } from './core/application-components/create-category/create-category.component';
+import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dialog.component';
+// import { CreateCategoryComponent } from './application-components/create-category/create-category.component';
 // import { ActivityCategoryComponent } from './activity-category/activity-category.component';
 
 
@@ -67,6 +70,9 @@ import { EditCategoryComponent } from './core/application-components/edit-catego
     HomePageComponent,
     LoginDialogComponent,
     EditCategoryComponent,
+    CreateCategoryComponent,
+    DeleteDialogComponent,
+    // CreateCategoryComponent,
     // ActivityCategoryComponent
 
   ],

@@ -138,6 +138,14 @@ export class RestDataSource {
     return this.http.get<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', { headers: this.httpHeaders });
   }
 
+  editActivityCategory(id: number, title: string, description: string, category: string ): Observable<ActivityCategoryInterface> {
+    return this.http.patch<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', {title, description,category },
+      { headers: this.httpHeaders });
+  }
+
+  deleteActivityCategory(id: number): Observable<ActivityCategoryInterface> {
+    return this.http.delete<any>(`${environment.apiUrl}/activityscategorys/` + id + '/');
+  }
 
   fetchUsers(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/register`, this.httpOptions);
