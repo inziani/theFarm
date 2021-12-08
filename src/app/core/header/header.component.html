@@ -1,58 +1,4 @@
-<!-- Bootstrap Navigation  -->
-<!-- <nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand" style="color: #ff9e00;" routerLink="/home">smallFarms</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" style="color: #ff9e00;" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #ff9e00;" routerLink="/home">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #ff9e00;" routerLink="/home">Contact Us - {{ isAuthenticated }} - {{ user }}
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #ff9e00;" routerLink="/login" *ngIf="!isAuthenticated"
-            style="color: #ff9e00; cursor: pointer;">LogIn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="color: #ff9e00;" routerLink="/signup" *ngIf="!isAuthenticated"
-            style="color: #ff9e00; cursor: pointer;">SignUp</a>
-        </li>
-      </ul>
-      <form class="d-flex ms-5">
-        <input class="form-control me-2 mt-1" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline mt-1" type="submit" style="color: #ff9e00;">Search</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item dropdown ml-auto">
-          <a class="nav-link dropdown-toggle" href="#" style="color: #ff9e00;" id="navbarDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false" *ngIf="isAuthenticated">
-            Profile
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:#0d00a4 ;">
-            <li><a routerLink="/profile" *ngIf="isAuthenticated" class="dropdown-item"
-                style="color: #ff9e00; cursor: pointer;">Edit Profile</a>
-            </li>
-            <li><a routerLink="/activity" *ngIf="isAuthenticated" class="dropdown-item"
-                style="color: #ff9e00; cursor: pointer;">Activitys</a>
-            </li>
-            <li><a class="dropdown-item" *ngIf="isAuthenticated" style="color: #ff9e00;" (click)="onLogOut()">Sign
-                Out</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
-<!-- End of Bootstrap Navigation Bar -->
+
 
 <!-- Angular Material Navigation Bar -->
 <mat-toolbar>
@@ -72,7 +18,6 @@
       <li><a routerLink="/profile" *ngIf="isAuthenticated">You are loggeg in as {{ isAuthenticated }} - {{ user }} {{
           userName }}</a>
       </li>
-      <!-- <div *ngFor="let userList in userList"> {{ userList }} </div> -->
     </ul>
   </div>
 </mat-toolbar>

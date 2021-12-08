@@ -67,25 +67,4 @@ export class EditCategoryComponent implements OnInit {
 
   }
 
-  onDeleteActivityCategory() {
-    this.dialogRef.close(this.formGroup.value);
-    this.activityCategory = this.formGroup.value;
-    this.dataSource.deleteActivityCategory(this.dialogDataCategory.id).subscribe(success => {
-      if (success) {
-        this.dialog.open(DeleteDialogComponent);
-        // this.router.navigate(['home']);
-        console.log('Patch call successful', success);
-        alert('delete call successful');
-      }
-    },
-      error => {
-        this.error = 'Login Unsuccessful! Try again';
-        alert(this.error);
-        this.isLoading = false;
-      },
-
-    );
-
-  }
-
 }
