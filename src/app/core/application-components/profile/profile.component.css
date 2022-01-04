@@ -8,3 +8,11 @@ body {
   display: block;
   height: 100vh
 }
+a {
+  text-decoration: none;
+}
+
+.account-settings {
+  height: 10vh;
+  
+}

@@ -1,1 +1,70 @@
-<p>profile works!</p>
+<mat-grid-list cols="5" rowHeight="100px" class="mt-5">
+  <mat-grid-tile colspan="2" rowspan="5" style="background-color: red;">
+    <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutGap="20px">
+      <div class="cardWrap" fxLayout.lt-xs="column" fxLayout.xs="column" fxLayout="column" fxFlex.xs="50"
+        fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
+
+        <div fxFlex.xs="50%" fxLayoutAlign="center center" fxLayout="column" fxFlex.lt-xs="50">
+          <div>
+            <mat-card fxFlex="300px" class="account-settings">
+              <a routerLink="/login">
+                <mat-card-content>
+                  <p>Account Settings</p>
+                  <p>
+                    Lorem ipsum dolor sit amet.
+                  </p>
+                </mat-card-content>
+              </a>
+            </mat-card>
+          </div>
+        </div>
+
+        <div fxFlex.xs="50%" fxLayoutAlign="center center" fxLayout="column" fxFlex.lt-xs="50">
+          <div>
+            <mat-card fxFlex="300px" class="account-settings">
+              <a routerLink="/login">
+                <mat-card-content>
+                  <p>Notifications</p>
+                  <p>
+                    Lorem ipsum dolor sit amet.
+                  </p>
+                </mat-card-content>
+              </a>
+
+            </mat-card>
+          </div>
+        </div>
+
+        <div fxFlex.xs="50%" fxLayoutAlign="center center" fxLayout="column" fxFlex.lt-xs="50">
+          <div>
+            <mat-card fxFlex="300px" class="account-settings">
+              <a routerLink="/login">
+                <mat-card-content>
+                  <p>Roles & Authorizations</p>
+                  <p>
+                    Lorem ipsum dolor sit amet.
+                  </p>
+                </mat-card-content>
+              </a>
+
+            </mat-card>
+          </div>
+        </div>
+        <div fxFlex.xs="50%" fxLayoutAlign="center center" fxLayout="column" fxFlex.lt-xs="50">
+          <div>
+            <mat-card fxFlex="300px" class="account-settings">
+              <a routerLink="/login">
+                <p>Password & Security</p>
+                <p>
+                  Lorem ipsum dolor sit amet.
+                </p>
+              </a>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="3" rowspan="5" style="background-color: pink;">Account details uno</mat-grid-tile>
+</mat-grid-list>
+
