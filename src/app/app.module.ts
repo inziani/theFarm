@@ -35,7 +35,7 @@ import { ProfileComponent } from './core/application-components/profile/profile.
 import { EditActivityComponent } from './core/application-components/edit-activity/edit-activity.component';
 import { LoadingSpinnerComponent } from './core/application-components/loading-spinner/loading-spinner';
 import { ActivityCategorysComponent } from './core/application-components/activity-categorys/activity-categorys.component';
-import { FooterComponent } from './core/footer/footer/footer.component';
+import { FooterComponent } from './core/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideNavComponent } from './core/side-nav/side-nav.component';
 import { ModulesComponent } from './core/modules/modules.component';
@@ -45,8 +45,11 @@ import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog
 import { EditCategoryComponent } from './core/application-components/edit-category/edit-category.component';
 import { CreateCategoryComponent } from './core/application-components/create-category/create-category.component';
 import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dialog.component';
-// import { CreateCategoryComponent } from './application-components/create-category/create-category.component';
-// import { ActivityCategoryComponent } from './activity-category/activity-category.component';
+import { AccountSettingsComponent } from './core/application-components/profile/account-settings/account-settings.component';
+import { NotificationsComponent } from './core/application-components/profile/notifications/notifications.component';
+import { RoleAuthComponent } from './core/application-components/profile/role-auth/role-auth.component';
+import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
+
 
 
 
@@ -72,8 +75,11 @@ import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dia
     EditCategoryComponent,
     CreateCategoryComponent,
     DeleteDialogComponent,
-    // CreateCategoryComponent,
-    // ActivityCategoryComponent
+    AccountSettingsComponent,
+    NotificationsComponent,
+    RoleAuthComponent,
+    PasswordSecComponent,
+
 
   ],
   imports: [

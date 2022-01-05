@@ -14,5 +14,29 @@ a {
 
 .account-settings {
   height: 10vh;
-  
+
+}
+
+.profile-picture{
+
+  max-width: 700px;
+  margin-bottom: 8px;
+  margin-top: 3px;
+  background: #fb8500;
+
+}
+
+.profile-page{
+   /* background-color:#03045e;
+   font-size: 15px; */
+   /* color: #fb8500; */
+   height: 100vh;
+   margin-left: 5px;
+   margin-right: 5px;
+   padding-left: 5px;
+   padding-right: 5px;
+}
+
+mat-card{
+  width: 800px;
 }

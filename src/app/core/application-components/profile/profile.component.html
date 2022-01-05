@@ -1,3 +1,42 @@
+<!-- Using the Flex layout with Tabs -->
+<!-- Profile picture sections -->
+
+<div class="mt-5">
+  <mat-card class="profile-picture">
+    <mat-card-title-group>
+      <mat-card-title>{{ loggedInUser }}</mat-card-title>
+      <mat-card-subtitle>Date last updated</mat-card-subtitle>
+      <img mat-card-md-image src="/src/assets/images/vri.png">
+    </mat-card-title-group>
+    <mat-card-content>
+      <!-- {{longText}} -->
+      <p>content</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <div class="mt-5">
+  <mat-card class="profile-picture">
+    <mat-card-title-group>
+      <mat-card-title>{{ loggedInUser }}</mat-card-title>
+      <mat-card-subtitle>Date last updated</mat-card-subtitle>
+      <img mat-card-md-image src="/src/assets/images/vri.png">
+    </mat-card-title-group>
+    <mat-card-content>
+      {{longText}}
+      <p>content</p>
+    </mat-card-content>
+  </mat-card>
+</div> -->
+
+
+<!-- Tabs for the different items section -->
+
+
+
+
+<!-- Using the Grid -->
+<!--
 <mat-grid-list cols="5" rowHeight="100px" class="mt-5">
   <mat-grid-tile colspan="2" rowspan="5" style="background-color: red;">
     <div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutGap="20px">
@@ -65,6 +104,10 @@
       </div>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile colspan="3" rowspan="5" style="background-color: pink;">Account details uno</mat-grid-tile>
-</mat-grid-list>
+  <mat-grid-tile colspan="3" rowspan="5" style="background-color: pink;">
+    <p>Profile tab details details</p>
+    <app-account-settings></app-account-settings>
+    <app-notifications></app-notifications>
+  </mat-grid-tile>
+  </mat-grid-list> -->
 

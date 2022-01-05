@@ -11,6 +11,9 @@ import { ProfileTiles } from '@app/shared/interfaces/profile-tiles';
 })
 export class ProfileComponent implements OnInit {
 
+  public loggedInUser: string = 'Valentine Robai Inziani'
+
+
   public tiles: ProfileTiles[] = [
     { text: "Account Settings", columns: 2, rows: 5, color: "red" },
     { text: "Account Details" , columns: 3, rows: 5, color: "pink" }
