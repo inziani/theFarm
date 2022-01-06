@@ -1,19 +1,48 @@
 <!-- Using the Flex layout with Tabs -->
 <!-- Profile picture sections -->
 
-<div class="mt-5">
-  <mat-card class="profile-picture">
-    <mat-card-title-group>
-      <mat-card-title>{{ loggedInUser }}</mat-card-title>
-      <mat-card-subtitle>Date last updated</mat-card-subtitle>
-      <img mat-card-md-image src="/src/assets/images/vri.png">
-    </mat-card-title-group>
-    <mat-card-content>
-      <!-- {{longText}} -->
-      <p>content</p>
-    </mat-card-content>
-  </mat-card>
-</div>
+<section class="mt-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
+  <div fxLayout="column" fxFlex.md="100">
+    <div fxLayout="row wrap" fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
+      fxLayoutAlign="center center">
+      <mat-card class="profile-picture">
+        <img mat-card-md-image class="mt-3" src="/assets/images/vri.png">
+        <mat-card-title-group class="mt-3">
+          <mat-card-title>{{ loggedInUser }}</mat-card-title>
+          <mat-card-subtitle>Date last updated</mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>
+          <!-- {{longText}} -->
+          <!-- <p>Update</p> -->
+          <mat-card-actions align="end">
+            <button class="mx-5" type="submit" mat-raised-button color="primary">Update</button>
+          </mat-card-actions>
+          </mat-card-content>
+          </mat-card>
+          </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
+      fxLayoutAlign="center center">
+      <mat-tab-group mat-stretch-tabs class="stretched-tabs mat-elevation-z4">
+        <mat-tab label="Account Settings">
+          <app-account-settings></app-account-settings>
+        </mat-tab>
+        <mat-tab label="Notifications">
+          <app-notifications></app-notifications>
+        </mat-tab>
+        <mat-tab label="Roles & Authorizations">
+          <app-role-auth></app-role-auth>
+        </mat-tab>
+        <mat-tab label="Password & Security">
+          <app-password-sec></app-password-sec>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    </div>
+
+
+
+    </section>
 
 <!-- <div class="mt-5">
   <mat-card class="profile-picture">
