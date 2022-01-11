@@ -27,9 +27,7 @@ a {
 }
 
 .profile-page{
-   /* background-color:#03045e;
-   font-size: 15px; */
-   /* color: #fb8500; */
+
    height: 100vh;
    margin-left: 5px;
    margin-right: 5px;
@@ -42,7 +40,6 @@ mat-card{
   box-shadow: none !important;
 }
 .mat-raised-button{
-   /* width: 50%; */
 
    color: #03045e;
    background-color: #fb8500;
@@ -60,18 +57,22 @@ img {
 
 .stretched-tabs {
   width: 1200px;
+  
 
 }
 
 .mat-tab-group{
 background-color: #03045e;
-color: #fb8500;
+color: #fb8500 ;
 
 }
 
-.mat-tab-label.mat-tab-label-active {
-   color: #ffffff;
+.mat-tab-label.mat-tab-label-active.mat-tab {
+   color: #03045e;
+   background-color: #fb8500;
 }
+
+
 
 
 

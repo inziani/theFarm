@@ -12,6 +12,7 @@ import { ProfileTiles } from '@app/shared/interfaces/profile-tiles';
 export class ProfileComponent implements OnInit {
 
   public loggedInUser: string = 'Valentine Robai Inziani'
+  public color = "#fb8500";
 
 
   public tiles: ProfileTiles[] = [

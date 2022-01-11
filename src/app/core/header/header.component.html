@@ -15,8 +15,10 @@
       <li><a routerLink="/home" *ngIf="!isAuthenticated">Contact Us</a></li>
       <li><a routerLink="/login" *ngIf="!isAuthenticated">Log In </a></li>
       <li><a routerLink="/signup" *ngIf="!isAuthenticated"> Sign Up</a></li>
-      <li><a routerLink="/profile" *ngIf="isAuthenticated">You are loggeg in as {{ isAuthenticated }} - {{ user }} {{
-          userName }}</a>
+      <li *ngIf="isAuthenticated">
+        <a routerLink="/profile" *ngFor="let loggedInUser of currentLoggedInUser">You are logged in as {{
+          loggedInUser.username }}
+        </a>
       </li>
     </ul>
   </div>

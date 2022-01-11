@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
 
 
   userSignUp: SignUpCredentials = new SignUpCredentials("", "", new Date(), NaN, "", "", "", "", "", "");
-  test: SignUpCredentials[] = [];
+  // test: SignUpCredentials[] = [];
   public maxDate!: Date;
 
   isLoading = false;

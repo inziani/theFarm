@@ -33,6 +33,7 @@ export class AuthenticationService {
 
 
 
+
   constructor(
     private http: HttpClient,
     private dataSource: RestDataSource) {
@@ -94,14 +95,6 @@ export class AuthenticationService {
 
 
   }
-
-
-
-
-  // private setSession(authResult: any) {
-  //   // console.log(this.token);
-  //   return this.token = authResult;
-  // }
 
 
 

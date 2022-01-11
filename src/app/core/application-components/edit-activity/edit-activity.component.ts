@@ -55,7 +55,7 @@ export class EditActivityComponent implements OnInit {
     private dialogRef: MatDialogRef<EditActivityComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: any
   ) {
-    // this.activityList = [];
+
   }
 
   ngOnInit(): void {
@@ -82,7 +82,6 @@ export class EditActivityComponent implements OnInit {
   onAddActivity() {
     this.dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-
     this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
       if (success) {
         // this.dialogue.open(LoginDialogComponent);
