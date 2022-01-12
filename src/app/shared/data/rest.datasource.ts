@@ -4,9 +4,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
-// import * as jwtDecode from 'jwt-decode';
+
 import jwtDecode, { JwtPayload } from 'jwt-decode';
-import * as moment from 'moment';
+
 
 import { User } from "../models/user.model";
 import { Activity } from "../models/activity.model";
@@ -83,7 +83,7 @@ export class RestDataSource {
     this.userId = finaldecodedToken.user_id;
     this.expiryDate = new Date(finaldecodedToken.exp * 1000);
     this.user.next(this.userId);
-    console.log(`Payload - ${this.payload},User - ${this.userId}`);
+    // console.log(`Payload - ${this.payload},User - ${this.userId}`);
     localStorage.setItem('userData', this.payload);
     return this.payload;
   }
@@ -148,8 +148,14 @@ export class RestDataSource {
   }
 
   fetchUsers(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/register`, this.httpOptions);
+    return this.http.get(`${environment.apiUrl}/register/`, this.httpOptions);
   }
+
+  fetchUserProfiles(): Observable<any>{
+    return this.http.get(`${environment.apiUrl}/user-profile`, this.httpOptions);
+  }
+
+
 
   fetchActivityDb(sort: string, order: SortDirection, page: number): Observable<Activity[]>{
      return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { SignUpFormGroup } from '@app/shared/models/signupform.model';
-import { SignUpCredentials } from '@app/shared/models/authentication.model';
+import { UserUpdateFormGroup } from '@app/shared/models/user-update-form.model';
+// import { UseUpdate } from '@app/shared/models/authentication.model';
 import { Gender } from '@app/shared/interfaces/gender';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { User } from '@app/shared/models/user.model';
@@ -22,11 +22,12 @@ export class AccountSettingsComponent implements OnInit {
   ];
 
   // Form Data
-  public formGroup = new SignUpFormGroup();
+  public formGroup = new UserUpdateFormGroup();
   public isLoading: boolean = false;
   public error!: string | null;
   public maxDate!: Date;
   public formSubmitted: boolean = false;
+  public readonly!: boolean;
 
   // Logged in User data
   public user!: any;
@@ -34,8 +35,8 @@ export class AccountSettingsComponent implements OnInit {
   public userList!: User[];
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
-  public patchedUser!: any;
-  public finalPatcherUser!:any;
+  public patchedUser!: User;
+
 
 
   constructor(
@@ -44,6 +45,7 @@ export class AccountSettingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.readonly = true;
 
     this.userSubscription = this.dataSource.user.subscribe(
       user => {
@@ -51,33 +53,30 @@ export class AccountSettingsComponent implements OnInit {
         this.user = user;
         this.loggedInUser = this.dataSource.fetchUsers().subscribe(users => {
           this.userList = users;
-          this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
-          this.currentLoggedInUser = this.loggedInUser;
-          // this.patchedUser = { ...this.currentLoggedInUser };
-          // this.patchedUser = this.currentLoggedInUser.reduce((username, firstName) => Object.assign(username, firstName), {});
-          // this.finalPatcherUser = this.patchedUser;
-          // this.patchedUser = Object.assign({}, ['id', 'username', 'first_name', 'last_name', 'date_of_birth', 'phone_numner',
-          // 'email', 'gender', 'city']);
-          this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj), {});
-          this.formGroup.patchValue({
-            username: this.patchedUser.username,
-            first_name: 'Valentine',
-            last_name: this.patchedUser.last_name,
-            email: this.patchedUser.email,
-
+          this.currentLoggedInUser = this.userList.filter((person: User) => person.id === this.user);
+          this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj),
+          {
+            id: NaN, first_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
+            email: '', gender: '', city: ''
           });
+          this.formGroup.patchValue({
+
+            first_name: this.patchedUser.first_name,
+            last_name: this.patchedUser.last_name,
+            date_of_birth: this.patchedUser.date_of_birth,
+            phone_number: this.patchedUser.phone_number,
+            username: this.patchedUser.username,
+            email: this.patchedUser.email,
+            gender: this.patchedUser.gender,
+            city: this.patchedUser.city
+            });
           console.log('My logged in user - ', this.currentLoggedInUser);
           console.log('My Patched User -', this.patchedUser);
           console.log('My Form-', this.formGroup.value);
         });
 
       });
-
-
-
   }
-
-
 
   ngOnDestroy() {
 
@@ -86,6 +85,10 @@ export class AccountSettingsComponent implements OnInit {
 
    submitForm() {
 
+   }
+
+  update(): void {
+    this.readonly = !this.readonly;
   }
 
 

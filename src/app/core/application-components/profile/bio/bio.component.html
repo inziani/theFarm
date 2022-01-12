@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
+  <p>Get data from the Profile table</p>
+  <div *ngFor="let profile of userProfilesList">
+
+    <p> Bio - {{ profile.bio }}</p>
+    <p>Hobbies - {{ profile.hobbies }}</p>
+    <p>Profile Picture - "{{ profile.profile_pic }}"</p>
+    <img src="'{{ profile.profile_pic }}'" alt="">
+    <p>Date Created - {{ profile.create_at | date }}</p>
+    <p>Date Changed - {{ profile.updated_at | date }}</p>
+  </div>
+
+</div>

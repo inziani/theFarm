@@ -46,7 +46,7 @@ import { EditCategoryComponent } from './core/application-components/edit-catego
 import { CreateCategoryComponent } from './core/application-components/create-category/create-category.component';
 import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dialog.component';
 import { AccountSettingsComponent } from './core/application-components/profile/account-settings/account-settings.component';
-import { NotificationsComponent } from './core/application-components/profile/notifications/notifications.component';
+import { BioComponent } from './core/application-components/profile/bio/bio.component';
 import { RoleAuthComponent } from './core/application-components/profile/role-auth/role-auth.component';
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
 
@@ -76,7 +76,7 @@ import { PasswordSecComponent } from './core/application-components/profile/pass
     CreateCategoryComponent,
     DeleteDialogComponent,
     AccountSettingsComponent,
-    NotificationsComponent,
+    BioComponent,
     RoleAuthComponent,
     PasswordSecComponent,
 
