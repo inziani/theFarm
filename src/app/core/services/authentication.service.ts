@@ -59,20 +59,20 @@ export class AuthenticationService {
     return this.dataSource.refreshToken != null;
   }
    onUserSignOn(
-    firstName: string,
-    lastName: string,
-    birthday: Date,
-    phoneNumber: number,
+    first_name: string,
+    last_name: string,
+    date_of_birth: Date,
+    phone_number: number,
     username: string,
     gender: string,
     city: string,
     email: string,
     password: string): Observable<any> {
     return this.http.post<SignUpResponse>(`${environment.apiUrl}/register/`, JSON.stringify({
-      firstName,
-      lastName,
-      birthday,
-      phoneNumber,
+      first_name,
+      last_name,
+      date_of_birth,
+      phone_number,
       username,
       gender,
       city,

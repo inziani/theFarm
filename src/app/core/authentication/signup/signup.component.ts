@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,39 +8,49 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 import { SignUpFormControl, SignUpFormGroup } from '@app/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/shared/models/authentication.model';
 import { Gender } from '@app/shared/interfaces/gender';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
 
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+
 })
 export class SignupComponent implements OnInit {
 
-  gender: Gender[] = [
+ public datePipe!: any;
+
+ public gender: Gender[] = [
     { value: 'Female', viewValue: 'Female' },
     { value: 'Male', viewValue: 'Male' }
   ];
 
-  formGroup = new SignUpFormGroup();
-
-
-  userSignUp: SignUpCredentials = new SignUpCredentials("", "", new Date(), NaN, "", "", "", "", "", "");
-  // test: SignUpCredentials[] = [];
+  public formGroup = new SignUpFormGroup();
+  public userSignUp!: SignUpCredentials;
   public maxDate!: Date;
 
-  isLoading = false;
-  formSubmitted: boolean = false;
-  error!: string | null;
+  public isLoading = false;
+  public formSubmitted: boolean = false;
+  public error!: string | null;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private dateFormat: DatePipe
+
+  ) {
+
+    this.datePipe = dateFormat;
+  }
 
   ngOnInit(): void {
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+
+
 
   }
 
@@ -48,16 +59,16 @@ export class SignupComponent implements OnInit {
       return
     }
     this.isLoading = true;
-    const firstName = form.value.firstName;
-    const lastName = form.value.lastName;
-    const birthday = form.value.birthday;
-    const phoneNumber = form.value.firstName;
+    const first_name = form.value.first_name;
+    const last_name = form.value.last_name;
+    const date_of_birth = form.value.birthday;
+    const phone_number = form.value.phone_number;
     const username = form.value.username;
-    const gender = form.value.lastName;
-    const city = form.value.birthday;
+    const gender = form.value.gender;
+    const city = form.value.city;
     const email = form.value.email;
-    const password = form.value.email;
-    this.authenticationService.onUserSignOn(firstName, lastName, birthday, phoneNumber, username, gender, city, email, password).subscribe(signUpData => {
+    const password = form.value.password;
+    this.authenticationService.onUserSignOn(first_name, last_name, date_of_birth, phone_number, username, gender, city, email, password).subscribe(signUpData => {
       console.log(signUpData);
       this.isLoading = false;
       this.router.navigate(['/login']);
@@ -78,10 +89,10 @@ export class SignupComponent implements OnInit {
     console.log(this.userSignUp);
     this.formSubmitted = true;
     this.authenticationService.onUserSignOn(
-      this.userSignUp.firstName,
-      this.userSignUp.lastName,
-      this.userSignUp.birthday,
-      this.userSignUp.phoneNumber,
+      this.userSignUp.first_name,
+      this.userSignUp.last_name,
+      this.datePipe.transform(this.userSignUp.date_of_birth, 'yyyy-MM-dd'),
+      this.userSignUp.phone_number,
       this.userSignUp.username,
       this.userSignUp.gender,
       this.userSignUp.city,

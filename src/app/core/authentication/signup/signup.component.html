@@ -14,20 +14,19 @@
         fxLayoutAlign="center center">
         <mat-form-field>
           <mat-label>First Name</mat-label>
-          <input type="text" matInput placeholder="First Name" id="firstName" name="firstName"
-            formControlName="firstName">
+          <input type="text" matInput placeholder="First Name" id="first_name" name="first_name" formControlName="first_name">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['firstName'].dirty) && formGroup.controls['firstName'].invalid">
-            <li *ngFor="let error of formGroup.getfirstNameValidationMessages('firstName')">{{ error}}</li>
+            *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
+            <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
           </ul>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Last Name</mat-label>
-          <input type="text" matInput placeholder="Last Name" id="lastName" name="lastName" formControlName="lastName">
+          <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name" formControlName="last_name">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['lastName'].dirty) && formGroup.controls['lastName'].invalid">
-            <li *ngFor="let error of formGroup.getlastNameValidationMessages('lastName')">{{ error}}</li>
+            *ngIf="(formSubmitted || formGroup.controls['last_name'].dirty) && formGroup.controls['last_name'].invalid">
+            <li *ngFor="let error of formGroup.getlastNameValidationMessages('last_name')">{{ error}}</li>
           </ul>
         </mat-form-field>
       </div>
@@ -35,22 +34,22 @@
         fxLayoutAlign="center center">
         <mat-form-field>
           <mat-label>Birthday</mat-label>
-          <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="Date of Birth" id="birthday"
-            name="birthday" formControlName="birthday">
+          <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="Date of Birth" id="date_of_birth"
+            name="date_of_birth" formControlName="date_of_birth">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['birthday'].dirty) && formGroup.controls['birthday'].invalid">
-            <li *ngFor="let error of formGroup.getBirthDayValidationMessages('birthday')">{{ error}}</li>
+            *ngIf="(formSubmitted || formGroup.controls['date_of_birth'].dirty) && formGroup.controls['date_of_birth'].invalid">
+            <li *ngFor="let error of formGroup.getBirthDayValidationMessages('date_of_birth')">{{ error}}</li>
           </ul>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Phone Number</mat-label>
-          <input type="tel" matInput placeholder="Phone Number" id="phoneNumber" name="phoneNumber"
-            formControlName="phoneNumber">
+          <input type="tel" matInput placeholder="Phone Number" id="phone_number" name="phone_number"
+            formControlName="phone_number">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['phoneNumber'].dirty) && formGroup.controls['phoneNumber'].invalid">
-            <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phoneNumber')">{{ error}}</li>
+            *ngIf="(formSubmitted || formGroup.controls['phone_number'].dirty) && formGroup.controls['phone_number'].invalid">
+            <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phone_number')">{{ error}}</li>
           </ul>
         </mat-form-field>
       </div>

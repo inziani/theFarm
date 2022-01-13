@@ -51,19 +51,19 @@ export class UserUpdateFormGroup extends FormGroup {
         super({
 
 
-            first_name: new UserUpdateFormControl("First Name", "first_name", {value:"", disabled: true}, Validators.required,),
-            last_name: new UserUpdateFormControl("Last Name", "last_name", {value:"", disabled: true}, Validators.required),
-            date_of_birth: new UserUpdateFormControl("Birthday", "birthday", {value:"", disabled: true}, Validators.required),
-            phone_number: new UserUpdateFormControl("Phone Number", "phoneNumber", {value:"", disabled: true}, Validators.required),
-            username: new UserUpdateFormControl("Username", "username", {value:"", disabled: true}, Validators.required),
-            email: new UserUpdateFormControl("Email", "email", {value:"", disabled: true}, Validators.compose([
+            first_name: new UserUpdateFormControl("First Name", "first_name", "", Validators.required,),
+            last_name: new UserUpdateFormControl("Last Name", "last_name", "", Validators.required),
+            date_of_birth: new UserUpdateFormControl("Birthday", "birthday", {value:'', disabled: true }, Validators.required),
+            phone_number: new UserUpdateFormControl("Phone Number", "phoneNumber", "", Validators.required),
+            username: new UserUpdateFormControl("Username", "username", "", Validators.required),
+            email: new UserUpdateFormControl("Email", "email", "", Validators.compose([
 
               Validators.required,
               Validators.email,
 
             ])),
-            gender: new UserUpdateFormControl("Gender", "gender", {value:"", disabled: true}, Validators.required),
-            city: new UserUpdateFormControl("City", "city", {value:"", disabled: true}, Validators.required),
+            gender: new UserUpdateFormControl("Gender", "gender", {value:'', disabled: true }, Validators.required),
+            city: new UserUpdateFormControl("City", "city", "", Validators.required),
 
 
         });

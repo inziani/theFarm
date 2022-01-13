@@ -1,8 +1,8 @@
 <section class="user-update-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
-  fxLayoutAlign="center center">
+  fxLayoutAlign="center center" fxLayoutGap="0px">
   <h1>Change User Information here</h1>
   <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
-    <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+    <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
       <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
         <ul>
           <li *ngFor="let error of formGroup.getFormValidationMessages()">
@@ -14,18 +14,22 @@
         fxLayoutAlign="center center">
         <mat-form-field>
           <mat-label>First Name</mat-label>
-          <input type="text" matInput placeholder="First Name" id="first_name" name="first_name" formControlName="first_name">
+          <input type="text" matInput placeholder="First Name" id="first_name" name="first_name" formControlName="first_name"
+            [readonly]="readonly">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
+           *ngIf="(formSubmitted || formGroup.controls.first_name.dirty) && formGroup.controls['first_name'].invalid"
+
+            >
             <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
           </ul>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Last Name</mat-label>
-          <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name" formControlName="last_name">
+          <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name" formControlName="last_name"
+            [readonly]="readonly">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['lastName'].dirty) && formGroup.controls['lastName'].invalid">
+            *ngIf="(formSubmitted || formGroup.controls.last_name.dirty) && formGroup.controls['lastName'].invalid">
             <li *ngFor="let error of formGroup.getlastNameValidationMessages('lastName')">{{ error}}</li>
           </ul>
         </mat-form-field>
@@ -35,11 +39,11 @@
         <mat-form-field>
           <mat-label>Birthday</mat-label>
           <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="Date of Birth" id="date_of_birth"
-            name="date_of_birth" formControlName="date_of_birth">
+            name="date_of_birth" formControlName="date_of_birth" [attr.disabled]="true">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker [disabled]="readonly"></mat-datepicker>
+          <mat-datepicker #picker></mat-datepicker>
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['date_of_birth'].dirty) && formGroup.controls['date_of_birth'].invalid">
+            *ngIf="(formSubmitted || formGroup.controls.date_of_birth.dirty) && formGroup.controls['date_of_birth'].invalid">
             <li *ngFor="let error of formGroup.getBirthDayValidationMessages('date_of_birth')">{{ error}}</li>
           </ul>
         </mat-form-field>
@@ -48,7 +52,7 @@
           <input type="tel" matInput placeholder="Phone Number" id="phone_number" name="phone_number"
             formControlName="phone_number" [readonly]="readonly">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['phone_number'].dirty) && formGroup.controls['phone_number'].invalid">
+            *ngIf="(formSubmitted || formGroup.controls.phone_number.dirty) && formGroup.controls['phone_number'].invalid">
             <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phone_number')">{{ error}}</li>
           </ul>
         </mat-form-field>
@@ -60,7 +64,7 @@
           <input type="text" matInput placeholder="username" id="username" name="username" formControlName="username"
             [readonly]="readonly">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['username'].dirty) && formGroup.controls['username'].invalid">
+            *ngIf="(formSubmitted || formGroup.controls.username.dirty) && formGroup.controls['username'].invalid">
             <li *ngFor="let error of formGroup.getUserNameValidationMessages('username')">{{ error}}</li>
           </ul>
         </mat-form-field>
@@ -68,7 +72,7 @@
           <mat-label>email</mat-label>
           <input type="email" matInput placeholder="email" id="email" name="email" formControlName="email" [readonly]="readonly">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
+            *ngIf="(formSubmitted || formGroup.controls.email.dirty) && formGroup.controls['email'].invalid">
             <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
           </ul>
         </mat-form-field>
@@ -77,14 +81,14 @@
         fxLayoutAlign="center center">
         <mat-form-field>
           <mat-label>Gender</mat-label>
-          <mat-select formControlName="gender" placeholder="gender" id="gender" name="gender">
-            <mat-option *ngFor="let gender of gender" [value]="gender.value">
+          <mat-select formControlName="gender" placeholder="gender" id="gender" name="gender" [attr.disabled]="true">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
               {{ gender.viewValue }}
             </mat-option>
 
           </mat-select>
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
+            *ngIf="(formSubmitted || formGroup.controls.gender.dirty) && formGroup.controls['gender'].invalid">
             <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
           </ul>
         </mat-form-field>
@@ -92,7 +96,7 @@
           <mat-label>City</mat-label>
           <input type="text" matInput placeholder="City" id="city" name="city" formControlName="city" [readonly]="readonly">
           <ul class="text-danger list-unstyled"
-            *ngIf="(formSubmitted || formGroup.controls['city'].dirty) && formGroup.controls['city'].invalid">
+            *ngIf="(formSubmitted || formGroup.controls.city.dirty) && formGroup.controls['city'].invalid">
             <li *ngFor="let error of formGroup.getEmailValidationMessages('city')">{{ error}}</li>
           </ul>
         </mat-form-field>
@@ -101,7 +105,7 @@
         <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px" fxLayoutAlign="center center">
           <button type="submit" mat-raised-button color="primary" (click)="update()">Edit</button>
           <button type="submit" mat-raised-button color="primary"
-            [disabled]="!formSubmitted && formGroup.invalid">Save</button>
+            [disabled]="!formSubmitted && formGroup.invalid" (click)="submitForm()">Save</button>
         </div>
 
       </div>

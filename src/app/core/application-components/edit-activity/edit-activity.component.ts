@@ -96,7 +96,7 @@ export class EditActivityComponent implements OnInit {
         this.isLoading = false;
       }
     );
-    // console.log(this.formGroup.value);
+    
 };
 
 

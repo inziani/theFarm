@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { appRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
@@ -49,8 +50,8 @@ import { AccountSettingsComponent } from './core/application-components/profile/
 import { BioComponent } from './core/application-components/profile/bio/bio.component';
 import { RoleAuthComponent } from './core/application-components/profile/role-auth/role-auth.component';
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
-
-
+import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -96,7 +97,15 @@ import { PasswordSecComponent } from './core/application-components/profile/pass
 
 
   ],
-  providers: [UsersService, AuthenticationService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, RestDataSource, NavigationServiceService, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }],
+  providers: [
+    UsersService, AuthenticationService,
+    RestDataSource, NavigationServiceService, DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+
+
+
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginDialogComponent,

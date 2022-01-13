@@ -9,10 +9,10 @@ export class LoginCredentials {
 export class SignUpCredentials {
 
     constructor(
-        public firstName: string,
-        public lastName: string,
-        public birthday: Date,
-        public phoneNumber: number,
+        public first_name: string,
+        public last_name: string,
+        public date_of_birth: Date,
+        public phone_number: number,
         public username: string,
         public gender: string,
         public city: string,

@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class AccountSettingsComponent implements OnInit {
 
-  gender: Gender[] = [
+  genders: Gender[] = [
     { value: 'Female', viewValue: 'Female' },
     { value: 'Male', viewValue: 'Male' }
   ];
@@ -59,17 +59,7 @@ export class AccountSettingsComponent implements OnInit {
             id: NaN, first_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
             email: '', gender: '', city: ''
           });
-          this.formGroup.patchValue({
-
-            first_name: this.patchedUser.first_name,
-            last_name: this.patchedUser.last_name,
-            date_of_birth: this.patchedUser.date_of_birth,
-            phone_number: this.patchedUser.phone_number,
-            username: this.patchedUser.username,
-            email: this.patchedUser.email,
-            gender: this.patchedUser.gender,
-            city: this.patchedUser.city
-            });
+          this.formGroup.patchValue(this.patchedUser );
           console.log('My logged in user - ', this.currentLoggedInUser);
           console.log('My Patched User -', this.patchedUser);
           console.log('My Form-', this.formGroup.value);
@@ -82,13 +72,40 @@ export class AccountSettingsComponent implements OnInit {
 
     this.userSubscription.unsubscribe();
   }
+  get first_name() {
+    return this.formGroup.get('first_name')
+  }
+  get last_name() {
+    return this.formGroup.get('first_name')
+  }
+  get date_of_birth() {
+    return this.formGroup.get('date_of_birth')
+  }
+  get phone_number() {
+    return this.formGroup.get('phone_number')
+  }
+  get username() {
+    return this.formGroup.get('username')
+  }
+  get email() {
+    return this.formGroup.get('email')
+  }
+  get gender() {
+    return this.formGroup.get('gender')
+  }
+  get city() {
+    return this.formGroup.get('city')
+  }
 
-   submitForm() {
+  submitForm() {
+    alert('the button is working');
 
    }
 
   update(): void {
     this.readonly = !this.readonly;
+    this.formGroup.controls.gender.enable();
+    this.formGroup.controls.date_of_birth.enable();
   }
 
 

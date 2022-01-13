@@ -49,10 +49,10 @@ export class SignUpFormGroup extends FormGroup {
         super({
 
 
-            firstName: new SignUpFormControl("First Name", "firstName", "", Validators.required),
-            lastName: new SignUpFormControl("Last Name", "lastName", "", Validators.required),
-            birthday: new SignUpFormControl("Birthday", "birthday", "", Validators.required),
-            phoneNumber: new SignUpFormControl("Phone Number", "phoneNumber", "", Validators.required),
+            first_name: new SignUpFormControl("First Name", "first_name", "", Validators.required),
+            last_name: new SignUpFormControl("Last Name", "last_name", "", Validators.required),
+            date_of_birth: new SignUpFormControl("Birthday", "date_of_birth", "", Validators.required),
+            phone_number: new SignUpFormControl("Phone Number", "phone_number", "", Validators.required),
             username: new SignUpFormControl("Username", "username", "", Validators.required),
             email: new SignUpFormControl("Email", "email", "", Validators.compose([
                 Validators.required,
@@ -83,20 +83,20 @@ export class SignUpFormGroup extends FormGroup {
     }
 
 
-    getfirstNameValidationMessages(firstName: string): string[] {
-        return (this.controls['firstName'] as SignUpFormControl).getValidationMessages();
+    getfirstNameValidationMessages(first_name: string): string[] {
+        return (this.controls['first_name'] as SignUpFormControl).getValidationMessages();
     }
 
-    getlastNameValidationMessages(lastName: string): string[] {
-        return (this.controls['lastName'] as SignUpFormControl).getValidationMessages();
+    getlastNameValidationMessages(last_name: string): string[] {
+        return (this.controls['last_name'] as SignUpFormControl).getValidationMessages();
     }
 
-    getBirthDayValidationMessages(birthday: string): string[] {
-        return (this.controls['birthday'] as SignUpFormControl).getValidationMessages();
+    getBirthDayValidationMessages(date_of_birth: string): string[] {
+        return (this.controls['date_of_birth'] as SignUpFormControl).getValidationMessages();
     }
 
-    getPhoneNumberValidationMessages(phoneNumber: string): string[] {
-        return (this.controls['phoneNumber'] as SignUpFormControl).getValidationMessages();
+    getPhoneNumberValidationMessages(phone_number: string): string[] {
+        return (this.controls['phone_number'] as SignUpFormControl).getValidationMessages();
     }
 
     getUserNameValidationMessages(username: string): string[] {

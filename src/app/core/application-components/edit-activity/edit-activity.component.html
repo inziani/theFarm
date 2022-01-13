@@ -32,13 +32,14 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Activity Category</mat-label>
-    <mat-select formControlName="activityCategory" placeholder="Activity Category" id="activityCategory"
-      name="activityCategory">      <mat-option *ngFor="let category of activityCategory" [value]="category.title">
+    <mat-select formControlName="activity_category" placeholder="Activity Category" id="activity_category"
+      name="activity_category">
+      <mat-option *ngFor="let category of activityCategory" [value]="category.title">
         {{ category.title }}
       </mat-option>
     </mat-select>
     <ul class="text-danger list-unstyled"
-      *ngIf="(formSubmitted || formGroup.controls['activityCategory'].dirty) && formGroup.controls['activityCategory'].invalid">
+      *ngIf="(formSubmitted || formGroup.controls['activity_category'].dirty) && formGroup.controls['activity_category'].invalid">
       <li *ngFor="let error of formGroup.getActivityCategoryValidationMessages('activityCategory')">{{ error}}
       </li>
     </ul>

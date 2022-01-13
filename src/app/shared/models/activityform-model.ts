@@ -57,7 +57,7 @@ export class ActivityFormGroup extends FormGroup{
             Validators.maxLength(132)
             ])),
           status: new ActivityFormControl("Status", "status", "", Validators.required),
-          activityCategory: new ActivityFormControl("Activity Category", "activityCategory", "", Validators.required),
+          activity_category: new ActivityFormControl("Activity Category", "activity_category", "", Validators.required),
         });
     }
 
@@ -78,7 +78,7 @@ export class ActivityFormGroup extends FormGroup{
     }
 
     getActivityCategoryValidationMessages(activityCategory: string): string[] {
-        return (this.controls['activityCategory'] as ActivityFormControl).getValidationMessages();
+        return (this.controls['activity_category'] as ActivityFormControl).getValidationMessages();
     }
 
     getFormValidationMessages(): string[] {
