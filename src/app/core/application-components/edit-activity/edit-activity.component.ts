@@ -32,7 +32,6 @@ export class EditActivityComponent implements OnInit {
   activityCategory!: ActivityCategoryInterface[];
 
   activity!: Activity;
-    // = new Activity('title', 'description', 'activity_category', 'status')
   isLoading = false;
   formSubmitted: boolean = false;
 
@@ -83,10 +82,11 @@ export class EditActivityComponent implements OnInit {
     this.dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
     this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
+      console.log(success)
       if (success) {
         // this.dialogue.open(LoginDialogComponent);
         // this.router.navigate(['home']);
-        alert('Category added successfully');
+        alert('Activity added successfully');
         console.log(success);
       }
     },
@@ -96,7 +96,7 @@ export class EditActivityComponent implements OnInit {
         this.isLoading = false;
       }
     );
-    
+
 };
 
 

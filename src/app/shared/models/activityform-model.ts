@@ -77,7 +77,7 @@ export class ActivityFormGroup extends FormGroup{
         return (this.controls['status'] as ActivityFormControl).getValidationMessages();
     }
 
-    getActivityCategoryValidationMessages(activityCategory: string): string[] {
+    getActivityCategoryValidationMessages(activity_category: string): string[] {
         return (this.controls['activity_category'] as ActivityFormControl).getValidationMessages();
     }
 

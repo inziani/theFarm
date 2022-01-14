@@ -126,7 +126,7 @@ export class RestDataSource {
     return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys/`, JSON.stringify({ title, description, category }), this.httpOptions)
   };
 
-  addActivity(title: string, description: string, status: string, activity_category: string) {
+  addActivity(title: string, description: string, status: string, activity_category: number) {
     return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activity_category }), this.httpOptions)
   };
 
