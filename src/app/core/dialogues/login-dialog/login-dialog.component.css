@@ -1,16 +1,11 @@
-/* .login-dialogue{
 
-    color: #ff9e00;
-
-
-} */
 
 .container {
   text-align: center;
 }
 
 .mat-raised-button {
-  /* width: 50%; */
+
   color: #03045e;
   background-color: #fb8500;
 }

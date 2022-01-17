@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogActions } from "@angular/material/dialog";
 import { MatDialogClose } from "@angular/material/dialog";
 import { MatDialogTitle } from "@angular/material/dialog";
-// import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
@@ -25,36 +25,31 @@ import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activ
 
 })
 export class EditActivityComponent implements OnInit {
-  selectedValue: any;
 
-  title: string = "Create new task";
-
-  activityCategory!: ActivityCategoryInterface[];
-
-  activity!: Activity;
-  isLoading = false;
-  formSubmitted: boolean = false;
-
-
-  error!: string;
-  activityList!: Activity[];
-
-  status: Status[] = [
+  public selectedValue: any;
+  public title: string = "Edit Task";
+  public activityCategory!: ActivityCategoryInterface[];
+  public activity!: Activity;
+  public isLoading = false;
+  public formSubmitted: boolean = false;
+  public error!: string;
+  public activityList!: Activity[];
+  public status: Status[] = [
     { value: 'Created', viewValue: 'Created' },
     { value: 'Work in progress', viewValue: 'Work in progress' },
     { value: 'Completed', viewValue: 'Completed' },
     { value: 'Closed', viewValue: 'Closed' }
   ];
-
-  formGroup = new ActivityFormGroup();
+  public formGroup = new ActivityFormGroup();
 
   constructor(
     private activitysService: ActivitysService,
     private dataSource: RestDataSource,
     private dialogRef: MatDialogRef<EditActivityComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: any
+    @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
   ) {
 
+    console.log(this.dialogDataActivity, '- Dialogue Data');
   }
 
   ngOnInit(): void {
@@ -64,8 +59,8 @@ export class EditActivityComponent implements OnInit {
       // console.log(this.activityCategory);
 
     });
+    this.formGroup.patchValue(this.dialogDataActivity);
   }
-
 
   onFetchActivityData() {
     this.dataSource.fetchActivityList().subscribe(
@@ -78,10 +73,11 @@ export class EditActivityComponent implements OnInit {
     )
   };
 
-  onAddActivity() {
+  onEditActivity() {
     this.dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
+    console.log(this.activity, ' - Editable data');
+    this.dataSource.editActivity(this.dialogDataActivity.id, this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
       console.log(success)
       if (success) {
         // this.dialogue.open(LoginDialogComponent);
@@ -107,24 +103,6 @@ export class EditActivityComponent implements OnInit {
   }
 
 
-
-
-
-  // onAddActivity(form: NgForm){
-  //   const title = form.value.title;
-  //   const slug = form.value.slug;
-  //   const activityCategory = form.value.activityCategory;
-  //   const description = form.value.description;
-  //   const status = form.value.status;
-  //   // console.log(form.value);
-  //   this.activitysService.addNewActivity(title, slug, activityCategory, description, status).subscribe(data =>{
-  //     console.log(data);
-  //   },
-  //   error =>{
-  //     this.error = error.message;
-
-  //   })
-  // };
 
   submitForm() {
     // console.log('dialogue data');

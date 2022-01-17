@@ -15,6 +15,8 @@ import { ActivitysService } from 'src/app/core/services/activitys.service';
 import { Activity } from 'src/app/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { CreateActivityComponent } from '../create-activity/create-activity.component';
+import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
 
 
 @Component({
@@ -100,23 +102,8 @@ export class TodoComponent implements OnInit, AfterViewInit {
       }
     )
   }
-  // editActivity(activity: Activity) {
-  //   this.activitysService.getSingleActivityRequest(activity.id).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.activityObject = data;
-  //       // this.activity.id = data.id;
-  //       console.log(this.activityObject);
-  //       // console.log(this.activityObject.id);
-  //       console.log(this.activityObject.title);
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   )
-  // };
 
-  openDialog() {
+  openCreateActivityDialog() {
 
     const dialogConfig = new MatDialogConfig();
 
@@ -125,10 +112,84 @@ export class TodoComponent implements OnInit, AfterViewInit {
     dialogConfig.width = '400px';
     // dialogConfig.direction = 'rtl'
 
-    const dialogRef = this.dialogue.open(EditActivityComponent, dialogConfig);
+    const dialogRef = this.dialogue.open(CreateActivityComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(newActivity => {
     })
+  }
+
+  openEditActivityDialog(id: number) {
+    // ***Create dialogue object
+    const dialogConfig = new MatDialogConfig();
+    // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+
+    // *** Fetch data from api
+
+    this.dataSource.fetchSingleActivity(id).subscribe((response) => {
+      let activity = response;
+      dialogConfig.data = activity;
+      console.log(activity);
+
+      // ***Open dialog
+
+      const dialogRef = this.dialogue.open(EditActivityComponent, dialogConfig);
+
+      // ***Returned data from dialogue
+
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (result == undefined) {
+          return;
+        }
+        else {
+
+          console.log('Editable Data after else button', result);
+
+        }
+
+      });
+
+    });
+
+  }
+
+  openDeleteActivityDialog(id: number) {
+        // ***create dialog object
+    const dialogConfig = new MatDialogConfig();
+    // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    // dialogConfig.direction = 'rtl'
+
+    // ****fetch data from the API
+    this.dataSource.fetchSingleActivity(id).subscribe((response) => {
+      let category = response;
+      dialogConfig.data = category;
+
+      // ***Open Dialog
+      const dialogRef = this.dialogue.open(DeleteDialogComponent, dialogConfig);
+
+      // ***Returned data from dialogue
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (result == undefined) {
+          return;
+        }
+        else {
+
+          console.log('Editable Data after else button', result);
+
+        }
+
+      });
+
+    });
+
+
   }
 
   ngOnDestroy() {

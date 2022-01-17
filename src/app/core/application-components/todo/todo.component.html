@@ -5,17 +5,17 @@
     <div class="mx-5 text-center">
       <p>Quote for the day...{{ randomQuote }}</p>
       <a>
-        <mat-icon (click)="openDialog()">add_box</mat-icon>
+        <mat-icon (click)="openCreateActivityDialog()">add_box</mat-icon>
       </a>
     </div>
   <table mat-table [dataSource]="sourceData" class="example-table" matSort matSortActive="date_created"
       matSortDisableClear matSortDirection="desc">
-      <!-- Number Column -->
+<!-- Number Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
         <td mat-cell *matCellDef="let row">{{ row.id | number }}</td>
       </ng-container>
-    <!-- Title Column -->
+<!-- Title Column -->
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
         <td mat-cell *matCellDef="let row">{{row.title}}</td>
@@ -26,7 +26,7 @@
         <td mat-cell *matCellDef="let row">{{row.description}}</td>
       </ng-container>
 
-      <!-- Created Column -->
+<!-- Created Column -->
       <ng-container matColumnDef="date_created">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Created
@@ -54,16 +54,16 @@
           Maintenance
         </th>
         <td mat-cell *matCellDef="let row">
-          <a>
+          <a (click)="openEditActivityDialog(row.id)">
             <mat-icon>edit</mat-icon>
           </a>
-          <a>
+          <a (click)="openDeleteActivityDialog(row.id)">
             <mat-icon>delete_outline</mat-icon>
           </a>
 
         </td>
         </ng-container>
-        <!-- Owner Column -->
+<!-- Owner Column -->
         <ng-container matColumnDef="owner">
           <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
             Owner
@@ -74,6 +74,6 @@
         <tr mat-row *matRowDef="let row; columns: activityColumnHeaders;"></tr>
         </table>
   </div>
-<mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 20]">
+<mat-paginator [length]="resultsLength" [pageSize]="6" [pageSizeOptions]="[6]">
 </mat-paginator>
 </div>

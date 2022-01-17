@@ -100,7 +100,7 @@ export class ActivityCategorysComponent implements OnInit {
 
   }
 
-  openDeleteCategoryDialogue(id: number) {
+  openDeleteCategoryDialog(id: number) {
     // ***create dialog object
     const dialogConfig = new MatDialogConfig();
     // ***stop user from closing dialog by clicking elsewhere and other dialog configuration

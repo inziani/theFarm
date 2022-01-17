@@ -52,6 +52,7 @@ import { RoleAuthComponent } from './core/application-components/profile/role-au
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
 import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
 import { DatePipe } from '@angular/common';
+import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
 
 
 
@@ -80,6 +81,7 @@ import { DatePipe } from '@angular/common';
     BioComponent,
     RoleAuthComponent,
     PasswordSecComponent,
+    CreateActivityComponent,
 
 
   ],

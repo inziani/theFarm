@@ -130,6 +130,14 @@ export class RestDataSource {
     return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activity_category }), this.httpOptions)
   };
 
+  editActivity(id: number, title: string, description: string,status: string, activity_category: number) {
+    return this.http.patch<any>(`${environment.apiUrl}/activitys/` + id + '/', { title, description, status, activity_category}, { headers: this.httpHeaders });
+  }
+
+   deleteActivity(id: number): Observable<ActivityCategoryInterface> {
+    return this.http.delete<any>(`${environment.apiUrl}/activitys/` + id + '/');
+  }
+
   fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
   }
@@ -165,7 +173,7 @@ export class RestDataSource {
      return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
 
-   fetchSingleActivityRequest(id: number): Observable<Activity>{
+   fetchSingleActivity(id: number): Observable<Activity>{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
   };
 
