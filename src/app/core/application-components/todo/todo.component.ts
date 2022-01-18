@@ -16,7 +16,7 @@ import { Activity } from 'src/app/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from '../create-activity/create-activity.component';
-import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
+import { DeleteCategoryDialogComponent } from '@app/core/dialogues/delete-category-dialog/delete-category-dialog.component';
 
 
 @Component({
@@ -116,7 +116,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(newActivity => {
     })
-  }
+  };
 
   openEditActivityDialog(id: number) {
     // ***Create dialogue object
@@ -154,7 +154,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
     });
 
-  }
+  };
 
   openDeleteActivityDialog(id: number) {
         // ***create dialog object
@@ -171,7 +171,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
       dialogConfig.data = category;
 
       // ***Open Dialog
-      const dialogRef = this.dialogue.open(DeleteDialogComponent, dialogConfig);
+      const dialogRef = this.dialogue.open(DeleteCategoryDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
       dialogRef.afterClosed().subscribe(result => {

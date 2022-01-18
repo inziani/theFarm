@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 import { MatInput } from '@angular/material/input';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogActions } from "@angular/material/dialog";
 import { MatDialogClose } from "@angular/material/dialog";
 import { MatDialogTitle } from "@angular/material/dialog";
@@ -16,6 +16,7 @@ import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-categ
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { Status } from '@app/shared/interfaces/activity-status';
 import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activityform-model';
+import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 
 @Component({
@@ -45,6 +46,7 @@ export class EditActivityComponent implements OnInit {
   constructor(
     private activitysService: ActivitysService,
     private dataSource: RestDataSource,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<EditActivityComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
   ) {
@@ -80,10 +82,8 @@ export class EditActivityComponent implements OnInit {
     this.dataSource.editActivity(this.dialogDataActivity.id, this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
       console.log(success)
       if (success) {
-        // this.dialogue.open(LoginDialogComponent);
-        // this.router.navigate(['home']);
-        alert('Activity added successfully');
-        console.log(success);
+        this.dialog.open(ChangesSavedDialogComponent);
+
       }
     },
       error => {

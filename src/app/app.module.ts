@@ -45,7 +45,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog.component';
 import { EditCategoryComponent } from './core/application-components/edit-category/edit-category.component';
 import { CreateCategoryComponent } from './core/application-components/create-category/create-category.component';
-import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dialog.component';
+import { DeleteCategoryDialogComponent } from './core/dialogues/delete-category-dialog/delete-category-dialog.component';
 import { AccountSettingsComponent } from './core/application-components/profile/account-settings/account-settings.component';
 import { BioComponent } from './core/application-components/profile/bio/bio.component';
 import { RoleAuthComponent } from './core/application-components/profile/role-auth/role-auth.component';
@@ -53,6 +53,8 @@ import { PasswordSecComponent } from './core/application-components/profile/pass
 import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
 import { DatePipe } from '@angular/common';
 import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
+import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
 
 
 
@@ -76,12 +78,14 @@ import { CreateActivityComponent } from './core/application-components/create-ac
     LoginDialogComponent,
     EditCategoryComponent,
     CreateCategoryComponent,
-    DeleteDialogComponent,
+    DeleteCategoryDialogComponent,
     AccountSettingsComponent,
     BioComponent,
     RoleAuthComponent,
     PasswordSecComponent,
     CreateActivityComponent,
+    ChangesSavedDialogComponent,
+    DeleteActivityDialogComponent,
 
 
   ],

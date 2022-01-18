@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  <p>Are you sure you want to delete the following Activity Category?</p>
+  <ul>
+    <li>
+      <p>Title - <span class="title-desc">{{ activityCategory.title }}</span></p>
+    </li>
+    <li>
+      <p>Description - <span class="title-desc">{{ activityCategory.description }}</span></p>
+    </li>
+  </ul>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+  <button type="submit" mat-raised-button color="primary" (click)="onDeleteActivityCategory()"
+    mat-dialog-close="true">Yes</button>
+  <button type="submit" mat-raised-button color="primary" mat-dialog-close="true">No</button>
+
+</mat-dialog-actions>

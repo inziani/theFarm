@@ -4,9 +4,10 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivityCategoryFormGroup } from '@app/shared/models/activity-category-form.model';
 import { Category } from '@app/shared/interfaces/activity-category';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivityCategory } from '@app/shared/models/activity-category.models';
 import { MatTable } from '@angular/material/table';
+import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-create-category',
@@ -33,6 +34,7 @@ export class CreateCategoryComponent implements OnInit {
 
   constructor(
     private dataSource: RestDataSource,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<CreateCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogDataCategory: any
   ) { }
@@ -45,9 +47,7 @@ export class CreateCategoryComponent implements OnInit {
     this.activityCategory = this.formGroup.value;
     this.dataSource.addActivityCategory(this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe(success => {
       if (success) {
-        // this.dialogue.open(LoginDialogComponent);
-        // this.router.navigate(['home']);
-        console.log(success);
+        this.dialog.open(LoginDialogComponent);
       }
     },
       error => {

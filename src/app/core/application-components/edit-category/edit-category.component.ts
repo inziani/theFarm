@@ -2,12 +2,11 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
-
 import { ActivityCategoryFormGroup } from '@app/shared/models/activity-category-form.model';
 import { Category } from '@app/shared/interfaces/activity-category';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivityCategory } from '@app/shared/models/activity-category.models';
+import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 
 @Component({
@@ -39,7 +38,6 @@ export class EditCategoryComponent implements OnInit {
 
   ) {
 
-
   }
 
   ngOnInit(): void {
@@ -49,16 +47,15 @@ export class EditCategoryComponent implements OnInit {
   onEditActivityCategory() {
     this.dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
+    console.log('Activity Category on form information -',this.activityCategory);
     this.dataSource.editActivityCategory(this.dialogDataCategory.id, this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe(success => {
       if (success) {
-        // this.dialogue.open(LoginDialogComponent);
-        // this.router.navigate(['home']);
-        console.log('Patch call successful', success);
-        alert('Patch call successful')
+        this.dialog.open(ChangesSavedDialogComponent);
+
       }
     },
       error => {
-        this.error = 'Login Unsuccessful! Try again';
+        this.error = 'Transaction failed, changes not saved';
         alert(this.error);
         this.isLoading = false;
       },

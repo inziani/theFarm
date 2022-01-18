@@ -11,7 +11,7 @@ import { ActivityCategory } from '@app/shared/models/activity-category.models';
 
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
-import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
+import { DeleteCategoryDialogComponent } from '@app/core/dialogues/delete-category-dialog/delete-category-dialog.component';
 
 @Component({
   selector: 'app-activity-categorys',
@@ -115,7 +115,7 @@ export class ActivityCategorysComponent implements OnInit {
       dialogConfig.data = category;
 
       // ***Open Dialog
-      const dialogRef = this.dialogue.open(DeleteDialogComponent, dialogConfig);
+      const dialogRef = this.dialogue.open(DeleteCategoryDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
       dialogRef.afterClosed().subscribe(result => {
