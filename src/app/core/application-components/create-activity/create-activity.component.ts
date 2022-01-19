@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-import { Activity } from '@app/shared/models/activity.model';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { Status } from '@app/shared/interfaces/activity-status';
-import { ActivityFormGroup } from '@app/shared/models/activityform-model';
-import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-category';
+import { Activity } from '@app/core/shared/models/activity.model';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { Status } from '@app/core/shared/interfaces/activity-status';
+import { ActivityFormGroup } from '@app/core/shared/models/activityform-model';
+import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-category';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 
 @Component({

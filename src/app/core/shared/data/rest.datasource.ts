@@ -134,7 +134,7 @@ export class RestDataSource {
     return this.http.patch<any>(`${environment.apiUrl}/activitys/` + id + '/', { title, description, status, activity_category}, { headers: this.httpHeaders });
   }
 
-   deleteActivity(id: number): Observable<ActivityCategoryInterface> {
+   deleteActivity(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/activitys/` + id + '/');
   }
 

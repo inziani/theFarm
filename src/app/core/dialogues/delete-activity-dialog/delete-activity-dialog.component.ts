@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { Activity } from '@app/shared/models/activity.model';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { Activity } from '@app/core/shared/models/activity.model';
 import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
@@ -31,7 +31,7 @@ export class DeleteActivityDialogComponent implements OnInit {
   onDeleteActivity() {
     this.dataSource.deleteActivity(this.activity.id).subscribe(sucess => {
       if (sucess) {
-       
+
         console.log(sucess)
       }
       else {
@@ -40,7 +40,7 @@ export class DeleteActivityDialogComponent implements OnInit {
       }
     },
       error => {
-        this.error = 'The trasaction failed. Please check';
+        this.error = 'The transaction failed. Please check';
         alert(this.error)
       });
   }

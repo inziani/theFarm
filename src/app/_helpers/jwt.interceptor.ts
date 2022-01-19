@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http';
 import { concat, Observable, ReplaySubject, BehaviorSubject, throwError } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
 import { environment } from '@environments/environment';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';

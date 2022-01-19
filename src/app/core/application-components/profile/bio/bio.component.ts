@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { UserProfile } from '@app/shared/models/user.model';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { UserProfile } from '@app/core/shared/models/user.model';
 
 @Component({
   selector: 'app-bio',

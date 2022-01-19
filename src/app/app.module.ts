@@ -14,8 +14,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UsersService } from './core/services/users.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { NavigationServiceService } from './core/services/navigation-service.service';
-import { RestDataSource } from './shared/data/rest.datasource';
-import { DowndownDirective } from './shared/directives/dropdown.directive';
+import { RestDataSource } from './core/shared/data/rest.datasource';
+import { DowndownDirective } from './core/shared/directives/dropdown.directive';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
 

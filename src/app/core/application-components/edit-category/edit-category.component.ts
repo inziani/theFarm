@@ -2,10 +2,10 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { ActivityCategoryFormGroup } from '@app/shared/models/activity-category-form.model';
-import { Category } from '@app/shared/interfaces/activity-category';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { ActivityCategory } from '@app/shared/models/activity-category.models';
+import { ActivityCategoryFormGroup } from '@app/core/shared/models/activity-category-form.model';
+import { Category } from '@app/core/shared/interfaces/activity-category';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 

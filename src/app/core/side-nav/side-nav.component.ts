@@ -3,8 +3,8 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 
 
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { UserProfile } from '@app/shared/interfaces/sidenav-trees';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { UserProfile } from '@app/core/shared/interfaces/sidenav-trees';
 
 
 @Component({

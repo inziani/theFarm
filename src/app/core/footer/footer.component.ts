@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
 import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
 

@@ -5,9 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-category';
-import { ActivityCategory } from '@app/shared/models/activity-category.models';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-category';
+import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
 
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { CreateCategoryComponent } from '../create-category/create-category.component';

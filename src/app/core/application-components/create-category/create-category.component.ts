@@ -1,13 +1,14 @@
 
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 
-import { ActivityCategoryFormGroup } from '@app/shared/models/activity-category-form.model';
-import { Category } from '@app/shared/interfaces/activity-category';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { ActivityCategoryFormGroup } from '@app/core/shared/models/activity-category-form.model';
+import { Category } from '@app/core/shared/interfaces/activity-category';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivityCategory } from '@app/shared/models/activity-category.models';
+import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
 import { MatTable } from '@angular/material/table';
 import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dialog.component';
+import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-create-category',
@@ -47,7 +48,7 @@ export class CreateCategoryComponent implements OnInit {
     this.activityCategory = this.formGroup.value;
     this.dataSource.addActivityCategory(this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe(success => {
       if (success) {
-        this.dialog.open(LoginDialogComponent);
+        this.dialog.open(ChangesSavedDialogComponent);
       }
     },
       error => {

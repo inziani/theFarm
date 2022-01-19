@@ -5,9 +5,9 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { SignUpFormControl, SignUpFormGroup } from '@app/shared/models/signupform.model';
-import { SignUpCredentials } from '@app/shared/models/authentication.model';
-import { Gender } from '@app/shared/interfaces/gender';
+import { SignUpFormControl, SignUpFormGroup } from '@app/core/shared/models/signupform.model';
+import { SignUpCredentials } from '@app/core/shared/models/authentication.model';
+import { Gender } from '@app/core/shared/interfaces/gender';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 

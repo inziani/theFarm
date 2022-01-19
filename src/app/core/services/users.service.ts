@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
-import { User } from 'src/app/shared/models/user.model';
+import { User } from '@app/core/shared/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,5 +10,5 @@ import { User } from 'src/app/shared/models/user.model';
 export class UsersService {
 
   constructor(private http: HttpClient) { }
- 
+
 }

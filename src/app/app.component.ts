@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RestDataSource } from './shared/data/rest.datasource';
+import { RestDataSource } from './core/shared/data/rest.datasource';
 
 
 @Component({

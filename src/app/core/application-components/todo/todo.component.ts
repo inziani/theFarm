@@ -10,13 +10,14 @@ import { MatDialog, MatDialogConfig, _closeDialogVia } from '@angular/material/d
 
 
 
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { ActivitysService } from 'src/app/core/services/activitys.service';
-import { Activity } from 'src/app/shared/models/activity.model';
+import { Activity } from '@app/core/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from '../create-activity/create-activity.component';
 import { DeleteCategoryDialogComponent } from '@app/core/dialogues/delete-category-dialog/delete-category-dialog.component';
+import { DeleteActivityDialogComponent } from '@app/core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
 
 
 @Component({
@@ -167,11 +168,11 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
     // ****fetch data from the API
     this.dataSource.fetchSingleActivity(id).subscribe((response) => {
-      let category = response;
-      dialogConfig.data = category;
+      let activity = response;
+      dialogConfig.data = activity;
 
       // ***Open Dialog
-      const dialogRef = this.dialogue.open(DeleteCategoryDialogComponent, dialogConfig);
+      const dialogRef = this.dialogue.open(DeleteActivityDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
       dialogRef.afterClosed().subscribe(result => {

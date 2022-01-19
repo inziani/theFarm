@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { LoginFormControl, LoginFormGroup } from '@app/shared/models/loginform.model';
-import { LoginCredentials } from '@app/shared/models/authentication.model';
+import { LoginFormControl, LoginFormGroup } from '@app/core/shared/models/loginform.model';
+import { LoginCredentials } from '@app/core/shared/models/authentication.model';
 import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dialog.component';
 
 import { AuthenticationService } from '@app/core/services/authentication.service';
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
 
 
 

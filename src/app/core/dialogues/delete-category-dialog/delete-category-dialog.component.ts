@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { ActivityCategory } from '@app/shared/models/activity-category.models';
-import { Activity } from '@app/shared/models/activity.model';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
+import { Activity } from '@app/core/shared/models/activity.model';
 import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-saved-dialog.component';
 
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
@@ -58,7 +58,6 @@ export class DeleteCategoryDialogComponent implements OnInit {
     );
 
   }
-
 
 
 }

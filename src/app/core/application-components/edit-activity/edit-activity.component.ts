@@ -11,11 +11,11 @@ import { MatDialogTitle } from "@angular/material/dialog";
 
 
 import { ActivitysService } from 'src/app/core/services/activitys.service';
-import { Activity } from 'src/app/shared/models/activity.model';
-import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-category';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { Status } from '@app/shared/interfaces/activity-status';
-import { ActivityFormGroup, ActivityFormControl } from '@app/shared/models/activityform-model';
+import { Activity } from '@app/core/shared/models/activity.model';
+import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-category';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { Status } from '@app/core/shared/interfaces/activity-status';
+import { ActivityFormGroup, ActivityFormControl } from '@app/core/shared/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 
