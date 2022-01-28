@@ -1,8 +1,14 @@
+<mat-sidenav-content>
+  <app-finance-navbar></app-finance-navbar>
+  <main>
+    <router-outlet name='finance-home'></router-outlet>
+  </main>
+</mat-sidenav-content>
+
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
     <app-side-nav (closeSideNav)="sidenav.close()"></app-side-nav>
   </mat-sidenav>
-
   <mat-sidenav-content>
     <app-header (sideNavToggle)="sidenav.toggle()"></app-header>
     <main>

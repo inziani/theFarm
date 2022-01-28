@@ -56,6 +56,8 @@ import { CreateActivityComponent } from './core/application-components/create-ac
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
 import { CreateGlaccountComponent } from './finance/general-ledger/master-data/create-glaccount/create-glaccount.component';
+import { HomepageFinanceComponent } from './finance/home-page/homepage-finance/homepage-finance.component';
+import { FinanceNavbarComponent } from './finance/home-page/finance-navbar/finance-navbar.component';
 
 
 
@@ -88,6 +90,8 @@ import { CreateGlaccountComponent } from './finance/general-ledger/master-data/c
     ChangesSavedDialogComponent,
     DeleteActivityDialogComponent,
     CreateGlaccountComponent,
+    HomepageFinanceComponent,
+    FinanceNavbarComponent,
 
 
   ],
