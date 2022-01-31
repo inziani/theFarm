@@ -58,6 +58,7 @@ import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-
 import { CreateGlaccountComponent } from './finance/general-ledger/master-data/create-glaccount/create-glaccount.component';
 import { HomepageFinanceComponent } from './finance/home-page/homepage-finance/homepage-finance.component';
 import { FinanceNavbarComponent } from './finance/home-page/finance-navbar/finance-navbar.component';
+import { GenerelledgerHomepageComponent } from './finance/general-ledger/generelledger-homepage/generelledger-homepage.component';
 
 
 
@@ -92,6 +93,7 @@ import { FinanceNavbarComponent } from './finance/home-page/finance-navbar/finan
     CreateGlaccountComponent,
     HomepageFinanceComponent,
     FinanceNavbarComponent,
+    GenerelledgerHomepageComponent,
 
 
   ],

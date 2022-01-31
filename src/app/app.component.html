@@ -1,9 +1,4 @@
-<mat-sidenav-content>
-  <app-finance-navbar></app-finance-navbar>
-  <main>
-    <router-outlet name='finance-home'></router-outlet>
-  </main>
-</mat-sidenav-content>
+
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
@@ -15,4 +10,11 @@
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-sidenav-container>
+  <app-finance-navbar></app-finance-navbar>
+  <main>
+    <router-outlet name='finance-home'></router-outlet>
+  </main>
 </mat-sidenav-container>

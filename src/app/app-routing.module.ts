@@ -10,6 +10,7 @@ import { AuthenticationGuard } from "./_helpers/authentication.guard";
 import { ActivityCategorysComponent } from "./core/application-components/activity-categorys/activity-categorys.component";
 import { CreateGlaccountComponent } from "./finance/general-ledger/master-data/create-glaccount/create-glaccount.component";
 import { HomepageFinanceComponent } from "./finance/home-page/homepage-finance/homepage-finance.component";
+import { GenerelledgerHomepageComponent } from "./finance/general-ledger/generelledger-homepage/generelledger-homepage.component";
 
 
 const appRoutes: Routes = [
@@ -21,8 +22,18 @@ const appRoutes: Routes = [
   { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
   { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
   { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
-  { path: 'financehome', component: HomepageFinanceComponent,  outlet: 'finance-home', canActivate: [AuthenticationGuard]},
-  { path: 'createGLaccount', component: CreateGlaccountComponent, outlet: 'finance-home', canActivate: [AuthenticationGuard]},
+  // { path: 'financehome', component: HomepageFinanceComponent,  outlet: 'finance-home', canActivate: [AuthenticationGuard]},
+  // { path: 'createGLaccount', component: CreateGlaccountComponent, outlet: 'finance-home', canActivate: [AuthenticationGuard]},
+  {
+    path: 'financehome', component: HomepageFinanceComponent, children: [
+      {
+        path: 'generalLedger', component: GenerelledgerHomepageComponent, children: [
+        { path: 'createGLaccount', component: CreateGlaccountComponent }
+      ] },
+
+      ]
+    , canActivate: [AuthenticationGuard]
+  },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 
 ]
