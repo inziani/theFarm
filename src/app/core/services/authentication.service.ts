@@ -7,7 +7,7 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 
 
-import { environment } from 'src/environments/environment';
+import { environment } from '@environments/environment';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
 

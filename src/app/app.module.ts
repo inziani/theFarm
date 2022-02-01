@@ -55,10 +55,7 @@ import { DatePipe } from '@angular/common';
 import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
-import { CreateGlaccountComponent } from './finance/general-ledger/master-data/create-glaccount/create-glaccount.component';
-import { HomepageFinanceComponent } from './finance/home-page/homepage-finance/homepage-finance.component';
-import { FinanceNavbarComponent } from './finance/home-page/finance-navbar/finance-navbar.component';
-import { GenerelledgerHomepageComponent } from './finance/general-ledger/generelledger-homepage/generelledger-homepage.component';
+
 
 
 
@@ -90,10 +87,7 @@ import { GenerelledgerHomepageComponent } from './finance/general-ledger/generel
     CreateActivityComponent,
     ChangesSavedDialogComponent,
     DeleteActivityDialogComponent,
-    CreateGlaccountComponent,
-    HomepageFinanceComponent,
-    FinanceNavbarComponent,
-    GenerelledgerHomepageComponent,
+
 
 
   ],

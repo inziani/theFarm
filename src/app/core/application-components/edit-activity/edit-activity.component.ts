@@ -10,7 +10,7 @@ import { MatDialogClose } from "@angular/material/dialog";
 import { MatDialogTitle } from "@angular/material/dialog";
 
 
-import { ActivitysService } from 'src/app/core/services/activitys.service';
+import { ActivitysService } from '@app/core/services/activitys.service';
 import { Activity } from '@app/core/shared/models/activity.model';
 import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-category';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';

@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
 
 
 import { Activity } from "@app/core/shared/models/activity.model";
-import { environment } from "src/environments/environment";
+import { environment } from "@environments/environment";
 
 @Injectable({providedIn:'root'})
 

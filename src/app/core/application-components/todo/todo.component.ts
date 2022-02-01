@@ -11,7 +11,7 @@ import { MatDialog, MatDialogConfig, _closeDialogVia } from '@angular/material/d
 
 
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { ActivitysService } from 'src/app/core/services/activitys.service';
+import { ActivitysService } from '@app/core/services/activitys.service';
 import { Activity } from '@app/core/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
