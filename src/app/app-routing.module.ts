@@ -8,9 +8,7 @@ import { SignupComponent } from "./core/authentication/signup/signup.component";
 import { TodoComponent } from "./core/application-components/todo/todo.component";
 import { AuthenticationGuard } from "./_helpers/authentication.guard";
 import { ActivityCategorysComponent } from "./core/application-components/activity-categorys/activity-categorys.component";
-// import { CreateGlaccountComponent } from "./finance/general-ledger/master-data/create-glaccount/create-glaccount.component";
-// import { HomepageFinanceComponent } from "./finance/home-page/homepage-finance/homepage-finance.component";
-// import { GenerelledgerHomepageComponent } from "./finance/general-ledger/generelledger-homepage/generelledger-homepage.component";
+
 
 
 const appRoutes: Routes = [
@@ -29,6 +27,6 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 
-export class appRoutingModule {
+export class AppRoutingModule {
 
 }

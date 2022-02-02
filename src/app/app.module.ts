@@ -5,7 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { appRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -55,6 +55,8 @@ import { DatePipe } from '@angular/common';
 import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
+import { FinanceSharedModule } from 'projects/sales/src/app/app.module';
+import { SalesSharedModule } from 'projects/finance/src/app/app.module';
 
 
 
@@ -94,7 +96,7 @@ import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    appRoutingModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -102,6 +104,8 @@ import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-
     MaterialModule,
     FlexLayoutModule,
     GoogleMapsModule,
+    FinanceSharedModule.forRoot(),
+    SalesSharedModule.forRoot()
 
 
   ],
