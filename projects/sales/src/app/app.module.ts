@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SalesHomepageComponent } from './sales-homepage/sales-homepage.component';
 
 const providers: any = [];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SalesHomepageComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,15 @@ const providers: any = [];
 })
 export class AppModule { }
 
-
+@NgModule({})
+export class SalesSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
 @NgModule({})
 export class FinanceSharedModule{
   static forRoot(): ModuleWithProviders {
@@ -29,3 +39,35 @@ export class FinanceSharedModule{
     }
   }
 }
+
+
+@NgModule({})
+export class HumanResourcesSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
+
+@NgModule({})
+export class ProjectManagementSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
+
+@NgModule({})
+export class MaterialsManagementSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
+

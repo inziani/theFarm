@@ -55,8 +55,11 @@ import { DatePipe } from '@angular/common';
 import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
-import { FinanceSharedModule } from 'projects/sales/src/app/app.module';
-import { SalesSharedModule } from 'projects/finance/src/app/app.module';
+import { FinanceSharedModule } from 'projects/finance/src/app/app.module';
+import { SalesSharedModule } from 'projects/sales/src/app/app.module';
+import { MaterialsManagementSharedModule } from 'projects/materials-management/src/app/app.module';
+import { HumanResourcesSharedModule } from 'projects/human-resources/src/app/app.module';
+import { ProjectManagementSharedModule } from 'projects/project-management/src/app/app.module';
 
 
 
@@ -105,7 +108,12 @@ import { SalesSharedModule } from 'projects/finance/src/app/app.module';
     FlexLayoutModule,
     GoogleMapsModule,
     FinanceSharedModule.forRoot(),
-    SalesSharedModule.forRoot()
+    SalesSharedModule.forRoot(),
+    MaterialsManagementSharedModule.forRoot(),
+    HumanResourcesSharedModule.forRoot(),
+    ProjectManagementSharedModule.forRoot()
+
+
 
 
   ],

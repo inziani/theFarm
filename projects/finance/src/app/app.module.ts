@@ -2,11 +2,15 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { MaterialModule } from '@app/material.module';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GlHomepageComponent } from './general-ledger/gl-homepage/gl-homepage.component';
 import { GlMasterdataComponent } from './general-ledger/gl-masterdata/gl-masterdata.component';
 import { GlDocumentPostingComponent } from './general-ledger/gl-document-posting/gl-document-posting.component';
+import { FinanceHomepageComponent } from './finance-homepage/finance-homepage.component';
+import { FinanceNavbarComponent } from './finance-navbar/finance-navbar.component';
 
 
 const providers: any = [];
@@ -15,11 +19,14 @@ const providers: any = [];
     AppComponent,
     GlHomepageComponent,
     GlMasterdataComponent,
-    GlDocumentPostingComponent
+    GlDocumentPostingComponent,
+    FinanceHomepageComponent,
+    FinanceNavbarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule
   ],
   providers: [providers,],
   bootstrap: [AppComponent]
@@ -27,9 +34,47 @@ const providers: any = [];
 export class AppModule { }
 
 
-
+@NgModule({})
+export class FinanceSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
 @NgModule({})
 export class SalesSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
+
+@NgModule({})
+export class ProjectManagementSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
+
+@NgModule({})
+export class HumanResourcesSharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: [providers, ]
+    }
+  }
+}
+
+@NgModule({})
+export class MaterialsManagementSharedModule{
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: AppModule,
