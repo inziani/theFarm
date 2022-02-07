@@ -8,11 +8,19 @@ import { GlMasterdataComponent } from './general-ledger/gl-masterdata/gl-masterd
 
 const routes: Routes = [
 
-  { path: 'finance', redirectTo: 'financehome', pathMatch: 'full'},
-  { path: 'financehome', component: FinanceHomepageComponent, canActivate: [AuthenticationGuard] },
-  { path: "finance/glposting", component: GlDocumentPostingComponent, canActivate: [AuthenticationGuard] },
-  { path: "finance/createmaster", component: GlMasterdataComponent , canActivate: [AuthenticationGuard]},
-  { path: "glhomepage", component: GlHomepageComponent, canActivate: [AuthenticationGuard] },
+  { path: 'finance', component: FinanceHomepageComponent, pathMatch: 'full' },
+  { path: 'financehomepage', component: FinanceHomepageComponent, pathMatch: 'full'},
+  { path: 'generalledgerhome', component: GlHomepageComponent },
+  { path: "glposting", component: GlDocumentPostingComponent },
+  { path: "createmaster", component: GlMasterdataComponent },
+
+
+        // { path: 'payableshome', component: GlHomepageComponent },
+        // { path: 'receivableshome', component: GlHomepageComponent, canActivate: [AuthenticationGuard] },
+        // { path: 'assetshome', component: GlHomepageComponent, canActivate: [AuthenticationGuard] },
+        // { path: 'bankhome', component: GlHomepageComponent, canActivate: [AuthenticationGuard] },
+
+  { path: 'financeit', redirectTo: 'generalledgerhome', pathMatch: 'full'},
 
 
 ];
