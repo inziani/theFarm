@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from '@app/material.module';
 import { AppComponent } from './app.component';
 import { SalesHomepageComponent } from './sales-homepage/sales-homepage.component';
 
@@ -14,7 +15,8 @@ const providers: any = [];
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule
   ],
   providers: [providers,],
   bootstrap: [AppComponent]

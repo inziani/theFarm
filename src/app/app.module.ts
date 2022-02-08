@@ -93,8 +93,6 @@ import { ProjectManagementSharedModule } from 'projects/project-management/src/a
     ChangesSavedDialogComponent,
     DeleteActivityDialogComponent,
 
-
-
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
 
@@ -11,6 +12,7 @@ import { GlMasterdataComponent } from './general-ledger/gl-masterdata/gl-masterd
 import { GlDocumentPostingComponent } from './general-ledger/gl-document-posting/gl-document-posting.component';
 import { FinanceHomepageComponent } from './finance-homepage/finance-homepage.component';
 import { FinanceNavbarComponent } from './finance-navbar/finance-navbar.component';
+
 
 
 const providers: any = [];
@@ -25,8 +27,10 @@ const providers: any = [];
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
     AppRoutingModule,
-    MaterialModule
+
   ],
   providers: [providers,],
   bootstrap: [AppComponent]

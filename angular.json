@@ -189,6 +189,7 @@
               "projects/finance/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "projects/finance/src/styles.scss"
             ],
             "scripts": []
