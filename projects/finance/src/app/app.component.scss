@@ -1,3 +1,4 @@
+
 .menu-button {
     width: 100%;
     display: flex;
@@ -28,19 +29,19 @@
     color: lightgrey;
 }
 
-mat-divider {
+.mat-divider {
     margin-top: 16px;
     margin-bottom: 16px;
     background-color: rgba(255, 255, 255, 0.5);
 }
 
 
-mat-toolbar {
+.mat-toolbar {
   background-color: #1c3144;
   color: #ee3e29;
 }
 
-mat-sidenav {
+.mat-sidenav {
     margin: 16px;
     width: 200px;
     border-right: none;
@@ -66,6 +67,25 @@ mat-sidenav {
     background-color: #1c3144;
 }
 
-mat-sidenav-container {
+.mat-sidenav-container {
     height: calc(100vh - 65px);
 }
+
+
+.tp-container {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background: #eee;
+}
+.tp-section {
+   display: flex;
+   align-content: center;
+   align-items: center;
+   height: 60px;
+   width:100px;
+}
+
+

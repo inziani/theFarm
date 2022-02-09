@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from './material.module';
+import { MaterialModule } from '@app/material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { FinanceNavbarComponent } from './finance-navbar/finance-navbar.componen
 
 
 
+
 const providers: any = [];
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ const providers: any = [];
     GlMasterdataComponent,
     GlDocumentPostingComponent,
     FinanceHomepageComponent,
-    FinanceNavbarComponent
+    FinanceNavbarComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -39,50 +41,11 @@ export class AppModule { }
 
 
 @NgModule({})
-export class FinanceSharedModule{
+export class FinanceSharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: AppModule,
-      providers: [providers, ]
-    }
-  }
-}
-@NgModule({})
-export class SalesSharedModule{
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: AppModule,
-      providers: [providers, ]
-    }
-  }
-}
-
-@NgModule({})
-export class ProjectManagementSharedModule{
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: AppModule,
-      providers: [providers, ]
-    }
-  }
-}
-
-@NgModule({})
-export class HumanResourcesSharedModule{
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: AppModule,
-      providers: [providers, ]
-    }
-  }
-}
-
-@NgModule({})
-export class MaterialsManagementSharedModule{
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: AppModule,
-      providers: [providers, ]
+      providers: [providers,]
     }
   }
 }

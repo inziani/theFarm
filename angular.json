@@ -44,6 +44,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["hammerjs"],
             "outputPath": "dist/subsistenceFarming",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -178,6 +179,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["hammerjs"],
             "outputPath": "dist/finance",
             "index": "projects/finance/src/index.html",
             "main": "projects/finance/src/main.ts",
@@ -299,6 +301,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["hammerjs"],
             "outputPath": "dist/sales",
             "index": "projects/sales/src/index.html",
             "main": "projects/sales/src/main.ts",
@@ -419,6 +422,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["hammerjs"],
             "outputPath": "dist/project-management",
             "index": "projects/project-management/src/index.html",
             "main": "projects/project-management/src/main.ts",
@@ -539,6 +543,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["hammerjs"],
             "outputPath": "dist/human-resources",
             "index": "projects/human-resources/src/index.html",
             "main": "projects/human-resources/src/main.ts",
@@ -662,6 +667,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["hammerjs"],
             "outputPath": "dist/materials-management",
             "index": "projects/materials-management/src/index.html",
             "main": "projects/materials-management/src/main.ts",

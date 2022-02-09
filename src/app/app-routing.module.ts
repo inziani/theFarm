@@ -47,7 +47,8 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(appRoutes),
-    FinanceSharedModule.forRoot()
+    FinanceSharedModule.forRoot(),
+    SalesSharedModule.forRoot()
   ],
   exports: [RouterModule]
 })

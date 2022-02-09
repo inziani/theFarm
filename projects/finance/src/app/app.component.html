@@ -1,12 +1,22 @@
 <app-finance-navbar></app-finance-navbar>
+<mat-sidenav-container class="tp-container">
+  <mat-sidenav mode="side" opened>
+    <section class="tp-section">
+      <span>File</span>
+    </section>
+    <section class="tp-section">
+      <span>Edit</span>
+    </section>
+  </mat-sidenav>
+  <mat-sidenav-content>Main content <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!--
 <mat-sidenav-container>
-  <mat-sidenav class="mat-elevation-z8" #sidenav role="navigation">
-    <p>Please work damn it!!</p>
+  <mat-sidenav class="mat-elevation-z8" #sidenav role="navigation" mode="side">
     <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
-
     <h4 class="name">John Smith</h4>
     <p class="designation">Software Engineer</p>
-
     <mat-divider></mat-divider>
     <button mat-button class="menu-button">
       <mat-icon>home</mat-icon>
@@ -20,20 +30,17 @@
       <mat-icon>info</mat-icon>
       <span>About</span>
     </button>
-
     <mat-divider></mat-divider>
-
     <button mat-button class="menu-button">
       <mat-icon>help</mat-icon>
       <span>Help</span>
     </button>
-
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="content mat-elevation-z8">
-        <!-- Main content here! including all the different routes -->
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
       <router-outlet></router-outlet>
     </div>
-    </mat-sidenav-content>
-    </mat-sidenav-container>
+  </mat-sidenav-content>
+  </mat-sidenav-container>
 
+-->

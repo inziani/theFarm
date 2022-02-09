@@ -25,7 +25,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare, faEdit, faTrash, faPlus, faHome, faBars } from '@fortawesome/free-solid-svg-icons';
-import { faTelegram, faTwitter, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
+import { faTelegram, faTwitter, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './core/application-components/todo/todo.component';
@@ -55,11 +56,13 @@ import { DatePipe } from '@angular/common';
 import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
-import { FinanceSharedModule } from 'projects/finance/src/app/app.module';
-import { SalesSharedModule } from 'projects/sales/src/app/app.module';
-import { MaterialsManagementSharedModule } from 'projects/materials-management/src/app/app.module';
-import { HumanResourcesSharedModule } from 'projects/human-resources/src/app/app.module';
-import { ProjectManagementSharedModule } from 'projects/project-management/src/app/app.module';
+
+import { FinanceSharedModule } from '../../projects/finance/src/app/app.module';
+import { SalesSharedModule } from '../../projects/sales/src/app/app.module';
+import { MaterialsManagementSharedModule } from '../../projects/materials-management/src/app/app.module';
+import { HumanResourcesSharedModule } from '../../projects/human-resources/src/app/app.module';
+import { ProjectManagementSharedModule } from '../../projects/project-management/src/app/app.module';
+
 
 
 
@@ -105,6 +108,7 @@ import { ProjectManagementSharedModule } from 'projects/project-management/src/a
     MaterialModule,
     FlexLayoutModule,
     GoogleMapsModule,
+
     FinanceSharedModule.forRoot(),
     SalesSharedModule.forRoot(),
     MaterialsManagementSharedModule.forRoot(),
@@ -137,6 +141,6 @@ import { ProjectManagementSharedModule } from 'projects/project-management/src/a
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faSquare, faEdit, faTrash, faPlus, faHome, faTwitter, faLinkedin, faTelegram, faBars, faWhatsapp);
+    // myLibrary.addIcons(faSquare, faEdit, faTrash, faPlus, faHome, faTwitter, faLinkedin, faTelegram, faBars, faWhatsapp);
   }
 }

@@ -8,8 +8,8 @@ import { GlMasterdataComponent } from './general-ledger/gl-masterdata/gl-masterd
 
 const routes: Routes = [
 
-  { path: 'finance', component: FinanceHomepageComponent, pathMatch: 'full' },
-  { path: 'financehomepage', component: FinanceHomepageComponent, pathMatch: 'full'},
+  { path: 'finance', component: FinanceHomepageComponent},
+  { path: 'financehomepage', component: FinanceHomepageComponent},
   { path: 'generalledgerhome', component: GlHomepageComponent },
   { path: "glposting", component: GlDocumentPostingComponent },
   { path: "createmaster", component: GlMasterdataComponent },
