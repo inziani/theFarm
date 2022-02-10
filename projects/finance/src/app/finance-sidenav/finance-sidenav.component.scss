@@ -11,7 +11,32 @@
     }
 }
 
+.avatar {
+    margin-top: 160px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-left: 30px;
+}
 
+.name {
+    margin-top: 8px;
+    font-weight: lighter;
+    color: #ee3e29;
+}
+
+.designation {
+    margin-top: 2px;
+    font-size: 0.7rem;
+    color: #ee3e29;
+    font-weight: lighter;
+}
+
+.mat-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
 
 
 .mat-toolbar {
@@ -28,8 +53,6 @@
     border-radius: 10px;
     padding: 16px;
     text-align: center;
-
-
 }
 
 .content {
@@ -37,7 +60,6 @@
     border-radius: 10px;
     margin: 16px;
     margin-left: 32px;
-    margin-right: 32px;
 
     display: flex;
     justify-content: center;
@@ -53,15 +75,13 @@
 }
 
 
-
 .tp-container {
    position: absolute;
    top: 6;
+  //  bottom: 0;
    left: 0;
    right: 0;
    background: #eee;
-   margin-left: 8px;
-   margin-right: 8px;
 }
 .tp-section {
    display: flex;

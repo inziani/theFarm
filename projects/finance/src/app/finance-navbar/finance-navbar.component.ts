@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-finance-navbar',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./finance-navbar.component.scss']
 })
 export class FinanceNavbarComponent implements OnInit {
+  @Output() sideNavToggle = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onToggleSidenav() {
+
+    this.sideNavToggle.emit();
+
+  }
 }

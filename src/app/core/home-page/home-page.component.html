@@ -1,15 +1,4 @@
 
-<mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation">
-    <app-side-nav (closeSideNav)="sidenav.close()"></app-side-nav>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <app-header (sideNavToggle)="sidenav.toggle()"></app-header>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
 <div class="home-page" fxLayout="column" fxLayout.gt-md="column" fxLayoutGap.gt-md="20px" fxLayoutAlign="center center">
     <div fxLayout.lt-xs="column" fxLayout.xs="column" fxLayout="column" fxFlex.xs="50">
         <div fxLayoutAlign="center center" fxLayout="column">

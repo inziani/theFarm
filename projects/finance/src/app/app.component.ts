@@ -10,5 +10,10 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class AppComponent {
   title = 'finance';
 
+  openSideNav = false;
 
+
+  sideNavToggle() {
+    return this.openSideNav = true;
+  }
 }

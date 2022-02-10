@@ -12,6 +12,7 @@ import { GlMasterdataComponent } from './general-ledger/gl-masterdata/gl-masterd
 import { GlDocumentPostingComponent } from './general-ledger/gl-document-posting/gl-document-posting.component';
 import { FinanceHomepageComponent } from './finance-homepage/finance-homepage.component';
 import { FinanceNavbarComponent } from './finance-navbar/finance-navbar.component';
+import { FinanceSidenavComponent } from './finance-sidenav/finance-sidenav.component';
 
 
 
@@ -25,6 +26,7 @@ const providers: any = [];
     GlDocumentPostingComponent,
     FinanceHomepageComponent,
     FinanceNavbarComponent,
+    FinanceSidenavComponent,
 
   ],
   imports: [
