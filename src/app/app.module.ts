@@ -62,6 +62,8 @@ import { SalesSharedModule } from '../../projects/sales/src/app/app.module';
 import { MaterialsManagementSharedModule } from '../../projects/materials-management/src/app/app.module';
 import { HumanResourcesSharedModule } from '../../projects/human-resources/src/app/app.module';
 import { ProjectManagementSharedModule } from '../../projects/project-management/src/app/app.module';
+import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
 
 
 
@@ -95,6 +97,8 @@ import { ProjectManagementSharedModule } from '../../projects/project-management
     CreateActivityComponent,
     ChangesSavedDialogComponent,
     DeleteActivityDialogComponent,
+    AppLayoutComponent,
+    AuthenticationLayoutComponent,
 
   ],
   imports: [

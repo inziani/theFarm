@@ -6,19 +6,16 @@ import { GlDocumentPostingComponent } from './general-ledger/gl-document-posting
 import { GlHomepageComponent } from './general-ledger/gl-homepage/gl-homepage.component';
 import { GlMasterdataComponent } from './general-ledger/gl-masterdata/gl-masterdata.component';
 
-const routes: Routes = [
 
+const routes: Routes = [
+  { path: '', component: FinanceHomepageComponent },
+  { path: 'home', component: FinanceHomepageComponent },
   { path: 'finance', component: FinanceHomepageComponent},
   { path: 'financehomepage', component: FinanceHomepageComponent},
   { path: 'generalledgerhome', component: GlHomepageComponent },
   { path: "glposting", component: GlDocumentPostingComponent },
   { path: "createmaster", component: GlMasterdataComponent },
 
-
-        // { path: 'payableshome', component: GlHomepageComponent },
-        // { path: 'receivableshome', component: GlHomepageComponent, canActivate: [AuthenticationGuard] },
-        // { path: 'assetshome', component: GlHomepageComponent, canActivate: [AuthenticationGuard] },
-        // { path: 'bankhome', component: GlHomepageComponent, canActivate: [AuthenticationGuard] },
 
   { path: 'financeit', redirectTo: 'generalledgerhome', pathMatch: 'full'},
 

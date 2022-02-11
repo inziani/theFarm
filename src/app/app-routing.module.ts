@@ -18,17 +18,27 @@ import { HumanResourcesSharedModule } from "projects/human-resources/src/app/app
 import { ProjectsHomepageComponent } from "projects/project-management/src/app/projects-homepage/projects-homepage.component";
 import { FinanceHomepageComponent } from "projects/finance/src/app/finance-homepage/finance-homepage.component";
 import { GlHomepageComponent } from "projects/finance/src/app/general-ledger/gl-homepage/gl-homepage.component";
+import { AppLayoutComponent } from "./app-layout/app-layout.component";
+import { AuthenticationLayoutComponent } from "./authentication-layout/authentication-layout.component";
 
 
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomePageComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
-  { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
-  { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
-  { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
+  {
+    path: '', component: AppLayoutComponent, children: [
+      { path: '', component: HomePageComponent },
+      { path: 'home', component: HomePageComponent },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
+      { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
+      { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
+      { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
+    ]
+  },
+  {
+    path: '', component: AuthenticationLayoutComponent, children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+  ]},
 
 
 // Different layout pages for the different modules
