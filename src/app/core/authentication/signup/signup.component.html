@@ -1,3 +1,4 @@
+
 <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
   fxLayoutAlign="center center">
   <h1>Sign up</h1>
@@ -20,7 +21,6 @@
             <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
           </ul>
         </mat-form-field>
-
         <mat-form-field>
           <mat-label>Last Name</mat-label>
           <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name" formControlName="last_name">
@@ -80,7 +80,6 @@
             <mat-option *ngFor="let gender of gender" [value]="gender.value">
               {{ gender.viewValue }}
             </mat-option>
-
           </mat-select>
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
@@ -122,9 +121,11 @@
       </div>
       <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
         <button type="submit" mat-raised-button color="primary"
-          [disabled]="!formSubmitted && formGroup.invalid">Submit</button>
+          [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
+<p style="color:#ff9e00;" >Don't have an account? <span><a class="text-decoration-none" style="color:#ff9e00;"
+      routerLink="/login">Sign in</a></span></p><br>
+      <p><span><a style="color:#ff9e00;" routerLink="/home"><mat-icon>home</mat-icon></a></span></p>
       </div>
     </form>
-
   </div>
 </section>

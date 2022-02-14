@@ -1,11 +1,19 @@
 ::placeholder {
-  color: #0d00a4;
+  color: #03045e;
   opacity: 1;
 }
-
 
 input.ng-dirty.ng-invalid
 { border: 2px solid #ff0000 }
 
 input.ng-dirty.ng-valid
 { border: 2px solid #6bc502 }
+
+.login-form{
+  background-color: #03045e;
+  color: #fb8500;
+}
+
+mat-form-field{
+  width:600px;
+}

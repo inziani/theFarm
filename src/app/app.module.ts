@@ -64,6 +64,11 @@ import { HumanResourcesSharedModule } from '../../projects/human-resources/src/a
 import { ProjectManagementSharedModule } from '../../projects/project-management/src/app/app.module';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
+import { FinanceHomeComponent } from './finance/finance-home/finance-home.component';
+import { GlHomeComponent } from './finance/general-ledger/gl-home/gl-home.component';
+import { FinanceLayoutComponent } from './finance/finance-layout/finance-layout.component';
+import { FinanceNavbarComponent } from './finance/finance-navbar/finance-navbar.component';
+import { FinanceSidenavComponent } from './finance/finance-sidenav/finance-sidenav.component';
 
 
 
@@ -99,6 +104,11 @@ import { AuthenticationLayoutComponent } from './authentication-layout/authentic
     DeleteActivityDialogComponent,
     AppLayoutComponent,
     AuthenticationLayoutComponent,
+    FinanceHomeComponent,
+    GlHomeComponent,
+    FinanceLayoutComponent,
+    FinanceNavbarComponent,
+    FinanceSidenavComponent
 
   ],
   imports: [
@@ -112,6 +122,7 @@ import { AuthenticationLayoutComponent } from './authentication-layout/authentic
     MaterialModule,
     FlexLayoutModule,
     GoogleMapsModule,
+
 
     FinanceSharedModule.forRoot(),
     SalesSharedModule.forRoot(),

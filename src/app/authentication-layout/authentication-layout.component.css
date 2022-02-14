@@ -1,5 +1,17 @@
 
-.body{
+
+.container{
+    text-align: center;
+    margin: auto;
+    padding:10px;
+    height: 80vh;
+    width: 100%;
+    inline-size:50%;
+    background-color: #03045e;
+    color: #ff9e00;
+}
+
+body{
   background-color: #03045e;
   color: #fb8500;
 }
@@ -31,9 +43,9 @@
   opacity: 1;
 }
 
-
 input.ng-dirty.ng-invalid
 { border: 2px solid #ff0000 }
 
 input.ng-dirty.ng-valid
 { border: 2px solid #6bc502 }
+

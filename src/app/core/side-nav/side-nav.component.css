@@ -76,3 +76,11 @@ h4 {
   display: inline-block;
   padding-left: 6px;
 }
+
+.close-sidenav{
+  right: 15px;
+  position: absolute;
+  cursor: pointer;
+  color: #ff9e00;
+  margin-top: 12px;
+}
