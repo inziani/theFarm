@@ -57,11 +57,7 @@ import { CreateActivityComponent } from './core/application-components/create-ac
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
 
-import { FinanceSharedModule } from '../../projects/finance/src/app/app.module';
-import { SalesSharedModule } from '../../projects/sales/src/app/app.module';
-import { MaterialsManagementSharedModule } from '../../projects/materials-management/src/app/app.module';
-import { HumanResourcesSharedModule } from '../../projects/human-resources/src/app/app.module';
-import { ProjectManagementSharedModule } from '../../projects/project-management/src/app/app.module';
+// Finance components
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
 import { FinanceHomeComponent } from './finance/finance-home/finance-home.component';
@@ -124,11 +120,11 @@ import { FinanceSidenavComponent } from './finance/finance-sidenav/finance-siden
     GoogleMapsModule,
 
 
-    FinanceSharedModule.forRoot(),
-    SalesSharedModule.forRoot(),
-    MaterialsManagementSharedModule.forRoot(),
-    HumanResourcesSharedModule.forRoot(),
-    ProjectManagementSharedModule.forRoot()
+    // FinanceSharedModule.forRoot(),
+    // SalesSharedModule.forRoot(),
+    // MaterialsManagementSharedModule.forRoot(),
+    // HumanResourcesSharedModule.forRoot(),
+    // ProjectManagementSharedModule.forRoot()
 
 
 
