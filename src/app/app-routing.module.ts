@@ -16,7 +16,8 @@ import { AuthenticationLayoutComponent } from "./authentication-layout/authentic
 import { FinanceLayoutComponent } from "./finance/finance-layout/finance-layout.component";
 import { FinanceHomeComponent } from "./finance/finance-home/finance-home.component";
 import { GlHomeComponent } from "./finance/general-ledger/gl-home/gl-home.component";
-import { GlMasterDataComponent } from "./finance/general-ledger/gl-master-data/gl-master-data.component";
+import { GlMasterDataComponent } from "./finance/general-ledger/gl-home/gl-master-data/gl-master-data.component";
+import { GlDisplayComponent } from "./finance/general-ledger/gl-home/gl-display/gl-display.component";
 
 
 
@@ -31,24 +32,32 @@ const appRoutes: Routes = [
       { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
       { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
       { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
+      // { path: 'login', component: LoginComponent },
+      // { path: 'signup', component: SignupComponent },
     ]
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  // {
-  //   // Authentication Module layout
-  //   path: '', component: AuthenticationLayoutComponent, children: [
-  //     { path: 'login', component: LoginComponent },
-  //     { path: 'signup', component: SignupComponent },
-  //   ]
-  // , },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'signup', component: SignupComponent },
+  {
+    // Authentication Module layout
+    path: '', component: AuthenticationLayoutComponent, children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+    ]
+  , },
 
   // Finance Module Layout
   {
     path: '', component: FinanceLayoutComponent, children: [
       { path: 'finance', component: FinanceHomeComponent },
-      { path: 'glhome', component: GlHomeComponent },
-      { path: 'glmasterdata', component: GlMasterDataComponent }
+      {
+        path: 'glhome', component: GlHomeComponent,
+        children:
+          [
+            { path: '', component: GlDisplayComponent },
+            { path: 'glmasterdata', component: GlMasterDataComponent }
+          ]
+      }
 
    ], canActivate: [AuthenticationGuard]},
 

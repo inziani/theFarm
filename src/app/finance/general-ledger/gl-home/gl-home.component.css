@@ -1,0 +1,29 @@
+.gl-home{
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  /* width: 100%; */
+}
+
+.display-cards{
+  max-height: max-content;
+  margin-left: 5px;
+}
+
+
+.gl-menu{
+  max-width: 250px;
+  padding: 10px;
+}
+
+.gl-details{
+  max-width: 800px;
+  padding: 10px;
+}
+
+  .mat-raised-button{
+   width: 200px;
+   height: 100px;
+   color: #1c3144;
+   background-color:#ee3e29;
+}

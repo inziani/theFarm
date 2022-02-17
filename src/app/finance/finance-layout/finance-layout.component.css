@@ -44,10 +44,11 @@
     font-size: 2rem;
     color: #ee3e29;
     background-color: #1c3144;
+
 }
 
 .mat-sidenav-container {
-    height: calc(100vh - 65px);
+    height: calc(100vh - 65px)
 }
 
 
