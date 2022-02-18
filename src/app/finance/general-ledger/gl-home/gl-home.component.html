@@ -1,14 +1,13 @@
 <div>
-  <h2 class="text-center">General Ledger</h2>
-  <div fxLayout="row" fxLayoutGap="5px grid" fxLayoutAlign="start" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="5px grid">
-    <div>
-      <!-- fxFlex fxFlex.xs=" 100%" fxFlex.sm="100%" fxFill -->
-      <!-- fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutAlign="center start" -->
-      <mat-card class="mat-elevation-z4 gl-menu">
+  <h2 class="text-center p-3">General Ledger</h2>
+  <div fxLayout="row" fxLayoutGap="5px grid" fxLayoutAlign="start center" fxLayout.lt-md="column"
+    fxLayoutGap.lt-md="5px grid">
+    <div class="mt-0">
+      <mat-card class="mat-elevation-z0 gl-menu mb-3">
         <mat-card-header>
-          <mat-card-title>my Transactions</mat-card-title>
+          <mat-card-title>myTransactions</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content fxLayout="column" fxLayoutGap="10px grid" fxLayoutAlign="center center">
           <a routerLink="./glmasterdata"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
               <h3><strong>Master Data</strong></h3>
             </button></a>
@@ -18,19 +17,22 @@
           <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
               <h3><strong>Reporting</strong></h3>
             </button></a>
+            <a routerLink="/glhome"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
+                <h3><strong>Home</strong></h3>
+              </button></a>
         </mat-card-content>
       </mat-card>
     </div>
     <div>
-      <!-- fxFlex fxFlex.xs="100%" fxFlex.sm="100%" -->
-      <mat-card class="mat-elevation-z4 gl-details">
+      <mat-card class="mat-elevation-z0 gl-details mt-4">
         <mat-card-header>
-          <mat-card-title>Mountains</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <router-outlet></router-outlet>
+            <router-outlet></router-outlet>
         </mat-card-content>
       </mat-card>
     </div>
+
   </div>
+
 </div>

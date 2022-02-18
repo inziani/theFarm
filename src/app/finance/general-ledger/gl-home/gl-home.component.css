@@ -12,27 +12,30 @@
 
 
 .gl-menu{
-  max-width: 250px;
-  height: calc(100vh - 160px);
-  /* padding: 10px; */
+
   margin-right: 10px;
-  margin-left: 10px;
-  /* display: flex; */
+  margin-left: 15px;
+
   justify-content: center;
   align-items: center;
+  background-color: #1c3144;
 }
 
 .gl-details{
-  width: 1085px;
-  height: calc(100vh - 160px);
-  /* padding: 10px; */
   margin-right: 10px;
   margin-left: 10px;
+  background-color: #1c3144;
 }
 
-  .mat-raised-button{
+.mat-raised-button{
    width: 200px;
    height: 100px;
    color: #1c3144;
    background-color:#ee3e29;
 }
+
+.mat-card-title{
+  text-align: center;
+  color: #ee3e29;
+}
+
