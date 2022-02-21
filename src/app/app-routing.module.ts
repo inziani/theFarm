@@ -50,14 +50,17 @@ const appRoutes: Routes = [
   {
     path: '', component: FinanceLayoutComponent, children: [
       { path: 'finance', component: FinanceHomeComponent },
+      { path: 'mainglmasterdata', component: GlMasterDataComponent },
       {
         path: 'glhome', component: GlHomeComponent,
         children:
           [
             { path: '', component: GlDisplayComponent },
-            { path: 'glmasterdata', component: GlMasterDataComponent }
+            { path: 'glmasterdata', component: GlMasterDataComponent },
+            { path: 'gldisplay', component: GlDisplayComponent }
           ]
-      }
+      },
+
 
    ], canActivate: [AuthenticationGuard]},
 

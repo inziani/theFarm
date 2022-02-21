@@ -53,6 +53,7 @@ a {
   font-weight: lighter;
   cursor: pointer;
 }
+
 a:hover,
 a:active {
   color: #bfd7ff;
