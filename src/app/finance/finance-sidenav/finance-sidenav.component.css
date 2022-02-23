@@ -1,10 +1,61 @@
+
+.type-icon {
+  color: #ee3e29;
+  margin-right: 5px;
+}
+
+.mat-tree{
+  background-color:#1c3144 ;
+  margin-top: 50%;
+
+}
+
+.mat-tree-node{
+  color: #ee3e29;
+  cursor: pointer;
+}
+
+
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.example-tree .mat-nested-tree-node div[role=group] .gl-tree {
+  /* padding-left: 40px; */
+  padding-left: 40px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.example-tree div[role=group] > .mat-tree-node {
+  padding-left: 40px;
+}
+
+
+/* SideNav List Styles */
+
+
+
 .close-sidenav{
   right: 15px;
   position: absolute;
   cursor: pointer;
   color: #ee3e29;
 }
-
 
 ul {
   list-style-type: none;
