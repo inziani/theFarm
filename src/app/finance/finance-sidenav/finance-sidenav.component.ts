@@ -2,10 +2,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
 
-import { GeneralLedgerNode, TreeNode } from '../finance-interfaces/gl-tree-interface';
+import { FinanceNode, FinanceFlattener } from '../finance-interfaces/gl-tree-interface';
 import { GL_TREE_DATA } from '../finance-data/gl-tree-data';
 
-import { of as observableOf } from 'rxjs';
+
 
 
 @Component({
@@ -16,78 +16,60 @@ import { of as observableOf } from 'rxjs';
 export class FinanceSidenavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
 
-  /* TreeControl controls the expand/collapse state o the tree nodes*/
+  /* Flat Tree TreeControl controls the expand/collapse state of the tree nodes*/
+  private _transformer = (node: FinanceNode, level: number): any => {
+    return {
+      name: node.name,
+      expandable: !!node.children && node.children.length > 0,
+      level,
+      routerLink: node.routerLink,
+      iconname: node.iconname
 
-  public flatTreeControl!: FlatTreeControl<TreeNode>;
+    }
+  };
+
+  public flatTreeControl = new FlatTreeControl<FinanceFlattener>(
+    node =>node.level,
+    node =>node.expandable);
 
   // The TreeFlattener is used to generate the flat list of items from the hierachical data
 
-  public treeFlattener!: MatTreeFlattener<GeneralLedgerNode, TreeNode>;
-  public flatSourceData!: MatTreeFlatDataSource<GeneralLedgerNode, TreeNode>;
+  public treeFlattener = new MatTreeFlattener(
+    this._transformer,
+    node => node.level,
+    node => node.expandable,
+    node => node.children,
 
-  public nestedDataSource = new MatTreeNestedDataSource<GeneralLedgerNode>();
-  public nestedTreeControl = new NestedTreeControl<GeneralLedgerNode>(node =>node.children);
+  );
+
+  public flatDataSource!: MatTreeFlatDataSource<FinanceNode, FinanceFlattener>;
+
+  // Nested Tree
+
+  public nestedDataSource = new MatTreeNestedDataSource<FinanceNode>();
+  public nestedTreeControl = new NestedTreeControl<FinanceNode>(node =>node.children);
 
   constructor() {
-    // this.treeFlattener = new MatTreeFlattener(
-    //   this.transformer,
-    //   this.getLevel,
-    //   this.isExpandable,
-    //   this.getChildren);
 
-    this.flatTreeControl = new FlatTreeControl<TreeNode>(this.getLevel, this.isExpandable);
-    this.flatSourceData = new MatTreeFlatDataSource(this.flatTreeControl, this.treeFlattener);
+    this.flatDataSource = new MatTreeFlatDataSource(this.flatTreeControl, this.treeFlattener);
 
 
    }
 
   ngOnInit(): void {
 
-    // this.flatSourceData.data = GL_TREE_DATA;
+    this.flatDataSource.data = GL_TREE_DATA;
     this.nestedDataSource.data = GL_TREE_DATA;
   }
 
   // Get the nested node using the hasNestedChild
 
-  public hasNestedChild(index: number, node: GeneralLedgerNode) {
+  public hasNestedChild(index: number, node: FinanceNode) {
     return node?.children && node.children.length > 0;
 
   }
 
-  /** Transform the data to something the tree can read. */
-
-  public transformer(node: GeneralLedgerNode, level: number) {
-    return {
-      name: node.name,
-      iconname: node.iconname,
-      level: level,
-      expandable: !!node.children
-    };
-  }
-
-  /** Get the level of the node */
-
-  public getLevel(node: TreeNode) {
-    return node.level;
-  }
-
-  /** Return whether the node is expanded or not. */
-
-  public isExpandable(node: TreeNode) {
-    return node.expandable;
-  };
-
-  /** Get the children for the node. */
-
-  public getChildren(node: GeneralLedgerNode) {
-    return observableOf(node.children);
-  }
-
-  /** Get whether the node has children or not. */
-
-  public hasChild(index: number, node: TreeNode){
-    return node.expandable;
-  }
+  public hasFlatChild = (_: Number, node: FinanceFlattener)=> node.expandable;
 
   public onClose() {
     this.closeSideNav.emit();

@@ -1,19 +1,22 @@
 
 // File Node with nested structure
-export interface GeneralLedgerNode{
+export interface FinanceNode{
   name: string;
   iconname?: string,
   routerLink?: string,
-  children?: GeneralLedgerNode[];
+  children?: FinanceNode[];
 }
 
 // FlatNode with Expandable and level information
 
-export interface TreeNode{
+export interface FinanceFlattener{
+  expandable: boolean;
   name: string;
-  iconname: string;
   level: number;
-  expandable: boolean
+
+
+
+
 
 
 }

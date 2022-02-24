@@ -51,6 +51,8 @@ const appRoutes: Routes = [
     path: '', component: FinanceLayoutComponent, children: [
       { path: 'finance', component: FinanceHomeComponent },
       { path: 'mainglmasterdata', component: GlMasterDataComponent },
+      { path: 'maingldisplay', component: GlDisplayComponent },
+
       {
         path: 'glhome', component: GlHomeComponent,
         children:
