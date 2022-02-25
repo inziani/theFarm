@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
 @Component({
   selector: 'app-finance-navbar',
@@ -8,7 +9,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class FinanceNavbarComponent implements OnInit {
    @Output() sideNavToggle = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(
+    private restDataSource: RestDataSource
+  ) { }
 
   ngOnInit(): void {
   }
@@ -16,6 +19,13 @@ export class FinanceNavbarComponent implements OnInit {
    onToggleSidenav() {
 
     this.sideNavToggle.emit();
+
+   }
+
+
+  onLogOut() {
+
+    this.restDataSource.removeToken();
 
   }
 

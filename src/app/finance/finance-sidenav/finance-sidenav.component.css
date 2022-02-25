@@ -1,7 +1,7 @@
-.mat-drawer-inner-container::-webkit-scrollbar {
-    display: none;
+body {
+  scrollbar-width: thin;          /* "auto" or "thin" */
+  scrollbar-color: blue orange;   /* scroll thumb and track */
 }
-
 
 .nav-caption {
   display: inline-block;
@@ -12,6 +12,7 @@
   background-color:#1c3144 ;
   margin-top: 50%;
   margin-left: 0;
+
 
 }
 
@@ -52,6 +53,7 @@
 }
 .leaf-node{
   padding-left: 20px;
+  display: inline-flex;
 }
 
 

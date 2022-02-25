@@ -122,8 +122,14 @@
       <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
         <button type="submit" mat-raised-button color="primary"
           [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
-<p style="color:#ff9e00;" >Don't have an account? <span><a class="text-decoration-none" style="color:#ff9e00;"
-      routerLink="/login">Sign in</a></span></p><br>
+<!-- <p style="color:#ff9e00;" >Don't have an account? <span><a class="text-decoration-none" style="color:#ff9e00;"
+      routerLink="/login">Sign in</a></span></p><br> -->
+<a class="register" routerLink="/login" style="color:#ff9e00;">
+  <mat-icon>person</mat-icon><span>
+    <p class="mx-3">Sign In</p>
+  </span>
+</a><br>
+
       <p><span><a style="color:#ff9e00;" routerLink="/home"><mat-icon>home</mat-icon></a></span></p>
       </div>
     </form>

@@ -17,3 +17,11 @@ input.ng-dirty.ng-valid
 mat-form-field{
   width:600px;
 }
+
+.register{
+  display: inline-flex;
+
+}
+a{
+  text-decoration: none;
+}
