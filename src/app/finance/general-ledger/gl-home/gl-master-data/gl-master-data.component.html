@@ -1,12 +1,51 @@
 <div class="mat-elevation-z8 gl-master-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
   <h2 class="my-3">New General Ledger Account Master Data</h2>
   <mat-divider></mat-divider>
-  <mat-tab-group mat-stretch-tabs class="master-data-tabs mat-elevation-z4">
+  <mat-tab-group mat-stretch-tabs class="mat-elevation-z4" mat-align-tabs="center">
     <mat-tab label="Header">Header</mat-tab>
     <mat-tab label="General">General</mat-tab>
     <mat-tab label="Company Code Data">Company Code Data</mat-tab>
     <mat-tab label="Where Used">Where Used</mat-tab>
   </mat-tab-group>
+</div>
+
+<div>
+  <mat-button-toggle-group #colorToggle="matButtonToggleGroup" value="primary" aria-label="Change color">
+    <mat-button-toggle value="primary"> Primary </mat-button-toggle>
+    <mat-button-toggle value="accent"> Accent </mat-button-toggle>
+  </mat-button-toggle-group>
+  <span class="example-button-toggle-label"> Color </span>
+</div>
+
+<div>
+  <mat-button-toggle-group #backgroundColorToggle="matButtonToggleGroup" value="primary" aria-label="Change color">
+    <mat-button-toggle value="primary"> Primary </mat-button-toggle>
+    <mat-button-toggle value="accent"> Accent </mat-button-toggle>
+  </mat-button-toggle-group>
+  <span class="example-button-toggle-label"> Background Color </span>
+</div>
+
+<mat-tab-group [color]="colorToggle.value" [backgroundColor]="backgroundColorToggle.value">
+  <mat-tab label="First"> Content 1 </mat-tab>
+  <mat-tab label="Second"> Content 2 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group>
+
+<div>
+  <p>Testing the combination of attributes</p>
+  <mat-button-toggle-group #colorToggle="matButtonToggleGroup" value="primary" aria-label="Change color"
+    #backgroundColorToggle="matButtonToggleGroup">
+
+    <mat-tab-group [color]="colorToggle.value" [backgroundColor]="backgroundColorToggle.value">
+      <mat-tab label="Header">
+        <mat-button-toggle value="primary"> Header </mat-button-toggle>
+      </mat-tab>
+      <mat-tab label="Second"> Content 2 </mat-tab>
+      <mat-tab label="Third"> Content 3 </mat-tab>
+    </mat-tab-group>
+
+  </mat-button-toggle-group>
+
 
 </div>
 

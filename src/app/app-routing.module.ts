@@ -32,12 +32,9 @@ const appRoutes: Routes = [
       { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
       { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
       { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
-      // { path: 'login', component: LoginComponent },
-      // { path: 'signup', component: SignupComponent },
     ]
   },
-  // { path: 'login', component: LoginComponent },
-  // { path: 'signup', component: SignupComponent },
+
   {
     // Authentication Module layout
     path: '', component: AuthenticationLayoutComponent, children: [

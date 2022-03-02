@@ -1,7 +1,6 @@
-/* .gl-master-container{
-
-
-} */
+.mat-divider{
+  background-color:#ee3e29;
+}
 
 .master-data-tabs{
 max-width: 800px;
@@ -10,5 +9,18 @@ color:#ee3e29 ;
 .mat-tab{
   color: #ee3e29;
 }
+
+.example-button-toggle-label {
+  display: inline-block;
+  margin: 16px;
+}
+
+.mat-button-toggle{
+width: 50%;
+color: #03045e;
+background-color:#fb8500;
+
+}
+
 
 

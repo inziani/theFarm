@@ -20,6 +20,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 // import { MatToolbar } from "@angular/material/toolbar";
 
 
@@ -48,7 +49,8 @@ import { MatTabsModule } from "@angular/material/tabs";
         MatPaginatorModule,
         MatProgressSpinnerModule,
         MatSortModule,
-        MatTabsModule
+        MatTabsModule,
+        MatButtonToggleModule
 
 
 
@@ -73,7 +75,8 @@ import { MatTabsModule } from "@angular/material/tabs";
         MatPaginatorModule,
         MatProgressSpinnerModule,
         MatSortModule,
-        MatTabsModule
+        MatTabsModule,
+        MatButtonToggleModule
 
     ]
 })

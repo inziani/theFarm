@@ -39,11 +39,12 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if
-      (this.authenticationService.authenticated){
+        (this.authenticationService.authenticated) {
+        this.authenticationService.refreshedToken;
         return true;
       }
       else{
-
+      this.authenticationService.onLogout
       this.router.navigate(['login']);
       return false;
 

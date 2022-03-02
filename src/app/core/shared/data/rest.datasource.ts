@@ -63,10 +63,7 @@ export class RestDataSource {
     return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({ email, password }), this.httpOptions).pipe(
       map((response: any) => {
         this.authToken = response.access;
-        // console.log('access:', this.authToken);
         this.authTokenRefresh = response.refresh;
-        // console.log('refresh:', this.authTokenRefresh);
-        console.log(`Access - ${this.authToken}, Refresh - ${this.authTokenRefresh}, User - ${this.userId}`)
         return this.authToken;
       },
       ),
