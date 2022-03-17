@@ -28,18 +28,18 @@ import { DeleteActivityDialogComponent } from '@app/core/dialogues/delete-activi
 })
 export class TodoComponent implements OnInit, AfterViewInit {
 
-  activity!: Activity;
-  activityObject = <Activity>{};
-  activityList!: Activity[];
-  todaysDate = new Date();
-  activityColumnHeaders: string[] = ['id', 'title', 'description','date_created', 'date_changed','status', 'maintenance', 'owner'];
-  resultsLength = 0;
-  sourceData = new MatTableDataSource<Activity>();
-  filter = "";
+  public activity!: Activity;
+  public activityObject = <Activity>{};
+  public activityList!: Activity[];
+  public todaysDate = new Date();
+  public activityColumnHeaders: string[] = ['id', 'title', 'description','date_created', 'date_changed','status', 'maintenance', 'owner'];
+  public resultsLength = 0;
+  public sourceData = new MatTableDataSource<Activity>();
+  public filter = "";
 
-  dialogueData: any;
+  public dialogueData: any;
 
-  randomQuote!: any;
+  public randomQuote!: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

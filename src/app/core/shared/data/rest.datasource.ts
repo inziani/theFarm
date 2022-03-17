@@ -40,7 +40,7 @@ export class RestDataSource {
     })
   };
 
-  httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  public httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   public activityCategoryList!: ActivityCategory[];
   public activityList!: Activity[];
   public payload: any;
@@ -116,7 +116,7 @@ export class RestDataSource {
 
 
   fetchRandomQuotes() {
-    return this.http.get<RandomQuote>(`${environment.randomQuotesURL}`, this.httpOptions,);
+    return this.http.get<RandomQuote>(`${environment.randomQuotesURL}/random.json/`, this.httpOptions,);
   }
 
   addActivityCategory(title: string, description: string, category: string) {

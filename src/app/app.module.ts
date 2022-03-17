@@ -124,14 +124,6 @@ import { GlDisplayComponent } from './finance/general-ledger/gl-home/gl-display/
     GoogleMapsModule,
 
 
-    // FinanceSharedModule.forRoot(),
-    // SalesSharedModule.forRoot(),
-    // MaterialsManagementSharedModule.forRoot(),
-    // HumanResourcesSharedModule.forRoot(),
-    // ProjectManagementSharedModule.forRoot()
-
-
-
 
   ],
   providers: [

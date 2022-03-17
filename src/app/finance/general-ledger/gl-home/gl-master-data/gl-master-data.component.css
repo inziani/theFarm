@@ -1,26 +1,14 @@
-.mat-divider{
-  background-color:#ee3e29;
-}
 
-.master-data-tabs{
-max-width: 800px;
-color:#ee3e29 ;
-}
-.mat-tab{
-  color: #ee3e29;
-}
 
-.example-button-toggle-label {
-  display: inline-block;
-  margin: 16px;
-}
-
-.mat-button-toggle{
-width: 50%;
-color: #03045e;
-background-color:#fb8500;
+.gl-master-container{
+background-color: red;
 
 }
-
+.mat-ink-bar{
+    background-color:#ee3e29;
+}
+.mat-tab-label-active{
+     color: #ee3e29 !important;
+ }
 
 
