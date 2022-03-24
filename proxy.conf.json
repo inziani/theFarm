@@ -8,12 +8,14 @@
       }
     },
     "/api/v1":{
-      "target": "http://quotes.stormconsultancy.co.uk/random.json",
+      "target": "http://quotes.stormconsultancy.co.uk",
       "secure":false,
-      "changeOrigin":true,
       "pathRewrite":{
-        "^/api":""
-      }
+        "^/api/v1":""
+      },
+
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
 
   }

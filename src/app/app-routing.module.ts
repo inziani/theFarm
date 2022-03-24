@@ -16,7 +16,7 @@ import { AuthenticationLayoutComponent } from "./authentication-layout/authentic
 import { FinanceLayoutComponent } from "./finance/finance-layout/finance-layout.component";
 import { FinanceHomeComponent } from "./finance/finance-home/finance-home.component";
 import { GlHomeComponent } from "./finance/general-ledger/gl-home/gl-home.component";
-import { GlMasterDataComponent } from "./finance/general-ledger/gl-home/gl-master-data/gl-master-data.component";
+import { GlMasterDataComponent } from "./finance/general-ledger/master-data/gl-master-data/gl-master-data.component";
 import { GlDisplayComponent } from "./finance/general-ledger/gl-home/gl-display/gl-display.component";
 
 

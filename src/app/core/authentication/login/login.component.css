@@ -14,14 +14,7 @@ input.ng-dirty.ng-valid
   color: #fb8500;
 }
 
-mat-form-field{
-  width:600px;
-}
 
-.register{
-  display: inline-flex;
-
-}
 a{
   text-decoration: none;
 }

@@ -1,0 +1,45 @@
+
+
+.gl-master-container{
+background-color: red;
+
+}
+.mat-ink-bar{
+    /* background-color:#ee3e29; */
+    color: #ee3e29;
+}
+/* .mat-tab-label-active{
+     color: #ee3e29 !important;
+ } */
+
+ .mat-tab-group {
+  white-space: nowrap;
+  overflow: auto;
+  border-bottom: 0;
+}
+
+
+.mat-tab-label {
+    /* min-width: 25px !important;
+    padding: 5px; */
+    /* background-color: transparent; */
+    color: #ee3e29;
+    font-weight: 700;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+    /* min-width: 25px !important;
+    padding: 5px; */
+    /* background-color: transparent; */
+    color: #ee3e29;
+    font-weight: 700;
+}
+
+::ng-deep .mat-tab-header, .mat-tab-nav-bar, .mat-tab {
+    border-bottom: 0;
+}
+
+
+
+

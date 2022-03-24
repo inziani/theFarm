@@ -65,8 +65,9 @@ import { GlHomeComponent } from './finance/general-ledger/gl-home/gl-home.compon
 import { FinanceLayoutComponent } from './finance/finance-layout/finance-layout.component';
 import { FinanceNavbarComponent } from './finance/finance-navbar/finance-navbar.component';
 import { FinanceSidenavComponent } from './finance/finance-sidenav/finance-sidenav.component';
-import { GlMasterDataComponent } from './finance/general-ledger/gl-home/gl-master-data/gl-master-data.component';
+import { GlMasterDataComponent } from './finance/general-ledger/master-data/gl-master-data/gl-master-data.component';
 import { GlDisplayComponent } from './finance/general-ledger/gl-home/gl-display/gl-display.component';
+import { GlHeaderMasterComponent } from './finance/general-ledger/master-data/gl-header-master/gl-header-master.component';
 
 
 
@@ -108,7 +109,8 @@ import { GlDisplayComponent } from './finance/general-ledger/gl-home/gl-display/
     FinanceNavbarComponent,
     FinanceSidenavComponent,
     GlMasterDataComponent,
-    GlDisplayComponent
+    GlDisplayComponent,
+    GlHeaderMasterComponent
 
   ],
   imports: [
