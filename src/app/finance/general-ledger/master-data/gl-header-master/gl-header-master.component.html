@@ -59,91 +59,96 @@
         </div>
         <div fxLayout='row' fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
           fxLayoutAlign="center center">
+          <!-- <mat-label>Chart of Accounts</mat-label> -->
           <mat-form-field>
-            <mat-label>First Name</mat-label>
-            <input type="text" matInput placeholder="First Name" id="first_name" name="first_name"
-              formControlName="first_name">
+            <mat-label>Chart of Accounts</mat-label>
+            <input type="text" matInput placeholder="Chart of Accounts" id="chartOfAccounts" name="chartOfAccounts"
+              formControlName="chartOfAccounts">
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
-              <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
+              *ngIf="(formSubmitted || formGroup.controls['chartOfAccounts'].dirty) && formGroup.controls['chartOfAccounts'].invalid">
+              <li *ngFor="let error of formGroup.getChartOfAccountsValidationMessages('chartOfAccounts')">{{ error}}</li>
             </ul>
           </mat-form-field>
+          <!-- <mat-label>Company Code</mat-label> -->
           <mat-form-field>
-            <mat-label>Last Name</mat-label>
-            <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name"
-              formControlName="last_name">
+            <mat-label>Company Code</mat-label>
+            <input type="text" matInput placeholder="Company Code" id="companyCode" name="companyCode"
+              formControlName="companyCode">
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['last_name'].dirty) && formGroup.controls['last_name'].invalid">
-              <li *ngFor="let error of formGroup.getlastNameValidationMessages('last_name')">{{ error}}</li>
+              *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
+              <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}</li>
+            </ul>
+          </mat-form-field>
+        </div>
+        <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
+          fxLayoutAlign="center center">
+          <!-- <mat-label>Account Number</mat-label> -->
+          <mat-form-field>
+            <mat-label>Account Number</mat-label>
+            <input matInput placeholder="Account Number" id="accountNumber" name="accountNumber" formControlName="accountNumber">
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['accountNumber'].dirty) && formGroup.controls['accountNumber'].invalid">
+              <li *ngFor="let error of formGroup.getAccountNumberValidationMessages('accountNumber')">{{ error}}</li>
+            </ul>
+          </mat-form-field>
+          <!-- <mat-label>Account Type</mat-label> -->
+          <mat-form-field>
+            <mat-label>Account Type</mat-label>
+            <input type="text" matInput placeholder="Account Type" id="accountType" name="accountType"
+              formControlName="accountType">
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['accountType'].dirty) && formGroup.controls['accountType'].invalid">
+              <li *ngFor="let error of formGroup.getAccountTypeValidationMessages('accountType')">{{ error}}</li>
+            </ul>
+          </mat-form-field>
+        </div>
+        <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
+          fxLayoutAlign="center center">
+          <!-- <mat-label>Account Group</mat-label> -->
+          <mat-form-field>
+            <mat-label>Account Group</mat-label>
+            <input type="text" matInput placeholder="accountGroup" id="accountGroup" name="accountGroup"
+              formControlName="accountGroup">
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['accountGroup'].dirty) && formGroup.controls['accountGroup'].invalid">
+              <li *ngFor="let error of formGroup.getAccountGroupValidationMessages('accountGroup')">{{ error}}</li>
+            </ul>
+          </mat-form-field>
+          <!-- <mat-label>Profit & Loss account type</mat-label> -->
+          <mat-form-field>
+            <mat-label>Profit and Loss statement account type</mat-label>
+            <input type="text" matInput placeholder="Profit and Loss account type" id="pNlAccountType" name="pNlAccountType"
+              formControlName="pNlAccountType">
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{ error}}</li>
             </ul>
           </mat-form-field>
         </div>
         <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
           fxLayoutAlign="center center">
           <mat-form-field>
-            <mat-label>Birthday</mat-label>
-            <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="Date of Birth" id="date_of_birth"
-              name="date_of_birth" formControlName="date_of_birth">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['date_of_birth'].dirty) && formGroup.controls['date_of_birth'].invalid">
-              <li *ngFor="let error of formGroup.getBirthDayValidationMessages('date_of_birth')">{{ error}}</li>
-            </ul>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Phone Number</mat-label>
-            <input type="tel" matInput placeholder="Phone Number" id="phone_number" name="phone_number"
-              formControlName="phone_number">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['phone_number'].dirty) && formGroup.controls['phone_number'].invalid">
-              <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phone_number')">{{ error}}</li>
-            </ul>
-          </mat-form-field>
-        </div>
-        <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-          fxLayoutAlign="center center">
-          <mat-form-field>
-            <mat-label>username</mat-label>
-            <input type="text" matInput placeholder="username" id="username" name="username" formControlName="username">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['username'].dirty) && formGroup.controls['username'].invalid">
-              <li *ngFor="let error of formGroup.getUserNameValidationMessages('username')">{{ error}}</li>
-            </ul>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>email</mat-label>
-            <input type="email" matInput placeholder="email" id="email" name="email" formControlName="email">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
-              <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
-            </ul>
-          </mat-form-field>
-        </div>
-        <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-          fxLayoutAlign="center center">
-          <mat-form-field>
-            <mat-label>Gender</mat-label>
-            <mat-select formControlName="gender" placeholder="gender" id="gender" name="gender">
-              <!-- <mat-option *ngFor="let gender of gender" [value]="gender.value">
-                            {{ gender.viewValue }}
-                          </mat-option> -->
+            <mat-label>Profit and Loss Account Type</mat-label>
+            <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType" name="pNlAccountType">
+              <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
+                {{ account.viewValue }}
+              </mat-option>
             </mat-select>
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
-              <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
+              *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{ error}}</li>
             </ul>
           </mat-form-field>
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-label>City</mat-label>
             <input type="text" matInput placeholder="City" id="city" name="city" formControlName="city">
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['city'].dirty) && formGroup.controls['city'].invalid">
-              <li *ngFor="let error of formGroup.getEmailValidationMessages('city')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('city')">{{ error}}</li>
             </ul>
-          </mat-form-field>
+          </mat-form-field> -->
         </div>
-        <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
+        <!-- <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
           fxLayoutAlign="center center">
           <mat-form-field>
             <mat-label>Password</mat-label>
@@ -152,7 +157,7 @@
             <mat-hint>Your password must contain 12 characters or more.</mat-hint>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">
-              <li *ngFor="let error of formGroup.getPasswordValidationMessages('password')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('password')">{{ error}}</li>
             </ul>
           </mat-form-field>
           <mat-form-field>
@@ -162,11 +167,11 @@
             <mat-hint>Ensure that the passwords are the same</mat-hint>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['confirmPassword'].dirty) && formGroup.controls['confirmPassword'].invalid">
-              <li *ngFor="let error of formGroup.getConfirmPasswordValidationMessages('confirmPassword')">{{ error}}
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('confirmPassword')">{{ error}}
               </li>
             </ul>
           </mat-form-field>
-        </div>
+        </div> -->
         <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
           <button type="submit" mat-raised-button color="primary"
             [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
@@ -184,7 +189,7 @@
     </div>
   </section>
 
-  <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
+  <!-- <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
     fxLayoutAlign="center center">
     <h1>
       <header>Description</header>
@@ -206,7 +211,7 @@
               formControlName="first_name">
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
-              <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('first_name')">{{ error}}</li>
             </ul>
           </mat-form-field>
           <mat-form-field>
@@ -215,7 +220,7 @@
               formControlName="last_name">
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['last_name'].dirty) && formGroup.controls['last_name'].invalid">
-              <li *ngFor="let error of formGroup.getlastNameValidationMessages('last_name')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('last_name')">{{ error}}</li>
             </ul>
           </mat-form-field>
         </div>
@@ -229,7 +234,7 @@
             <mat-datepicker #picker></mat-datepicker>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['date_of_birth'].dirty) && formGroup.controls['date_of_birth'].invalid">
-              <li *ngFor="let error of formGroup.getBirthDayValidationMessages('date_of_birth')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('date_of_birth')">{{ error}}</li>
             </ul>
           </mat-form-field>
           <mat-form-field>
@@ -238,7 +243,7 @@
               formControlName="phone_number">
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['phone_number'].dirty) && formGroup.controls['phone_number'].invalid">
-              <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phone_number')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('phone_number')">{{ error}}</li>
             </ul>
           </mat-form-field>
         </div>
@@ -249,7 +254,7 @@
             <input type="text" matInput placeholder="username" id="username" name="username" formControlName="username">
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['username'].dirty) && formGroup.controls['username'].invalid">
-              <li *ngFor="let error of formGroup.getUserNameValidationMessages('username')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('username')">{{ error}}</li>
             </ul>
           </mat-form-field>
           <mat-form-field>
@@ -257,7 +262,7 @@
             <input type="email" matInput placeholder="email" id="email" name="email" formControlName="email">
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
-              <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('email')">{{ error}}</li>
             </ul>
           </mat-form-field>
         </div>
@@ -266,13 +271,13 @@
           <mat-form-field>
             <mat-label>Gender</mat-label>
             <mat-select formControlName="gender" placeholder="gender" id="gender" name="gender">
-              <!-- <mat-option *ngFor="let gender of gender" [value]="gender.value">
+              <mat-option *ngFor="let gender of gender" [value]="gender.value">
               {{ gender.viewValue }}
-            </mat-option> -->
+            </mat-option>
             </mat-select>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
-              <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('gender')">{{ error}}</li>
             </ul>
           </mat-form-field>
           <mat-form-field>
@@ -280,7 +285,7 @@
             <input type="text" matInput placeholder="City" id="city" name="city" formControlName="city">
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['city'].dirty) && formGroup.controls['city'].invalid">
-              <li *ngFor="let error of formGroup.getEmailValidationMessages('city')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('city')">{{ error}}</li>
             </ul>
           </mat-form-field>
         </div>
@@ -293,7 +298,7 @@
             <mat-hint>Your password must contain 12 characters or more.</mat-hint>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">
-              <li *ngFor="let error of formGroup.getPasswordValidationMessages('password')">{{ error}}</li>
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('password')">{{ error}}</li>
             </ul>
           </mat-form-field>
           <mat-form-field>
@@ -303,7 +308,7 @@
             <mat-hint>Ensure that the passwords are the same</mat-hint>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['confirmPassword'].dirty) && formGroup.controls['confirmPassword'].invalid">
-              <li *ngFor="let error of formGroup.getConfirmPasswordValidationMessages('confirmPassword')">{{ error}}
+              <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('confirmPassword')">{{ error}}
               </li>
             </ul>
           </mat-form-field>
@@ -323,7 +328,8 @@
         </div>
         </form>
         </div>
-        </section>
+        </section> -->
+        <!--
 <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
   fxLayoutAlign="center center">
   <h1>
@@ -346,7 +352,7 @@
             formControlName="first_name">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
-            <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('first_name')">{{ error}}</li>
           </ul>
         </mat-form-field>
         <mat-form-field>
@@ -355,7 +361,7 @@
             formControlName="last_name">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['last_name'].dirty) && formGroup.controls['last_name'].invalid">
-            <li *ngFor="let error of formGroup.getlastNameValidationMessages('last_name')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('last_name')">{{ error}}</li>
           </ul>
         </mat-form-field>
       </div>
@@ -369,7 +375,7 @@
           <mat-datepicker #picker></mat-datepicker>
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['date_of_birth'].dirty) && formGroup.controls['date_of_birth'].invalid">
-            <li *ngFor="let error of formGroup.getBirthDayValidationMessages('date_of_birth')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('date_of_birth')">{{ error}}</li>
           </ul>
         </mat-form-field>
         <mat-form-field>
@@ -378,7 +384,7 @@
             formControlName="phone_number">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['phone_number'].dirty) && formGroup.controls['phone_number'].invalid">
-            <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phone_number')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('phone_number')">{{ error}}</li>
           </ul>
         </mat-form-field>
       </div>
@@ -389,7 +395,7 @@
           <input type="text" matInput placeholder="username" id="username" name="username" formControlName="username">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['username'].dirty) && formGroup.controls['username'].invalid">
-            <li *ngFor="let error of formGroup.getUserNameValidationMessages('username')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('username')">{{ error}}</li>
           </ul>
         </mat-form-field>
         <mat-form-field>
@@ -397,7 +403,7 @@
           <input type="email" matInput placeholder="email" id="email" name="email" formControlName="email">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
-            <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('email')">{{ error}}</li>
           </ul>
         </mat-form-field>
       </div>
@@ -406,13 +412,13 @@
         <mat-form-field>
           <mat-label>Gender</mat-label>
           <mat-select formControlName="gender" placeholder="gender" id="gender" name="gender">
-            <!-- <mat-option *ngFor="let gender of gender" [value]="gender.value">
+            <mat-option *ngFor="let gender of gender" [value]="gender.value">
               {{ gender.viewValue }}
-            </mat-option> -->
+            </mat-option>
           </mat-select>
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
-            <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('gender')">{{ error}}</li>
           </ul>
         </mat-form-field>
         <mat-form-field>
@@ -420,7 +426,7 @@
           <input type="text" matInput placeholder="City" id="city" name="city" formControlName="city">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['city'].dirty) && formGroup.controls['city'].invalid">
-            <li *ngFor="let error of formGroup.getEmailValidationMessages('city')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('city')">{{ error}}</li>
           </ul>
         </mat-form-field>
       </div>
@@ -433,7 +439,7 @@
           <mat-hint>Your password must contain 12 characters or more.</mat-hint>
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">
-            <li *ngFor="let error of formGroup.getPasswordValidationMessages('password')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('password')">{{ error}}</li>
           </ul>
         </mat-form-field>
         <mat-form-field>
@@ -443,7 +449,7 @@
           <mat-hint>Ensure that the passwords are the same</mat-hint>
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['confirmPassword'].dirty) && formGroup.controls['confirmPassword'].invalid">
-            <li *ngFor="let error of formGroup.getConfirmPasswordValidationMessages('confirmPassword')">{{ error}}</li>
+            <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('confirmPassword')">{{ error}}</li>
           </ul>
         </mat-form-field>
       </div>
@@ -462,6 +468,5 @@
       </div>
     </form>
   </div>
-</section>
-
+</section> -->
 </section>

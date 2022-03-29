@@ -53,6 +53,7 @@ export class GLHeaderFormGroup extends FormGroup {
         accountNumber: new GLHeaderFormControl("Account Number", "accountNumber", "", Validators.required),
         accountType: new GLHeaderFormControl("Account Type", "accountType", "", Validators.required),
         accountGroup: new GLHeaderFormControl("Account Group", "accountGroup", "", Validators.required),
+        pNlAccountType: new GLHeaderFormControl("Profit and Loss account type", "pNlAccountType", "", Validators.required),
         reconciliationAccountType: new GLHeaderFormControl("Reconciliation Account Type", "reconciliationAccountType", "", Validators.required),
         alternativeGLAccount: new GLHeaderFormControl("Alternative GL Account", "alternativeGLAccount", "", Validators.required),
         shortDescription: new GLHeaderFormControl("Short Description", "shortDescription", "", Validators.required),
@@ -87,7 +88,6 @@ export class GLHeaderFormGroup extends FormGroup {
         return Object.keys(this.controls).map(k => this.controls[k] as GLHeaderFormControl);
     }
 
-
     getChartOfAccountsValidationMessages(chartOfAccounts: string): string[] {
         return (this.controls['chartOfAccounts'] as GLHeaderFormControl).getValidationMessages();
     }
@@ -104,7 +104,11 @@ export class GLHeaderFormGroup extends FormGroup {
         return (this.controls['accountType'] as GLHeaderFormControl).getValidationMessages();
     }
 
-    getAccountGroupValidationMessages(accountGroup: string): string[] {
+    getPnLAccountTypeValidationMessages(pNlAccountType: string): string[] {
+        return (this.controls['pNlAccountType'] as GLHeaderFormControl).getValidationMessages();
+    }
+
+   getAccountGroupValidationMessages(accountGroup: string): string[] {
         return (this.controls['accountGroup'] as GLHeaderFormControl).getValidationMessages();
     }
 
