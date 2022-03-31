@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GLHeaderFormGroup } from '@app/finance/finance-models/gl-models/gl-form-models/gl-header-form-model';
+import { GLMasterDataFormGroup } from '@app/finance/finance-models/gl-models/gl-form-models/gl-master-data-model';
 import { ProfitAndLossAccountType } from '@app/finance/finance-interfaces/pnl-account-interface';
 
 @Component({
@@ -13,7 +13,7 @@ export class GlHeaderMasterComponent implements OnInit {
   public isLoading: boolean = false;
   public maxDate!: Date;
   public formSubmitted: boolean = false;
-  public formGroup = new GLHeaderFormGroup();
+  public formGroup = new GLMasterDataFormGroup();
   public pnlAccountType!: ProfitAndLossAccountType [];
 
 

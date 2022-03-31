@@ -5,16 +5,6 @@
    font-size: 12px;
 }
 
-/* Border */
-/* .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: white!important;
-} */
-/* Font color */
-/* input.mat-input-element {
-  color: white!important;
-  background-color: white!important;
-  border-style: dashed;
-} */
 
 .signup-form{
 
@@ -40,6 +30,6 @@ a{
   text-decoration: none;
 }
 
-mat-card{
+.mat-card{
   width: 400px;
 }
