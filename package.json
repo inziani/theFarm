@@ -12,18 +12,18 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.2.16",
+    "@angular/animations": "~13.3.1",
     "@angular/cdk": "^11.2.13",
-    "@angular/common": "~12.2.16",
-    "@angular/compiler": "~12.2.16",
-    "@angular/core": "~12.2.16",
+    "@angular/common": "~13.3.1",
+    "@angular/compiler": "~13.3.1",
+    "@angular/core": "~13.3.1",
     "@angular/flex-layout": "^12.0.0-beta.35",
-    "@angular/forms": "~12.2.16",
+    "@angular/forms": "~13.3.1",
     "@angular/google-maps": "^12.2.13",
     "@angular/material": "^11.2.13",
-    "@angular/platform-browser": "~12.2.16",
-    "@angular/platform-browser-dynamic": "~12.2.16",
-    "@angular/router": "~12.2.16",
+    "@angular/platform-browser": "~13.3.1",
+    "@angular/platform-browser-dynamic": "~13.3.1",
+    "@angular/router": "~13.3.1",
     "@fortawesome/angular-fontawesome": "^0.8.2",
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
@@ -39,9 +39,9 @@
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^12.2.16",
-    "@angular/cli": "^12.2.16",
-    "@angular/compiler-cli": "~12.2.16",
+    "@angular-devkit/build-angular": "^13.3.1",
+    "@angular/cli": "^13.3.1",
+    "@angular/compiler-cli": "~13.3.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.20.43",
     "codelyzer": "^6.0.0",
@@ -56,7 +56,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.3.5"
+    "typescript": "~4.6.3"
   },
   "dl-font-poppins": "goog-webfont-dl -o src/font-poppins.css -p assets/Poppins -d src/assets/Poppins -a \"Poppins\"",
   "postinstall": "npm run dl-font-poppins && npm run dl-font-poppins"

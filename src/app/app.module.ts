@@ -74,79 +74,63 @@ import { GlHeaderMasterComponent } from './finance/general-ledger/master-data/gl
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomePageComponent,
-    TodoComponent,
-    LoginComponent,
-    SignupComponent,
-    HeaderComponent,
-    ProfileComponent,
-    EditActivityComponent,
-    DowndownDirective,
-    LoadingSpinnerComponent,
-    ActivityCategorysComponent,
-    FooterComponent,
-    SideNavComponent,
-    ModulesComponent,
-    HomePageComponent,
-    LoginDialogComponent,
-    EditCategoryComponent,
-    CreateCategoryComponent,
-    DeleteCategoryDialogComponent,
-    AccountSettingsComponent,
-    BioComponent,
-    RoleAuthComponent,
-    PasswordSecComponent,
-    CreateActivityComponent,
-    ChangesSavedDialogComponent,
-    DeleteActivityDialogComponent,
-    AppLayoutComponent,
-    AuthenticationLayoutComponent,
-    FinanceHomeComponent,
-    GlHomeComponent,
-    FinanceLayoutComponent,
-    FinanceNavbarComponent,
-    FinanceSidenavComponent,
-    GlMasterDataComponent,
-    GlDisplayComponent,
-    GlHeaderMasterComponent
-
-  ],
-  imports: [
-    BrowserModule,
-    FontAwesomeModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule,
-    GoogleMapsModule,
-
-
-
-  ],
-  providers: [
-    UsersService, AuthenticationService,
-    RestDataSource, NavigationServiceService, DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
-
-
-
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    LoginDialogComponent,
-    SignupComponent,
-    EditActivityComponent,
-    EditCategoryComponent,
-
-
-  ]
-
+    declarations: [
+        AppComponent,
+        HomePageComponent,
+        TodoComponent,
+        LoginComponent,
+        SignupComponent,
+        HeaderComponent,
+        ProfileComponent,
+        EditActivityComponent,
+        DowndownDirective,
+        LoadingSpinnerComponent,
+        ActivityCategorysComponent,
+        FooterComponent,
+        SideNavComponent,
+        ModulesComponent,
+        HomePageComponent,
+        LoginDialogComponent,
+        EditCategoryComponent,
+        CreateCategoryComponent,
+        DeleteCategoryDialogComponent,
+        AccountSettingsComponent,
+        BioComponent,
+        RoleAuthComponent,
+        PasswordSecComponent,
+        CreateActivityComponent,
+        ChangesSavedDialogComponent,
+        DeleteActivityDialogComponent,
+        AppLayoutComponent,
+        AuthenticationLayoutComponent,
+        FinanceHomeComponent,
+        GlHomeComponent,
+        FinanceLayoutComponent,
+        FinanceNavbarComponent,
+        FinanceSidenavComponent,
+        GlMasterDataComponent,
+        GlDisplayComponent,
+        GlHeaderMasterComponent
+    ],
+    imports: [
+        BrowserModule,
+        FontAwesomeModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        FlexLayoutModule,
+        GoogleMapsModule,
+    ],
+    providers: [
+        UsersService, AuthenticationService,
+        RestDataSource, NavigationServiceService, DatePipe,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
