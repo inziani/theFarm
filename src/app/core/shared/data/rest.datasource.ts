@@ -55,7 +55,7 @@ export class RestDataSource {
   ) {
   }
 
-  getAllUsers() {
+  getAllUsers(): Observable<any> {
     return this.http.get<User[]>(`${environment.apiUrl}/users/`);
   }
 
@@ -131,7 +131,7 @@ export class RestDataSource {
     return this.http.patch<any>(`${environment.apiUrl}/activitys/` + id + '/', { title, description, status, activity_category}, { headers: this.httpHeaders });
   }
 
-   deleteActivity(id: number): Observable<any> {
+   deleteActivity(id: number): Observable<number> {
     return this.http.delete<any>(`${environment.apiUrl}/activitys/` + id + '/');
   }
 
