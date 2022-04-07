@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-category';
+import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-interface';
 import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
 
 import { EditCategoryComponent } from '../edit-category/edit-category.component';

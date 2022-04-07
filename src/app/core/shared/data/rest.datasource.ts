@@ -9,9 +9,11 @@ import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 
 import { User } from "../models/user.model";
+import { UserInterface, UserProfileInterface } from "../interfaces/users-interface";
 import { Activity } from "../models/activity.model";
-import { ActivityCategoryInterface } from "../interfaces/activity-category";
-import { RandomQuote } from "../interfaces/random-quote";
+
+import { ActivityCategoryInterface, ActivityInterface } from "../interfaces/activity-interface";
+import { RandomQuote } from "../interfaces/activity-interface";
 
 import { environment } from "@environments/environment";
 import { ActivityCategory } from "../models/activity-category.models";
@@ -55,8 +57,12 @@ export class RestDataSource {
   ) {
   }
 
-  getAllUsers(): Observable<any> {
-    return this.http.get<User[]>(`${environment.apiUrl}/users/`);
+  getAllUsers(): Observable<UserInterface[]> {
+    return this.http.get<UserInterface[]>(`${environment.apiUrl}/users/`);
+  }
+
+  getAllUserProfiles(): Observable<UserProfileInterface[]>{
+    return this.http.get<UserProfileInterface[]>(`${environment.apiUrl}/user-profile/`)
   }
 
   getToken(email: string, password: string): Observable<any> {
@@ -156,8 +162,8 @@ export class RestDataSource {
     return this.http.get(`${environment.apiUrl}/register/`, this.httpOptions);
   }
 
-  fetchUserProfiles(): Observable<any>{
-    return this.http.get(`${environment.apiUrl}/user-profile`, this.httpOptions);
+  fetchUserProfiles(): Observable<UserProfileInterface>{
+    return this.http.get<UserProfileInterface>(`${environment.apiUrl}/user-profile`, this.httpOptions);
   }
 
 
@@ -166,14 +172,13 @@ export class RestDataSource {
      return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
 
-  fetchActivityList(): Observable<Activity[]>{
-     return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
+  fetchActivityList(): Observable<ActivityInterface[]>{
+     return this.http.get<ActivityInterface[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
 
    fetchSingleActivity(id: number): Observable<Activity>{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
   };
-
 
 
 }

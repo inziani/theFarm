@@ -2,7 +2,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 
 import { ActivityCategoryFormGroup } from '@app/core/shared/models/activity-category-form.model';
-import { Category } from '@app/core/shared/interfaces/activity-category';
+import { Category } from '@app/core/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivityCategory } from '@app/core/shared/models/activity-category.models';

@@ -3,9 +3,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 import { Activity } from '@app/core/shared/models/activity.model';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { Status } from '@app/core/shared/interfaces/activity-status';
+import { Status } from '@app/core/shared/interfaces/activity-interface';
 import { ActivityFormGroup } from '@app/core/shared/models/activityform-model';
-import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-category';
+import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-interface';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 
 @Component({
