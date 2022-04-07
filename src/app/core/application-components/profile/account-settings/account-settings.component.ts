@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
 // import { UseUpdate } from '@app/shared/models/authentication.model';
-import { Gender } from '@app/core/shared/interfaces/gender';
+import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { User } from '@app/core/shared/models/user.model';
 

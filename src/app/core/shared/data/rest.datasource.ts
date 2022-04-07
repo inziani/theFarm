@@ -125,11 +125,11 @@ export class RestDataSource {
     return this.http.get<RandomQuote>(`${environment.randomQuotesURL}/random.json/`, this.httpOptions,);
   }
 
-  addActivityCategory(title: string, description: string, category: string) {
+  addActivityCategory(title: string, description: string, category: string): Observable<ActivityCategory> {
     return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys/`, JSON.stringify({ title, description, category }), this.httpOptions)
   };
 
-  addActivity(title: string, description: string, status: string, activity_category: number) {
+  addActivity(title: string, description: string, status: string, activity_category: number): Observable<Activity> {
     return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activity_category }), this.httpOptions)
   };
 

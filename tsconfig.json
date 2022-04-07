@@ -27,7 +27,11 @@
       ],
       "@environments/*": [
         "src/environments/*"
-      ]
+      ],
+      "tslib": [
+        "path/to/node_modules/tslib/tslib.d.ts"
+        ]
+
     }
   },
   "angularCompilerOptions": {
