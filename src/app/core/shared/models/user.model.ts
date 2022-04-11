@@ -9,19 +9,11 @@ export class User{
     public username: string,
     public email: string,
     public gender: string,
-    public city: string
+    public city: string,
 
-    // private _token: string,
-    // private _tokenExpirationDate: Date
   ){
 
   }
-  // get token(){
-  //   if (!this._tokenExpirationDate || new Date()> this._tokenExpirationDate){
-  //     return null;
-  //   }
-  //   return this._token
-  // }
 }
 
 export class UserProfile{
@@ -32,6 +24,37 @@ export class UserProfile{
     public profile_pic: string,
     public create_at: Date,
     public updated_at: Date
+
+  ) {
+
+  }
+}
+
+export class AuthenticateUser{
+  constructor(
+
+    public id: number,
+    public first_name: string,
+    public last_name: string,
+    public username: string,
+    public email: string,
+    public _token?: string,
+    public _tokenRefresh?: string
+  ) {
+
+  }
+}
+
+export class AuthenticatedUser {
+
+  constructor(
+
+  tokenType: string,
+  expiryDate: number,
+  iatDate: number,
+  token: string,
+  userId: number
+
 
   ) {
 

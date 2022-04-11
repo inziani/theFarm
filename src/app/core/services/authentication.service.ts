@@ -9,18 +9,16 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { JwTAuthenticationResponse, LoginResponse, SignUpResponse } from '../shared/interfaces/users-interface';
+import { AuthenticatedUser } from '../shared/models/user.model';
+import jwtDecode from 'jwt-decode';
+import { ThisReceiver } from '@angular/compiler';
 
 
 
-interface AuthenticationResponse {
-  refresh: string,
-  access: string
-}
 
-interface SignUpResponse {
-  email: string,
-  username: string
-}
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +26,16 @@ interface SignUpResponse {
 
 export class AuthenticationService {
 
-  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  userDetails = new BehaviorSubject<any>(null);
+  public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  private currentUser!: BehaviorSubject<AuthenticatedUser>;
+  public loggedInUser!: AuthenticatedUser;
+  public jwtAccessToken!: string;
+  public jwtRefreshToken!: string;
+
+
+  public get currentUserValue(): AuthenticatedUser{
+    return this.currentUser.value;
+  }
 
 
 
@@ -38,12 +44,41 @@ export class AuthenticationService {
     private http: HttpClient,
     private dataSource: RestDataSource) {
 
+    this.currentUser = new BehaviorSubject<AuthenticatedUser>({});
+
+
+
   }
 
-  onLogin(email: string, password: string): Observable<any> {
-    return this.dataSource.getToken(email, password);
+  onLogin(email: string, password: string): Observable<string> {
+    // return this.dataSource.getToken(email, password);
+    return this.http.post<string>(`${environment.apiUrl}/${environment.jwtLogin}`,
+    JSON.stringify({ email, password}), this.httpOptions
+    ).pipe(
+      map(loginResponse => {
+        // login is successfull and token is in the response
 
+        this.jwtAccessToken = loginResponse;
+        console.log('is it the one', loginResponse);
+
+        return this.jwtAccessToken;
+      }),
+      tap(loginResponse => {
+        this.saveUser(loginResponse)
+      }),
+      shareReplay()
+    );
   }
+
+  private saveUser(loginResponse: string) {
+    console.log('The token-', loginResponse);
+    // this.loggedInUser = JSON.parse(JSON.stringify(loginResponse));
+    this.currentUser.next(JSON.parse(JSON.stringify(loginResponse)));
+    console.log('Logged in Behaviour Subject-', this.currentUser);
+    localStorage.setItem('currentUser', JSON.stringify(loginResponse));
+    return this.currentUser.next(JSON.parse(JSON.stringify(loginResponse)));
+
+    }
 
   onLogout() {
     // remove user from the local storage to log user out
@@ -55,6 +90,7 @@ export class AuthenticationService {
    get authenticated() {
     return this.dataSource.authToken != null;
    }
+
   get refreshedToken() {
     return this.dataSource.refreshToken != null;
   }

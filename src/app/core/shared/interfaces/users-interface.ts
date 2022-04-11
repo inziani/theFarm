@@ -30,4 +30,27 @@ export interface Gender {
     viewValue: string;
 }
 
+export interface SignUpResponse {
+  email: string,
+  username: string
+}
+export interface LoginResponse{
+  tokenType: string,
+  expiryDate: number,
+  iatDate: number,
+  accessToken: string
+  userId: number
+
+}
+
+export interface JwTAuthenticationResponse {
+  id: number,
+  first_name: string,
+  last_name: string,
+  username: string,
+  email: string,
+  _token?: string,
+  _tokenRefresh?: string
+}
+
 

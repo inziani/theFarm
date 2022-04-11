@@ -20,10 +20,6 @@ import { ActivityCategory } from "../models/activity-category.models";
 import { Router } from "@angular/router";
 import { SortDirection } from "@angular/material/sort";
 
-interface AuthenticationResponse {
-  refresh: string,
-  access: string
-}
 
 @Injectable()
 
@@ -65,31 +61,33 @@ export class RestDataSource {
     return this.http.get<UserProfileInterface[]>(`${environment.apiUrl}/user-profile/`)
   }
 
-  getToken(email: string, password: string): Observable<any> {
-    return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({ email, password }), this.httpOptions).pipe(
-      map((response: any) => {
-        this.authToken = response.access;
-        this.authTokenRefresh = response.refresh;
-        return this.authToken;
-      },
-      ),
-      tap(respData => {
-        this.storeUser(respData)
-      }), shareReplay());
-  }
+  // getToken(email: string, password: string): Observable<any> {
+  //   return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({ email, password }), this.httpOptions).pipe(
+  //     map((response: any) => {
+  //       this.authToken = response.access;
+  //       this.authTokenRefresh = response.refresh;
+  //       return this.authToken;
+  //     },
+  //     ),
+  //     tap(respData => {
+  //       this.storeUser(respData)
+  //     }), shareReplay());
+  // }
 
-  private storeUser(token: any) {
-    type customJwtPayLoad = JwtPayload & { userPayloadData: string }
-    let decodedToken = jwtDecode<customJwtPayLoad>(token);
-    this.payload = JSON.stringify(decodedToken);
-    let finaldecodedToken = JSON.parse(this.payload);
-    this.userId = finaldecodedToken.user_id;
-    this.expiryDate = new Date(finaldecodedToken.exp * 1000);
-    this.user.next(this.userId);
-    // console.log(`Payload - ${this.payload},User - ${this.userId}`);
-    localStorage.setItem('userData', this.payload);
-    return this.payload;
-  }
+  // private storeUser(token: any) {
+  //   type customJwtPayLoad = JwtPayload & { userPayloadData: string }
+  //   let decodedToken = jwtDecode<customJwtPayLoad>(token);
+  //   console.log('Decoded Token - ', decodedToken);
+  //   this.payload = JSON.stringify(decodedToken);
+  //   let finaldecodedToken = JSON.parse(this.payload);
+  //   console.log('Parsed payload', finaldecodedToken);
+  //   this.userId = finaldecodedToken.user_id;
+  //   this.expiryDate = new Date(finaldecodedToken.exp * 1000);
+  //   this.user.next(this.userId);
+  //   // console.log(`Payload - ${this.payload},User - ${this.userId}`);
+  //   localStorage.setItem('userData', this.payload);
+  //   return this.payload;
+  // }
 
 
   refreshToken(): Observable<any> {
@@ -108,17 +106,17 @@ export class RestDataSource {
 
   }
 
-  jwtPayloadData(token: any) {
-    type customJwtPayLoad = JwtPayload & { userPayloadData: string }
-    let decodedToken = jwtDecode<customJwtPayLoad>(token);
-    this.payload = JSON.stringify(decodedToken);
-    let finaldecodedToken = JSON.parse(this.payload);
-    this.userId = finaldecodedToken.user_id;
-    this.expiryDate = new Date(finaldecodedToken.exp * 1000);
-    this.user.next(this.userId);
-    console.log(this.user);
-    return this.payload;
-  }
+  // jwtPayloadData(token: any) {
+  //   type customJwtPayLoad = JwtPayload & { userPayloadData: string }
+  //   let decodedToken = jwtDecode<customJwtPayLoad>(token);
+  //   this.payload = JSON.stringify(decodedToken);
+  //   let finaldecodedToken = JSON.parse(this.payload);
+  //   this.userId = finaldecodedToken.user_id;
+  //   this.expiryDate = new Date(finaldecodedToken.exp * 1000);
+  //   this.user.next(this.userId);
+  //   console.log(this.user);
+  //   return this.payload;
+  // }
 
 
   fetchRandomQuotes() {
