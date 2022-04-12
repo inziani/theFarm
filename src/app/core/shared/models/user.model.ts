@@ -30,20 +30,20 @@ export class UserProfile{
   }
 }
 
-export class AuthenticateUser{
-  constructor(
+// export class AuthenticateUser{
+//   constructor(
 
-    public id: number,
-    public first_name: string,
-    public last_name: string,
-    public username: string,
-    public email: string,
-    public _token?: string,
-    public _tokenRefresh?: string
-  ) {
+//     public id: number,
+//     public first_name: string,
+//     public last_name: string,
+//     public username: string,
+//     public email: string,
+//     public _token?: string,
+//     public _tokenRefresh?: string
+//   ) {
 
-  }
-}
+//   }
+// }
 
 export class AuthenticatedUser {
 

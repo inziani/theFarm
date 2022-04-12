@@ -18,23 +18,30 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  emptyToken: string = ''
+  private accessToken!: string;
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   error!: HttpErrorResponse;
 
   constructor(
     private dataSource: RestDataSource,
+    private authenticationService: AuthenticationService,
     private route: Router
 
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.authenticationService.currentUser$.subscribe(token => {
+      let tokenObj = JSON.parse(JSON.stringify(token));
+      this.accessToken = tokenObj.access;
+    })
 
-     if (this.dataSource.authToken) {
+    // if (this.dataSource.authToken)
+   if (this.accessToken)
+    {
         const cloned = request.clone({
           setHeaders: {
-            Authorization: `Bearer ${this.dataSource.authToken}`
+            Authorization: `Bearer ${this.accessToken}`
           }
 
         });

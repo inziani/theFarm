@@ -84,7 +84,7 @@ export class RestDataSource {
   //   this.userId = finaldecodedToken.user_id;
   //   this.expiryDate = new Date(finaldecodedToken.exp * 1000);
   //   this.user.next(this.userId);
-  //   // console.log(`Payload - ${this.payload},User - ${this.userId}`);
+  //   console.log(`Payload - ${this.payload},User - ${this.userId}`);
   //   localStorage.setItem('userData', this.payload);
   //   return this.payload;
   // }
@@ -105,18 +105,6 @@ export class RestDataSource {
     this.router.navigate(['/login'])
 
   }
-
-  // jwtPayloadData(token: any) {
-  //   type customJwtPayLoad = JwtPayload & { userPayloadData: string }
-  //   let decodedToken = jwtDecode<customJwtPayLoad>(token);
-  //   this.payload = JSON.stringify(decodedToken);
-  //   let finaldecodedToken = JSON.parse(this.payload);
-  //   this.userId = finaldecodedToken.user_id;
-  //   this.expiryDate = new Date(finaldecodedToken.exp * 1000);
-  //   this.user.next(this.userId);
-  //   console.log(this.user);
-  //   return this.payload;
-  // }
 
 
   fetchRandomQuotes() {
@@ -164,8 +152,6 @@ export class RestDataSource {
     return this.http.get<UserProfileInterface>(`${environment.apiUrl}/user-profile`, this.httpOptions);
   }
 
-
-
   fetchActivityDb(sort: string, order: SortDirection, page: number): Observable<Activity[]>{
      return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
@@ -177,6 +163,5 @@ export class RestDataSource {
    fetchSingleActivity(id: number): Observable<Activity>{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
   };
-
 
 }

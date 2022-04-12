@@ -14,12 +14,6 @@ import { AuthenticatedUser } from '../shared/models/user.model';
 import jwtDecode from 'jwt-decode';
 import { ThisReceiver } from '@angular/compiler';
 
-
-
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -27,26 +21,21 @@ import { ThisReceiver } from '@angular/compiler';
 export class AuthenticationService {
 
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  private currentUser!: BehaviorSubject<AuthenticatedUser>;
+  public currentUser$!: BehaviorSubject<AuthenticatedUser>;
   public loggedInUser!: AuthenticatedUser;
   public jwtAccessToken!: string;
   public jwtRefreshToken!: string;
 
 
   public get currentUserValue(): AuthenticatedUser{
-    return this.currentUser.value;
+    return this.currentUser$.value;
   }
-
-
-
 
   constructor(
     private http: HttpClient,
     private dataSource: RestDataSource) {
 
-    this.currentUser = new BehaviorSubject<AuthenticatedUser>({});
-
-
+    this.currentUser$ = new BehaviorSubject<AuthenticatedUser>({});
 
   }
 
@@ -59,7 +48,7 @@ export class AuthenticationService {
         // login is successfull and token is in the response
 
         this.jwtAccessToken = loginResponse;
-        console.log('is it the one', loginResponse);
+        console.log('is it the one for access?', this.jwtAccessToken);
 
         return this.jwtAccessToken;
       }),
@@ -73,26 +62,35 @@ export class AuthenticationService {
   private saveUser(loginResponse: string) {
     console.log('The token-', loginResponse);
     // this.loggedInUser = JSON.parse(JSON.stringify(loginResponse));
-    this.currentUser.next(JSON.parse(JSON.stringify(loginResponse)));
-    console.log('Logged in Behaviour Subject-', this.currentUser);
+    this.currentUser$.next(JSON.parse(JSON.stringify(loginResponse)));
+    console.log('Logged in Behaviour Subject-', this.currentUser$);
     localStorage.setItem('currentUser', JSON.stringify(loginResponse));
-    return this.currentUser.next(JSON.parse(JSON.stringify(loginResponse)));
+    return this.currentUser$.next(JSON.parse(JSON.stringify(loginResponse)));
 
     }
 
   onLogout() {
     // remove user from the local storage to log user out
-     this.dataSource.authToken = 'null';
-     this.dataSource.authTokenRefresh = 'null';
+    //  this.dataSource.authToken = 'null';
+    //  this.dataSource.authTokenRefresh = 'null';
+    this.jwtAccessToken = 'null';
+    this.jwtRefreshToken = 'null';
 
   }
 
    get authenticated() {
-    return this.dataSource.authToken != null;
+    // return this.dataSource.authToken != null;
+     this.currentUser$.subscribe(token => {
+       let access = JSON.parse(JSON.stringify(token));
+       this.jwtAccessToken = access.access;
+     });
+     console.log('athenticated toke', this.jwtAccessToken);
+     return this.jwtAccessToken != null;
    }
 
   get refreshedToken() {
-    return this.dataSource.refreshToken != null;
+    // return this.dataSource.refreshToken != null;
+    return this.jwtRefreshToken != null;
   }
    onUserSignOn(
     first_name: string,
