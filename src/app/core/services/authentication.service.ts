@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 
@@ -25,6 +25,8 @@ export class AuthenticationService {
   public loggedInUser!: AuthenticatedUser;
   public jwtAccessToken!: string;
   public jwtRefreshToken!: string;
+
+
 
 
   public get currentUserValue(): AuthenticatedUser{
@@ -61,9 +63,9 @@ export class AuthenticationService {
 
   private saveUser(loginResponse: string) {
     console.log('The token-', loginResponse);
-    // this.loggedInUser = JSON.parse(JSON.stringify(loginResponse));
     this.currentUser$.next(JSON.parse(JSON.stringify(loginResponse)));
     console.log('Logged in Behaviour Subject-', this.currentUser$);
+
     localStorage.setItem('currentUser', JSON.stringify(loginResponse));
     return this.currentUser$.next(JSON.parse(JSON.stringify(loginResponse)));
 
@@ -92,6 +94,7 @@ export class AuthenticationService {
     // return this.dataSource.refreshToken != null;
     return this.jwtRefreshToken != null;
   }
+
    onUserSignOn(
     first_name: string,
     last_name: string,
@@ -125,6 +128,7 @@ export class AuthenticationService {
       return throwError(errorMessage);
     }));
   };
+
 
   }
 

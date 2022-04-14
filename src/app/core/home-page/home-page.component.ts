@@ -33,15 +33,7 @@ export class HomePageComponent implements OnInit {
       console.log('TestData:' , this.testData);
     });
 
-    this.authenticationService.currentUser$.subscribe(data => {
-      let test = JSON.parse(JSON.stringify(data));
-      this.token = test.access;
-      console.log('header subjects', this.token);
-    });
 
-
-    this.userFromUserService = this.userService.decodedLoggedInUser;
-    console.log('pulled userObject from user service', this.userFromUserService);
 
   }
 
