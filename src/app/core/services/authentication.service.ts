@@ -11,7 +11,8 @@ import { environment } from '@environments/environment';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { JwTAuthenticationResponse, LoginResponse, SignUpResponse } from '../shared/interfaces/users-interface';
 import { AuthenticatedUser } from '../shared/models/user.model';
-import jwtDecode from 'jwt-decode';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import { ThisReceiver } from '@angular/compiler';
 
 @Injectable({
@@ -21,15 +22,15 @@ import { ThisReceiver } from '@angular/compiler';
 export class AuthenticationService {
 
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  public currentUser$!: BehaviorSubject<AuthenticatedUser>;
-  public loggedInUser!: AuthenticatedUser;
+  public currentUser$ = new BehaviorSubject<number>(0);
+  public expiryDate!: Date;
   public jwtAccessToken!: string;
   public jwtRefreshToken!: string;
 
 
 
 
-  public get currentUserValue(): AuthenticatedUser{
+  public get currentUserValue(): number{
     return this.currentUser$.value;
   }
 
@@ -37,21 +38,15 @@ export class AuthenticationService {
     private http: HttpClient,
     private dataSource: RestDataSource) {
 
-    this.currentUser$ = new BehaviorSubject<AuthenticatedUser>({});
-
   }
 
   onLogin(email: string, password: string): Observable<string> {
-    // return this.dataSource.getToken(email, password);
     return this.http.post<string>(`${environment.apiUrl}/${environment.jwtLogin}`,
     JSON.stringify({ email, password}), this.httpOptions
     ).pipe(
       map(loginResponse => {
         // login is successfull and token is in the response
-
         this.jwtAccessToken = loginResponse;
-        console.log('is it the one for access?', this.jwtAccessToken);
-
         return this.jwtAccessToken;
       }),
       tap(loginResponse => {
@@ -62,13 +57,13 @@ export class AuthenticationService {
   }
 
   private saveUser(loginResponse: string) {
-    console.log('The token-', loginResponse);
-    this.currentUser$.next(JSON.parse(JSON.stringify(loginResponse)));
-    console.log('Logged in Behaviour Subject-', this.currentUser$);
-
-    localStorage.setItem('currentUser', JSON.stringify(loginResponse));
-    return this.currentUser$.next(JSON.parse(JSON.stringify(loginResponse)));
-
+    let parsedUser = JSON.parse(JSON.stringify(loginResponse));
+    type customJwtPayLoad = JwtPayload & { userPayloadData: string };
+    let decodedToken = jwtDecode<customJwtPayLoad>(parsedUser.access);
+    let finalParsedUser = JSON.parse(JSON.stringify(decodedToken));
+    this.currentUser$.next(finalParsedUser.user_id);
+    this.expiryDate = new Date(finalParsedUser.exp * 1000);
+    return this.currentUser$;
     }
 
   onLogout() {
@@ -86,7 +81,7 @@ export class AuthenticationService {
        let access = JSON.parse(JSON.stringify(token));
        this.jwtAccessToken = access.access;
      });
-     console.log('athenticated toke', this.jwtAccessToken);
+     console.log('authenticated tokens', this.jwtAccessToken);
      return this.jwtAccessToken != null;
    }
 

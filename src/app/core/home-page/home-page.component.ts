@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
 import { UsersService } from '../services/users.service';
 import { RestDataSource } from '../shared/data/rest.datasource';
@@ -13,9 +14,9 @@ import { AuthenticatedUser } from '../shared/models/user.model';
 })
 export class HomePageComponent implements OnInit {
 
-  public testData: UserProfileInterface[] = [];
-  public token!: string;
-  public userFromUserService!: AuthenticatedUser;
+  public users: UserInterface[] = [];
+  private userSubscription!: Subscription;
+  public userser!: AuthenticatedUser;
 
 
 
@@ -28,15 +29,22 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.sourceData.getAllUserProfiles().subscribe(data => {
-      this.testData = data;
-      console.log('TestData:' , this.testData);
+    this.sourceData.getAllUsers().subscribe(userData => {
+      this.users = userData;
+      console.log('TestData:', this.users);
     });
 
+    this.userSubscription = this.authenticationService.currentUser$.subscribe(user => {
+      this.userser = user;
+    });
 
 
   }
 
+   ngOnDestroy() {
+
+    this.userSubscription.unsubscribe();
+  }
 
 
 }

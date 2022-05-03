@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { User } from '@app/core/shared/models/user.model';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -16,18 +17,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuthenticated: boolean = false;
   private userSubscription!: Subscription;
-  public user!: any;
+  public user!: number;
   public userList!: User[];
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
 
   constructor(
     private dataSource: RestDataSource,
+    private authenticationService: AuthenticationService,
     private route: Router
   ) { }
 
   ngOnInit(): void {
-    this.userSubscription = this.dataSource.user.subscribe(
+    this.userSubscription = this.authenticationService.currentUser$.subscribe(
       user => {
         this.isAuthenticated = !!user;
         this.user = user;

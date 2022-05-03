@@ -41,10 +41,10 @@ export class RestDataSource {
   public httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   public activityCategoryList!: ActivityCategory[];
   public activityList!: Activity[];
-  public payload: any;
-  public userId!: number;
-  public expiryDate!: Date;
-  public singleCatergory!: any;
+  // public payload: any;
+  // public userId!: number;
+  // public expiryDate!: Date;
+
 
 
   constructor(
