@@ -77,11 +77,11 @@ export class AuthenticationService {
 
    get authenticated() {
     // return this.dataSource.authToken != null;
-     this.currentUser$.subscribe(token => {
-       let access = JSON.parse(JSON.stringify(token));
-       this.jwtAccessToken = access.access;
-     });
-     console.log('authenticated tokens', this.jwtAccessToken);
+    //  this.currentUser$.subscribe(token => {
+    //    let access = JSON.parse(JSON.stringify(token));
+    //    this.jwtAccessToken = access.access;
+    //  });
+    //  console.log('authenticated tokens', this.jwtAccessToken);
      return this.jwtAccessToken != null;
    }
 
