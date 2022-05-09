@@ -121,32 +121,43 @@ export class RestDataSource {
 
   editActivity(id: number, title: string, description: string,status: string, activity_category: number) {
     return this.http.patch<any>(`${environment.apiUrl}/activitys/` + id + '/', { title, description, status, activity_category}, { headers: this.httpHeaders });
-  }
+  };
 
    deleteActivity(id: number): Observable<number> {
     return this.http.delete<any>(`${environment.apiUrl}/activitys/` + id + '/');
-  }
+  };
 
   fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
-  }
+  };
 
   fetchSingleActivityCategory(id: number): Observable<ActivityCategoryInterface> {
     return this.http.get<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', { headers: this.httpHeaders });
-  }
+  };
 
   editActivityCategory(id: number, title: string, description: string, category: string ): Observable<ActivityCategoryInterface> {
     return this.http.patch<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', {title, description,category },
       { headers: this.httpHeaders });
-  }
+  };
 
   deleteActivityCategory(id: number): Observable<ActivityCategoryInterface> {
     return this.http.delete<any>(`${environment.apiUrl}/activityscategorys/` + id + '/');
+  };
+
+  fetchUsers(): Observable<UserInterface[]> {
+    return this.http.get<UserInterface[]>(`${environment.apiUrl}/register/`, this.httpOptions);
   }
 
-  fetchUsers(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/register/`, this.httpOptions);
-  }
+  editUserInformation(id: number, first_name: string, last_name: string, date_of_birth: string, phone_number: string,
+  username: string, email: string, gender: string, city: string ) {
+    return this.http.patch<any>(`${ environment.apiUrl }/register/` + id + '/', {
+      first_name, last_name, date_of_birth, phone_number, username, email, gender, city }, { headers: this.httpHeaders });
+
+  };
+
+
+
+
 
   fetchUserProfiles(): Observable<UserProfileInterface>{
     return this.http.get<UserProfileInterface>(`${environment.apiUrl}/user-profile`, this.httpOptions);

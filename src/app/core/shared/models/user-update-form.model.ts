@@ -50,7 +50,7 @@ export class UserUpdateFormGroup extends FormGroup {
     constructor() {
         super({
 
-
+            id: new UserUpdateFormControl("id", "id", "", Validators.required,),
             first_name: new UserUpdateFormControl("First Name", "first_name", "", Validators.required,),
             last_name: new UserUpdateFormControl("Last Name", "last_name", "", Validators.required),
             date_of_birth: new UserUpdateFormControl("Birthday", "birthday", {value:'', disabled: true }, Validators.required),

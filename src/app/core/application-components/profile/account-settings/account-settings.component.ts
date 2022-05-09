@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
 // import { UseUpdate } from '@app/shared/models/authentication.model';
@@ -8,6 +9,9 @@ import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { User } from '@app/core/shared/models/user.model';
 
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-account-settings',
@@ -30,24 +34,33 @@ export class AccountSettingsComponent implements OnInit {
   public readonly!: boolean;
 
   // Logged in User data
-  public user!: any;
+  public user!: number;
   private userSubscription!: Subscription;
   public userList!: User[];
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
   public patchedUser!: User;
+  public datePipe!: Date;
+
 
 
 
   constructor(
 
-    private dataSource : RestDataSource
-  ) { }
+    private dataSource: RestDataSource,
+    private authenticationService: AuthenticationService,
+    private dialog: MatDialog,
+    private dateFormat: DatePipe
+
+  ) {
+
+    this.datePipe = dateFormat;
+  }
 
   ngOnInit(): void {
     this.readonly = true;
 
-    this.userSubscription = this.dataSource.user.subscribe(
+    this.userSubscription = this.authenticationService.currentUser$.subscribe(
       user => {
 
         this.user = user;
@@ -98,7 +111,38 @@ export class AccountSettingsComponent implements OnInit {
   }
 
   submitForm() {
-    alert('the button is working');
+    // alert('the button is working');
+    console.log('before patcheuser', this.patchedUser);
+    this.patchedUser = this.formGroup.value;
+    console.log('after patched user', this.patchedUser);
+
+    return this.dataSource.editUserInformation(
+      this.patchedUser.id,
+      this.patchedUser.first_name,
+      this.patchedUser.last_name,
+      // this.patchedUser.date_of_birth,
+      this.dateFormat.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
+      this.patchedUser.phone_number,
+      this.patchedUser.username,
+      this.patchedUser.email,
+      this.patchedUser.gender,
+      this.patchedUser.city).subscribe(success => {
+
+
+
+      if (success) {
+        console.log(success);
+        this.dialog.open(ChangesSavedDialogComponent);
+      }
+    },
+      error => {
+        this.error = 'The User update failed';
+        alert(this.error);
+        this.isLoading = false;
+
+      }
+
+    )
 
    }
 
