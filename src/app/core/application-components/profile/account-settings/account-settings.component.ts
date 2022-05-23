@@ -40,7 +40,7 @@ export class AccountSettingsComponent implements OnInit {
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
   public patchedUser!: User;
-  public datePipe!: Date;
+  public datePipe!: any;
 
 
 
@@ -110,39 +110,47 @@ export class AccountSettingsComponent implements OnInit {
     return this.formGroup.get('city')
   }
 
+  // submitForm() {
+  //   alert('What is the issue now?')
+  // }
+
   submitForm() {
     // alert('the button is working');
-    console.log('before patcheuser', this.patchedUser);
+    // console.log('before patcheuser', this.patchedUser);
     this.patchedUser = this.formGroup.value;
-    console.log('after patched user', this.patchedUser);
+    // console.log('after patched user', this.patchedUser);
 
     return this.dataSource.editUserInformation(
       this.patchedUser.id,
       this.patchedUser.first_name,
       this.patchedUser.last_name,
       // this.patchedUser.date_of_birth,
-      this.dateFormat.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
+      this.datePipe.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
       this.patchedUser.phone_number,
       this.patchedUser.username,
       this.patchedUser.email,
       this.patchedUser.gender,
-      this.patchedUser.city).subscribe(success => {
+      this.patchedUser.city).
+      //   subscribe(success => {
+
+      //   if (success) {
+      //     console.log('this is sucess', success);
+      //     this.dialog.open(ChangesSavedDialogComponent);
+      //   }
+      // },
+      //   error => {
+      //     this.error = 'The User update failed';
+      //     alert(this.error);
+      //     this.isLoading = false;
+
+      //   })
+
+      subscribe({
+        complete: () => this.dialog.open(ChangesSavedDialogComponent),
+        error: () => { this.error = 'This user update failed', alert(this.error)}
+    });
 
 
-
-      if (success) {
-        console.log(success);
-        this.dialog.open(ChangesSavedDialogComponent);
-      }
-    },
-      error => {
-        this.error = 'The User update failed';
-        alert(this.error);
-        this.isLoading = false;
-
-      }
-
-    )
 
    }
 

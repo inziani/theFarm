@@ -40,9 +40,29 @@
     </div>
     </div>
 
+  </section>
 
-
-    </section>
+  <div class="mt-0">
+    <mat-card class="mat-elevation-z0 gl-menu mb-3">
+      <mat-card-header>
+        <mat-card-title>myTransactions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="column" fxLayoutGap="10px grid" fxLayoutAlign="center center">
+        <a routerLink="./glmasterdata"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
+            <h3><strong>Account settings</strong></h3>
+          </button></a>
+        <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
+            <h3><strong>Bio</strong></h3>
+          </button></a>
+        <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
+            <h3><strong>Roles and Authorizations</strong></h3>
+          </button></a>
+        <a routerLink="/glhome"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
+            <h3><strong>Password and security</strong></h3>
+          </button></a>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
 <!-- <div class="mt-5">
   <mat-card class="profile-picture">
