@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+
+import { ProfilePageGridInterface } from '@app/core/shared/interfaces/grids-interface';
 
 
 @Component({
@@ -12,6 +13,15 @@ export class ProfileComponent implements OnInit {
 
   public loggedInUser: string = 'Valentine Robai Inziani'
   public color = "#fb8500";
+
+  public tiles: ProfilePageGridInterface[] =
+    [
+      { text: 'Three', cols: 2, rows: 8},
+      { text: 'One', cols: 3, rows: 3 },
+      { text: 'Two', cols: 3, rows: 5 },
+
+
+    ];
 
 
   constructor() { }
