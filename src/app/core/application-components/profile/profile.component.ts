@@ -23,6 +23,13 @@ export class ProfileComponent implements OnInit {
 
     ];
 
+  public profileItems = [
+
+    { item: 'Account settings' },
+    { item: 'Roles and Authorizations' },
+    { item: 'Password and security' }
+  ];
+
 
   constructor() { }
 
