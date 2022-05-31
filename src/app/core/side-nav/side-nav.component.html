@@ -20,6 +20,9 @@
     <a mat-list-item routerLink="/home" (click)="onClose()">
         <mat-icon>receipt</mat-icon><span class="nav-caption">Materials Management</span>
     </a>
+    <a mat-list-item routerLink="/profile" (click)="onClose()">
+      <mat-icon>manage_accounts</mat-icon><span class="nav-caption">Profile</span>
+    </a>
     <a mat-list-item routerLink="/home" (click)="onLogOut()">
         <mat-icon>logout</mat-icon><span class="nav-caption">Log out</span>
     </a>
@@ -27,7 +30,7 @@
 
 <!-- Use expansion panel instead of mat tree for the user profile -->
 
-<mat-accordion>
+<!-- <mat-accordion>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title class="panel-title">
@@ -54,4 +57,4 @@
       </a>
 </ul>
 </mat-expansion-panel>
-</mat-accordion>
+</mat-accordion> -->
