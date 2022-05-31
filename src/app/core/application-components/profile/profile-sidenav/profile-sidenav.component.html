@@ -1,0 +1,20 @@
+<a (click)="onClose()" class="close-sidenav">
+  <mat-icon>close</mat-icon>
+</a>
+<mat-nav-list>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>home</mat-icon><span class="nav-caption">Home</span>
+  </a>
+  <a mat-list-item routerLink="/bio" (click)="onClose()">
+    <mat-icon>shopping_cart</mat-icon><span class="nav-caption">Bio</span>
+  </a>
+  <a mat-list-item routerLink="/roleauth" (click)="onClose()">
+    <mat-icon>construction</mat-icon><span class="nav-caption">Roles and Authorizations</span>
+  </a>
+  <a mat-list-item routerLink="/security" (click)="onClose()">
+    <mat-icon>analytics</mat-icon><span class="nav-caption">Security</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onLogOut()">
+    <mat-icon>logout</mat-icon><span class="nav-caption">Log out</span>
+  </a>
+</mat-nav-list>

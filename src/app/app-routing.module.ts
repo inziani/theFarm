@@ -18,6 +18,10 @@ import { FinanceHomeComponent } from "./finance/finance-home/finance-home.compon
 import { GlHomeComponent } from "./finance/general-ledger/gl-home/gl-home.component";
 import { GlMasterDataComponent } from "./finance/general-ledger/master-data/gl-master-data/gl-master-data.component";
 import { GlDisplayComponent } from "./finance/general-ledger/gl-home/gl-display/gl-display.component";
+import { RoleAuthComponent } from "./core/application-components/profile/role-auth/role-auth.component";
+import { BioComponent } from "./core/application-components/profile/bio/bio.component";
+import { PasswordSecComponent } from "./core/application-components/profile/password-sec/password-sec.component";
+import { ProfileLayoutComponent } from "./profile-layout/profile-layout.component";
 
 
 
@@ -28,11 +32,30 @@ const appRoutes: Routes = [
     path: '', component: AppLayoutComponent, children: [
       { path: '', component: HomePageComponent },
       { path: 'home', component: HomePageComponent },
-      { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
+      // { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard]},
+      // { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
+      // { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
+      // { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
+      // { path: 'roleauth', component: RoleAuthComponent, canActivate: [AuthenticationGuard] },
+      // { path: 'bio', component: BioComponent, canActivate: [AuthenticationGuard] },
+      // { path: 'security', component: PasswordSecComponent, canActivate: [AuthenticationGuard] }
+
+    ]
+  },
+
+  // Profile layout
+
+  {
+    path: '', component: ProfileLayoutComponent, children: [
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard]},
       { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
       { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
       { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
-    ]
+      { path: 'roleauth', component: RoleAuthComponent, canActivate: [AuthenticationGuard] },
+      { path: 'bio', component: BioComponent, canActivate: [AuthenticationGuard] },
+      { path: 'security', component: PasswordSecComponent, canActivate: [AuthenticationGuard] }
+
+    ], canActivate: [AuthenticationGuard]
   },
 
   {

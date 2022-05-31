@@ -22,11 +22,7 @@ export class SideNavComponent implements OnInit {
     private restDataSource: RestDataSource
   ) {
 
-
-
   }
-
-
 
   ngOnInit(): void {
   }

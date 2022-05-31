@@ -68,6 +68,8 @@ import { FinanceSidenavComponent } from './finance/finance-sidenav/finance-siden
 import { GlMasterDataComponent } from './finance/general-ledger/master-data/gl-master-data/gl-master-data.component';
 import { GlDisplayComponent } from './finance/general-ledger/gl-home/gl-display/gl-display.component';
 import { GlHeaderMasterComponent } from './finance/general-ledger/master-data/gl-header-master/gl-header-master.component';
+import { ProfileSidenavComponent } from './core/application-components/profile/profile-sidenav/profile-sidenav.component';
+import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 
 
 
@@ -110,7 +112,9 @@ import { GlHeaderMasterComponent } from './finance/general-ledger/master-data/gl
         FinanceSidenavComponent,
         GlMasterDataComponent,
         GlDisplayComponent,
-        GlHeaderMasterComponent
+        GlHeaderMasterComponent,
+        ProfileSidenavComponent,
+        ProfileLayoutComponent
     ],
     imports: [
         BrowserModule,
