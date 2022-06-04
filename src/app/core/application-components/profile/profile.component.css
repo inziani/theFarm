@@ -1,18 +1,14 @@
-body {
-  /* background-color: #03045e; */
-  height: 100vh;
-}
-:host{
 
+
+:host{
   background-color: #03045e;
   display: block;
   height: 100vh
 }
+
 a {
   text-decoration: none;
 }
-
-
 
 .profile-picture{
   width: 400px;
@@ -23,7 +19,6 @@ a {
 }
 
 .profile-page{
-
    height: 100vh;
    margin-left: 5px;
    margin-right: 5px;
@@ -32,7 +27,7 @@ a {
 }
 
 mat-card{
-  /* width: 500px; */
+
   box-shadow: none !important;
   align-items: center;
 }
@@ -58,22 +53,8 @@ img {
   border-radius: 50%;
 }
 
-.mat-grid-tile{
-  background-color: black;
-  align-content: space-around;
-  align-items: center;
 
-}
 
-.container{
-  color: #fb8500;
-  /* min-height: 100vh; */
-
-}
-
-.profile-items {
-  align-items: center;
-}
 
 
 

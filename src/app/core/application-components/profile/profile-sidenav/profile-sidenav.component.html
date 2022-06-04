@@ -6,19 +6,22 @@
     <mat-icon>home</mat-icon><span class="nav-caption">Home</span>
   </a>
   <a mat-list-item routerLink="/activity" (click)="onClose()">
-    <mat-icon>home</mat-icon><span class="nav-caption">Tasks</span>
+    <mat-icon>add_box</mat-icon><span class="nav-caption">Tasks</span>
   </a>
   <a mat-list-item routerLink="/activityCategory" (click)="onClose()">
-    <mat-icon>home</mat-icon><span class="nav-caption">Task Category</span>
+    <mat-icon>add_circle_outline</mat-icon><span class="nav-caption">Task Category</span>
   </a>
+    <a mat-list-item routerLink="/profile" (click)="onClose()">
+      <mat-icon>person</mat-icon><span class="nav-caption">Personal Details</span>
+    </a>
   <a mat-list-item routerLink="/bio" (click)="onClose()">
-    <mat-icon>shopping_cart</mat-icon><span class="nav-caption">Bio</span>
+    <mat-icon>details</mat-icon><span class="nav-caption">Bio</span>
   </a>
   <a mat-list-item routerLink="/roleauth" (click)="onClose()">
-    <mat-icon>construction</mat-icon><span class="nav-caption">Roles and Authorizations</span>
+    <mat-icon>work</mat-icon><span class="nav-caption">Roles and Authorizations</span>
   </a>
   <a mat-list-item routerLink="/security" (click)="onClose()">
-    <mat-icon>analytics</mat-icon><span class="nav-caption">Security</span>
+    <mat-icon>security</mat-icon><span class="nav-caption">Security</span>
   </a>
   <a mat-list-item routerLink="/home" (click)="onLogOut()">
     <mat-icon>logout</mat-icon><span class="nav-caption">Log out</span>

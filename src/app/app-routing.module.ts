@@ -3,7 +3,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { EditActivityComponent } from "./core/application-components/edit-activity/edit-activity.component";
 
 import { AppComponent } from "./app.component";
-// import { AppComponent as FinanceAppComponent } from "projects/finance/src/app/app.component";
 import { HomePageComponent } from "./core/home-page/home-page.component";
 import { LoginComponent } from "./core/authentication/login/login.component";
 import { ProfileComponent } from "./core/application-components/profile/profile.component";
@@ -24,7 +23,6 @@ import { PasswordSecComponent } from "./core/application-components/profile/pass
 import { ProfileLayoutComponent } from "./profile-layout/profile-layout.component";
 
 
-
 const appRoutes: Routes = [
 
   {
@@ -32,13 +30,6 @@ const appRoutes: Routes = [
     path: '', component: AppLayoutComponent, children: [
       { path: '', component: HomePageComponent },
       { path: 'home', component: HomePageComponent },
-      // { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard]},
-      // { path: 'activity', component: TodoComponent, canActivate: [AuthenticationGuard] },
-      // { path: 'newActivity', component: EditActivityComponent, canActivate: [AuthenticationGuard] },
-      // { path: 'activityCategory', component: ActivityCategorysComponent, canActivate: [AuthenticationGuard] },
-      // { path: 'roleauth', component: RoleAuthComponent, canActivate: [AuthenticationGuard] },
-      // { path: 'bio', component: BioComponent, canActivate: [AuthenticationGuard] },
-      // { path: 'security', component: PasswordSecComponent, canActivate: [AuthenticationGuard] }
 
     ]
   },

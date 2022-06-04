@@ -1,117 +1,27 @@
-<!-- Using the Flex layout with Tabs -->
+
 <!-- Profile picture sections -->
-
-<div class="mx-5 my-3">
-  <div class="container-md overflow-hidden ">
-    <div class="row g-2">
-            <div class="col-md-12 d-flex justify-content-md-center mx-3">
-              <div class="p-3 border">
-                <mat-card class="profile-picture">
-                  <img mat-card-md-image class="mt-3" src="/assets/images/vri.png">
-                  <mat-card-title-group class="mt-3">
-                    <mat-card-title>{{ loggedInUser }}</mat-card-title>
-                    <mat-card-subtitle>Date last updated</mat-card-subtitle>
-                  </mat-card-title-group>
-                  <mat-card-content>
-                    <mat-card-actions align="start">
-                      <button class="mx-2" type="submit" mat-stroked-button color="primary">Update</button>
-                    </mat-card-actions>
-                  </mat-card-content>
-                </mat-card>
-              </div>
-            </div>
-      <!-- <div class="col-md-3 d-flex">
-        <div class="p-3 border mx-3 my-5">
-          <p>Profile Items</p>
-              <a routerLink="./glmasterdata"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                  <h3><strong>Account settings</strong></h3>
-                </button></a>
-              <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                  <h3><strong>Bio</strong></h3>
-                </button></a>
-              <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                  <h3><strong>Roles and Authorizations</strong></h3>
-                </button></a>
-              <a routerLink="/glhome"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                  <h3><strong>Password and security</strong></h3>
-                </button></a>
-        </div>
-      </div> -->
-      <div class="col-md-12">
-        <div class="p-3 border mx-3 my-5"> <app-account-settings></app-account-settings></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-<!--
-<section class="mt-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px">
-    <div fxLayout="column" fxLayoutGap="20px" class="mt-5 mx-3" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
-      fxLayoutAlign="center" fxFlex="1 2 auto">
-      <mat-card class="profile-picture">
-        <img mat-card-md-image class="mt-3" src="/assets/images/vri.png">
-        <mat-card-title-group class="mt-3">
-          <mat-card-title>{{ loggedInUser }}</mat-card-title>
-          <mat-card-subtitle>Date last updated</mat-card-subtitle>
-        </mat-card-title-group>
-        <mat-card-content>
-          <mat-card-actions align="end">
-            <button class="mx-5" type="submit" mat-stroked-button color="primary">Update</button>
-          </mat-card-actions>
-          </mat-card-content>
+<div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
+     <div class="p-3">
+        <mat-card class="profile-picture">
+            <img mat-card-md-image class="mt-3" src="/assets/images/vri.png">
+             <mat-card-title-group class="mt-3">
+                <mat-card-title>{{ loggedInUser }}</mat-card-title>
+                  <mat-card-subtitle>Date last updated</mat-card-subtitle>
+              </mat-card-title-group>
+                <mat-card-content>
+                  <mat-card-actions align="start">
+                    <button class="mx-2" type="submit" mat-stroked-button color="primary">Update</button>
+                  </mat-card-actions>
+                </mat-card-content>
           </mat-card>
-          <div>
-            <mat-card class="mat-elevation-z0 mb-3 mt-5" >
-              <mat-card-header>
-                <mat-card-title>secondOne</mat-card-title>
-              </mat-card-header>
-              <mat-card-content fxLayout="column" fxLayoutGap="10px grid" fxLayoutAlign="center center">
-                <a routerLink="./glmasterdata"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                    <h3><strong>Account settings</strong></h3>
-                  </button></a>
-                <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                    <h3><strong>Bio</strong></h3>
-                  </button></a>
-                <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                    <h3><strong>Roles and Authorizations</strong></h3>
-                  </button></a>
-                <a routerLink="/glhome"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-                    <h3><strong>Password and security</strong></h3>
-                  </button></a>
-            </mat-card-content>
-        </mat-card>
       </div>
+  </div>
+  <!-- Account settings section -->
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center" >
+    <div class="mx-5 my-3 p-5">
+      <app-account-settings></app-account-settings>
     </div>
-  <div fxFlex="1 1 auto">
-    <mat-card class="mat-elevation-z8 my-3 mx-3 mt-5">
-      <mat-card-header>
-        <mat-card-title>myTransactions</mat-card-title>
-      </mat-card-header>
-      <mat-card-content fxLayout="column" fxLayoutGap="10px grid" fxLayoutAlign="center center">
-        <a routerLink="./glmasterdata"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-            <h3><strong>Account settings</strong></h3>
-          </button></a>
-        <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-            <h3><strong>Bio</strong></h3>
-          </button></a>
-        <a routerLink="/finance"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-            <h3><strong>Roles and Authorizations</strong></h3>
-          </button></a>
-        <a routerLink="/glhome"><button class="mx-2 my-4 mat-elevation-z8" mat-raised-button color="accent">
-            <h3><strong>Password and security</strong></h3>
-          </button></a>
-      </mat-card-content>
-    </mat-card>
+
   </div>
 </div>
-</section> -->

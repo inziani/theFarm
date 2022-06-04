@@ -1,8 +1,8 @@
-<section class="user-update-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
-  fxLayoutAlign="center center" fxLayoutGap="0px">
+<section class="mt-2 mb-3" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
+  fxLayoutAlign="center center" fxLayoutGap="20px">
   <h1>Personal Information</h1>
-  <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
-    <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+  <div >
+    <form novalidate [formGroup]="formGroup" *ngIf="!isLoading" class="mat-elevation-z8 mx-5 my-5 p-5">
       <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
         <ul>
           <li *ngFor="let error of formGroup.getFormValidationMessages()">
@@ -17,13 +17,10 @@
           <input type="text" matInput placeholder="First Name" id="first_name" name="first_name" formControlName="first_name"
             [readonly]="readonly">
           <ul class="text-danger list-unstyled"
-           *ngIf="(formSubmitted || formGroup.controls.first_name.dirty) && formGroup.controls['first_name'].invalid"
-
-            >
+           *ngIf="(formSubmitted || formGroup.controls.first_name.dirty) && formGroup.controls['first_name'].invalid">
             <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
           </ul>
         </mat-form-field>
-
         <mat-form-field>
           <mat-label>Last Name</mat-label>
           <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name" formControlName="last_name"
@@ -101,13 +98,21 @@
           </ul>
         </mat-form-field>
       </div>
-      <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
+      <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
+        fxLayoutAlign="center center" class="my-5">
+        <mat-icon>facebook</mat-icon>
+        <mat-icon>whatsapp</mat-icon>
+        <!-- <mat-icon>twitter</mat-icon>
+        <mat-icon>github</mat-icon>
+        <mat-icon>linkedin</mat-icon>
+        <mat-icon>youtube</mat-icon> -->
+      </div>
+      <div fxLayout='column' fxLayoutAlign="center center" class="mt-3 mb-5">
         <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px" fxLayoutAlign="center center">
           <button type="submit" mat-raised-button color="primary" (click)="update()">Edit</button>
           <button type="submit" mat-raised-button color="primary"
             [disabled]="!formSubmitted && formGroup.invalid" (click)="submitForm()">Save</button>
         </div>
-
       </div>
     </form>
   </div>
