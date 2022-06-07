@@ -1,11 +1,32 @@
+:host {
+  background-color: #03045e;
+  display: block;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
+.mat-card {
+  background-color: rgb(223, 202, 164);
+
+}
+
+.mat-card-title{
+  color: #03045e;
+}
+
+
+
+
+/* Old styles */
+
+/*
 .home-page{
     text-align: center;
     margin: auto;
     padding:10px;
     height: 80vh;
     width: 100%;
-    /* margin-top: 5px; */
     inline-size:50%;
     background-color: #03045e;
     color: #ff9e00;
@@ -115,4 +136,4 @@ h4 {
 }
 
 
-
+ */

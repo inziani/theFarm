@@ -1,13 +1,4 @@
 
-.container .cardWrap div{
-height: 80vh;
-width: 60vh;
-margin-left: 2px;
-margin-right: 2px;
-padding-left: 5px;
-padding-right: 5px;
-
-}
 
 .mat-option {
   background-color:#03045e;
@@ -17,68 +8,43 @@ padding-right: 5px;
 
 .mat-raised-button{
   width: 50%;
+  height: 50px;
+
+}
+.textareas{
+  text-decoration: none;
+  /* resize:none; */
+  /* display: none; */
+
+}
+
+
+.mat-form-field {
+  color: #03045e;
 }
 .mat-primary{
-  background-color: #ff9e00;
-  color: #03045e;
+  background-color: #03045e;
+  color: #ff9e00
 }
 
 .contact-us{
-  min-width: 150px;
-  max-width: 500px;
   width: 100%;
   background-color: transparent;
-}
-
-.mat-card{
-margin-bottom: 8px;
-background-color:transparent;
-color: #ff9e00;
-margin-left: 2px;
-margin-right: 2px;
-width: 100%;
-height: 80vh;
-}
-.footer{
-    text-align: center;
-    margin-top: 5rem;
-    margin-left: 2px;
-    margin-right: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-body{
-height: 100vh;
-}
-
-  .footer-link{
-    /* display: inline-block; */
-      color: #ff9e00;
-      text-decoration: none;
-  }
-  .footer-icons{
-      font-size: 2rem;
-  }
-
-  ul > li {
-    display: inline-block;
-    /* You can also add some margins here to make it look prettier */
-    margin-right: 1rem;
-    zoom:1;
-    /* *display:inline; */
-    /* this fix is needed for IE7- */
-}
-
-.footer-content{
-  opacity: inherit;
+  align-items: center;
 }
 
 .copyright{
-height: 20vh;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 20vh;
+  align-content: center;
 }
 
-.textareas {
-  border: none;
-  resize: none;
+.mat-card {
+  background-color: rgb(212, 188, 146);
+  color: #03045e;
   }
+
+ .mat-icon{
+   font-size: 35px;
+ }

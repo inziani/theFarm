@@ -1,4 +1,66 @@
-<div class="footer mt-5 mb-5" fxLayout="column" fxLayout.lt-xs="column" fxLayoutGap.lt-xs="20px"
+
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
+      fxLayoutAlign.lt-md="center center">
+      <div>
+        <h1 class="my-5">contact Us..</h1>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
+      fxLayoutAlign.lt-md="center center">
+
+      <div>
+<mat-card>
+<mat-card-header>
+   <!-- <mat-card-title>Material Management</mat-card-title> -->
+  </mat-card-header>
+     <mat-card-content>
+        <form (ngSubmit)="submitContactForm(contactForm)" #contactForm="ngForm">
+          <div class="my-5 mx-5">
+            <mat-form-field class="contact-us mt-3">
+              <mat-label>Name</mat-label>
+              <input type="text" matInput placeholder="Name" id="Name" name="Name" ngModel #name="ngModel" required>
+            </mat-form-field>
+            <mat-form-field class="contact-us mt-3">
+              <mat-label>email</mat-label>
+              <input type="email" matInput placeholder="email" id="email" name="email" ngModel #email="ngModel" required>
+            </mat-form-field>
+            <mat-form-field class="contact-us mt-3">
+              <mat-label>Subject</mat-label>
+              <mat-select required>
+                <mat-option *ngFor="let service of services" [value]="service.value">
+                  {{service.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="contact-us mt-3">
+              <mat-label>Message</mat-label>
+              <textarea required matInput placeholder="Message" rows="15" class="textareas"></textarea>
+            </mat-form-field>
+          </div>
+          <div fxLayout='column' fxLayoutAlign="center center" class="my-5">
+          <button class="my-3" mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Submit</button>
+          </div>
+        </form>
+
+        </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+          <div class="my-5">
+            <mat-icon class="mx-3 my-5">facebook</mat-icon>
+            <mat-icon class="mx-3 my-5">whatsapp</mat-icon>
+            <mat-icon class="mx-3 my-5">facebook</mat-icon>
+            <mat-icon class="mx-3 my-5">whatsapp</mat-icon>
+          </div>
+    <div class="my-5">
+              <small>
+                <p class="copyright">copyright &copy; small farms <span>{{ date | date: 'yyyy' }}</span> all rights
+                  reserved</p>
+              </small>
+    </div>
+</div>
+
+<!-- <div class="footer mt-5 mb-5" fxLayout="column" fxLayout.lt-xs="column" fxLayoutGap.lt-xs="20px"
     fxLayoutAlign="center center">
     <div class="cardWrap" fxLayout.lt-md="column" fxLayout.md="column" fxLayout="row" fxFlex.md="100"
         fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
@@ -36,7 +98,7 @@
             </form>
         </div>
         <div fxFlex="600px" fxLayout="column" fxFlex.xs="100%" fxLayoutAlign="center center">
-            <!-- <div>
+            <div>
                 <ul class="footer-icons mt-5 mb-5 ">
                     <li><a href="https://www.twitter.com/@robaimusirivi/" class="footer-icons">
                             <fa-icon [icon]="['fab', 'twitter']"></fa-icon>
@@ -52,7 +114,7 @@
                             <fa-icon [icon]="['fab', 'whatsapp']"></fa-icon>
                         </a></li>
                 </ul>
-            </div> -->
+            </div>
         </div>
     </div>
 
@@ -74,7 +136,7 @@
                     reserved</p>
             </small></div>
     </div>
-</div>
+</div> -->
 
 
 
