@@ -1,22 +1,32 @@
 
-
 <!-- Angular Material Navigation Bar -->
 <mat-toolbar>
-  <div><button class="mt-5" mat-icon-button (click)="onToggleSidenav()" *ngIf="isAuthenticated">
+  <div>
+    <button class="mt-5" mat-icon-button (click)="onToggleSidenav()" *ngIf="isAuthenticated">
       <mat-icon>menu</mat-icon>
-    </button></div>
+    </button>
+  </div>
   <div><a routerLink="/home">
-      <h4 class="nav-caption mt-5">smallFarmers</h4>
-    </a></div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs class="mt-5">
+      <h4 class="nav-caption mt-5">smallFarmers</h4></a>
+  </div>
+<!-- Testing -->
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.gt-md>
+    <button class="mt-5" mat-icon-button (click)="onHomePageSideNavToggle()" *ngIf="!isAuthenticated">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <!-- Testing -->
+
+
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.lt-md class="mt-5">
     <ul fxLayout fxLayoutGap="0.5rem" class="navigation-items">
       <li><a routerLink="/home" *ngIf="!isAuthenticated">Home</a></li>
       <li><a routerLink="/home" *ngIf="!isAuthenticated">About</a></li>
       <li><a routerLink="/home" *ngIf="!isAuthenticated">Contact Us</a></li>
       <li><a routerLink="/login" *ngIf="!isAuthenticated">Log In </a></li>
-      <li><a routerLink="/signup" *ngIf="!isAuthenticated"> Sign Up</a></li>
-      <li *ngIf="isAuthenticated">
-        <a routerLink="/profile" *ngFor="let loggedInUser of currentLoggedInUser">{{
+      <li><a routerLink="/signup" *ngIf="!isAuthenticated">Sign Up</a></li>
+      <li *ngIf="isAuthenticated"><a routerLink="/profile" *ngFor="let loggedInUser of currentLoggedInUser">{{
           loggedInUser.username }}
         </a>
       </li>

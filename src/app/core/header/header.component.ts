@@ -14,6 +14,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   @Output() sideNavToggle = new EventEmitter<void>();
+  @Output() homePageNavToggle = new EventEmitter<void>();
 
   public isAuthenticated: boolean = false;
   private userSubscription!: Subscription;
@@ -51,9 +52,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onToggleSidenav() {
-
     this.sideNavToggle.emit();
+  }
 
+  onHomePageSideNavToggle() {
+    this.homePageNavToggle.emit();
   }
 
   onLogOut() {

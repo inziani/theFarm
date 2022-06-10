@@ -13,15 +13,19 @@
 }
 .textareas{
   text-decoration: none;
+  color: #03045e;
   /* resize:none; */
   /* display: none; */
 
 }
 
 
-.mat-form-field {
+.mat-form-field-appearance-outline .mat-form-field-outline {
+
   color: #03045e;
+  
 }
+
 .mat-primary{
   background-color: #03045e;
   color: #ff9e00
@@ -41,8 +45,15 @@
 }
 
 .mat-card {
-  background-color: rgb(212, 188, 146);
+  /* background-color: rgb(212, 188, 146); */
+  /* background-color: #f6c77c;; */
+  /* background-color: #f6cf90; */
   color: #03045e;
+  background-color: antiquewhite;
+
+  }
+  .mat-input-element{
+    color: #03045e;
   }
 
  .mat-icon{

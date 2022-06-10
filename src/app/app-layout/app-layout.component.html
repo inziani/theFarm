@@ -1,9 +1,12 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
-    <app-side-nav (closeSideNav)="sidenav.close()"></app-side-nav>
+    <app-side-nav #authenticated  (closeSideNav)="sidenav.close()"></app-side-nav>
+  </mat-sidenav>
+  <mat-sidenav #homeSideNav position="end" role="navigation">
+    <app-home-sidenav #unauthenticated  (closedSideNav)="homeSideNav.close()"></app-home-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-header (sideNavToggle)="sidenav.toggle()"></app-header>
+    <app-header (sideNavToggle)="sidenav.toggle()" (homePageNavToggle)="homeSideNav.toggle()"></app-header>
     <main>
       <router-outlet></router-outlet>
     </main>
