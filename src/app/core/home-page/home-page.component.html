@@ -1,14 +1,46 @@
 
 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center">
-  <!-- Welcome text -->
-  <!-- <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center"> -->
-    <div class="mx-5 my-5" style="text-align: center;">
-      <h1 class="mx-5 my-5"> Welcome to smallFarmers</h1>
-      <p class="mx-5 my-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores praesentium nulla, vitae laudantium iure distinctio numquam maiores fugiat minima harum in quae ipsum recusandae ex quibusdam. Tenetur recusandae ipsa quae voluptates nisi dicta dolorum optio odit nihil. Corporis assumenda iure quos maiores. Inventore odit dicta doloribus labore vitae eaque aut!
-      </p>
+
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center">
+   <div class="my-5 mx-5 home-image">
+    <img class="my-3"
+    [style.height]="'auto'"
+    [style.width]="'100%'"
+    [style.opacity]="0.7"
+    src="/assets/images/home.jpg">
+
+  <div class="homeimage-text" style="text-align: center;" fxLayout="column" fxLayoutAlign="center center"   fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center">
+    <div>
+            <h1 class="mx-5 my-3 smallfarmfont display-3">smallFarmers</h1>
+            <h3 class="mx-5 my-3 intfont">
+              Farming problems and solutions, tips and Ideas, recording and reporting for small farmers
+            </h3>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center" class="my-3">
+              <button mat-raised-button color="primary" class="mr-3 my-2">ENQUIRE</button>
+              <button mat-raised-button color="primary" class="my-2">MORE ABOUT US</button>
+            </div>
+          </div>
     </div>
-    <!-- </div > -->
+  </div>
+
+</div>
+
+  <!-- Welcome text -->
+    <div class="mx-3 my-5" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center" >
+      <h1 style="text-align: center;"> About us..</h1>
+      <p class="mx-5 my-5 about-text">
+        Small farms is an Agricultural solutions firm that provides a wide range of digital products and services for small and subsistence farmers. Our objective is to give farmers and their customers access to with digital tools that will enable them to :
+      </p>
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center">
+      <ol>
+        <li>Get information on optimal agricultural practices</li>
+        <li>Access digital platforms for recording, tracking and reporting their financial, human resources, agricultural,
+        procurement, stocking and any project management activities</li>
+        <li>Provide transparency to consumers on how food is produced</li>
+      </ol>
+      </div>
+    </div>
+
 
 
 <!-- Modules -->
@@ -23,7 +55,6 @@
             <a routerLink="/login"><img class="my-1" mat-card-image src="../assets/images/pm.jpg"
                 alt="ProjectManagement" style="height: 200px; width: 300px; object-fit: cover;"></a>
             <mat-card-content>
-             
             </mat-card-content>
           </mat-card>
           <!--  Finance-->
@@ -34,7 +65,6 @@
             <a routerLink="/login"><img class="my-1" mat-card-image src="../assets/images/finance.jpg" alt="Finance"
                 style="height: 200px; width: 300px; object-fit: cover;"></a>
             <mat-card-content>
-
             </mat-card-content>
           </mat-card>
           <!-- Human Resources -->
@@ -45,7 +75,6 @@
             <a routerLink="/login"><img class="my-1" mat-card-image src="../assets/images/hr.jpg" alt="HumanResources"
               style="height: 200px; width: 300px; object-fit: cover;"></a>
             <mat-card-content>
-
             </mat-card-content>
           </mat-card>
           <!-- Materials Management -->
@@ -56,18 +85,14 @@
             <a routerLink="/login"><img class="my-1" mat-card-image src="../assets/images/stock.jpg"
                 alt="MaterialsMaanagement" style="height: 200px; width: 300px; "></a>
             <mat-card-content>
-
             </mat-card-content>
           </mat-card>
       </div>
 </div>
-
 <div class="my-5 mx-5">
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
       fxLayoutAlign.lt-md="center center">
-
     <app-footer></app-footer>
-
     </div>
 </div>
 </div>

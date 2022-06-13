@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
   public users: UserInterface[] = [];
   private userSubscription!: Subscription;
   public userser!: AuthenticatedUser;
+  // public imageBackGroundColor = {"backgroundcolor":"#000000"}
 
 
 
