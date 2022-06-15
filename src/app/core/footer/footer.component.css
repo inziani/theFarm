@@ -8,27 +8,23 @@
 
 .mat-raised-button{
   width: 50%;
-  height: 50px;
+  /* height: 50px; */
 
 }
 .textareas{
   text-decoration: none;
   color: #03045e;
-  /* resize:none; */
-  /* display: none; */
 
 }
-
-
 .mat-form-field-appearance-outline .mat-form-field-outline {
 
   color: #03045e;
-  
+
 }
 
 .mat-primary{
-  background-color: #03045e;
-  color: #ff9e00
+  background-color: #ff9e00;
+  color: #03045e;
 }
 
 .contact-us{
@@ -38,10 +34,8 @@
 }
 
 .copyright{
-  margin-top: 20px;
-  margin-bottom: 20px;
   height: 20vh;
-  align-content: center;
+  text-align: center;
 }
 
 .mat-card {
@@ -57,5 +51,15 @@
   }
 
  .mat-icon{
-   font-size: 35px;
+   font-size: 25px;
  }
+
+ .form-control{
+  color: #ff9e00;
+  background-color: #03045e;
+  border-color: #ff9e00;
+  border-width: thin;
+
+ }
+
+
