@@ -21,6 +21,7 @@ import { RoleAuthComponent } from "./core/application-components/profile/role-au
 import { BioComponent } from "./core/application-components/profile/bio/bio.component";
 import { PasswordSecComponent } from "./core/application-components/profile/password-sec/password-sec.component";
 import { ProfileLayoutComponent } from "./profile-layout/profile-layout.component";
+import { AgricultureDialogueComponent } from "./core/dialogues/agriculture-dialogue/agriculture-dialogue.component";
 
 
 const appRoutes: Routes = [
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
     path: '', component: AppLayoutComponent, children: [
       { path: '', component: HomePageComponent },
       { path: 'home', component: HomePageComponent },
+      { path: 'agriculture', component: AgricultureDialogueComponent },
 
     ]
   },

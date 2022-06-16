@@ -71,6 +71,12 @@ import { GlHeaderMasterComponent } from './finance/general-ledger/master-data/gl
 import { ProfileSidenavComponent } from './core/application-components/profile/profile-sidenav/profile-sidenav.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { HomeSidenavComponent } from './core/home-sidenav/home-sidenav.component';
+import { AgricultureDialogueComponent } from './core/dialogues/agriculture-dialogue/agriculture-dialogue.component';
+import { FinanceDialogueComponent } from './core/dialogues/finance-dialogue/finance-dialogue.component';
+import { HrDialogueComponent } from './core/dialogues/hr-dialogue/hr-dialogue.component';
+import { MaterialsDialogueComponent } from './core/dialogues/materials-dialogue/materials-dialogue.component';
+import { ProjectsDialogueComponent } from './projects-dialogue/projects-dialogue.component';
+import { KnowledgeDialogueComponent } from './knowledge-dialogue/knowledge-dialogue.component';
 
 
 
@@ -116,7 +122,13 @@ import { HomeSidenavComponent } from './core/home-sidenav/home-sidenav.component
         GlHeaderMasterComponent,
         ProfileSidenavComponent,
         ProfileLayoutComponent,
-        HomeSidenavComponent
+        HomeSidenavComponent,
+        AgricultureDialogueComponent,
+        FinanceDialogueComponent,
+        HrDialogueComponent,
+        MaterialsDialogueComponent,
+        ProjectsDialogueComponent,
+        KnowledgeDialogueComponent
     ],
     imports: [
         BrowserModule,
