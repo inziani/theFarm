@@ -75,8 +75,8 @@ import { AgricultureDialogueComponent } from './core/dialogues/agriculture-dialo
 import { FinanceDialogueComponent } from './core/dialogues/finance-dialogue/finance-dialogue.component';
 import { HrDialogueComponent } from './core/dialogues/hr-dialogue/hr-dialogue.component';
 import { MaterialsDialogueComponent } from './core/dialogues/materials-dialogue/materials-dialogue.component';
-import { ProjectsDialogueComponent } from './projects-dialogue/projects-dialogue.component';
-import { KnowledgeDialogueComponent } from './knowledge-dialogue/knowledge-dialogue.component';
+import { ProjectsDialogueComponent } from './core/dialogues/projects-dialogue/projects-dialogue.component';
+import { KnowledgeDialogueComponent } from './core/dialogues/knowledge-dialogue/knowledge-dialogue.component';
 
 
 

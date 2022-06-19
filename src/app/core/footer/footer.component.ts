@@ -25,9 +25,10 @@ export class FooterComponent implements OnInit {
       { value: 'My account', viewValue: 'My account' },
       { value: 'Sales', viewValue: 'Sales' },
       { value: 'Finance', viewValue: 'Finance' },
-      { value: 'Human Resources', viewValue: 'Human Resources' },
-      { value: 'Project Management', viewValue: 'Project Management' },
-      { value: 'Materials Management', viewValue: 'Materials Management' }
+      { value: 'People', viewValue: 'People' },
+      { value: 'Projects', viewValue: 'Projects' },
+      { value: 'Materials', viewValue: 'Materials' },
+      { value: 'Knowledge and Learning', viewValue: 'Knowledge and Learning' }
     ]
 
 
