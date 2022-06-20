@@ -1,6 +1,7 @@
 ::placeholder {
   color: #03045e;
   opacity: 1;
+  font-size: medium;
 }
 
 input.ng-dirty.ng-invalid
@@ -14,7 +15,8 @@ input.ng-dirty.ng-valid
   color: #fb8500;
 }
 
-
 a{
   text-decoration: none;
 }
+
+

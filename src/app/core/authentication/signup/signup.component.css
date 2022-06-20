@@ -1,7 +1,37 @@
 
+::placeholder {
+  color: #03045e;
+  opacity: 1;
+  font-size: medium;
+}
+.container{
+  color: #fb8500;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #03045e;
+  height: 100vh;
+}
+
+.form-control{
+  background-color: #fb8500;
+  color: #03045e;
+  border: none;
+  font-size: medium;
+}
+
+ .form-select {
+   background-color: #fb8500;
+   color: #03045e;
+   border: none;
+   font-size: medium;
+
+ }
+
 .mat-form-field{
    width: 400px;
    display: inline;
+   border: none;
 }
 
 .signup-form{
@@ -9,15 +39,15 @@
    height: 100%;
 
 }
-
 .name{
    display: inline-block;
 }
 
 .mat-raised-button{
-   width: 50%;
+   width: 25%;
    color: #03045e;
    background-color:#fb8500;
+   height: 45px;
 }
 
 .register{

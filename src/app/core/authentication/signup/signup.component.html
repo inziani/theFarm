@@ -1,4 +1,134 @@
+<div class="container my-5 mx-auto my-auto">
+  <div class="text-center my-5">
+    <h1>Sign up</h1>
+  </div>
+  <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+    <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
+      <ul>
+        <li *ngFor="let error of formGroup.getFormValidationMessages()">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-lg" placeholder="First name" aria-label="First name"
+          id="first_name" name="first_name" formControlName="first_name">
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
+          <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-lg" placeholder="Last name" aria-label="Last name"
+          id="last_name" name="last_name" formControlName="last_name">
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['last_name'].dirty) && formGroup.controls['last_name'].invalid">
+          <li *ngFor="let error of formGroup.getlastNameValidationMessages('last_name')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <input type="date" max="{{ maxDate | date: 'yyyy-MM-dd'}}" class="form-control form-control-lg"
+          placeholder="Birthday" aria-label="Birthday" id="date_of_birth" name="date_of_birth"
+          formControlName="date_of_birth">
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['date_of_birth'].dirty) && formGroup.controls['date_of_birth'].invalid">
+          <li *ngFor="let error of formGroup.getBirthDayValidationMessages('date_of_birth')">{{ error}}</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <input type="tel" class="form-control form-control-lg" placeholder="Telephone Number"
+          aria-label="Telephone Number" id="phone_number" name="phone_number" formControlName="phone_number">
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['phone_number'].dirty) && formGroup.controls['phone_number'].invalid">
+          <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phone_number')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="username"
+          id="username" name="username" formControlName="username">
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['username'].dirty) && formGroup.controls['username'].invalid">
+          <li *ngFor="let error of formGroup.getUserNameValidationMessages('username')">{{ error}}</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <input type="email" class="form-control form-control-lg" placeholder="email" aria-label="email" id="email"
+          name="email" formControlName="email">
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
+          <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <select class="form-select form-control-lg" aria-label="Default select example" formControlName="gender" placeholder="Gender" id="gender" name="gender" title="Gender">
+          <option class="form-select" selected *ngFor="let gender of gender"
+            [value]="gender.value">
+            <p style="color: #fb8500; background-color: #03045e;">{{gender.viewValue}}</p>
+          </option>
+        </select>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
+          <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-lg" placeholder="City" aria-label="City" id="city"
+          name="city" formControlName="city">
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['city'].dirty) && formGroup.controls['city'].invalid">
+          <li *ngFor="let error of formGroup.getEmailValidationMessages('city')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password"
+          id="password" name="password" formControlName="password">
+        <div id="passwordHint" class="form-text">Your Password must contain 12 characters or more.</div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">
+          <li *ngFor="let error of formGroup.getPasswordValidationMessages('password')">{{ error}}</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <input type="password" class="form-control form-control-lg" placeholder="Confirm Password"
+          aria-label="Confirm Password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">
+        <div id="confirmPasswordHint" class="form-text">Your Passwords must be the same.</div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['confirmPassword'].dirty) && formGroup.controls['confirmPassword'].invalid">
+          <li *ngFor="let error of formGroup.getConfirmPasswordValidationMessages('confirmPassword')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <div fxLayout='column' fxLayoutAlign="center center" class="my-3">
+      <button type="submit" mat-raised-button color="primary" class="my-3"
+        [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
+      <a class="register" routerLink="/login" style="color:#ff9e00;">
+        <mat-icon>login</mat-icon>
+        <span>
+          <p class="mx-3">Sign In</p>
+        </span>
+      </a>
+      <br>
+      <p>
+        <span>
+          <a style="color:#ff9e00;" routerLink="/home">
+            <mat-icon>home</mat-icon>
+          </a>
+        </span>
+      </p>
+    </div>
+  </form>
+</div>
 
+<!--
 <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
   fxLayoutAlign="center center">
   <h1>Sign up</h1>
@@ -15,7 +145,8 @@
         fxLayoutAlign="center center">
         <mat-form-field>
           <mat-label>First Name</mat-label>
-          <input type="text" matInput placeholder="First Name" id="first_name" name="first_name" formControlName="first_name">
+          <input type="text" matInput placeholder="First Name" id="first_name" name="first_name"
+            formControlName="first_name">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
             <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
@@ -23,7 +154,8 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Last Name</mat-label>
-          <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name" formControlName="last_name">
+          <input type="text" matInput placeholder="Last Name" id="last_name" name="last_name"
+            formControlName="last_name">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['last_name'].dirty) && formGroup.controls['last_name'].invalid">
             <li *ngFor="let error of formGroup.getlastNameValidationMessages('last_name')">{{ error}}</li>
@@ -101,7 +233,6 @@
           <mat-label>Password</mat-label>
           <input type="password" matInput hintLabel="Your password should have a minimum of 12 characters"
             placeholder="Password" id="password" name="password" formControlName="password">
-          <!-- <mat-hint align="end">{{ userSignUp.length }}/12</mat-hint> -->
           <mat-hint>Your password must contain 12 characters or more.</mat-hint>
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">
@@ -122,16 +253,21 @@
       <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
         <button type="submit" mat-raised-button color="primary"
           [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
-<!-- <p style="color:#ff9e00;" >Don't have an account? <span><a class="text-decoration-none" style="color:#ff9e00;"
-      routerLink="/login">Sign in</a></span></p><br> -->
-<a class="register" routerLink="/login" style="color:#ff9e00;">
-  <mat-icon>person</mat-icon><span>
-    <p class="mx-3">Sign In</p>
-  </span>
-</a><br>
-
-      <p><span><a style="color:#ff9e00;" routerLink="/home"><mat-icon>home</mat-icon></a></span></p>
+        <a class="register" routerLink="/login" style="color:#ff9e00;">
+          <mat-icon>person</mat-icon>
+          <span>
+            <p class="mx-3">Sign In</p>
+          </span>
+        </a>
+        <br>
+        <p>
+          <span>
+            <a style="color:#ff9e00;" routerLink="/home">
+              <mat-icon>home</mat-icon>
+            </a>
+          </span>
+        </p>
       </div>
     </form>
   </div>
-</section>
+</section> -->
