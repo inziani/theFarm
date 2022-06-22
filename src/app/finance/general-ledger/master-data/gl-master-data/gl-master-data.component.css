@@ -1,68 +1,26 @@
-
-.mat-card{
-  width: 400px;
+.form-control {
+  border-radius: 0;
+  font-size: small;
+  font-weight: lighter;
+}
+.input-group-text{
+  border-radius: 0;
+  font-size: small;
+  font-weight: lighter;
 }
 
-.gl-master-container{
-background-color: red;
-
-}
-
- .mat-tab-group {
-  white-space: nowrap;
-  overflow: auto;
-  border-bottom: 0;
-
-}
-
-.mat-tab-label {
-
-    color: #ee3e29;
-    font-weight: 700;
-}
-
-/* Styles for the active tab label */
-.mat-tab-label.mat-tab-label-active {
-
-    color: #ee3e29;
-    font-weight: 700;
-}
-
-::ng-deep .mat-tab-header, .mat-tab-nav-bar, .mat-tab {
-    border-bottom: 0;
+.mat-icon{
+  color: #03045e;
 }
 
 
-.mat-form-field{
-   width: 200px;
-   display: inline;
-   font-size: 12px;
+#myTab li a {
+  /* border-color: blue; */
+  background-color: #03045e;
+  color: #fb8500;
+  font-size: small;
+  font-weight: lighter;
+  border-radius: 0;
 }
-
-/* .signup-form{
-
-   height: 100%;
-
-} */
-
-.name{
-   display: inline-block;
-}
-
-.mat-raised-button{
-   width: 50%;
-   color: #1c3144;
-   background-color:#ee3e29;
-}
-
-.register{
-  display: inline-flex;
-  vertical-align: middle;
-}
-a{
-  text-decoration: none;
-}
-
-
 
 

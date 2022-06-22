@@ -18,6 +18,8 @@
   color: #03045e;
   border: none;
   font-size: medium;
+  border-radius: 0 !important;
+  font-weight:lighter;
 }
 
  .form-select {
@@ -25,7 +27,8 @@
    color: #03045e;
    border: none;
    font-size: medium;
-
+   font-weight: lighter;
+  border-radius: 0 !important
  }
 
 .mat-form-field{
@@ -34,20 +37,21 @@
    border: none;
 }
 
-.signup-form{
+/* .signup-form{
 
    height: 100%;
 
-}
+} */
 .name{
    display: inline-block;
 }
 
 .mat-raised-button{
-   width: 25%;
+   width: 50%;
    color: #03045e;
    background-color:#fb8500;
    height: 45px;
+   border-radius: 0;
 }
 
 .register{
@@ -56,4 +60,12 @@
 }
 a{
   text-decoration: none;
+}
+
+.form-label{
+  font-weight: lighter;
+}
+
+.form-text {
+  font-weight: lighter;
 }

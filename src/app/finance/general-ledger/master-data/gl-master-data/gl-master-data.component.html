@@ -1,567 +1,78 @@
-<div class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-  <h2 class="my-3">General Ledger Account Master Data</h2>
-  <mat-divider></mat-divider>
-  <mat-tab-group mat-stretch-tabs class="stretched-tabs mat-elevation-z4">
-  <mat-tab label="Header">
-    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" fxLayout.lt-md="column"
-      fxLayoutGap.lt-md="20px" fxLayoutAlign.lt-md="center center" class="my-5 mx-5">
-      <mat-card class="mat-elevation-z8">
-        <mat-card-content>
-          <section fxLayout="row" fxLayoutGap="20px">
-            <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
-              fxLayoutAlign="center center">
-              <h1>
-                <header>Control</header>
-              </h1>
-              <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
-                <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
-                  <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
-                    <ul>
-                      <li *ngFor="let error of formGroup.getFormValidationMessages()">
-                        {{ error }}
-                      </li>
-                    </ul>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Chart of Accounts</mat-label>
-                      <input type="text" matInput placeholder="Chart of Accounts" id="chartOfAccounts"
-                        name="chartOfAccounts" formControlName="chartOfAccounts">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['chartOfAccounts'].dirty) && formGroup.controls['chartOfAccounts'].invalid">
-                        <li *ngFor="let error of formGroup.getChartOfAccountsValidationMessages('chartOfAccounts')">{{
-                          error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Company Code</mat-label>
-                      <input type="text" matInput placeholder="Company Code" id="companyCode" name="companyCode"
-                        formControlName="companyCode">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
-                        <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Account Number</mat-label>
-                      <input matInput placeholder="Account Number" id="accountNumber" name="accountNumber"
-                        formControlName="accountNumber">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountNumber'].dirty) && formGroup.controls['accountNumber'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountNumberValidationMessages('accountNumber')">{{
-                          error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Account Type</mat-label>
-                      <input type="text" matInput placeholder="Account Type" id="accountType" name="accountType"
-                        formControlName="accountType">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountType'].dirty) && formGroup.controls['accountType'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountTypeValidationMessages('accountType')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Account Group</mat-label>
-                      <input type="text" matInput placeholder="accountGroup" id="accountGroup" name="accountGroup"
-                        formControlName="accountGroup">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountGroup'].dirty) && formGroup.controls['accountGroup'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountGroupValidationMessages('accountGroup')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Profit and Loss Statement Account Type</mat-label>
-                      <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                        name="pNlAccountType">
-                        <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                          {{ account.viewValue }}
-                        </mat-option>
-                      </mat-select>
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                        <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                          error}}</li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Profit and Loss Statement Account Type</mat-label>
-                      <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                        name="pNlAccountType">
-                        <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                          {{ account.viewValue }}
-                        </mat-option>
-                      </mat-select>
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                        <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                          error}}</li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
-                    <button type="submit" mat-raised-button color="primary"
-                      [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
-                    <a class="register" routerLink="/login" style="color:#ee3e29;">
-                      <mat-icon>person</mat-icon><span>
-                        <p class="mx-3">Sign In</p>
-                      </span>
-                    </a><br>
-                    <p><span><a style="color:#ee3e29;" routerLink="/home">
-                          <mat-icon>home</mat-icon>
-                        </a></span></p>
-                  </div>
-                </form>
-              </div>
-            </section>
-          </section>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="mat-elevation-z8">
-        <mat-card-content>
-          <section fxLayout="row" fxLayoutGap="20px">
-            <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
-              fxLayoutAlign="center center">
-              <h1>
-                <header>Control</header>
-              </h1>
-              <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
-                <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
-                  <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
-                    <ul>
-                      <li *ngFor="let error of formGroup.getFormValidationMessages()">
-                        {{ error }}
-                      </li>
-                    </ul>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Chart of Accounts</mat-label>
-                      <input type="text" matInput placeholder="Chart of Accounts" id="chartOfAccounts"
-                        name="chartOfAccounts" formControlName="chartOfAccounts">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['chartOfAccounts'].dirty) && formGroup.controls['chartOfAccounts'].invalid">
-                        <li *ngFor="let error of formGroup.getChartOfAccountsValidationMessages('chartOfAccounts')">{{
-                          error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Company Code</mat-label>
-                      <input type="text" matInput placeholder="Company Code" id="companyCode" name="companyCode"
-                        formControlName="companyCode">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
-                        <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Account Number</mat-label>
-                      <input matInput placeholder="Account Number" id="accountNumber" name="accountNumber"
-                        formControlName="accountNumber">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountNumber'].dirty) && formGroup.controls['accountNumber'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountNumberValidationMessages('accountNumber')">{{
-                          error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Account Type</mat-label>
-                      <input type="text" matInput placeholder="Account Type" id="accountType" name="accountType"
-                        formControlName="accountType">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountType'].dirty) && formGroup.controls['accountType'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountTypeValidationMessages('accountType')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Account Group</mat-label>
-                      <input type="text" matInput placeholder="accountGroup" id="accountGroup" name="accountGroup"
-                        formControlName="accountGroup">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountGroup'].dirty) && formGroup.controls['accountGroup'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountGroupValidationMessages('accountGroup')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Profit and Loss Statement Account Type</mat-label>
-                      <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                        name="pNlAccountType">
-                        <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                          {{ account.viewValue }}
-                        </mat-option>
-                      </mat-select>
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                        <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                          error}}</li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Profit and Loss Statement Account Type</mat-label>
-                      <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                        name="pNlAccountType">
-                        <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                          {{ account.viewValue }}
-                        </mat-option>
-                      </mat-select>
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                        <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                          error}}</li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
-                    <button type="submit" mat-raised-button color="primary"
-                      [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
-                    <a class="register" routerLink="/login" style="color:#ee3e29;">
-                      <mat-icon>person</mat-icon><span>
-                        <p class="mx-3">Sign In</p>
-                      </span>
-                    </a><br>
-                    <p><span><a style="color:#ee3e29;" routerLink="/home">
-                          <mat-icon>home</mat-icon>
-                        </a></span></p>
-                  </div>
-                </form>
-              </div>
-            </section>
-          </section>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="mat-elevation-z8">
-        <mat-card-content>
-          <section fxLayout="row" fxLayoutGap="20px">
-            <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
-              fxLayoutAlign="center center">
-              <h1>
-                <header>Control</header>
-              </h1>
-              <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
-                <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
-                  <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
-                    <ul>
-                      <li *ngFor="let error of formGroup.getFormValidationMessages()">
-                        {{ error }}
-                      </li>
-                    </ul>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Chart of Accounts</mat-label>
-                      <input type="text" matInput placeholder="Chart of Accounts" id="chartOfAccounts"
-                        name="chartOfAccounts" formControlName="chartOfAccounts">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['chartOfAccounts'].dirty) && formGroup.controls['chartOfAccounts'].invalid">
-                        <li *ngFor="let error of formGroup.getChartOfAccountsValidationMessages('chartOfAccounts')">{{
-                          error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Company Code</mat-label>
-                      <input type="text" matInput placeholder="Company Code" id="companyCode" name="companyCode"
-                        formControlName="companyCode">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
-                        <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Account Number</mat-label>
-                      <input matInput placeholder="Account Number" id="accountNumber" name="accountNumber"
-                        formControlName="accountNumber">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountNumber'].dirty) && formGroup.controls['accountNumber'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountNumberValidationMessages('accountNumber')">{{
-                          error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Account Type</mat-label>
-                      <input type="text" matInput placeholder="Account Type" id="accountType" name="accountType"
-                        formControlName="accountType">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountType'].dirty) && formGroup.controls['accountType'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountTypeValidationMessages('accountType')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Account Group</mat-label>
-                      <input type="text" matInput placeholder="accountGroup" id="accountGroup" name="accountGroup"
-                        formControlName="accountGroup">
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['accountGroup'].dirty) && formGroup.controls['accountGroup'].invalid">
-                        <li *ngFor="let error of formGroup.getAccountGroupValidationMessages('accountGroup')">{{ error}}
-                        </li>
-                      </ul>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-label>Profit and Loss Statement Account Type</mat-label>
-                      <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                        name="pNlAccountType">
-                        <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                          {{ account.viewValue }}
-                        </mat-option>
-                      </mat-select>
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                        <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                          error}}</li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                    fxLayoutAlign="center center">
-                    <mat-form-field>
-                      <mat-label>Profit and Loss Statement Account Type</mat-label>
-                      <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                        name="pNlAccountType">
-                        <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                          {{ account.viewValue }}
-                        </mat-option>
-                      </mat-select>
-                      <ul class="text-danger list-unstyled"
-                        *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                        <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                          error}}</li>
-                      </ul>
-                    </mat-form-field>
-                  </div>
-                  <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
-                    <button type="submit" mat-raised-button color="primary"
-                      [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
-                    <a class="register" routerLink="/login" style="color:#ee3e29;">
-                      <mat-icon>person</mat-icon><span>
-                        <p class="mx-3">Sign In</p>
-                      </span>
-                    </a><br>
-                    <p><span><a style="color:#ee3e29;" routerLink="/home">
-                          <mat-icon>home</mat-icon>
-                        </a></span></p>
-                  </div>
-                </form>
-              </div>
-            </section>
-          </section>
-        </mat-card-content>
-      </mat-card>
-
+<div class="container">
+  <h1 class="text-center my-4"> General Ledger Master Data Maintenance</h1>
+  <div class="row my-5">
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">GL Account No.</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Company Code</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
     </div>
-  </mat-tab>
-  <mat-tab label="Company Code Data">Company Code Data</mat-tab>
-  <mat-tab label="Controlling Area">Controlling Area</mat-tab>
-  <mat-tab label="Where Else Used">Where Else Used</mat-tab>
-</mat-tab-group>
-
-<!-- <mat-tab-group>
-    <div class="gl-master-container">
-      <mat-tab label="Header">
-          <div fxLayout="row" fxLayoutGap="16px grid">
-            <div fxFlex fxLayout="row" class="my-5 mx-5" fxLayoutGap="16px" fxFlex.xs="100%" fxFlex.sm="33%">
-              <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                  <mat-card-title>Control</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <section fxLayout="row" fxLayoutGap="20px">
-                    <section class="signup-form mt-5 mb-5" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
-                      fxLayoutAlign="center center">
-                      <h1>
-                        <header>Control</header>
-                      </h1>
-                      <div fxFlex="600px" fxLayout="column" fxFlex.md="100">
-                        <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
-                          <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
-                            <ul>
-                              <li *ngFor="let error of formGroup.getFormValidationMessages()">
-                                {{ error }}
-                              </li>
-                            </ul>
-                          </div>
-                          <div fxLayout='row' fxLayoutGap="20px" class="mt-5" fxLayout.lt-md='column' fxLayoutGap.lt-md="20px"
-                            fxLayoutAlign="center center">
-                            <mat-form-field>
-                              <mat-label>Chart of Accounts</mat-label>
-                              <input type="text" matInput placeholder="Chart of Accounts" id="chartOfAccounts"
-                                name="chartOfAccounts" formControlName="chartOfAccounts">
-                              <ul class="text-danger list-unstyled"
-                                *ngIf="(formSubmitted || formGroup.controls['chartOfAccounts'].dirty) && formGroup.controls['chartOfAccounts'].invalid">
-                                <li *ngFor="let error of formGroup.getChartOfAccountsValidationMessages('chartOfAccounts')">{{
-                                  error}}
-                                </li>
-                              </ul>
-                            </mat-form-field>
-                            <mat-form-field>
-                              <mat-label>Company Code</mat-label>
-                              <input type="text" matInput placeholder="Company Code" id="companyCode" name="companyCode"
-                                formControlName="companyCode">
-                              <ul class="text-danger list-unstyled"
-                                *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
-                                <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}
-                                </li>
-                              </ul>
-                            </mat-form-field>
-                          </div>
-                          <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                            fxLayoutAlign="center center">
-                            <mat-form-field>
-                              <mat-label>Account Number</mat-label>
-                              <input matInput placeholder="Account Number" id="accountNumber" name="accountNumber"
-                                formControlName="accountNumber">
-                              <ul class="text-danger list-unstyled"
-                                *ngIf="(formSubmitted || formGroup.controls['accountNumber'].dirty) && formGroup.controls['accountNumber'].invalid">
-                                <li *ngFor="let error of formGroup.getAccountNumberValidationMessages('accountNumber')">{{ error}}
-                                </li>
-                              </ul>
-                            </mat-form-field>
-                            <mat-form-field>
-                              <mat-label>Account Type</mat-label>
-                              <input type="text" matInput placeholder="Account Type" id="accountType" name="accountType"
-                                formControlName="accountType">
-                              <ul class="text-danger list-unstyled"
-                                *ngIf="(formSubmitted || formGroup.controls['accountType'].dirty) && formGroup.controls['accountType'].invalid">
-                                <li *ngFor="let error of formGroup.getAccountTypeValidationMessages('accountType')">{{ error}}
-                                </li>
-                              </ul>
-                            </mat-form-field>
-                          </div>
-                          <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                            fxLayoutAlign="center center">
-                            <mat-form-field>
-                              <mat-label>Account Group</mat-label>
-                              <input type="text" matInput placeholder="accountGroup" id="accountGroup" name="accountGroup"
-                                formControlName="accountGroup">
-                              <ul class="text-danger list-unstyled"
-                                *ngIf="(formSubmitted || formGroup.controls['accountGroup'].dirty) && formGroup.controls['accountGroup'].invalid">
-                                <li *ngFor="let error of formGroup.getAccountGroupValidationMessages('accountGroup')">{{ error}}
-                                </li>
-                              </ul>
-                            </mat-form-field>
-                            <mat-form-field>
-                              <mat-label>Profit and Loss Statement Account Type</mat-label>
-                              <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                                name="pNlAccountType">
-                                <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                                  {{ account.viewValue }}
-                                </mat-option>
-                              </mat-select>
-                              <ul class="text-danger list-unstyled"
-                                *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                                <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                                  error}}</li>
-                              </ul>
-                            </mat-form-field>
-                          </div>
-                          <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px"
-                            fxLayoutAlign="center center">
-                            <mat-form-field>
-                              <mat-label>Profit and Loss Statement Account Type</mat-label>
-                              <mat-select formControlName="pNlAccountType" placeholder="pNlAccountType" id="pNlAccountType"
-                                name="pNlAccountType">
-                                <mat-option *ngFor="let account of pnlAccountType" [value]="account.value">
-                                  {{ account.viewValue }}
-                                </mat-option>
-                              </mat-select>
-                              <ul class="text-danger list-unstyled"
-                                *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
-                                <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{
-                                  error}}</li>
-                              </ul>
-                            </mat-form-field>
-                          </div>
-                          <div fxLayout='column' fxLayoutAlign="center center" class="mt-5">
-                            <button type="submit" mat-raised-button color="primary"
-                              [disabled]="!formSubmitted && formGroup.invalid">Submit</button><br>
-                            <a class="register" routerLink="/login" style="color:#ee3e29;">
-                              <mat-icon>person</mat-icon><span>
-                                <p class="mx-3">Sign In</p>
-                              </span>
-                            </a><br>
-                            <p><span><a style="color:#ee3e29;" routerLink="/home">
-                                  <mat-icon>home</mat-icon>
-                                </a></span></p>
-                          </div>
-                        </form>
-                      </div>
-                    </section>
-                  </section>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                  <mat-card-title>Description</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni deleniti odit eius ullam
-                    obcaecati
-                    provident
-                    neque sint placeat laboriosam quam!
-                  </p>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                  <mat-card-title>Consolidation Data</mat-card-title>
-                </mat-card-header>
-
-                <mat-card-content>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni deleniti odit eius ullam
-                    obcaecati
-                    provident
-                    neque sint placeat laboriosam quam!
-                  </p>
-                </mat-card-content>
-              </mat-card>
+    <div class="col-md-6">
+      <div class="input-group my-3 justify-content-center">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: white;">
+          <mat-icon class="mx-2 my-2">pageview</mat-icon>
+          <mat-icon class="mx-2 my-2">note_add</mat-icon>
+          <mat-icon class="mx-2 my-2">edit</mat-icon>
+          <mat-icon class="mx-2 my-2">save</mat-icon>
+          <mat-icon class="mx-2 my-2">delete</mat-icon>
+          <!-- <mat-icon class="mx-2 my-2">lock</mat-icon>
+          <mat-icon class="mx-2 my-2">lock_open</mat-icon> -->
+          <mat-icon class="mx-2 my-2">help</mat-icon>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs justify-content-center flex-row flex-md-row" role="navigation" data-bs-tabs="tabs" id="myTab">
+        <li class="nav-item mx-1 my-1"><a class="nav-link active" aria-current="page" data-bs-toggle="tab"
+            href="#description">Description</a></li>
+        <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#control">Control</a></li>
+        <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#bankInt">Bank & Interest</a></li>
+        <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#coaInfo">COA Information</a></li>
+        <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#CoCodeInfo">CoCode Information</a></li>
+      </ul>
+      <!-- Tab Content -->
+      <div class="tab-content my-tab">
+        <div class="tab-pane active" id="description">
+          <div class="row my-3">
+            <p>Control in Chart of Accounts</p>
+            <div class="col-md-6">
+                  <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default">GL Account Type</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Account Group</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                  </div>
             </div>
+            
           </div>
 
-      </mat-tab>
-      <mat-tab label="Company Code Data">Company Code Data</mat-tab>
-      <mat-tab label="Controlling Area">Controlling Area</mat-tab>
-      <mat-tab label="Where Else Used">Where Else Used</mat-tab>
+        </div>
+        <div class="tab-pane" id="control">
+          <p>Control data tab</p>
+        </div>
+        <div class="tab-pane" id="bankInt">
+          <p>Bank and Interest Tab.</p>
+        </div>
+        <div class="tab-pane" id="coaInfo">
+          <p>Chart of Accounts Information</p>
+        </div>
+        <div class="tab-pane" id="CoCodeInfo">
+          <p>Company Code Information.</p>
+        </div>
+      </div>
+      <!-- End of Tab content -->
     </div>
-  </mat-tab-group> -->
+  </div>
 </div>

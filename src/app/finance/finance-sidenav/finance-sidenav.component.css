@@ -9,7 +9,7 @@ body {
 }
 
 .mat-tree{
-  background-color:#1c3144 ;
+  background-color:#03045e ;
   margin-top: 50%;
   margin-left: 0;
 
@@ -17,7 +17,7 @@ body {
 }
 
 .mat-tree-node{
-  color: #ee3e29;
+  color: #fb8500;
   cursor: pointer;
 }
 
@@ -65,7 +65,7 @@ body {
   right: 15px;
   position: absolute;
   cursor: pointer;
-  color: #ee3e29;
+  color: #fb8500;
 }
 
 ul {
@@ -91,56 +91,9 @@ a {
 
 
 .mat-list-item {
-  color: #ee3e29;
+  color: #fb8500;
   font-weight: lighter;
   font-size: 0.875rem;
 
 }
-
-
-
-
-/* a {
-  text-decoration: none;
-  color: #ee3e29;
-  font-size: 0.875rem;
-  font-weight: lighter;
-  cursor: pointer;
-  background-color: #1c3144;
-} */
-
-/* .mat-expansion-panel {
-  background-color: #1c3144;
-  color: #ee3e29;
-  font-size: 0.875rem;
-  font-weight: lighter;
-
-} */
-/* .panel-title {
-  color: #ee3e29;
-  font-size: 0.875rem;
-  font-weight: lighter;
-
-} */
-
-/* .mat-accordion {
-  margin-top: 50%;
-  margin-left: 10px;
-
-}
-
-ul {
-  list-style-type: none;
-}
-p {
-  font-size: 0.875rem;
-  font-weight: lighter;
-} */
-
-
-
-
-
-
-
 

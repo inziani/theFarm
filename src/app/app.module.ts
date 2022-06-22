@@ -77,6 +77,7 @@ import { HrDialogueComponent } from './core/dialogues/hr-dialogue/hr-dialogue.co
 import { MaterialsDialogueComponent } from './core/dialogues/materials-dialogue/materials-dialogue.component';
 import { ProjectsDialogueComponent } from './core/dialogues/projects-dialogue/projects-dialogue.component';
 import { KnowledgeDialogueComponent } from './core/dialogues/knowledge-dialogue/knowledge-dialogue.component';
+import { FinanceFooterComponent } from './finance/finance-footer/finance-footer.component';
 
 
 
@@ -128,7 +129,8 @@ import { KnowledgeDialogueComponent } from './core/dialogues/knowledge-dialogue/
         HrDialogueComponent,
         MaterialsDialogueComponent,
         ProjectsDialogueComponent,
-        KnowledgeDialogueComponent
+        KnowledgeDialogueComponent,
+        FinanceFooterComponent
     ],
     imports: [
         BrowserModule,

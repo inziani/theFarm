@@ -1,44 +1,5 @@
-.gl-home{
-  width: 100%;
-  padding: 10px;
-  height: 100%;
-
-}
-
-.display-cards{
-  max-height: max-content;
-  margin-left: 5px;
-}
 
 
-.gl-menu{
 
-  margin-right: 10px;
-  margin-left: 15px;
 
-  justify-content: center;
-  align-items: center;
-  background-color: #1c3144;
-}
 
-.gl-details{
-  margin-right: 10px;
-  margin-left: 10px;
-  background-color: #1c3144;
-}
-
-.mat-raised-button{
-   width: 200px;
-   height: 100px;
-   color: #1c3144;
-   background-color:#ee3e29;
-}
-
-.mat-card-title{
-  text-align: center;
-  color: #ee3e29;
-}
-
-.mat-divider{
-  background-color:#ee3e29;
-}
