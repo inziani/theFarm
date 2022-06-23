@@ -22,7 +22,7 @@
           <mat-icon class="mx-2 my-2">save</mat-icon>
           <mat-icon class="mx-2 my-2">delete</mat-icon>
           <!-- <mat-icon class="mx-2 my-2">lock</mat-icon>
-          <mat-icon class="mx-2 my-2">lock_open</mat-icon> -->
+               <mat-icon class="mx-2 my-2">lock_open</mat-icon> -->
           <mat-icon class="mx-2 my-2">help</mat-icon>
         </span>
       </div>
@@ -30,49 +30,82 @@
   </div>
   <div class="row my-5">
     <div class="col-md-12">
-      <ul class="nav nav-tabs justify-content-center flex-row flex-md-row" role="navigation" data-bs-tabs="tabs" id="myTab">
+      <ul class="nav nav-tabs justify-content-center flex-row flex-md-row" role="navigation" data-bs-tabs="tabs"
+        id="myTab">
         <li class="nav-item mx-1 my-1"><a class="nav-link active" aria-current="page" data-bs-toggle="tab"
             href="#description">Description</a></li>
         <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#control">Control</a></li>
         <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#bankInt">Bank & Interest</a></li>
         <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#coaInfo">COA Information</a></li>
-        <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#CoCodeInfo">CoCode Information</a></li>
+        <li class="nav-item mx-1 my-1"><a class="nav-link" data-bs-toggle="tab" href="#CoCodeInfo">CoCode
+            Information</a>
+        </li>
       </ul>
       <!-- Tab Content -->
       <div class="tab-content my-tab">
+        <!-- Beginning of Description Tab -->
         <div class="tab-pane active" id="description">
           <div class="row my-3">
             <p>Control in Chart of Accounts</p>
             <div class="col-md-6">
-                  <div class="input-group mb-3">
-                      <span class="input-group-text" id="inputGroup-sizing-default">GL Account Type</span>
-                      <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="inputGroup-sizing-default">Account Group</span>
-                      <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
-                  </div>
+              <!-- Select from Drop down -->
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">GL Account Type</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Account Group</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
             </div>
-            
           </div>
-
+          <div class="row">
+            <p class="my-3">Description</p>
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Short Description</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Long Description</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+            <p class="my-3">Consolidation in Chart of Accounts</p>
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Trading Partner</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- End of Description Tab -->
+        <!-- Control Tab -->
         <div class="tab-pane" id="control">
-          <p>Control data tab</p>
+          <p>Control Tab</p>
         </div>
+        <!-- End of Control Tab -->
+        <!-- Bank Interest Tap -->
         <div class="tab-pane" id="bankInt">
-          <p>Bank and Interest Tab.</p>
+          <p>Bank Interest Tab</p>
         </div>
+        <!-- End of Bank Interest Tab -->
+        <!--Beginning of COA Information  -->
         <div class="tab-pane" id="coaInfo">
-          <p>Chart of Accounts Information</p>
+          <p>COA Information Tab</p>
         </div>
+        <!-- End of COA Information -->
+        <!--Beginning of CoCodeInfo Information  -->
         <div class="tab-pane" id="CoCodeInfo">
-          <p>Company Code Information.</p>
+          <p>CoCodeInfo Tab</p>
         </div>
+        <!-- End of CoCodeInfo Information -->
+        <!-- End of Tab content -->
       </div>
-      <!-- End of Tab content -->
     </div>
-  </div>
-</div>

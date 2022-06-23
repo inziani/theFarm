@@ -15,12 +15,20 @@
 
 
 #myTab li a {
-  /* border-color: blue; */
   background-color: #03045e;
   color: #fb8500;
   font-size: small;
   font-weight: lighter;
   border-radius: 0;
 }
+
+#myTab li a.active {
+  border-bottom-color: transparent;
+  background-color: #fb8500;
+  color: #03045e;
+  font-weight: normal;
+}
+
+
 
 
