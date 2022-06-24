@@ -26,7 +26,10 @@
   border-bottom-color: transparent;
   background-color: #fb8500;
   color: #03045e;
-  font-weight: normal;
+}
+.form-check-label{
+  font-weight: lighter;
+  font-size: small;
 }
 
 
