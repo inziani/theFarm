@@ -29,7 +29,6 @@
     </div>
   </div>
   <!-- Tabs Content and Headers -->
-
   <div class="row my-5">
     <div class="col-md-12">
       <ul class="nav nav-tabs justify-content-center flex-row flex-md-row" role="navigation" data-bs-tabs="tabs"
@@ -44,7 +43,6 @@
         </li>
       </ul>
       <!-- Tab Content -->
-
       <div class="tab-content my-tab">
         <!-- Beginning of Description Tab -->
         <div class="tab-pane active" id="description">
@@ -75,31 +73,31 @@
                   <p>Profit and Loss Statement Account</p>
                 </label>
               </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">P&l Statement Account Type</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input"
-                              aria-describedby="inputGroup-sizing-default">
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Business Area</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input"
-                              aria-describedby="inputGroup-sizing-default">
-                          </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">P&l Statement Account Type</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Business Area</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
             </div>
             <!-- New Row -->
             <!-- <p>Description</p> -->
             <div class="col-md-6">
               <p>Description</p>
-                            <div class="input-group mb-3">
-                              <span class="input-group-text" id="inputGroup-sizing-default">Short Description</span>
-                              <input type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="inputGroup-sizing-default">
-                            </div>
-                            <div class="input-group mb-3">
-                              <span class="input-group-text" id="inputGroup-sizing-default">Long Description</span>
-                              <input type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="inputGroup-sizing-default">
-                            </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Short Description</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Long Description</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
             </div>
             <!-- End of Old Row -->
           </div>
@@ -117,22 +115,105 @@
         <!-- End of Description Tab -->
         <!-- Control Tab -->
         <div class="tab-pane" id="control">
-
-          <div class="row my-5">
+          <div class="row my-3">
             <div class="col-md-6">
               <p>Account Control</p>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Account Currency</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  <p>Only Balances in Local Currency</p>
+                </label>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Exchange Rate Diffence Key</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Valuation Group</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Tax Category</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  <p>Posting without Tax allowed</p>
+                </label>
+              </div>
+              <div class="mb-3">
+                <label for="Subject" class="form-label">Reconciliation Account Type</label>
+                <select class="form-select" aria-label="Default select example">
+                  <option class="form-select" selected *ngFor="let account  of reconciliationAcctType"
+                    [value]="account.value">
+                    <p style="color: #fb8500; background-color: #03045e;">{{account.viewValue}}</p>
+                  </option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Alternative Account Number</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  <p>Account Managed in External System</p>
+                </label>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Inflation Key</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Tolerance Group</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
             </div>
             <div class="col-md-6">
               <p>Account Management</p>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  <p>Open Item Management</p>
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  <p>Line Item Display</p>
+                </label>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Sort Key</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Authorization Group</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
             </div>
           </div>
         </div>
         <!-- End of Control Tab -->
         <!-- Bank Interest Tap -->
         <div class="tab-pane" id="bankInt">
-         <div class="row my-3">
-          <div class="col-md-6">
-            <p>Document Posting Control</p>
+          <div class="row my-3">
+            <div class="col-md-6">
+              <p>Document Posting Control</p>
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Field Status Group</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
@@ -156,58 +237,58 @@
                   <p>Reconciliation Account Ready for Input</p>
                 </label>
               </div>
+            </div>
+            <div class="col-md-6">
+              <p>Bank and Financial Information</p>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Planning Level</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  <p>Relevant to Cash Flow</p>
+                </label>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">House Bank</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Account ID</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <p>Bank and Financial Information</p>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Planning Level</span>
-              <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                <p>Relevant to Cash Flow</p>
-              </label>
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">House Bank</span>
-              <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Account ID</span>
-              <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
+          <div class="row my-3">
+            <p>Interest Calculation Information</p>
+            <div class="col-md-4">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Interest Indicator</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Interest Calculation Frequency</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Key Date of Last Interest
+                  Calculation</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Date of Last Interest Run</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
             </div>
           </div>
-         </div>
-         <div class="row my-3">
-          <p>Interest Calculation Information</p>
-          <div class="col-md-4">
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Interest Indicator</span>
-              <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Interest Calculation Frequency</span>
-              <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Key Date of Last Interest Calculation</span>
-              <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-default">Date of Last Interest Run</span>
-              <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default">
-            </div>
-
-          </div>
-         </div>
         </div>
         <!-- End of Bank Interest Tab -->
         <!--Beginning of COA Information  -->

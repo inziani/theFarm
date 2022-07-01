@@ -31,6 +31,15 @@
   font-weight: lighter;
   font-size: small;
 }
+.form-label{
+  font-weight: lighter;
+  font-size: small;
+}
+.form-select{
+  font-weight: lighter;
+  font-size: small;
+  border-radius: 0;
+}
 
 
 
