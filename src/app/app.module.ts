@@ -78,6 +78,7 @@ import { MaterialsDialogueComponent } from './core/dialogues/materials-dialogue/
 import { ProjectsDialogueComponent } from './core/dialogues/projects-dialogue/projects-dialogue.component';
 import { KnowledgeDialogueComponent } from './core/dialogues/knowledge-dialogue/knowledge-dialogue.component';
 import { FinanceFooterComponent } from './finance/finance-footer/finance-footer.component';
+import { SearchDialogComponent } from './finance/finance-dialogues/search-dialog/search-dialog.component';
 
 
 
@@ -130,7 +131,8 @@ import { FinanceFooterComponent } from './finance/finance-footer/finance-footer.
         MaterialsDialogueComponent,
         ProjectsDialogueComponent,
         KnowledgeDialogueComponent,
-        FinanceFooterComponent
+        FinanceFooterComponent,
+        SearchDialogComponent
     ],
     imports: [
         BrowserModule,

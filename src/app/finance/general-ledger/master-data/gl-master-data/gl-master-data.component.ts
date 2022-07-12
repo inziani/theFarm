@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { GLMasterDataFormGroup } from '@app/finance/finance-models/gl-models/gl-form-models/gl-master-data-model';
 import { ProfitAndLossAccountType } from '@app/finance/finance-interfaces/pnl-account-interface';
 import { ReconciliationAccountType } from '@app/finance/finance-interfaces/finance-interfaces';
+import { SearchDialogComponent } from '@app/finance/finance-dialogues/search-dialog/search-dialog.component';
 
 
 @Component({
@@ -20,7 +22,9 @@ export class GlMasterDataComponent implements OnInit {
   public pnlAccountType!: ProfitAndLossAccountType[];
   public reconciliationAcctType!: ReconciliationAccountType[];
 
-  constructor() {
+  constructor(
+    public dialog: MatDialog
+  ) {
 
      this.pnlAccountType = [
       { value: 'Revenue', viewValue: 'Revenue' },
@@ -41,10 +45,20 @@ export class GlMasterDataComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitForm() {
-
+  onSave() {
+    alert('Saved');
   }
 
-
-
-}
+  onSearch() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '300px';
+    dialogConfig.height = '150px'
+    const dialogRef = this.dialog.open(SearchDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(success => {
+      // alert(success);
+    });
+    // alert('Open Search Dialogue')
+  }
+};

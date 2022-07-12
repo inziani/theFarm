@@ -1,7 +1,7 @@
 <div class="container">
-  <h1 class="text-center my-4"> General Ledger Master Data Maintenance</h1>
-  <div class="row my-5">
-    <div class="col-md-6">
+  <h1 class="text-center my-4" style="font-weight: lighter;"> General Ledger Master Data Maintenance</h1>
+  <div class="row my-5 border border-primary mx-2">
+    <div class="col-md-6 my-5">
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">GL Account No.</span>
         <input type="text" class="form-control" aria-label="Sizing example input"
@@ -13,24 +13,24 @@
           aria-describedby="inputGroup-sizing-default">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 my-5">
       <div class="input-group my-3 justify-content-center">
         <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: white;">
-          <mat-icon class="mx-2 my-2">pageview</mat-icon>
-          <mat-icon class="mx-2 my-2">note_add</mat-icon>
-          <mat-icon class="mx-2 my-2">edit</mat-icon>
-          <mat-icon class="mx-2 my-2">save</mat-icon>
-          <mat-icon class="mx-2 my-2">delete</mat-icon>
-          <!-- <mat-icon class="mx-2 my-2">lock</mat-icon>
-               <mat-icon class="mx-2 my-2">lock_open</mat-icon> -->
-          <mat-icon class="mx-2 my-2">help</mat-icon>
+                    <a><mat-icon class="mx-2 my-2" (click)="onSearch()">pageview</mat-icon></a>
+                    <a><mat-icon class="mx-2 my-2">note_add</mat-icon></a>
+                    <a><mat-icon class="mx-2 my-2">edit</mat-icon></a>
+                    <a><mat-icon class="mx-2 my-2" (click)="onSave()">save</mat-icon></a>
+                    <a><mat-icon class="mx-2 my-2">delete</mat-icon></a>
+                    <!-- <mat-icon class="mx-2 my-2">lock</mat-icon>
+                    <mat-icon class="mx-2 my-2">lock_open</mat-icon> -->
+                    <a><mat-icon class="mx-2 my-2">help</mat-icon></a>
         </span>
       </div>
     </div>
   </div>
   <!-- Tabs Content and Headers -->
-  <div class="row my-5">
-    <div class="col-md-12">
+  <div class="row my-5 border border-primary mx-2">
+    <div class="col-md-12 my-5">
       <ul class="nav nav-tabs justify-content-center flex-row flex-md-row" role="navigation" data-bs-tabs="tabs"
         id="myTab">
         <li class="nav-item mx-1 my-1"><a class="nav-link active" aria-current="page" data-bs-toggle="tab"
@@ -304,3 +304,5 @@
         <!-- End of Tab content -->
       </div>
     </div>
+  </div>
+  </div>

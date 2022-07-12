@@ -41,6 +41,16 @@
   border-radius: 0;
 }
 
+.border-primary{
+  border-color: #03045e!important;
+}
+
+a{
+  cursor: pointer;
+}
+
+
+
 
 
 

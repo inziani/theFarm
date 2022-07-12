@@ -1,0 +1,12 @@
+
+<div class="container">
+    <select class="form-select my-3" aria-label="Default select example">
+          <option class="form-select" selected><p>Enter Account Number</p></option>
+          <option class="form-select" *ngFor="let service of services" [value]="service.value"
+            aria-placeholder="Enter Account Number">
+            <p>{{service.viewValue}}</p>
+          </option>
+      </select>
+  <button mat-raised-button color="primary" mat-dialog-close class="my-2 mx-1">Search</button>
+  <button mat-raised-button color="primary" mat-dialog-close class="my-2 mx-1">Close</button>
+</div>
