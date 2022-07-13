@@ -46,10 +46,14 @@ export class GlMasterDataComponent implements OnInit {
   }
 
   onSave() {
+
+    if (!this.formGroup.valid) {
+      return
+    }
     alert('Saved');
   }
 
-  onSearch() {
+  onSearchGLAccount() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -61,4 +65,11 @@ export class GlMasterDataComponent implements OnInit {
     });
     // alert('Open Search Dialogue')
   }
+
+  onCreateGLAccount() {
+    alert('Account Created');
+
+}
 };
+
+

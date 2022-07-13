@@ -1,9 +1,9 @@
-import { formatCurrency } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { LoginFormControl, LoginFormGroup } from '@app/core/shared/models/loginform.model';
+import { LoginFormGroup } from '@app/core/shared/models/loginform.model';
 import { LoginCredentials } from '@app/core/shared/models/authentication.model';
 import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dialog.component';
 

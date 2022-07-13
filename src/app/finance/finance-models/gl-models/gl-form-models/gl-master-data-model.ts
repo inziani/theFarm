@@ -1,6 +1,5 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-
 export class GLMasterDataFormControl extends FormControl {
 
     label: string;
@@ -80,6 +79,10 @@ export class GLMasterDataFormGroup extends FormGroup {
         controllingArea: new GLMasterDataFormControl("Controlling Area", "controllingArea", "", Validators.required),
         costElement: new GLMasterDataFormControl("Cost Element", "costElement", "", Validators.required),
         unitOfMeasure: new GLMasterDataFormControl("Unit of Measure", "unitOfMeasure", "", Validators.required),
+        businessArea: new GLMasterDataFormControl("Business Area", "businessArea", "", Validators.required),
+        onlyBalancesInLocalCurrency: new GLMasterDataFormControl("Only Balances in Local currency", "onlyBalancesInLocalCurrency", "", Validators.required),
+        valuationGroup: new GLMasterDataFormControl("Valuation Group", "valuationGroup", "", Validators.required),
+
 
         });
     }
@@ -128,9 +131,9 @@ export class GLMasterDataFormGroup extends FormGroup {
         return (this.controls['longDescription'] as GLMasterDataFormControl).getValidationMessages();
     }
 
-    getGroupAccountNumberValidationMessages(groupAccountNumber: string): string[] {
+      getGroupAccountNumberValidationMessages(groupAccountNumber: string): string[] {
         return (this.controls['groupAccountNumber'] as GLMasterDataFormControl).getValidationMessages();
-    }
+      }
      getBlockedForPostingValidationMessages(blockedForPosting: string): string[] {
         return (this.controls['blockedForPosting'] as GLMasterDataFormControl).getValidationMessages();
      }
@@ -158,7 +161,7 @@ export class GLMasterDataFormGroup extends FormGroup {
      getAuthorizationGroupValidationMessages(authorizationGroup: string): string[] {
         return (this.controls['authorizationGroup'] as GLMasterDataFormControl).getValidationMessages();
      }
-     getfieldStatusGroupValidationMessages(fieldStatusGroup: string): string[] {
+     getFieldStatusGroupValidationMessages(fieldStatusGroup: string): string[] {
         return (this.controls['fieldStatusGroup'] as GLMasterDataFormControl).getValidationMessages();
      }
      getPostAutomaticallyOnlyValidationMessages(postAutomaticallyOnly: string): string[] {
@@ -190,6 +193,18 @@ export class GLMasterDataFormGroup extends FormGroup {
      }
      getInterestIndicatorValidationMessages(interestIndicator: string): string[] {
         return (this.controls['interestIndicator'] as GLMasterDataFormControl).getValidationMessages();
+     }
+     getBusinessAreaValidationMessages(businessArea: string): string[] {
+        return (this.controls['businessArea'] as GLMasterDataFormControl).getValidationMessages();
+     }
+     getTradingPartnerValidationMessages(tradingPartner: string): string[] {
+        return (this.controls['tradingPartner'] as GLMasterDataFormControl).getValidationMessages();
+     }
+   getOnlyBalancesInLocalCurrencyMessages(onlyBalancesInLocalCurrency: string): string[] {
+        return (this.controls['onlyBalancesInLocalCurrency'] as GLMasterDataFormControl).getValidationMessages();
+   }
+   getValuationGroupMessages(valuationGroup: string): string[] {
+        return (this.controls['valuationGroup'] as GLMasterDataFormControl).getValidationMessages();
     }
 
     getFormValidationMessages(): string[] {
