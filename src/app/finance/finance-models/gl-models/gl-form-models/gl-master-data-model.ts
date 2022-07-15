@@ -82,6 +82,13 @@ export class GLMasterDataFormGroup extends FormGroup {
         businessArea: new GLMasterDataFormControl("Business Area", "businessArea", "", Validators.required),
         onlyBalancesInLocalCurrency: new GLMasterDataFormControl("Only Balances in Local currency", "onlyBalancesInLocalCurrency", "", Validators.required),
         valuationGroup: new GLMasterDataFormControl("Valuation Group", "valuationGroup", "", Validators.required),
+        inflationKey: new GLMasterDataFormControl("Inflation Key", "inflationKey", "", Validators.required),
+        toleranceGroup: new GLMasterDataFormControl("Tolerance Group", "toleranceGroup", "", Validators.required),
+        lineItemManagement: new GLMasterDataFormControl("Line Item Management", "lineItemManagement", "", Validators.required),
+        supplementAutomaticPostings: new GLMasterDataFormControl("Supplement Automatic Postings", "supplementAutomaticPostings", "", Validators.required),
+        reconciliationAccountInput: new GLMasterDataFormControl("Reconciliation Account Input", "reconciliationAccountInput", "", Validators.required),
+        planningLevel: new GLMasterDataFormControl("Planning Level", "planningLevel", "", Validators.required),
+        keyDateofLastInterest:new GLMasterDataFormControl("Key Date of Last Interest", "keyDateofLastInterest", "", Validators.required),
 
 
         });
@@ -91,6 +98,22 @@ export class GLMasterDataFormGroup extends FormGroup {
         return Object.keys(this.controls).map(k => this.controls[k] as GLMasterDataFormControl);
     }
 
+
+    getKeyDateofLastInterestValidationMessages(keyDateofLastInterest: string): string[] {
+        return (this.controls['keyDateofLastInterest'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getSupplementAutomaticPostingsMessages(planningLevel: string): string[] {
+        return (this.controls['supplementAutomaticPostings'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getplanningLevelValidationMessages(planningLevel: string): string[] {
+        return (this.controls['planningLevel'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getLineItemManagementMessages(lineItemManagement: string): string[] {
+        return (this.controls['lineItemManagement'] as GLMasterDataFormControl).getValidationMessages();
+    }
+   getToleranceGroupMessages(toleranceGroup: string): string[] {
+        return (this.controls['toleranceGroup'] as GLMasterDataFormControl).getValidationMessages();
+    }
     getChartOfAccountsValidationMessages(chartOfAccounts: string): string[] {
         return (this.controls['chartOfAccounts'] as GLMasterDataFormControl).getValidationMessages();
     }
@@ -117,6 +140,9 @@ export class GLMasterDataFormGroup extends FormGroup {
 
     getReconciliationAccountTypeValidationMessages(reconciliationAccountType: string): string[] {
         return (this.controls['reconciliationAccountType'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getReconciliationAccountInputValidationMessages(reconciliationAccountInput: string): string[] {
+        return (this.controls['reconciliationAccountInput'] as GLMasterDataFormControl).getValidationMessages();
     }
 
     getAlternativeGLAccountValidationMessages(alternativeGLAccount: string): string[] {
@@ -205,6 +231,9 @@ export class GLMasterDataFormGroup extends FormGroup {
    }
    getValuationGroupMessages(valuationGroup: string): string[] {
         return (this.controls['valuationGroup'] as GLMasterDataFormControl).getValidationMessages();
+   }
+  getInflationKeyMessages(inflationKey: string): string[] {
+        return (this.controls['inflationKey'] as GLMasterDataFormControl).getValidationMessages();
     }
 
     getFormValidationMessages(): string[] {
