@@ -110,12 +110,8 @@ export class AccountSettingsComponent implements OnInit {
     return this.formGroup.get('city')
   }
 
-  // submitForm() {
-  //   alert('What is the issue now?')
-  // }
-
   submitForm() {
-    // alert('the button is working');
+
     // console.log('before patcheuser', this.patchedUser);
     this.patchedUser = this.formGroup.value;
     // console.log('after patched user', this.patchedUser);
@@ -131,27 +127,10 @@ export class AccountSettingsComponent implements OnInit {
       this.patchedUser.email,
       this.patchedUser.gender,
       this.patchedUser.city).
-      //   subscribe(success => {
-
-      //   if (success) {
-      //     console.log('this is sucess', success);
-      //     this.dialog.open(ChangesSavedDialogComponent);
-      //   }
-      // },
-      //   error => {
-      //     this.error = 'The User update failed';
-      //     alert(this.error);
-      //     this.isLoading = false;
-
-      //   })
-
       subscribe({
         complete: () => this.dialog.open(ChangesSavedDialogComponent),
         error: () => { this.error = 'This user update failed', alert(this.error)}
     });
-
-
-
    }
 
   update(): void {
@@ -159,6 +138,5 @@ export class AccountSettingsComponent implements OnInit {
     this.formGroup.controls.gender.enable();
     this.formGroup.controls.date_of_birth.enable();
   }
-
 
 }

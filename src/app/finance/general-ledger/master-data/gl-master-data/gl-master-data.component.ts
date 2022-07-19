@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { GLMasterDataFormGroup } from '@app/finance/finance-models/gl-models/gl-form-models/gl-master-data-model';
+import { GLMasterDataFormGroup } from '@app/finance/finance-models/gl-form-models/gl-master-data-model';
 import { ProfitAndLossAccountType } from '@app/finance/finance-interfaces/pnl-account-interface';
 import { ReconciliationAccountType } from '@app/finance/finance-interfaces/finance-interfaces';
 import { SearchDialogComponent } from '@app/finance/finance-dialogues/search-dialog/search-dialog.component';
+import { GlMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class GlMasterDataComponent implements OnInit {
   public formGroup = new GLMasterDataFormGroup();
   public pnlAccountType!: ProfitAndLossAccountType[];
   public reconciliationAcctType!: ReconciliationAccountType[];
+  public glAccount!: GlMasterDataModel;
+  public readonly!: boolean;
 
   constructor(
     public dialog: MatDialog
@@ -43,6 +46,7 @@ export class GlMasterDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.readonly = true;
   }
 
   onSave() {
@@ -50,9 +54,10 @@ export class GlMasterDataComponent implements OnInit {
     if (!this.formGroup.valid) {
       return
     }
-    alert('Saved');
+    this.glAccount = this.formGroup.value;
+    console.log(this.glAccount);
   }
-  
+
   onSearchGLAccount() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -67,7 +72,8 @@ export class GlMasterDataComponent implements OnInit {
   }
 
   onCreateGLAccount() {
-    alert('Account Created');
+    this.readonly = !this.readonly;
+    console.log(this.readonly);
 
 }
 };

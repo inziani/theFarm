@@ -40,8 +40,8 @@ img{
   height: 60px;
   font-weight:bolder;
   letter-spacing: 3px;
+  border-radius: 0;
 }
-
 
 .smallfarmfont{
   font-size: 55px;
@@ -71,4 +71,8 @@ ol li {
 
 a{
   cursor: pointer;
+}
+
+.mat-card{
+  border-radius: 0;
 }

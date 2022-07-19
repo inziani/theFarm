@@ -1,0 +1,51 @@
+export class GlMasterDataModel{
+
+  constructor(
+
+    public chartOfAccounts: string,
+    public companyCode: string,
+    public accountNumber: number,
+    public accountType: string,
+    public accountGroup: string,
+    public pNlAccountType : string,
+    public reconciliationAccountType: string,
+    public alternativeGLAccount: number,
+    public shortDescription: string,
+    public longDescription: string,
+    public tradingPartner: string,
+    public groupAccountNumber: number,
+    public blockedForPosting: boolean,
+    public markedForDeletion: boolean,
+    public accountCurrency: string,
+    public exchangeRateKey: string,
+    public taxCategory: string,
+    public postingWithoutTaxAllowed: boolean,
+    public openItemManagement: boolean,
+    public sortKey: string,
+    public authorizationGroup: string,
+    public fieldStatusGroup: string,
+    public postAutomaticallyOnly: boolean,
+    public relevantToCashFlow: boolean,
+    public houseBank: string,
+    public houseBankAccountID: number,
+    public interestIndicator: string,
+    public interestCalculationFrequency: number,
+    public lastDateOfInterestCalculation: Date,
+    public controllingArea: string,
+    public costElement: number,
+    public unitOfMeasure: string,
+    public businessArea: string,
+    public onlyBalancesInLocalCurrency: boolean,
+    public valuationGroup: string,
+    public inflationKey: string,
+    public toleranceGroup: string,
+    public lineItemManagement: boolean,
+    public supplementAutomaticPostings: boolean,
+    public reconciliationAccountInput: boolean,
+    public planningLevel: string,
+    public keyDateofLastInterest: Date,
+    public accountManagedinExternalSystem: number
+          ) {
+
+  }
+}

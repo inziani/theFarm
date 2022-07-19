@@ -91,7 +91,6 @@ export class GLMasterDataFormGroup extends FormGroup {
         keyDateofLastInterest: new GLMasterDataFormControl("Key Date of Last Interest", "keyDateofLastInterest", "", Validators.required),
         accountManagedinExternalSystem:new GLMasterDataFormControl("Account Managed in External System", "accountManagedinExternalSystem", "", Validators.required),
 
-
         });
     }
 

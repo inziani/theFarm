@@ -13,7 +13,7 @@
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">GL Account No.</span>
         <input type="text" class="form-control" aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default" formControlName="accountNumber">
+          aria-describedby="inputGroup-sizing-default" formControlName="accountNumber" [readonly]="readonly">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['accountNumber'].dirty) && formGroup.controls['accountNumber'].invalid">
             <li *ngFor="let error of formGroup.getAccountNumberValidationMessages('accountNumber')">{{ error}}</li>
@@ -22,7 +22,7 @@
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Company Code</span>
         <input type="text" class="form-control" aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default" formControlName="companyCode">
+          aria-describedby="inputGroup-sizing-default" formControlName="companyCode" [readonly]="readonly">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
             <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}</li>
@@ -31,7 +31,7 @@
       <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Chart of Accounts</span>
         <input type="text" class="form-control" aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default" formControlName="chartOfAccounts">
+          aria-describedby="inputGroup-sizing-default" formControlName="chartOfAccounts" [readonly]="readonly">
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls['chartOfAccounts'].dirty) && formGroup.controls['chartOfAccounts'].invalid">
             <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('chartOfAccounts')">{{ error}}</li>
@@ -79,7 +79,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">GL Account Type</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="accountType">
+                  aria-describedby="inputGroup-sizing-default" formControlName="accountType" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['accountType'].dirty) && formGroup.controls['accountType'].invalid">
                     <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('accountType')">{{ error}}</li>
@@ -88,7 +88,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Account Group</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="accountGroup">
+                  aria-describedby="inputGroup-sizing-default" formControlName="accountGroup" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['accountGroup'].dirty) && formGroup.controls['accountGroup'].invalid">
                     <li *ngFor="let error of formGroup.getAccountGroupValidationMessages('accountGroup')">{{ error}}</li>
@@ -96,13 +96,13 @@
               </div>
               <p>Reporting</p>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" [readonly]="readonly">
                 <label class="form-check-label" for="flexRadioDefault1">
                   <p>Balance Sheet Account</p>
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked [readonly]="readonly">
                 <label class="form-check-label" for="flexRadioDefault2">
                   <p>Profit and Loss Statement Account</p>
                 </label>
@@ -110,7 +110,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">P&l Statement Account Type</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="pNlAccountType">
+                  aria-describedby="inputGroup-sizing-default" formControlName="pNlAccountType"[readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['pNlAccountType'].dirty) && formGroup.controls['pNlAccountType'].invalid">
                     <li *ngFor="let error of formGroup.getPnLAccountTypeValidationMessages('pNlAccountType')">{{ error}}</li>
@@ -119,7 +119,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Business Area</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="businessArea">
+                  aria-describedby="inputGroup-sizing-default" formControlName="businessArea" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['businessArea'].dirty) && formGroup.controls['businessArea'].invalid">
                     <li *ngFor="let error of formGroup.getBusinessAreaValidationMessages('businessArea')">{{ error}}</li>
@@ -133,7 +133,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Short Description</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="shortDescription">
+                  aria-describedby="inputGroup-sizing-default" formControlName="shortDescription" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['shortDescription'].dirty) && formGroup.controls['shortDescription'].invalid">
                     <li *ngFor="let error of formGroup.getShortDescriptionValidationMessages('shortDescription')">{{ error}}</li>
@@ -142,7 +142,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Long Description</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="longDescription">
+                  aria-describedby="inputGroup-sizing-default" formControlName="longDescription" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['longDescription'].dirty) && formGroup.controls['longDescription'].invalid">
                     <li *ngFor="let error of formGroup.getLongDescriptionValidationMessages('longDescription')">{{ error}}</li>
@@ -156,7 +156,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Trading Partner</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="tradingPartner">
+                  aria-describedby="inputGroup-sizing-default" formControlName="tradingPartner" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['tradingPartner'].dirty) && formGroup.controls['tradingPartner'].invalid">
                     <li *ngFor="let error of formGroup.getTradingPartnerValidationMessages('tradingPartner')">{{ error}}</li>
@@ -174,14 +174,14 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Account Currency</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="accountCurrency">
+                  aria-describedby="inputGroup-sizing-default" formControlName="accountCurrency" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['accountCurrency'].dirty) && formGroup.controls['accountCurrency'].invalid">
                     <li *ngFor="let error of formGroup.getAccountCurrencyValidationMessages('accountCurrency')">{{ error}}</li>
                   </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault" formControlName="onlyBalancesInLocalCurrency">
                   <p>Only Balances in Local Currency</p>
                 </label>
@@ -193,7 +193,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Exchange Rate Diffence Key</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="exchangeRateKey">
+                  aria-describedby="inputGroup-sizing-default" formControlName="exchangeRateKey" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['exchangeRateKey'].dirty) && formGroup.controls['exchangeRateKey'].invalid">
                     <li *ngFor="let error of formGroup.getExchangeRateKeyValidationMessages('exchangeRateKey')">{{ error}}
@@ -203,7 +203,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Valuation Group</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="valuationGroup">
+                  aria-describedby="inputGroup-sizing-default" formControlName="valuationGroup" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['valuationGroup'].dirty) && formGroup.controls['valuationGroup'].invalid">
                     <li *ngFor="let error of formGroup.getValuationGroupMessages('valuationGroup')">{{ error}}
@@ -213,7 +213,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Tax Category</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="taxCategory">
+                  aria-describedby="inputGroup-sizing-default" formControlName="taxCategory" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['taxCategory'].dirty) && formGroup.controls['taxCategory'].invalid">
                     <li *ngFor="let error of formGroup.getTaxCategoryValidationMessages('taxCategory')">{{ error}}
@@ -221,7 +221,7 @@
                   </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault" formControlName="postingWithoutTaxAllowed">
                   <p>Posting without Tax allowed</p>
                 </label>
@@ -249,7 +249,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Alternative Account Number</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="alternativeGLAccount">
+                  aria-describedby="inputGroup-sizing-default" formControlName="alternativeGLAccount" [readonly]="readonly">
                        <ul class="text-danger list-unstyled"
                           *ngIf="(formSubmitted || formGroup.controls['alternativeGLAccount'].dirty) && formGroup.controls['alternativeGLAccount'].invalid">
                             <li *ngFor="let error of formGroup.getAlternativeGLAccountValidationMessages('alternativeGLAccount')">{{ error }}
@@ -257,7 +257,7 @@
                       </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="accountManagedinExternalSystem">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="accountManagedinExternalSystem" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault">
                   <p>Account Managed in External System</p>
                 </label>
@@ -271,7 +271,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Inflation Key</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="inflationKey">
+                  aria-describedby="inputGroup-sizing-default" formControlName="inflationKey" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['inflationKey'].dirty) && formGroup.controls['inflationKey'].invalid">
                     <li *ngFor="let error of formGroup.getInflationKeyMessages('inflationKey')">{{
@@ -282,7 +282,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Tolerance Group</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="toleranceGroup">
+                  aria-describedby="inputGroup-sizing-default" formControlName="toleranceGroup" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['toleranceGroup'].dirty) && formGroup.controls['toleranceGroup'].invalid">
                     <li *ngFor="let error of formGroup.getToleranceGroupMessages('toleranceGroup')">{{
@@ -294,7 +294,7 @@
             <div class="col-md-6">
               <p>Account Management</p>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="openItemManagement">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="openItemManagement" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault">
                   <p>Open Item Management</p>
                 </label>
@@ -306,7 +306,7 @@
                 </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault" formControlName="lineItemManagement">
                   <p>Line Item Display</p>
                 </label>
@@ -320,7 +320,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Sort Key</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="sortKey">
+                  aria-describedby="inputGroup-sizing-default" formControlName="sortKey" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['sortKey'].dirty) && formGroup.controls['sortKey'].invalid">
                     <li *ngFor="let error of formGroup.getSortKeyValidationMessages('sortKey')">{{
@@ -331,7 +331,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Authorization Group</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="authorizationGroup">
+                  aria-describedby="inputGroup-sizing-default" formControlName="authorizationGroup" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['authorizationGroup'].dirty) && formGroup.controls['authorizationGroup'].invalid">
                     <li *ngFor="let error of formGroup.getAuthorizationGroupValidationMessages('authorizationGroup')">{{
@@ -351,7 +351,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Field Status Group</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="fieldStatusGroup">
+                  aria-describedby="inputGroup-sizing-default" formControlName="fieldStatusGroup" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['fieldStatusGroup'].dirty) && formGroup.controls['fieldStatusGroup'].invalid">
                     <li *ngFor="let error of formGroup.getFieldStatusGroupValidationMessages('fieldStatusGroup')">
@@ -360,7 +360,7 @@
                   </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="postAutomaticallyOnly">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="postAutomaticallyOnly" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault">
                   <p>Post Automatically Only</p>
                 </label>
@@ -372,7 +372,7 @@
                 </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="supplementAutomaticPostings">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="supplementAutomaticPostings" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault">
                   <p>Supplement Automatic Postings</p>
                 </label>
@@ -384,7 +384,7 @@
                 </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="reconciliationAccountInput">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="reconciliationAccountInput" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault">
                   <p>Reconciliation Account Ready for Input</p>
                 </label>
@@ -400,7 +400,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Planning Level</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="planningLevel">
+                  aria-describedby="inputGroup-sizing-default" formControlName="planningLevel" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['planningLevel'].dirty) && formGroup.controls['planningLevel'].invalid">
                     <li *ngFor="let error of formGroup.getplanningLevelValidationMessages('planningLevel')">
@@ -409,7 +409,7 @@
                   </ul>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [readonly]="readonly">
                 <label class="form-check-label" for="flexCheckDefault" formControlName="relevantToCashFlow">
                   <p>Relevant to Cash Flow</p>
                 </label>
@@ -423,7 +423,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">House Bank</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="houseBank">
+                  aria-describedby="inputGroup-sizing-default" formControlName="houseBank" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['houseBank'].dirty) && formGroup.controls['houseBank'].invalid">
                     <li *ngFor="let error of formGroup.getHouseBankAccountIDValidationMessages('houseBank')">
@@ -434,7 +434,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Account ID</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="houseBankAccountID">
+                  aria-describedby="inputGroup-sizing-default" formControlName="houseBankAccountID" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['houseBankAccountID'].dirty) && formGroup.controls['houseBankAccountID'].invalid">
                     <li *ngFor="let error of formGroup.getHouseBankAccountIDValidationMessages('houseBankAccountID')">{{
@@ -450,7 +450,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Interest Indicator</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="interestIndicator">
+                  aria-describedby="inputGroup-sizing-default" formControlName="interestIndicator" [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['interestIndicator'].dirty) && formGroup.controls['interestIndicator'].invalid">
                     <li *ngFor="let error of formGroup.getInterestIndicatorValidationMessages('interestIndicator')">{{
@@ -461,7 +461,8 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Interest Calculation Frequency</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="interestCalculationFrequency">
+                  aria-describedby="inputGroup-sizing-default" formControlName="interestCalculationFrequency"
+                  [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['interestCalculationFrequency'].dirty) && formGroup.controls['interestCalculationFrequency'].invalid">
                     <li *ngFor="let error of formGroup.getInterestCalculationFrequencyValidationMessages('interestCalculationFrequency')">{{
@@ -473,7 +474,8 @@
                 <span class="input-group-text" id="inputGroup-sizing-default">Key Date of Last Interest
                   Calculation</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default" formControlName="keyDateofLastInterest">
+                  aria-describedby="inputGroup-sizing-default" formControlName="keyDateofLastInterest"
+                   [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['keyDateofLastInterest'].dirty) && formGroup.controls['keyDateofLastInterest'].invalid">
                     <li
@@ -485,7 +487,8 @@
               <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Date of Last Interest Run</span>
                 <input type="text" class="form-control" aria-label="Sizing example input"
-                  aria-describedby="inputGroup-sizing-default"  formControlName="lastDateOfInterestCalculation">
+                  aria-describedby="inputGroup-sizing-default"  formControlName="lastDateOfInterestCalculation"
+                   [readonly]="readonly">
                   <ul class="text-danger list-unstyled"
                     *ngIf="(formSubmitted || formGroup.controls['lastDateOfInterestCalculation'].dirty) && formGroup.controls['lastDateOfInterestCalculation'].invalid">
                     <li
