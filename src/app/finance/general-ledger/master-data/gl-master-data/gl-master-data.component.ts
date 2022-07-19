@@ -52,7 +52,7 @@ export class GlMasterDataComponent implements OnInit {
     }
     alert('Saved');
   }
-
+  
   onSearchGLAccount() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

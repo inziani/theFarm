@@ -88,7 +88,8 @@ export class GLMasterDataFormGroup extends FormGroup {
         supplementAutomaticPostings: new GLMasterDataFormControl("Supplement Automatic Postings", "supplementAutomaticPostings", "", Validators.required),
         reconciliationAccountInput: new GLMasterDataFormControl("Reconciliation Account Input", "reconciliationAccountInput", "", Validators.required),
         planningLevel: new GLMasterDataFormControl("Planning Level", "planningLevel", "", Validators.required),
-        keyDateofLastInterest:new GLMasterDataFormControl("Key Date of Last Interest", "keyDateofLastInterest", "", Validators.required),
+        keyDateofLastInterest: new GLMasterDataFormControl("Key Date of Last Interest", "keyDateofLastInterest", "", Validators.required),
+        accountManagedinExternalSystem:new GLMasterDataFormControl("Account Managed in External System", "accountManagedinExternalSystem", "", Validators.required),
 
 
         });
@@ -97,7 +98,9 @@ export class GLMasterDataFormGroup extends FormGroup {
     get glHeaderFormControls(): GLMasterDataFormControl[] {
         return Object.keys(this.controls).map(k => this.controls[k] as GLMasterDataFormControl);
     }
-
+    getAccountManagedinExternalSystemValidationMessages(accountManagedinExternalSystem: string): string[] {
+        return (this.controls['accountManagedinExternalSystem'] as GLMasterDataFormControl).getValidationMessages();
+    }
 
     getKeyDateofLastInterestValidationMessages(keyDateofLastInterest: string): string[] {
         return (this.controls['keyDateofLastInterest'] as GLMasterDataFormControl).getValidationMessages();
@@ -157,7 +160,7 @@ export class GLMasterDataFormGroup extends FormGroup {
         return (this.controls['longDescription'] as GLMasterDataFormControl).getValidationMessages();
     }
 
-      getGroupAccountNumberValidationMessages(groupAccountNumber: string): string[] {
+    getGroupAccountNumberValidationMessages(groupAccountNumber: string): string[] {
         return (this.controls['groupAccountNumber'] as GLMasterDataFormControl).getValidationMessages();
       }
      getBlockedForPostingValidationMessages(blockedForPosting: string): string[] {
@@ -232,7 +235,7 @@ export class GLMasterDataFormGroup extends FormGroup {
    getValuationGroupMessages(valuationGroup: string): string[] {
         return (this.controls['valuationGroup'] as GLMasterDataFormControl).getValidationMessages();
    }
-  getInflationKeyMessages(inflationKey: string): string[] {
+    getInflationKeyMessages(inflationKey: string): string[] {
         return (this.controls['inflationKey'] as GLMasterDataFormControl).getValidationMessages();
     }
 
