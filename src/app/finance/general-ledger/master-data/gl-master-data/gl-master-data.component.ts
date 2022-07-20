@@ -50,12 +50,13 @@ export class GlMasterDataComponent implements OnInit {
   }
 
   onSave() {
-
-    if (!this.formGroup.valid) {
-      return
+    if (this.formGroup.valid) {
+      return;
     }
     this.glAccount = this.formGroup.value;
-    console.log(this.glAccount);
+    this.formSubmitted = true;
+    console.log('Test Form items-', this.glAccount, this.glAccount.accountNumber);
+
   }
 
   onSearchGLAccount() {

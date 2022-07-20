@@ -73,7 +73,7 @@ export class GLMasterDataFormGroup extends FormGroup {
         relevantToCashFlow: new GLMasterDataFormControl("Relevant to Cashflow", "relevantToCashFlow", "", Validators.required),
         houseBank: new GLMasterDataFormControl("House Bank", "houseBank", "", Validators.required),
         houseBankAccountID: new GLMasterDataFormControl("House Bank Account ID", "houseBankAccountID", "", Validators.required),
-        interestIndicator: new GLMasterDataFormControl("InterestIndicator", "interestIndicator", "", Validators.required),
+        interestIndicator: new GLMasterDataFormControl("Interest Indicator", "interestIndicator", "", Validators.required),
         interestCalculationFrequency: new GLMasterDataFormControl("Interest Calculation Frequency", "interestCalculationFrequency", "", Validators.required),
         lastDateOfInterestCalculation: new GLMasterDataFormControl("Last day of interest calculation", "lastDateOfInterestCalculation", "", Validators.required),
         controllingArea: new GLMasterDataFormControl("Controlling Area", "controllingArea", "", Validators.required),
