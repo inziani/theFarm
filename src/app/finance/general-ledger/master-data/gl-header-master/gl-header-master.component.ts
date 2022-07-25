@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GLMasterDataFormGroup } from '@app/finance/finance-models/gl-form-models/gl-master-data-model';
+import { GLMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
 import { ProfitAndLossAccountType } from '@app/finance/finance-interfaces/pnl-account-interface';
 
 @Component({

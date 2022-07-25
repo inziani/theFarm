@@ -10,7 +10,6 @@ export class GLMasterDataFormControl extends FormControl {
         super(value, validator);
         this.label = label;
         this.modelProperty = property;
-
     }
 
     getValidationMessages() {
@@ -94,7 +93,7 @@ export class GLMasterDataFormGroup extends FormGroup {
         });
     }
 
-    get glHeaderFormControls(): GLMasterDataFormControl[] {
+    get glMasterDataFormControls(): GLMasterDataFormControl[] {
         return Object.keys(this.controls).map(k => this.controls[k] as GLMasterDataFormControl);
     }
     getAccountManagedinExternalSystemValidationMessages(accountManagedinExternalSystem: string): string[] {
@@ -113,7 +112,7 @@ export class GLMasterDataFormGroup extends FormGroup {
     getLineItemManagementMessages(lineItemManagement: string): string[] {
         return (this.controls['lineItemManagement'] as GLMasterDataFormControl).getValidationMessages();
     }
-   getToleranceGroupMessages(toleranceGroup: string): string[] {
+    getToleranceGroupMessages(toleranceGroup: string): string[] {
         return (this.controls['toleranceGroup'] as GLMasterDataFormControl).getValidationMessages();
     }
     getChartOfAccountsValidationMessages(chartOfAccounts: string): string[] {
@@ -159,7 +158,7 @@ export class GLMasterDataFormGroup extends FormGroup {
         return (this.controls['longDescription'] as GLMasterDataFormControl).getValidationMessages();
     }
 
-    getGroupAccountNumberValidationMessages(groupAccountNumber: string): string[] {
+     getGroupAccountNumberValidationMessages(groupAccountNumber: string): string[] {
         return (this.controls['groupAccountNumber'] as GLMasterDataFormControl).getValidationMessages();
       }
      getBlockedForPostingValidationMessages(blockedForPosting: string): string[] {
@@ -244,3 +243,74 @@ export class GLMasterDataFormGroup extends FormGroup {
         return messages;
     }
 }
+
+export class GLMasterDataAccountGroupFormGroup extends FormGroup {
+
+    constructor() {
+      super({
+
+        companyCode: new GLMasterDataFormControl("Company Code","companyCode", "", Validators.required ),
+        chartOfAccounts: new GLMasterDataFormControl("Chart of Accounts", "chartOfAccounts","", Validators.required),
+        accountGroup: new GLMasterDataFormControl("Account Group", "accountGroup", "", Validators.required),
+        description: new GLMasterDataFormControl("Description", "description", "", Validators.required)
+        });
+    }
+
+    get glMasterDataAccountGroupFormControls(): GLMasterDataFormControl[] {
+        return Object.keys(this.controls).map(k => this.controls[k] as GLMasterDataFormControl);
+    }
+
+    getCompanyCodeValidationMessages(companyCode: string): string[] {
+        return (this.controls['companyCode'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getChartOfAccountsValidationMessages(chartOfAccounts: string): string[] {
+        return (this.controls['chartOfAccounts'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getAccountGroupValidationMessages(accountGroup: string): string[] {
+        return (this.controls['accountGroup'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getDescriptionValidationMessages(description: string): string[] {
+        return (this.controls['description'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getFormValidationMessages(): string[] {
+        let messages: string[] = [];
+        Object.values(this.controls).forEach(c => messages.push(...(c as GLMasterDataFormControl).getValidationMessages()));
+        return messages;
+    }
+}
+
+export class GLMasterDataTaxCodeFormGroup extends FormGroup {
+
+    constructor() {
+      super({
+
+    companyCode: new GLMasterDataFormControl("Company Code","companyCode", "", Validators.required ),
+    taxCode: new GLMasterDataFormControl("Tax Code","taxCode", "", Validators.required ),
+    taxCodeDescription: new GLMasterDataFormControl("Tax Code Description","taxCodeDescription", "", Validators.required ),
+    taxCodePercentage: new GLMasterDataFormControl("Tax Code Percentage","taxCodePercentage", "", Validators.required ),
+        });
+    }
+
+    get glMasterDataAccountGroupFormControls(): GLMasterDataFormControl[] {
+        return Object.keys(this.controls).map(k => this.controls[k] as GLMasterDataFormControl);
+    }
+
+    getCompanyCodeValidationMessages(companyCode: string): string[] {
+        return (this.controls['companyCode'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getTaxCodeValidationMessages(taxCode: string): string[] {
+        return (this.controls['taxCode'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getTaxCodeDescriptionValidationMessages(taxCodeDescription: string): string[] {
+        return (this.controls['taxCodeDescription'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getTaxCodePercentageValidationMessages(taxCodePercentage: string): string[] {
+        return (this.controls['taxCodePercentage'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getFormValidationMessages(): string[] {
+        let messages: string[] = [];
+        Object.values(this.controls).forEach(c => messages.push(...(c as GLMasterDataFormControl).getValidationMessages()));
+        return messages;
+    }
+}
+
