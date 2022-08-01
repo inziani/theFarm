@@ -118,14 +118,14 @@
                 <p>Reporting</p>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                    [readonly]="readonly">
+                    [readonly]="readonly" formControlName="balanceSheetAccount">
                   <label class="form-check-label" for="flexRadioDefault1">
                     <p>Balance Sheet Account</p>
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
-                    [readonly]="readonly">
+                    [readonly]="readonly" formControlName="profitAndLossAccount">
                   <label class="form-check-label" for="flexRadioDefault2">
                     <p>Profit and Loss Statement Account</p>
                   </label>
@@ -222,8 +222,8 @@
                   </label>
                 </div>
                 <ul class="text-danger list-unstyled"
-                  *ngIf="(formSubmitted || formGroup.controls['onlyBalancesInLocalCurrency'].dirty) && formGroup.controls['onlyBalancesInLocalCurrency'].invalid">
-                  <li *ngFor="let error of formGroup.getOnlyBalancesInLocalCurrencyMessages('onlyBalancesInLocalCurrency')">
+                  *ngIf="(formSubmitted || formGroup.controls['onlyBalancesInLocalCurrency'].dirty) && formGroup.controls['balancesInLocalCurrency'].invalid">
+                  <li *ngFor="let error of formGroup.getBalancesInLocalCurrencyValidationMessages('balancesInLocalCurrency')">
                     {{ error}}</li>
                 </ul>
                 <div class="input-group mb-3">

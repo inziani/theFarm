@@ -51,7 +51,9 @@ export class GLMasterDataFormGroup extends FormGroup {
         accountNumber: new GLMasterDataFormControl("Account Number", "accountNumber", "", Validators.required),
         accountType: new GLMasterDataFormControl("Account Type", "accountType", "", Validators.required),
         accountGroup: new GLMasterDataFormControl("Account Group", "accountGroup", "", Validators.required),
-        pNlAccountType: new GLMasterDataFormControl("Profit and Loss account type", "pNlAccountType", "", Validators.required),
+        profitAndLossAccount: new GLMasterDataFormControl("Profit and Loss account", "profitAndLossAccount", "", Validators.required),
+        balanceSheetAccount: new GLMasterDataFormControl("Balance Sheet Account", "balanceSheetAccount", "", Validators.required),
+        reconciliationAccount: new GLMasterDataFormControl("Reconciliation Account", "reconciliationAccountType", "", Validators.required),
         reconciliationAccountType: new GLMasterDataFormControl("Reconciliation Account Type", "reconciliationAccountType", "", Validators.required),
         alternativeGLAccount: new GLMasterDataFormControl("Alternative GL Account", "alternativeGLAccount", "", Validators.required),
         shortDescription: new GLMasterDataFormControl("Short Description", "shortDescription", "", Validators.required),
@@ -79,7 +81,7 @@ export class GLMasterDataFormGroup extends FormGroup {
         costElement: new GLMasterDataFormControl("Cost Element", "costElement", "", Validators.required),
         unitOfMeasure: new GLMasterDataFormControl("Unit of Measure", "unitOfMeasure", "", Validators.required),
         businessArea: new GLMasterDataFormControl("Business Area", "businessArea", "", Validators.required),
-        onlyBalancesInLocalCurrency: new GLMasterDataFormControl("Only Balances in Local currency", "onlyBalancesInLocalCurrency", "", Validators.required),
+        balancesInLocalCurrency: new GLMasterDataFormControl("Only Balances in Local currency", "balancesInLocalCurrency", "", Validators.required),
         valuationGroup: new GLMasterDataFormControl("Valuation Group", "valuationGroup", "", Validators.required),
         inflationKey: new GLMasterDataFormControl("Inflation Key", "inflationKey", "", Validators.required),
         toleranceGroup: new GLMasterDataFormControl("Tolerance Group", "toleranceGroup", "", Validators.required),
@@ -131,8 +133,12 @@ export class GLMasterDataFormGroup extends FormGroup {
         return (this.controls['accountType'] as GLMasterDataFormControl).getValidationMessages();
     }
 
-    getPnLAccountTypeValidationMessages(pNlAccountType: string): string[] {
-        return (this.controls['pNlAccountType'] as GLMasterDataFormControl).getValidationMessages();
+    getPnLAccountTypeValidationMessages(profitAndLossAccount: string): string[] {
+        return (this.controls['profitAndLossAccount'] as GLMasterDataFormControl).getValidationMessages();
+    }
+
+    getbalanceSheetAccountValidationMessages(balanceSheetAccount: string): string[] {
+        return (this.controls['balanceSheetAccount'] as GLMasterDataFormControl).getValidationMessages();
     }
 
    getAccountGroupValidationMessages(accountGroup: string): string[] {
@@ -227,10 +233,10 @@ export class GLMasterDataFormGroup extends FormGroup {
      getTradingPartnerValidationMessages(tradingPartner: string): string[] {
         return (this.controls['tradingPartner'] as GLMasterDataFormControl).getValidationMessages();
      }
-   getOnlyBalancesInLocalCurrencyMessages(onlyBalancesInLocalCurrency: string): string[] {
-        return (this.controls['onlyBalancesInLocalCurrency'] as GLMasterDataFormControl).getValidationMessages();
-   }
-   getValuationGroupMessages(valuationGroup: string): string[] {
+    getBalancesInLocalCurrencyValidationMessages(balancesInLocalCurrency: string): string[] {
+        return (this.controls['balancesInLocalCurrency'] as GLMasterDataFormControl).getValidationMessages();
+    }
+    getValuationGroupMessages(valuationGroup: string): string[] {
         return (this.controls['valuationGroup'] as GLMasterDataFormControl).getValidationMessages();
    }
     getInflationKeyMessages(inflationKey: string): string[] {
