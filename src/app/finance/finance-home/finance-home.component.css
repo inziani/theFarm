@@ -1,0 +1,22 @@
+.card{
+  border-radius: 0;
+  border-color: #03045e;
+  border-width: 2px;
+}
+
+.card-text{
+  font-weight: lighter;
+
+
+}
+
+.card-title{
+
+  font-weight: lighter;
+
+}
+
+.a{
+  cursor: pointer;
+  text-decoration: none;
+}
