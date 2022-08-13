@@ -6,17 +6,19 @@
 
 .card-text{
   font-weight: lighter;
+  /* color: #03045e; */
 
 
 }
 
 .card-title{
-
   font-weight: lighter;
-
+  /* color: #03045e; */
 }
 
-.a{
+
+a {
   cursor: pointer;
-  text-decoration: none;
+  /* text-decoration: line-through; */
 }
+

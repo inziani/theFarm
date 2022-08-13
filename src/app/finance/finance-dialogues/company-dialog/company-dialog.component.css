@@ -1,0 +1,36 @@
+.mat-raised-button {
+  color: #03045e;
+  background-color: #fb8500;
+  border-radius: 0;
+}
+
+
+.form-control {
+  background-color: #fb8500;
+  color: #03045e;
+  border: none;
+  font-size: medium;
+  border-radius: 0 !important;
+  font-weight: lighter;
+}
+
+ .form-select {
+   background-color: #fb8500;
+   color: #03045e;
+   border: none;
+   font-size: medium;
+   font-weight: lighter;
+   border-radius: 0 !important
+ }
+
+ .col-form-label {
+   font-weight: lighter;
+ }
+
+ .form-text {
+   font-weight: lighter;
+ }
+
+
+
+

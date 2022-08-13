@@ -1,0 +1,114 @@
+<h2 mat-dialog-title style="font-weight: lighter;">Company Information</h2>
+<mat-dialog-content class="mat-typography">
+  <!-- <h3 style="font-weight:lighter;">Develop across all platforms</h3> -->
+  <!-- <p>Company Information</p> -->
+  <!--
+      company = models.CharField(max_length=4, null=False, blank=False, unique=True)
+      companyName = models.CharField(max_length=50)
+      street = models.CharField(max_length=50)
+      postOfficeBox = models.IntegerField(null=True, default=12345, blank=False)
+      postalCode = models.IntegerField(null=True, default=100, blank=False)
+      country = models.CharField(max_length=50, null=True, blank=True)
+      language = models.CharField(choices=LANGUAGE, default='en', max_length=35)
+      currency = models.CharField(choices=CURRENCY, default='KSH', max_length=3)
+      landLine = models.IntegerField(null=True, blank=True)
+      mobileNumber = models.CharField(max_length=15)
+      email = models.EmailField(max_length=254) -->
+  <div class="row my-3 justify-content-center">
+    <div class="col-md-6">
+      <div class="input-group my-2 justify-content-center">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: white;">
+          <a>
+            <mat-icon class="mx-2 my-2">pageview</mat-icon>
+          </a>
+          <a>
+            <mat-icon class="mx-2 my-2">note_add</mat-icon>
+          </a>
+          <a>
+            <mat-icon class="mx-2 my-2">edit</mat-icon>
+          </a>
+          <a>
+            <mat-icon class="mx-2 my-2">save</mat-icon>
+          </a>
+          <a>
+            <mat-icon class="mx-2 my-2">delete</mat-icon>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <form>
+    <div class="row my-3">
+      <label for="inputCompany" class="col-md-3 col-form-label">Company</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputCompany">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputCompanyName" class="col-md-3 col-form-label">Company Name</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputCompanyName">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputStreet" class="col-md-3 col-form-label">Street</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputStreet">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputPostOfficeBox" class="col-md-3 col-form-label">Post Office Box</label>
+      <div class="col-md-9">
+        <input type="number" class="form-control" id="inputPostOfficeBox">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputPostalCode" class="col-md-3 col-form-label">Postal Code</label>
+      <div class="col-md-9">
+        <input type="number" class="form-control" id="inputPostalCode">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputCountry" class="col-md-3 col-form-label">Country</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputCountry">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputLanguage" class="col-md-3 col-form-label">Language</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputLanguage">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputCurrency" class="col-md-3 col-form-label">Currency</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputCurrency">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputLandline" class="col-md-3 col-form-label">Landline</label>
+      <div class="col-md-9">
+        <input type="number" class="form-control" id="inputLandline">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputMobileNumber" class="col-md-3 col-form-label">Mobile Number</label>
+      <div class="col-md-9">
+        <input type="number" class="form-control" id="inputMobileNumber">
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputEmail" class="col-md-3 col-form-label">Email</label>
+      <div class="col-md-9">
+        <input type="email" class="form-control" id="inputEmail">
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close cdkFocusInitial>Close</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="center">
+   <button mat-raised-button mat-dialog-close cdkFocusInitial>Close</button>
+   </mat-dialog-actions> -->
