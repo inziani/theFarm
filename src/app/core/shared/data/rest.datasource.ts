@@ -41,9 +41,7 @@ export class RestDataSource {
   public httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   public activityCategoryList!: ActivityCategory[];
   public activityList!: Activity[];
-  // public payload: any;
-  // public userId!: number;
-  // public expiryDate!: Date;
+
 
 
 
@@ -106,7 +104,6 @@ export class RestDataSource {
 
   }
 
-
   fetchRandomQuotes() {
     return this.http.get<RandomQuote>(`${environment.randomQuotesURL}/random.json/`, this.httpOptions,);
   }
@@ -154,10 +151,6 @@ export class RestDataSource {
       first_name, last_name, date_of_birth, phone_number, username, email, gender, city }, { headers: this.httpHeaders });
 
   };
-
-
-
-
 
   fetchUserProfiles(): Observable<UserProfileInterface>{
     return this.http.get<UserProfileInterface>(`${environment.apiUrl}/user-profile`, this.httpOptions);

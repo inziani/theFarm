@@ -46,8 +46,6 @@ export class CreateActivityComponent implements OnInit {
     this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
       console.log(success)
       if (success) {
-        // this.dialogue.open(LoginDialogComponent);
-        // this.router.navigate(['home']);
         alert('Activity added successfully');
         console.log(success);
       }

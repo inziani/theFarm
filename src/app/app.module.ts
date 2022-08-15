@@ -80,6 +80,7 @@ import { KnowledgeDialogueComponent } from './core/dialogues/knowledge-dialogue/
 import { FinanceFooterComponent } from './finance/finance-footer/finance-footer.component';
 import { SearchDialogComponent } from './finance/finance-dialogues/search-dialog/search-dialog.component';
 import { CompanyDialogComponent } from './finance/finance-dialogues/company-dialog/company-dialog.component';
+import { FinanceService } from './core/services/finance.service';
 
 
 
@@ -150,7 +151,7 @@ import { CompanyDialogComponent } from './finance/finance-dialogues/company-dial
     ],
     providers: [
         UsersService, AuthenticationService,
-        RestDataSource, NavigationServiceService, DatePipe,
+        RestDataSource, NavigationServiceService, DatePipe, FinanceService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     ],

@@ -23,6 +23,7 @@ export class FinanceHomeComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '550px';
     dialogConfig.panelClass = 'companyClass';
+    dialogConfig.hasBackdrop = true;
       const dialogRef = this.dialog.open(CompanyDialogComponent, dialogConfig);
        dialogRef.afterClosed().subscribe(success => {
       console.log(success);

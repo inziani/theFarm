@@ -14,94 +14,168 @@
       landLine = models.IntegerField(null=True, blank=True)
       mobileNumber = models.CharField(max_length=15)
       email = models.EmailField(max_length=254) -->
-  <div class="row my-3 justify-content-center">
-    <div class="col-md-6">
-      <div class="input-group my-2 justify-content-center">
-        <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: white;">
-          <a>
-            <mat-icon class="mx-2 my-2">pageview</mat-icon>
-          </a>
-          <a>
-            <mat-icon class="mx-2 my-2">note_add</mat-icon>
-          </a>
-          <a>
-            <mat-icon class="mx-2 my-2">edit</mat-icon>
-          </a>
-          <a>
-            <mat-icon class="mx-2 my-2">save</mat-icon>
-          </a>
-          <a>
-            <mat-icon class="mx-2 my-2">delete</mat-icon>
-          </a>
-        </span>
+
+  <form novalidate [formGroup]="formGroup" *ngIf="!isLoading" (ngSubmit)="onSave()">
+    <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
+      <ul>
+        <li *ngFor="let error of formGroup.getFormValidationMessages()">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+    <div class="row my-3 justify-content-center">
+      <div class="col-md-6">
+        <div class="input-group my-2 justify-content-center">
+          <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: white;">
+            <a>
+              <mat-icon class="mx-2 my-2">pageview</mat-icon>
+            </a>
+            <a>
+              <mat-icon class="mx-2 my-2" (click)="onCreateCompany()">note_add</mat-icon>
+            </a>
+            <a>
+              <mat-icon class="mx-2 my-2">edit</mat-icon>
+            </a>
+            <a>
+              <mat-icon class="mx-2 my-2" (click)="onSave()">save</mat-icon>
+            </a>
+            <a>
+              <mat-icon class="mx-2 my-2">delete</mat-icon>
+            </a>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-  <form>
     <div class="row my-3">
       <label for="inputCompany" class="col-md-3 col-form-label">Company</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCompany">
+        <input type="text" class="form-control" id="inputCompany" formControlName="company" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['company'].dirty) && formGroup.controls['company'].invalid">
+          <li *ngFor="let error of formGroup.getCompanyValidationMessages('company')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputCompanyName" class="col-md-3 col-form-label">Company Name</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCompanyName">
+        <input type="text" class="form-control" id="inputCompanyName" formControlName="companyName" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['companyName'].dirty) && formGroup.controls['companyName'].invalid">
+          <li *ngFor="let error of formGroup.getCompanyNameValidationMessages('companyName')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputStreet" class="col-md-3 col-form-label">Street</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputStreet">
+        <input type="text" class="form-control" id="inputStreet" formControlName="street" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['street'].dirty) && formGroup.controls['street'].invalid">
+          <li *ngFor="let error of formGroup.getStreetValidationMessages('street')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputPostOfficeBox" class="col-md-3 col-form-label">Post Office Box</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputPostOfficeBox">
+        <input type="number" class="form-control" id="inputPostOfficeBox" formControlName="postOfficeBox" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['postOfficeBox'].dirty) && formGroup.controls['postOfficeBox'].invalid">
+          <li *ngFor="let error of formGroup.getPostOfficeBoxValidationMessages('postOfficeBox')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputPostalCode" class="col-md-3 col-form-label">Postal Code</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputPostalCode">
+        <input type="number" class="form-control" id="inputPostalCode" formControlName="postalCode" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['postalCode'].dirty) && formGroup.controls['postalCode'].invalid">
+          <li *ngFor="let error of formGroup.getPostalCodeValidationMessages('postalCode')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputCountry" class="col-md-3 col-form-label">Country</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCountry">
+        <input type="text" class="form-control" id="inputCountry" formControlName="country" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['country'].dirty) && formGroup.controls['country'].invalid">
+          <li *ngFor="let error of formGroup.getCountryValidationMessages('country')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputLanguage" class="col-md-3 col-form-label">Language</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputLanguage">
+        <input type="text" class="form-control" id="inputLanguage" formControlName="language" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['language'].dirty) && formGroup.controls['language'].invalid">
+          <li *ngFor="let error of formGroup.getlanguageValidationMessages('language')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputCurrency" class="col-md-3 col-form-label">Currency</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCurrency">
+        <input type="text" class="form-control" id="inputCurrency" formControlName="currency" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['currency'].dirty) && formGroup.controls['currency'].invalid">
+          <li *ngFor="let error of formGroup.getCurrencyValidationMessages('currency')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputLandline" class="col-md-3 col-form-label">Landline</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputLandline">
+        <input type="number" class="form-control" id="inputLandline" formControlName="landLine" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['landLine'].dirty) && formGroup.controls['landLine'].invalid">
+          <li *ngFor="let error of formGroup.getLandLineValidationMessages('landLine')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputMobileNumber" class="col-md-3 col-form-label">Mobile Number</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputMobileNumber">
+        <input type="text" class="form-control" id="inputMobileNumber" formControlName="mobileNumber" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['mobileNumber'].dirty) && formGroup.controls['mobileNumber'].invalid">
+          <li *ngFor="let error of formGroup.getMobileNumberValidationMessages('mobileNumber')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <div class="row my-3">
       <label for="inputEmail" class="col-md-3 col-form-label">Email</label>
       <div class="col-md-9">
-        <input type="email" class="form-control" id="inputEmail">
+        <input type="email" class="form-control" id="inputEmail" formControlName="email" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
+          <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
+        </ul>
       </div>
     </div>
     <mat-dialog-actions align="end">
@@ -109,6 +183,4 @@
     </mat-dialog-actions>
   </form>
 </mat-dialog-content>
-<!-- <mat-dialog-actions align="center">
-   <button mat-raised-button mat-dialog-close cdkFocusInitial>Close</button>
-   </mat-dialog-actions> -->
+

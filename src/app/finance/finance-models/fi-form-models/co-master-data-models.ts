@@ -73,6 +73,9 @@ export class CompanyMasterDataFormGroup extends FormGroup {
     getStreetValidationMessages(street: string): string[] {
         return (this.controls['street'] as CompanyMasterDataFormControl).getValidationMessages();
     }
+    getPostalCodeValidationMessages(postalCode: string): string[] {
+        return (this.controls['postOfficeBox'] as CompanyMasterDataFormControl).getValidationMessages();
+    }
     getPostOfficeBoxValidationMessages(postOfficeBox: string): string[] {
         return (this.controls['postOfficeBox'] as CompanyMasterDataFormControl).getValidationMessages();
     }
