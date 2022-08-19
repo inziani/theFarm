@@ -5,18 +5,25 @@ import { OnInit, OnDestroy } from '@angular/core';
 import { environment } from '@environments/environment';
 
 import { Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+
 
 
 import { UserInterface } from '../shared/interfaces/users-interface';
-import { AuthenticatedUser } from '../shared/models/user.model';
+import { User } from '@app/core/shared/models/user.model';
+
 import { AuthenticationService } from './authentication.service';
-import jwtDecode from 'jwt-decode';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  public isAuthenticated: boolean = false;
+  public user!: number;
+  public userList!: User[];
+  public loggedInUser!: any;
+  public currentLoggedInUser!: User[];
 
 
   private userSubscription!: Subscription;
@@ -25,10 +32,23 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private authenticationService: AuthenticationService)
+    private authenticationService: AuthenticationService,
+    private dataSource: RestDataSource,)
   { }
 
   ngOnInit() {
+
+    this.userSubscription = this.authenticationService.currentUser$.subscribe(
+      user => {
+        this.isAuthenticated = !!user;
+        this.user = user;
+        this.loggedInUser = this.dataSource.fetchUsers().subscribe(users => {
+          this.userList = users;
+          this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
+          this.currentLoggedInUser = this.loggedInUser;
+        })
+
+      });
 
   }
 

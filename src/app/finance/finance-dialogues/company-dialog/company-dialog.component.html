@@ -1,20 +1,5 @@
 <h2 mat-dialog-title style="font-weight: lighter;">Company Information</h2>
 <mat-dialog-content class="mat-typography">
-  <!-- <h3 style="font-weight:lighter;">Develop across all platforms</h3> -->
-  <!-- <p>Company Information</p> -->
-  <!--
-      company = models.CharField(max_length=4, null=False, blank=False, unique=True)
-      companyName = models.CharField(max_length=50)
-      street = models.CharField(max_length=50)
-      postOfficeBox = models.IntegerField(null=True, default=12345, blank=False)
-      postalCode = models.IntegerField(null=True, default=100, blank=False)
-      country = models.CharField(max_length=50, null=True, blank=True)
-      language = models.CharField(choices=LANGUAGE, default='en', max_length=35)
-      currency = models.CharField(choices=CURRENCY, default='KSH', max_length=3)
-      landLine = models.IntegerField(null=True, blank=True)
-      mobileNumber = models.CharField(max_length=15)
-      email = models.EmailField(max_length=254) -->
-
   <form novalidate [formGroup]="formGroup" *ngIf="!isLoading" (ngSubmit)="onSave()">
     <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
       <ul>
@@ -121,7 +106,12 @@
     <div class="row my-3">
       <label for="inputLanguage" class="col-md-3 col-form-label">Language</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputLanguage" formControlName="language" [readonly]="readonly">
+        <select class="form-select form-control-lg" aria-label="Default select example" formControlName="language" id="language"
+          name="language">
+          <option class="form-select" selected *ngFor="let language of language" [value]="language.value">
+            <p>{{language.viewValue}}</p>
+          </option>
+        </select>
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -133,7 +123,10 @@
     <div class="row my-3">
       <label for="inputCurrency" class="col-md-3 col-form-label">Currency</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCurrency" formControlName="currency" [readonly]="readonly">
+        <select class="form-select form-control-lg"  formControlName="currency" id="inputCurrency" name="inputCurrency">
+          <option class="form-select" selected *ngFor="let currency of currency" [value]="currency.value">
+            <p>{{currency.viewValue}}</p></option>
+        </select>
       </div>
       <div>
         <ul class="text-danger list-unstyled"

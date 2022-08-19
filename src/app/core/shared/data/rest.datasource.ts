@@ -14,6 +14,7 @@ import { Activity } from "../models/activity.model";
 
 import { ActivityCategoryInterface, ActivityInterface } from "../interfaces/activity-interface";
 import { RandomQuote } from "../interfaces/activity-interface";
+import { CompanyMasterDataModel } from "@app/finance/finance-models/fi-data-models/organization-data-models";
 
 import { environment } from "@environments/environment";
 import { ActivityCategory } from "../models/activity-category.models";
@@ -29,6 +30,10 @@ export class RestDataSource {
   public authTokenRefresh!: string;
   public authTokenExpiry!: Date;
   public user = new BehaviorSubject<any>(null);
+  public currentUser$ = new BehaviorSubject<number>(0);
+  public payload: any;
+  public userId!: number;
+  public expiryDate!: Date;
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -59,40 +64,42 @@ export class RestDataSource {
     return this.http.get<UserProfileInterface[]>(`${environment.apiUrl}/user-profile/`)
   }
 
-  // getToken(email: string, password: string): Observable<any> {
-  //   return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({ email, password }), this.httpOptions).pipe(
-  //     map((response: any) => {
-  //       this.authToken = response.access;
-  //       this.authTokenRefresh = response.refresh;
-  //       return this.authToken;
-  //     },
-  //     ),
-  //     tap(respData => {
-  //       this.storeUser(respData)
-  //     }), shareReplay());
-  // }
+  getToken(email: string, password: string): Observable<any> {
+    return this.http.post<AuthenticatorResponse>(`${environment.apiUrl}/api/token/`, JSON.stringify({ email, password }), this.httpOptions).pipe(
+      map((response: any) => {
+        this.authToken = response.access;
+        console.log('restDataToken-', this.authToken);
+        this.authTokenRefresh = response.refresh;
+        return this.authToken;
+      },
+      ),
+      tap(respData => {
+        this.storeUser(respData)
+      }), shareReplay());
+  }
 
-  // private storeUser(token: any) {
-  //   type customJwtPayLoad = JwtPayload & { userPayloadData: string }
-  //   let decodedToken = jwtDecode<customJwtPayLoad>(token);
-  //   console.log('Decoded Token - ', decodedToken);
-  //   this.payload = JSON.stringify(decodedToken);
-  //   let finaldecodedToken = JSON.parse(this.payload);
-  //   console.log('Parsed payload', finaldecodedToken);
-  //   this.userId = finaldecodedToken.user_id;
-  //   this.expiryDate = new Date(finaldecodedToken.exp * 1000);
-  //   this.user.next(this.userId);
-  //   console.log(`Payload - ${this.payload},User - ${this.userId}`);
-  //   localStorage.setItem('userData', this.payload);
-  //   return this.payload;
-  // }
+  private storeUser(token: any) {
+    type customJwtPayLoad = JwtPayload & { userPayloadData: string }
+    let decodedToken = jwtDecode<customJwtPayLoad>(token);
+    // console.log('Decoded Token - ', decodedToken);
+    this.payload = JSON.stringify(decodedToken);
+    let finaldecodedToken = JSON.parse(this.payload);
+    // console.log('Parsed payload', finaldecodedToken);
+    this.userId = finaldecodedToken.user_id;
+    this.expiryDate = new Date(finaldecodedToken.exp * 1000);
+    this.user.next(this.userId);
+    this.currentUser$.next(this.userId);
+    // console.log(`Payload - ${this.payload},User - ${this.userId}, CurrentUser - ${this.currentUser$}`);
+    localStorage.setItem('userData', this.payload);
+    return this.payload;
+  }
 
 
   refreshToken(): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/api/token/refresh/`, this.httpOptions).pipe(
       map((response: any) => {
         this.authTokenRefresh = response.refresh;
-        console.log(this.refreshToken);
+        // console.log(this.refreshToken);
         return this.authTokenRefresh;
       }), shareReplay());
 
@@ -167,5 +174,4 @@ export class RestDataSource {
    fetchSingleActivity(id: number): Observable<Activity>{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
   };
-
 }

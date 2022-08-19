@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable, Subscription, throwError } from 'rxjs';
+import { BehaviorSubject, observable, Observable, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 
@@ -9,11 +9,9 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { JwTAuthenticationResponse, LoginResponse, SignUpResponse } from '../shared/interfaces/users-interface';
-import { AuthenticatedUser } from '../shared/models/user.model';
+import { SignUpResponse } from '../shared/interfaces/users-interface';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
-// import jwt_decode from 'jwt-decode';
-import { ThisReceiver } from '@angular/compiler';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +24,8 @@ export class AuthenticationService {
   public expiryDate!: Date;
   public jwtAccessToken!: string;
   public jwtRefreshToken!: string;
-
-
+  public payload: any;
+  public userId!: number;
 
 
   public get currentUserValue(): number{
@@ -40,15 +38,22 @@ export class AuthenticationService {
 
   }
 
-  onLogin(email: string, password: string): Observable<string> {
+  getToken(email: string, password: string): Observable<string> {
     return this.http.post<string>(`${environment.apiUrl}/${environment.jwtLogin}`,
     JSON.stringify({ email, password}), this.httpOptions
     ).pipe(
-      map(loginResponse => {
+      map((loginResponse: any) => {
         // login is successfull and token is in the response
-        this.jwtAccessToken = loginResponse;
+        // console.log(loginResponse);
+        this.jwtAccessToken = loginResponse.access;
+        // console.log('authentication service access-', this.jwtAccessToken);
+        this.jwtRefreshToken = loginResponse.refresh;
+        // console.log('authentication service refresh-', this.jwtRefreshToken);
+        localStorage.setItem('userData', this.jwtAccessToken);
+        // this.jwtRefreshToken = loginResponse;
         return this.jwtAccessToken;
-      }),
+      },
+      ),
       tap(loginResponse => {
         this.saveUser(loginResponse)
       }),
@@ -56,37 +61,34 @@ export class AuthenticationService {
     );
   }
 
-  private saveUser(loginResponse: string) {
-    let parsedUser = JSON.parse(JSON.stringify(loginResponse));
+  private saveUser(loginResponse: any) {
     type customJwtPayLoad = JwtPayload & { userPayloadData: string };
-    let decodedToken = jwtDecode<customJwtPayLoad>(parsedUser.access);
-    let finalParsedUser = JSON.parse(JSON.stringify(decodedToken));
-    this.currentUser$.next(finalParsedUser.user_id);
-    this.expiryDate = new Date(finalParsedUser.exp * 1000);
-    return this.currentUser$;
-    }
+    let decodedToken = jwtDecode<customJwtPayLoad>(loginResponse);
+    // console.log('Decoded Token - ', decodedToken);
+    this.payload = JSON.stringify(decodedToken);
+    // console.log('authentication service-', decodedToken);
+    let finaldecodedToken = JSON.parse(this.payload);
+    // console.log('Parsed payload', finaldecodedToken);
+    this.userId = finaldecodedToken.user_id;
+    this.expiryDate = new Date(finaldecodedToken.exp * 1000);
+    this.currentUser$.next(this.userId);
+    // console.log(`Payload - ${this.payload},User - ${this.userId}, CurrentUser - ${this.currentUser$}`);
+    localStorage.setItem('userData', this.payload);
+    return this.payload;
+  }
 
   onLogout() {
-    // remove user from the local storage to log user out
-    //  this.dataSource.authToken = 'null';
-    //  this.dataSource.authTokenRefresh = 'null';
     this.jwtAccessToken = 'null';
     this.jwtRefreshToken = 'null';
 
   }
 
    get authenticated() {
-    // return this.dataSource.authToken != null;
-    //  this.currentUser$.subscribe(token => {
-    //    let access = JSON.parse(JSON.stringify(token));
-    //    this.jwtAccessToken = access.access;
-    //  });
-    //  console.log('authenticated tokens', this.jwtAccessToken);
      return this.jwtAccessToken != null;
    }
 
   get refreshedToken() {
-    // return this.dataSource.refreshToken != null;
+
     return this.jwtRefreshToken != null;
   }
 

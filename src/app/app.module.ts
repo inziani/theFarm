@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 
 import { UsersService } from './core/services/users.service';
@@ -139,11 +138,11 @@ import { FinanceService } from './core/services/finance.service';
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         FontAwesomeModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule,
         BrowserAnimationsModule,
         MaterialModule,
         FlexLayoutModule,

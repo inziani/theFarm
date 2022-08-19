@@ -10,6 +10,7 @@ import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dia
 import { AuthenticationService } from '@app/core/services/authentication.service';
 
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
+import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
 
 
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
+    public dataSource: RestDataSource,
     public authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     this.isLoading = true;
-    this.authenticationService.onLogin(email, password)
+    this.authenticationService.getToken(email, password)
       .subscribe(
         success => {
           if (success) {
@@ -82,10 +84,11 @@ export class LoginComponent implements OnInit {
       this.userLogin['password'] = this.formGroup.controls['password'].value);
     this.userLogin['email'] = this.formGroup.controls['email'].value;
     this.formSubmitted = true;
-    this.authenticationService.onLogin(this.userLogin.email, this.userLogin.password)
+    this.authenticationService.getToken(this.userLogin.email, this.userLogin.password)
       .subscribe(
         success => {
           if (success) {
+            // console.log('Log in component-', success);
             this.dialogue.open(LoginDialogComponent);
             this.router.navigate(['home']);
           }
