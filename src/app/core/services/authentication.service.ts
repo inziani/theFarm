@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, observable, Observable, throwError } from 'rxjs';
@@ -9,8 +9,9 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { SignUpResponse } from '../shared/interfaces/users-interface';
+import { SignUpResponse, UserCredentials } from '../shared/interfaces/users-interface';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -22,10 +23,12 @@ export class AuthenticationService {
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   public currentUser$ = new BehaviorSubject<number>(0);
   public expiryDate!: Date;
-  public jwtAccessToken!: string;
+  public jwtAccessToken!: any;
   public jwtRefreshToken!: string;
   public payload: any;
   public userId!: number;
+  public token: any;
+  public errorMessage!: string;
 
 
   public get currentUserValue(): number{
@@ -34,64 +37,74 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private dataSource: RestDataSource) {
+    private dataSource: RestDataSource,
+    public router: Router
+  ) {
 
   }
 
-  getToken(email: string, password: string): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/${environment.jwtLogin}`,
-    JSON.stringify({ email, password}), this.httpOptions
+  getToken(email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/${environment.jwtLogin}`,
+    JSON.stringify({ email, password }), this.httpOptions
     ).pipe(
       map((loginResponse: any) => {
-        // login is successfull and token is in the response
-        // console.log(loginResponse);
         this.jwtAccessToken = loginResponse.access;
-        // console.log('authentication service access-', this.jwtAccessToken);
         this.jwtRefreshToken = loginResponse.refresh;
-        // console.log('authentication service refresh-', this.jwtRefreshToken);
-        localStorage.setItem('userData', this.jwtAccessToken);
-        // this.jwtRefreshToken = loginResponse;
-        return this.jwtAccessToken;
-      },
-      ),
+        localStorage.setItem('access', this.jwtAccessToken);
+        localStorage.setItem('refresh', this.jwtRefreshToken);
+        console.log(`Access Token- ${this.jwtAccessToken}, Refresh Token- ${this.jwtRefreshToken}`);
+        return this.jwtAccessToken, this.jwtRefreshToken;
+      },),
       tap(loginResponse => {
         this.saveUser(loginResponse)
       }),
-      shareReplay()
-    );
+      shareReplay());
   }
 
   private saveUser(loginResponse: any) {
     type customJwtPayLoad = JwtPayload & { userPayloadData: string };
     let decodedToken = jwtDecode<customJwtPayLoad>(loginResponse);
-    // console.log('Decoded Token - ', decodedToken);
     this.payload = JSON.stringify(decodedToken);
-    // console.log('authentication service-', decodedToken);
     let finaldecodedToken = JSON.parse(this.payload);
-    // console.log('Parsed payload', finaldecodedToken);
     this.userId = finaldecodedToken.user_id;
     this.expiryDate = new Date(finaldecodedToken.exp * 1000);
+    console.log('Expiry Date -', this.expiryDate);
     this.currentUser$.next(this.userId);
-    // console.log(`Payload - ${this.payload},User - ${this.userId}, CurrentUser - ${this.currentUser$}`);
-    localStorage.setItem('userData', this.payload);
+    localStorage.setItem('payLoad', this.payload);
+    console.log('Payload-', this.payload);
     return this.payload;
   }
 
-  onLogout() {
-    this.jwtAccessToken = 'null';
-    this.jwtRefreshToken = 'null';
-
+  public isLoggedIn() {
+    return localStorage.getItem('access') != null;
   }
 
-   get authenticated() {
-     return this.jwtAccessToken != null;
+  public onLogout() {
+    localStorage.clear();
+    this.currentUser$.next(NaN);
+    this.router.navigate(['/login']);
+  }
+
+   public  getAccessToken() {
+     return localStorage.getItem('access') || '';
+
    }
 
-  get refreshedToken() {
-
-    return this.jwtRefreshToken != null;
+  public getRefreshedToken() {
+    return localStorage.getItem('refresh') || '';
   }
 
+  public generateRefreshToken() {
+    let refresh = this.getRefreshedToken();
+    return this.http.post(`${environment.apiUrl}/${environment.jwtRefresh}`, JSON.stringify({ refresh }), this.httpOptions).pipe(tokenRefresh => {
+      this.token = tokenRefresh;
+      return this.token;
+    });
+  }
+
+  saveTokens(tokenData: any) {
+    localStorage.setItem('refresh', tokenData.refresh);
+  }
    onUserSignOn(
     first_name: string,
     last_name: string,
@@ -112,21 +125,8 @@ export class AuthenticationService {
       city,
       email,
       password
-
-    }), this.httpOptions).pipe(catchError(errorResponse => {
-      let errorMessage = "An unknown error occurred";
-      if (!errorResponse.error || !errorResponse.error.error) {
-        return throwError(errorMessage);
-      }
-      switch (errorResponse.error.error.message) {
-        case "user with this email already exists.":
-          errorMessage = 'This email exists!';
-      }
-      return throwError(errorMessage);
-    }));
-  };
-
-
+    }), this.httpOptions);
+  }
   }
 
 

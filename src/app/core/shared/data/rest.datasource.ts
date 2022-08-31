@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 
@@ -43,9 +43,10 @@ export class RestDataSource {
     })
   };
 
-  public httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  public httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   public activityCategoryList!: ActivityCategory[];
   public activityList!: Activity[];
+  public errorMessage!: string;
 
 
 
@@ -60,7 +61,7 @@ export class RestDataSource {
     return this.http.get<UserInterface[]>(`${environment.apiUrl}/users/`);
   }
 
-  getAllUserProfiles(): Observable<UserProfileInterface[]>{
+  getAllUserProfiles(): Observable<UserProfileInterface[]> {
     return this.http.get<UserProfileInterface[]>(`${environment.apiUrl}/user-profile/`)
   }
 
@@ -81,15 +82,12 @@ export class RestDataSource {
   private storeUser(token: any) {
     type customJwtPayLoad = JwtPayload & { userPayloadData: string }
     let decodedToken = jwtDecode<customJwtPayLoad>(token);
-    // console.log('Decoded Token - ', decodedToken);
     this.payload = JSON.stringify(decodedToken);
     let finaldecodedToken = JSON.parse(this.payload);
-    // console.log('Parsed payload', finaldecodedToken);
     this.userId = finaldecodedToken.user_id;
     this.expiryDate = new Date(finaldecodedToken.exp * 1000);
     this.user.next(this.userId);
     this.currentUser$.next(this.userId);
-    // console.log(`Payload - ${this.payload},User - ${this.userId}, CurrentUser - ${this.currentUser$}`);
     localStorage.setItem('userData', this.payload);
     return this.payload;
   }
@@ -99,7 +97,6 @@ export class RestDataSource {
     return this.http.post<any>(`${environment.apiUrl}/api/token/refresh/`, this.httpOptions).pipe(
       map((response: any) => {
         this.authTokenRefresh = response.refresh;
-        // console.log(this.refreshToken);
         return this.authTokenRefresh;
       }), shareReplay());
 
@@ -116,62 +113,63 @@ export class RestDataSource {
   }
 
   addActivityCategory(title: string, description: string, category: string): Observable<ActivityCategory> {
-    return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys/`, JSON.stringify({ title, description, category }), this.httpOptions)
-  };
+    return this.http.post<ActivityCategory>(`${environment.apiUrl}/activityscategorys/`, JSON.stringify({ title, description, category }), this.httpOptions);
+  }
 
   addActivity(title: string, description: string, status: string, activity_category: number): Observable<Activity> {
-    return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activity_category }), this.httpOptions)
-  };
+    return this.http.post<Activity>(`${environment.apiUrl}/activitys/`, JSON.stringify({ title, description, status, activity_category }), this.httpOptions);
+  }
 
-  editActivity(id: number, title: string, description: string,status: string, activity_category: number) {
-    return this.http.patch<any>(`${environment.apiUrl}/activitys/` + id + '/', { title, description, status, activity_category}, { headers: this.httpHeaders });
-  };
+  editActivity(id: number, title: string, description: string, status: string, activity_category: number) {
+    return this.http.patch<any>(`${environment.apiUrl}/activitys/` + id + '/', { title, description, status, activity_category }, { headers: this.httpHeaders });
+  }
 
-   deleteActivity(id: number): Observable<number> {
+  deleteActivity(id: number): Observable<number> {
     return this.http.delete<any>(`${environment.apiUrl}/activitys/` + id + '/');
-  };
+  }
 
   fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
     return this.http.get<ActivityCategoryInterface[]>(`${environment.apiUrl}/activityscategorys/`, this.httpOptions);
-  };
+  }
 
   fetchSingleActivityCategory(id: number): Observable<ActivityCategoryInterface> {
     return this.http.get<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', { headers: this.httpHeaders });
-  };
+  }
 
-  editActivityCategory(id: number, title: string, description: string, category: string ): Observable<ActivityCategoryInterface> {
-    return this.http.patch<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', {title, description,category },
+  editActivityCategory(id: number, title: string, description: string, category: string): Observable<ActivityCategoryInterface> {
+    return this.http.patch<any>(`${environment.apiUrl}/activityscategorys/` + id + '/', { title, description, category },
       { headers: this.httpHeaders });
-  };
+  }
 
   deleteActivityCategory(id: number): Observable<ActivityCategoryInterface> {
-    return this.http.delete<any>(`${environment.apiUrl}/activityscategorys/` + id + '/');
-  };
+    return this.http.delete<any>(`${environment.apiUrl}/activityscategorys/` + id + '/')
+  }
 
   fetchUsers(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(`${environment.apiUrl}/register/`, this.httpOptions);
   }
 
   editUserInformation(id: number, first_name: string, last_name: string, date_of_birth: string, phone_number: string,
-  username: string, email: string, gender: string, city: string ) {
-    return this.http.patch<any>(`${ environment.apiUrl }/register/` + id + '/', {
-      first_name, last_name, date_of_birth, phone_number, username, email, gender, city }, { headers: this.httpHeaders });
+    username: string, email: string, gender: string, city: string) {
+    return this.http.patch<any>(`${environment.apiUrl}/register/` + id + '/', {
+      first_name, last_name, date_of_birth, phone_number, username, email, gender, city
+    }, { headers: this.httpHeaders });
 
-  };
+  }
 
-  fetchUserProfiles(): Observable<UserProfileInterface>{
+  fetchUserProfiles(): Observable<UserProfileInterface> {
     return this.http.get<UserProfileInterface>(`${environment.apiUrl}/user-profile`, this.httpOptions);
   }
 
-  fetchActivityDb(sort: string, order: SortDirection, page: number): Observable<Activity[]>{
-     return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
+  fetchActivityDb(sort: string, order: SortDirection, page: number): Observable<Activity[]> {
+    return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
 
-  fetchActivityList(): Observable<ActivityInterface[]>{
-     return this.http.get<ActivityInterface[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
+  fetchActivityList(): Observable<ActivityInterface[]> {
+    return this.http.get<ActivityInterface[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);
   }
 
-   fetchSingleActivity(id: number): Observable<Activity>{
-    return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});
-  };
+  fetchSingleActivity(id: number): Observable<Activity> {
+    return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', { headers: this.httpHeaders });
+  }
 }

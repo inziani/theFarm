@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+
+import { AuthenticationService } from '@app/core/services/authentication.service';
+
+
 
 @Component({
   selector: 'app-finance-navbar',
@@ -10,7 +13,7 @@ export class FinanceNavbarComponent implements OnInit {
    @Output() sideNavToggle = new EventEmitter<void>();
 
   constructor(
-    private restDataSource: RestDataSource
+    private authorizationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -22,10 +25,9 @@ export class FinanceNavbarComponent implements OnInit {
 
    }
 
-
   onLogOut() {
 
-    this.restDataSource.removeToken();
+   this.authorizationService.onLogout();
 
   }
 

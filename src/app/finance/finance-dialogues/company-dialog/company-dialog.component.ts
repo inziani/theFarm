@@ -1,5 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { map } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 
 import { FinanceService } from '@app/core/services/finance.service';
 import { CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
@@ -34,6 +38,7 @@ export class CompanyDialogComponent implements OnInit {
     { value: 'USD', viewValue: 'US Dollar' },
     { value: 'GBP', viewValue: 'British Pound' },
   ];
+  public errorMessage!: string;
 
   constructor(
     private restData: RestDataSource,
@@ -59,23 +64,12 @@ export class CompanyDialogComponent implements OnInit {
     // }
     // this.dialogRef.close(this.formGroup.value)
     this.company = this.formGroup.value;
-    console.log(this.company);
-
-    console.log('Test Form items-', this.company.company, this.company.companyName, this.company.street, this.company.postOfficeBox, this.company.postalCode, this.company.country, this.company.language, this.company.currency, this.company.landLine, this.company.mobileNumber, this.company.email);
-
     this.financeService.createCompanyMasterData(
       this.company.company, this.company.companyName, this.company.street, this.company.postOfficeBox, this.company.postalCode, this.company.country, this.company.language, this.company.currency, this.company.landLine, this.company.mobileNumber, this.company.email
     ).subscribe(companyCreated => {
       console.log('The Company Created', companyCreated);
     });
-    // this.financeService.createCompanyMasterData();
-
-
     this.formSubmitted = true;
-    alert('is the code getting here?');
-
-
-
   }
 
 }

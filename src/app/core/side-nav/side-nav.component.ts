@@ -1,10 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
-
-
-import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { UserProfile } from '@app/core/shared/interfaces/sidenav-trees';
+import { AuthenticationService } from '../services/authentication.service';
 
 
 @Component({
@@ -19,7 +14,7 @@ export class SideNavComponent implements OnInit {
 
 
   constructor(
-    private restDataSource: RestDataSource
+    private authorizationService: AuthenticationService
   ) {
 
   }
@@ -33,7 +28,7 @@ export class SideNavComponent implements OnInit {
 
   onLogOut() {
 
-    this.restDataSource.removeToken();
+    this.authorizationService.onLogout();
 
   }
 

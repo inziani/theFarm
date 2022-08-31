@@ -39,7 +39,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
   public dialogueData: any;
 
-  public randomQuote!: any;
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -57,7 +57,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // this.fetchActivityData();
     this.onFetchActivityData();
-    this.onFetchRandomQuotes();
     this.activityList = this.activitysService.getActivitysList();
     this.subscription = this.activitysService.activityListChanged.subscribe(
       (activityList: Activity[]) => {
@@ -82,14 +81,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
   }
 
-  onFetchRandomQuotes() {
-    this.dataSource.fetchRandomQuotes().subscribe(
-      quote => {
-        console.log(quote);
-        this.randomQuote = quote;
-
-      });
-  }
 
   onFetchActivityData() {
     this.dataSource.fetchActivityList().subscribe(

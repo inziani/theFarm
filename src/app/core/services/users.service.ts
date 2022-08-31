@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { OnInit, OnDestroy } from '@angular/core';
 import { environment } from '@environments/environment';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, catchError, throwError } from 'rxjs';
 
 
 
@@ -54,7 +54,8 @@ export class UsersService {
 
   // Get user listing;
   public getUsersListing(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(`${environment.apiUrl}/users/`);
+    return this.http.get<UserInterface[]>(`${environment.apiUrl}/users/`).pipe(
+      catchError(this.handleError));;
   }
   // Register new users
 
@@ -63,5 +64,23 @@ export class UsersService {
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
+
+  private handleError(error: HttpErrorResponse) {
+  let errorMessage = '';
+  if (error.status === 0) {
+    // A client-side or network error occurred. Handle it accordingly.
+    console.error('An error occurred:', error.error);
+
+  } else {
+    // The backend returned an unsuccessful response code.
+    // The response body may contain clues as to what went wrong.
+    console.error(
+      `Backend returned code ${error.status}, body was: `, error.error);
+    errorMessage = `Backend returned code ${error.status}, body was: `, error.error;
+  }
+  // Return an observable with a user-facing error message.
+    errorMessage = `Backend returned code ${error.status}, body was: `, error.error;
+  return throwError(() => new Error(errorMessage));
+}
 
 }

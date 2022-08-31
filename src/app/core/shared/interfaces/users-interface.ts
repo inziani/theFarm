@@ -25,7 +25,6 @@ export interface UserProfileInterface{
 }
 
 export interface Gender {
-
     value: string;
     viewValue: string;
 }
@@ -51,6 +50,12 @@ export interface JwTAuthenticationResponse {
   email: string,
   _token?: string,
   _tokenRefresh?: string
+}
+
+
+export interface UserCredentials {
+    email: string;
+    password: string;
 }
 
 
