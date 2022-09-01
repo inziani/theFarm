@@ -80,10 +80,8 @@ export class EditActivityComponent implements OnInit {
     this.activity = this.formGroup.value;
     console.log(this.activity, ' - Editable data');
     this.dataSource.editActivity(this.dialogDataActivity.id, this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
-      console.log(success)
       if (success) {
         this.dialog.open(ChangesSavedDialogComponent);
-
       }
     },
       error => {
@@ -95,18 +93,12 @@ export class EditActivityComponent implements OnInit {
 
 };
 
-
   close() {
-
     this.dialogRef.close();
-
   }
-
-
 
   submitForm() {
     // console.log('dialogue data');
-
   }
 
   onDeleteActivity(){

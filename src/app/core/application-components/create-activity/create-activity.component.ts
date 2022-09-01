@@ -60,9 +60,7 @@ export class CreateActivityComponent implements OnInit {
   };
 
   close() {
-
     this.dialogRef.close();
-
   }
 
 }
