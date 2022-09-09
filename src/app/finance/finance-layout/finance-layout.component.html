@@ -1,12 +1,30 @@
-<app-finance-navbar (sideNavToggle)="sidenav.toggle()"></app-finance-navbar>
+
 <mat-sidenav-container>
-  <mat-sidenav mode="side" class="mat-elevation-z8" #sidenav role="navigation">
+  <mat-sidenav mode="side" #sidenav role="navigation">
     <app-finance-sidenav (closeSideNav)="sidenav.close()"></app-finance-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div>
+    <app-finance-navbar (sideNavToggle)="sidenav.toggle()"></app-finance-navbar>
+    <main>
       <router-outlet></router-outlet>
-    </div>
+    </main>
   </mat-sidenav-content>
+  <app-finance-footer></app-finance-footer>
 </mat-sidenav-container>
-<app-finance-footer></app-finance-footer>
+
+
+
+<!-- <mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <app-side-nav #authenticated (closeSideNav)="sidenav.close()"></app-side-nav>
+  </mat-sidenav>
+  <mat-sidenav #homeSideNav position="end" role="navigation">
+    <app-home-sidenav #unauthenticated (closedSideNav)="homeSideNav.close()"></app-home-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (sideNavToggle)="sidenav.toggle()" (homePageNavToggle)="homeSideNav.toggle()"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { GLMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
+import { GLMasterDataFormGroup, GLMasterDataFormControl, GLMasterDataTaxCodeFormGroup } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
 import { ProfitAndLossAccountType } from '@app/finance/finance-interfaces/pnl-account-interface';
 import { ReconciliationAccountType } from '@app/finance/finance-interfaces/finance-interfaces';
 import { SearchDialogComponent } from '@app/finance/finance-dialogues/search-dialog/search-dialog.component';
@@ -50,12 +50,13 @@ export class GlMasterDataComponent implements OnInit {
   }
 
   onSave() {
-    if (this.formGroup.valid) {
+    if (!this.formGroup.valid) {
       return;
     }
-    this.glAccount = this.formGroup.value;
     this.formSubmitted = true;
+    this.glAccount = this.formGroup.value;
     console.log('Test Form items-', this.glAccount, this.glAccount.accountNumber);
+    this.formGroup.reset();
 
   }
 

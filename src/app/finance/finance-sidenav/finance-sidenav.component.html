@@ -8,7 +8,6 @@
           <mat-icon>{{ node.iconname }}</mat-icon><span class="nav-caption">{{node.name}}</span>
         </div>
       </mat-tree-node>
-
       <mat-tree-node *matTreeNodeDef="let node; when hasFlatChild" routerLink="{{ node.routerLink }}" matTreeNodePadding
         (click)="onClose()">
         <button mat-icon-button matTreeNodeToggle>
@@ -16,4 +15,4 @@
         </button>
         <mat-icon>{{ node.iconname }}</mat-icon><span class="nav-caption">{{ node.name }}</span>
       </mat-tree-node>
-      </mat-tree>
+    </mat-tree>

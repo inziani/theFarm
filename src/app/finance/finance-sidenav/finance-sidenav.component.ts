@@ -6,8 +6,6 @@ import { FinanceNode, FinanceFlattener } from '../finance-interfaces/gl-tree-int
 import { GL_TREE_DATA } from '../finance-data/gl-tree-data';
 
 
-
-
 @Component({
   selector: 'app-finance-sidenav',
   templateUrl: './finance-sidenav.component.html',

@@ -1,26 +1,30 @@
 export class GlMasterDataModel{
 
   constructor(
-
-    public chartOfAccounts: string,
-    public companyCode: string,
+    
     public accountNumber: number,
-    public accountType: string,
+    public companyCode: string,
+    public chartOfAccounts: string,
     public accountGroup: string,
-    public pNlAccountType : string,
+    public accountType: string,
+    public reconciliationAccountInput: boolean,
     public reconciliationAccountType: string,
     public alternativeGLAccount: number,
     public shortDescription: string,
     public longDescription: string,
-    public tradingPartner: string,
-    public groupAccountNumber: number,
-    public blockedForPosting: boolean,
-    public markedForDeletion: boolean,
+    public profitAndLossAccount: boolean,
+    public balanceSheetAccount: boolean,
     public accountCurrency: string,
+    public balancesInLocalCurrency: boolean,
     public exchangeRateKey: string,
     public taxCategory: string,
     public postingWithoutTaxAllowed: boolean,
     public openItemManagement: boolean,
+    public lineItemManagement: boolean,
+    public blockedForPosting: boolean,
+    public markedForDeletion: boolean,
+    public groupAccountNumber: number,
+    public tradingPartner: string,
     public sortKey: string,
     public authorizationGroup: string,
     public fieldStatusGroup: string,
@@ -28,23 +32,24 @@ export class GlMasterDataModel{
     public relevantToCashFlow: boolean,
     public houseBank: string,
     public houseBankAccountID: number,
-    public interestIndicator: string,
+    public interestIndicator: boolean,
     public interestCalculationFrequency: number,
     public lastDateOfInterestCalculation: Date,
+    public keyDateofLastInterest: Date,
     public controllingArea: string,
     public costElement: number,
     public unitOfMeasure: string,
     public businessArea: string,
-    public onlyBalancesInLocalCurrency: boolean,
     public valuationGroup: string,
     public inflationKey: string,
     public toleranceGroup: string,
-    public lineItemManagement: boolean,
-    public supplementAutomaticPostings: boolean,
-    public reconciliationAccountInput: boolean,
     public planningLevel: string,
-    public keyDateofLastInterest: Date,
-    public accountManagedinExternalSystem: number
+    public accountManagedinExternalSystem: number,
+    public supplementAutomaticPostings: boolean,
+
+
+
+
           ) {
 
   }

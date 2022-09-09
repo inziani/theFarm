@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { AuthenticationService } from '../services/authentication.service';
-import { RestDataSource } from '../shared/data/rest.datasource';
 
-import { UserInterface, UserProfileInterface } from '../shared/interfaces/users-interface';
+import { UserInterface } from '../shared/interfaces/users-interface';
 import { AuthenticatedUser } from '../shared/models/user.model';
 import { AgricultureDialogueComponent } from '../dialogues/agriculture-dialogue/agriculture-dialogue.component';
 import { HomePageModulesInterface } from '../shared/interfaces/routers-interfaces';
@@ -41,10 +38,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   constructor(
 
-    private sourceData: RestDataSource,
+
     private authenticationService: AuthenticationService,
-    private activeRoute: ActivatedRoute,
-    private router: Router,
     public dialog: MatDialog
   ) { }
 

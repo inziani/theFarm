@@ -14,16 +14,15 @@
 .mat-toolbar {
   background-color: #03045e;
   color: #fb8500;
+  width: 100%;
 }
 
 .mat-sidenav {
-    margin: 16px;
-    width: 300px;
+    /* margin: 16px; */
+    width: 250px;
     border-right: none;
-    background-color: #03045e;
-    color: #fb8500;
     border-radius: 10px;
-    padding: 16px;
+    /* padding: 16px; */
     text-align: center;
 
 }
@@ -38,9 +37,9 @@
     background-color: #03045e;
 }
 
-.mat-sidenav-container {
+/* .mat-sidenav-container {
     height: calc(100vh - 65px);
-}
+} */
 
 .tp-section {
    display: flex;

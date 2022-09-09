@@ -1,7 +1,3 @@
-body {
-  scrollbar-width: thin;          /* "auto" or "thin" */
-  scrollbar-color: blue orange;   /* scroll thumb and track */
-}
 
 .nav-caption {
   display: inline-block;
@@ -9,19 +5,15 @@ body {
 }
 
 .mat-tree{
-  background-color:#03045e ;
   margin-top: 50%;
   margin-left: 0;
-
-
 }
 
 .mat-tree-node{
-  color: #fb8500;
+  color: #03045e;
   cursor: pointer;
+  font-weight: lighter;
 }
-
-
 
 .finance-tree-invisible {
   display: none;
@@ -56,16 +48,15 @@ body {
   display: inline-flex;
 }
 
-
 /* SideNav List Styles */
 
-
-
 .close-sidenav{
+
   right: 15px;
   position: absolute;
   cursor: pointer;
-  color: #fb8500;
+  color: #03045e;
+  margin-top: 5px;
 }
 
 ul {
@@ -82,18 +73,15 @@ a {
 
 }
 
-
 .mat-nav-list {
   margin-top: 50%;
   margin-left: 0;
 
 }
 
-
 .mat-list-item {
   color: #fb8500;
   font-weight: lighter;
   font-size: 0.875rem;
-
 }
 

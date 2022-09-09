@@ -8,8 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
-
-
 import { UsersService } from './core/services/users.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { NavigationServiceService } from './core/services/navigation-service.service';
@@ -17,15 +15,10 @@ import { RestDataSource } from './core/shared/data/rest.datasource';
 import { DowndownDirective } from './core/shared/directives/dropdown.directive';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
-
-
-
-
 import { GoogleMapsModule } from '@angular/google-maps'
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare, faEdit, faTrash, faPlus, faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faTelegram, faTwitter, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './core/application-components/todo/todo.component';
@@ -60,13 +53,10 @@ import { DeleteActivityDialogComponent } from './core/dialogues/delete-activity-
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
 import { FinanceHomeComponent } from './finance/finance-home/finance-home.component';
-import { GlHomeComponent } from './finance/general-ledger/gl-home/gl-home.component';
 import { FinanceLayoutComponent } from './finance/finance-layout/finance-layout.component';
 import { FinanceNavbarComponent } from './finance/finance-navbar/finance-navbar.component';
 import { FinanceSidenavComponent } from './finance/finance-sidenav/finance-sidenav.component';
-import { GlMasterDataComponent } from './finance/general-ledger/master-data/gl-master-data/gl-master-data.component';
-import { GlDisplayComponent } from './finance/general-ledger/gl-home/gl-display/gl-display.component';
-import { GlHeaderMasterComponent } from './finance/general-ledger/master-data/gl-header-master/gl-header-master.component';
+import { GlMasterDataComponent } from './finance/general-ledger/gl-master-data/gl-master-data.component';
 import { ProfileSidenavComponent } from './core/application-components/profile/profile-sidenav/profile-sidenav.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { HomeSidenavComponent } from './core/home-sidenav/home-sidenav.component';
@@ -80,9 +70,6 @@ import { FinanceFooterComponent } from './finance/finance-footer/finance-footer.
 import { SearchDialogComponent } from './finance/finance-dialogues/search-dialog/search-dialog.component';
 import { CompanyDialogComponent } from './finance/finance-dialogues/company-dialog/company-dialog.component';
 import { FinanceService } from './core/services/finance.service';
-
-
-
 
 
 @NgModule({
@@ -116,13 +103,10 @@ import { FinanceService } from './core/services/finance.service';
         AppLayoutComponent,
         AuthenticationLayoutComponent,
         FinanceHomeComponent,
-        GlHomeComponent,
         FinanceLayoutComponent,
         FinanceNavbarComponent,
         FinanceSidenavComponent,
         GlMasterDataComponent,
-        GlDisplayComponent,
-        GlHeaderMasterComponent,
         ProfileSidenavComponent,
         ProfileLayoutComponent,
         HomeSidenavComponent,

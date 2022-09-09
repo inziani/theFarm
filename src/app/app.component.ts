@@ -33,8 +33,6 @@ export class AppComponent {
 
   }
 
-
-
   sideNavToggle() {
     return this.openSideNav = true;
   }
