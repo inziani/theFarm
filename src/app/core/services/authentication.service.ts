@@ -2,13 +2,12 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, observable, Observable, throwError } from 'rxjs';
-import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 
 
 
 import { environment } from '@environments/environment';
-import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { SignUpResponse, UserCredentials } from '../shared/interfaces/users-interface';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
@@ -37,7 +36,6 @@ export class AuthenticationService {
 
   constructor(
     private http: HttpClient,
-    private dataSource: RestDataSource,
     public router: Router
   ) {
 
@@ -52,7 +50,7 @@ export class AuthenticationService {
         this.jwtRefreshToken = loginResponse.refresh;
         localStorage.setItem('access', this.jwtAccessToken);
         localStorage.setItem('refresh', this.jwtRefreshToken);
-        console.log(`Access Token- ${this.jwtAccessToken}, Refresh Token- ${this.jwtRefreshToken}`);
+        // console.log(`Access Token- ${this.jwtAccessToken}, Refresh Token- ${this.jwtRefreshToken}`);
         return this.jwtAccessToken, this.jwtRefreshToken;
       },),
       tap(loginResponse => {
@@ -68,10 +66,10 @@ export class AuthenticationService {
     let finaldecodedToken = JSON.parse(this.payload);
     this.userId = finaldecodedToken.user_id;
     this.expiryDate = new Date(finaldecodedToken.exp * 1000);
-    console.log('Expiry Date -', this.expiryDate);
+    // console.log('Expiry Date -', this.expiryDate);
     this.currentUser$.next(this.userId);
     localStorage.setItem('payLoad', this.payload);
-    console.log('Payload-', this.payload);
+    // console.log('Payload-', this.payload);
     return this.payload;
   }
 

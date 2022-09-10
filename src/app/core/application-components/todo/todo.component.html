@@ -3,7 +3,6 @@
   <div class="table-container">
     <h1 class="to-do-list">Task List</h1>
     <div class="mx-5 text-center">
-
       <a>
         <mat-icon (click)="openCreateActivityDialog()">add_box</mat-icon>
       </a>
@@ -72,8 +71,7 @@
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="activityColumnHeaders"></tr>
         <tr mat-row *matRowDef="let row; columns: activityColumnHeaders;"></tr>
-        </table>
-  </div>
-<mat-paginator [length]="resultsLength" [pageSize]="6" [pageSizeOptions]="[6]">
-</mat-paginator>
+      </table>
+    </div>
+  <mat-paginator [length]="resultsLength" [pageSize]="6" [pageSizeOptions]="[6]"></mat-paginator>
 </div>

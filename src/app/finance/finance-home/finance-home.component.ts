@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FinanceService } from '@app/core/services/finance.service';
 
 import { CompanyDialogComponent } from '../finance-dialogues/company-dialog/company-dialog.component';
+import { CompanyMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
 
 @Component({
   selector: 'app-finance-home',
@@ -9,12 +11,18 @@ import { CompanyDialogComponent } from '../finance-dialogues/company-dialog/comp
   styleUrls: ['./finance-home.component.css']
 })
 export class FinanceHomeComponent implements OnInit {
+  public companyListing: CompanyMasterDataModel[] = [];
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public financeService: FinanceService
   ) { }
 
   ngOnInit(): void {
+    this.financeService.fetchCompanyData().subscribe(response => {
+      this.companyListing = response;
+      // console.log('Companies-', this.companyListing);
+    })
   }
 
   onSelectCompany() {
@@ -31,6 +39,8 @@ export class FinanceHomeComponent implements OnInit {
     // alert('The Company link  works!')
 
   }
+
+
 
   onSelectCompanyCode() {
 

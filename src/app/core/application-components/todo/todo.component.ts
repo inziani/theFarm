@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
-import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Event, Router } from '@angular/router';
 
-import { merge, Observable, observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
@@ -16,7 +15,6 @@ import { Activity } from '@app/core/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from '../create-activity/create-activity.component';
-import { DeleteCategoryDialogComponent } from '@app/core/dialogues/delete-category-dialog/delete-category-dialog.component';
 import { DeleteActivityDialogComponent } from '@app/core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
 
 
@@ -36,7 +34,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
   public resultsLength = 0;
   public sourceData = new MatTableDataSource<Activity>();
   public filter = "";
-
   public dialogueData: any;
 
 
@@ -55,7 +52,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.fetchActivityData();
     this.onFetchActivityData();
     this.activityList = this.activitysService.getActivitysList();
     this.subscription = this.activitysService.activityListChanged.subscribe(
@@ -72,21 +68,19 @@ export class TodoComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.sourceData.sort = this.sort;
     this.sourceData.paginator = this.paginator;
-
   }
 
   doFilter(filterValue: any) {
     this.sourceData.filter = (JSON.stringify(filterValue)).trim().toLowerCase();
-    console.log(filterValue);
+    // console.log(filterValue);
 
   }
-
 
   onFetchActivityData() {
     this.dataSource.fetchActivityList().subscribe(
       activityList => {
         this.activityList = activityList;
-        console.log(this.activityList);
+        // console.log(this.activityList);
 
       },
       error => {
@@ -123,7 +117,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
     this.dataSource.fetchSingleActivity(id).subscribe((response) => {
       let activity = response;
       dialogConfig.data = activity;
-      console.log(activity);
+      // console.log(activity);
 
       // ***Open dialog
 

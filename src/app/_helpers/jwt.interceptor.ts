@@ -51,7 +51,7 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
-    return next.handle(request).pipe(catchError(this.handleError));
+    return next.handle(request);
       // .pipe(catchError(this.handleError)); Call the error handler here.
   }
 

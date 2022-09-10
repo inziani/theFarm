@@ -1,4 +1,4 @@
-<h2 mat-dialog-title style="font-weight: lighter;">Company Information</h2>
+<h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Company Information</h2>
 <mat-dialog-content class="mat-typography">
   <form novalidate [formGroup]="formGroup" *ngIf="!isLoading" (ngSubmit)="onSave()">
     <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
@@ -8,10 +8,10 @@
         </li>
       </ul>
     </div>
-    <div class="row my-3 justify-content-center">
+    <!-- <div class="row my-3 justify-content-center">
       <div class="col-md-6">
         <div class="input-group my-2 justify-content-center">
-          <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: white;">
+          <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: white; border-color: #03045e; border-radius: 0;">
             <a>
               <mat-icon class="mx-2 my-2">pageview</mat-icon>
             </a>
@@ -30,11 +30,11 @@
           </span>
         </div>
       </div>
-    </div>
-    <div class="row my-3">
+    </div> -->
+    <div class="row my-1">
       <label for="inputCompany" class="col-md-3 col-form-label">Company</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCompany" formControlName="company" [readonly]="readonly">
+        <input type="text" class="form-control" id="inputCompany" formControlName="company">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -46,7 +46,7 @@
     <div class="row my-3">
       <label for="inputCompanyName" class="col-md-3 col-form-label">Company Name</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCompanyName" formControlName="companyName" [readonly]="readonly">
+        <input type="text" class="form-control" id="inputCompanyName" formControlName="companyName" >
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -58,7 +58,7 @@
     <div class="row my-3">
       <label for="inputStreet" class="col-md-3 col-form-label">Street</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputStreet" formControlName="street" [readonly]="readonly">
+        <input type="text" class="form-control" id="inputStreet" formControlName="street">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -70,7 +70,7 @@
     <div class="row my-3">
       <label for="inputPostOfficeBox" class="col-md-3 col-form-label">Post Office Box</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputPostOfficeBox" formControlName="postOfficeBox" [readonly]="readonly">
+        <input type="number" class="form-control" id="inputPostOfficeBox" formControlName="postOfficeBox">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -82,7 +82,7 @@
     <div class="row my-3">
       <label for="inputPostalCode" class="col-md-3 col-form-label">Postal Code</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputPostalCode" formControlName="postalCode" [readonly]="readonly">
+        <input type="number" class="form-control" id="inputPostalCode" formControlName="postalCode">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -94,7 +94,7 @@
     <div class="row my-3">
       <label for="inputCountry" class="col-md-3 col-form-label">Country</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCountry" formControlName="country" [readonly]="readonly">
+        <input type="text" class="form-control" id="inputCountry" formControlName="country">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -138,7 +138,7 @@
     <div class="row my-3">
       <label for="inputLandline" class="col-md-3 col-form-label">Landline</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputLandline" formControlName="landLine" [readonly]="readonly">
+        <input type="number" class="form-control" id="inputLandline" formControlName="landLine">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -150,7 +150,7 @@
     <div class="row my-3">
       <label for="inputMobileNumber" class="col-md-3 col-form-label">Mobile Number</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputMobileNumber" formControlName="mobileNumber" [readonly]="readonly">
+        <input type="text" class="form-control" id="inputMobileNumber" formControlName="mobileNumber">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -162,7 +162,7 @@
     <div class="row my-3">
       <label for="inputEmail" class="col-md-3 col-form-label">Email</label>
       <div class="col-md-9">
-        <input type="email" class="form-control" id="inputEmail" formControlName="email" [readonly]="readonly">
+        <input type="email" class="form-control" id="inputEmail" formControlName="email">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -172,6 +172,7 @@
       </div>
     </div>
     <mat-dialog-actions align="end">
+      <button mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onSave()">Save</button>
       <button mat-raised-button mat-dialog-close cdkFocusInitial>Close</button>
     </mat-dialog-actions>
   </form>

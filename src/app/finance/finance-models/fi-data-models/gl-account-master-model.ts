@@ -1,7 +1,7 @@
-export class GlMasterDataModel{
+export class GeneralLedgerMasterDataModel{
 
   constructor(
-    
+
     public accountNumber: number,
     public companyCode: string,
     public chartOfAccounts: string,
@@ -46,11 +46,5 @@ export class GlMasterDataModel{
     public planningLevel: string,
     public accountManagedinExternalSystem: number,
     public supplementAutomaticPostings: boolean,
-
-
-
-
-          ) {
-
-  }
+) { }
 }

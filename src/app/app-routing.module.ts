@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes, Router } from "@angular/router";
 import { EditActivityComponent } from "./core/application-components/edit-activity/edit-activity.component";
 
 import { AppComponent } from "./app.component";

@@ -6,19 +6,35 @@
 
 .card-text{
   font-weight: lighter;
-  /* color: #03045e; */
-
-
 }
 
 .card-title{
   font-weight: lighter;
-  /* color: #03045e; */
 }
 
 
 a {
   cursor: pointer;
-  /* text-decoration: line-through; */
+}
+
+.btn-primary{
+  background-color: rgb(241, 232, 232);
+  color: #03045e;
+  border-radius: 0;
+  text-align: center;
+  font-weight: lighter;
+  border: none;
+}
+
+p {
+
+  font-size: small;
+  font-weight: lighter;
+}
+
+.table {
+  width: 100%;
+  font-weight: lighter;
+  color: #03045e;
 }
 

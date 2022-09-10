@@ -1,0 +1,40 @@
+.container {
+  height: 100vh;
+}
+
+.input-group-text {
+  color: #03045e;
+  border: none;
+  background-color: transparent;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-header-cell{
+  background-color: rgb(241, 232, 232);
+  font-weight:bold;
+  color: #03045e;
+
+}
+
+.mat-cell{
+  color: #03045e;
+  font-weight: lighter;
+  font-size: small;
+}
+
+.mat-elevation-z8{
+  border-radius: 0;
+}
+
+.mat-paginator {
+  background-color: transparent;
+  color: #03045e;
+}
+
+
+
+
+

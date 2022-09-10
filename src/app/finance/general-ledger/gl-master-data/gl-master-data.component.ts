@@ -5,7 +5,7 @@ import { GLMasterDataFormGroup, GLMasterDataFormControl, GLMasterDataTaxCodeForm
 import { ProfitAndLossAccountType } from '@app/finance/finance-interfaces/pnl-account-interface';
 import { ReconciliationAccountType } from '@app/finance/finance-interfaces/finance-interfaces';
 import { SearchDialogComponent } from '@app/finance/finance-dialogues/search-dialog/search-dialog.component';
-import { GlMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
+import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class GlMasterDataComponent implements OnInit {
   public formGroup = new GLMasterDataFormGroup();
   public pnlAccountType!: ProfitAndLossAccountType[];
   public reconciliationAcctType!: ReconciliationAccountType[];
-  public glAccount!: GlMasterDataModel;
+  public glAccount!: GeneralLedgerMasterDataModel;
   public readonly!: boolean;
 
   constructor(

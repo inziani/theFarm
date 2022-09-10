@@ -1,5 +1,4 @@
 .mat-raised-button{
-   /* width: 50%; */
    color: #03045e;
    background-color:#fb8500;
 }
@@ -23,12 +22,9 @@ body{
   margin-left: 5rem;
   margin-right: 5rem;
   margin-bottom: 5rem;
-
-
 }
 
 .table-container {
-
   position:relative;
   min-height: 600px;
   max-height: 800px;
@@ -40,8 +36,6 @@ table {
   width: 100%;
   font-weight: lighter;
   margin-top: 10px;
-
-
 }
 .mat-header-cell,
 .mat-cell
@@ -67,8 +61,6 @@ table {
 
 a{
   cursor: pointer;
-
-
 }
 
 
@@ -84,7 +76,7 @@ a{
 
 .mat-paginator{
   background-color: #03045e;
-  color: #ff9e00;
+  color: #03045e;
 }
 
 

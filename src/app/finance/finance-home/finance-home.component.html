@@ -1,65 +1,39 @@
 <div class="container my-5 justify-content-center">
-  <h1 class="text-center my-5" style="font-weight: lighter; color: #03045e;">Organizational Structure</h1>
-  <div class="row my-5 row-cols-1 row-cols-md-5 g-4 justify-content-center">
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <a><h3 class="card-title" (click)="onSelectCompany()">Company</h3></a>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  <h1 class="text-center my-2" style="font-weight: lighter; color: #03045e;">Organizational Structure</h1>
+  <!-- Section separations -->
+  <div class="row">
+    <div class="col-md-2">
+      <!-- Beginning of Org Listing with  -->
+        <div class="d-grid gap-3">
+          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
+            <p (click)="onSelectCompany()">Company</p>
+          </a></button>
+          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
+            <p class="card-title" (click)="onSelectCompanyCode()">Company Code</p>
+          </a></button>
+          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
+            <p class="card-title" (click)="onSelectChartOfAccounts()">Chart of Accounts</p>
+          </a></button>
+          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
+            <p class="card-title" (click)="onSelectReportingArea()">Reporting Area</p>
+          </a></button>
+          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
+            <p class="card-title" (click)="onSelectControllingArea()">Controlling Area</p>
+          </a></button>
+          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
+            <p class="card-title" (click)="onSelectBusinessArea()">Business Area</p>
+          </a></button>
+            <button class="btn btn-primary mat-elevation-z8" type="button"><a>
+              <p class="card-title" (click)="onSelectSalesArea()">Sales Area</p>
+            </a></button>
         </div>
-      </div>
+      <!-- end of Organization Listing -->
     </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <a><h3 class="card-title" (click)="onSelectCompanyCode()">Company Code</h3></a>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <a><h3 class="card-title" (click)="onSelectChartOfAccounts()">Chart of Accounts</h3></a>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <a><h3 class="card-title" (click)="onSelectReportingArea()">Reporting Area</h3></a>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <a><h3 class="card-title" (click)="onSelectControllingArea()">Controlling Area</h3></a>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <a><h3 class="card-title" (click)="onSelectBusinessArea()">Business Area</h3></a>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-body">
-          <a>
-            <h3 class="card-title" (click)="onSelectSalesArea()">Sales Area</h3>
-          </a>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-      </div>
+    <div class="col-md-10">
+      <!-- Organizational details -->
+      <app-org-unit-details></app-org-unit-details>
+      <!-- End of Organizational details -->
     </div>
   </div>
+  <!-- end of page separatiom -->
 </div>
-
-

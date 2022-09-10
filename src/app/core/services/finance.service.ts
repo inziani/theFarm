@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { environment } from '@environments/environment';
 import { CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, catchError, throwError } from 'rxjs';
+import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 
 
 
@@ -13,6 +14,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 
 export class FinanceService {
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  public companyListing!: CompanyMasterDataModel[];
 
   constructor(
     private http: HttpClient,
@@ -38,6 +40,17 @@ export class FinanceService {
     }), this.httpOptions).pipe(catchError(this.handleError));
 
   };
+
+  fetchCompanyData(): Observable<CompanyMasterDataModel[]> {
+    return this.http.get<CompanyMasterDataModel[]>(`${environment.apiUrl}/company/`, this.httpOptions)
+
+  }
+
+  createGeneralLedgerAccountMasterData(
+  ): Observable<GeneralLedgerMasterDataModel> {
+    return this.http.post<GeneralLedgerMasterDataModel>(`${environment.apiUrl}/generalLedgerAccountMaster/`, JSON.stringify({}), this.httpOptions);
+
+  }
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';

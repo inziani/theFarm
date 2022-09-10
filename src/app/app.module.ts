@@ -70,6 +70,12 @@ import { FinanceFooterComponent } from './finance/finance-footer/finance-footer.
 import { SearchDialogComponent } from './finance/finance-dialogues/search-dialog/search-dialog.component';
 import { CompanyDialogComponent } from './finance/finance-dialogues/company-dialog/company-dialog.component';
 import { FinanceService } from './core/services/finance.service';
+import { CompanyCodeDialogComponent } from './finance/finance-dialogues/company-code-dialog/company-code-dialog.component';
+import { ChartOfAccountsDialogComponent } from './finance/finance-dialogues/chart-of-accounts-dialog/chart-of-accounts-dialog.component';
+import { ReportingAreaDialogComponent } from './finance/finance-dialogues/reporting-area-dialog/reporting-area-dialog.component';
+import { ControllingAreaDialogComponent } from './finance/finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
+import { BusinessAreaDialogComponent } from './finance/finance-dialogues/business-area-dialog/business-area-dialog.component';
+import { OrgUnitDetailsComponent } from './finance/org-unit-details/org-unit-details.component';
 
 
 @NgModule({
@@ -118,13 +124,19 @@ import { FinanceService } from './core/services/finance.service';
         KnowledgeDialogueComponent,
         FinanceFooterComponent,
         SearchDialogComponent,
-        CompanyDialogComponent
+        CompanyDialogComponent,
+        CompanyCodeDialogComponent,
+        ChartOfAccountsDialogComponent,
+        ReportingAreaDialogComponent,
+        ControllingAreaDialogComponent,
+        BusinessAreaDialogComponent,
+        OrgUnitDetailsComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
-        FontAwesomeModule,
         AppRoutingModule,
+        FontAwesomeModule,
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
