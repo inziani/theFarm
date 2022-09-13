@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { UsersService } from './core/services/users.service';
@@ -130,7 +131,8 @@ import { OrgUnitDetailsComponent } from './finance/org-unit-details/org-unit-det
         ReportingAreaDialogComponent,
         ControllingAreaDialogComponent,
         BusinessAreaDialogComponent,
-        OrgUnitDetailsComponent
+        OrgUnitDetailsComponent,
+
     ],
     imports: [
         BrowserModule,
@@ -149,6 +151,7 @@ import { OrgUnitDetailsComponent } from './finance/org-unit-details/org-unit-det
         RestDataSource, NavigationServiceService, DatePipe, FinanceService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+        { provide: MAT_DIALOG_DATA, useValue: {}}
     ],
     bootstrap: [AppComponent]
 })

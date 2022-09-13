@@ -172,4 +172,5 @@ export class RestDataSource {
   fetchSingleActivity(id: number): Observable<Activity> {
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', { headers: this.httpHeaders });
   }
+
 }

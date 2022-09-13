@@ -43,7 +43,31 @@ export class FinanceService {
 
   fetchCompanyData(): Observable<CompanyMasterDataModel[]> {
     return this.http.get<CompanyMasterDataModel[]>(`${environment.apiUrl}/company/`, this.httpOptions)
+  }
 
+  public fetchSingleCompany(id: number): Observable<CompanyMasterDataModel> {
+    return this.http.get<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/', this.httpOptions);
+  }
+
+
+
+  public editSingleCompany(
+    id: number,
+    company: string,
+    companyName: string,
+    street: string,
+    postOfficeBox: string,
+    postalCode: string,
+    country: string,
+    language: string,
+    currency: string,
+    landLine: number,
+    mobileNumber: string,
+    email: string,
+  ): Observable<CompanyMasterDataModel> {
+    return this.http.patch<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/', {
+      companyName, street, postOfficeBox, postalCode, country, language, currency, landLine, mobileNumber, email
+    }, this.httpOptions);
   }
 
   createGeneralLedgerAccountMasterData(

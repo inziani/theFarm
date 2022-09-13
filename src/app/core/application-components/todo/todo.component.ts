@@ -96,10 +96,8 @@ export class TodoComponent implements OnInit, AfterViewInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
-    // dialogConfig.direction = 'rtl'
 
     const dialogRef = this.dialogue.open(CreateActivityComponent, dialogConfig);
-
     dialogRef.afterClosed().subscribe(newActivity => {
     })
   };
@@ -174,7 +172,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
       });
 
     });
-
 
   }
 

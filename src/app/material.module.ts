@@ -13,7 +13,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatCardModule } from "@angular/material/card";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTreeModule } from "@angular/material/tree";
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
@@ -21,6 +21,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -46,7 +47,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatProgressSpinnerModule,
         MatSortModule,
         MatTabsModule,
-      MatButtonToggleModule,
+        MatButtonToggleModule,
+        MatCheckboxModule,
+
+
 
 
 
@@ -73,7 +77,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatProgressSpinnerModule,
         MatSortModule,
         MatTabsModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        MatCheckboxModule
 
     ]
 })

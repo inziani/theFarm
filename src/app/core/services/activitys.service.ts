@@ -31,9 +31,6 @@ export class ActivitysService{
     return this.activityList;
   }
 
-  // getActivityRequest(): Observable<Activity[]>{
-  //    return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, {headers: this.httpHeaders});
-  // }
 
   getSingleActivityRequest(id: number): Observable<Activity>{
     return this.http.get<Activity>(`${environment.apiUrl}/activitys/` + id + '/', {headers: this.httpHeaders});

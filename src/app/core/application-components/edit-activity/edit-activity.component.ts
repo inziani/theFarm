@@ -3,11 +3,8 @@ import { NgForm } from '@angular/forms';
 
 import { map } from 'rxjs/operators';
 
-import { MatInput } from '@angular/material/input';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialogActions } from "@angular/material/dialog";
-import { MatDialogClose } from "@angular/material/dialog";
-import { MatDialogTitle } from "@angular/material/dialog";
+
 
 
 import { ActivitysService } from '@app/core/services/activitys.service';
@@ -90,7 +87,6 @@ export class EditActivityComponent implements OnInit {
         this.isLoading = false;
       }
     );
-
 };
 
   close() {
