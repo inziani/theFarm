@@ -4,9 +4,8 @@
         <div class="col-md-6 my-1">
           <div class="input-group my-1 justify-content-center">
             <span class="input-group-text" id="inputGroup-sizing-default">
-
               <button mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onCreateCompany()">
-                <mat-icon class="mx-2 my-2" (click)="onSave()">note_add</mat-icon>Create Company
+                <mat-icon class="mx-2 my-2">note_add</mat-icon>Create Company
               </button>
               <!-- <a>
                 <mat-icon class="mx-2 my-2" (click)="onCreateCompany()">note_add</mat-icon>
@@ -29,12 +28,6 @@
       <!-- Begining of Table -->
         <table mat-table [dataSource]="sourceData" class="mat-elevation-z8 my-3" matSort matSortActive="id"
           matSortDisableClear >
-          <!-- Selected Row -->
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Select</th>
-            <td mat-cell *matCellDef="let row"><mat-checkbox (click)="onSelectCompany(row.id)"></mat-checkbox></td>
-          </ng-container>
-          <!-- End of selected row -->
           <!-- Number Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
@@ -72,8 +65,33 @@
           </ng-container>
           <!-- email  Column -->
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>email</th>
+            <th mat-header-cell *matHeaderCellDef>Email</th>
             <td mat-cell *matCellDef="let row">{{row.email}}</td>
+          </ng-container>
+          <!-- Display  Column -->
+          <ng-container matColumnDef="display">
+            <th mat-header-cell *matHeaderCellDef>Display</th>
+            <td mat-cell *matCellDef="let row">
+              <a  (click)="onDisplayCompany(row.id)">
+                <mat-icon>pageview</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+          <!-- Edit  Column -->
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>Edit</th>
+            <td mat-cell *matCellDef="let row">
+              <a>
+                <mat-icon (click)="onEditCompany(row.id)">edit</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+          <!-- Delete  Column -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-icon (click)="onDeleteCompany(row.id)">delete_outline</mat-icon>
+            </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="companyColumnHeaders"></tr>
           <tr mat-row *matRowDef="let row; columns: companyColumnHeaders;"></tr>

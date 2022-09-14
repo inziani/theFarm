@@ -1,4 +1,4 @@
-<h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Company Information</h2>
+<h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Display Company Information</h2>
 <mat-dialog-content class="mat-typography">
   <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
     <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
@@ -23,7 +23,7 @@
     <div class="row my-3">
       <label for="inputCompanyName" class="col-md-3 col-form-label">Company Name</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCompanyName" formControlName="companyName">
+        <input type="text" class="form-control" id="inputCompanyName" formControlName="companyName" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -35,7 +35,7 @@
     <div class="row my-3">
       <label for="inputStreet" class="col-md-3 col-form-label">Street</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputStreet" formControlName="street">
+        <input type="text" class="form-control" id="inputStreet" formControlName="street" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -47,7 +47,7 @@
     <div class="row my-3">
       <label for="inputPostOfficeBox" class="col-md-3 col-form-label">Post Office Box</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputPostOfficeBox" formControlName="postOfficeBox">
+        <input type="number" class="form-control" id="inputPostOfficeBox" formControlName="postOfficeBox" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -59,7 +59,7 @@
     <div class="row my-3">
       <label for="inputPostalCode" class="col-md-3 col-form-label">Postal Code</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputPostalCode" formControlName="postalCode">
+        <input type="number" class="form-control" id="inputPostalCode" formControlName="postalCode" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -71,7 +71,7 @@
     <div class="row my-3">
       <label for="inputCountry" class="col-md-3 col-form-label">Country</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCountry" formControlName="country">
+        <input type="text" class="form-control" id="inputCountry" formControlName="country" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -83,7 +83,8 @@
     <div class="row my-3">
       <label for="inputLanguage" class="col-md-3 col-form-label">Language</label>
       <div class="col-md-9">
-        <select class="form-select form-control-lg" aria-label="Default select example" formControlName="language" id="language" name="language">
+        <select class="form-select form-control-lg" aria-label="Default select example" formControlName="language"
+          id="language" name="language">
           <option class="form-select" selected *ngFor="let language of language" [value]="language.value">
             <p>{{language.viewValue}}</p>
           </option>
@@ -99,9 +100,10 @@
     <div class="row my-3">
       <label for="inputCurrency" class="col-md-3 col-form-label">Currency</label>
       <div class="col-md-9">
-        <select class="form-select form-control-lg"  formControlName="currency" id="inputCurrency" name="inputCurrency">
+        <select class="form-select form-control-lg" formControlName="currency" id="inputCurrency" name="inputCurrency">
           <option class="form-select" selected *ngFor="let currency of currency" [value]="currency.value">
-            <p>{{currency.viewValue}}</p></option>
+            <p>{{currency.viewValue}}</p>
+          </option>
         </select>
       </div>
       <div>
@@ -114,7 +116,7 @@
     <div class="row my-3">
       <label for="inputLandline" class="col-md-3 col-form-label">Landline</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" id="inputLandline" formControlName="landLine">
+        <input type="number" class="form-control" id="inputLandline" formControlName="landLine" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -126,7 +128,7 @@
     <div class="row my-3">
       <label for="inputMobileNumber" class="col-md-3 col-form-label">Mobile Number</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputMobileNumber" formControlName="mobileNumber">
+        <input type="text" class="form-control" id="inputMobileNumber" formControlName="mobileNumber" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -138,7 +140,7 @@
     <div class="row my-3">
       <label for="inputEmail" class="col-md-3 col-form-label">Email</label>
       <div class="col-md-9">
-        <input type="email" class="form-control" id="inputEmail" formControlName="email">
+        <input type="email" class="form-control" id="inputEmail" formControlName="email" [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -148,11 +150,9 @@
       </div>
     </div>
     <mat-dialog-actions align="end" class="my-1">
-      <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onSave()"
-      [disabled]="!formSubmitted && formGroup.invalid">
-      <mat-icon class="mx-2 my-2">save</mat-icon>Save</button>
-      <button mat-raised-button mat-dialog-close cdkFocusInitial><mat-icon class="mx-2 my-2">close</mat-icon>Close</button>
+      <button mat-raised-button mat-dialog-close cdkFocusInitial>
+        <mat-icon class="mx-2 my-2">close</mat-icon>Close
+      </button>
     </mat-dialog-actions>
   </form>
 </mat-dialog-content>
-

@@ -2,6 +2,7 @@ export class CompanyMasterDataModel{
 
   constructor(
 
+    public id: number,
     public company: string,
     public companyName: string,
     public street: string,

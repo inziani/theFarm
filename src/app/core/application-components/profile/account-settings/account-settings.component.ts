@@ -73,9 +73,9 @@ export class AccountSettingsComponent implements OnInit {
             email: '', gender: '', city: ''
           });
           this.formGroup.patchValue(this.patchedUser );
-          console.log('My logged in user - ', this.currentLoggedInUser);
-          console.log('My Patched User -', this.patchedUser);
-          console.log('My Form-', this.formGroup.value);
+          // console.log('My logged in user - ', this.currentLoggedInUser);
+          // console.log('My Patched User -', this.patchedUser);
+          // console.log('My Form-', this.formGroup.value);
         });
 
       });

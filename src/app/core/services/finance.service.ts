@@ -14,6 +14,7 @@ import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-dat
 
 export class FinanceService {
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  public httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   public companyListing!: CompanyMasterDataModel[];
 
   constructor(
@@ -22,7 +23,7 @@ export class FinanceService {
 
   ) { }
 
-  createCompanyMasterData(
+  public createCompanyMasterData(
     company: string,
     companyName: string,
     street: string,
@@ -41,7 +42,7 @@ export class FinanceService {
 
   };
 
-  fetchCompanyData(): Observable<CompanyMasterDataModel[]> {
+  public fetchCompanyData(): Observable<CompanyMasterDataModel[]> {
     return this.http.get<CompanyMasterDataModel[]>(`${environment.apiUrl}/company/`, this.httpOptions)
   }
 
@@ -49,15 +50,13 @@ export class FinanceService {
     return this.http.get<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/', this.httpOptions);
   }
 
-
-
   public editSingleCompany(
     id: number,
     company: string,
     companyName: string,
     street: string,
-    postOfficeBox: string,
-    postalCode: string,
+    postOfficeBox: number,
+    postalCode: number,
     country: string,
     language: string,
     currency: string,
@@ -65,12 +64,27 @@ export class FinanceService {
     mobileNumber: string,
     email: string,
   ): Observable<CompanyMasterDataModel> {
-    return this.http.patch<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/', {
-      companyName, street, postOfficeBox, postalCode, country, language, currency, landLine, mobileNumber, email
-    }, this.httpOptions);
+    return this.http.patch<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/',
+      {
+        companyName,
+        street,
+        postOfficeBox,
+        postalCode,
+        country,
+        language,
+        currency,
+        landLine,
+        mobileNumber,
+        email
+
+    }, { headers: this.httpHeaders });
   }
 
-  createGeneralLedgerAccountMasterData(
+   public deleteCompany(id: number): Observable<CompanyMasterDataModel> {
+     return this.http.delete<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/');
+  }
+
+  public createGeneralLedgerAccountMasterData(
   ): Observable<GeneralLedgerMasterDataModel> {
     return this.http.post<GeneralLedgerMasterDataModel>(`${environment.apiUrl}/generalLedgerAccountMaster/`, JSON.stringify({}), this.httpOptions);
 

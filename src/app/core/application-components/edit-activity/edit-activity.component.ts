@@ -48,7 +48,7 @@ export class EditActivityComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
   ) {
 
-    console.log(this.dialogDataActivity, '- Dialogue Data');
+    // console.log(this.dialogDataActivity, '- Dialogue Data');
   }
 
   ngOnInit(): void {
@@ -75,7 +75,6 @@ export class EditActivityComponent implements OnInit {
   onEditActivity() {
     this.dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    console.log(this.activity, ' - Editable data');
     this.dataSource.editActivity(this.dialogDataActivity.id, this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
       if (success) {
         this.dialog.open(ChangesSavedDialogComponent);

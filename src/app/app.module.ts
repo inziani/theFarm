@@ -77,6 +77,9 @@ import { ReportingAreaDialogComponent } from './finance/finance-dialogues/report
 import { ControllingAreaDialogComponent } from './finance/finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
 import { BusinessAreaDialogComponent } from './finance/finance-dialogues/business-area-dialog/business-area-dialog.component';
 import { OrgUnitDetailsComponent } from './finance/org-unit-details/org-unit-details.component';
+import { DeleteCompanyDialogComponent } from './finance/finance-dialogues/delete-company-dialog/delete-company-dialog.component';
+import { CreateCompanyDialogComponent } from './finance/finance-dialogues/create-company-dialog/create-company-dialog.component';
+import { DisplayCompanyDialogComponent } from './finance/finance-dialogues/display-company-dialog/display-company-dialog.component';
 
 
 @NgModule({
@@ -132,6 +135,9 @@ import { OrgUnitDetailsComponent } from './finance/org-unit-details/org-unit-det
         ControllingAreaDialogComponent,
         BusinessAreaDialogComponent,
         OrgUnitDetailsComponent,
+        DeleteCompanyDialogComponent,
+        CreateCompanyDialogComponent,
+        DisplayCompanyDialogComponent,
 
     ],
     imports: [

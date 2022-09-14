@@ -47,26 +47,19 @@ export class CompanyDialogComponent implements OnInit {
     private financeService: FinanceService,
     private dialogRef: MatDialogRef<CompanyDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel
-  ) {
-    console.log("Child receiving dialogue data-", companyData);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.readonly = true;
     this.formGroup.patchValue(this.companyData);
   }
 
-  onCreateCompany() {
-    this.readonly = !this.readonly;
-  }
-  onEditCompany() {
-    this.readonly = !this.readonly;
-  }
-
-  onSave() {
+  public onSave() {
+    this.dialogRef.close(this.formGroup.value);
     this.company = this.formGroup.value;
     this.financeService
-      .createCompanyMasterData(
+      .editSingleCompany(
+        this.companyData.id,
         this.company.company,
         this.company.companyName,
         this.company.street,
@@ -79,9 +72,8 @@ export class CompanyDialogComponent implements OnInit {
         this.company.mobileNumber,
         this.company.email
       )
-      .subscribe((companyCreated) => {
-        if (companyCreated) {
-          // Dialogue open
+      .subscribe((companyEdited) => {
+        if (companyEdited) {
           this.dialog.open(ChangesSavedDialogComponent);
         }
       });
