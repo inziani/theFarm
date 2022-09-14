@@ -9,6 +9,7 @@ import { CompanyMasterDataModel } from "../finance-models/fi-data-models/organiz
 import { CompanyDialogComponent } from "../finance-dialogues/company-dialog/company-dialog.component";
 import { DisplayCompanyDialogComponent } from "../finance-dialogues/display-company-dialog/display-company-dialog.component";
 import { DeleteCompanyDialogComponent } from "../finance-dialogues/delete-company-dialog/delete-company-dialog.component";
+import { CreateCompanyDialogComponent } from "../finance-dialogues/create-company-dialog/create-company-dialog.component";
 
 @Component({
   selector: "app-org-unit-details",
@@ -54,8 +55,6 @@ export class OrgUnitDetailsComponent implements OnInit {
     this.sourceData.paginator = this.paginator;
   }
 
-
-
   public onCreateCompany() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -63,7 +62,8 @@ export class OrgUnitDetailsComponent implements OnInit {
     dialogConfig.width = "550px";
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
-    const dialogRef = this.dialogue.open(CompanyDialogComponent, dialogConfig);
+
+    const dialogRef = this.dialogue.open(CreateCompanyDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((success) => {
       return success;
     });

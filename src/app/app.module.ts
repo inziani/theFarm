@@ -80,6 +80,7 @@ import { OrgUnitDetailsComponent } from './finance/org-unit-details/org-unit-det
 import { DeleteCompanyDialogComponent } from './finance/finance-dialogues/delete-company-dialog/delete-company-dialog.component';
 import { CreateCompanyDialogComponent } from './finance/finance-dialogues/create-company-dialog/create-company-dialog.component';
 import { DisplayCompanyDialogComponent } from './finance/finance-dialogues/display-company-dialog/display-company-dialog.component';
+import { CompanyCodeDetailsComponent } from './finance/company-code-details/company-code-details.component';
 
 
 @NgModule({
@@ -138,6 +139,7 @@ import { DisplayCompanyDialogComponent } from './finance/finance-dialogues/displ
         DeleteCompanyDialogComponent,
         CreateCompanyDialogComponent,
         DisplayCompanyDialogComponent,
+        CompanyCodeDetailsComponent,
 
     ],
     imports: [
