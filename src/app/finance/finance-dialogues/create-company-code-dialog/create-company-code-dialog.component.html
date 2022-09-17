@@ -1,0 +1,62 @@
+<h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Create Company Code</h2>
+<mat-dialog-content class="mat-typography">
+  <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+    <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
+      <ul>
+        <li *ngFor="let error of formGroup.getFormValidationMessages()">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+    <div class="row my-1">
+      <label for="inputCompanyCode" class="col-md-3 col-form-label">Company Code</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputCompanyCode" formControlName="companyCode" [readonly]="readonly">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
+          <li *ngFor="let error of formGroup.getCompanyValidationMessages('companyCode')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputCompanyCodeName" class="col-md-3 col-form-label">Company Code Name</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputCompanyCodeName" formControlName="companyCodeName">
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['companyCodeName'].dirty) && formGroup.controls['companyCodeName'].invalid">
+          <li *ngFor="let error of formGroup.getCompanyCodeNameValidationMessages('companyCodeName')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row my-3">
+      <label for="inputCompany" class="col-md-3 col-form-label">Company</label>
+      <div class="col-md-9">
+        <select class="form-select form-control-lg" aria-label="Default select example" formControlName="company"
+          id="company" name="company">
+          <option class="form-select" selected *ngFor="let company of companyList" [value]="company.id">
+            <p>{{ company.companyName }}</p>
+          </option>
+        </select>
+      </div>
+      <div>
+        <ul class="text-danger list-unstyled"
+          *ngIf="(formSubmitted || formGroup.controls['company'].dirty) && formGroup.controls['company'].invalid">
+          <li *ngFor="let error of formGroup.getCompanyValidationMessages('company')">{{ error}}</li>
+        </ul>
+      </div>
+    </div>
+    <mat-dialog-actions align="end" class="my-1">
+      <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onSave()"
+        [disabled]="!formSubmitted && formGroup.invalid">
+        <mat-icon class="mx-2 my-2">save</mat-icon>Save
+      </button>
+      <button mat-raised-button mat-dialog-close cdkFocusInitial>
+        <mat-icon class="mx-2 my-2">close</mat-icon>Close
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

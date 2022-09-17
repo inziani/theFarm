@@ -1,37 +1,22 @@
-<div class="container my-5 justify-content-center">
-  <h1 class="text-center my-2" style="font-weight: lighter; color: #03045e;">Organizational Structure</h1>
-  <!-- Section separations -->
+<div class="container my-3 justify-content-center">
+  <h1 class="text-center my-2" style="font-weight: lighter; color: #03045e;">Organization Structure</h1>
+  <!-- page separations -->
   <div class="row">
     <div class="col-md-2">
-      <!-- Beginning of Org Listing with  -->
-        <div class="d-grid gap-3">
-          <button class="btn btn-primary mat-elevation-z8" type="button"><a routerLink="/company">
-            <p>Company</p>
-          </a></button>
-          <button class="btn btn-primary mat-elevation-z8" type="button"><a routerLink="/companyCode">
-            <p class="card-title">Company Code</p>
-          </a></button>
-          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
-            <p class="card-title" (click)="onSelectChartOfAccounts()">Chart of Accounts</p>
-          </a></button>
-          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
-            <p class="card-title" (click)="onSelectReportingArea()">Reporting Area</p>
-          </a></button>
-          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
-            <p class="card-title" (click)="onSelectControllingArea()">Controlling Area</p>
-          </a></button>
-          <button class="btn btn-primary mat-elevation-z8" type="button"><a>
-            <p class="card-title" (click)="onSelectBusinessArea()">Business Area</p>
-          </a></button>
-            <button class="btn btn-primary mat-elevation-z8" type="button"><a>
-              <p class="card-title" (click)="onSelectSalesArea()">Sales Area</p>
-            </a></button>
-        </div>
+      <!-- Beginning of Organization Listing with  -->
+      <app-org-unit-list></app-org-unit-list>
       <!-- end of Organization Listing -->
     </div>
-    <div class="col-md-10">
-      <!-- Organizational details -->
-      <app-org-unit-details></app-org-unit-details>
+    <!-- Organizational details -->
+    <div class="col-md-10" [ngSwitch]="itemSelected">
+      <div *ngSwitchCase="'company'"><app-org-details-company></app-org-details-company></div>
+      <div *ngSwitchCase="'companyCode'"><app-org-details-company-code></app-org-details-company-code></div>
+      <div *ngSwitchCase="'chartOfAccounts'"><app-org-details-chartofaccounts></app-org-details-chartofaccounts></div>
+      <div *ngSwitchCase="'reportingArea'"><app-org-details-reportingarea></app-org-details-reportingarea></div>
+      <div *ngSwitchCase="'controllingArea'"><app-org-details-controllingarea></app-org-details-controllingarea></div>
+      <div *ngSwitchCase="'businessArea'"><app-org-details-businessarea></app-org-details-businessarea></div>
+      <div *ngSwitchCase="'salesArea'"><app-org-details-salesarea></app-org-details-salesarea></div>
+      <div *ngSwitchDefault><app-org-details-company ></app-org-details-company></div>
       <!-- End of Organizational details -->
     </div>
   </div>

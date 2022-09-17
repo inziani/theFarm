@@ -33,9 +33,7 @@ export class CompanyMasterDataFormControl extends FormControl {
                         messages.push(`This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `);
                         break;
                 }
-
             }
-
         }
         return messages;
     }
@@ -107,36 +105,74 @@ export class CompanyMasterDataFormGroup extends FormGroup {
 }
 
 
+export class CompanyCodeMasterDataFormControl extends FormControl {
+
+    label: string;
+    modelProperty: string;
+
+    constructor(label: string, property: string, value: any, validator: any) {
+
+        super(value, validator);
+        this.label = label;
+        this.modelProperty = property;
+    }
+
+    getValidationMessages() {
+        let messages: string[] = [];
+        if (this.errors) {
+            for (let errorName in this.errors) {
+                switch (errorName) {
+                    case "email":
+                        messages.push(`Please enter a valid ${this.label} address`);
+                        break;
+                    case "required":
+                        messages.push(`${this.label} is a required field `);
+                        break;
+                    case "minLength":
+                        messages.push(`${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`);
+                        break;
+                    case "maxLength":
+                        messages.push(`The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`);
+                        break;
+                    case "pattern":
+                        messages.push(`This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `);
+                        break;
+                }
+            }
+        }
+        return messages;
+    }
+}
 
 export class CompanyCodeMasterDataFormGroup extends FormGroup {
 
     constructor() {
       super({
 
-        code: new CompanyMasterDataFormControl("Company Code Code","code", "", Validators.required ),
-        description: new CompanyMasterDataFormControl("Description", "description","", Validators.required),
-        company: new CompanyMasterDataFormControl("Company", "company", "", Validators.required),
+        companyCode: new CompanyCodeMasterDataFormControl("Company Code Code","companyCode", "", Validators.required ),
+        companyCodeName: new CompanyCodeMasterDataFormControl("Company Code Name", "companyCodeName","", Validators.required),
+        company: new CompanyCodeMasterDataFormControl("Company", "company", "", Validators.required),
 
         });
     }
 
-    get companyMasterDataFormControl(): CompanyMasterDataFormControl[] {
-        return Object.keys(this.controls).map(k => this.controls[k] as CompanyMasterDataFormControl);
+    get companyCodeMasterDataFormControl(): CompanyCodeMasterDataFormControl[] {
+        return Object.keys(this.controls).map(k => this.controls[k] as CompanyCodeMasterDataFormControl);
     }
 
-    getCodeValidationMessages(code: string): string[] {
-        return (this.controls['code'] as CompanyMasterDataFormControl).getValidationMessages();
+    getCompanyCodeValidationMessages(companyCode: string): string[] {
+        return (this.controls['companyCode'] as CompanyCodeMasterDataFormControl).getValidationMessages();
     }
 
+    getCompanyCodeNameValidationMessages(companyCodeName: string): string[] {
+        return (this.controls['companyCodeName'] as CompanyCodeMasterDataFormControl).getValidationMessages();
+    }
     getCompanyValidationMessages(company: string): string[] {
-        return (this.controls['company'] as CompanyMasterDataFormControl).getValidationMessages();
-    }
-    getDescriptionValidationMessages(description: string): string[] {
-        return (this.controls['description'] as CompanyMasterDataFormControl).getValidationMessages();
+        return (this.controls['company'] as CompanyCodeMasterDataFormControl).getValidationMessages();
     }
     getFormValidationMessages(): string[] {
         let messages: string[] = [];
-        Object.values(this.controls).forEach(c => messages.push(...(c as CompanyMasterDataFormControl).getValidationMessages()));
+        Object.values(this.controls).forEach(c => messages.push(...(c as CompanyCodeMasterDataFormControl).getValidationMessages()));
         return messages;
     }
 }

@@ -1,22 +1,21 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort, SortDirection } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
-
-import { FinanceService } from "@app/core/services/finance.service";
-import { CompanyMasterDataModel } from "../finance-models/fi-data-models/organization-data-models";
-import { CompanyDialogComponent } from "../finance-dialogues/company-dialog/company-dialog.component";
-import { DisplayCompanyDialogComponent } from "../finance-dialogues/display-company-dialog/display-company-dialog.component";
-import { DeleteCompanyDialogComponent } from "../finance-dialogues/delete-company-dialog/delete-company-dialog.component";
-import { CreateCompanyDialogComponent } from "../finance-dialogues/create-company-dialog/create-company-dialog.component";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { FinanceService } from '@app/core/services/finance.service';
+import { CompanyDialogComponent } from '../finance-dialogues/company-dialog/company-dialog.component';
+import { CreateCompanyDialogComponent } from '../finance-dialogues/create-company-dialog/create-company-dialog.component';
+import { DeleteCompanyDialogComponent } from '../finance-dialogues/delete-company-dialog/delete-company-dialog.component';
+import { DisplayCompanyDialogComponent } from '../finance-dialogues/display-company-dialog/display-company-dialog.component';
+import { CompanyMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
 
 @Component({
-  selector: "app-org-unit-details",
-  templateUrl: "./org-unit-details.component.html",
-  styleUrls: ["./org-unit-details.component.css"],
+  selector: 'app-org-details-company',
+  templateUrl: './org-details-company.component.html',
+  styleUrls: ['./org-details-company.component.css']
 })
-export class OrgUnitDetailsComponent implements OnInit {
+export class OrgDetailsCompanyComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -40,20 +39,20 @@ export class OrgUnitDetailsComponent implements OnInit {
   public isSelected: boolean = true;
 
   constructor(
-    public financeService: FinanceService,
-    public dialogue: MatDialog
-  ) {}
+
+    private financeService: FinanceService,
+    private dialogue: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.financeService.fetchCompanyData().subscribe((response) => {
       this.sourceData.data = response;
     });
   }
-
-  ngAfterViewInit() {
+   ngAfterViewInit() {
     this.sourceData.sort = this.sort;
     this.sourceData.paginator = this.paginator;
-  }
+   }
 
   public onCreateCompany() {
     const dialogConfig = new MatDialogConfig();
@@ -155,5 +154,4 @@ export class OrgUnitDetailsComponent implements OnInit {
       });
     });
   }
-
 }

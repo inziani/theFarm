@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { CompanyCodeMasterDataModel, CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, catchError, throwError } from 'rxjs';
 import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -13,9 +14,12 @@ import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-dat
 })
 
 export class FinanceService {
+
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  public httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   public companyListing!: CompanyMasterDataModel[];
+  public orgUnitSelected = new EventEmitter<string>();
+  public companyCodeListing!: CompanyCodeMasterDataModel[];
+  public companyCode!: CompanyCodeMasterDataModel;
 
   constructor(
     private http: HttpClient,
@@ -23,6 +27,11 @@ export class FinanceService {
 
   ) { }
 
+  // Cross component communication
+
+
+  // Orginizational Data
+  // Company Data
   public createCompanyMasterData(
     company: string,
     companyName: string,
@@ -38,7 +47,7 @@ export class FinanceService {
   ): Observable<CompanyMasterDataModel> {
     return this.http.post<CompanyMasterDataModel>(`${environment.apiUrl}/company/`, JSON.stringify({
       company, companyName, street, postOfficeBox, postalCode, country, language, currency, landLine, mobileNumber, email
-    }), this.httpOptions).pipe(catchError(this.handleError));
+    }), this.httpOptions);
 
   };
 
@@ -77,19 +86,52 @@ export class FinanceService {
         mobileNumber,
         email
 
-    }, { headers: this.httpHeaders });
+    }, this.httpOptions);
   }
 
    public deleteCompany(id: number): Observable<CompanyMasterDataModel> {
      return this.http.delete<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/');
   }
 
-  public createGeneralLedgerAccountMasterData(
-  ): Observable<GeneralLedgerMasterDataModel> {
-    return this.http.post<GeneralLedgerMasterDataModel>(`${environment.apiUrl}/generalLedgerAccountMaster/`, JSON.stringify({}), this.httpOptions);
+
+// Company Code Data
+
+  public fetchCompanyCodeData(): Observable<CompanyCodeMasterDataModel[]> {
+    return this.http.get<CompanyCodeMasterDataModel[]>(`${environment.apiUrl}/companyCode/`, this.httpOptions);
+  }
+
+  public fetchSingleCompanyCode(id: number): Observable<CompanyCodeMasterDataModel> {
+    return this.http.get<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/` + id + '/', this.httpOptions);
 
   }
 
+  public createCompanyCodeMasterData(
+    companyCode: number,
+    companyCodeName: string,
+    company: string,
+  ): Observable<CompanyCodeMasterDataModel> {
+    return this.http.post<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/`, JSON.stringify(
+      {
+      companyCode,
+      companyCodeName,
+      company
+      }
+    ), this.httpOptions);
+  };
+
+// End of Company Code Data
+// End of Organization Data
+
+// General Ledger Data
+
+    public createGeneralLedgerAccountMasterData(
+  ): Observable<GeneralLedgerMasterDataModel> {
+    return this.http.post<GeneralLedgerMasterDataModel>(`${environment.apiUrl}/generalLedgerAccountMaster/`, JSON.stringify({}), this.httpOptions);
+
+    }
+// End of General Ledger Data
+
+// Error Handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
 
@@ -107,4 +149,7 @@ export class FinanceService {
     errorMessage = `Backend returned code ${error.status}, body was: `, error.error;
     return throwError(() => new Error(errorMessage));
   }
+
+  // End of Error Handling
+
 }

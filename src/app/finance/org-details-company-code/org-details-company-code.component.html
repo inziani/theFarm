@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row my-1 justify-content-center">
+    <div class="col-md-6 my-1">
+      <div class="input-group my-1 justify-content-center">
+        <span class="input-group-text" id="inputGroup-sizing-default">
+          <button mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onCreateCompanyCode()">
+            <mat-icon class="mx-2 my-2">note_add</mat-icon>Create Company Code
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row my-1">
+    <div class="col">
+      <!-- Begining of Table -->
+      <table mat-table [dataSource]="sourceData" class="mat-elevation-z8 my-3" matSort matSortActive="companyCode"
+        matSortDisableClear matSortDirection="asc">
+        <!-- Number Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+          <td mat-cell *matCellDef="let row">{{ row.id | number }}</td>
+        </ng-container>
+        <!-- CompanyCode Column -->
+        <ng-container matColumnDef="companyCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Company Code</th>
+          <td mat-cell *matCellDef="let row">{{row.companyCode}}</td>
+        </ng-container>
+        <!-- Company Code  Name Column -->
+        <ng-container matColumnDef="companyCodeName">
+          <th mat-header-cell *matHeaderCellDef>Company Code Name</th>
+          <td mat-cell *matCellDef="let row">{{row.companyName}}</td>
+        </ng-container>
+        <!-- Company Column -->
+        <ng-container matColumnDef="company">
+          <th mat-header-cell *matHeaderCellDef>Company</th>
+          <td mat-cell *matCellDef="let row">{{row.company}}</td>
+        </ng-container>
+        <!-- Display  Column -->
+        <ng-container matColumnDef="display">
+          <th mat-header-cell *matHeaderCellDef>Display</th>
+          <td mat-cell *matCellDef="let row">
+            <a (click)="onDisplayCompanyCode(row.id)">
+              <mat-icon>pageview</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Edit  Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>Edit</th>
+          <td mat-cell *matCellDef="let row">
+            <a>
+              <mat-icon (click)="onEditCompanyCode(row.id)">edit</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Delete  Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-icon (click)="onDeleteCompanyCode(row.id)">delete_outline</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="companyCodeColumnHeaders"></tr>
+        <tr mat-row *matRowDef="let row; columns: companyCodeColumnHeaders;"></tr>
+      </table>
+      <!-- End of Table -->
+      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10]"></mat-paginator>
+    </div>
+  </div>
+</div>
+

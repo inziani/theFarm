@@ -26,8 +26,7 @@ import { ProjectsDialogueComponent } from "./core/dialogues/projects-dialogue/pr
 import { MaterialsDialogueComponent } from "./core/dialogues/materials-dialogue/materials-dialogue.component";
 import { KnowledgeDialogueComponent } from "./core/dialogues/knowledge-dialogue/knowledge-dialogue.component";
 import { CompanyCodeDialogComponent } from "./finance/finance-dialogues/company-code-dialog/company-code-dialog.component";
-import { OrgUnitDetailsComponent } from "./finance/org-unit-details/org-unit-details.component"
-import { CompanyCodeDetailsComponent } from "./finance/company-code-details/company-code-details.component";
+
 
 
 
@@ -69,8 +68,7 @@ const appRoutes: Routes = [
     path: '', component: FinanceLayoutComponent, children: [
       { path: 'finance', component: FinanceHomeComponent, canActivate: [AuthenticationGuard] },
       { path: 'glmasterdata', component: GlMasterDataComponent, canActivate: [AuthenticationGuard] },
-      { path: 'company', component: OrgUnitDetailsComponent, canActivate: [AuthenticationGuard] },
-      { path: 'companyCode', component: CompanyCodeDetailsComponent, canActivate: [AuthenticationGuard] }
+
 
    ], canActivate: [AuthenticationGuard]},
 
