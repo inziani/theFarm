@@ -1,5 +1,4 @@
-
-<h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Create Company Code</h2>
+<h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Company Code Information</h2>
 <mat-dialog-content class="mat-typography">
   <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
     <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
@@ -12,7 +11,8 @@
     <div class="row my-1">
       <label for="inputCompanyCode" class="col-md-3 col-form-label">Company Code</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" id="inputCompanyCode" formControlName="companyCode" [readonly]="readonly">
+        <input type="text" class="form-control" id="inputCompanyCode" formControlName="companyCode"
+          [readonly]="readonly">
       </div>
       <div>
         <ul class="text-danger list-unstyled"
@@ -61,4 +61,3 @@
     </mat-dialog-actions>
   </form>
 </mat-dialog-content>
-

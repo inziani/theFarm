@@ -71,7 +71,6 @@ import { FinanceFooterComponent } from './finance/finance-footer/finance-footer.
 import { SearchDialogComponent } from './finance/finance-dialogues/search-dialog/search-dialog.component';
 import { CompanyDialogComponent } from './finance/finance-dialogues/company-dialog/company-dialog.component';
 import { FinanceService } from './core/services/finance.service';
-import { CompanyCodeDialogComponent } from './finance/finance-dialogues/company-code-dialog/company-code-dialog.component';
 import { ChartOfAccountsDialogComponent } from './finance/finance-dialogues/chart-of-accounts-dialog/chart-of-accounts-dialog.component';
 import { ReportingAreaDialogComponent } from './finance/finance-dialogues/reporting-area-dialog/reporting-area-dialog.component';
 import { ControllingAreaDialogComponent } from './finance/finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
@@ -89,8 +88,8 @@ import { OrgDetailsSalesareaComponent } from './finance/org-details-salesarea/or
 import { OrgDetailsReportingareaComponent } from './finance/org-details-reportingarea/org-details-reportingarea.component';
 import { CreateCompanyCodeDialogComponent } from './finance/finance-dialogues/create-company-code-dialog/create-company-code-dialog.component';
 import { DisplayCompanyCodeDialogComponent } from './finance/finance-dialogues/display-company-code-dialog/display-company-code-dialog.component';
-import { EditCompanyCodeDialogComponent } from './edit-company-code-dialog/edit-company-code-dialog.component';
-import { DeleteCompanyCodeDialogComponent } from './delete-company-code-dialog/delete-company-code-dialog.component';
+import { EditCompanyCodeDialogComponent } from './finance/finance-dialogues/edit-company-code-dialog/edit-company-code-dialog.component';
+import { DeleteCompanyCodeDialogComponent } from './finance/finance-dialogues/delete-company-code-dialog/delete-company-code-dialog.component';
 
 
 @NgModule({
@@ -140,7 +139,6 @@ import { DeleteCompanyCodeDialogComponent } from './delete-company-code-dialog/d
         FinanceFooterComponent,
         SearchDialogComponent,
         CompanyDialogComponent,
-        CompanyCodeDialogComponent,
         ChartOfAccountsDialogComponent,
         ReportingAreaDialogComponent,
         ControllingAreaDialogComponent,

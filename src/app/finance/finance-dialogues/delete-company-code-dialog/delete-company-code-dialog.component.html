@@ -1,0 +1,22 @@
+<h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Delete Company Code</h2>
+<mat-dialog-content>
+  <p style="font-weight: lighter; color: #03045e;">Are you sure you want to delete the following Company Code?</p>
+  <ul>
+    <li>
+      <p style="font-weight: lighter; color: #03045e;">Company - <span class="title-desc">{{ companyCode.companyCode }}</span>
+      </p>
+    </li>
+    <li>
+      <p style="font-weight: lighter; color: #03045e;">Company Name - <span class="title-desc">{{ companyCode.companyCodeName
+          }}</span></p>
+    </li>
+  </ul>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="my-1">
+  <button type="submit" mat-raised-button cdkFocusInitial mat-dialog-close class="mx-1 my-1" (click)="onDelete()">
+    <mat-icon class="mx-2 my-2">save</mat-icon>Yes
+  </button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial>
+    <mat-icon class="mx-2 my-2">close</mat-icon>No
+  </button>
+</mat-dialog-actions>

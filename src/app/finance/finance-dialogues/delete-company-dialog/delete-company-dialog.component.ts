@@ -21,10 +21,11 @@ export class DeleteCompanyDialogComponent implements OnInit {
   public formSubmitted: boolean = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel,
+
     public financeService: FinanceService,
     public dialog: MatDialog,
     private dialogRef: MatDialogRef<DeleteCompanyDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel,
 
   ) {
 

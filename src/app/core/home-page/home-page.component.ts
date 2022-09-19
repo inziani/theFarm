@@ -119,9 +119,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   }
 
+  
+
     ngOnDestroy() {
      this.userSubscription$.unsubscribe();
   };
+
+
 
 
 }

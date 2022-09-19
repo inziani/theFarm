@@ -119,6 +119,26 @@ export class FinanceService {
     ), this.httpOptions);
   };
 
+  public editCompanyCodeMasterData(
+    id: number,
+    companyCode: number,
+    companyCodeName: string,
+    company: string,
+  ): Observable<CompanyCodeMasterDataModel>
+  {
+    return this.http.patch<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/` + id + '/',
+      {
+      companyCode,
+      companyCodeName,
+      company
+      },
+      this.httpOptions);
+  };
+
+   public deleteCompanyCode(id: number): Observable<CompanyCodeMasterDataModel> {
+     return this.http.delete<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/` + id + '/');
+  }
+
 // End of Company Code Data
 // End of Organization Data
 

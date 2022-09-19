@@ -25,7 +25,7 @@ import { HrDialogueComponent } from "./core/dialogues/hr-dialogue/hr-dialogue.co
 import { ProjectsDialogueComponent } from "./core/dialogues/projects-dialogue/projects-dialogue.component";
 import { MaterialsDialogueComponent } from "./core/dialogues/materials-dialogue/materials-dialogue.component";
 import { KnowledgeDialogueComponent } from "./core/dialogues/knowledge-dialogue/knowledge-dialogue.component";
-import { CompanyCodeDialogComponent } from "./finance/finance-dialogues/company-code-dialog/company-code-dialog.component";
+
 
 
 

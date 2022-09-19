@@ -22,7 +22,6 @@ export class CompanyMasterDataModel{
 export class CompanyCodeMasterDataModel{
 
   constructor(
-    public url: string,
     public id: number,
     public companyCode: number,
     public companyCodeName: string,

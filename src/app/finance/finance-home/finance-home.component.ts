@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 
@@ -20,5 +20,9 @@ export class FinanceHomeComponent implements OnInit {
     this.financeService.orgUnitSelected.subscribe(orgUnit => {
       this.itemSelected = orgUnit;
     })
+  }
+
+  ngOnDestroy(): void{
+
   }
 }

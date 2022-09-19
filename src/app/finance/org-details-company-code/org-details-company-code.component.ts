@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FinanceService } from '@app/core/services/finance.service';
-import { DeleteCompanyCodeDialogComponent } from '@app/delete-company-code-dialog/delete-company-code-dialog.component';
-import { EditCompanyCodeDialogComponent } from '@app/edit-company-code-dialog/edit-company-code-dialog.component';
+import { DeleteCompanyCodeDialogComponent } from '@app/finance/finance-dialogues/delete-company-code-dialog/delete-company-code-dialog.component';
+import { EditCompanyCodeDialogComponent } from '@app/finance/finance-dialogues/edit-company-code-dialog/edit-company-code-dialog.component';
 import { CreateCompanyCodeDialogComponent } from '../finance-dialogues/create-company-code-dialog/create-company-code-dialog.component';
 import { DisplayCompanyCodeDialogComponent } from '../finance-dialogues/display-company-code-dialog/display-company-code-dialog.component';
 import { CompanyCodeMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
@@ -29,9 +29,11 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
     "delete"
    ];
   public resultsLength = 0;
-  public companyCodeListing: CompanyCodeMasterDataModel[] = [];
   public companyCode!: CompanyCodeMasterDataModel;
   public sourceData = new MatTableDataSource<CompanyCodeMasterDataModel>();
+
+
+
 
   constructor(
     private dialogue: MatDialog,
@@ -41,10 +43,11 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
   ngOnInit(): void {
     this.financeService.fetchCompanyCodeData().subscribe(companyCode => {
       this.sourceData.data = companyCode;
+
     })
   }
 
-   ngAfterViewInit() {
+  ngAfterViewInit() {
     this.sourceData.sort = this.sort;
     this.sourceData.paginator = this.paginator;
    }
@@ -85,7 +88,7 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
         if (result == undefined) {
           return;
         } else {
-          console.log("Editable Data after else button", result);
+          // console.log("Editable Data after else button", result);
         }
       });
     });
@@ -102,7 +105,7 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
 
     this.financeService.fetchSingleCompanyCode(id).subscribe((companyCode) => {
       this.companyCode = companyCode;
-      dialogConfig.data = this.companyCode;
+      dialogConfig.data = companyCode;
 
       // Open the dialogue config
 
@@ -114,7 +117,7 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
         if (result == undefined) {
           return;
         } else {
-          console.log("Editable Data after else button", result);
+          // console.log("Editable Data after else button", result);
         }
       });
     });
@@ -143,10 +146,9 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
         if (result == undefined) {
           return;
         } else {
-          console.log("Editable Data after else button", result);
+          // console.log("Editable Data after else button", result);
         }
       });
     });
   }
-
 }

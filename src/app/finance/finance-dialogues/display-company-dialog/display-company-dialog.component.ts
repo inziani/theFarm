@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { Currency, Language } from '@app/finance/finance-interfaces/finance-interfaces';
 import { CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { CompanyMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
@@ -30,12 +31,18 @@ export class DisplayCompanyDialogComponent implements OnInit {
   ];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel
+    private dialogRef: MatDialogRef<DisplayCompanyDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel,
+
   ) { }
 
   ngOnInit(): void {
     this.readonly = true;
     this.formGroup.patchValue(this.companyData);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }
