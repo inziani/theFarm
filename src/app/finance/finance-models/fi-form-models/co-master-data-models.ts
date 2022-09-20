@@ -177,47 +177,86 @@ export class CompanyCodeMasterDataFormGroup extends FormGroup {
     }
 }
 
+export class ChartOfAccountsMasterDataFormControl extends FormControl {
+
+    label: string;
+    modelProperty: string;
+
+    constructor(label: string, property: string, value: any, validator: any) {
+
+        super(value, validator);
+        this.label = label;
+        this.modelProperty = property;
+    }
+
+    getValidationMessages() {
+        let messages: string[] = [];
+        if (this.errors) {
+            for (let errorName in this.errors) {
+                switch (errorName) {
+                    case "email":
+                        messages.push(`Please enter a valid ${this.label} address`);
+                        break;
+                    case "required":
+                        messages.push(`${this.label} is a required field `);
+                        break;
+                    case "minLength":
+                        messages.push(`${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`);
+                        break;
+                    case "maxLength":
+                        messages.push(`The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`);
+                        break;
+                    case "pattern":
+                        messages.push(`This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `);
+                        break;
+                }
+            }
+        }
+        return messages;
+    }
+}
+
 export class ChartOfAccountsMasterDataFormGroup extends FormGroup {
 
     constructor() {
       super({
 
-        coaCode: new CompanyMasterDataFormControl("Chart of Accounts Code","coaCode", "", Validators.required ),
-        companyCode: new CompanyMasterDataFormControl("Company Code","companyCode", "", Validators.required ),
-        description: new CompanyMasterDataFormControl("Description","description", "", Validators.required ),
-        language: new CompanyMasterDataFormControl("Language", "language", "", Validators.required),
-        lengthAccNumber: new CompanyMasterDataFormControl("Length of Account Number", "lengthAccNumber", "", Validators.required),
-        status: new CompanyMasterDataFormControl("Status", "status", "", Validators.required),
+        coaCode: new ChartOfAccountsMasterDataFormControl("Chart of Accounts Code","coaCode", "", Validators.required ),
+        companyCode: new ChartOfAccountsMasterDataFormControl("Company Code","companyCode", "", Validators.required ),
+        chartOfAccountsName: new ChartOfAccountsMasterDataFormControl("Chart Of Accounts Name","chartOfAccountsName", "", Validators.required ),
+        language: new ChartOfAccountsMasterDataFormControl("Language", "language", "", Validators.required),
+        lengthAccNumber: new ChartOfAccountsMasterDataFormControl("Length of Account Number", "lengthAccNumber", "", Validators.required),
+        blockedForPosting: new ChartOfAccountsMasterDataFormControl("Blocked For Posting", "blockedForPosting", "", Validators.required),
 
         });
     }
 
-    get companyMasterDataFormControl(): CompanyMasterDataFormControl[] {
-        return Object.keys(this.controls).map(k => this.controls[k] as CompanyMasterDataFormControl);
+    get ChartOfAccountsMasterDataFormControl(): ChartOfAccountsMasterDataFormControl[] {
+        return Object.keys(this.controls).map(k => this.controls[k] as ChartOfAccountsMasterDataFormControl);
     }
     getCoaCodeValidationMessages(coaCode: string): string[] {
-        return (this.controls['coaCode'] as CompanyMasterDataFormControl).getValidationMessages();
+        return (this.controls['coaCode'] as ChartOfAccountsMasterDataFormControl).getValidationMessages();
     }
 
     getCompanyCodeValidationMessages(companyCode: string): string[] {
-        return (this.controls['companyCode'] as CompanyMasterDataFormControl).getValidationMessages();
+        return (this.controls['companyCode'] as ChartOfAccountsMasterDataFormControl).getValidationMessages();
     }
-    getDescriptionValidationMessages(description: string): string[] {
-        return (this.controls['description'] as CompanyMasterDataFormControl).getValidationMessages();
+    getChartOfAccountsNameValidationMessages(chartOfAccountsName: string): string[] {
+        return (this.controls['chartOfAccountsName'] as ChartOfAccountsMasterDataFormControl).getValidationMessages();
     }
     getlanguageValidationMessages(language: string): string[] {
-        return (this.controls['language'] as CompanyMasterDataFormControl).getValidationMessages();
+        return (this.controls['language'] as ChartOfAccountsMasterDataFormControl).getValidationMessages();
     }
     getlengthAccNumberValidationMessages(lengthAccNumber: string): string[] {
-        return (this.controls['lengthAccNumber'] as CompanyMasterDataFormControl).getValidationMessages();
+        return (this.controls['lengthAccNumber'] as ChartOfAccountsMasterDataFormControl).getValidationMessages();
     }
-    getStatusValidationMessages(status: string): string[] {
-        return (this.controls['status'] as CompanyMasterDataFormControl).getValidationMessages();
+    getBlockedForPostingValidationMessages(blockedForPosting: string): string[] {
+        return (this.controls['blockedForPosting'] as ChartOfAccountsMasterDataFormControl).getValidationMessages();
     }
 
     getFormValidationMessages(): string[] {
         let messages: string[] = [];
-        Object.values(this.controls).forEach(c => messages.push(...(c as CompanyMasterDataFormControl).getValidationMessages()));
+        Object.values(this.controls).forEach(c => messages.push(...(c as ChartOfAccountsMasterDataFormControl).getValidationMessages()));
         return messages;
     }
 }

@@ -44,7 +44,7 @@ import { AccountSettingsComponent } from './core/application-components/profile/
 import { BioComponent } from './core/application-components/profile/bio/bio.component';
 import { RoleAuthComponent } from './core/application-components/profile/role-auth/role-auth.component';
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
-import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
+// import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
 import { DatePipe } from '@angular/common';
 import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
