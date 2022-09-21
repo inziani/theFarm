@@ -90,6 +90,8 @@ import { CreateCompanyCodeDialogComponent } from './finance/finance-dialogues/cr
 import { DisplayCompanyCodeDialogComponent } from './finance/finance-dialogues/display-company-code-dialog/display-company-code-dialog.component';
 import { EditCompanyCodeDialogComponent } from './finance/finance-dialogues/edit-company-code-dialog/edit-company-code-dialog.component';
 import { DeleteCompanyCodeDialogComponent } from './finance/finance-dialogues/delete-company-code-dialog/delete-company-code-dialog.component';
+import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dialog.component';
+
 
 
 @NgModule({
@@ -157,7 +159,9 @@ import { DeleteCompanyCodeDialogComponent } from './finance/finance-dialogues/de
         CreateCompanyCodeDialogComponent,
         DisplayCompanyCodeDialogComponent,
         EditCompanyCodeDialogComponent,
-        DeleteCompanyCodeDialogComponent
+        DeleteCompanyCodeDialogComponent,
+        DeleteDialogComponent,
+
 
     ],
     imports: [
@@ -182,6 +186,7 @@ import { DeleteCompanyCodeDialogComponent } from './finance/finance-dialogues/de
     bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private library: FaIconLibrary) {
+  constructor(
+    private library: FaIconLibrary) {
   }
 }

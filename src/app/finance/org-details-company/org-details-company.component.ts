@@ -36,7 +36,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
     "delete"
   ];
   public resultsLength = 0;
-  public isSelected: boolean = true;
+
 
   constructor(
 

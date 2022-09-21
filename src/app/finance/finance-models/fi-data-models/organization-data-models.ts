@@ -35,10 +35,11 @@ export class ChartOfAccountsMasterDataModel{
 
   constructor(
     public id: number,
+    public coaCode: string,
     public companyCode: string,
     public chartOfAccountsName: string,
     public language: string,
-    public lengthOfAcctNymber: number,
+    public lengthAccNumber: number,
     public blockedForPosting: boolean
 
   ) {
@@ -49,6 +50,7 @@ export class ChartOfAccountsMasterDataModel{
 export class ReportingArea{
 
   constructor(
+    public id: number,
     public reportingArea: string,
     public reportingAreaName: string,
     public personReponsible: string,
@@ -62,6 +64,7 @@ export class ReportingArea{
 export class ControllingArea{
 
   constructor(
+    public id: number,
     public controllingArea: string,
     public controllingAreaName: string,
     public personReponsible: string,

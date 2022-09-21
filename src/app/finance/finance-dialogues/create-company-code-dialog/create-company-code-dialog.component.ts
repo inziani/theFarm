@@ -53,7 +53,9 @@ export class CreateCompanyCodeDialogComponent implements OnInit {
       });
     this.formGroup.reset();
     this.formSubmitted = false;
-  };  close() {
+  };
+
+  public close() {
     this.dialogRef.close();
   }
 

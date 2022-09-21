@@ -226,7 +226,7 @@ export class ChartOfAccountsMasterDataFormGroup extends FormGroup {
         chartOfAccountsName: new ChartOfAccountsMasterDataFormControl("Chart Of Accounts Name","chartOfAccountsName", "", Validators.required ),
         language: new ChartOfAccountsMasterDataFormControl("Language", "language", "", Validators.required),
         lengthAccNumber: new ChartOfAccountsMasterDataFormControl("Length of Account Number", "lengthAccNumber", "", Validators.required),
-        blockedForPosting: new ChartOfAccountsMasterDataFormControl("Blocked For Posting", "blockedForPosting", "", Validators.required),
+        blockedForPosting: new ChartOfAccountsMasterDataFormControl("Blocked For Posting", "blockedForPosting", "", Validators.nullValidator),
 
         });
     }

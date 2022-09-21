@@ -13,8 +13,8 @@
   <div class="row my-1">
     <div class="col">
       <!-- Begining of Table -->
-      <table mat-table [dataSource]="sourceData" class="mat-elevation-z8 my-3" matSort matSortActive="id"
-        matSortDisableClear>
+      <table mat-table [dataSource]="sourceData" class="mat-elevation-z8 my-3" matSort matSortActive="company"
+        matSortDisableClear matSortDirection="asc">
         <!-- Number Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>

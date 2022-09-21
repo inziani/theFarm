@@ -2,8 +2,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { CompanyCodeMasterDataModel, CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
-import { Observable, catchError, throwError } from 'rxjs';
+import { ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel, CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { Observable, catchError, throwError, BehaviorSubject, Observer } from 'rxjs';
 import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,16 +18,21 @@ export class FinanceService {
   public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
   public companyListing!: CompanyMasterDataModel[];
   public orgUnitSelected = new EventEmitter<string>();
+  private dataSource = new BehaviorSubject<string>('');
+  public data: Observable<string> = this.dataSource.asObservable();
   public companyCodeListing!: CompanyCodeMasterDataModel[];
   public companyCode!: CompanyCodeMasterDataModel;
 
   constructor(
     private http: HttpClient,
-
-
   ) { }
 
   // Cross component communication
+  public sendData(data: string) {
+    this.dataSource.next(data);
+  }
+
+  // End of Cross component communication
 
 
   // Orginizational Data
@@ -140,6 +145,64 @@ export class FinanceService {
   }
 
 // End of Company Code Data
+// Chart Of Accounts
+  public fetchChartOfAccountsData(): Observable<ChartOfAccountsMasterDataModel[]>{
+    return this.http.get<ChartOfAccountsMasterDataModel[]>(`${environment.apiUrl}/chartOfAccounts/`, this.httpOptions);
+  }
+
+  public fetchSingleChartOfAccounts(id: number): Observable<ChartOfAccountsMasterDataModel>{
+    return this.http.get<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
+  }
+
+  public createChartOfAccountsMasterData(
+    coaCode: string,
+    companyCode: string,
+    chartOfAccountsName: string,
+    language: string,
+    lengthAccNumber: number,
+    blockedForPosting: boolean
+  ): Observable<ChartOfAccountsMasterDataModel> {
+    return this.http.post<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/`, {
+      coaCode,
+      companyCode,
+      chartOfAccountsName,
+      language,
+      lengthAccNumber,
+      blockedForPosting
+    }, this.httpOptions);
+  }
+
+  public editChartOfAccountsMasterData(
+    id: number,
+    coaCode: string,
+    companyCode: string,
+    chartOfAccountsName: string,
+    language: string,
+    lengthAccNumber: number,
+    blockedForPosting: boolean
+  ): Observable<ChartOfAccountsMasterDataModel> {
+    return this.http.patch<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', {
+      coaCode,
+      companyCode,
+      chartOfAccountsName,
+      language,
+      lengthAccNumber,
+      blockedForPosting
+    }, this.httpOptions);
+
+  }
+
+  public displayChartOfAccountsMasterData(id: number): Observable<ChartOfAccountsMasterDataModel>{
+    return this.http.get<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
+  }
+
+  public deleteChartOfAccountsMasterData(id: number): Observable<ChartOfAccountsMasterDataModel>{
+    return this.http.delete<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
+  }
+
+
+
+// End of Chart of accaounts
 // End of Organization Data
 
 // General Ledger Data
