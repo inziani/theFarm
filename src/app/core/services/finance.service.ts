@@ -172,7 +172,7 @@ export class FinanceService {
     }, this.httpOptions);
   }
 
-  public editChartOfAccountsMasterData(
+  public editSingleChartOfAccountsMasterData(
     id: number,
     coaCode: string,
     companyCode: string,
@@ -192,7 +192,7 @@ export class FinanceService {
 
   }
 
-  public displayChartOfAccountsMasterData(id: number): Observable<ChartOfAccountsMasterDataModel>{
+  public displaySingleChartOfAccountsMasterData(id: number): Observable<ChartOfAccountsMasterDataModel>{
     return this.http.get<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
   }
 

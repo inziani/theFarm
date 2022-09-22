@@ -22,6 +22,8 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 
 @NgModule({
@@ -49,12 +51,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatTabsModule,
         MatButtonToggleModule,
         MatCheckboxModule,
-
-
-
-
-
-
+        MatRadioModule
     ],
     exports: [
         MatButtonModule,
@@ -78,11 +75,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatSortModule,
         MatTabsModule,
         MatButtonToggleModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatRadioModule
 
     ]
 })
-
 
 export class MaterialModule {
 

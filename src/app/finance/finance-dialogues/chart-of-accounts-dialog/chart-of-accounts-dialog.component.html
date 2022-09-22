@@ -58,7 +58,7 @@
           <label for="inputLanguage" class="col-md-4 col-form-label">Language</label>
           <div class="col-md-8">
             <select class="form-select form-control-lg" aria-label="Default select example" formControlName="language"
-              id="inputLanguage" name="language">
+              id="inputLanguage" name="language" disable="disabled">
               <option class="form-select" selected *ngFor="let language of language" [value]="language.value">
                 <p>{{ language.viewValue }}</p>
               </option>
@@ -84,22 +84,20 @@
             </ul>
           </div>
         </div>
-        <div class="my-3">
-          <div class="form-check">
-            <label class="form-check-label mx-2" for="flexRadioDefault1">
-              Blocked for posting
-            </label>
-            <input class="form-check-input" type="radio" name="blockedForPosting" id="blockedForPosting"
-              [value]="blockedForPosting" formControlName="blockedForPosting">
-          </div>
-          <div>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
-              <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
-              </li>
-            </ul>
-          </div>
-        </div>
+              <div class="my-1">
+                <p style="color: #03045e; font-weight: lighter;">Blocked for posting</p>
+                <mat-radio-group formControlName="blockedForPosting">
+                  <mat-radio-button class="my-2 mx-2" [value]="blockedForPosting" disabled="disabled">Yes</mat-radio-button>
+                  <mat-radio-button class="my-2 mx 2" [value]="notBlockedForPosting" disabled="disabled">No</mat-radio-button>
+                </mat-radio-group>
+                <div>
+                  <ul class="text-danger list-unstyled"
+                    *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
+                    <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
         <mat-dialog-actions align="end" class="my-1">
           <button mat-raised-button mat-dialog-close cdkFocusInitial>
             <mat-icon class="mx-2 my-2">close</mat-icon>
@@ -194,14 +192,12 @@
             </ul>
           </div>
         </div>
-        <div class="my-3">
-          <div class="form-check">
-            <label class="form-check-label mx-2" for="flexRadioDefault1">
-              Blocked for posting
-            </label>
-            <input class="form-check-input" type="radio" name="blockedForPosting" id="blockedForPosting"
-              [value]="blockedForPosting" formControlName="blockedForPosting">
-          </div>
+        <div class="my-1">
+          <p style="color: #03045e; font-weight: lighter;">Blocked for posting</p>
+          <mat-radio-group formControlName="blockedForPosting">
+            <mat-radio-button class="my-2 mx-2" [value]="blockedForPosting">Yes</mat-radio-button>
+            <mat-radio-button class="my-2 mx 2" [value]="notBlockedForPosting">No</mat-radio-button>
+          </mat-radio-group>
           <div>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
@@ -227,7 +223,7 @@
   <!-- End of Create Template -->
   <!-- Beginning of Edit Template -->
   <div *ngSwitchCase="'edit'">
-    <div *ngSwitchCase="'create'">
+    <!-- <div *ngSwitchCase="'create'"> -->
       <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Chart of Accounts Information</h2>
       <mat-dialog-content class="mat-typography">
         <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
@@ -241,7 +237,7 @@
           <div class="row my-1">
             <label for="inputCoaCode" class="col-md-4 col-form-label">Chart of Accounts</label>
             <div class="col-md-8">
-              <input type="text" class="form-control" id="inputCoaCode" formControlName="coaCode">
+              <input type="text" class="form-control" id="inputCoaCode" formControlName="coaCode" [readonly]="readonly">
             </div>
             <div>
               <ul class="text-danger list-unstyled"
@@ -311,22 +307,20 @@
               </ul>
             </div>
           </div>
-          <div class="my-3">
-            <div class="form-check">
-              <label class="form-check-label mx-2" for="flexRadioDefault1">
-                Blocked for posting
-              </label>
-              <input class="form-check-input" type="radio" name="blockedForPosting" id="blockedForPosting"
-                [value]="blockedForPosting" formControlName="blockedForPosting">
-            </div>
-            <div>
-              <ul class="text-danger list-unstyled"
-                *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
-                <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
-                </li>
-              </ul>
-            </div>
-          </div>
+                <div class="my-1">
+                  <p style="color: #03045e; font-weight: lighter;">Blocked for posting</p>
+                  <mat-radio-group formControlName="blockedForPosting">
+                    <mat-radio-button class="my-2 mx-2" [value]="blockedForPosting">Yes</mat-radio-button>
+                    <mat-radio-button class="my-2 mx 2" [value]="notBlockedForPosting">No</mat-radio-button>
+                  </mat-radio-group>
+                  <div>
+                    <ul class="text-danger list-unstyled"
+                      *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
+                      <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
           <mat-dialog-actions align="end" class="my-1">
             <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onEditChartOfAccounts()"
               [disabled]="!formSubmitted && formGroup.invalid">
@@ -340,7 +334,7 @@
           </mat-dialog-actions>
         </form>
       </mat-dialog-content>
-    </div>
+    <!-- </div> -->
   </div>
   <!-- End of Edit Template -->
   <!-- Beginning of Delete Template -->

@@ -40,6 +40,8 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
   public chartOfAccounts!: ChartOfAccountsMasterDataModel;
   public formGroup!: ChartOfAccountsMasterDataFormGroup;
 
+
+
   constructor(
     private financeService: FinanceService,
     public dialogue: MatDialog
@@ -103,7 +105,33 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
     });
   }
 
-  public onEditChartOfAccounts(id: number) {
+  public onEditChartOfAccounts(process: string, id: number) {
+    this.financeService.sendData(process);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "550px";
+    dialogConfig.panelClass = "companyClass";
+    dialogConfig.hasBackdrop = true;
+
+    // Fetch API Data
+
+    this.financeService.fetchSingleChartOfAccounts(id).subscribe(chartOfAccountsData => {
+      this.chartOfAccounts = chartOfAccountsData;
+      dialogConfig.data = this.chartOfAccounts;
+
+      // Open the DialogeComponent
+      let dialogRef = this.dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
+
+      // Return Data from Dialogue
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === undefined) {
+          return
+        } else {
+
+        }
+      });
+    });
 
   }
 
