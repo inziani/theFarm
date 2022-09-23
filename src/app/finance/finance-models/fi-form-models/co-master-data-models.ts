@@ -261,3 +261,81 @@ export class ChartOfAccountsMasterDataFormGroup extends FormGroup {
     }
 }
 
+
+export class ControllingAreaMasterDataFormControl extends FormControl {
+
+    label: string;
+    modelProperty: string;
+
+    constructor(label: string, property: string, value: any, validator: any) {
+
+        super(value, validator);
+        this.label = label;
+        this.modelProperty = property;
+    }
+
+    getValidationMessages() {
+        let messages: string[] = [];
+        if (this.errors) {
+            for (let errorName in this.errors) {
+                switch (errorName) {
+                    case "email":
+                        messages.push(`Please enter a valid ${this.label} address`);
+                        break;
+                    case "required":
+                        messages.push(`${this.label} is a required field `);
+                        break;
+                    case "minLength":
+                        messages.push(`${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`);
+                        break;
+                    case "maxLength":
+                        messages.push(`The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`);
+                        break;
+                    case "pattern":
+                        messages.push(`This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `);
+                        break;
+                }
+            }
+        }
+        return messages;
+    }
+}
+
+export class ControllingAreaMasterDataFormGroup extends FormGroup {
+
+    constructor() {
+      super({
+
+        controllingArea: new ControllingAreaMasterDataFormControl("Controlling Area", "controllingArea", "", Validators.required),
+        controllingAreaName: new ControllingAreaMasterDataFormControl("Controlling Area Name", "controllingAreaName", "", Validators.required),
+        personResponsible: new ControllingAreaMasterDataFormControl("Person Responsible", "personResponsible", "", Validators.required),
+        companyCode: new ControllingAreaMasterDataFormControl("Company Code","companyCode", "", Validators.required ),
+
+        });
+    }
+
+    get ControllingAreaMasterDataFormControl(): ControllingAreaMasterDataFormControl[] {
+        return Object.keys(this.controls).map(k => this.controls[k] as ControllingAreaMasterDataFormControl);
+    }
+    getControllingAreaValidationMessages(controllingArea: string): string[] {
+        return (this.controls['controllingArea'] as ControllingAreaMasterDataFormControl).getValidationMessages();
+    }
+
+    getControllingAreaNameValidationMessages(controllingAreaName: string): string[] {
+        return (this.controls['controllingAreaName'] as ControllingAreaMasterDataFormControl).getValidationMessages();
+    }
+    getPersonResponsibleValidationMessages(personResponsible: string): string[] {
+        return (this.controls['personResponsible'] as ControllingAreaMasterDataFormControl).getValidationMessages();
+    }
+    getCompanyCodeValidationMessages(companyCode: string): string[] {
+        return (this.controls['companyCode'] as ControllingAreaMasterDataFormControl).getValidationMessages();
+    }
+
+    getFormValidationMessages(): string[] {
+        let messages: string[] = [];
+        Object.values(this.controls).forEach(c => messages.push(...(c as ControllingAreaMasterDataFormControl).getValidationMessages()));
+        return messages;
+    }
+}
+
+

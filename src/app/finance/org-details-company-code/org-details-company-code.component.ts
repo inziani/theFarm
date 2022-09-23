@@ -16,6 +16,7 @@ import { CompanyCodeMasterDataModel } from '../finance-models/fi-data-models/org
   styleUrls: ['./org-details-company-code.component.css']
 })
 export class OrgDetailsCompanyCodeComponent implements OnInit {
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

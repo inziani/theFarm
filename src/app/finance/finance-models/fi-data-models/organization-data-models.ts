@@ -61,7 +61,7 @@ export class ReportingArea{
   }
 }
 
-export class ControllingArea{
+export class ControllingAreaMasterDataModel{
 
   constructor(
     public id: number,

@@ -2,10 +2,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel, CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel, CompanyMasterDataModel, ControllingAreaMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, catchError, throwError, BehaviorSubject, Observer } from 'rxjs';
 import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+
 
 
 
@@ -200,9 +200,56 @@ export class FinanceService {
     return this.http.delete<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
   }
 
-
-
 // End of Chart of accaounts
+
+// Beginning of Controlling Area Data
+
+  public fetchControllingAreaData(): Observable<ControllingAreaMasterDataModel[]>{
+    return this.http.get<ControllingAreaMasterDataModel[]>(`${environment.apiUrl}/controllingArea/`, this.httpOptions);
+
+  }
+
+  public fetchSingleControllingArea(id: number): Observable<ControllingAreaMasterDataModel>{
+    return this.http.get<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/` + id + '/', this.httpOptions);
+  }
+
+  public createControllingAreaMasterData(
+    controllingArea: string,
+    controllingAreaName: string,
+    personResponsible: string,
+    companyCode: string
+  ): Observable<ControllingAreaMasterDataModel>{
+    return this.http.post<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/`, {
+      controllingArea,
+      controllingAreaName,
+      personResponsible,
+      companyCode
+    },
+    this.httpOptions);
+  }
+
+  public editControllingAreaMasterData(
+    id: number,
+    controllingArea: string,
+    controllingAreaName: string,
+    personResponsible: string,
+    companyCode: string
+  ): Observable<ControllingAreaMasterDataModel>{
+    return this.http.patch<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/` + id + '/', {
+      controllingArea,
+      controllingAreaName,
+      personResponsible,
+      companyCode
+    },
+    this.httpOptions);
+  }
+
+  public deleteControllingAreaMasterData(id: number): Observable<ControllingAreaMasterDataModel>{
+    return this.http.delete<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/` + id + '/', this.httpOptions);
+  }
+// End of Controlling Area Data
+
+
 // End of Organization Data
 
 // General Ledger Data
