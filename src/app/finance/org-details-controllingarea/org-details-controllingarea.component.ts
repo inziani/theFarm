@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ControllingAreaDialogComponent } from '../finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
+import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-org-details-controllingarea',
@@ -31,6 +32,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
   ];
 
   public resultsLength = 0;
+  public controllingArea!: ControllingAreaMasterDataModel;
 
 
   constructor(
@@ -56,6 +58,34 @@ export class OrgDetailsControllingareaComponent implements OnInit {
 
   public onDisplayControllingArea(process: string, id: number) {
 
+        this.financeService.sendData(process);
+
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "550px";
+    dialogConfig.hasBackdrop = true;
+
+    // Fetch Data from api
+
+    this.financeService.fetchSingleControllingArea(id).subscribe({
+      next: (controllingArea) =>
+      {
+        this.controllingArea = controllingArea;
+        dialogConfig.data = this.controllingArea;
+        let dialogRef = this.dialogue.open(ControllingAreaDialogComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe({
+          next: (result) => result,
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          complete: () => console.info('Complete')
+
+    });
+      },
+      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      complete: () => console.info('Complete?')
+    });
+
   }
 
   public onCreateControllingArea(process: string) {
@@ -72,13 +102,66 @@ export class OrgDetailsControllingareaComponent implements OnInit {
       next: (result) => result,
       error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
       complete: () => console.info('complete')
-    })
+    });
   }
 
   public onEditControllingArea(process: string, id: number) {
+    this.financeService.sendData(process);
+
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "550px";
+    dialogConfig.hasBackdrop = true;
+
+    // Fetch Data from api
+
+    this.financeService.fetchSingleControllingArea(id).subscribe({
+      next: (controllingArea) =>
+      {
+        this.controllingArea = controllingArea;
+        dialogConfig.data = this.controllingArea;
+        let dialogRef = this.dialogue.open(ControllingAreaDialogComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe({
+          next: (result) => result,
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          complete: () => console.info('Complete')
+
+    });
+      },
+      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      complete: () => console.info('Complete?')
+    });
 
   }
   public onDeleteCompanyCode(process: string, id: number) {
+    this.financeService.sendData(process);
+
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "550px";
+    dialogConfig.hasBackdrop = true;
+
+    this.financeService.fetchSingleControllingArea(id).subscribe({
+      next: (controllingArea) =>
+      {
+        this.controllingArea = controllingArea;
+        dialogConfig.data = this.controllingArea;
+        let dialogRef = this.dialogue.open(ControllingAreaDialogComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe({
+          next: (result) => result,
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          complete: () => console.info('Complete')
+
+    });
+      },
+      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      complete: () => console.info('Complete?')
+    });
+
 
  }
 

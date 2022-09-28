@@ -2,7 +2,7 @@
 <div class="col-md-10" [ngSwitch]="selectedProcess">
   <!-- Beginning of Display Template -->
   <div *ngSwitchCase="'display'">
-    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Display Ccontrolling Area</h2>
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Display Controlling Area</h2>
     <mat-dialog-content class="mat-typography">
       <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
         <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">

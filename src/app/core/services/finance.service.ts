@@ -228,7 +228,7 @@ export class FinanceService {
     this.httpOptions);
   }
 
-  public editControllingAreaMasterData(
+  public editSingleControllingAreaMasterData(
     id: number,
     controllingArea: string,
     controllingAreaName: string,

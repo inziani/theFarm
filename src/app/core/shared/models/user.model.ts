@@ -30,33 +30,14 @@ export class UserProfile{
   }
 }
 
-// export class AuthenticateUser{
-//   constructor(
-
-//     public id: number,
-//     public first_name: string,
-//     public last_name: string,
-//     public username: string,
-//     public email: string,
-//     public _token?: string,
-//     public _tokenRefresh?: string
-//   ) {
-
-//   }
-// }
-
-export class AuthenticatedUser {
+export class JwTToken{
 
   constructor(
-
-  tokenType: string,
-  expiryDate: number,
-  iatDate: number,
-  token: string,
-  userId: number
-
+    public refresh: string,
+    public access: string
 
   ) {
 
   }
 }
+

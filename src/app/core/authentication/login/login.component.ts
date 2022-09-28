@@ -24,17 +24,16 @@ import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
 export class LoginComponent implements OnInit {
 
-  formGroup = new LoginFormGroup();
-  userLogin: LoginCredentials = new LoginCredentials("", "");
-  formSubmitted: boolean = false;
+  public formGroup = new LoginFormGroup();
+  public userLogin: LoginCredentials = new LoginCredentials("", "");
+  public formSubmitted: boolean = false;
+  public isLoginMode = true;
+  public isLoading = false;
+  public error: string = '';
+  public token!: string;
 
-  isLoginMode = true;
-  isLoading = false;
-  error: string = '';
-  token!: string;
 
-
-  onSwitchMode() {
+  public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
 
   }
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  logIn(form: NgForm) {
+  public logIn(form: NgForm) {
     if (!form.valid) {
       return
     }
@@ -76,19 +75,19 @@ export class LoginComponent implements OnInit {
     form.reset();
   };
 
-  submitForm() {
+ public submitForm() {
     if (!this.formGroup.valid) {
       return
     }
     Object.keys(this.formGroup.controls).forEach(c =>
       this.userLogin['password'] = this.formGroup.controls['password'].value);
-    this.userLogin['email'] = this.formGroup.controls['email'].value;
-    this.formSubmitted = true;
-    this.authenticationService.getToken(this.userLogin.email, this.userLogin.password)
+   this.userLogin['email'] = this.formGroup.controls['email'].value;
+   this.isLoading = true;
+   this.formSubmitted = true;
+   this.authenticationService.getToken(this.userLogin.email, this.userLogin.password)
       .subscribe(
         success => {
           if (success) {
-            // console.log('Log in component-', success);
             this.dialogue.open(LoginDialogComponent);
             this.router.navigate(['home']);
           }
@@ -99,9 +98,7 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
         }
       );
-
     this.formGroup.reset();
     this.formSubmitted = false;
   }
-
 }

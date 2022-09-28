@@ -107,6 +107,7 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
 
   public onEditChartOfAccounts(process: string, id: number) {
     this.financeService.sendData(process);
+
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

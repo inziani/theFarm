@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthenticationService } from '../services/authentication.service';
 
 import { UserInterface } from '../shared/interfaces/users-interface';
-import { AuthenticatedUser } from '../shared/models/user.model';
+// import { AuthenticatedUser } from '../shared/models/user.model';
 import { AgricultureDialogueComponent } from '../dialogues/agriculture-dialogue/agriculture-dialogue.component';
 import { HomePageModulesInterface } from '../shared/interfaces/routers-interfaces';
 import { FinanceDialogueComponent } from '../dialogues/finance-dialogue/finance-dialogue.component';
@@ -22,7 +22,7 @@ import { MaterialsDialogueComponent } from '../dialogues/materials-dialogue/mate
 export class HomePageComponent implements OnInit, OnDestroy {
 
   public users: UserInterface[] = [];
-  public userser!: AuthenticatedUser;
+  public userser!: number;
   public module!: HomePageModulesInterface;
   public homeModules: HomePageModulesInterface[] = [
     { id: 1, description: 'agriculture' },
@@ -119,7 +119,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   }
 
-  
+
 
     ngOnDestroy() {
      this.userSubscription$.unsubscribe();

@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -7,24 +7,16 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 
-import { concat, Observable, ReplaySubject, BehaviorSubject, throwError, switchMap, catchError, map } from 'rxjs';
-
+import { Observable, throwError, switchMap } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
 
 import { Router } from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
-
 
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   private accessToken!: string;
-  private refreshToken!: string;
-  private tokenExpiryDate!: Date;
-  private isRefreshing: Boolean = false;
-  private refreshTokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public error!: HttpErrorResponse;
   public refreshedToken!: any;
 

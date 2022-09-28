@@ -42,14 +42,9 @@ export interface LoginResponse{
 
 }
 
-export interface JwTAuthenticationResponse {
-  id: number,
-  first_name: string,
-  last_name: string,
-  username: string,
-  email: string,
-  _token?: string,
-  _tokenRefresh?: string
+export interface JwTAuthenticationResponseInterface {
+  refresh: string,
+  access: string
 }
 
 
@@ -57,5 +52,7 @@ export interface UserCredentials {
     email: string;
     password: string;
 }
+
+
 
 

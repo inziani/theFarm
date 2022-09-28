@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
+
 import { FinanceService } from '@app/core/services/finance.service';
+
 import { CompanyCodeMasterDataModel, ControllingAreaMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { ControllingAreaMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
@@ -20,14 +25,12 @@ export class ControllingAreaDialogComponent implements OnInit {
   public companyCodeList!: CompanyCodeMasterDataModel[];
   public controllingArea!: ControllingAreaMasterDataModel;
 
-
-
-
   constructor(
 
     private financeService: FinanceService,
     private dialogRef: MatDialogRef<ControllingAreaDialogComponent>,
-    private dialogue: MatDialog
+    private dialogue: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public controllingAreaDialogueData: ControllingAreaMasterDataModel
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +40,9 @@ export class ControllingAreaDialogComponent implements OnInit {
       error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
       complete: () => console.info('complete')
     });
+
+    this.controllingArea = this.controllingAreaDialogueData;
+    this.formGroup.patchValue(this.controllingArea);
   }
 
   public getData() {
@@ -48,14 +54,58 @@ export class ControllingAreaDialogComponent implements OnInit {
 
   public onCreateControllingArea() {
 
+    // Fetch data from the form and pass it on
+
+    this.dialogRef.close(this.formGroup.value);
+    this.controllingArea = this.formGroup.value;
+
+    // Post the Data to the API
+
+    this.financeService.createControllingAreaMasterData(
+      this.controllingArea.companyCode,
+      this.controllingArea.controllingAreaName,
+      this.controllingArea.personReponsible,
+      this.controllingArea.companyCode
+    ).subscribe({
+      next: (controllingAreaMasterCreated) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      complete: () => console.info('Complete')
+    }
+    );
+    this.formGroup.reset;
+    this.formSubmitted = false;
   }
 
   public onEditControllingArea() {
+    this.dialogRef.close(this.formGroup.value);
+    this.controllingArea = this.formGroup.value;
 
+    // Fetch Data from Form
+
+    this.financeService.editSingleControllingAreaMasterData(
+      this.controllingAreaDialogueData.id,
+      this.controllingArea.controllingArea,
+      this.controllingArea.controllingAreaName,
+      this.controllingArea.personReponsible,
+      this.controllingArea.companyCode
+    ).subscribe({
+      next: (controllingAreaMasterEdited) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      complete: () => console.info('complete')
+    });
+    this.formGroup.reset;
+    this.formSubmitted = false;
   }
 
 
   public onDeleteControllingArea() {
+    this.financeService.
+      deleteControllingAreaMasterData(this.controllingArea.id).
+      subscribe({
+        next: (controllingAreaDeleted) => this.dialogue.open(DeleteDialogComponent),
+        error: (error) => this.dialogue.open(ErrorHandlingDialogComponent),
+        complete: () => console.info('complete')
+      });
 
 
   }

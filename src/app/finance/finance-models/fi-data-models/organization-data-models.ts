@@ -74,9 +74,10 @@ export class ControllingAreaMasterDataModel{
   }
 }
 
-export class BusinessArea{
+export class BusinessAreaMasterDataModel{
 
   constructor(
+    public id: number,
     public businessArea: string,
     public businessAreaName: string,
     public personResponsible: string,
