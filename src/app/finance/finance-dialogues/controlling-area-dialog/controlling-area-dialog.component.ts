@@ -77,6 +77,7 @@ export class ControllingAreaDialogComponent implements OnInit {
   }
 
   public onEditControllingArea() {
+
     this.dialogRef.close(this.formGroup.value);
     this.controllingArea = this.formGroup.value;
 
@@ -106,8 +107,6 @@ export class ControllingAreaDialogComponent implements OnInit {
         error: (error) => this.dialogue.open(ErrorHandlingDialogComponent),
         complete: () => console.info('complete')
       });
-
-
   }
 
   public close() {

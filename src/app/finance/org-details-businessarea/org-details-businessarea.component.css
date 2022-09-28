@@ -41,3 +41,7 @@
   font-weight: lighter;
   border: none;
 }
+
+.custom-modal{
+  border-radius: 0;
+}

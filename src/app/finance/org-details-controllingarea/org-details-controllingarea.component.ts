@@ -53,12 +53,11 @@ export class OrgDetailsControllingareaComponent implements OnInit {
   ngAfterViewInit() {
     this.sourceData.sort = this.sort;
     this.sourceData.paginator = this.paginator;
-
   }
 
   public onDisplayControllingArea(process: string, id: number) {
 
-        this.financeService.sendData(process);
+    this.financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

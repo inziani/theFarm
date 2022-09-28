@@ -8,6 +8,8 @@ import { BusinessAreaDialogComponent } from '../finance-dialogues/business-area-
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ControllingAreaDialogComponent } from '../finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
+import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-org-details-businessarea',
@@ -42,6 +44,17 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.financeService.fetchBusinessAreaData().subscribe({
+      next: (businessAreaDataFetched) => this.sourceData.data = businessAreaDataFetched,
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      complete: () => console.info('complete')
+    });
+
+  }
+
+  ngAfterViewInit() {
+    this.sourceData.sort = this.sort;
+    this.sourceData.paginator = this.paginator;
   }
 
   public onCreateBusinessArea(process: string) {
@@ -64,14 +77,96 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
   public onDisplayBusinessArea(process: string, id: number) {
 
+    this.financeService.sendData(process);
+
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "550px";
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.panelClass = 'custom-modal';
+
+    // Fetch Data from api
+
+    this.financeService.fetchSingleBusinessArea(id).subscribe({
+      next: (businessArea) =>
+      {
+        this.businessArea = businessArea;
+        dialogConfig.data = this.businessArea;
+        let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe({
+          next: (result) => result,
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          complete: () => console.info('Complete')
+
+    });
+      },
+      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      complete: () => console.info('Complete?')
+    });
+
   }
 
   public onEditBusinessArea(process: string, id: number) {
+
+    this.financeService.sendData(process);
+
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "550px";
+    dialogConfig.hasBackdrop = true;
+
+    // Fetch Data from api
+
+    this.financeService.fetchSingleBusinessArea(id).subscribe({
+      next: (businessArea) =>
+      {
+        this.businessArea = businessArea;
+        dialogConfig.data = this.businessArea;
+        let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe({
+          next: (result) => result,
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          complete: () => console.info('Complete')
+
+    });
+      },
+      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      complete: () => console.info('Complete?')
+    });
+
 
   }
 
   public onDeleteBusinessArea(process: string, id: number) {
 
-  }
+    this.financeService.sendData(process);
 
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "550px";
+    dialogConfig.hasBackdrop = true;
+
+    this.financeService.fetchSingleBusinessArea(id).subscribe({
+      next: (businessArea) =>
+      {
+        this.businessArea = businessArea;
+        dialogConfig.data = this.businessArea;
+        let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe({
+          next: (result) => result,
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          complete: () => console.info('Complete')
+
+    });
+      },
+      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      complete: () => console.info('Complete?')
+    });
+  }
 }

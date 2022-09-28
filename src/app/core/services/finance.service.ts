@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel, CompanyMasterDataModel, ControllingAreaMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { BusinessAreaMasterDataModel, ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel, CompanyMasterDataModel, ControllingAreaMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, catchError, throwError, BehaviorSubject, Observer } from 'rxjs';
 import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 
@@ -249,12 +249,58 @@ export class FinanceService {
   }
 // End of Controlling Area Data
 
+// Beginning of Business Area
 
+public fetchBusinessAreaData(): Observable<BusinessAreaMasterDataModel[]>{
+    return this.http.get<BusinessAreaMasterDataModel[]>(`${environment.apiUrl}/businessArea/`, this.httpOptions);
+
+  }
+
+  public fetchSingleBusinessArea(id: number): Observable<BusinessAreaMasterDataModel>{
+    return this.http.get<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/` + id + '/', this.httpOptions);
+  }
+
+public createBusinessAreaMasterData(
+    businessArea: string,
+    businessAreaName: string,
+    personResponsible: string,
+    companyCode: string
+  ): Observable<BusinessAreaMasterDataModel>{
+    return this.http.post<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/`, {
+      businessArea,
+      businessAreaName,
+      personResponsible,
+      companyCode
+    },
+    this.httpOptions);
+}
+
+public editSingleBusinessAreaMasterData(
+    id: number,
+    businessArea: string,
+    businessAreaAreaName: string,
+    personResponsible: string,
+    companyCode: string
+  ): Observable<BusinessAreaMasterDataModel>{
+    return this.http.patch<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/` + id + '/', {
+      businessArea,
+      businessAreaAreaName,
+      personResponsible,
+      companyCode
+    },
+    this.httpOptions);
+  }
+
+  public deleteBusinessAreaMasterData(id: number): Observable<BusinessAreaMasterDataModel> {
+    return this.http.delete<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/` + id + '/', this.httpOptions);
+  }
+// End of Business Area
 // End of Organization Data
 
+  
 // General Ledger Data
 
-    public createGeneralLedgerAccountMasterData(
+public createGeneralLedgerAccountMasterData(
   ): Observable<GeneralLedgerMasterDataModel> {
     return this.http.post<GeneralLedgerMasterDataModel>(`${environment.apiUrl}/generalLedgerAccountMaster/`, JSON.stringify({}), this.httpOptions);
 
