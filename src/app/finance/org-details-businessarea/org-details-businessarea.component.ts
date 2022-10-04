@@ -34,6 +34,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
   ];
   public resultsLength = 0;
   public businessArea!: BusinessAreaMasterDataModel;
+  public errorMessage!: string;
 
 
   constructor(
@@ -43,10 +44,9 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.financeService.fetchBusinessAreaData().subscribe({
       next: (businessAreaDataFetched) => this.sourceData.data = businessAreaDataFetched,
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('complete')
     });
 
@@ -69,7 +69,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
     let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe({
       next: (result) => result,
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('complete')
     });
 
@@ -97,12 +97,12 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
           complete: () => console.info('Complete')
 
     });
       },
-      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
       complete: () => console.info('Complete?')
     });
 
@@ -129,12 +129,12 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
           complete: () => console.info('Complete')
 
     });
       },
-      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('Complete?')
     });
 
@@ -160,12 +160,12 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
           complete: () => console.info('Complete')
 
     });
       },
-      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('Complete?')
     });
   }

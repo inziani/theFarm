@@ -45,5 +45,11 @@ a{
 .form-check-label {
   font-weight: lighter;
 }
+.alert{
+  border:none;
+  font-weight: lighter;
+  background-color: transparent;
+  font-size: medium;
+}
 
 

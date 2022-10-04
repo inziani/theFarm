@@ -78,13 +78,11 @@ export class OrgDetailsControllingareaComponent implements OnInit {
           next: (result) => result,
           error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
           complete: () => console.info('Complete')
-
     });
       },
       error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
       complete: () => console.info('Complete?')
     });
-
   }
 
   public onCreateControllingArea(process: string) {

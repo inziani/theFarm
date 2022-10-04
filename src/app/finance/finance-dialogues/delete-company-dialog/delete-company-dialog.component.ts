@@ -19,6 +19,7 @@ export class DeleteCompanyDialogComponent implements OnInit {
   public isLoading: boolean = false;
   public readonly!: boolean;
   public formSubmitted: boolean = false;
+  
 
   constructor(
 

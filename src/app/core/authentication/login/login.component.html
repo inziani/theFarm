@@ -6,6 +6,15 @@
         <app-loading-spinner></app-loading-spinner>
       </div>
       <form (ngSubmit)="submitForm()" novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+
+        <!-- Login Error message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <mat-icon>error</mat-icon><br>
+          {{ errorMessage }}
+        </div>
+
+        <!-- End of Login Error message -->
+
         <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
           <ul>
             <li *ngFor="let error of formGroup.getFormValidationMessages()">

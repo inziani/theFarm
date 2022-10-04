@@ -11,6 +11,7 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { ThisReceiver } from '@angular/compiler';
 
 
 
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
   public formSubmitted: boolean = false;
   public isLoginMode = true;
   public isLoading = false;
-  public error: string = '';
+  public errorMessage: string = '';
   public token!: string;
 
 
@@ -68,36 +69,36 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          this.error = 'Login Unsuccessful! Try again'
+          this.errorMessage = 'Login Unsuccessful! Try again'
           this.isLoading = false;
         }
       );
     form.reset();
   };
 
- public submitForm() {
+  public submitForm() {
     if (!this.formGroup.valid) {
       return
     }
     Object.keys(this.formGroup.controls).forEach(c =>
       this.userLogin['password'] = this.formGroup.controls['password'].value);
-   this.userLogin['email'] = this.formGroup.controls['email'].value;
-   this.isLoading = true;
-   this.formSubmitted = true;
-   this.authenticationService.getToken(this.userLogin.email, this.userLogin.password)
-      .subscribe(
-        success => {
-          if (success) {
-            this.dialogue.open(LoginDialogComponent);
-            this.router.navigate(['home']);
-          }
+    this.userLogin['email'] = this.formGroup.controls['email'].value;
+    this.isLoading = true;
+    this.formSubmitted = true;
+    this.authenticationService.getToken(this.userLogin.email, this.userLogin.password)
+      .subscribe({
+
+        next: (success) => {
+          this.dialogue.open(LoginDialogComponent);
+          this.router.navigate(['home']);
         },
-        error => {
-          this.error = 'Login Unsuccessful! Try again';
-          alert(this.error);
+        error: (error)=> {
+          this.errorMessage = error;
           this.isLoading = false;
-        }
-      );
+        },
+        complete: () => console.info('complete')
+      });
+
     this.formGroup.reset();
     this.formSubmitted = false;
   }

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
 import { FinanceService } from '@app/core/services/finance.service';
 import { BusinessAreaMasterDataModel, CompanyCodeMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { BusinessAreaMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
@@ -21,6 +22,10 @@ export class BusinessAreaDialogComponent implements OnInit {
   public formSubmitted: boolean = false;
   public companyCodeList!: CompanyCodeMasterDataModel[];
   public businessArea!: BusinessAreaMasterDataModel;
+  public errorMessage!: string;
+  public createdItem!: string;
+  public changedItem!: string;
+  public deletedItem!: string;
 
   constructor(
     private financeService: FinanceService,
@@ -34,13 +39,15 @@ export class BusinessAreaDialogComponent implements OnInit {
   }
 
   public getData() {
-    this.financeService.data.subscribe(process => {
-      this.selectedProcess = process;
+    this.financeService.data.subscribe({
+      next: (process) => this.selectedProcess = process,
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete')
     });
 
     this.financeService.fetchCompanyCodeData().subscribe({
       next: (companyCodeData) => this.companyCodeList = companyCodeData,
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('complete')
     });
 
@@ -63,8 +70,8 @@ export class BusinessAreaDialogComponent implements OnInit {
       this.businessArea.personResponsible,
       this.businessArea.companyCode
     ).subscribe({
-      next: (businessAreaMasterCreated) => this.dialogue.open(ChangesSavedDialogComponent),
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      next: (businessAreaMasterCreated) => this.dialogue.open(ObjectCreatedComponent, { data: this.createdItem = businessAreaMasterCreated.businessAreaName}),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err.message}),
       complete: () => console.info('Complete')
     }
     );
@@ -87,8 +94,8 @@ export class BusinessAreaDialogComponent implements OnInit {
       this.businessArea.personResponsible,
       this.businessArea.companyCode
     ).subscribe({
-      next: (businessAreaMasterEdited) => this.dialogue.open(ChangesSavedDialogComponent),
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      next: (businessAreaMasterEdited) => this.dialogue.open(ChangesSavedDialogComponent, { data: this.changedItem = businessAreaMasterEdited.businessAreaName}),
+      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('Complete')
     });
     this.formGroup.reset;
@@ -100,8 +107,8 @@ export class BusinessAreaDialogComponent implements OnInit {
     this.financeService.
       deleteBusinessAreaMasterData(this.businessArea.id).
       subscribe({
-        next: (businessAreaDeleted) => this.dialogue.open(DeleteDialogComponent),
-        error: (error) => this.dialogue.open(ErrorHandlingDialogComponent),
+        next: (businessAreaDeleted) => this.dialogue.open(DeleteDialogComponent, { data: this.deletedItem = this.businessArea.businessAreaName}),
+        error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
         complete: () => console.info('Complete')
       });
 

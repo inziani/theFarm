@@ -1,6 +1,7 @@
 .container {
   text-align: center;
   font-weight: lighter;
+  color: #03045e;
 }
 
 .mat-raised-button {
@@ -9,11 +10,4 @@
   background-color: #03045e;
   border-radius: 0;
   font-weight: lighter;
-}
-
-.alert {
-  border: none;
-  font-weight: lighter;
-  background-color: transparent;
-  font-size: medium;
 }

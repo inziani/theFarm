@@ -10,6 +10,8 @@ import { FinanceService } from '@app/core/services/finance.service';
 })
 export class FinanceHomeComponent implements OnInit {
   public itemSelected!: string;
+  public errorMessage!: string;
+  
 
   constructor(
     public dialog: MatDialog,
@@ -19,6 +21,12 @@ export class FinanceHomeComponent implements OnInit {
   ngOnInit(): void {
     this.financeService.orgUnitSelected.subscribe(orgUnit => {
       this.itemSelected = orgUnit;
+    });
+
+    this.financeService.orgUnitSelected.subscribe({
+      next: (orgUnit: string) => this.itemSelected = orgUnit,
+      error: (error: string) => this.errorMessage = error,
+      complete: () => console.info('Complete')
     })
   }
 

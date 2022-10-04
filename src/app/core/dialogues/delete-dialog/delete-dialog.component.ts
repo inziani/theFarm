@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-delete-dialog',
   templateUrl: './delete-dialog.component.html',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public deletedItem: string
+
+  ) { }
 
   ngOnInit(): void {
   }
