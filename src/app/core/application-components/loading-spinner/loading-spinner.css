@@ -1,5 +1,5 @@
 .lds-spinner {
-    color: official;
+    color: #fb8500;
     display: inline-block;
     position: relative;
     width: 80px;
@@ -76,4 +76,3 @@
       opacity: 0;
     }
   }
-  

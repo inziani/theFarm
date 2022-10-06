@@ -8,7 +8,7 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 
-import { User } from "../models/user.model";
+import { User, UserProfile } from "../models/user.model";
 import { UserInterface, UserProfileInterface } from "../interfaces/users-interface";
 import { Activity } from "../models/activity.model";
 
@@ -145,8 +145,8 @@ export class RestDataSource {
     return this.http.delete<any>(`${environment.apiUrl}/activityscategorys/` + id + '/')
   }
 
-  fetchUsers(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(`${environment.apiUrl}/register/`, this.httpOptions);
+  fetchUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}/users/`, this.httpOptions);
   }
 
   editUserInformation(id: number, first_name: string, last_name: string, date_of_birth: string, phone_number: string,
@@ -157,8 +157,8 @@ export class RestDataSource {
 
   }
 
-  fetchUserProfiles(): Observable<UserProfileInterface> {
-    return this.http.get<UserProfileInterface>(`${environment.apiUrl}/user-profile`, this.httpOptions);
+  fetchUserProfiles(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(`${environment.apiUrl}/user-profile`, this.httpOptions);
   }
 
   fetchActivityDb(sort: string, order: SortDirection, page: number): Observable<Activity[]> {

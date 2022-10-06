@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { CompanyCodeMasterDataModel, ControllingAreaMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
+import { ControllingAreaMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
@@ -16,6 +16,7 @@ import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-d
   styleUrls: ['./org-details-controllingarea.component.css']
 })
 export class OrgDetailsControllingareaComponent implements OnInit {
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

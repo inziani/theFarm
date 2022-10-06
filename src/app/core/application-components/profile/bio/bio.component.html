@@ -1,15 +1,134 @@
-<div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
-<h1>Testing the Bio page</h1>
 
-  <p>Get data from the Profile table</p>
-  <div *ngFor="let profile of userProfilesList">
-
-    <p> Bio - {{ profile.bio }}</p>
-    <p>Hobbies - {{ profile.hobbies }}</p>
-    <p>Profile Picture - "{{ profile.profile_pic }}"</p>
-    <img src="'{{ profile.profile_pic }}'" alt="">
-    <p>Date Created - {{ profile.create_at | date }}</p>
-    <p>Date Changed - {{ profile.updated_at | date }}</p>
+<div class="container my-3 justify-content-center">
+  <h1 class="text-center my-2" style="font-weight: lighter; color: #fb8500;">User Management</h1>
+  <div class="row my-5 justify-content-center">
+    <div class="col-md-6 my-3">
+      <div class="input-group my-1 justify-content-center">
+        <span class="input-group-text" id="inputGroup-sizing-default" >
+            <input class="form-control mx-4" type="text" placeholder="Search" aria-label="default input example">
+            <mat-icon (click)="searchUser()">search</mat-icon>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-6 my-3">
+      <div class="input-group my-1 justify-content-center">
+        <span class="input-group-text justify-content-center" id="inputGroup-sizing-default" >
+            <mat-icon class="mx-2 my-2" (click)="addUser('add')">note_add</mat-icon>Add User
+        </span>
+      </div>
+    </div>
   </div>
-
+  <div class="row my-1">
+    <div class="col">
+      <!-- Begining of Table -->
+      <table mat-table [dataSource]="sourceData" class="mat-elevation-z8 my-3" matSort matSortActive="last_name"
+        matSortDisableClear matSortDirection="asc">
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+          <td mat-cell *matCellDef="let row">{{ row.id | number }}</td>
+        </ng-container>
+        <!-- username Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+          <td mat-cell *matCellDef="let row">{{row.username}}</td>
+        </ng-container>
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let row">{{row.email}}</td>
+        </ng-container>
+        <!-- first_name -->
+        <ng-container matColumnDef="first_name">
+          <th mat-header-cell *matHeaderCellDef>First Name</th>
+          <td mat-cell *matCellDef="let row">{{row.first_name}}</td>
+        </ng-container>
+        <!-- Middle Name-->
+        <ng-container matColumnDef="middle_name">
+          <th mat-header-cell *matHeaderCellDef>Middle Name</th>
+          <td mat-cell *matCellDef="let row">{{row.middle_name}}</td>
+        </ng-container>
+      <!-- Last Name-->
+      <ng-container matColumnDef="last_name">
+        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+        <td mat-cell *matCellDef="let row">{{row.last_name}}</td>
+      </ng-container>
+      <!-- Phone Number -->
+      <ng-container matColumnDef="phone_number">
+        <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+        <td mat-cell *matCellDef="let row">{{row.phone_number}}</td>
+      </ng-container>
+      <!-- Date of Birth -->
+      <ng-container matColumnDef="date_of_birth">
+        <th mat-header-cell *matHeaderCellDef>Date of Birth</th>
+        <td mat-cell *matCellDef="let row">{{row.date_of_birth | date }}</td>
+      </ng-container>
+      <!-- Gender -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef>Gender</th>
+        <td mat-cell *matCellDef="let row">{{row.gender}}</td>
+      </ng-container>
+      <!-- City -->
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef>City</th>
+        <td mat-cell *matCellDef="let row">{{row.city}}</td>
+      </ng-container>
+      <!-- Country -->
+      <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef>Country</th>
+        <td mat-cell *matCellDef="let row">{{row.country}}</td>
+      </ng-container>
+      <!-- is_active -->
+      <ng-container matColumnDef="is_active">
+        <th mat-header-cell *matHeaderCellDef>Active</th>
+        <td mat-cell *matCellDef="let row">{{row.is_active}}</td>
+      </ng-container>
+      <!-- is_superuser -->
+      <ng-container matColumnDef="is_superuser">
+        <th mat-header-cell *matHeaderCellDef>Superuser</th>
+        <td mat-cell *matCellDef="let row">{{row.is_superuser}}</td>
+      </ng-container>
+      <!-- is_staff -->
+      <ng-container matColumnDef="is_staff">
+        <th mat-header-cell *matHeaderCellDef>Staff</th>
+        <td mat-cell *matCellDef="let row">{{row.is_staff}}</td>
+      </ng-container>
+      <!-- Date Joined -->
+      <ng-container matColumnDef="date_joined">
+        <th mat-header-cell *matHeaderCellDef>Date Joined</th>
+        <td mat-cell *matCellDef="let row">{{row.date_joined | date }}</td>
+      </ng-container>
+        <!-- Display  Column -->
+        <ng-container matColumnDef="display">
+          <th mat-header-cell *matHeaderCellDef>Display</th>
+          <td mat-cell *matCellDef="let row">
+            <a (click)="onDisplayUser('display', row.id)">
+              <mat-icon>pageview</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Edit  Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>Edit</th>
+          <td mat-cell *matCellDef="let row">
+            <a>
+              <mat-icon (click)="onEditUser('edit', row.id)">edit</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Delete  Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-icon (click)="onDeleteUser('delete', row.id)">delete</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="userColumnHeaders"></tr>
+        <tr mat-row *matRowDef="let row; columns: userColumnHeaders;"></tr>
+      </table>
+      <!-- End of Table -->
+      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10]"></mat-paginator>
+    </div>
+  </div>
 </div>
+

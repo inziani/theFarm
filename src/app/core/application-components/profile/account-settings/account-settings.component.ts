@@ -69,13 +69,10 @@ export class AccountSettingsComponent implements OnInit {
           this.currentLoggedInUser = this.userList.filter((person: User) => person.id === this.user);
           this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj),
           {
-            id: NaN, first_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
-            email: '', gender: '', city: ''
+            id: NaN, first_name: '', middle_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
+            email: '', gender: '', city: '', country: '', is_active: true, is_staff: true, is_superuser: false, date_joined: new Date()
           });
           this.formGroup.patchValue(this.patchedUser );
-          // console.log('My logged in user - ', this.currentLoggedInUser);
-          // console.log('My Patched User -', this.patchedUser);
-          // console.log('My Form-', this.formGroup.value);
         });
 
       });

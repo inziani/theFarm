@@ -51,10 +51,6 @@ export class UserUpdateFormGroup extends FormGroup {
         super({
 
             id: new UserUpdateFormControl("id", "id", "", Validators.required,),
-            first_name: new UserUpdateFormControl("First Name", "first_name", "", Validators.required,),
-            last_name: new UserUpdateFormControl("Last Name", "last_name", "", Validators.required),
-            date_of_birth: new UserUpdateFormControl("Birthday", "birthday", {value:'', disabled: true }, Validators.required),
-            phone_number: new UserUpdateFormControl("Phone Number", "phoneNumber", "", Validators.required),
             username: new UserUpdateFormControl("Username", "username", "", Validators.required),
             email: new UserUpdateFormControl("Email", "email", "", Validators.compose([
 
@@ -62,20 +58,31 @@ export class UserUpdateFormGroup extends FormGroup {
               Validators.email,
 
             ])),
+            first_name: new UserUpdateFormControl("First Name", "first_name", "", Validators.required,),
+            middle_name: new UserUpdateFormControl("Middle Name", "middle_name", "", Validators.required),
+            last_name: new UserUpdateFormControl("Last Name", "last_name", "", Validators.required),
+            phone_number: new UserUpdateFormControl("Phone Number", "phoneNumber", "", Validators.required),
+            date_of_birth: new UserUpdateFormControl("Birthday", "birthday", {value:'', disabled: true }, Validators.required),
             gender: new UserUpdateFormControl("Gender", "gender", {value:'', disabled: true }, Validators.required),
             city: new UserUpdateFormControl("City", "city", "", Validators.required),
-
+            country: new UserUpdateFormControl("Country", "country", "", Validators.required),
+            is_active: new UserUpdateFormControl("Active", "is_active", "", Validators.required),
+            is_superuser: new UserUpdateFormControl("Superuser", "is_superuser", "", Validators.required),
+            is_staff: new UserUpdateFormControl("Staff", "is_staff", "", Validators.required),
 
         });
     }
 
-    get signUpFormControls(): UserUpdateFormControl[] {
+    get userUpdateFormControl(): UserUpdateFormControl[] {
         return Object.keys(this.controls).map(k => this.controls[k] as UserUpdateFormControl);
     }
 
 
     getfirstNameValidationMessages(first_name: string): string[] {
         return (this.controls['first_name'] as UserUpdateFormControl).getValidationMessages();
+    }
+    getMiddleNameValidationMessages(middle_name: string): string[] {
+        return (this.controls['middle_name'] as UserUpdateFormControl).getValidationMessages();
     }
 
     getlastNameValidationMessages(last_name: string): string[] {
@@ -106,6 +113,19 @@ export class UserUpdateFormGroup extends FormGroup {
         return (this.controls['city'] as UserUpdateFormControl).getValidationMessages();
     }
 
+    getCountryValidationMessages(country: string): string[] {
+        return (this.controls['country'] as UserUpdateFormControl).getValidationMessages();
+    }
+
+    getIsActiveValidationMessages(is_active: string): string[] {
+        return (this.controls['is_active'] as UserUpdateFormControl).getValidationMessages();
+    }
+    getIsSuperuserValidationMessages(is_superuser: string): string[] {
+        return (this.controls['is_superuser'] as UserUpdateFormControl).getValidationMessages();
+    }
+    getIsStaffValidationMessages(is_staff: string): string[] {
+        return (this.controls['is_staff'] as UserUpdateFormControl).getValidationMessages();
+    }
 
     getFormValidationMessages(): string[] {
         let messages: string[] = [];
