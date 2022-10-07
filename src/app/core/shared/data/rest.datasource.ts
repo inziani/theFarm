@@ -145,21 +145,6 @@ export class RestDataSource {
     return this.http.delete<any>(`${environment.apiUrl}/activityscategorys/` + id + '/')
   }
 
-  fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}/users/`, this.httpOptions);
-  }
-
-  editUserInformation(id: number, first_name: string, last_name: string, date_of_birth: string, phone_number: string,
-    username: string, email: string, gender: string, city: string) {
-    return this.http.patch<any>(`${environment.apiUrl}/register/` + id + '/', {
-      first_name, last_name, date_of_birth, phone_number, username, email, gender, city
-    }, { headers: this.httpHeaders });
-
-  }
-
-  fetchUserProfiles(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>(`${environment.apiUrl}/user-profile`, this.httpOptions);
-  }
 
   fetchActivityDb(sort: string, order: SortDirection, page: number): Observable<Activity[]> {
     return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, this.httpOptions);

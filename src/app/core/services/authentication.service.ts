@@ -1,16 +1,14 @@
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, observable, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 
-
-
-
 import { environment } from '@environments/environment';
-import { JwTAuthenticationResponseInterface, SignUpResponse, UserCredentials } from '../shared/interfaces/users-interface';
+import { JwTAuthenticationResponseInterface, SignUpResponse } from '../shared/interfaces/users-interface';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
+import { User } from '../shared/models/user.model';
 
 
 
@@ -64,16 +62,6 @@ export class AuthenticationService {
     this.jwtAccessToken = responseData.access;
     this.jwtRefreshToken = responseData.refresh;
     return this.mappedToken;
-
-    // type customJwtPayLoad = JwtPayload & { userPayloadData: string };
-    // let decodedToken = jwtDecode<customJwtPayLoad>(responseData.access);
-    // this.payload = JSON.stringify(decodedToken);
-    // let finaldecodedToken = JSON.parse(this.payload);
-    // this.userId = finaldecodedToken.user_id;
-    // this.expiryDate = new Date(finaldecodedToken.exp * 1000);
-    // this.currentUser$.next(this.userId);
-    // return this.payload;
-
 
   }
 
@@ -143,8 +131,8 @@ export class AuthenticationService {
     gender: string,
     city: string,
     email: string,
-    password: string): Observable<any> {
-    return this.http.post<SignUpResponse>(`${environment.apiUrl}/register/`, JSON.stringify({
+    password: string): Observable<User> {
+    return this.http.post<User>(`${environment.apiUrl}/register/`, JSON.stringify({
       first_name,
       last_name,
       date_of_birth,
@@ -155,6 +143,38 @@ export class AuthenticationService {
       email,
       password
     }), this.httpOptions);
+  }
+
+  public editUserInformation(
+    id: number,
+    username: string,
+    email: string,
+    first_name: string,
+    middle_name: string,
+    last_name: string,
+    phone_number: string,
+    date_of_birth: string,
+    gender: string,
+    city: string,
+    country: string,
+    is_active: boolean,
+    is_superuser: boolean,
+    is_staff: boolean,
+    ): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/users/` + id + '/', {
+      username,
+      first_name,
+      middle_name,
+      last_name,
+      phone_number,
+      date_of_birth,
+      gender,
+      city,
+      country,
+      is_active,
+      is_superuser,
+      is_staff
+    }, this.httpOptions);
   }
 }
 

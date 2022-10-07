@@ -93,6 +93,7 @@ import { DeleteCompanyCodeDialogComponent } from './finance/finance-dialogues/de
 import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dialog.component';
 import { ErrorHandlingDialogComponent } from './core/dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ObjectCreatedComponent } from './core/dialogues/object-created/object-created.component';
+import { UserUpdateDialogComponent } from './core/dialogues/user-update-dialog/user-update-dialog.component';
 
 
 
@@ -165,6 +166,7 @@ import { ObjectCreatedComponent } from './core/dialogues/object-created/object-c
         DeleteDialogComponent,
         ErrorHandlingDialogComponent,
         ObjectCreatedComponent,
+        UserUpdateDialogComponent,
 
 
     ],

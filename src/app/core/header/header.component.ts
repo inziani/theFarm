@@ -4,6 +4,7 @@ import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { User } from '@app/core/shared/models/user.model';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
+import { UsersService } from '../services/users.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public currentLoggedInUser!: User[];
 
   constructor(
-    private dataSource: RestDataSource,
+    private userService: UsersService,
     private authenticationService: AuthenticationService,
     private route: Router
   ) { }
@@ -34,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       user => {
         this.isAuthenticated = !!user;
         this.user = user;
-        this.loggedInUser = this.dataSource.fetchUsers().subscribe(users => {
+        this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
           this.userList = users;
           this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
           this.currentLoggedInUser = this.loggedInUser;
@@ -60,7 +61,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogOut() {
-    this.dataSource.removeToken();
+    this.authenticationService.onLogout();
   }
 
   ngOnDestroy() {

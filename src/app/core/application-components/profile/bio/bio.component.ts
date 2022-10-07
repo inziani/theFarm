@@ -6,8 +6,10 @@ import { MatSort } from '@angular/material/sort';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { UserProfileInterface } from '@app/core/shared/interfaces/users-interface';
 import { User, UserProfile } from '@app/core/shared/models/user.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
+import { UsersService } from '@app/core/services/users.service';
+import { UserUpdateDialogComponent } from '@app/core/dialogues/user-update-dialog/user-update-dialog.component';
 
 @Component({
   selector: 'app-bio',
@@ -44,15 +46,17 @@ export class BioComponent implements OnInit {
   public errorMessage!: string;
   public sourceData = new MatTableDataSource<User>();
   public resultsLength = 0;
+  public userAction!: string;
 
 
   constructor(
     private dataSource: RestDataSource,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userService: UsersService
   ) { }
 
   ngOnInit(): void {
-    this.dataSource.fetchUsers().subscribe({
+    this.userService.fetchUsers().subscribe({
       next: (userList) => this.sourceData.data = userList,
       error: (err) => this.dialog.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err, }),
       complete: () => console.info('complete')
@@ -63,22 +67,82 @@ export class BioComponent implements OnInit {
     this.sourceData.paginator = this.paginator;
   }
 
-  public addUser(add: string) {
+  public addUser(userAction: string) {
+    this.userService.sendData(userAction);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.panelClass = "companyClass";
+    dialogConfig.hasBackdrop = true;
 
+    // OpenDialog
+
+    let dialogRef = this.dialog.open(UserUpdateDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe({
+      next: (response) => { return response },
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete')
+    });
   }
   public searchUser() {
 
   }
 
-  public onDisplayUser(userAction: string, id: number){
+  public onDisplayUser(userAction: string, id: number) {
+    this.userService.sendData(userAction);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.panelClass = "companyClass";
+    dialogConfig.hasBackdrop = true;
 
+    // OpenDialog
+
+    let dialogRef = this.dialog.open(UserUpdateDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe({
+      next: (response) => { return response },
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete')
+    });
   }
 
   public onDeleteUser(userAction: string, id: number) {
+    this.userService.sendData(userAction);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.panelClass = "companyClass";
+    dialogConfig.hasBackdrop = true;
 
+    // OpenDialog
+
+    let dialogRef = this.dialog.open(UserUpdateDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe({
+      next: (response) => { return response },
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete')
+    });
   }
 
   public onEditUser(userAction: string, id: number) {
+    this.userService.sendData(userAction);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.panelClass = "companyClass";
+    dialogConfig.hasBackdrop = true;
 
+    // OpenDialog
+
+    let dialogRef = this.dialog.open(UserUpdateDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe({
+      next: (response) => { return response },
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete')
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -8,7 +8,7 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 import { SignUpFormGroup } from '@app/core/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/core/shared/models/authentication.model';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+
 
 
 

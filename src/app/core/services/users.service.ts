@@ -1,39 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { OnInit, OnDestroy } from '@angular/core';
 import { environment } from '@environments/environment';
 
-import { Observable, Subscription, catchError, throwError } from 'rxjs';
+import { Observable, Subscription, catchError, throwError, BehaviorSubject } from 'rxjs';
 
 
 
 import { UserInterface } from '../shared/interfaces/users-interface';
-import { User } from '@app/core/shared/models/user.model';
+import { User, UserProfile } from '@app/core/shared/models/user.model';
 
 import { AuthenticationService } from './authentication.service';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+
   public isAuthenticated: boolean = false;
   public user!: number;
   public userList!: User[];
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
-
-
+  private userAction = new BehaviorSubject<string>('');
+  public data: Observable<string> = this.userAction.asObservable();
   private userSubscription!: Subscription;
+  public httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    })
+  };
 
 
 
   constructor(
     private http: HttpClient,
     private authenticationService: AuthenticationService,
-    private dataSource: RestDataSource,)
+    private dataSource: RestDataSource,
+
+  )
   { }
 
   ngOnInit() {
@@ -42,22 +52,102 @@ export class UsersService {
       user => {
         this.isAuthenticated = !!user;
         this.user = user;
-        this.loggedInUser = this.dataSource.fetchUsers().subscribe(users => {
+        this.loggedInUser = this.fetchUsers().subscribe(users => {
           this.userList = users;
           this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
           this.currentLoggedInUser = this.loggedInUser;
         })
 
       });
+  }
 
+  public sendData(data: string) {
+    this.userAction.next(data);
   }
 
   // Get user listing;
   public getUsersListing(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(`${environment.apiUrl}/users/`).pipe(
-      catchError(this.handleError));;
+    return this.http.get<UserInterface[]>(`${environment.apiUrl}/users/`);
   }
-  // Register new users
+
+  // User creation
+
+  public addUser(
+    username: string,
+    email: string,
+    first_name: string,
+    middle_name: string,
+    last_name: string,
+    phone_number: string,
+    date_of_birth: string,
+    gender: string,
+    city: string,
+    country: string,
+    is_active: boolean,
+    is_superuser: boolean,
+    is_staff: boolean,
+    ): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/users/`,  {
+      username,
+      first_name,
+      middle_name,
+      last_name,
+      phone_number,
+      date_of_birth,
+      gender,
+      city,
+      country,
+      is_active,
+      is_superuser,
+      is_staff
+    },
+      this.httpOptions);
+  }
+
+
+  public fetchUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}/users/`, this.httpOptions);
+  }
+
+  public editUserInformation(
+    id: number,
+    username: string,
+    email: string,
+    first_name: string,
+    middle_name: string,
+    last_name: string,
+    phone_number: string,
+    date_of_birth: string,
+    gender: string,
+    city: string,
+    country: string,
+    is_active: boolean,
+    is_superuser: boolean,
+    is_staff: boolean,
+    ): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/users/` + id + '/', {
+      username,
+      first_name,
+      middle_name,
+      last_name,
+      phone_number,
+      date_of_birth,
+      gender,
+      city,
+      country,
+      is_active,
+      is_superuser,
+      is_staff
+    }, this.httpOptions);
+  }
+
+ public fetchUserProfiles(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(`${environment.apiUrl}/user-profile`, this.httpOptions);
+  }
+
+  // Admin User Edit
+  // Admin User Deletion
+
 
   // Delete Users
 
@@ -65,22 +155,6 @@ export class UsersService {
     this.userSubscription.unsubscribe();
   }
 
-  private handleError(error: HttpErrorResponse) {
-  let errorMessage = '';
-  if (error.status === 0) {
-    // A client-side or network error occurred. Handle it accordingly.
-    console.error('An error occurred:', error.error);
 
-  } else {
-    // The backend returned an unsuccessful response code.
-    // The response body may contain clues as to what went wrong.
-    console.error(
-      `Backend returned code ${error.status}, body was: `, error.error);
-    errorMessage = `Backend returned code ${error.status}, body was: `, error.error;
-  }
-  // Return an observable with a user-facing error message.
-    errorMessage = `Backend returned code ${error.status}, body was: `, error.error;
-  return throwError(() => new Error(errorMessage));
-}
 
 }

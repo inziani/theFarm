@@ -1,0 +1,7 @@
+<div class="container" [ngSwitch]="userAction">
+  <div *ngSwitchCase="'add'">Create User</div>
+  <div *ngSwitchCase="'edit'">Change User</div>
+  <div *ngSwitchCase="'display'">Delete User</div>
+  <div *ngSwitchCase="'delete'">Delete User</div>
+  <div *ngSwitchDefault>Display User</div>
+</div>

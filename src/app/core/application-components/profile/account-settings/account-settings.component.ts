@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 
 import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
-// import { UseUpdate } from '@app/shared/models/authentication.model';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
-import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { User } from '@app/core/shared/models/user.model';
 
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { UsersService } from '@app/core/services/users.service';
 
 @Component({
   selector: 'app-account-settings',
@@ -28,7 +26,6 @@ export class AccountSettingsComponent implements OnInit {
   // Form Data
   public formGroup = new UserUpdateFormGroup();
   public isLoading: boolean = false;
-  public error!: string | null;
   public maxDate!: Date;
   public formSubmitted: boolean = false;
   public readonly!: boolean;
@@ -41,13 +38,12 @@ export class AccountSettingsComponent implements OnInit {
   public currentLoggedInUser!: User[];
   public patchedUser!: User;
   public datePipe!: any;
-
-
+  public errorMessage!: string;
 
 
   constructor(
 
-    private dataSource: RestDataSource,
+    private userService: UsersService,
     private authenticationService: AuthenticationService,
     private dialog: MatDialog,
     private dateFormat: DatePipe
@@ -64,7 +60,7 @@ export class AccountSettingsComponent implements OnInit {
       user => {
 
         this.user = user;
-        this.loggedInUser = this.dataSource.fetchUsers().subscribe(users => {
+        this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
           this.userList = users;
           this.currentLoggedInUser = this.userList.filter((person: User) => person.id === this.user);
           this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj),
@@ -82,55 +78,33 @@ export class AccountSettingsComponent implements OnInit {
 
     this.userSubscription.unsubscribe();
   }
-  get first_name() {
-    return this.formGroup.get('first_name')
-  }
-  get last_name() {
-    return this.formGroup.get('first_name')
-  }
-  get date_of_birth() {
-    return this.formGroup.get('date_of_birth')
-  }
-  get phone_number() {
-    return this.formGroup.get('phone_number')
-  }
-  get username() {
-    return this.formGroup.get('username')
-  }
-  get email() {
-    return this.formGroup.get('email')
-  }
-  get gender() {
-    return this.formGroup.get('gender')
-  }
-  get city() {
-    return this.formGroup.get('city')
-  }
 
   submitForm() {
-
-    // console.log('before patcheuser', this.patchedUser);
     this.patchedUser = this.formGroup.value;
-    // console.log('after patched user', this.patchedUser);
-
-    return this.dataSource.editUserInformation(
+    return this.userService.editUserInformation(
       this.patchedUser.id,
       this.patchedUser.first_name,
+      this.patchedUser.middle_name,
       this.patchedUser.last_name,
-      // this.patchedUser.date_of_birth,
       this.datePipe.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
       this.patchedUser.phone_number,
       this.patchedUser.username,
       this.patchedUser.email,
       this.patchedUser.gender,
-      this.patchedUser.city).
+      this.patchedUser.city,
+      this.patchedUser.country,
+      this.patchedUser.is_active,
+      this.patchedUser.is_superuser,
+      this.patchedUser.is_staff
+    ).
       subscribe({
-        complete: () => this.dialog.open(ChangesSavedDialogComponent),
-        error: () => { this.error = 'This user update failed', alert(this.error)}
+        next: (patchedUser) => this.dialog.open(ChangesSavedDialogComponent, { data: this.patchedUser = patchedUser }),
+        error: (err) => { this.errorMessage = err },
+        complete: () => console.info('Complete')
     });
    }
 
-  update(): void {
+  public update(): void {
     this.readonly = !this.readonly;
     this.formGroup.controls.gender.enable();
     this.formGroup.controls.date_of_birth.enable();
