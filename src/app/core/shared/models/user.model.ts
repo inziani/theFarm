@@ -16,7 +16,6 @@ export class User{
     public is_superuser: boolean,
     public is_staff: boolean,
     public date_joined: Date
-
   ){
 
   }
