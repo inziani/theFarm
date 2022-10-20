@@ -1,8 +1,8 @@
 {
-    "files.autoSave": "onFocusChange",
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.wordWrap": "on"
+  "files.autoSave": "afterDelay",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.wordWrap": "on"
 }

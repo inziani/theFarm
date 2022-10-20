@@ -1,9 +1,23 @@
 <div class="container" [ngSwitch]="userAction">
   <div *ngSwitchCase="'add'">
-    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;" class="text-center">Add User</h2>
+    <h2
+      mat-dialog-title
+      style="font-weight: lighter; color: #03045e"
+      class="text-center"
+    >
+      Add User
+    </h2>
     <mat-dialog-content class="mat-typography">
-      <form novalidate [formGroup]="formGroup" *ngIf="!isLoading" (ngSubmit)="onAddUser()">
-        <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
+      <form
+        novalidate
+        [formGroup]="formGroup"
+        *ngIf="!isLoading"
+        (ngSubmit)="onAddUser()"
+      >
+        <div
+          class="bg-danger text-white p-2 mb-2"
+          *ngIf="formSubmitted && formGroup.invalid"
+        >
           <ul>
             <li *ngFor="let error of formGroup.getFormValidationMessages()">
               {{ error }}
@@ -13,126 +27,360 @@
         <div class="row g-3 my-1 justify-content-center">
           <div class="col-md-6">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control form-control-lg" aria-label="Username" id="username" name="username"
-              formControlName="username">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['username'].dirty) && formGroup.controls['username'].invalid">
-              <li *ngFor="let error of formGroup.getUserNameValidationMessages('username')">{{ error}}</li>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              aria-label="Username"
+              id="username"
+              name="username"
+              formControlName="username"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['username'].dirty) &&
+                formGroup.controls['username'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getUserNameValidationMessages(
+                    'username'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
           <div class="col-md-6">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control form-control-lg" aria-label="email" id="email" name="email"
-              formControlName="email">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['email'].dirty) && formGroup.controls['email'].invalid">
-              <li *ngFor="let error of formGroup.getEmailValidationMessages('email')">{{ error}}</li>
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              aria-label="email"
+              id="email"
+              name="email"
+              formControlName="email"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['email'].dirty) &&
+                formGroup.controls['email'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getEmailValidationMessages('email')
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
         </div>
         <div class="row g-3 my-1 justify-content-center">
           <div class="col-md-6">
             <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control form-control-lg" aria-label="First name" id="first_name"
-              name="first_name" formControlName="first_name">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['first_name'].dirty) && formGroup.controls['first_name'].invalid">
-              <li *ngFor="let error of formGroup.getfirstNameValidationMessages('first_name')">{{ error}}</li>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              aria-label="First name"
+              id="first_name"
+              name="first_name"
+              formControlName="first_name"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['first_name'].dirty) &&
+                formGroup.controls['first_name'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getfirstNameValidationMessages(
+                    'first_name'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
           <div class="col-md-6">
             <label for="middle_name" class="form-label">Middle Name</label>
-            <input type="text" class="form-control form-control-lg" aria-label="Middle name" id="middle_name"
-              name="middle_name" formControlName="middle_name">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['middle_name'].dirty) && formGroup.controls['middle_name'].invalid">
-              <li *ngFor="let error of formGroup.getMiddleNameValidationMessages('middle_name')">{{ error}}</li>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              aria-label="Middle name"
+              id="middle_name"
+              name="middle_name"
+              formControlName="middle_name"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['middle_name'].dirty) &&
+                formGroup.controls['middle_name'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getMiddleNameValidationMessages(
+                    'middle_name'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
         </div>
         <div class="row g-3 my-1 justify-content-center">
           <div class="col-md-6">
             <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control form-control-lg" aria-label="last_name" id="last_name"
-              name="last_name" formControlName="last_name">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['last_name'].dirty) && formGroup.controls['last_name'].invalid">
-              <li *ngFor="let error of formGroup.getUserNameValidationMessages('last_name')">{{ error}}</li>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              aria-label="last_name"
+              id="last_name"
+              name="last_name"
+              formControlName="last_name"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['last_name'].dirty) &&
+                formGroup.controls['last_name'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getUserNameValidationMessages(
+                    'last_name'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
           <div class="col-md-6">
             <label for="gender" class="form-label">Gender</label>
-            <select class="form-select form-control-lg" aria-label="Default select example" formControlName="gender"
-              id="gender" name="gender">
-              <option class="form-select" selected *ngFor="let gender of gender" [value]="gender.value">
-                <p style="color: #03045e; font-weight: lighter;">{{ gender.viewValue }}</p>
+            <select
+              class="form-select form-control-lg"
+              aria-label="Default select example"
+              formControlName="gender"
+              id="gender"
+              name="gender"
+            >
+              <option
+                class="form-select"
+                selected
+                *ngFor="let gender of gender"
+                [value]="gender.value"
+              >
+                <p style="color: #03045e; font-weight: lighter">
+                  {{ gender.viewValue }}
+                </p>
               </option>
             </select>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['gender'].dirty) && formGroup.controls['gender'].invalid">
-              <li *ngFor="let error of formGroup.getUserNameValidationMessages('gender')">{{ error}}</li>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['gender'].dirty) &&
+                formGroup.controls['gender'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getUserNameValidationMessages('gender')
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
         </div>
         <div class="row g-3 my-1 justify-content-center">
           <div class="col-md-6">
-            <label for="telephoneNumber" class="form-label">Telephone Number</label>
-            <input type="tel" class="form-control form-control-lg" aria-label="Telephone Number" id="phone_number"
-              name="phone_number" formControlName="phone_number">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['phone_number'].dirty) && formGroup.controls['phone_number'].invalid">
-              <li *ngFor="let error of formGroup.getPhoneNumberValidationMessages('phone_number')">{{ error}}</li>
+            <label for="telephoneNumber" class="form-label"
+              >Telephone Number</label
+            >
+            <input
+              type="tel"
+              class="form-control form-control-lg"
+              aria-label="Telephone Number"
+              id="phone_number"
+              name="phone_number"
+              formControlName="phone_number"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['phone_number'].dirty) &&
+                formGroup.controls['phone_number'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getPhoneNumberValidationMessages(
+                    'phone_number'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
           <div class="col-md-6">
             <label for="dob" class="form-label">Date of Birth</label>
-            <input type="date" max="{{ maxDate | date: 'yyyy-MM-dd'}}" class="form-control form-control-lg"
-              id="date_of_birth" name="date_of_birth" formControlName="date_of_birth">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['date_of_birth'].dirty) && formGroup.controls['date_of_birth'].invalid">
-              <li *ngFor="let error of formGroup.getBirthDayValidationMessages('date_of_birth')">{{ error}}</li>
+            <input
+              type="date"
+              max="{{ maxDate | date: 'yyyy-MM-dd' }}"
+              class="form-control form-control-lg"
+              id="date_of_birth"
+              name="date_of_birth"
+              formControlName="date_of_birth"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['date_of_birth'].dirty) &&
+                formGroup.controls['date_of_birth'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getBirthDayValidationMessages(
+                    'date_of_birth'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
         </div>
         <div class="row g-3 my-1 justify-content-center">
           <div class="col-md-6">
             <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control form-control-lg" aria-label="City" id="city" name="city"
-              formControlName="city">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['city'].dirty) && formGroup.controls['city'].invalid">
-              <li *ngFor="let error of formGroup.getEmailValidationMessages('city')">{{ error}}</li>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              aria-label="City"
+              id="city"
+              name="city"
+              formControlName="city"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['city'].dirty) &&
+                formGroup.controls['city'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getEmailValidationMessages('city')
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
           <div class="col-md-6">
             <label for="country" class="form-label">Country</label>
-            <input type="text" class="form-control form-control-lg" aria-label="Country" id="Country" name="Country"
-              formControlName="country">
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['country'].dirty) && formGroup.controls['country'].invalid">
-              <li *ngFor="let error of formGroup.getEmailValidationMessages('country')">{{ error}}</li>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              aria-label="Country"
+              id="Country"
+              name="Country"
+              formControlName="country"
+            />
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['country'].dirty) &&
+                formGroup.controls['country'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getEmailValidationMessages('country')
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
         </div>
         <div class="row g-3 my-1 justify-content-center">
           <div class="col-md-6">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control form-control-lg" aria-label="Password" id="password"
-              name="password" formControlName="password">
-            <div id="passwordHint" class="form-text">The Password must contain 12 characters or more.</div>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['password'].dirty) && formGroup.controls['password'].invalid">
-              <li *ngFor="let error of formGroup.getPasswordValidationMessages('password')">{{ error}}</li>
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              aria-label="Password"
+              id="password"
+              name="password"
+              formControlName="password"
+            />
+            <div id="passwordHint" class="form-text">
+              The Password must contain 12 characters or more.
+            </div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['password'].dirty) &&
+                formGroup.controls['password'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getPasswordValidationMessages(
+                    'password'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
             </ul>
           </div>
           <div class="col-md-6">
-            <label for="confirmPassword" class="form-label">Repeat Password</label>
-            <input type="password" class="form-control form-control-lg" aria-label="Confirm Password"
-              id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">
-            <div id="confirmPasswordHint" class="form-text">The Passwords must be the same.</div>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['confirmPassword'].dirty) && formGroup.controls['confirmPassword'].invalid">
-              <li *ngFor="let error of formGroup.getConfirmPasswordValidationMessages('confirmPassword')">{{ error}}
+            <label for="confirmPassword" class="form-label"
+              >Repeat Password</label
+            >
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              aria-label="Confirm Password"
+              id="confirmPassword"
+              name="confirmPassword"
+              formControlName="confirmPassword"
+            />
+            <div id="confirmPasswordHint" class="form-text">
+              The Passwords must be the same.
+            </div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted ||
+                  formGroup.controls['confirmPassword'].dirty) &&
+                formGroup.controls['confirmPassword'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getConfirmPasswordValidationMessages(
+                    'confirmPassword'
+                  )
+                "
+              >
+                {{ error }}
               </li>
             </ul>
           </div>
@@ -141,17 +389,31 @@
         <div class="row g-3 my-3 justify-content-center mat-elevation-z1">
           <div class="col-md-4">
             <div class="my-1 mat-group">
-              <p style="color: #03045e; font-weight: lighter;">Is Active?</p>
+              <p style="color: #03045e; font-weight: lighter">Is Active?</p>
               <mat-radio-group formControlName="is_active">
-                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsYes">Yes
+                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsYes"
+                  >Yes
                 </mat-radio-button>
-                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsNo">No</mat-radio-button>
+                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsNo"
+                  >No</mat-radio-button
+                >
               </mat-radio-group>
               <div>
-                <ul class="text-danger list-unstyled"
-                  *ngIf="(formSubmitted || formGroup.controls['is_active'].dirty) && formGroup.controls['is_active'].invalid">
-                  <li *ngFor="let error of formGroup.getIsActiveValidationMessages('is_active')">{{
-                    error}}
+                <ul
+                  class="text-danger list-unstyled"
+                  *ngIf="
+                    (formSubmitted || formGroup.controls['is_active'].dirty) &&
+                    formGroup.controls['is_active'].invalid
+                  "
+                >
+                  <li
+                    *ngFor="
+                      let error of formGroup.getIsActiveValidationMessages(
+                        'is_active'
+                      )
+                    "
+                  >
+                    {{ error }}
                   </li>
                 </ul>
               </div>
@@ -159,17 +421,32 @@
           </div>
           <div class="col-md-4">
             <div class="my-1 mat-group">
-              <p style="color: #03045e; font-weight: lighter;">Is SuperUser?</p>
+              <p style="color: #03045e; font-weight: lighter">Is SuperUser?</p>
               <mat-radio-group formControlName="is_superuser">
-                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsYes">Yes
+                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsYes"
+                  >Yes
                 </mat-radio-button>
-                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsNo">No</mat-radio-button>
+                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsNo"
+                  >No</mat-radio-button
+                >
               </mat-radio-group>
               <div>
-                <ul class="text-danger list-unstyled"
-                  *ngIf="(formSubmitted || formGroup.controls['is_superuser'].dirty) && formGroup.controls['is_superuser'].invalid">
-                  <li *ngFor="let error of formGroup.getIsSuperuserValidationMessages('is_superuser')">{{
-                    error}}
+                <ul
+                  class="text-danger list-unstyled"
+                  *ngIf="
+                    (formSubmitted ||
+                      formGroup.controls['is_superuser'].dirty) &&
+                    formGroup.controls['is_superuser'].invalid
+                  "
+                >
+                  <li
+                    *ngFor="
+                      let error of formGroup.getIsSuperuserValidationMessages(
+                        'is_superuser'
+                      )
+                    "
+                  >
+                    {{ error }}
                   </li>
                 </ul>
               </div>
@@ -177,18 +454,37 @@
           </div>
           <div class="col-md-4">
             <div class="my-1 mat-group">
-              <p style="color: #03045e; font-weight: lighter;">Is Staff?</p>
+              <p style="color: #03045e; font-weight: lighter">Is Staff?</p>
               <mat-radio-group formControlName="is_staff">
-                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsYes" (change)="isStaff($event)">Yes
+                <mat-radio-button
+                  class="my-2 mx-1"
+                  [value]="radioButtonsYes"
+                  (change)="isStaff($event)"
+                  >Yes
                 </mat-radio-button>
-                <mat-radio-button class="my-2 mx-1" [value]="radioButtonsNo" (change)="notStaff($event)">No
+                <mat-radio-button
+                  class="my-2 mx-1"
+                  [value]="radioButtonsNo"
+                  (change)="notStaff($event)"
+                  >No
                 </mat-radio-button>
               </mat-radio-group>
               <div>
-                <ul class="text-danger list-unstyled"
-                  *ngIf="(formSubmitted || formGroup.controls['is_staff'].dirty) && formGroup.controls['is_staff'].invalid">
-                  <li *ngFor="let error of formGroup.getIsStaffValidationMessages('is_staff')">{{
-                    error}}
+                <ul
+                  class="text-danger list-unstyled"
+                  *ngIf="
+                    (formSubmitted || formGroup.controls['is_staff'].dirty) &&
+                    formGroup.controls['is_staff'].invalid
+                  "
+                >
+                  <li
+                    *ngFor="
+                      let error of formGroup.getIsStaffValidationMessages(
+                        'is_staff'
+                      )
+                    "
+                  >
+                    {{ error }}
                   </li>
                 </ul>
               </div>
@@ -199,112 +495,849 @@
         <!-- Start of Employee information -->
         <div class="container" [ngSwitch]="displayEmployeeTemplate">
           <div *ngSwitchCase="'True'">
-            <div class="my-5 g-3 justify-content-center ">
+            <div class="my-5 g-3 justify-content-center">
               <mat-accordion>
                 <mat-expansion-panel>
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      <h2 style="font-weight: lighter; color: #03045e;" class="text-center my-3">Employee Information
+                      <h2
+                        style="font-weight: lighter; color: #03045e"
+                        class="text-center my-3"
+                      >
+                        Employee Information
                       </h2>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <!-- Identification -->
-                  <h3 style="font-weight: lighter; color: #03045e;" class="text-center my-3">Employee Identification
+                  <h3
+                    style="font-weight: lighter; color: #03045e"
+                    class="text-center my-3"
+                  >
+                    Identification and Address
                   </h3>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">Identification Document</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput">
-                      </div>
-                      <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Identification Number</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2">
+                        <label for="formGroupExampleInput" class="form-label"
+                          >Identification Document</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput"
+                        />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">Tax Number</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput">
-                      </div>
-                      <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Start Date</label>
-                        <input type="date" class="form-control" id="formGroupExampleInput2">
-                      </div>
-                    </div>
-                    <div class="col-md-6 align-items-center">
-                      <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">End Date</label>
-                        <input type="date" class="form-control" id="formGroupExampleInput">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Identification Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
                       </div>
                     </div>
-                    <!-- End of Identification -->
                   </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Start Date</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label"
+                          >End Date</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="formGroupExampleInput"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label"
+                          >Tax Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label"
+                          >Residential Address</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >City</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Country</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- End of Identification -->
                   <!-- Next of Kin -->
-                  <h3 style="font-weight: lighter; color: #03045e;" class="text-center my-3">Employee Next of Kin</h3>
+                  <h3
+                    style="font-weight: lighter; color: #03045e"
+                    class="text-center my-3"
+                  >
+                    Next of Kin
+                  </h3>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >First Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Middle Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Middle Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Last Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="formGroupExampleInput2">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Email</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Relationship</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Relationship</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Telephone Number</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Telephone Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-3">
-                        <label for="dob" class="form-label">Date of Birth</label>
-                        <input type="date" max="{{ maxDate | date: 'yyyy-MM-dd'}}" class="form-control form-control-lg"
-                          id="date_of_birth" name="date_of_birth" formControlName="date_of_birth">
+                        <label for="dob" class="form-label"
+                          >Date of Birth</label
+                        >
+                        <input
+                          type="date"
+                          max="{{ maxDate | date: 'yyyy-MM-dd' }}"
+                          class="form-control form-control-lg"
+                          id="date_of_birth"
+                          name="date_of_birth"
+                          formControlName="date_of_birth"
+                        />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
-                        <select class="form-select form-control-lg" aria-label="Default select example"
-                          formControlName="gender" id="gender" name="gender">
-                          <option class="form-select" selected *ngFor="let gender of gender" [value]="gender.value">
-                            <p style="color: #03045e; font-weight: lighter;">{{ gender.viewValue }}</p>
+                        <select
+                          class="form-select form-control-lg"
+                          aria-label="Default select example"
+                          formControlName="gender"
+                          id="gender"
+                          name="gender"
+                        >
+                          <option
+                            class="form-select"
+                            selected
+                            *ngFor="let gender of gender"
+                            [value]="gender.value"
+                          >
+                            <p style="color: #03045e; font-weight: lighter">
+                              {{ gender.viewValue }}
+                            </p>
                           </option>
                         </select>
                       </div>
                     </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Identification Document</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Identification Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Tax Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Residential Address</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >City</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Country</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <!-- End of Next of Kin -->
+                  <!-- Marital Information -->
+                  <h3
+                    style="font-weight: lighter; color: #03045e"
+                    class="text-center my-3"
+                  >
+                    Marital Details
+                  </h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >First Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Middle Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Last Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Email</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Telephone Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="dob" class="form-label"
+                          >Date of Birth</label
+                        >
+                        <input
+                          type="date"
+                          max="{{ maxDate | date: 'yyyy-MM-dd' }}"
+                          class="form-control form-control-lg"
+                          id="date_of_birth"
+                          name="date_of_birth"
+                          formControlName="date_of_birth"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Relationship</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="marriageDate" class="form-label"
+                          >Marriage Date</label
+                        >
+                        <input
+                          type="date"
+                          max="{{ maxDate | date: 'yyyy-MM-dd' }}"
+                          class="form-control form-control-lg"
+                          id="marriageDate"
+                          name="marriageDate"
+                          formControlName="marriageDate"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Marriage Certificate Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select
+                          class="form-select form-control-lg"
+                          aria-label="Default select example"
+                          formControlName="gender"
+                          id="gender"
+                          name="gender"
+                        >
+                          <option
+                            class="form-select"
+                            selected
+                            *ngFor="let gender of gender"
+                            [value]="gender.value"
+                          >
+                            <p style="color: #03045e; font-weight: lighter">
+                              {{ gender.viewValue }}
+                            </p>
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Identification Document</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Identification Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Tax Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Residential Address</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >City</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Country</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End of Marital Information -->
+                  <!-- Dependents -->
+                  <h3
+                    style="font-weight: lighter; color: #03045e"
+                    class="text-center my-3"
+                  >
+                    Dependants
+                  </h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >First Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Middle Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Last Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Email</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Relationship</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Telephone Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="dob" class="form-label"
+                          >Date of Birth</label
+                        >
+                        <input
+                          type="date"
+                          max="{{ maxDate | date: 'yyyy-MM-dd' }}"
+                          class="form-control form-control-lg"
+                          id="date_of_birth"
+                          name="date_of_birth"
+                          formControlName="date_of_birth"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select
+                          class="form-select form-control-lg"
+                          aria-label="Default select example"
+                          formControlName="gender"
+                          id="gender"
+                          name="gender"
+                        >
+                          <option
+                            class="form-select"
+                            selected
+                            *ngFor="let gender of gender"
+                            [value]="gender.value"
+                          >
+                            <p style="color: #03045e; font-weight: lighter">
+                              {{ gender.viewValue }}
+                            </p>
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Identification Document</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Identification Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Tax Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Residential Address</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >City</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Country</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End of Dependants -->
+                  <!-- Bank Details -->
+                  <h3
+                    style="font-weight: lighter; color: #03045e"
+                    class="text-center my-3"
+                  >
+                    Bank Information
+                  </h3>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label"
+                          >Bank</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Bank Branch</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Account Number</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >City</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label"
+                          >Country</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="formGroupExampleInput2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End of Bank Details -->
                 </mat-expansion-panel>
               </mat-accordion>
             </div>
@@ -316,12 +1349,18 @@
             <!-- Default setting shows nothing -->
           </div>
         </div>
-
         <!-- End of Employee Information -->
+
         <!-- Save Buttons begin here -->
         <mat-dialog-actions align="end" class="my-1">
-          <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onAddUser()"
-            [disabled]="!formSubmitted && formGroup.invalid">
+          <button
+            type="submit"
+            mat-raised-button
+            cdkFocusInitial
+            class="mx-1 my-1"
+            (click)="onAddUser()"
+            [disabled]="!formSubmitted && formGroup.invalid"
+          >
             <mat-icon class="mx-2 my-2">save</mat-icon>
             Save
           </button>
