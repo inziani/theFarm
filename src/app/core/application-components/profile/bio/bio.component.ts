@@ -72,7 +72,7 @@ export class BioComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "600px";
+    dialogConfig.width = "800px";
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
 
@@ -94,7 +94,7 @@ export class BioComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "600px";
+    dialogConfig.width = "800px";
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
 
@@ -113,7 +113,7 @@ export class BioComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "600px";
+    dialogConfig.width = "800px";
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
 
@@ -132,7 +132,7 @@ export class BioComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "600px";
+    dialogConfig.width = "800px";
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
 

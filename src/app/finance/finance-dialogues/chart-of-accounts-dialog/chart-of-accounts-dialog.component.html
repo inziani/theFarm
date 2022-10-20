@@ -27,12 +27,14 @@
         <div class="row my-3">
           <label for="inputChartOfAccountsName" class="col-md-4 col-form-label">COA Name</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" id="inputChartOfAccountsName" formControlName="chartOfAccountsName" [readonly]="readonly">
+            <input type="text" class="form-control" id="inputChartOfAccountsName" formControlName="chartOfAccountsName"
+              [readonly]="readonly">
           </div>
           <div>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['chartOfAccountsName'].dirty) && formGroup.controls['chartOfAccountsName'].invalid">
-              <li *ngFor="let error of formGroup.getChartOfAccountsNameValidationMessages('chartOfAccountsName')">{{ error}}
+              <li *ngFor="let error of formGroup.getChartOfAccountsNameValidationMessages('chartOfAccountsName')">{{
+                error}}
               </li>
             </ul>
           </div>
@@ -40,8 +42,8 @@
         <div class="row my-3">
           <label for="inputCompanyCode" class="col-md-4 col-form-label">Company Code</label>
           <div class="col-md-8">
-            <select class="form-select form-control-lg" aria-label="Default select example" formControlName="companyCode"
-              id="companyCode" name="companyCode">
+            <select class="form-select form-control-lg" aria-label="Default select example"
+              formControlName="companyCode" id="companyCode" name="companyCode">
               <option class="form-select" selected *ngFor="let companyCode of companyCodeList" [value]="companyCode.id">
                 {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
               </option>
@@ -74,7 +76,8 @@
         <div class="row my-3">
           <label for="inputlengthAccNumber" class="col-md-4 col-form-label">Account Length</label>
           <div class="col-md-8">
-            <input type="number" class="form-control" id="inputlengthAccNumber" formControlName="lengthAccNumber" [readonly]="readonly">
+            <input type="number" class="form-control" id="inputlengthAccNumber" formControlName="lengthAccNumber"
+              [readonly]="readonly">
           </div>
           <div>
             <ul class="text-danger list-unstyled"
@@ -84,20 +87,20 @@
             </ul>
           </div>
         </div>
-              <div class="my-1">
-                <p style="color: #03045e; font-weight: lighter;">Blocked for posting</p>
-                <mat-radio-group formControlName="blockedForPosting">
-                  <mat-radio-button class="my-2 mx-2" [value]="blockedForPosting" disabled="disabled">Yes</mat-radio-button>
-                  <mat-radio-button class="my-2 mx 2" [value]="notBlockedForPosting" disabled="disabled">No</mat-radio-button>
-                </mat-radio-group>
-                <div>
-                  <ul class="text-danger list-unstyled"
-                    *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
-                    <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
-                    </li>
-                  </ul>
-                </div>
-              </div>
+        <div class="my-1">
+          <p style="color: #03045e; font-weight: lighter;">Blocked for posting</p>
+          <mat-radio-group formControlName="blockedForPosting">
+            <mat-radio-button class="my-2 mx-2" [value]="blockedForPosting" disabled="disabled">Yes</mat-radio-button>
+            <mat-radio-button class="my-2 mx 2" [value]="notBlockedForPosting" disabled="disabled">No</mat-radio-button>
+          </mat-radio-group>
+          <div>
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
+              <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
+              </li>
+            </ul>
+          </div>
+        </div>
         <mat-dialog-actions align="end" class="my-1">
           <button mat-raised-button mat-dialog-close cdkFocusInitial>
             <mat-icon class="mx-2 my-2">close</mat-icon>
@@ -106,7 +109,7 @@
         </mat-dialog-actions>
       </form>
     </mat-dialog-content>
-    </div>
+  </div>
   <!-- End of Display Template -->
   <!-- Beginning of Create Template -->
   <div *ngSwitchCase="'create'">
@@ -140,7 +143,8 @@
           <div>
             <ul class="text-danger list-unstyled"
               *ngIf="(formSubmitted || formGroup.controls['chartOfAccountsName'].dirty) && formGroup.controls['chartOfAccountsName'].invalid">
-              <li *ngFor="let error of formGroup.getChartOfAccountsNameValidationMessages('chartOfAccountsName')">{{ error}}
+              <li *ngFor="let error of formGroup.getChartOfAccountsNameValidationMessages('chartOfAccountsName')">{{
+                error}}
               </li>
             </ul>
           </div>
@@ -224,116 +228,116 @@
   <!-- Beginning of Edit Template -->
   <div *ngSwitchCase="'edit'">
     <!-- <div *ngSwitchCase="'create'"> -->
-      <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Chart of Accounts Information</h2>
-      <mat-dialog-content class="mat-typography">
-        <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
-          <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
-            <ul>
-              <li *ngFor="let error of formGroup.getFormValidationMessages()">
-                {{ error }}
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Chart of Accounts Information</h2>
+    <mat-dialog-content class="mat-typography">
+      <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+        <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
+          <ul>
+            <li *ngFor="let error of formGroup.getFormValidationMessages()">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <div class="row my-1">
+          <label for="inputCoaCode" class="col-md-4 col-form-label">Chart of Accounts</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="inputCoaCode" formControlName="coaCode" [readonly]="readonly">
+          </div>
+          <div>
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['coaCode'].dirty) && formGroup.controls['coaCode'].invalid">
+              <li *ngFor="let error of formGroup.getCoaCodeValidationMessages('coaCode')">{{ error}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row my-3">
+          <label for="inputChartOfAccountsName" class="col-md-4 col-form-label">COA Name</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="inputChartOfAccountsName" formControlName="chartOfAccountsName">
+          </div>
+          <div>
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['chartOfAccountsName'].dirty) && formGroup.controls['chartOfAccountsName'].invalid">
+              <li *ngFor="let error of formGroup.getChartOfAccountsNameValidationMessages('chartOfAccountsName')">{{
+                error}}
               </li>
             </ul>
           </div>
-          <div class="row my-1">
-            <label for="inputCoaCode" class="col-md-4 col-form-label">Chart of Accounts</label>
-            <div class="col-md-8">
-              <input type="text" class="form-control" id="inputCoaCode" formControlName="coaCode" [readonly]="readonly">
-            </div>
-            <div>
-              <ul class="text-danger list-unstyled"
-                *ngIf="(formSubmitted || formGroup.controls['coaCode'].dirty) && formGroup.controls['coaCode'].invalid">
-                <li *ngFor="let error of formGroup.getCoaCodeValidationMessages('coaCode')">{{ error}}</li>
-              </ul>
-            </div>
+        </div>
+        <div class="row my-3">
+          <label for="inputCompanyCode" class="col-md-4 col-form-label">Company Code</label>
+          <div class="col-md-8">
+            <select class="form-select form-control-lg" aria-label="Default select example"
+              formControlName="companyCode" id="companyCode" name="companyCode">
+              <option class="form-select" selected *ngFor="let companyCode of companyCodeList" [value]="companyCode.id">
+                {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
+              </option>
+            </select>
           </div>
-          <div class="row my-3">
-            <label for="inputChartOfAccountsName" class="col-md-4 col-form-label">COA Name</label>
-            <div class="col-md-8">
-              <input type="text" class="form-control" id="inputChartOfAccountsName" formControlName="chartOfAccountsName">
-            </div>
-            <div>
-              <ul class="text-danger list-unstyled"
-                *ngIf="(formSubmitted || formGroup.controls['chartOfAccountsName'].dirty) && formGroup.controls['chartOfAccountsName'].invalid">
-                <li *ngFor="let error of formGroup.getChartOfAccountsNameValidationMessages('chartOfAccountsName')">{{
-                  error}}
-                </li>
-              </ul>
-            </div>
+          <div>
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
+              <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}</li>
+            </ul>
           </div>
-          <div class="row my-3">
-            <label for="inputCompanyCode" class="col-md-4 col-form-label">Company Code</label>
-            <div class="col-md-8">
-              <select class="form-select form-control-lg" aria-label="Default select example" formControlName="companyCode"
-                id="companyCode" name="companyCode">
-                <option class="form-select" selected *ngFor="let companyCode of companyCodeList" [value]="companyCode.id">
-                  {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
-                </option>
-              </select>
-            </div>
-            <div>
-              <ul class="text-danger list-unstyled"
-                *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
-                <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}</li>
-              </ul>
-            </div>
+        </div>
+        <div class="row my-3">
+          <label for="inputLanguage" class="col-md-4 col-form-label">Language</label>
+          <div class="col-md-8">
+            <select class="form-select form-control-lg" aria-label="Default select example" formControlName="language"
+              id="inputLanguage" name="language">
+              <option class="form-select" selected *ngFor="let language of language" [value]="language.value">
+                <p>{{ language.viewValue }}</p>
+              </option>
+            </select>
           </div>
-          <div class="row my-3">
-            <label for="inputLanguage" class="col-md-4 col-form-label">Language</label>
-            <div class="col-md-8">
-              <select class="form-select form-control-lg" aria-label="Default select example" formControlName="language"
-                id="inputLanguage" name="language">
-                <option class="form-select" selected *ngFor="let language of language" [value]="language.value">
-                  <p>{{ language.viewValue }}</p>
-                </option>
-              </select>
-            </div>
-            <div>
-              <ul class="text-danger list-unstyled"
-                *ngIf="(formSubmitted || formGroup.controls['language'].dirty) && formGroup.controls['language'].invalid">
-                <li *ngFor="let error of formGroup.getlanguageValidationMessages('language')">{{ error}}</li>
-              </ul>
-            </div>
+          <div>
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['language'].dirty) && formGroup.controls['language'].invalid">
+              <li *ngFor="let error of formGroup.getlanguageValidationMessages('language')">{{ error}}</li>
+            </ul>
           </div>
-          <div class="row my-3">
-            <label for="inputlengthAccNumber" class="col-md-4 col-form-label">Account Length</label>
-            <div class="col-md-8">
-              <input type="number" class="form-control" id="inputlengthAccNumber" formControlName="lengthAccNumber">
-            </div>
-            <div>
-              <ul class="text-danger list-unstyled"
-                *ngIf="(formSubmitted || formGroup.controls['lengthAccNumber'].dirty) && formGroup.controls['lengthAccNumber'].invalid">
-                <li *ngFor="let error of formGroup.getlengthAccNumberValidationMessages('lengthAccNumber')">{{ error}}
-                </li>
-              </ul>
-            </div>
+        </div>
+        <div class="row my-3">
+          <label for="inputlengthAccNumber" class="col-md-4 col-form-label">Account Length</label>
+          <div class="col-md-8">
+            <input type="number" class="form-control" id="inputlengthAccNumber" formControlName="lengthAccNumber">
           </div>
-                <div class="my-1 mat-group">
-                  <p style="color: #03045e; font-weight: lighter;">Blocked for posting</p>
-                  <mat-radio-group formControlName="blockedForPosting">
-                    <mat-radio-button class="my-2 mx-2" [value]="blockedForPosting">Yes</mat-radio-button>
-                    <mat-radio-button class="my-2 mx 2" [value]="notBlockedForPosting">No</mat-radio-button>
-                  </mat-radio-group>
-                  <div>
-                    <ul class="text-danger list-unstyled"
-                      *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
-                      <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-          <mat-dialog-actions align="end" class="my-1">
-            <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onEditChartOfAccounts()"
-              [disabled]="!formSubmitted && formGroup.invalid">
-              <mat-icon class="mx-2 my-2">save</mat-icon>
-              Save
-            </button>
-            <button mat-raised-button mat-dialog-close cdkFocusInitial>
-              <mat-icon class="mx-2 my-2">close</mat-icon>
-              Close
-            </button>
-          </mat-dialog-actions>
-        </form>
-      </mat-dialog-content>
+          <div>
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['lengthAccNumber'].dirty) && formGroup.controls['lengthAccNumber'].invalid">
+              <li *ngFor="let error of formGroup.getlengthAccNumberValidationMessages('lengthAccNumber')">{{ error}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="my-1 mat-group">
+          <p style="color: #03045e; font-weight: lighter;">Blocked for posting</p>
+          <mat-radio-group formControlName="blockedForPosting">
+            <mat-radio-button class="my-2 mx-2" [value]="blockedForPosting">Yes</mat-radio-button>
+            <mat-radio-button class="my-2 mx 2" [value]="notBlockedForPosting">No</mat-radio-button>
+          </mat-radio-group>
+          <div>
+            <ul class="text-danger list-unstyled"
+              *ngIf="(formSubmitted || formGroup.controls['blockedForPosting'].dirty) && formGroup.controls['blockedForPosting'].invalid">
+              <li *ngFor="let error of formGroup.getBlockedForPostingValidationMessages('blockedForPosting')">{{ error}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <mat-dialog-actions align="end" class="my-1">
+          <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onEditChartOfAccounts()"
+            [disabled]="!formSubmitted && formGroup.invalid">
+            <mat-icon class="mx-2 my-2">save</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button mat-dialog-close cdkFocusInitial>
+            <mat-icon class="mx-2 my-2">close</mat-icon>
+            Close
+          </button>
+        </mat-dialog-actions>
+      </form>
+    </mat-dialog-content>
     <!-- </div> -->
   </div>
   <!-- End of Edit Template -->
@@ -341,26 +345,32 @@
   <div *ngSwitchCase="'delete'">
     <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Delete Company Code</h2>
     <mat-dialog-content>
-      <p style="font-weight: lighter; color: #03045e;">Are you sure you want to delete the following Chart of Accounts?</p>
+      <p style="font-weight: lighter; color: #03045e;">Are you sure you want to delete the following Chart of Accounts?
+      </p>
       <ul>
         <li>
-          <p style="font-weight: lighter; color: #03045e;">Chart of Accounts Code - <span class="title-desc">{{ chartOfAccounts.coaCode
+          <p style="font-weight: lighter; color: #03045e;">Chart of Accounts Code - <span class="title-desc">{{
+              chartOfAccounts.coaCode
               }}</span>
           </p>
         </li>
         <li>
           <p style="font-weight: lighter; color: #03045e;">Chart of Accounts Name - <span class="title-desc">{{
               chartOfAccounts.chartOfAccountsName
-              }}</span></p>
+              }}</span>
+          </p>
         </li>
       </ul>
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="my-1">
-      <button type="submit" mat-raised-button cdkFocusInitial mat-dialog-close class="mx-1 my-1" (click)="onDeleteChartOfAccounts()">
-        <mat-icon class="mx-2 my-2">save</mat-icon>Yes
+      <button type="submit" mat-raised-button cdkFocusInitial mat-dialog-close class="mx-1 my-1"
+        (click)="onDeleteChartOfAccounts()">
+        <mat-icon class="mx-2 my-2">save</mat-icon>
+        Yes
       </button>
       <button mat-raised-button mat-dialog-close cdkFocusInitial>
-        <mat-icon class="mx-2 my-2">close</mat-icon>No
+        <mat-icon class="mx-2 my-2">close</mat-icon>
+        No
       </button>
     </mat-dialog-actions>
   </div>

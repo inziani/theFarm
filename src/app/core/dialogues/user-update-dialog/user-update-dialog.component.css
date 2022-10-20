@@ -1,0 +1,64 @@
+.mat-raised-button {
+  color: white;
+  background-color: #03045e;
+  border-radius: 0;
+  font-weight: lighter;
+  border: none;
+}
+
+
+.form-control {
+  background-color: white;
+  color: #03045e;
+  /* border: none; */
+  font-size: medium;
+  border-radius: 0 !important;
+  font-weight: lighter;
+  border-color: #03045e;
+}
+
+.form-select {
+  /* background-color: #fb8500; */
+  background-color: white;
+  color: #03045e;
+  /* border: none; */
+  font-size: medium;
+  font-weight: lighter;
+  border-radius: 0 !important;
+  border-color: #03045e;
+}
+
+.col-form-label {
+  font-weight: lighter;
+  color: #03045e;
+}
+
+.form-text {
+  font-weight: lighter;
+}
+
+.input-group-text {
+  color: #03045e;
+}
+
+.form-check {
+  font-weight: lighter;
+  color: #03045e;
+}
+
+.mat-radio-button {
+  font-weight: lighter;
+  color: #03045e;
+}
+.form-label {
+  font-weight: lighter;
+  color: #03045e;
+}
+.mat-expansion-panel-header{
+  border: none;
+  color: #03045e;
+}
+.mat-panel-title{
+  justify-content: space-between;
+}
+

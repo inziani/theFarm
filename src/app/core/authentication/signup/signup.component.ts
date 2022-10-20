@@ -1,6 +1,6 @@
 
 import { DatePipe } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { AuthenticationService } from '@app/core/services/authentication.service
 import { SignUpFormGroup } from '@app/core/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/core/shared/models/authentication.model';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
+import { MatAccordion } from '@angular/material/expansion';
 
 
 
@@ -19,9 +20,9 @@ import { Gender } from '@app/core/shared/interfaces/users-interface';
 
 })
 export class SignupComponent implements OnInit {
+  @ViewChild(MatAccordion) private accordion!: MatAccordion;
 
  public datePipe!: any;
-
  public gender: Gender[] = [
     { value: 'Female', viewValue: 'Female' },
     { value: 'Male', viewValue: 'Male' }
@@ -45,6 +46,7 @@ export class SignupComponent implements OnInit {
 
     this.datePipe = dateFormat;
   }
+
 
   ngOnInit(): void {
     this.maxDate = new Date();
