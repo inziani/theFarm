@@ -111,6 +111,5 @@ export class BusinessAreaDialogComponent implements OnInit {
         error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
         complete: () => console.info('Complete')
       });
-
   }
 }

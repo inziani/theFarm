@@ -17,10 +17,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-
   public isAuthenticated: boolean = false;
   public user!: number;
   public userList!: User[];
@@ -32,33 +31,30 @@ export class UsersService {
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'accept': 'application/json'
-    })
+      accept: 'application/json',
+    }),
   };
-
-
 
   constructor(
     private http: HttpClient,
     private authenticationService: AuthenticationService,
-    private dataSource: RestDataSource,
-
-  )
-  { }
+    private dataSource: RestDataSource
+  ) {}
 
   ngOnInit() {
-
     this.userSubscription = this.authenticationService.currentUser$.subscribe(
-      user => {
+      (user) => {
         this.isAuthenticated = !!user;
         this.user = user;
-        this.loggedInUser = this.fetchUsers().subscribe(users => {
+        this.loggedInUser = this.fetchUsers().subscribe((users) => {
           this.userList = users;
-          this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
+          this.loggedInUser = this.userList.filter(
+            (person: User) => person.id === this.user
+          );
           this.currentLoggedInUser = this.loggedInUser;
-        })
-
-      });
+        });
+      }
+    );
   }
 
   public sendData(data: string) {
@@ -86,27 +82,41 @@ export class UsersService {
     is_active: boolean,
     is_superuser: boolean,
     is_staff: boolean,
-    ): Observable<User> {
-    return this.http.patch<User>(`${environment.apiUrl}/users/`,  {
-      username,
-      first_name,
-      middle_name,
-      last_name,
-      phone_number,
-      date_of_birth,
-      gender,
-      city,
-      country,
-      is_active,
-      is_superuser,
-      is_staff
-    },
-      this.httpOptions);
+    password: string
+  ): Observable<User> {
+    return this.http.post<User>(
+      `${environment.apiUrl}/users/`,
+      {
+        username,
+        email,
+        first_name,
+        middle_name,
+        last_name,
+        phone_number,
+        date_of_birth,
+        gender,
+        city,
+        country,
+        is_active,
+        is_superuser,
+        is_staff,
+        password,
+      },
+      this.httpOptions
+    );
   }
 
-
   public fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}/users/`, this.httpOptions);
+    return this.http.get<User[]>(
+      `${environment.apiUrl}/users/`,
+      this.httpOptions
+    );
+  }
+  public fetchSingleUser(id: number): Observable<User> {
+    return this.http.get<User>(
+      `${environment.apiUrl}/users/` + id + '/',
+      this.httpOptions
+    );
   }
 
   public editUserInformation(
@@ -123,38 +133,49 @@ export class UsersService {
     country: string,
     is_active: boolean,
     is_superuser: boolean,
-    is_staff: boolean,
-    ): Observable<User> {
-    return this.http.patch<User>(`${environment.apiUrl}/users/` + id + '/', {
-      username,
-      first_name,
-      middle_name,
-      last_name,
-      phone_number,
-      date_of_birth,
-      gender,
-      city,
-      country,
-      is_active,
-      is_superuser,
-      is_staff
-    }, this.httpOptions);
+    is_staff: boolean
+  ): Observable<User> {
+    return this.http.patch<User>(
+      `${environment.apiUrl}/users/` + id + '/',
+      {
+        username,
+        email,
+        first_name,
+        middle_name,
+        last_name,
+        phone_number,
+        date_of_birth,
+        gender,
+        city,
+        country,
+        is_active,
+        is_superuser,
+        is_staff,
+      },
+      this.httpOptions
+    );
   }
 
- public fetchUserProfiles(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>(`${environment.apiUrl}/user-profile`, this.httpOptions);
+  public deleteSingleUser(id: number): Observable<User> {
+    return this.http.delete<User>(
+      `${environment.apiUrl}/users/` + id + '/',
+      this.httpOptions
+    );
+  }
+
+  public fetchUserProfiles(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(
+      `${environment.apiUrl}/user-profile`,
+      this.httpOptions
+    );
   }
 
   // Admin User Edit
   // Admin User Deletion
-
 
   // Delete Users
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
-
-
-
 }

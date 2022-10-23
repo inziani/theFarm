@@ -47,6 +47,7 @@ export class BioComponent implements OnInit {
   public sourceData = new MatTableDataSource<User>();
   public resultsLength = 0;
   public userAction!: string;
+  public singleUser!: User;
 
 
   constructor(
@@ -98,14 +99,29 @@ export class BioComponent implements OnInit {
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
 
-    // OpenDialog
-
-    let dialogRef = this.dialog.open(UserUpdateDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe({
-      next: (response) => { return response },
-      error: (err) => this.errorMessage = err,
+    // Fetch Data from API
+    this.userService.fetchSingleUser(id).subscribe({
+      next: (singleUser) => {
+        this.singleUser = singleUser;
+        dialogConfig.data = this.singleUser
+        let dialogRef = this.dialog.open(
+          UserUpdateDialogComponent,
+          dialogConfig
+        );
+        dialogRef.afterClosed().subscribe({
+          next: (response) => {
+            return response;
+          },
+          error: (err) => (this.errorMessage = err),
+          complete: () => console.info('Complete'),
+        });
+      },
+      error: (err) => this.dialog.open(ErrorHandlingDialogComponent, {
+        data: this.errorMessage = err,
+      }),
       complete: () => console.info('Complete')
     });
+
   }
 
   public onDeleteUser(userAction: string, id: number) {
@@ -117,14 +133,30 @@ export class BioComponent implements OnInit {
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
 
-    // OpenDialog
+    // OpenDialog and connect to the API
 
-    let dialogRef = this.dialog.open(UserUpdateDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe({
-      next: (response) => { return response },
-      error: (err) => this.errorMessage = err,
-      complete: () => console.info('Complete')
+    this.userService.fetchSingleUser(id).subscribe({
+      next: (deleteUser) => {
+        this.singleUser = deleteUser
+        dialogConfig.data = this.singleUser;
+        let dialogRef = this.dialog.open(
+          UserUpdateDialogComponent,
+          dialogConfig
+        );
+        dialogRef.afterClosed().subscribe({
+          next: (response) => {
+            return response;
+          },
+          error: (err) =>
+            this.dialog.open(ErrorHandlingDialogComponent, {
+              data: (this.errorMessage = err),
+            }),
+          complete: () => console.info('Complete'),
+        });
+      }
+
     });
+
   }
 
   public onEditUser(userAction: string, id: number) {

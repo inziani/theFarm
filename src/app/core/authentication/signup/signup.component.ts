@@ -9,6 +9,8 @@ import { SignUpFormGroup } from '@app/core/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/core/shared/models/authentication.model';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { MatAccordion } from '@angular/material/expansion';
+import { MatDialog } from '@angular/material/dialog';
+import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
 
 
 
@@ -34,11 +36,12 @@ export class SignupComponent implements OnInit {
 
   public isLoading = false;
   public formSubmitted: boolean = false;
-  public error!: string | null;
+  public errorMessage!: string | null;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
+    private dialog: MatDialog,
     private route: ActivatedRoute,
     private dateFormat: DatePipe
 
@@ -47,38 +50,10 @@ export class SignupComponent implements OnInit {
     this.datePipe = dateFormat;
   }
 
-
   ngOnInit(): void {
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
 
-  }
-
-  signUp(form: NgForm) {
-    if (!form.valid) {
-      return
-    }
-    this.isLoading = true;
-    const first_name = form.value.first_name;
-    const last_name = form.value.last_name;
-    const date_of_birth = form.value.birthday;
-    const phone_number = form.value.phone_number;
-    const username = form.value.username;
-    const gender = form.value.gender;
-    const city = form.value.city;
-    const email = form.value.email;
-    const password = form.value.password;
-    this.authenticationService.onUserSignOn(first_name, last_name, date_of_birth, phone_number, username, gender, city, email, password).subscribe(signUpData => {
-      console.log(signUpData);
-      this.isLoading = false;
-      this.router.navigate(['/login']);
-    },
-      errorMessage => {
-        console.log(errorMessage);
-        this.error = errorMessage;
-        this.isLoading = false;
-      })
-    form.reset();
   }
 
   submitForm() {
@@ -99,20 +74,15 @@ export class SignupComponent implements OnInit {
       this.userSignUp.email,
       this.userSignUp.password
     )
-      .subscribe(
-        success => {
-          if (success) {
-            alert("Welcome to small farmers. You can now log in and access your account")
-            this.router.navigate(['login']);
-          }
-        },
-        error => {
-          this.error = 'Login Unsuccessful! Try again';
-          alert(this.error);
-          this.isLoading = false;
-        }
-      );
+      .subscribe({
+        next: (userCreated) => this.dialog.open(ObjectCreatedComponent,
+          {data: this.userSignUp.username = userCreated.username}),
+        error: (err) => this.errorMessage = err,
+        complete: () => console.log('Complete')
+      });
+    this.isLoading = false;
     this.formGroup.reset();
     this.formSubmitted = false;
+    this.router.navigate(['/login']);
   }
 }
