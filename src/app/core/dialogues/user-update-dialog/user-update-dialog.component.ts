@@ -11,6 +11,7 @@ import { UsersService } from '@app/core/services/users.service';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
 import { User } from '@app/core/shared/models/user.model';
+import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ErrorHandlingDialogComponent } from '../error-handling-dialog/error-handling-dialog.component';
 import { ObjectCreatedComponent } from '../object-created/object-created.component';
@@ -58,6 +59,7 @@ export class UserUpdateDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.readonly = true;
     this.staffUser = this.dialogueData;
     this.formGroup.patchValue(this.staffUser);
     this.maxDate = new Date();
@@ -80,15 +82,10 @@ export class UserUpdateDialogComponent implements OnInit {
   }
 
   public onAddUser() {
-
-
     // Fetch data from the form and pass it along
-
     this.dialogRef.close(this.formGroup.value);
     this.staffUser = this.formGroup.value;
-
     // Post the data to the API for Posting
-
     this.userService.addUser(
       this.staffUser.username,
       this.staffUser.email,
@@ -115,12 +112,42 @@ export class UserUpdateDialogComponent implements OnInit {
     this.isLoading = false;
     this.formGroup.reset();
     this.formSubmitted = false;
-    this.router.navigate(['/login']);
-
   }
 
   public onEditUser() {
+    // Fetch data from the form and pass it along
+    this.dialogRef.close(this.formGroup.value);
+    this.staffUser = this.formGroup.value;
+    // Post the data to the API for Posting
 
+    this.userService
+      .editUserInformation(
+        this.dialogueData.id,
+        this.staffUser.username,
+        this.staffUser.email,
+        this.staffUser.first_name,
+        this.staffUser.middle_name,
+        this.staffUser.last_name,
+        this.staffUser.phone_number,
+        this.datePipe.transform(this.staffUser.date_of_birth, 'yyyy-MM-dd'),
+        this.staffUser.gender,
+        this.staffUser.city,
+        this.staffUser.country,
+        this.staffUser.is_active,
+        this.staffUser.is_superuser,
+        this.staffUser.is_staff
+      )
+      .subscribe({
+        next: (userChanged) =>
+          this.dialog.open(ChangesSavedDialogComponent, {
+            data: (this.staffUser.username = userChanged.username),
+          }),
+        error: (err) => (this.errorMessage = err),
+        complete: () => console.log('Complete'),
+      });
+    this.isLoading = false;
+    this.formGroup.reset();
+    this.formSubmitted = false;
   }
 
   public onDeleteUser() {
@@ -135,4 +162,6 @@ export class UserUpdateDialogComponent implements OnInit {
       complete: () => console.info('Completed')
     });
   }
+
+
 }

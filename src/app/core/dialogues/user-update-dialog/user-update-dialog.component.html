@@ -1703,6 +1703,7 @@
               id="password"
               name="password"
               formControlName="password"
+              readonly
             />
             <div id="passwordHint" class="form-text">
               The Password must contain 12 characters or more.
@@ -1736,6 +1737,7 @@
               id="confirmPassword"
               name="confirmPassword"
               formControlName="confirmPassword"
+              readonly
             />
             <div id="confirmPasswordHint" class="form-text">
               The Passwords must be the same.
@@ -2733,9 +2735,8 @@
             mat-raised-button
             cdkFocusInitial
             class="mx-1 my-1"
-            (click)="onAddUser()"
-            [disabled]="!formSubmitted && formGroup.invalid"
-          >
+            (click)="onEditUser()"
+             >
             <mat-icon class="mx-2 my-2">save</mat-icon>
             Save
           </button>

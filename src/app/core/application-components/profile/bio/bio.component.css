@@ -1,3 +1,10 @@
+.clicked-row{
+  font-size:xx-small;
+  font-weight: bolder;
+  color: grey;
+}
+
+
 :host {
   background-color: #03045e;
   display: block;

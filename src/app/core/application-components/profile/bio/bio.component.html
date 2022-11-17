@@ -1,12 +1,13 @@
-
+<!-- User Management -->
 <div class="container my-3 justify-content-center">
   <h1 class="text-center my-2" style="font-weight: lighter; color: #fb8500;">User Management</h1>
   <div class="row my-5 justify-content-center">
     <div class="col-md-6 my-3">
       <div class="input-group my-1 justify-content-center">
         <span class="input-group-text" id="inputGroup-sizing-default" >
-            <input class="form-control mx-4" type="text" placeholder="Search" aria-label="default input example">
-            <mat-icon (click)="searchUser()">search</mat-icon>
+            <input (keyup)="applyFilter($event)" #input
+            class="form-control mx-4" type="text" placeholder="Search" aria-label="default input example">
+
         </span>
       </div>
     </div>
@@ -124,7 +125,14 @@
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="userColumnHeaders"></tr>
-        <tr mat-row *matRowDef="let row; columns: userColumnHeaders;"></tr>
+        <tr
+        mat-row
+        (click)="clickedRow.add(row)"
+        [class.clicked-row]="clickedRow.has(row)"
+        *matRowDef="let row; columns: userColumnHeaders;"></tr>
+        <!-- Row shown when there is no matching data in the filter -->
+        <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the Search item "{{input.value}}"</td></tr>
       </table>
       <!-- End of Table -->
       <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10]"></mat-paginator>
