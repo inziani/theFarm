@@ -2,7 +2,7 @@
 <!-- My Account and Personal Profile -->
 <section class="mt-2 mb-3" fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
   fxLayoutAlign="center center" fxLayoutGap="20px">
-  <h1>Personal Information</h1>
+  <h1 style="font-weight: light;">Personal Information</h1>
   <div >
     <form novalidate [formGroup]="formGroup" *ngIf="!isLoading" class="mat-elevation-z8 mx-5 my-5 p-5">
       <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
@@ -104,10 +104,10 @@
         fxLayoutAlign="center center" class="my-5">
         <mat-icon>facebook</mat-icon>
         <mat-icon>whatsapp</mat-icon>
-        <!-- <mat-icon>twitter</mat-icon>
+        <mat-icon>twitter</mat-icon>
         <mat-icon>github</mat-icon>
         <mat-icon>linkedin</mat-icon>
-        <mat-icon>youtube</mat-icon> -->
+        <mat-icon>youtube</mat-icon>
       </div>
       <div fxLayout='column' fxLayoutAlign="center center" class="mt-3 mb-5">
         <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px" fxLayoutAlign="center center">

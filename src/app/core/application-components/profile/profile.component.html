@@ -1,37 +1,284 @@
-
 <!-- Profile picture sections -->
 
 <div class="container my-5 mx-5">
   <div class="row">
-    <div class="col-md-12"></div>
-  </div>
-  <div class="row">
-    <div class="col-md-2">Profile Picture</div>
-    <div class="col-md-10">Profile Details?</div>
+    <div class="col-md-4 my-5">
+      <div class="row">
+        <div class="col-md-12 justify-content-center my-5">
+          <mat-card class="profile-picture">
+            <img mat-card-md-image class="mt-3" src="/assets/images/vri.png" />
+            <mat-card-title-group class="mt-3">
+              <mat-card-title>{{ loggedInUser }}</mat-card-title>
+              <mat-card-subtitle>Date last updated</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <mat-card-actions align="end">
+                <button
+                  class="justify-content-center"
+                  type="submit"
+                  mat-stroked-button
+                  color="primary"
+                >
+                  Update
+                </button>
+              </mat-card-actions>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="container my-2 justify-content-center">
+            <div class="row">
+              <div class="col">
+                <div class="d-grid gap-3">
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="submit"
+                    (click)="onSelectPersonalInformation()"
+                  >
+                    <a>
+                      <p>Personal Information</p>
+                    </a>
+                  </button>
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="button"
+                    (click)="onSelectBio()"
+                  >
+                    <a>
+                      <p class="card-title">Bio</p>
+                    </a>
+                  </button>
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="button"
+                  >
+                    <a>
+                      <p class="card-title" (click)="onSelectInterests()">
+                        Interests
+                      </p>
+                    </a>
+                  </button>
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="button"
+                  >
+                    <a>
+                      <p class="card-title" (click)="onSelectWorkAndPlay()">
+                        Work & Play
+                      </p>
+                    </a>
+                  </button>
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="button"
+                  >
+                    <a>
+                      <p class="card-title" (click)="onSelectSettings()">
+                        Settings
+                      </p>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 my-5" [ngSwitch]="itemSelected">
+      <div
+        *ngSwitchCase="'personalInformation'"
+        class="mat-elevation-z8 mx-5 my-5 p-5"
+      >
+        <!-- Official Personal Information -->
+        <div class="container justify-content-center">
+          <h1 style="font-weight: light; text-align: center">
+            Personal Information
+          </h1>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="first_name" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="first_name" />
+            </div>
+            <div class="col-md-6">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="last_name" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="birthday" class="form-label">Birthday</label>
+              <input type="text" class="form-control" id="birthday" />
+            </div>
+            <div class="col-md-6">
+              <label for="phone_number" class="form-label"
+                >Telephone Number</label
+              >
+              <input type="text" class="form-control" id="phone_number" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" />
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">email</label>
+              <input type="email" class="form-control" id="email" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="gender" class="form-label">Gender</label>
+              <input type="text" class="form-control" id="gender" />
+            </div>
+            <div class="col-md-6">
+              <label for="city" class="form-label">City</label>
+              <input type="city" class="form-control" id="city" />
+            </div>
+          </div>
+      <div fxLayout='column' fxLayoutAlign="center center" class="mt-3 mb-5">
+        <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px" fxLayoutAlign="center center">
+          <button type="submit" mat-raised-button color="primary" (click)="update()">Edit</button>
+          <button type="submit" mat-raised-button color="primary"
+            [disabled]="!formSubmitted && formGroup.invalid" (click)="submitForm()">Save</button>
+        </div>
+      </div>
+        </div>
+        <!-- End of Official Personal Information -->
+        <app-account-settings></app-account-settings>
+      </div>
+      <div *ngSwitchCase="'interests'" class="mat-elevation-z8 mx-5 my-5 p-5">
+        <h1>Interests</h1>
+        <h4>Professional</h4>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+        ipsa a tempora velit commodi voluptatum fugiat beatae eum quae soluta,
+        repudiandae placeat consequatur pariatur quos! Ex voluptates aliquam
+        repudiandae at reiciendis deserunt vitae dignissimos, necessitatibus
+        ipsam, praesentium mollitia libero nemo impedit nulla quia labore
+        incidunt qui reprehenderit, voluptate debitis nostrum?
+        <h4>Personal</h4>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis
+          minima molestiae, repudiandae aperiam perspiciatis eos repellat
+          magnam, pariatur eaque fugiat reprehenderit ullam magni dolor qui? Ad
+          quam tenetur, non quos exercitationem cum eos nostrum ipsam veniam
+          aliquam, impedit eaque magni.
+        </p>
+        <h4>Social</h4>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro enim
+          commodi ullam alias ad vero ea beatae id quibusdam quis asperiores
+          fuga neque in exercitationem odio, rerum accusantium impedit error!
+          Tempora, soluta ducimus, repellat eum, facilis voluptatem quis atque
+          maxime qui magnam est repudiandae aut placeat nobis aperiam
+          necessitatibus ipsa rem doloribus voluptate minima repellendus laborum
+          animi cum deleniti! Vel dolor delectus aliquid est quibusdam magni id,
+          doloremque fugiat sed dicta placeat repellendus cum suscipit sapiente!
+        </p>
+      </div>
+      <div *ngSwitchCase="'bio'" class="mat-elevation-z8 mx-5 my-5 p-5">
+        <h1>Bio</h1>
+        <h4>Education</h4>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto,
+          repudiandae numquam totam tempore quidem laborum vero id consequatur
+          veniam commodi distinctio architecto, aut dolor? Voluptates odit odio
+          hic eum facilis consectetur iusto minus harum cum quas! Praesentium
+          quae cum nihil deserunt. Esse aliquid est beatae eligendi placeat odio
+          vel ducimus.
+        </p>
+        <h4>Professional</h4>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque unde
+          cum quam id, ut saepe eveniet totam velit non. Repellat nobis, eos
+          voluptatum inventore sed cupiditate odio, delectus, quas optio ipsum
+          autem alias quaerat! Molestias excepturi iure voluptatibus! Delectus
+          ipsa explicabo nesciunt eius repudiandae, saepe distinctio, tempore
+          iure nulla at laborum animi ad provident aliquid atque voluptatibus!
+          Molestiae, est necessitatibus.
+        </p>
+
+        <br />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, amet
+        laborum officia enim accusantium minus obcaecati cum, nisi nam ipsa
+        voluptas! Eveniet, doloribus, dicta porro consectetur aliquam
+        perspiciatis omnis animi fugiat pariatur facere, quae ea. Sed ad,
+        deserunt iure minus ipsa sit facere dolor sunt!
+      </div>
+      <div *ngSwitchCase="'workAndPlay'" class="mat-elevation-z8 mx-5 my-5 p-5">
+        <h1>Work and Play</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
+          dolore quos, perferendis facilis iure nihil rerum. Voluptatibus,
+          incidunt? Omnis porro, praesentium at delectus reiciendis fugit
+          expedita hic nam assumenda voluptatibus consequatur pariatur beatae
+          dolores. Ipsa obcaecati dolor, accusamus velit enim esse excepturi!
+          Sapiente itaque eum perspiciatis dolorum nobis minus esse culpa cumque
+          sunt tempora molestias nesciunt ab iusto, magni deleniti assumenda
+          adipisci dolores ducimus ea quae, explicabo repudiandae quos? Eveniet
+          quidem quasi, libero iure illum dicta nulla aliquid harum in aperiam
+          adipisci quae quisquam fuga consequatur omnis et autem corrupti
+          expedita, accusantium sint vitae. Alias inventore nihil in aspernatur
+          sit!
+        </p>
+      </div>
+      <div *ngSwitchCase="'settings'" class="mat-elevation-z8 mx-5 my-5 p-5">
+        Settings
+      </div>
+      <div *ngSwitchDefault class="mat-elevation-z8 mx-5 my-5 p-5">
+        Personal Information
+      </div>
+    </div>
   </div>
 </div>
-<div fxLayout="column" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center">
-     <div class="p-3">
-        <mat-card class="profile-picture">
-            <img mat-card-md-image class="mt-3" src="/assets/images/vri.png">
-             <mat-card-title-group class="mt-3">
-                <mat-card-title>{{ loggedInUser }}</mat-card-title>
-                  <mat-card-subtitle>Date last updated</mat-card-subtitle>
-              </mat-card-title-group>
-                <mat-card-content>
-                  <mat-card-actions align="start">
-                    <button class="mx-2" type="submit" mat-stroked-button color="primary">Update</button>
-                  </mat-card-actions>
-                </mat-card-content>
-          </mat-card>
-      </div>
-  </div>
-  <!-- Account settings section -->
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px" fxLayoutAlign="center center" >
+
+<!--  Should be deleted after completion-->
+<!-- <div
+  fxLayout="column"
+  fxLayout.lt-md="column"
+  fxLayoutGap.lt-md="20px"
+  fxLayoutAlign="center center"
+>
+  <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutGap.lt-md="20px"
+    fxLayoutAlign="center center"
+  >
+    <div class="p-3">
+      <mat-card class="profile-picture">
+        <img mat-card-md-image class="mt-3" src="/assets/images/vri.png" />
+        <mat-card-title-group class="mt-3">
+          <mat-card-title>{{ loggedInUser }}</mat-card-title>
+          <mat-card-subtitle>Date last updated</mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>
+          <mat-card-actions align="start">
+            <button
+              class="mx-2"
+              type="submit"
+              mat-stroked-button
+              color="primary"
+            >
+              Update
+            </button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div> -->
+<!-- Account settings section -->
+<!-- <div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutGap.lt-md="20px"
+    fxLayoutAlign="center center"
+  >
     <div class="mx-5 my-3 p-5">
       <app-account-settings></app-account-settings>
     </div>
-
   </div>
-</div>
+</div> -->

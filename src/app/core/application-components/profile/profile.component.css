@@ -35,23 +35,60 @@ mat-card{
 
 .mat-stroked-button{
   color: #03045e;
+  /* background-color: rgb(241, 232, 232); */
   background-color: #fb8500;
+  border-radius: 0;
+  font-weight: lighter;
 }
-.mat-raised-button{
+/* .mat-raised-button{
    color: #03045e;
-   background-color: #fb8500;
+   background-color: rgb(241, 232, 232);
    width: 250px;
    height: 75px;
+   border-radius: 0;
+} */
+
+.mat-raised-button{
+   width: 50%;
+   color: #03045e;
+   background-color:#fb8500;
+   border-radius: 0;
 }
 
 .mat-card-title, .mat-card-subtitle{
-  /* color: #03045e; */
   color: #fb8500;
+  font-weight: lighter;
 }
 
 img {
   border-radius: 50%;
 }
+
+a {
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #fb8500;
+  border-radius: 0;
+  text-align: center;
+  font-weight: lighter;
+  border: none;
+  background-color: transparent;
+}
+
+p {
+  font-weight: lighter;
+}
+
+.form-control{
+  border-radius: 0;
+  background-color: #fb8500;
+  color: #03045e;
+  font-weight: lighter;
+  border: none;
+}
+
 
 
 
