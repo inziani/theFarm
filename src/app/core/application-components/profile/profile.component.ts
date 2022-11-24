@@ -30,7 +30,8 @@ export class ProfileComponent implements OnInit {
 public gender: Gender[] = [
     { value: 'Female', viewValue: 'Female' },
     { value: 'Male', viewValue: 'Male' },
-  ];
+];
+
 
   // Logged in User data
   public user!: number;
@@ -64,6 +65,8 @@ public gender: Gender[] = [
 
   ngOnInit(): void {
     this.readonly = true;
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
   public update(): void {
