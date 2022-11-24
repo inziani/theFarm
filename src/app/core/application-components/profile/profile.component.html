@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8 my-5" [ngSwitch]="itemSelected">
+    <div class="col-md-8 my-5 justify-content-center" [ngSwitch]="itemSelected">
       <div
         *ngSwitchCase="'personalInformation'"
         class="mat-elevation-z8 mx-5 my-5 p-5"
@@ -132,81 +132,166 @@
           <div class="row mb-3">
             <div class="col-md-6">
               <label for="gender" class="form-label">Gender</label>
-              <input type="text" class="form-control" id="gender" />
+              <select
+                class="form-select form-control"
+                id="gender"
+                name="gender"
+              >
+                <option
+                  class="form-select"
+                  selected
+                  *ngFor="let gender of gender"
+                  [value]="gender.value"
+                >
+                  <p style="color: #fb8500; background-color: #03045e">
+                    {{ gender.viewValue }}
+                  </p>
+                </option>
+              </select>
             </div>
             <div class="col-md-6">
               <label for="city" class="form-label">City</label>
               <input type="city" class="form-control" id="city" />
             </div>
           </div>
-      <div fxLayout='column' fxLayoutAlign="center center" class="mt-3 mb-5">
-        <div fxLayout='row' fxLayoutGap="13px" fxLayout.lt-md='column' fxLayoutGap.lt-md="13px" fxLayoutAlign="center center">
-          <button type="submit" mat-raised-button color="primary" (click)="update()">Edit</button>
-          <button type="submit" mat-raised-button color="primary"
-            [disabled]="!formSubmitted && formGroup.invalid" (click)="submitForm()">Save</button>
-        </div>
-      </div>
+          <div
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            class="mt-3 mb-5"
+          >
+            <div
+              fxLayout="row"
+              fxLayoutGap="13px"
+              fxLayout.lt-md="column"
+              fxLayoutGap.lt-md="13px"
+              fxLayoutAlign="center center"
+            >
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                (click)="update()"
+              >
+                Edit
+              </button>
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                [disabled]="!formSubmitted && formGroup.invalid"
+                (click)="submitForm()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </div>
         <!-- End of Official Personal Information -->
-        <app-account-settings></app-account-settings>
       </div>
-      <div *ngSwitchCase="'interests'" class="mat-elevation-z8 mx-5 my-5 p-5">
-        <h1>Interests</h1>
-        <h4>Professional</h4>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        ipsa a tempora velit commodi voluptatum fugiat beatae eum quae soluta,
-        repudiandae placeat consequatur pariatur quos! Ex voluptates aliquam
-        repudiandae at reiciendis deserunt vitae dignissimos, necessitatibus
-        ipsam, praesentium mollitia libero nemo impedit nulla quia labore
-        incidunt qui reprehenderit, voluptate debitis nostrum?
-        <h4>Personal</h4>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis
-          minima molestiae, repudiandae aperiam perspiciatis eos repellat
-          magnam, pariatur eaque fugiat reprehenderit ullam magni dolor qui? Ad
-          quam tenetur, non quos exercitationem cum eos nostrum ipsam veniam
-          aliquam, impedit eaque magni.
-        </p>
-        <h4>Social</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro enim
-          commodi ullam alias ad vero ea beatae id quibusdam quis asperiores
-          fuga neque in exercitationem odio, rerum accusantium impedit error!
-          Tempora, soluta ducimus, repellat eum, facilis voluptatem quis atque
-          maxime qui magnam est repudiandae aut placeat nobis aperiam
-          necessitatibus ipsa rem doloribus voluptate minima repellendus laborum
-          animi cum deleniti! Vel dolor delectus aliquid est quibusdam magni id,
-          doloremque fugiat sed dicta placeat repellendus cum suscipit sapiente!
-        </p>
+      <div
+        *ngSwitchCase="'interests'"
+        class="mat-elevation-z8 mx-5 my-5 p-5"
+        style="background-color: #03045e"
+      >
+        <h1 style="font-weight: lighter">Interests</h1>
+        <div class="row my-3">
+          <div class="col-md-12">
+            <label for="professional" class="form-label">
+              <h2 style="font-weight: lighter">Professional</h2></label
+            >
+            <textarea rows="10">Some text...</textarea>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-12">
+            <label for="personal" class="form-label"
+              ><h2 style="font-weight: lighter">Personal</h2></label
+            >
+            <textarea rows="10">Some text...</textarea>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-12">
+            <label for="social" class="form-label">
+              <h2 style="font-weight: lighter">Social</h2></label
+            >
+            <textarea rows="10">Some text...</textarea>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="mt-3 mb-5">
+          <div
+            fxLayout="row"
+            fxLayoutGap="13px"
+            fxLayout.lt-md="column"
+            fxLayoutGap.lt-md="13px"
+            fxLayoutAlign="center center"
+          >
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              (click)="update()"
+            >
+              Edit
+            </button>
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="!formSubmitted && formGroup.invalid"
+              (click)="submitForm()"
+            >
+              Save
+            </button>
+          </div>
+        </div>
       </div>
       <div *ngSwitchCase="'bio'" class="mat-elevation-z8 mx-5 my-5 p-5">
-        <h1>Bio</h1>
-        <h4>Education</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto,
-          repudiandae numquam totam tempore quidem laborum vero id consequatur
-          veniam commodi distinctio architecto, aut dolor? Voluptates odit odio
-          hic eum facilis consectetur iusto minus harum cum quas! Praesentium
-          quae cum nihil deserunt. Esse aliquid est beatae eligendi placeat odio
-          vel ducimus.
-        </p>
-        <h4>Professional</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque unde
-          cum quam id, ut saepe eveniet totam velit non. Repellat nobis, eos
-          voluptatum inventore sed cupiditate odio, delectus, quas optio ipsum
-          autem alias quaerat! Molestias excepturi iure voluptatibus! Delectus
-          ipsa explicabo nesciunt eius repudiandae, saepe distinctio, tempore
-          iure nulla at laborum animi ad provident aliquid atque voluptatibus!
-          Molestiae, est necessitatibus.
-        </p>
-
-        <br />
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, amet
-        laborum officia enim accusantium minus obcaecati cum, nisi nam ipsa
-        voluptas! Eveniet, doloribus, dicta porro consectetur aliquam
-        perspiciatis omnis animi fugiat pariatur facere, quae ea. Sed ad,
-        deserunt iure minus ipsa sit facere dolor sunt!
+        <h1 style="font-weight: lighter">Bio</h1>
+        <div class="row my-3">
+          <div class="col-md-12">
+            <label for="education" class="form-label"
+              ><h2 style="font-weight: lighter">Education</h2></label
+            >
+            <textarea rows="10">Some text...</textarea>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-12">
+            <label for="professional" class="form-label">
+              <h2 style="font-weight: lighter">Professional</h2></label
+            >
+            <textarea rows="10">Some text...</textarea>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center" class="mt-3 mb-5">
+          <div
+            fxLayout="row"
+            fxLayoutGap="13px"
+            fxLayout.lt-md="column"
+            fxLayoutGap.lt-md="13px"
+            fxLayoutAlign="center center"
+          >
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              (click)="update()"
+            >
+              Edit
+            </button>
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="!formSubmitted && formGroup.invalid"
+              (click)="submitForm()"
+            >
+              Save
+            </button>
+          </div>
+        </div>
       </div>
       <div *ngSwitchCase="'workAndPlay'" class="mat-elevation-z8 mx-5 my-5 p-5">
         <h1>Work and Play</h1>
@@ -229,7 +314,7 @@
         Settings
       </div>
       <div *ngSwitchDefault class="mat-elevation-z8 mx-5 my-5 p-5">
-        Personal Information
+        <app-account-settings></app-account-settings>
       </div>
     </div>
   </div>

@@ -11,9 +11,9 @@
   border-radius: 0;
 
 }
-.textareas{
-  text-decoration: none;
-  color: #03045e;
+
+textarea {
+  resize: none;
 
 }
 .mat-form-field-appearance-outline .mat-form-field-outline {

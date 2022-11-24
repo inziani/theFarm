@@ -84,7 +84,6 @@
             <mat-option *ngFor="let gender of genders" [value]="gender.value">
               {{ gender.viewValue }}
             </mat-option>
-
           </mat-select>
           <ul class="text-danger list-unstyled"
             *ngIf="(formSubmitted || formGroup.controls.gender.dirty) && formGroup.controls['gender'].invalid">

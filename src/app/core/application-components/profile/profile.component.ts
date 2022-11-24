@@ -7,6 +7,7 @@ import { UsersService } from '@app/core/services/users.service';
 
 
 import { ProfilePageGridInterface } from '@app/core/shared/interfaces/grids-interface';
+import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
 import { User } from '@app/core/shared/models/user.model';
 import { Subscription } from 'rxjs';
@@ -26,6 +27,11 @@ export class ProfileComponent implements OnInit {
   public maxDate!: Date;
   public formSubmitted: boolean = false;
   public readonly!: boolean;
+public gender: Gender[] = [
+    { value: 'Female', viewValue: 'Female' },
+    { value: 'Male', viewValue: 'Male' },
+  ];
+
   // Logged in User data
   public user!: number;
   private userSubscription!: Subscription;
