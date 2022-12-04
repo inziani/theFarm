@@ -1,7 +1,6 @@
 
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
-
 export class UserUpdateFormControl extends FormControl{
 
 

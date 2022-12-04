@@ -9,7 +9,7 @@ import { Observable, Subscription, catchError, throwError, BehaviorSubject } fro
 
 
 import { UserInterface } from '../shared/interfaces/users-interface';
-import { User, UserProfile } from '@app/core/shared/models/user.model';
+import { EmployeeIDInformation, User, UserProfile } from '@app/core/shared/models/user.model';
 
 import { AuthenticationService } from './authentication.service';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
@@ -101,6 +101,26 @@ export class UsersService {
         is_superuser,
         is_staff,
         password,
+      },
+      this.httpOptions
+    );
+  }
+
+  public addUserId(
+    identificationDocument: string,
+    IdentificationNumber: string,
+    taxNumber: string,
+    startDate: Date,
+    endDate: Date
+  ): Observable<EmployeeIDInformation> {
+    return this.http.post<EmployeeIDInformation>(
+      `${environment.apiUrl}/empIDInfo/`,
+      {
+        identificationDocument,
+        IdentificationNumber,
+        taxNumber,
+        startDate,
+        endDate,
       },
       this.httpOptions
     );
