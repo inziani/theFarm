@@ -92,7 +92,8 @@ public gender: Gender[] = [
         this.patchedUser.country,
         this.patchedUser.is_active,
         this.patchedUser.is_superuser,
-        this.patchedUser.is_staff
+        this.patchedUser.is_staff,
+        this.patchedUser.staffType
       )
       .subscribe({
         next: (patchedUser) =>

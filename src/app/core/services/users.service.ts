@@ -82,6 +82,7 @@ export class UsersService {
     is_active: boolean,
     is_superuser: boolean,
     is_staff: boolean,
+    staffType: string,
     password: string
   ): Observable<User> {
     return this.http.post<User>(
@@ -153,7 +154,8 @@ export class UsersService {
     country: string,
     is_active: boolean,
     is_superuser: boolean,
-    is_staff: boolean
+    is_staff: boolean,
+    staffType: string
   ): Observable<User> {
     return this.http.patch<User>(
       `${environment.apiUrl}/users/` + id + '/',

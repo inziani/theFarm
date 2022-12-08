@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { UsersService } from '@app/core/services/users.service';
-import { Gender } from '@app/core/shared/interfaces/users-interface';
+import { Gender, StaffType } from '@app/core/shared/interfaces/users-interface';
 import {
   UserUpdateFormGroup,
   EmployeeIDInformationFormGroup,
@@ -34,13 +34,18 @@ export class UserUpdateDialogComponent implements OnInit {
   public formGroup = new UserUpdateFormGroup();
   public formGroupStaffId = new EmployeeIDInformationFormGroup();
   public staffUser!: User;
-  public staffUserId!:EmployeeIDInformation;
+  public staffUserId!: EmployeeIDInformation;
   public isLoading: boolean = false;
   public readonly!: boolean;
   public formSubmitted: boolean = false;
   public gender: Gender[] = [
     { value: 'Female', viewValue: 'Female' },
     { value: 'Male', viewValue: 'Male' },
+  ];
+  public staffType: StaffType[] = [
+    { value: 'Contract', viewValue: 'Contract' },
+    { value: 'Permanent', viewValue: 'Permanent' },
+    { value: 'Not Applicable', viewValue: 'Not Applicable'}
   ];
   public maxDate!: Date;
   public radioButtonsYes: string = 'True';
@@ -95,7 +100,7 @@ export class UserUpdateDialogComponent implements OnInit {
       this.staffUserId.taxNumber,
       this.staffUserId.startDate,
       this.staffUserId.endDate
-    ).subscribe
+    ).subscribe;
   }
 
   public onAddUser() {
@@ -118,6 +123,7 @@ export class UserUpdateDialogComponent implements OnInit {
         this.staffUser.is_active,
         this.staffUser.is_superuser,
         this.staffUser.is_staff,
+        this.staffUser.staffType,
         this.staffUser.password
       )
       .subscribe({
@@ -138,17 +144,19 @@ export class UserUpdateDialogComponent implements OnInit {
     this._dialogRef.close(this.formGroup.value);
     this.staffUser = this.formGroup.value;
     // Check if the user being added is a staff member
-    if (!this.staffUser.is_staff) {
+    if (this.staffUser.staffType === 'Permanent') {
+      alert('Staff is True and Permanent');
       this.onAddUser();
-      // this.onAddEmployeeId()
+      this.onAddEmployeeId()
       this.isLoading = false;
       this.formGroup.reset();
       this.formSubmitted = false;
-    }
-    else
+    } else
     {
+      alert('staff is Contract or Not Applicable');
+      console.log(this.staffUser.staffType);
       this.onAddUser()
-      this.onAddEmployeeId
+      // this.onAddEmployeeId
       this.isLoading = false;
       this.formGroup.reset();
       this.formSubmitted = false;
@@ -176,7 +184,8 @@ export class UserUpdateDialogComponent implements OnInit {
         this.staffUser.country,
         this.staffUser.is_active,
         this.staffUser.is_superuser,
-        this.staffUser.is_staff
+        this.staffUser.is_staff,
+        this.staffUser.staffType
       )
       .subscribe({
         next: (userChanged) =>

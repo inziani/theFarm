@@ -66,7 +66,7 @@ export class AccountSettingsComponent implements OnInit {
           this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj),
           {
             id: NaN, first_name: '', middle_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
-            email: '', gender: '', city: '', country: '', is_active: true, is_staff: true, is_superuser: false, date_joined: new Date(), password: ''
+            email: '', gender: '', city: '', country: '', is_active: true, staffType: 'string',  is_staff: true, is_superuser: false, date_joined: new Date(), password: ''
           });
           this.formGroup.patchValue(this.patchedUser );
         });
@@ -95,7 +95,8 @@ export class AccountSettingsComponent implements OnInit {
       this.patchedUser.country,
       this.patchedUser.is_active,
       this.patchedUser.is_superuser,
-      this.patchedUser.is_staff
+      this.patchedUser.is_staff,
+      this.patchedUser.staffType
     ).
       subscribe({
         next: (patchedUser) => this.dialog.open(ChangesSavedDialogComponent, { data: this.patchedUser = patchedUser }),

@@ -17,6 +17,7 @@ export class User{
     public is_active: boolean,
     public is_superuser: boolean,
     public is_staff: boolean,
+    public staffType: string,
     public date_joined: Date,
     public password: string,
 

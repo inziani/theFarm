@@ -29,6 +29,11 @@ export interface Gender {
     viewValue: string;
 }
 
+export interface StaffType {
+  value: string;
+  viewValue: string;
+}
+
 export interface SignUpResponse {
   email: string,
   username: string
