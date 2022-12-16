@@ -8,8 +8,11 @@
           <mat-card class="profile-picture">
             <img mat-card-md-image class="mt-3" src="/assets/images/vri.png" />
             <mat-card-title-group class="mt-3">
-              <mat-card-title>{{ loggedInUser }}</mat-card-title>
-              <mat-card-subtitle>Date last updated</mat-card-subtitle>
+              <mat-card-title *ngFor="let loggedUser of currentLoggedInUser">
+                {{ loggedUser.first_name }} {{ loggedUser.middle_name }}
+                {{ loggedUser.last_name }}</mat-card-title
+              >
+              <mat-card-subtitle></mat-card-subtitle>
             </mat-card-title-group>
             <mat-card-content>
               <mat-card-actions align="end">
@@ -85,101 +88,186 @@
         <!-- Official Personal Information -->
         <div class="container justify-content-center">
           <h1 style="font-weight: light; text-align: center">
-            Personal Information
+            Edit Personal Information
           </h1>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="first_name" class="form-label">First Name</label>
-              <input type="text" class="form-control" id="first_name" />
-            </div>
-            <div class="col-md-6">
-              <label for="last_name" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="last_name" />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="date_of_birth" class="form-label">Birthday</label>
-              <input
-                class="form-control"
-                id="date_of_birth"
-                type="date"
-                max="{{ maxDate | date: 'yyyy-MM-dd' }}"
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="phone_number" class="form-label"
-                >Telephone Number</label
-              >
-              <input type="text" class="form-control" id="phone_number" />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" />
-            </div>
-            <div class="col-md-6">
-              <label for="email" class="form-label">email</label>
-              <input type="email" class="form-control" id="email" />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="gender" class="form-label">Gender</label>
-              <select
-                class="form-select form-control"
-                id="gender"
-                name="gender"
-              >
-                <option
-                  class="form-select"
-                  selected
-                  *ngFor="let gender of gender"
-                  [value]="gender.value"
-                >
-                  <p style="color: #fb8500; background-color: #03045e">
-                    {{ gender.viewValue }}
-                  </p>
-                </option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="city" class="form-label">City</label>
-              <input type="city" class="form-control" id="city" />
-            </div>
-          </div>
-          <div
-            fxLayout="column"
-            fxLayoutAlign="center center"
-            class="mt-3 mb-5"
-          >
-            <div
-              fxLayout="row"
-              fxLayoutGap="13px"
-              fxLayout.lt-md="column"
-              fxLayoutGap.lt-md="13px"
-              fxLayoutAlign="center center"
+          <form [formGroup]="formGroup" novalidate>
+            <!-- <div
+              class="bg-danger text-white p-2 mb-2"
+              *ngIf="formSubmitted && formGroup.invalid"
             >
-              <button
-                type="submit"
-                mat-raised-button
-                color="primary"
-                (click)="update()"
+              <ul>
+                <li *ngFor="let error of formGroup.getFormValidationMessages()">
+                  {{ error }}
+                </li>
+              </ul>
+            </div> -->
+            <fieldset [disabled]="isDisabled">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="first_name" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="first_name"
+                    formControlName="first_name"
+                  />
+                </div>
+                <ul
+                  class="text-danger list-unstyled"
+                  *ngIf="
+                    (formSubmitted || formGroup.controls['first_name'].dirty) &&
+                    formGroup.controls['first_name'].invalid
+                  "
+                >
+                  <li
+                    *ngFor="
+                      let error of formGroup.getEmailValidationMessages(
+                        'first_name'
+                      )
+                    "
+                  >
+                    {{ error }}
+                  </li>
+                </ul>
+                <div class="col-md-6">
+                  <label for="middle_name" class="form-label"
+                    >Middle Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="middle_name"
+                    formControlName="middle_name"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="last_name" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="last_name"
+                    formControlName="last_name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="date_of_birth" class="form-label">Birthday</label>
+                  <input
+                    class="form-control"
+                    id="date_of_birth"
+                    type="date"
+                    max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+                    formControlName="date_of_birth"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    formControlName="username"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="phone_number" class="form-label"
+                    >Telephone Number</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phone_number"
+                    formControlName="phone_number"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="gender" class="form-label">Gender</label>
+                  <select
+                    class="form-select form-control"
+                    id="gender"
+                    name="gender"
+                    formControlName="gender"
+                  >
+                    <option
+                      class="form-select"
+                      selected
+                      *ngFor="let gender of gender"
+                      [value]="gender.value"
+                    >
+                      <p style="color: #fb8500; background-color: #03045e">
+                        {{ gender.viewValue }}
+                      </p>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="city" class="form-label">City</label>
+                  <input
+                    type="city"
+                    class="form-control"
+                    id="city"
+                    formControlName="city"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="country" class="form-label">Country</label>
+                  <input
+                    type="country"
+                    class="form-control"
+                    id="country"
+                    formControlName="country"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              class="mt-3 mb-5"
+            >
+              <div
+                fxLayout="row"
+                fxLayoutGap="13px"
+                fxLayout.lt-md="column"
+                fxLayoutGap.lt-md="13px"
+                fxLayoutAlign="center center"
               >
-                Edit
-              </button>
-              <button
-                type="submit"
-                mat-raised-button
-                color="primary"
-                [disabled]="!formSubmitted && formGroup.invalid"
-                (click)="submitForm()"
-              >
-                Save
-              </button>
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  (click)="update()"
+                >
+                  Edit
+                </button>
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="!formSubmitted && formGroup.invalid"
+                  (click)="submitForm()"
+                >
+                  Save
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
         <!-- End of Official Personal Information -->
       </div>
@@ -292,106 +380,177 @@
         Settings
       </div>
       <div *ngSwitchDefault class="mat-elevation-z8 mx-5 my-5 p-5">
+        <!-- Default template to be displayed -->
         <!-- Official Personal Information -->
         <div class="container justify-content-center">
           <h1 style="font-weight: light; text-align: center">
-            Personal Information
+            Your Personal Information
           </h1>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="first_name" class="form-label">First Name</label>
-              <input type="text" class="form-control" id="first_name" />
-            </div>
-            <div class="col-md-6">
-              <label for="last_name" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="last_name" />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="date_of_birth" class="form-label">Birthday</label>
-              <input
-                class="form-control"
-                id="date_of_birth"
-                type="date"
-                max="{{ maxDate | date: 'yyyy-MM-dd' }}"
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="phone_number" class="form-label"
-                >Telephone Number</label
-              >
-              <input type="text" class="form-control" id="phone_number" />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" />
-            </div>
-            <div class="col-md-6">
-              <label for="email" class="form-label">email</label>
-              <input type="email" class="form-control" id="email" />
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="gender" class="form-label">Gender</label>
-              <select
-                class="form-select form-control"
-                id="gender"
-                name="gender"
-              >
-                <option
-                  class="form-select"
-                  selected
-                  *ngFor="let gender of gender"
-                  [value]="gender.value"
-                >
-                  <p style="color: #fb8500; background-color: #03045e">
-                    {{ gender.viewValue }}
-                  </p>
-                </option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="city" class="form-label">City</label>
-              <input type="city" class="form-control" id="city" />
-            </div>
-          </div>
-          <div
-            fxLayout="column"
-            fxLayoutAlign="center center"
-            class="mt-3 mb-5"
-          >
-            <div
-              fxLayout="row"
-              fxLayoutGap="13px"
-              fxLayout.lt-md="column"
-              fxLayoutGap.lt-md="13px"
-              fxLayoutAlign="center center"
+          <form [formGroup]="formGroup" novalidate>
+            <!-- <div
+              class="bg-danger text-white p-2 mb-2"
+              *ngIf="formSubmitted && formGroup.invalid"
             >
-              <button
-                type="submit"
-                mat-raised-button
-                color="primary"
-                (click)="update()"
+              <ul>
+                <li *ngFor="let error of formGroup.getFormValidationMessages()">
+                  {{ error }}
+                </li>
+              </ul>
+            </div> -->
+            <fieldset [disabled]="isDisabled">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="first_name" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="first_name"
+                    formControlName="first_name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="middle_name" class="form-label"
+                    >Middle Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="middle_name"
+                    formControlName="middle_name"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="last_name" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="last_name"
+                    formControlName="last_name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="date_of_birth" class="form-label">Birthday</label>
+                  <input
+                    class="form-control"
+                    id="date_of_birth"
+                    type="date"
+                    max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+                    formControlName="date_of_birth"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    formControlName="username"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="phone_number" class="form-label"
+                    >Telephone Number</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phone_number"
+                    formControlName="phone_number"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="gender" class="form-label">Gender</label>
+                  <select
+                    class="form-select form-control"
+                    id="gender"
+                    name="gender"
+                    formControlName="gender"
+                  >
+                    <option
+                      class="form-select"
+                      selected
+                      *ngFor="let gender of gender"
+                      [value]="gender.value"
+                    >
+                      <p style="color: #fb8500; background-color: #03045e">
+                        {{ gender.viewValue }}
+                      </p>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="city" class="form-label">City</label>
+                  <input
+                    type="city"
+                    class="form-control"
+                    id="city"
+                    formControlName="city"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="country" class="form-label">Country</label>
+                  <input
+                    type="country"
+                    class="form-control"
+                    id="country"
+                    formControlName="country"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              class="mt-3 mb-5"
+            >
+              <!-- <div
+                fxLayout="row"
+                fxLayoutGap="13px"
+                fxLayout.lt-md="column"
+                fxLayoutGap.lt-md="13px"
+                fxLayoutAlign="center center"
               >
-                Edit
-              </button>
-              <button
-                type="submit"
-                mat-raised-button
-                color="primary"
-                [disabled]="!formSubmitted && formGroup.invalid"
-                (click)="submitForm()"
-              >
-                Save
-              </button>
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  (click)="update()"
+                >
+                  Edit
+                </button>
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="!formSubmitted && formGroup.invalid"
+                  (click)="submitForm()"
+                >
+                  Save
+                </button>
+              </div> -->
             </div>
-          </div>
+          </form>
         </div>
         <!-- End of Official Personal Information -->
+
+        <!-- End of default template to be displayed -->
       </div>
     </div>
   </div>

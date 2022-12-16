@@ -27,20 +27,23 @@ export class ProfileComponent implements OnInit {
   public maxDate!: Date;
   public formSubmitted: boolean = false;
   public readonly!: boolean;
-public gender: Gender[] = [
+  public isDisabled!: boolean;
+  public gender: Gender[] = [
     { value: 'Female', viewValue: 'Female' },
     { value: 'Male', viewValue: 'Male' },
-];
-
+  ];
 
   // Logged in User data
+  private _isAuthenticated!: boolean;
   public user!: number;
-  private userSubscription!: Subscription;
+  private _userSubscription!: Subscription;
   public userList!: User[];
+  public loggedUser!: any;
   public currentLoggedInUser!: User[];
   public patchedUser!: User;
   public datePipe!: any;
   public errorMessage!: string;
+  public testUser!: User[];
 
   public tiles: ProfilePageGridInterface[] = [
     { text: 'Three', cols: 2, rows: 8 },
@@ -65,17 +68,61 @@ public gender: Gender[] = [
 
   ngOnInit(): void {
     this.readonly = true;
+    this.isDisabled = true;
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this._userSubscription = this._authenticationService.currentUser$.subscribe(
+      (user) => {
+        this._isAuthenticated = !!user;
+        this.user = user;
+        this.loggedUser = this._userService.fetchUsers().subscribe({
+          next: (userList) => {
+            this.userList = userList;
+            this.loggedUser = this.userList.filter(
+              (person: User) => person.id === this.user
+            );
+            this.currentLoggedInUser = this.loggedUser
+            this.patchedUser = this.currentLoggedInUser.reduce(
+              (...obj) => Object.assign(...obj),
+              {
+                id: NaN,
+                first_name: '',
+                middle_name: '',
+                last_name: '',
+                date_of_birth: '',
+                phone_number: '',
+                username: '',
+                email: '',
+                gender: '',
+                city: '',
+                country: '',
+                is_active: true,
+                staffType: 'string',
+                is_staff: true,
+                is_superuser: false,
+                date_joined: new Date(),
+                password: '',
+              }
+            );
+            this.formGroup.patchValue(this.patchedUser);
+
+          },
+        });
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this._userSubscription.unsubscribe();
   }
 
   public update(): void {
-    this.readonly = !this.readonly;
-    this.formGroup.controls.gender.enable();
-    this.formGroup.controls.date_of_birth.enable();
+    this.patchedUser = this.formGroup.value;
+    this.formSubmitted = !this.formSubmitted;
+    this.isDisabled = !this.isDisabled;
   }
 
-  submitForm() {
+  public submitForm() {
     this.patchedUser = this.formGroup.value;
     return this._userService
       .editUserInformation(

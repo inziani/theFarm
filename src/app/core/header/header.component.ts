@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
 
+
   constructor(
     private userService: UsersService,
     private authenticationService: AuthenticationService,
@@ -39,11 +40,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.userList = users;
           this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
           this.currentLoggedInUser = this.loggedInUser;
+
         })
 
       });
-
-
   }
 
 

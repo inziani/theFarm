@@ -45,7 +45,7 @@ export class UserUpdateDialogComponent implements OnInit {
   public staffType: StaffType[] = [
     { value: 'Contract', viewValue: 'Contract' },
     { value: 'Permanent', viewValue: 'Permanent' },
-    { value: 'Not Applicable', viewValue: 'Not Applicable'}
+    { value: 'Not Applicable', viewValue: 'Not Applicable' },
   ];
   public maxDate!: Date;
   public radioButtonsYes: string = 'True';
@@ -81,6 +81,12 @@ export class UserUpdateDialogComponent implements OnInit {
     });
   }
 
+  /*
+   ========This code will be moved to the HR  module to edit staff information once a user has been created=======
+
+   (change)="isStaff($event)" - Change event to be put on the YES Radio button for is_staff
+   (change)="notStaff($event)" - Change even to be put on the NO Radio Button for is_staff
+
   public isStaff(change: MatRadioChange) {
     this.displayEmployeeTemplate = change.value;
   }
@@ -89,7 +95,11 @@ export class UserUpdateDialogComponent implements OnInit {
     this.displayEmployeeTemplate = change.value;
   }
 
+  ===========End of Code to be moved=============================================================================
+*/
+
   public onAddEmployeeId() {
+    alert('Is this code getting called?');
     // Fetch data from the form and pass it along
     this._dialogRef.close(this.formGroupStaffId.value);
     this.staffUserId = this.formGroupStaffId.value;
@@ -147,15 +157,14 @@ export class UserUpdateDialogComponent implements OnInit {
     if (this.staffUser.staffType === 'Permanent') {
       alert('Staff is True and Permanent');
       this.onAddUser();
-      this.onAddEmployeeId()
+      this.onAddEmployeeId();
       this.isLoading = false;
       this.formGroup.reset();
       this.formSubmitted = false;
-    } else
-    {
+    } else {
       alert('staff is Contract or Not Applicable');
       console.log(this.staffUser.staffType);
-      this.onAddUser()
+      this.onAddUser();
       // this.onAddEmployeeId
       this.isLoading = false;
       this.formGroup.reset();

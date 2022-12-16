@@ -197,6 +197,38 @@ export class UsersService {
 
   // Delete Users
 
+  /*
+  Edit Personal User Profile Information
+  */
+
+  public oneEditUserProfilePersonalInformation(
+    first_name: string,
+    last_name: string,
+    date_of_birth: Date,
+    phone_number: number,
+    username: string,
+    gender: string,
+    city: string,
+    email: string,
+    password: string
+  ): Observable<User> {
+    return this.http.post<User>(
+      `${environment.apiUrl}/register/`,
+      JSON.stringify({
+        first_name,
+        last_name,
+        date_of_birth,
+        phone_number,
+        username,
+        gender,
+        city,
+        email,
+        password,
+      }),
+      this.httpOptions
+    );
+  }
+
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }

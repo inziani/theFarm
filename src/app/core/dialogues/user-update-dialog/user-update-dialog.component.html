@@ -12,7 +12,7 @@
         novalidate
         [formGroup]="formGroup"
         *ngIf="!isLoading"
-        (ngSubmit)="onSubmit()"
+        (ngSubmit)="onAddUser()"
       >
         <div
           class="bg-danger text-white p-2 mb-2"
@@ -459,13 +459,13 @@
                 <mat-radio-button
                   class="my-2 mx-1"
                   [value]="radioButtonsYes"
-                  (change)="isStaff($event)"
+
                   >Yes
                 </mat-radio-button>
                 <mat-radio-button
                   class="my-2 mx-1"
                   [value]="radioButtonsNo"
-                  (change)="notStaff($event)"
+
                   >No
                 </mat-radio-button>
               </mat-radio-group>
@@ -1425,7 +1425,7 @@
             mat-raised-button
             cdkFocusInitial
             class="mx-1 my-1"
-            (click)="onSubmit()"
+            (click)="onAddUser()"
             [disabled]="!formSubmitted && formGroup.invalid"
           >
             <mat-icon class="mx-2 my-2">save</mat-icon>
@@ -1454,7 +1454,7 @@
         novalidate
         [formGroup]="formGroup"
         *ngIf="!isLoading"
-        (ngSubmit)="onSubmit()"
+        (ngSubmit)="onAddUser()"
       >
         <!-- <fieldset [disabled]="isDisabled"> -->
         <div
@@ -1904,13 +1904,13 @@
                 <mat-radio-button
                   class="my-2 mx-1"
                   [value]="radioButtonsYes"
-                  (change)="isStaff($event)"
+
                   >Yes
                 </mat-radio-button>
                 <mat-radio-button
                   class="my-2 mx-1"
                   [value]="radioButtonsNo"
-                  (change)="notStaff($event)"
+                  
                   >No
                 </mat-radio-button>
               </mat-radio-group>
@@ -3287,13 +3287,13 @@
                   <mat-radio-button
                     class="my-2 mx-1"
                     [value]="radioButtonsYes"
-                    (change)="isStaff($event)"
+
                     >Yes
                   </mat-radio-button>
                   <mat-radio-button
                     class="my-2 mx-1"
                     [value]="radioButtonsNo"
-                    (change)="notStaff($event)"
+
                     >No
                   </mat-radio-button>
                 </mat-radio-group>
@@ -4186,7 +4186,7 @@
             mat-raised-button
             cdkFocusInitial
             class="mx-1 my-1"
-            (click)="onSubmit()"
+            (click)="onAddUser()"
             [disabled]="!formSubmitted && formGroup.invalid"
           >
             <mat-icon class="mx-2 my-2">save</mat-icon>
