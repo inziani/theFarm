@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
               }
             );
             this.formGroup.patchValue(this.patchedUser);
-
+            console.log('early patch-', this.patchedUser);
           },
         });
       }
@@ -127,13 +127,13 @@ export class ProfileComponent implements OnInit {
     return this._userService
       .editUserInformation(
         this.patchedUser.id,
+        this.patchedUser.username,
+        this.patchedUser.email,
         this.patchedUser.first_name,
         this.patchedUser.middle_name,
         this.patchedUser.last_name,
-        this.datePipe.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
         this.patchedUser.phone_number,
-        this.patchedUser.username,
-        this.patchedUser.email,
+        this.datePipe.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
         this.patchedUser.gender,
         this.patchedUser.city,
         this.patchedUser.country,
@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
       .subscribe({
         next: (patchedUser) =>
           this._dialog.open(ChangesSavedDialogComponent, {
-            data: (this.patchedUser = patchedUser),
+            data: (this.patchedUser.username = patchedUser.username),
           }),
         error: (err) => {
           this.errorMessage = err;

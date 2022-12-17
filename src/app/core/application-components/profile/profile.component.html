@@ -91,16 +91,6 @@
             Edit Personal Information
           </h1>
           <form [formGroup]="formGroup" novalidate>
-            <!-- <div
-              class="bg-danger text-white p-2 mb-2"
-              *ngIf="formSubmitted && formGroup.invalid"
-            >
-              <ul>
-                <li *ngFor="let error of formGroup.getFormValidationMessages()">
-                  {{ error }}
-                </li>
-              </ul>
-            </div> -->
             <fieldset [disabled]="isDisabled">
               <div class="row mb-3">
                 <div class="col-md-6">
@@ -111,24 +101,25 @@
                     id="first_name"
                     formControlName="first_name"
                   />
-                </div>
-                <ul
-                  class="text-danger list-unstyled"
-                  *ngIf="
-                    (formSubmitted || formGroup.controls['first_name'].dirty) &&
-                    formGroup.controls['first_name'].invalid
-                  "
-                >
-                  <li
-                    *ngFor="
-                      let error of formGroup.getEmailValidationMessages(
-                        'first_name'
-                      )
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['first_name'].dirty) &&
+                      formGroup.controls['first_name'].invalid
                     "
                   >
-                    {{ error }}
-                  </li>
-                </ul>
+                    <li
+                      *ngFor="
+                        let error of formGroup.getfirstNameValidationMessages(
+                          'first_name'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
                 <div class="col-md-6">
                   <label for="middle_name" class="form-label"
                     >Middle Name</label
@@ -139,6 +130,24 @@
                     id="middle_name"
                     formControlName="middle_name"
                   />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['middle_name'].dirty) &&
+                      formGroup.controls['middle_name'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getMiddleNameValidationMessages(
+                          'middle_name'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div class="row mb-3">
@@ -150,6 +159,24 @@
                     id="last_name"
                     formControlName="last_name"
                   />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['last_name'].dirty) &&
+                      formGroup.controls['last_name'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getlastNameValidationMessages(
+                          'last_name'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
                 </div>
                 <div class="col-md-6">
                   <label for="date_of_birth" class="form-label">Birthday</label>
@@ -160,30 +187,28 @@
                     max="{{ maxDate | date : 'yyyy-MM-dd' }}"
                     formControlName="date_of_birth"
                   />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['date_of_birth'].dirty) &&
+                      formGroup.controls['date_of_birth'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getBirthDayValidationMessages(
+                          'date_of_birth'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="username" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    formControlName="username"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label for="email" class="form-label">email</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    formControlName="email"
-                  />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6">
+                  <div class="col-md-6">
                   <label for="phone_number" class="form-label"
                     >Telephone Number</label
                   >
@@ -193,7 +218,80 @@
                     id="phone_number"
                     formControlName="phone_number"
                   />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['phone_number'].dirty) &&
+                      formGroup.controls['phone_number'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getPhoneNumberValidationMessages(
+                          'phone_number'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
                 </div>
+                <div class="col-md-6">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    formControlName="username"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['username'].dirty) &&
+                      formGroup.controls['username'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getUserNameValidationMessages(
+                          'username'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row mb-3">
+                 <div class="col-md-6">
+                  <label for="email" class="form-label">email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['email'].dirty) &&
+                      formGroup.controls['email'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getEmailValidationMessages(
+                          'email'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+
                 <div class="col-md-6">
                   <label for="gender" class="form-label">Gender</label>
                   <select
@@ -213,6 +311,23 @@
                       </p>
                     </option>
                   </select>
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['gender'].dirty) &&
+                      formGroup.controls['gender'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getGenderValidationMessages(
+                          'gender'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div class="row mb-3">
@@ -224,6 +339,21 @@
                     id="city"
                     formControlName="city"
                   />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['city'].dirty) &&
+                      formGroup.controls['city'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getCityValidationMessages('city')
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
                 </div>
                 <div class="col-md-6">
                   <label for="country" class="form-label">Country</label>
@@ -233,6 +363,23 @@
                     id="country"
                     formControlName="country"
                   />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['country'].dirty) &&
+                      formGroup.controls['country'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getCountryValidationMessages(
+                          'country'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
                 </div>
               </div>
             </fieldset>

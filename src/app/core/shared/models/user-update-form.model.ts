@@ -47,6 +47,13 @@ export class UserUpdateFormControl extends FormControl{
 export class UserUpdateFormGroup extends FormGroup {
   constructor() {
     super({
+      id: new UserUpdateFormControl(
+        'id',
+        'id',
+        '',
+        Validators.required
+      ),
+
       username: new UserUpdateFormControl(
         'Username',
         'username',
