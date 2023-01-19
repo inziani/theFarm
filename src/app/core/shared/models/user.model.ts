@@ -26,18 +26,18 @@ export class User{
   }
 }
 
-export class UserProfile{
+export interface UserProfile {
 
-  constructor(
-    public bio: string,
-    public hobbies: string,
-    public profile_pic: string,
-    public create_at: Date,
-    public updated_at: Date
+    user: number,
+    education_bio: string,
+    professional_bio: string,
+    professional_hobbies: string,
+    personal_hobbies: string,
+    social_hobbies: string,
+    // profile_pic: string,
+    create_at: Date,
+    updated_at: Date
 
-  ) {
-
-  }
 }
 
 export class JwTToken{
@@ -88,24 +88,24 @@ export class EmployeeIDInformation {
     }
   };
 
-export type EmployeePersonalFormData = {
-  name: FormControl<string>;
-  username: FormControl<string>;
-  email: FormControl<string>;
-  first_name: FormControl<string>;
-  middle_name: FormControl<string>;
-  last_name: FormControl <string>;
-  phone_number: FormControl<string>;
-  date_of_birth: FormControl<string>;
-  gender: FormControl<string>;
-  city: FormControl<string>;
-  country: FormControl<string>;
-  is_active: FormControl<boolean>;
-  is_superuser: FormControl<boolean>;
-  is_staff: FormControl<boolean>;
-  date_joined: FormControl<Date>;
-  password: FormControl<string>;
-};
+// export type EmployeePersonalFormData = {
+//   name: FormControl<string>;
+//   username: FormControl<string>;
+//   email: FormControl<string>;
+//   first_name: FormControl<string>;
+//   middle_name: FormControl<string>;
+//   last_name: FormControl <string>;
+//   phone_number: FormControl<string>;
+//   date_of_birth: FormControl<string>;
+//   gender: FormControl<string>;
+//   city: FormControl<string>;
+//   country: FormControl<string>;
+//   is_active: FormControl<boolean>;
+//   is_superuser: FormControl<boolean>;
+//   is_staff: FormControl<boolean>;
+//   date_joined: FormControl<Date>;
+//   password: FormControl<string>;
+// };
 
 export type EmployeeIdFormData = {
   /**

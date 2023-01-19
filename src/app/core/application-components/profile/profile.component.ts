@@ -9,8 +9,8 @@ import { UsersService } from '@app/core/services/users.service';
 import { ProfilePageGridInterface } from '@app/core/shared/interfaces/grids-interface';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
-import { User } from '@app/core/shared/models/user.model';
-import { Subscription } from 'rxjs';
+import { User, UserProfile } from '@app/core/shared/models/user.model';
+import { Subscription, switchMap, tap } from 'rxjs';
 
 
 @Component({
@@ -37,13 +37,16 @@ export class ProfileComponent implements OnInit {
   private _isAuthenticated!: boolean;
   public user!: number;
   private _userSubscription!: Subscription;
+  private _userProfilesSubscription!: Subscription;
   public userList!: User[];
   public loggedUser!: any;
   public currentLoggedInUser!: User[];
+  public currentLoggedInUserProfile!: UserProfile;
   public patchedUser!: User;
   public datePipe!: any;
   public errorMessage!: string;
-  public testUser!: User[];
+  public userProfilePatchedUser!: UserProfile;
+  public userProfilePatchedUserList!: UserProfile[];
 
   public tiles: ProfilePageGridInterface[] = [
     { text: 'Three', cols: 2, rows: 8 },
@@ -71,6 +74,31 @@ export class ProfileComponent implements OnInit {
     this.isDisabled = true;
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this._userProfilesSubscription = this._userService.userProfileData.subscribe(
+      {
+        next: (userProfiles) => {
+          this.userProfilePatchedUserList = userProfiles;
+          console.log('fetchedprofiles - ', this.userProfilePatchedUserList);
+        }
+      }
+    );
+    this._userService.fetchUserProfiles().subscribe({
+      next: (userProfiles) => this.userProfilePatchedUserList = userProfiles,
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete')
+    });
+
+    //=======================Test================================================
+    this._userSubscription = this._authenticationService.currentUser$.subscribe(
+      (user) => {
+        this._isAuthenticated = !!user;
+        this.user = user;
+      }
+    )
+    //=======================End of Test=========================================
+
+
+    // ==============Correct Data================================================
     this._userSubscription = this._authenticationService.currentUser$.subscribe(
       (user) => {
         this._isAuthenticated = !!user;
@@ -81,7 +109,7 @@ export class ProfileComponent implements OnInit {
             this.loggedUser = this.userList.filter(
               (person: User) => person.id === this.user
             );
-            this.currentLoggedInUser = this.loggedUser
+            this.currentLoggedInUser = this.loggedUser;
             this.patchedUser = this.currentLoggedInUser.reduce(
               (...obj) => Object.assign(...obj),
               {
@@ -104,8 +132,25 @@ export class ProfileComponent implements OnInit {
                 password: '',
               }
             );
+            // =================End of Correct Data=============
             this.formGroup.patchValue(this.patchedUser);
-            console.log('early patch-', this.patchedUser);
+
+            //==================================================
+            // this.userProfilePatchedUser =
+            //   this.currentLoggedInUserProfile.reduce(
+            //     (...obj) => Object.assign(...obj),
+            //     {
+            //       user: NaN,
+            //       education_bio: '',
+            //       professional_bio: '',
+            //       professional_hobbies: '',
+            //       personal_hobbies: '',
+            //       social_hobbies: '',
+            //       create_at: new Date,
+            //       updated_at: new Date,
+            //     }
+            //   );
+            //===================================================
           },
         });
       }
@@ -152,6 +197,26 @@ export class ProfileComponent implements OnInit {
         },
         complete: () => console.info('Complete'),
       });
+  }
+
+  public editUserProfile() {
+    return this._userService.editSingleUserProfile(this.patchedUser.id).subscribe({
+      next: (userProfile) => {
+        this._dialog.open(ChangesSavedDialogComponent, {
+          data: ( this.patchedUser.username = this.patchedUser.username),
+        })
+      },
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete')
+    })
+    // return this._userService.fetchUserProfiles().subscribe({
+    //   next: (userProfile) => {
+    //     this.testUserProfiles = userProfile;
+    //     console.log(userProfile);
+    //     },
+    //   error: (err) => (this.errorMessage = err),
+    //   complete: () => console.log('Complete'),
+    // });
   }
 
   public onSelectPersonalInformation() {

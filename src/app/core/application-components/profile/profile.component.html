@@ -208,7 +208,7 @@
                 </div>
               </div>
               <div class="row mb-3">
-                  <div class="col-md-6">
+                <div class="col-md-6">
                   <label for="phone_number" class="form-label"
                     >Telephone Number</label
                   >
@@ -265,7 +265,7 @@
                 </div>
               </div>
               <div class="row mb-3">
-                 <div class="col-md-6">
+                <div class="col-md-6">
                   <label for="email" class="form-label">email</label>
                   <input
                     type="email"
@@ -423,13 +423,16 @@
         class="mat-elevation-z8 mx-5 my-5 p-5"
         style="background-color: #03045e"
       >
-        <h1 style="font-weight: lighter">Interests</h1>
+        <h1 style="font-weight: lighter">Hobbies</h1>
         <div class="row my-3">
           <div class="col-md-12">
             <label for="professional" class="form-label">
               <h2 style="font-weight: lighter">Professional</h2></label
             >
-            <textarea rows="10">Some text...</textarea>
+            <textarea rows="10">
+              Some text...
+
+            </textarea>
           </div>
         </div>
         <div class="row my-3">
@@ -470,7 +473,7 @@
               mat-raised-button
               color="primary"
               [disabled]="!formSubmitted && formGroup.invalid"
-              (click)="submitForm()"
+              (click)="editUserProfile()"
             >
               Save
             </button>

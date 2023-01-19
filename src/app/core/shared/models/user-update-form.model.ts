@@ -253,6 +253,133 @@ export class UserUpdateFormGroup extends FormGroup {
   }
 }
 
+export class UserProfileUpdateFormControl extends FormControl {
+
+  label: string;
+  modelProperty: string;
+
+  constructor(label: string, property: string, value: any, validator: any) {
+    super(value, validator);
+    this.label = label;
+    this.modelProperty = property;
+  }
+
+  getValidationMessages() {
+    let messages: string[] = [];
+    if (this.errors) {
+      for (let errorName in this.errors) {
+        switch (errorName) {
+          case 'email':
+            messages.push(`Please enter a valid ${this.label} address`);
+            break;
+          case 'required':
+            messages.push(`${this.label} is a required field `);
+            break;
+          case 'minLength':
+            messages.push(
+              `${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`
+            );
+            break;
+          case 'maxLength':
+            messages.push(
+              `The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`
+            );
+            break;
+          case 'pattern':
+            messages.push(
+              `This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `
+            );
+            break;
+        }
+      }
+    }
+    return messages;
+  }
+}
+
+export class UserProfileUserUpdateFormGroup extends FormGroup {
+  constructor() {
+    super({
+      education_bio: new UserProfileUpdateFormControl(
+        'Education Bio',
+        'education_bio',
+        '',
+        Validators.required
+      ),
+      professional_bio: new UserProfileUpdateFormControl(
+        'Professional Bio',
+        'professional_bio',
+        '',
+        Validators.required
+      ),
+      professional_hobbies: new UserProfileUpdateFormControl(
+        'Professional Hobbies',
+        'professional_hobbies',
+        '',
+        Validators.required
+      ),
+      personal_hobbies: new UserProfileUpdateFormControl(
+        'Personal Hobbies',
+        'personal_hobbies',
+        '',
+        Validators.required
+      ),
+      social_hobbies: new UserProfileUpdateFormControl(
+        'Social Hobbies',
+        'social_hobbies',
+        '',
+        Validators.required
+      ),
+    });
+  }
+
+  get userProfileUpdateFormControl(): UserProfileUpdateFormControl[] {
+    return Object.keys(this.controls).map(
+      (k) => this.controls[k] as UserProfileUpdateFormControl
+    );
+  }
+
+  getEducationBioValidationMessages(education_bio: string): string[] {
+    return (
+      this.controls['education_bio'] as UserProfileUpdateFormControl
+    ).getValidationMessages();
+  }
+  getProfessionalBioValidationMessages(professional_bio: string): string[] {
+    return (
+      this.controls['professional_bio'] as UserProfileUpdateFormControl
+    ).getValidationMessages();
+  }
+
+  getProfessionalHobbiesValidationMessages(
+    professional_hobbies: string
+  ): string[] {
+    return (
+      this.controls['professional_hobbies'] as UserProfileUpdateFormControl
+    ).getValidationMessages();
+  }
+
+  getPersonalHobbiesValidationMessages(personal_hobbies: string): string[] {
+    return (
+      this.controls['personal_hobbies'] as UserProfileUpdateFormControl
+    ).getValidationMessages();
+  }
+
+  getSocialSobbiesValidationMessages(social_hobbies: string): string[] {
+    return (
+      this.controls['social_hobbies'] as UserProfileUpdateFormControl
+    ).getValidationMessages();
+  }
+
+  getFormValidationMessages(): string[] {
+    let messages: string[] = [];
+    Object.values(this.controls).forEach((c) =>
+      messages.push(
+        ...(c as UserProfileUpdateFormControl).getValidationMessages()
+      )
+    );
+    return messages;
+  }
+}
 
 
 export class EmployeeIDInformationFormControl extends FormControl{

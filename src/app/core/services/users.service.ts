@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { OnInit, OnDestroy } from '@angular/core';
 import { environment } from '@environments/environment';
 
-import { Observable, Subscription, catchError, throwError, BehaviorSubject } from 'rxjs';
-
+import { Observable, Subscription, BehaviorSubject, map, shareReplay } from 'rxjs';
 
 
 import { UserInterface } from '../shared/interfaces/users-interface';
-import { EmployeeIDInformation, User, UserProfile } from '@app/core/shared/models/user.model';
+import {
+  EmployeeIDInformation,
+  User,
+  UserProfile,
+} from '@app/core/shared/models/user.model';
 
 import { AuthenticationService } from './authentication.service';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { MatDialog } from '@angular/material/dialog';
-
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,9 @@ export class UsersService {
   public currentLoggedInUser!: User[];
   private userAction = new BehaviorSubject<string>('');
   public data: Observable<string> = this.userAction.asObservable();
+  private _$userProfileDataSource = new BehaviorSubject<UserProfile[]>([]);
+  public userProfileData: Observable<UserProfile[]> =
+    this._$userProfileDataSource.asObservable();
   private userSubscription!: Subscription;
   public httpOptions = {
     headers: new HttpHeaders({
@@ -34,6 +37,7 @@ export class UsersService {
       accept: 'application/json',
     }),
   };
+  
 
   constructor(
     private http: HttpClient,
@@ -128,10 +132,9 @@ export class UsersService {
   }
 
   public fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(
-      `${environment.apiUrl}/users/`,
-      this.httpOptions
-    );
+    return this.http
+      .get<User[]>(`${environment.apiUrl}/users/`, this.httpOptions)
+      .pipe(shareReplay());
   }
   public fetchSingleUser(id: number): Observable<User> {
     return this.http.get<User>(
@@ -186,8 +189,31 @@ export class UsersService {
   }
 
   public fetchUserProfiles(): Observable<UserProfile[]> {
-    return this.http.get<UserProfile[]>(
-      `${environment.apiUrl}/user-profile`,
+    return this.http
+      .get<UserProfile[]>(
+        `${environment.apiUrl}/user-profile`,
+        this.httpOptions
+      )
+      .pipe(map(
+        (userProfiles: UserProfile[]) =>
+        {
+          this._$userProfileDataSource.next(userProfiles);
+          return userProfiles
+        }
+      )
+        , shareReplay());
+  }
+
+  public fetchSingleUserProfile(user: number): Observable<UserProfile> {
+    return this.http.get<UserProfile>(
+      `${environment.apiUrl}/user-profile/` + user + '/',
+      this.httpOptions
+    );
+  }
+
+  public editSingleUserProfile(user: number): Observable<UserProfile> {
+    return this.http.patch<UserProfile>(
+      `${environment.apiUrl}/user-profile/` + user + '/',
       this.httpOptions
     );
   }
