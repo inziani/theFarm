@@ -27,9 +27,11 @@ export class UsersService {
   public currentLoggedInUser!: User[];
   private userAction = new BehaviorSubject<string>('');
   public data: Observable<string> = this.userAction.asObservable();
+
   private _$userProfileDataSource = new BehaviorSubject<UserProfile[]>([]);
   public userProfileData: Observable<UserProfile[]> =
     this._$userProfileDataSource.asObservable();
+  
   private userSubscription!: Subscription;
   public httpOptions = {
     headers: new HttpHeaders({
@@ -37,7 +39,7 @@ export class UsersService {
       accept: 'application/json',
     }),
   };
-  
+
 
   constructor(
     private http: HttpClient,

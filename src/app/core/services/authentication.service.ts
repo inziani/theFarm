@@ -8,17 +8,17 @@ import { environment } from '@environments/environment';
 import { JwTAuthenticationResponseInterface, SignUpResponse } from '../shared/interfaces/users-interface';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
-import { User } from '../shared/models/user.model';
+import { User, UserProfile } from '../shared/models/user.model';
 
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AuthenticationService {
-
-  public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  public httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
   public currentUser$ = new BehaviorSubject<number>(0);
   public user$ = new Subject<number>();
   public expiryDate!: Date;
@@ -29,62 +29,82 @@ export class AuthenticationService {
   public token: any;
   public errorMessage!: string;
   public mappedToken!: JwTAuthenticationResponseInterface;
+  private _$userProfileDataSource = new BehaviorSubject<UserProfile>({
+    user: NaN,
+    education_bio: 'education_bio',
+    professional_bio: 'professional_bio',
+    professional_hobbies: 'professional_hobbies',
+    personal_hobbies: 'personal_hobbies',
+    social_hobbies: 'social_hobbies',
+    create_at: new Date(),
+    updated_at: new Date(),
+  });
+  public userProfileData: Observable<UserProfile> =
+    this._$userProfileDataSource.asObservable();
+  public $profile = new BehaviorSubject<UserProfile>({
+    user: NaN,
+    education_bio: 'education_bio',
+    professional_bio: 'professional_bio',
+    professional_hobbies: 'professional_hobbies',
+    personal_hobbies: 'personal_hobbies',
+    social_hobbies: 'social_hobbies',
+    create_at: new Date(),
+    updated_at: new Date(),
+  });
+  public test!: any;
 
-
-
-  public get currentUserValue(): number{
+  public get currentUserValue(): number {
     return this.currentUser$.value;
   }
 
-  constructor(
-    private http: HttpClient,
-    public router: Router
-  ) {
-
-  }
+  constructor(private http: HttpClient, public router: Router) {}
 
   public obtainJwTToken(
     email: string,
     password: string
-  ): Observable<JwTAuthenticationResponseInterface>{
-    return this.http.post<JwTAuthenticationResponseInterface>
-      (`${environment.apiUrl}/${environment.jwtLogin}`,
-        JSON.stringify({ email, password }), this.httpOptions).
-      pipe(tap(responseData => {
-        this.saveUserTokens(responseData);
-      }),
+  ): Observable<JwTAuthenticationResponseInterface> {
+    return this.http
+      .post<JwTAuthenticationResponseInterface>(
+        `${environment.apiUrl}/${environment.jwtLogin}`,
+        JSON.stringify({ email, password }),
+        this.httpOptions
+      )
+      .pipe(
+        tap((responseData) => {
+          this.saveUserTokens(responseData);
+        }),
         shareReplay()
       );
   }
 
   private saveUserTokens(responseData: JwTAuthenticationResponseInterface) {
-    this.mappedToken = responseData
+    this.mappedToken = responseData;
     this.jwtAccessToken = responseData.access;
     this.jwtRefreshToken = responseData.refresh;
     return this.mappedToken;
-
   }
 
-  public getToken(
-    email: string,
-    password: string): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/${environment.jwtLogin}`,
-      JSON.stringify(
-        { email, password }), this.httpOptions).pipe(
-          map((loginResponse: any) => {
-            this.jwtAccessToken = loginResponse.access;
-            this.jwtRefreshToken = loginResponse.refresh;
-            return this.jwtAccessToken, this.jwtRefreshToken;
-          },),
-          tap(loginResponse => {
-            this.saveUser(loginResponse)
-          }),
-          shareReplay());
+  public getToken(email: string, password: string): Observable<any> {
+    return this.http
+      .post<any>(
+        `${environment.apiUrl}/${environment.jwtLogin}`,
+        JSON.stringify({ email, password }),
+        this.httpOptions
+      )
+      .pipe(
+        map((loginResponse: any) => {
+          this.jwtAccessToken = loginResponse.access;
+          this.jwtRefreshToken = loginResponse.refresh;
+          return this.jwtAccessToken, this.jwtRefreshToken;
+        }),
+        tap((loginResponse) => {
+          this._saveUser(loginResponse);
+        }),
+        shareReplay()
+      );
   }
 
-
-
-  private saveUser(loginResponse: any) {
+  private _saveUser(loginResponse: any) {
     type customJwtPayLoad = JwtPayload & { userPayloadData: string };
     let decodedToken = jwtDecode<customJwtPayLoad>(loginResponse);
     this.payload = JSON.stringify(decodedToken);
@@ -92,7 +112,27 @@ export class AuthenticationService {
     this.userId = finaldecodedToken.user_id;
     this.expiryDate = new Date(finaldecodedToken.exp * 1000);
     this.currentUser$.next(this.userId);
+    this.test = this._fetchUserProfile(finaldecodedToken.user_id);
     return this.payload;
+  }
+
+  private _fetchUserProfile(userId: number): Observable<UserProfile> {
+    return this.http
+      .get<UserProfile>(
+        `${environment.apiUrl}/user-profile` + userId + '/',
+        this.httpOptions
+      )
+      .pipe(
+        map((userProfileDataSource) => {
+          this._$userProfileDataSource.next(userProfileDataSource);
+          console.log(
+            'BEHAVIOUR SUBJECT USER - ',
+            this._$userProfileDataSource
+          );
+          return userProfileDataSource;
+        }),
+        shareReplay()
+      );
   }
 
   public isLoggedIn() {
@@ -105,9 +145,8 @@ export class AuthenticationService {
   }
 
   public getAccessToken() {
-     return this.jwtAccessToken;
-
-   }
+    return this.jwtAccessToken;
+  }
 
   public getRefreshedToken() {
     return this.jwtRefreshToken;
@@ -115,12 +154,17 @@ export class AuthenticationService {
 
   public generateRefreshToken() {
     let refresh = this.getRefreshedToken();
-    return this.http.post(`${environment.apiUrl}/${environment.jwtRefresh}`, JSON.stringify({ refresh }), this.httpOptions).pipe(tokenRefresh => {
-      this.token = tokenRefresh;
-      return this.token;
-    });
+    return this.http
+      .post(
+        `${environment.apiUrl}/${environment.jwtRefresh}`,
+        JSON.stringify({ refresh }),
+        this.httpOptions
+      )
+      .pipe((tokenRefresh) => {
+        this.token = tokenRefresh;
+        return this.token;
+      });
   }
-
 
   public onUserSignOn(
     first_name: string,
@@ -131,18 +175,23 @@ export class AuthenticationService {
     gender: string,
     city: string,
     email: string,
-    password: string): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/register/`, JSON.stringify({
-      first_name,
-      last_name,
-      date_of_birth,
-      phone_number,
-      username,
-      gender,
-      city,
-      email,
-      password
-    }), this.httpOptions);
+    password: string
+  ): Observable<User> {
+    return this.http.post<User>(
+      `${environment.apiUrl}/register/`,
+      JSON.stringify({
+        first_name,
+        last_name,
+        date_of_birth,
+        phone_number,
+        username,
+        gender,
+        city,
+        email,
+        password,
+      }),
+      this.httpOptions
+    );
   }
 
   public editUserInformation(
@@ -159,22 +208,26 @@ export class AuthenticationService {
     country: string,
     is_active: boolean,
     is_superuser: boolean,
-    is_staff: boolean,
-    ): Observable<User> {
-    return this.http.patch<User>(`${environment.apiUrl}/users/` + id + '/', {
-      username,
-      first_name,
-      middle_name,
-      last_name,
-      phone_number,
-      date_of_birth,
-      gender,
-      city,
-      country,
-      is_active,
-      is_superuser,
-      is_staff
-    }, this.httpOptions);
+    is_staff: boolean
+  ): Observable<User> {
+    return this.http.patch<User>(
+      `${environment.apiUrl}/users/` + id + '/',
+      {
+        username,
+        first_name,
+        middle_name,
+        last_name,
+        phone_number,
+        date_of_birth,
+        gender,
+        city,
+        country,
+        is_active,
+        is_superuser,
+        is_staff,
+      },
+      this.httpOptions
+    );
   }
 }
 

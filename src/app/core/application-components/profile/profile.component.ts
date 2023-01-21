@@ -5,13 +5,11 @@ import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-d
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { UsersService } from '@app/core/services/users.service';
 
-
 import { ProfilePageGridInterface } from '@app/core/shared/interfaces/grids-interface';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
 import { User, UserProfile } from '@app/core/shared/models/user.model';
-import { Subscription, switchMap, tap } from 'rxjs';
-
+import { Subscription, switchMap, tap, map, mapTo } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -37,7 +35,8 @@ export class ProfileComponent implements OnInit {
   private _isAuthenticated!: boolean;
   public user!: number;
   private _userSubscription!: Subscription;
-  private _userProfilesSubscription!: Subscription;
+  private _$userProfilesSubscription!: Subscription;
+  private _$userProfileSubscription!: Subscription;
   public userList!: User[];
   public loggedUser!: any;
   public currentLoggedInUser!: User[];
@@ -74,87 +73,34 @@ export class ProfileComponent implements OnInit {
     this.isDisabled = true;
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
-    this._userProfilesSubscription = this._userService.userProfileData.subscribe(
-      {
-        next: (userProfiles) => {
-          this.userProfilePatchedUserList = userProfiles;
-          console.log('fetchedprofiles - ', this.userProfilePatchedUserList);
-        }
-      }
-    );
-    this._userService.fetchUserProfiles().subscribe({
-      next: (userProfiles) => this.userProfilePatchedUserList = userProfiles,
-      error: (err) => this.errorMessage = err,
-      complete: () => console.info('Complete')
-    });
-
-    //=======================Test================================================
-    this._userSubscription = this._authenticationService.currentUser$.subscribe(
-      (user) => {
-        this._isAuthenticated = !!user;
-        this.user = user;
-      }
-    )
-    //=======================End of Test=========================================
-
-
-    // ==============Correct Data================================================
-    this._userSubscription = this._authenticationService.currentUser$.subscribe(
-      (user) => {
-        this._isAuthenticated = !!user;
-        this.user = user;
-        this.loggedUser = this._userService.fetchUsers().subscribe({
-          next: (userList) => {
-            this.userList = userList;
-            this.loggedUser = this.userList.filter(
-              (person: User) => person.id === this.user
-            );
-            this.currentLoggedInUser = this.loggedUser;
-            this.patchedUser = this.currentLoggedInUser.reduce(
-              (...obj) => Object.assign(...obj),
-              {
-                id: NaN,
-                first_name: '',
-                middle_name: '',
-                last_name: '',
-                date_of_birth: '',
-                phone_number: '',
-                username: '',
-                email: '',
-                gender: '',
-                city: '',
-                country: '',
-                is_active: true,
-                staffType: 'string',
-                is_staff: true,
-                is_superuser: false,
-                date_joined: new Date(),
-                password: '',
-              }
-            );
-            // =================End of Correct Data=============
-            this.formGroup.patchValue(this.patchedUser);
-
-            //==================================================
-            // this.userProfilePatchedUser =
-            //   this.currentLoggedInUserProfile.reduce(
-            //     (...obj) => Object.assign(...obj),
-            //     {
-            //       user: NaN,
-            //       education_bio: '',
-            //       professional_bio: '',
-            //       professional_hobbies: '',
-            //       personal_hobbies: '',
-            //       social_hobbies: '',
-            //       create_at: new Date,
-            //       updated_at: new Date,
-            //     }
-            //   );
-            //===================================================
-          },
-        });
-      }
-    );
+    this._userSubscription = this._authenticationService.currentUser$
+      .pipe(
+        tap((user) => {
+          this.user = user;
+          console.log('No Retreat User Number-', this.user);
+        }),
+        switchMap((user) =>
+          this._userService.fetchSingleUser(user).pipe(
+            tap((currentLoggedInUser) => {
+              this.patchedUser = currentLoggedInUser;
+              this.formGroup.patchValue(this.patchedUser);
+              console.log('UserObject- ', this.patchedUser);
+            }),
+            switchMap((user) =>
+              this._userService.fetchSingleUserProfile(user.id).pipe(
+                tap((currentLoggedInUserProfile) => {
+                  this.userProfilePatchedUser = currentLoggedInUserProfile;
+                  console.log(
+                    'UserProfileObject-',
+                    this.userProfilePatchedUser
+                  );
+                })
+              )
+            )
+          )
+        )
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
@@ -200,23 +146,17 @@ export class ProfileComponent implements OnInit {
   }
 
   public editUserProfile() {
-    return this._userService.editSingleUserProfile(this.patchedUser.id).subscribe({
-      next: (userProfile) => {
-        this._dialog.open(ChangesSavedDialogComponent, {
-          data: ( this.patchedUser.username = this.patchedUser.username),
-        })
-      },
-      error: (err) => this.errorMessage = err,
-      complete: () => console.info('Complete')
-    })
-    // return this._userService.fetchUserProfiles().subscribe({
-    //   next: (userProfile) => {
-    //     this.testUserProfiles = userProfile;
-    //     console.log(userProfile);
-    //     },
-    //   error: (err) => (this.errorMessage = err),
-    //   complete: () => console.log('Complete'),
-    // });
+    return this._userService
+      .editSingleUserProfile(this.patchedUser.id)
+      .subscribe({
+        next: (userProfile) => {
+          this._dialog.open(ChangesSavedDialogComponent, {
+            data: (this.patchedUser.username = this.patchedUser.username),
+          });
+        },
+        error: (err) => (this.errorMessage = err),
+        complete: () => console.info('Complete'),
+      });
   }
 
   public onSelectPersonalInformation() {
