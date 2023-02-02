@@ -31,7 +31,7 @@ export class UsersService {
   private _$userProfileDataSource = new BehaviorSubject<UserProfile[]>([]);
   public userProfileData: Observable<UserProfile[]> =
     this._$userProfileDataSource.asObservable();
-  
+
   private userSubscription!: Subscription;
   public httpOptions = {
     headers: new HttpHeaders({
@@ -212,10 +212,25 @@ export class UsersService {
       this.httpOptions
     );
   }
-
-  public editSingleUserProfile(user: number): Observable<UserProfile> {
+// This method will edit all the user profiles that are sitting on one table in Django. T
+  public editSingleUserProfile(
+    user: number,
+    education_bio: string,
+    professional_bio: string,
+    professional_hobbies: string,
+    personal_hobbies: string,
+    social_hobbies: string,
+    ): Observable<UserProfile> {
     return this.http.patch<UserProfile>(
       `${environment.apiUrl}/user-profile/` + user + '/',
+      {
+        education_bio,
+        professional_bio,
+        professional_hobbies,
+        personal_hobbies,
+        social_hobbies
+      },
+
       this.httpOptions
     );
   }

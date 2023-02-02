@@ -7,7 +7,10 @@ import { UsersService } from '@app/core/services/users.service';
 
 import { ProfilePageGridInterface } from '@app/core/shared/interfaces/grids-interface';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
-import { UserUpdateFormGroup } from '@app/core/shared/models/user-update-form.model';
+import {
+  UserUpdateFormGroup,
+  UserBioUserUpdateFormGroup,
+} from '@app/core/shared/models/user-update-form.model';
 import { User, UserProfile } from '@app/core/shared/models/user.model';
 import { Subscription, switchMap, tap, map, mapTo } from 'rxjs';
 
@@ -21,6 +24,7 @@ export class ProfileComponent implements OnInit {
   public color = '#fb8500';
   public itemSelected!: string;
   public formGroup = new UserUpdateFormGroup();
+  public formGroupBio = new UserBioUserUpdateFormGroup();
   public isLoading: boolean = false;
   public maxDate!: Date;
   public formSubmitted: boolean = false;
@@ -90,6 +94,7 @@ export class ProfileComponent implements OnInit {
               this._userService.fetchSingleUserProfile(user.id).pipe(
                 tap((currentLoggedInUserProfile) => {
                   this.userProfilePatchedUser = currentLoggedInUserProfile;
+                  this.formGroupBio.patchValue(this.userProfilePatchedUser);
                   console.log(
                     'UserProfileObject-',
                     this.userProfilePatchedUser
@@ -109,11 +114,13 @@ export class ProfileComponent implements OnInit {
 
   public update(): void {
     this.patchedUser = this.formGroup.value;
+    this.userProfilePatchedUser = this.formGroupBio.value;
+    console.log('patchProfile - ', this.userProfilePatchedUser);
     this.formSubmitted = !this.formSubmitted;
     this.isDisabled = !this.isDisabled;
   }
 
-  public submitForm() {
+  public submitPersonalInformationForm() {
     this.patchedUser = this.formGroup.value;
     return this._userService
       .editUserInformation(
@@ -145,18 +152,42 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  public editUserProfile() {
+  // Method to update the user Bio information
+  public submitUserProfileBioForm() {
+    this.userProfilePatchedUser = this.formGroupBio.value;
     return this._userService
-      .editSingleUserProfile(this.patchedUser.id)
+      .editSingleUserProfile(
+        this.patchedUser.id,
+        this.userProfilePatchedUser.education_bio,
+        this.userProfilePatchedUser.professional_bio,
+        this.userProfilePatchedUser.professional_hobbies,
+        this.userProfilePatchedUser.personal_hobbies,
+        this.userProfilePatchedUser.social_hobbies
+      )
       .subscribe({
-        next: (userProfile) => {
+        next: (patchUserProfile) => {
           this._dialog.open(ChangesSavedDialogComponent, {
-            data: (this.patchedUser.username = this.patchedUser.username),
+            data: this.patchedUser.username,
           });
         },
-        error: (err) => (this.errorMessage = err),
+        error: (err) => {
+          this.errorMessage = err;
+        },
         complete: () => console.info('Complete'),
       });
+  }
+
+  public submitUserProfileHobbiesForm() {
+    return this._userService.deleteSingleUser(this.patchedUser.id).subscribe({
+      next: (userProfile) => {
+        console.log('testing-', userProfile);
+        this._dialog.open(ChangesSavedDialogComponent, {
+          data: (this.patchedUser.username = this.patchedUser.username),
+        });
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
+    });
   }
 
   public onSelectPersonalInformation() {
