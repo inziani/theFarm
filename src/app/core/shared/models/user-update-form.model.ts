@@ -343,6 +343,65 @@ export class UserBioUserUpdateFormGroup extends FormGroup {
 }
 
 
+export class UserHobbiesUserUpdateFormGroup extends FormGroup {
+  constructor() {
+    super({
+      professional_hobbies: new UserBioUpdateFormControl(
+        'Professional Hobbies',
+        'professional_hobbies',
+        '',
+        Validators.required
+      ),
+      personal_hobbies: new UserBioUpdateFormControl(
+        'Personal Hobbies',
+        'personal_hobbies',
+        '',
+        Validators.required
+      ),
+      social_hobbies: new UserBioUpdateFormControl(
+        'Social Hobbies',
+        'social_hobbies',
+        '',
+        Validators.required
+      ),
+    });
+  }
+
+  get userHobbiesUpdateFormControl(): UserBioUpdateFormControl[] {
+    return Object.keys(this.controls).map(
+      (k) => this.controls[k] as UserBioUpdateFormControl
+    );
+  }
+
+  getProfessionalHobbiesValidationMessages(
+    professional_hobbies: string
+  ): string[] {
+    return (
+      this.controls['professional_hobbies'] as UserBioUpdateFormControl
+    ).getValidationMessages();
+  }
+
+  getPersonalHobbiesValidationMessages(personal_hobbies: string): string[] {
+    return (
+      this.controls['personal_hobbies'] as UserBioUpdateFormControl
+    ).getValidationMessages();
+  }
+
+  getSocialHobbiesValidationMessages(social_hobbies: string): string[] {
+    return (
+      this.controls['social_hobbies'] as UserBioUpdateFormControl
+    ).getValidationMessages();
+  }
+
+  getFormValidationMessages(): string[] {
+    let messages: string[] = [];
+    Object.values(this.controls).forEach((c) =>
+      messages.push(...(c as UserBioUpdateFormControl).getValidationMessages())
+    );
+    return messages;
+  }
+}
+
 export class EmployeeIDInformationFormControl extends FormControl{
 
     label: string;

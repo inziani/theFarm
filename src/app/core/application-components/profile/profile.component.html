@@ -424,17 +424,14 @@
         style="background-color: #03045e"
       >
         <h1 style="font-weight: lighter">Hobbies</h1>
-        <form novalidate id="hobbies">
+        <form [formGroup]="formGroupHobbies" novalidate id="hobbies">
           <fieldset [disabled]="isDisabled">
             <div class="row my-3">
               <div class="col-md-12">
                 <label for="professional" class="form-label">
                   <h2 style="font-weight: lighter">Professional</h2></label
                 >
-                <textarea rows="10">
-              Some text...
-            </textarea
-                >
+                <textarea rows="10" formControlName="professional_hobbies"></textarea>
               </div>
             </div>
             <div class="row my-3">
@@ -442,15 +439,14 @@
                 <label for="personal" class="form-label"
                   ><h2 style="font-weight: lighter">Personal</h2></label
                 >
-                <textarea rows="10">Some text...</textarea>
+                <textarea rows="10" formControlName="personal_hobbies"></textarea>
               </div>
             </div>
             <div class="row my-3">
               <div class="col-md-12">
                 <label for="social" class="form-label">
-                  <h2 style="font-weight: lighter">Social</h2></label
-                >
-                <textarea rows="10">Some text...</textarea>
+                  <h2 style="font-weight: lighter">Social</h2></label>
+                <textarea rows="10" formControlName="social_hobbies"></textarea>
               </div>
             </div>
           </fieldset>
@@ -498,27 +494,7 @@
                 <label for="education" class="form-label"
                   ><h2 style="font-weight: lighter">Education</h2></label
                 >
-                <textarea rows="10" formControlName="education_bio">
-                    Some text...</textarea
-                >
-                <!-- <ul
-                  class="text-danger list-unstyled"
-                  *ngIf="
-                    (formSubmitted ||
-                      formGroup.controls['education_bio'].dirty) &&
-                    formGroup.controls['education_bio'].invalid
-                  "
-                >
-                  <li
-                    *ngFor="
-                      let error of formGroupBio.getEducationBioValidationMessages(
-                        'education_bio'
-                      )
-                    "
-                  >
-                    {{ error }}
-                  </li>
-                </ul> -->
+                <textarea rows="10" formControlName="education_bio"></textarea>
               </div>
             </div>
             <div class="row my-3">
@@ -526,27 +502,10 @@
                 <label for="professional" class="form-label">
                   <h2 style="font-weight: lighter">Professional</h2></label
                 >
-                <textarea rows="10" formControlName="professional_bio">
-                    Some text...</textarea
-                >
-                <!-- <ul
-                  class="text-danger list-unstyled"
-                  *ngIf="
-                    (formSubmitted ||
-                      formGroup.controls['professional_bio'].dirty) &&
-                    formGroup.controls['professional_bio'].invalid
-                  "
-                >
-                  <li
-                    *ngFor="
-                      let error of formGroupBio.getProfessionalBioValidationMessages(
-                        'professional_bio'
-                      )
-                    "
-                  >
-                    {{ error }}
-                  </li>
-                </ul> -->
+                <textarea
+                  rows="10"
+                  formControlName="professional_bio"
+                ></textarea>
               </div>
             </div>
           </fieldset>
