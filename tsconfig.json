@@ -14,14 +14,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "module": "commonjs",
     "lib": [
       "es2018",
       "dom"
     ],
-
-    "paths":{
+    "paths": {
       "@app/*": [
         "src/app/*"
       ],
@@ -30,9 +29,9 @@
       ],
       "tslib": [
         "path/to/node_modules/tslib/tslib.d.ts"
-        ]
-
-    }
+      ]
+    },
+    "useDefineForClassFields": false
   },
   
   "angularCompilerOptions": {
