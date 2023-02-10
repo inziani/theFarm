@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
@@ -13,7 +14,7 @@ import {
   UserHobbiesUserUpdateFormGroup,
 } from '@app/core/shared/models/user-update-form.model';
 import { User, UserProfile } from '@app/core/shared/models/user.model';
-import { Subscription, switchMap, tap, map, mapTo } from 'rxjs';
+import { Subscription, switchMap, tap, map, mapTo, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -65,6 +66,16 @@ export class ProfileComponent implements OnInit {
     { item: 'Password and security' },
   ];
 
+  //  Profile picture upload data
+
+  public selectedFiles?: FileList;
+  public currentFile?: File;
+  public progress = 0;
+  public imageLoadStatusMessage = '';
+  public imagePreview = '';
+  public imageInfos?: Observable<any>;
+
+
   constructor(
     private _userService: UsersService,
     private _authenticationService: AuthenticationService,
@@ -91,6 +102,9 @@ export class ProfileComponent implements OnInit {
               this.patchedUser = currentLoggedInUser;
               this.formGroup.patchValue(this.patchedUser);
               console.log('UserObject- ', this.patchedUser);
+              this.imageInfos = this._userService.getUserProfilePicture(
+                this.patchedUser.id
+              );
             }),
             switchMap((user) =>
               this._userService.fetchSingleUserProfile(user.id).pipe(
@@ -109,11 +123,74 @@ export class ProfileComponent implements OnInit {
         )
       )
       .subscribe();
+
+
   }
 
   ngOnDestroy() {
     this._userSubscription.unsubscribe();
   }
+
+  public selectFile(event: any): void{
+    this.imageLoadStatusMessage = '';
+    this.imagePreview = '';
+    this.progress = 0;
+    this.selectedFiles = event.target.files;
+
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+
+      if (file) {
+        this.imagePreview = '';
+        this.currentFile = file;
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => {
+          console.log(e.target.result);
+          this.imagePreview = e.target.result;
+        };
+        reader.readAsDataURL(this.currentFile);
+      }
+    }
+  }
+
+  public upload(): void{
+    this.progress = 0;
+
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        this._userService.uploadProfilePicture(this.patchedUser.id, this.currentFile).subscribe({
+          next: (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round((100 * event.loaded) / event.total);
+            } else if (
+              event instanceof HttpResponse
+            ) {
+              this.imageLoadStatusMessage = event.body.message;
+              this.imageInfos = this._userService.getUserProfilePicture(this.patchedUser.id);
+            }
+          },
+          error: (err: any) => {
+            console.log(err);
+            this.progress = 0;
+            if (err.error && err.error.message) {
+              this.imageLoadStatusMessage = err.error.message;
+            } else {
+              this.imageLoadStatusMessage = 'The Image upload process has failed. Please try again.'
+            }
+          },
+          complete: () => {
+            this.currentFile = undefined;
+          }
+        });
+      }
+    }
+    this.selectedFiles = undefined;
+  }
+
+
 
   public update(): void {
     this.patchedUser = this.formGroup.value;

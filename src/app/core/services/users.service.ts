@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 
@@ -39,7 +39,6 @@ export class UsersService {
       accept: 'application/json',
     }),
   };
-
 
   constructor(
     private http: HttpClient,
@@ -183,6 +182,23 @@ export class UsersService {
     );
   }
 
+  public uploadProfilePicture(
+    id: number,
+    file: File
+  ): Observable<HttpEvent<any>> {
+    const userProfilePictureForm: FormData = new FormData();
+    const profilePicture = userProfilePictureForm.append('file', file);
+    return this.http.patch<any>(
+      `${environment.apiUrl}/users` + id + '/',
+      { profilePicture },
+      this.httpOptions
+    );
+  }
+
+  public getUserProfilePicture(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/users` + id + '/', this.httpOptions );
+  }
+
   public deleteSingleUser(id: number): Observable<User> {
     return this.http.delete<User>(
       `${environment.apiUrl}/users/` + id + '/',
@@ -196,14 +212,13 @@ export class UsersService {
         `${environment.apiUrl}/user-profile`,
         this.httpOptions
       )
-      .pipe(map(
-        (userProfiles: UserProfile[]) =>
-        {
+      .pipe(
+        map((userProfiles: UserProfile[]) => {
           this._$userProfileDataSource.next(userProfiles);
-          return userProfiles
-        }
-      )
-        , shareReplay());
+          return userProfiles;
+        }),
+        shareReplay()
+      );
   }
 
   public fetchSingleUserProfile(user: number): Observable<UserProfile> {
@@ -212,15 +227,15 @@ export class UsersService {
       this.httpOptions
     );
   }
-// This method will edit all the user profiles that are sitting on one table in Django. T
+  // This method will edit all the user profiles that are sitting on one table in Django. T
   public editSingleUserProfile(
     user: number,
     education_bio: string,
     professional_bio: string,
     professional_hobbies: string,
     personal_hobbies: string,
-    social_hobbies: string,
-    ): Observable<UserProfile> {
+    social_hobbies: string
+  ): Observable<UserProfile> {
     return this.http.patch<UserProfile>(
       `${environment.apiUrl}/user-profile/` + user + '/',
       {
@@ -228,7 +243,7 @@ export class UsersService {
         professional_bio,
         professional_hobbies,
         personal_hobbies,
-        social_hobbies
+        social_hobbies,
       },
 
       this.httpOptions

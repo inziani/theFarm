@@ -342,6 +342,14 @@ export class UserBioUserUpdateFormGroup extends FormGroup {
   }
 }
 
+// export class UserProfilePictureUpdateFormGroup extends FormGroup{
+
+//   constructor() {
+//     super({
+
+//     })
+//   }
+// }
 
 export class UserHobbiesUserUpdateFormGroup extends FormGroup {
   constructor() {

@@ -26,6 +26,10 @@ export class User{
   }
 }
 
+export interface profilePicture {
+  profile_pic: string,
+}
+
 export interface UserProfile {
 
     user: number,
@@ -34,7 +38,7 @@ export interface UserProfile {
     professional_hobbies: string,
     personal_hobbies: string,
     social_hobbies: string,
-    // profile_pic: string,
+
     create_at: Date,
     updated_at: Date
 
