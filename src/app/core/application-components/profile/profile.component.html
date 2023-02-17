@@ -14,13 +14,22 @@
               <mat-card-subtitle></mat-card-subtitle>
             </mat-card-title-group>
             <mat-card-content>
+              <div class="col">
+                <label class="btn btn-default p-0">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    (change)="selectFile($event)"
+                  />
+                </label>
+              </div>
+
               <mat-card-actions align="end">
                 <button
                   class="justify-content-center"
                   type="submit"
                   mat-stroked-button
                   color="primary"
-                 
                   (click)="upload()"
                 >
                   Update
@@ -433,7 +442,10 @@
                 <label for="professional" class="form-label">
                   <h2 style="font-weight: lighter">Professional</h2></label
                 >
-                <textarea rows="10" formControlName="professional_hobbies"></textarea>
+                <textarea
+                  rows="10"
+                  formControlName="professional_hobbies"
+                ></textarea>
               </div>
             </div>
             <div class="row my-3">
@@ -441,13 +453,17 @@
                 <label for="personal" class="form-label"
                   ><h2 style="font-weight: lighter">Personal</h2></label
                 >
-                <textarea rows="10" formControlName="personal_hobbies"></textarea>
+                <textarea
+                  rows="10"
+                  formControlName="personal_hobbies"
+                ></textarea>
               </div>
             </div>
             <div class="row my-3">
               <div class="col-md-12">
                 <label for="social" class="form-label">
-                  <h2 style="font-weight: lighter">Social</h2></label>
+                  <h2 style="font-weight: lighter">Social</h2></label
+                >
                 <textarea rows="10" formControlName="social_hobbies"></textarea>
               </div>
             </div>
