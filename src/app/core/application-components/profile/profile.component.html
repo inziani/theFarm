@@ -1,44 +1,86 @@
-<!-- Profile picture sections -->
 <div class="container my-5 mx-5">
   <div class="row">
+    <!-- Profile picture sections -->
     <div class="col-md-4 my-5">
       <div class="row">
-        <div class="col-md-12 justify-content-center my-5">
-          <mat-card class="profile-picture">
-            <img mat-card-md-image class="mt-3" src="/assets/images/vri.png" />
-            <mat-card-title-group class="mt-3">
-              <mat-card-title *ngFor="let loggedUser of currentLoggedInUser">
-                {{ loggedUser.first_name }} {{ loggedUser.middle_name }}
-                {{ loggedUser.last_name }}</mat-card-title
-              >
-              <mat-card-subtitle></mat-card-subtitle>
-            </mat-card-title-group>
-            <mat-card-content>
-              <div class="col">
-                <label class="btn btn-default p-0">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    (change)="selectFile($event)"
-                  />
-                </label>
-              </div>
+        <form [formGroup]="formGroupProfilePicture">
+          <div class="col-md-12 justify-content-center my-5">
+            <mat-card class="profile-picture">
+              <img mat-card-md-image class="mt-3" src="/assets/images/vri.png" />
+              <h3 style="color: #fb8500; font-weight: lighter;" class="my-3">{{first_name}} {{middle_name}} {{last_name}}</h3>
+              <!-- <img src="upLoadPict.name" *ngIf="imageSrc" style="height: 250px; width:400px"> -->
+              <mat-card-title-group class="mt-3">
+                <mat-card-title></mat-card-title>
+                <mat-card-subtitle ></mat-card-subtitle>
+              </mat-card-title-group>
 
-              <mat-card-actions align="end">
+              <!-- Testing the picture upload process -->
+              <mat-card-content>
+                <input
+                  formControlName="profile_pic"
+                  class="profile-picture-upload"
+                  type="file"
+                  accept="image/*"
+                  (change)="onSelectPicture($event)"
+                />
                 <button
-                  class="justify-content-center"
                   type="submit"
-                  mat-stroked-button
-                  color="primary"
-                  (click)="upload()"
+                  class="btn btn-primary btn-sm"
+                  [disabled]="selectedFiles"
+                  (click)="submitPic()"
                 >
-                  Update
+                  Save Picture
                 </button>
-              </mat-card-actions>
-            </mat-card-content>
-          </mat-card>
-        </div>
+                <!-- Picture loading and preview section -->
+                <!-- <div>
+                <img src="imagePreview" class="preview" />
+              </div> -->
+                <!-- <div *ngIf="currentFile && progress" class="progress my-3">
+                <div
+                  class="progress-bar progress-bar-info"
+                  role="progressbar"
+                  attr.aria-valuenow="{{ progress }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: progress + '%' }"
+                >
+                  {{ progress }}%
+                </div>
+              </div> -->
+                <div
+                  *ngIf="imageLoadStatusMessage"
+                  class="alert alert-secondary"
+                  role="alert"
+                >
+                  {{ imageLoadStatusMessage }}
+                </div>
+
+                <!-- <div class="card mt-3">
+                <div class="card-header">List of Images</div>
+                <ul class="list-group list-group-flush">
+                  <li
+                    *ngFor="let image of imageInfos | async"
+                    class="list-group-item"
+                  >
+                    <p>
+                      <a href="{{ image.url }}">{{ image.name }}</a>
+                    </p>
+                    <img
+                      src="{{ image.url }}"
+                      alt="{{ image.name }}"
+                      height="80px"
+                    />
+                  </li>
+                </ul>
+              </div> -->
+              </mat-card-content>
+              <!-- End of Picture loading and preview section -->
+            </mat-card>
+          </div>
+        </form>
       </div>
+
+      <!-- End of Profile Picture  -->
       <div class="row">
         <div class="col-md-12">
           <div class="container my-2 justify-content-center">

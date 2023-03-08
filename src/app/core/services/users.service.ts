@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 
@@ -24,7 +24,6 @@ export class UsersService {
   public user!: number;
   public userList!: User[];
   public loggedInUser!: any;
-  public currentLoggedInUser!: User[];
   private userAction = new BehaviorSubject<string>('');
   public data: Observable<string> = this.userAction.asObservable();
 
@@ -56,7 +55,6 @@ export class UsersService {
           this.loggedInUser = this.userList.filter(
             (person: User) => person.id === this.user
           );
-          this.currentLoggedInUser = this.loggedInUser;
         });
       }
     );
@@ -182,21 +180,54 @@ export class UsersService {
     );
   }
 
+  public uploadProfilePictureTest(
+    id: number,
+    profile_pic: File
+  ): Observable<any> {
+    const userProfilePictureForm: FormData = new FormData();
+    userProfilePictureForm.append('profile_pic', profile_pic);
+    return this.http.put(
+      `${environment.apiUrl}/user-profile/` + id + '/',
+      { userProfilePictureForm },
+      this.httpOptions
+    );
+  }
+
   public uploadProfilePicture(
     id: number,
-    file: File
-  ): Observable<HttpEvent<any>> {
-    const userProfilePictureForm: FormData = new FormData();
-    const profilePicture = userProfilePictureForm.append('file', file);
-    return this.http.patch<any>(
-      `${environment.apiUrl}/users` + id + '/',
-      { profilePicture },
+    education_bio: string,
+    professional_bio: string,
+    professional_hobbies: string,
+    personal_hobbies: string,
+    social_hobbies: string,
+    profile_pic: File
+  ): Observable<UserProfile> {
+
+    const formData: FormData = new FormData();
+    formData.append('profile_pic', profile_pic);
+    var option = { file: profile_pic };
+
+    console.log('****appendedfile', profile_pic);
+    console.log('***its here', formData.getAll('profile_pic'));
+    return this.http.patch<UserProfile>(
+      `${environment.apiUrl}/user-profile/` + id + '/',
+      {
+        education_bio,
+        professional_bio,
+        professional_hobbies,
+        personal_hobbies,
+        social_hobbies,
+        option,
+      },
       this.httpOptions
     );
   }
 
   public getUserProfilePicture(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/users` + id + '/', this.httpOptions );
+    return this.http.get<any>(
+      `${environment.apiUrl}/user-profile/` + id + '/',
+      this.httpOptions
+    );
   }
 
   public deleteSingleUser(id: number): Observable<User> {
@@ -221,8 +252,8 @@ export class UsersService {
       );
   }
 
-  public fetchSingleUserProfile(user: number): Observable<UserProfile> {
-    return this.http.get<UserProfile>(
+  public fetchSingleUserProfile(user: number): Observable<any> {
+    return this.http.get<any>(
       `${environment.apiUrl}/user-profile/` + user + '/',
       this.httpOptions
     );

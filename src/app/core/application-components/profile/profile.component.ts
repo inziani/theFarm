@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpEventType, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
@@ -12,8 +12,12 @@ import {
   UserUpdateFormGroup,
   UserBioUserUpdateFormGroup,
   UserHobbiesUserUpdateFormGroup,
+  UserProfilePictureUpdateFormGroup,
 } from '@app/core/shared/models/user-update-form.model';
-import { User, UserProfile } from '@app/core/shared/models/user.model';
+import {
+  User,
+  UserProfile,
+} from '@app/core/shared/models/user.model';
 import { Subscription, switchMap, tap, map, mapTo, Observable } from 'rxjs';
 
 @Component({
@@ -22,12 +26,11 @@ import { Subscription, switchMap, tap, map, mapTo, Observable } from 'rxjs';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  public loggedInUser: string = 'Valentine Robai Inziani';
-  public color = '#fb8500';
   public itemSelected!: string;
   public formGroup = new UserUpdateFormGroup();
   public formGroupBio = new UserBioUserUpdateFormGroup();
   public formGroupHobbies = new UserHobbiesUserUpdateFormGroup();
+  public formGroupProfilePicture = new UserProfilePictureUpdateFormGroup();
   public isLoading: boolean = false;
   public maxDate!: Date;
   public formSubmitted: boolean = false;
@@ -39,20 +42,16 @@ export class ProfileComponent implements OnInit {
   ];
 
   // Logged in User data
-  private _isAuthenticated!: boolean;
   public user!: number;
+  public first_name!: string;
+  public middle_name!: string;
+  public last_name!: string;
   private _userSubscription!: Subscription;
-  private _$userProfilesSubscription!: Subscription;
-  private _$userProfileSubscription!: Subscription;
-  public userList!: User[];
-  public loggedUser!: any;
-  public currentLoggedInUser!: User[];
-  public currentLoggedInUserProfile!: UserProfile;
   public patchedUser!: User;
+  public userProfilePatchedUser!: UserProfile;
   public datePipe!: any;
   public errorMessage!: string;
-  public userProfilePatchedUser!: UserProfile;
-  public userProfilePatchedUserList!: UserProfile[];
+  public upLoadPict: any;
 
   public tiles: ProfilePageGridInterface[] = [
     { text: 'Three', cols: 2, rows: 8 },
@@ -67,14 +66,21 @@ export class ProfileComponent implements OnInit {
   ];
 
   //  Profile picture upload data
-
   public selectedFiles?: FileList;
   public currentFile?: File;
   public progress = 0;
   public imageLoadStatusMessage = '';
   public imagePreview = '';
   public imageInfos?: Observable<any>;
+  public imageSrc!: string;
+  public httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      accept: 'application/json',
+    }),
+  };
 
+  // End of picture data
 
   constructor(
     private _userService: UsersService,
@@ -94,17 +100,15 @@ export class ProfileComponent implements OnInit {
       .pipe(
         tap((user) => {
           this.user = user;
-          console.log('No Retreat User Number-', this.user);
         }),
         switchMap((user) =>
           this._userService.fetchSingleUser(user).pipe(
             tap((currentLoggedInUser) => {
               this.patchedUser = currentLoggedInUser;
+              this.first_name = this.patchedUser.first_name;
+              this.middle_name = this.patchedUser.middle_name;
+              this.last_name = this.patchedUser.last_name
               this.formGroup.patchValue(this.patchedUser);
-              console.log('UserObject- ', this.patchedUser);
-              this.imageInfos = this._userService.getUserProfilePicture(
-                this.patchedUser.id
-              );
             }),
             switchMap((user) =>
               this._userService.fetchSingleUserProfile(user.id).pipe(
@@ -112,10 +116,6 @@ export class ProfileComponent implements OnInit {
                   this.userProfilePatchedUser = currentLoggedInUserProfile;
                   this.formGroupBio.patchValue(this.userProfilePatchedUser);
                   this.formGroupHobbies.patchValue(this.userProfilePatchedUser);
-                  console.log(
-                    'UserProfileObject-',
-                    this.userProfilePatchedUser
-                  );
                 })
               )
             )
@@ -123,15 +123,70 @@ export class ProfileComponent implements OnInit {
         )
       )
       .subscribe();
-
-
   }
 
   ngOnDestroy() {
     this._userSubscription.unsubscribe();
   }
+  // Test Code for image upload
 
-  public selectFile(event: any): void{
+  public onSelectPicture(event: any) {
+    const reader = new FileReader();
+    this.upLoadPict = event.target.files[0];
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+
+        this.formGroupProfilePicture.patchValue({
+          fileSource: this.upLoadPict,
+        });
+      };
+    }
+  }
+
+  public submitPic() {
+    alert('whatt?');
+    const id = this.patchedUser.id;
+    const profile_pic = this.upLoadPict;
+    const file: File = profile_pic;
+
+    return this._userService
+      .uploadProfilePicture(
+        this.patchedUser.id,
+        this.userProfilePatchedUser.education_bio,
+        this.userProfilePatchedUser.professional_bio,
+        this.userProfilePatchedUser.professional_hobbies,
+        this.userProfilePatchedUser.personal_hobbies,
+        this.userProfilePatchedUser.social_hobbies,
+        file
+      )
+      .subscribe({
+        next: (file) => console.log('I have no clue whats going on!', file),
+        error: (err: any) => {
+          console.log(err);
+          this.progress = 0;
+
+          if (err.error && err.error.message) {
+            this.imageLoadStatusMessage = err.error.message;
+          } else {
+            this.imageLoadStatusMessage =
+              'The Image upload process has failed. Please try again.';
+          }
+          this.currentFile = undefined;
+        },
+        complete: () => {
+          console.info('Complete');
+        },
+      });
+  }
+
+  // End of test code for image upload
+
+  public selectFile(event: any): void {
     this.imageLoadStatusMessage = '';
     this.imagePreview = '';
     this.progress = 0;
@@ -154,43 +209,57 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  public upload(): void{
+  public upload(): void {
     this.progress = 0;
 
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
+
       if (file) {
         this.currentFile = file;
-        this._userService.uploadProfilePicture(this.patchedUser.id, this.currentFile).subscribe({
-          next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.progress = Math.round((100 * event.loaded) / event.total);
-            } else if (
-              event instanceof HttpResponse
-            ) {
-              this.imageLoadStatusMessage = event.body.message;
-              this.imageInfos = this._userService.getUserProfilePicture(this.patchedUser.id);
-            }
-          },
-          error: (err: any) => {
-            console.log(err);
-            this.progress = 0;
-            if (err.error && err.error.message) {
-              this.imageLoadStatusMessage = err.error.message;
-            } else {
-              this.imageLoadStatusMessage = 'The Image upload process has failed. Please try again.'
-            }
-          },
-          complete: () => {
-            this.currentFile = undefined;
-          }
-        });
+
+        this._userService
+          .uploadProfilePicture(
+            this.patchedUser.id,
+            this.userProfilePatchedUser.education_bio,
+            this.userProfilePatchedUser.professional_bio,
+            this.userProfilePatchedUser.professional_hobbies,
+            this.userProfilePatchedUser.personal_hobbies,
+            this.userProfilePatchedUser.social_hobbies,
+            this.currentFile
+          )
+          .subscribe({
+            next: (event: any) => {
+              if (event.type === HttpEventType.UploadProgress) {
+                this.progress = Math.round((100 * event.loaded) / event.total);
+              } else if (event instanceof HttpResponse) {
+                this.imageLoadStatusMessage = event.body.message;
+                this.imageInfos = this._userService.getUserProfilePicture(
+                  this.patchedUser.id
+                );
+                console.log('ProfilePictureListing - ', this.imageInfos);
+              }
+            },
+            error: (err: any) => {
+              console.log(err);
+              this.progress = 0;
+
+              if (err.error && err.error.message) {
+                this.imageLoadStatusMessage = err.error.message;
+              } else {
+                this.imageLoadStatusMessage =
+                  'The Image upload process has failed. Please try again.';
+              }
+              this.currentFile = undefined;
+            },
+            complete: () => {
+              console.info('Complete');
+            },
+          });
       }
     }
     this.selectedFiles = undefined;
   }
-
-
 
   public update(): void {
     this.patchedUser = this.formGroup.value;

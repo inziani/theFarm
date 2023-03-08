@@ -342,14 +342,6 @@ export class UserBioUserUpdateFormGroup extends FormGroup {
   }
 }
 
-// export class UserProfilePictureUpdateFormGroup extends FormGroup{
-
-//   constructor() {
-//     super({
-
-//     })
-//   }
-// }
 
 export class UserHobbiesUserUpdateFormGroup extends FormGroup {
   constructor() {
@@ -405,6 +397,78 @@ export class UserHobbiesUserUpdateFormGroup extends FormGroup {
     let messages: string[] = [];
     Object.values(this.controls).forEach((c) =>
       messages.push(...(c as UserBioUpdateFormControl).getValidationMessages())
+    );
+    return messages;
+  }
+}
+
+export class UserProfilePictureUpdateFormControl extends FormControl {
+  label: string;
+  modelProperty: string;
+
+  constructor(label: string, property: string, value: any, validator: any) {
+    super(value, validator);
+    this.label = label;
+    this.modelProperty = property;
+  }
+
+  getValidationMessages() {
+    let messages: string[] = [];
+    if (this.errors) {
+      for (let errorName in this.errors) {
+        switch (errorName) {
+          case 'email':
+            messages.push(`Please enter a valid ${this.label} address`);
+            break;
+          case 'required':
+            messages.push(`${this.label} is a required field `);
+            break;
+          case 'minLength':
+            messages.push(
+              `${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`
+            );
+            break;
+          case 'maxLength':
+            messages.push(
+              `The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`
+            );
+            break;
+          case 'pattern':
+            messages.push(
+              `This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `
+            );
+            break;
+        }
+      }
+    }
+    return messages;
+  }
+}
+
+
+export class UserProfilePictureUpdateFormGroup extends FormGroup {
+  constructor() {
+    super({
+      profile_pic: new UserProfilePictureUpdateFormControl(
+        'Profile Picture',
+        'profile_pic',
+        '',
+        Validators.required
+      ),
+    });
+  }
+
+  getProfilePicValidationMessages(profile_pic: string): string[] {
+    return (
+      this.controls['profile_pic'] as UserProfilePictureUpdateFormControl
+    ).getValidationMessages();
+  }
+  getFormValidationMessages(): string[] {
+    let messages: string[] = [];
+    Object.values(this.controls).forEach((c) =>
+      messages.push(
+        ...(c as UserProfilePictureUpdateFormControl).getValidationMessages()
+      )
     );
     return messages;
   }
