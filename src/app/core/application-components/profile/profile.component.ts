@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { HttpEventType, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit {
   public first_name!: string;
   public middle_name!: string;
   public last_name!: string;
+  public imageUrl!: string;
   private _userSubscription!: Subscription;
   public patchedUser!: User;
   public userProfilePatchedUser!: UserProfile;
@@ -72,13 +73,7 @@ export class ProfileComponent implements OnInit {
   public imageLoadStatusMessage = '';
   public imagePreview = '';
   public imageInfos?: Observable<any>;
-  public imageSrc!: string;
-  public httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      accept: 'application/json',
-    }),
-  };
+
 
   // End of picture data
 
@@ -107,7 +102,7 @@ export class ProfileComponent implements OnInit {
               this.patchedUser = currentLoggedInUser;
               this.first_name = this.patchedUser.first_name;
               this.middle_name = this.patchedUser.middle_name;
-              this.last_name = this.patchedUser.last_name
+              this.last_name = this.patchedUser.last_name;
               this.formGroup.patchValue(this.patchedUser);
             }),
             switchMap((user) =>
@@ -116,6 +111,7 @@ export class ProfileComponent implements OnInit {
                   this.userProfilePatchedUser = currentLoggedInUserProfile;
                   this.formGroupBio.patchValue(this.userProfilePatchedUser);
                   this.formGroupHobbies.patchValue(this.userProfilePatchedUser);
+                  this.imageUrl = currentLoggedInUserProfile.profile_pic;
                 })
               )
             )
@@ -128,63 +124,7 @@ export class ProfileComponent implements OnInit {
   ngOnDestroy() {
     this._userSubscription.unsubscribe();
   }
-  // Test Code for image upload
-
-  public onSelectPicture(event: any) {
-    const reader = new FileReader();
-    this.upLoadPict = event.target.files[0];
-
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        this.imageSrc = reader.result as string;
-
-        this.formGroupProfilePicture.patchValue({
-          fileSource: this.upLoadPict,
-        });
-      };
-    }
-  }
-
-  public submitPic() {
-    alert('whatt?');
-    const id = this.patchedUser.id;
-    const profile_pic = this.upLoadPict;
-    const file: File = profile_pic;
-
-    return this._userService
-      .uploadProfilePicture(
-        this.patchedUser.id,
-        this.userProfilePatchedUser.education_bio,
-        this.userProfilePatchedUser.professional_bio,
-        this.userProfilePatchedUser.professional_hobbies,
-        this.userProfilePatchedUser.personal_hobbies,
-        this.userProfilePatchedUser.social_hobbies,
-        file
-      )
-      .subscribe({
-        next: (file) => console.log('I have no clue whats going on!', file),
-        error: (err: any) => {
-          console.log(err);
-          this.progress = 0;
-
-          if (err.error && err.error.message) {
-            this.imageLoadStatusMessage = err.error.message;
-          } else {
-            this.imageLoadStatusMessage =
-              'The Image upload process has failed. Please try again.';
-          }
-          this.currentFile = undefined;
-        },
-        complete: () => {
-          console.info('Complete');
-        },
-      });
-  }
-
-  // End of test code for image upload
+  // Profile Picture Upload
 
   public selectFile(event: any): void {
     this.imageLoadStatusMessage = '';
@@ -209,7 +149,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  public upload(): void {
+  public uploadPicture(): void {
     this.progress = 0;
 
     if (this.selectedFiles) {
@@ -221,11 +161,6 @@ export class ProfileComponent implements OnInit {
         this._userService
           .uploadProfilePicture(
             this.patchedUser.id,
-            this.userProfilePatchedUser.education_bio,
-            this.userProfilePatchedUser.professional_bio,
-            this.userProfilePatchedUser.professional_hobbies,
-            this.userProfilePatchedUser.personal_hobbies,
-            this.userProfilePatchedUser.social_hobbies,
             this.currentFile
           )
           .subscribe({
@@ -234,10 +169,6 @@ export class ProfileComponent implements OnInit {
                 this.progress = Math.round((100 * event.loaded) / event.total);
               } else if (event instanceof HttpResponse) {
                 this.imageLoadStatusMessage = event.body.message;
-                this.imageInfos = this._userService.getUserProfilePicture(
-                  this.patchedUser.id
-                );
-                console.log('ProfilePictureListing - ', this.imageInfos);
               }
             },
             error: (err: any) => {
@@ -260,6 +191,8 @@ export class ProfileComponent implements OnInit {
     }
     this.selectedFiles = undefined;
   }
+
+  // End of profile picture upload
 
   public update(): void {
     this.patchedUser = this.formGroup.value;

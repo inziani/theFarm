@@ -36,7 +36,7 @@ export class AuthenticationService {
     professional_hobbies: 'professional_hobbies',
     personal_hobbies: 'personal_hobbies',
     social_hobbies: 'social_hobbies',
-    profile_pic: new File([], 'fileName'),
+    profile_pic: { url: ''},
     create_at: new Date(),
     updated_at: new Date(),
   });
@@ -49,7 +49,7 @@ export class AuthenticationService {
     professional_hobbies: 'professional_hobbies',
     personal_hobbies: 'personal_hobbies',
     social_hobbies: 'social_hobbies',
-    profile_pic: new File([], 'fileName'),
+    profile_pic: {url: ''},
     create_at: new Date(),
     updated_at: new Date(),
   });

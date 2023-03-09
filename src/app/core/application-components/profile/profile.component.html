@@ -6,36 +6,35 @@
         <form [formGroup]="formGroupProfilePicture">
           <div class="col-md-12 justify-content-center my-5">
             <mat-card class="profile-picture">
-              <img mat-card-md-image class="mt-3" src="/assets/images/vri.png" />
+               <img mat-card-md-image class="mt-3" [src]="imageUrl"/>
               <h3 style="color: #fb8500; font-weight: lighter;" class="my-3">{{first_name}} {{middle_name}} {{last_name}}</h3>
-              <!-- <img src="upLoadPict.name" *ngIf="imageSrc" style="height: 250px; width:400px"> -->
               <mat-card-title-group class="mt-3">
                 <mat-card-title></mat-card-title>
                 <mat-card-subtitle ></mat-card-subtitle>
               </mat-card-title-group>
 
-              <!-- Testing the picture upload process -->
+              <!-- Profile picture upload -->
               <mat-card-content>
                 <input
                   formControlName="profile_pic"
                   class="profile-picture-upload"
                   type="file"
                   accept="image/*"
-                  (change)="onSelectPicture($event)"
+                  (change)="selectFile($event)"
                 />
                 <button
                   type="submit"
                   class="btn btn-primary btn-sm"
                   [disabled]="selectedFiles"
-                  (click)="submitPic()"
+                  (click)="uploadPicture()"
                 >
                   Save Picture
                 </button>
                 <!-- Picture loading and preview section -->
-                <!-- <div>
-                <img src="imagePreview" class="preview" />
-              </div> -->
-                <!-- <div *ngIf="currentFile && progress" class="progress my-3">
+                <div>
+                <img [src]="imagePreview" class="preview" />
+              </div>
+                <div *ngIf="currentFile && progress" class="progress my-3">
                 <div
                   class="progress-bar progress-bar-info"
                   role="progressbar"
@@ -46,10 +45,10 @@
                 >
                   {{ progress }}%
                 </div>
-              </div> -->
+              </div>
                 <div
                   *ngIf="imageLoadStatusMessage"
-                  class="alert alert-secondary"
+                  class="alert alert-danger"
                   role="alert"
                 >
                   {{ imageLoadStatusMessage }}

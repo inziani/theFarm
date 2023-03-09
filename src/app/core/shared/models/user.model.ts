@@ -29,7 +29,7 @@ export interface UserProfile {
   professional_hobbies: string;
   personal_hobbies: string;
   social_hobbies: string;
-  profile_pic: File;
+  profile_pic: {url: string},
   create_at: Date;
   updated_at: Date;
 }
