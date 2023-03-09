@@ -73,6 +73,7 @@ export class ProfileComponent implements OnInit {
   public imageLoadStatusMessage = '';
   public imagePreview = '';
   public imageInfos?: Observable<any>;
+  public pictureLoadingSuccess!: string;
 
 
   // End of picture data
@@ -131,6 +132,7 @@ export class ProfileComponent implements OnInit {
     this.imagePreview = '';
     this.progress = 0;
     this.selectedFiles = event.target.files;
+    console.log('Selected Files', this.selectedFiles);
 
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
@@ -141,7 +143,7 @@ export class ProfileComponent implements OnInit {
         const reader = new FileReader();
 
         reader.onload = (e: any) => {
-          console.log(e.target.result);
+
           this.imagePreview = e.target.result;
         };
         reader.readAsDataURL(this.currentFile);
@@ -172,7 +174,6 @@ export class ProfileComponent implements OnInit {
               }
             },
             error: (err: any) => {
-              console.log(err);
               this.progress = 0;
 
               if (err.error && err.error.message) {
@@ -190,6 +191,10 @@ export class ProfileComponent implements OnInit {
       }
     }
     this.selectedFiles = undefined;
+    this.imagePreview = ''
+    this._dialog.open(ChangesSavedDialogComponent, {
+      data: (this.pictureLoadingSuccess ='The Picture'),
+    });
   }
 
   // End of profile picture upload
@@ -197,7 +202,6 @@ export class ProfileComponent implements OnInit {
   public update(): void {
     this.patchedUser = this.formGroup.value;
     this.userProfilePatchedUser = this.formGroupBio.value;
-    console.log('patchProfile - ', this.userProfilePatchedUser);
     this.formSubmitted = !this.formSubmitted;
     this.isDisabled = !this.isDisabled;
   }

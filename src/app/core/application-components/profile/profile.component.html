@@ -25,7 +25,7 @@
                 <button
                   type="submit"
                   class="btn btn-primary btn-sm"
-                  [disabled]="selectedFiles"
+                  [disabled]="!selectedFiles"
                   (click)="uploadPicture()"
                 >
                   Save Picture
@@ -53,32 +53,12 @@
                 >
                   {{ imageLoadStatusMessage }}
                 </div>
-
-                <!-- <div class="card mt-3">
-                <div class="card-header">List of Images</div>
-                <ul class="list-group list-group-flush">
-                  <li
-                    *ngFor="let image of imageInfos | async"
-                    class="list-group-item"
-                  >
-                    <p>
-                      <a href="{{ image.url }}">{{ image.name }}</a>
-                    </p>
-                    <img
-                      src="{{ image.url }}"
-                      alt="{{ image.name }}"
-                      height="80px"
-                    />
-                  </li>
-                </ul>
-              </div> -->
               </mat-card-content>
               <!-- End of Picture loading and preview section -->
             </mat-card>
           </div>
         </form>
       </div>
-
       <!-- End of Profile Picture  -->
       <div class="row">
         <div class="col-md-12">

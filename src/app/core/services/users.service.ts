@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 
@@ -15,6 +15,7 @@ import {
 
 import { AuthenticationService } from './authentication.service';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+
 
 @Injectable({
   providedIn: 'root',
@@ -238,32 +239,10 @@ export class UsersService {
     profile_pic: File
   ): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-    formData.append('profile_pic', profile_pic);
-    return this.http.post<any>(
-      `${environment.apiUrl}/user-profile/` + id + '/',
-      {
-        formData,
-      },
-      {
-        reportProgress: true,
-        responseType: 'json',
-      }
-    );
+    formData.append('profile_pic', profile_pic, profile_pic.name);
+    return this.http.put<any>(
+      `${environment.apiUrl}/user-profile/` + id + '/', formData);
   }
-
-  // public getUserProfilePicture(id: number): Observable<any> {
-  //   return this.http.get<any>(
-  //     `${environment.apiUrl}/user-profile/` + id + '/',
-  //     this.httpOptions
-  //   );
-  // }
-
-  //  End of updating profile picture code
-
-
-  /*
-  Edit Personal User Profile Information
-  */
 
   public oneEditUserProfilePersonalInformation(
     first_name: string,
