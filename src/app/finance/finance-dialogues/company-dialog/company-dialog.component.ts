@@ -13,6 +13,7 @@ import {
   Language,
 } from "@app/finance/finance-interfaces/finance-interfaces";
 import { ChangesSavedDialogComponent } from "@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component";
+import { data } from "autoprefixer";
 
 @Component({
   selector: "app-company-dialog",
@@ -72,14 +73,23 @@ export class CompanyDialogComponent implements OnInit {
         this.company.mobileNumber,
         this.company.email
       )
-      .subscribe((companyEdited) => {
-        if (companyEdited) {
-          this.dialog.open(ChangesSavedDialogComponent);
-        }
-      });
+      .subscribe(
+        {
+          next: (companyEdited) => {
+            this.dialog.open(
+              ChangesSavedDialogComponent,
+              { data: (this.company = companyEdited) }
+            )
+          },
+          error: (err) => this.errorMessage = err,
+          complete: () => console.info('Complete')
+        });
+
     this.formGroup.reset();
     this.formSubmitted = false;
   }
+
+
 
   close() {
     this.dialogRef.close();
