@@ -1,100 +1,73 @@
-import { FinanceNode } from "../finance-interfaces/gl-tree-interface";
-
+import { FinanceNode } from '../finance-interfaces/gl-tree-interface';
 
 export const GL_TREE_DATA: FinanceNode[] = [
-
-   {
+  {
     name: 'smallFarms',
     iconname: 'home',
     routerLink: '/home',
-    children: []
+    children: [],
   },
   {
     name: 'Organizational Structure',
-    iconname: 'folder',
+    iconname: 'category',
     routerLink: '/finance',
-    children: []
+    children: [],
   },
-   {
+
+  {
     name: 'General Ledger',
-    iconname: 'folder',
-    routerLink: '/finance',
-     children: [
-
-        {
-    name: 'Master Data',
-    iconname: 'folder',
+    iconname: 'business',
     routerLink: '/finance',
     children: [
-      { name: 'Create Account', iconname: 'library_add', routerLink: '/glmasterdata', },
-      { name: 'Edit Account', iconname: 'edit', routerLink: '/glmasterdata'  },
-      { name: 'Display Account', iconname: 'library_books', routerLink: '/glmasterdata'  },
-      { name: 'Delete Account', iconname: 'delete', routerLink: '/glmasterdata'  }
-    ]
+      {
+        name: 'Master Data',
+        iconname: 'library_add',
+        routerLink: '/glmasterdata',
+      },
+      {
+        name: 'Document Entry',
+        iconname: 'description',
+        routerLink: '/glmasterdata',
+      },
+      {
+        name: 'Balances',
+        iconname: 'list',
+        routerLink: '/glmasterdata',
+      },
+      {
+        name: 'Reports',
+        iconname: 'analytics',
+        routerLink: '/glmasterdata',
+      },
+    ],
   },
+
   {
-    name: 'Document Entry',
-    iconname: 'folder',
-    routerLink: '/finance',
-    children: [
-      { name: 'Post Document', iconname: 'note_add', routerLink: '/finance' },
-      { name: 'Edit Document', iconname: 'edit', routerLink: '/finance' },
-      { name: 'Delete Document', iconname: 'delete', routerLink: '/finance'  },
-      { name: 'Document Display', iconname: 'pageview', routerLink: '/finance'  }
-    ]
-  },
-  {
-    name: 'Balances',
-    iconname: 'folder',
-    routerLink: '/finance',
-    children: [
-      { name: 'Account Balances', iconname: 'account_balance', routerLink: '/finance'  },
-      { name: 'Line Items', iconname: 'list_alt', routerLink: '/finance'  },
-      { name: 'Account Listing', iconname: 'format_list_numbered', routerLink: '/finance' }
-    ]
-       },
-
-    ]
-  },
-
-   {
     name: 'Payables',
     iconname: 'payment',
     routerLink: '/finance',
     children: [
       {
         name: 'Master Data',
-        iconname: 'folder',
+        iconname: 'library_add',
         routerLink: '/glmasterdata',
-        children: [
-      { name: 'Create Account', iconname: 'library_add', routerLink: '/glmasterdata', },
-      { name: 'Edit Account', iconname: 'edit', routerLink: '/glmasterdata'  },
-      { name: 'Display Account', iconname: 'library_books', routerLink: '/glmasterdata'  },
-      { name: 'Delete Account', iconname: 'delete', routerLink: '/glmasterdata'  }
-        ]
-
       },
       {
         name: 'Document Entry',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-          { name: 'Post Document', iconname: 'insert_drive_file' },
-          { name: 'Edit Document', iconname: 'description' },
-          { name: 'Delete Document', iconname: 'delete' },
-          { name: 'Document Display', iconname: 'speaker_notes' }]
+        iconname: 'description',
+        routerLink: '/glmasterdata',
       },
       {
-        name: 'Account',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-        { name: 'Account Balances' },
-        { name: 'Line Items' },
-        { name: 'Account Listing' }
-        ]
-      }
-    ]
+        name: 'Balances',
+        iconname: 'list',
+        routerLink: '/glmasterdata',
+      },
+      {
+        name: 'Reports',
+        iconname: 'analytics',
+        routerLink: '/glmasterdata',
+      },
+    ],
   },
   {
     name: 'Receivables',
@@ -103,39 +76,25 @@ export const GL_TREE_DATA: FinanceNode[] = [
     children: [
       {
         name: 'Master Data',
-        iconname: 'folder',
+        iconname: 'library_add',
         routerLink: '/glmasterdata',
-        children: [
-      { name: 'Create Account', iconname: 'library_add', routerLink: '/glmasterdata', },
-      { name: 'Edit Account', iconname: 'edit', routerLink: '/glmasterdata'  },
-      { name: 'Display Account', iconname: 'library_books', routerLink: '/glmasterdata'  },
-      { name: 'Delete Account', iconname: 'delete', routerLink: '/glmasterdata'  }
-        ]
-
       },
       {
         name: 'Document Entry',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-          { name: 'Post Document', iconname: 'insert_drive_file' },
-          { name: 'Edit Document', iconname: 'description' },
-          { name: 'Delete Document', iconname: 'delete' },
-          { name: 'Document Display', iconname: 'speaker_notes' }
-        ]
+        iconname: 'description',
+        routerLink: '/glmasterdata',
       },
       {
-        name: 'Account',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-        { name: 'Account Balances' },
-        { name: 'Line Items' },
-        { name: 'Account Listing' }
-        ]
-      }
-    ]
-
+        name: 'Balances',
+        iconname: 'list',
+        routerLink: '/glmasterdata',
+      },
+      {
+        name: 'Reports',
+        iconname: 'analytics',
+        routerLink: '/glmasterdata',
+      },
+    ],
   },
   {
     name: 'Fixed Assets',
@@ -144,39 +103,25 @@ export const GL_TREE_DATA: FinanceNode[] = [
     children: [
       {
         name: 'Master Data',
-        iconname: 'folder',
+        iconname: 'library_add',
         routerLink: '/glmasterdata',
-        children: [
-      { name: 'Create Account', iconname: 'library_add', routerLink: '/glmasterdata', },
-      { name: 'Edit Account', iconname: 'edit', routerLink: '/glmasterdata'  },
-      { name: 'Display Account', iconname: 'library_books', routerLink: '/glmasterdata'  },
-      { name: 'Delete Account', iconname: 'delete', routerLink: '/glmasterdata'  }
-        ]
-
       },
       {
         name: 'Document Entry',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-          { name: 'Post Document', iconname: 'insert_drive_file' },
-          { name: 'Edit Document', iconname: 'description' },
-          { name: 'Delete Document', iconname: 'delete' },
-          { name: 'Document Display', iconname: 'speaker_notes' }
-        ]
+        iconname: 'description',
+        routerLink: '/glmasterdata',
       },
       {
-        name: 'Account',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-          { name: 'Account Balances' },
-          { name: 'Line Items' },
-          { name: 'Account Listing' }
-        ]
-      }
-    ]
-
+        name: 'Balances',
+        iconname: 'list',
+        routerLink: '/glmasterdata',
+      },
+      {
+        name: 'Reports',
+        iconname: 'analytics',
+        routerLink: '/glmasterdata',
+      },
+    ],
   },
   {
     name: 'Banks',
@@ -185,46 +130,30 @@ export const GL_TREE_DATA: FinanceNode[] = [
     children: [
       {
         name: 'Master Data',
-        iconname: 'folder',
+        iconname: 'library_add',
         routerLink: '/glmasterdata',
-        children: [
-
-      { name: 'Create Account', iconname: 'library_add', routerLink: '/glmasterdata', },
-      { name: 'Edit Account', iconname: 'edit', routerLink: '/glmasterdata'  },
-      { name: 'Display Account', iconname: 'library_books', routerLink: '/glmasterdata'  },
-      { name: 'Delete Account', iconname: 'delete', routerLink: '/glmasterdata'  }
-        ]
-
       },
       {
         name: 'Document Entry',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-          { name: 'Post Document', iconname: 'insert_drive_file' },
-          { name: 'Edit Document', iconname: 'description' },
-          { name: 'Delete Document', iconname: 'delete' },
-          { name: 'Document Display', iconname: 'speaker_notes' }
-        ]
+        iconname: 'description',
+        routerLink: '/glmasterdata',
       },
       {
-        name: 'Account',
-        iconname: 'folder',
-        routerLink: '/finance',
-        children: [
-          { name: 'Account Balances' },
-          { name: 'Line Items' },
-          { name: 'Account Listing' }
-        ]
-      }
-    ]
-
+        name: 'Balances',
+        iconname: 'list',
+        routerLink: '/glmasterdata',
+      },
+      {
+        name: 'Reports',
+        iconname: 'analytics',
+        routerLink: '/glmasterdata',
+      },
+    ],
   },
-{
+  {
     name: 'Reporting',
     iconname: 'analytics',
     routerLink: '/finance',
-    children: []
-  },]
-
-
+    children: [],
+  },
+];
