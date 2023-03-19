@@ -7,7 +7,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 
 import { UsersService } from './core/services/users.service';
 import { AuthenticationService } from './core/services/authentication.service';
@@ -16,10 +20,11 @@ import { RestDataSource } from './core/shared/data/rest.datasource';
 import { DowndownDirective } from './core/shared/directives/dropdown.directive';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
-import { GoogleMapsModule } from '@angular/google-maps'
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faEdit, faTrash, faPlus, faHome, faBars } from '@fortawesome/free-solid-svg-icons';
-import { faTelegram, faTwitter, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { GoogleMapsModule } from '@angular/google-maps';
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './core/application-components/todo/todo.component';
@@ -94,105 +99,110 @@ import { DeleteDialogComponent } from './core/dialogues/delete-dialog/delete-dia
 import { ErrorHandlingDialogComponent } from './core/dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ObjectCreatedComponent } from './core/dialogues/object-created/object-created.component';
 import { UserUpdateDialogComponent } from './core/dialogues/user-update-dialog/user-update-dialog.component';
-
-
+import { IsoDatePipe } from './_helpers/iso-date.pipe';
+import { NumberRangesService } from './core/shared/data/number-ranges.service';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomePageComponent,
-        TodoComponent,
-        LoginComponent,
-        SignupComponent,
-        HeaderComponent,
-        ProfileComponent,
-        EditActivityComponent,
-        DowndownDirective,
-        LoadingSpinnerComponent,
-        ActivityCategorysComponent,
-        FooterComponent,
-        SideNavComponent,
-        ModulesComponent,
-        HomePageComponent,
-        LoginDialogComponent,
-        EditCategoryComponent,
-        CreateCategoryComponent,
-        DeleteCategoryDialogComponent,
-        AccountSettingsComponent,
-        BioComponent,
-        RoleAuthComponent,
-        PasswordSecComponent,
-        CreateActivityComponent,
-        ChangesSavedDialogComponent,
-        DeleteActivityDialogComponent,
-        AppLayoutComponent,
-        AuthenticationLayoutComponent,
-        FinanceHomeComponent,
-        FinanceLayoutComponent,
-        FinanceNavbarComponent,
-        FinanceSidenavComponent,
-        GlMasterDataComponent,
-        ProfileSidenavComponent,
-        ProfileLayoutComponent,
-        HomeSidenavComponent,
-        AgricultureDialogueComponent,
-        FinanceDialogueComponent,
-        HrDialogueComponent,
-        MaterialsDialogueComponent,
-        ProjectsDialogueComponent,
-        KnowledgeDialogueComponent,
-        FinanceFooterComponent,
-        SearchDialogComponent,
-        CompanyDialogComponent,
-        ChartOfAccountsDialogComponent,
-        ReportingAreaDialogComponent,
-        ControllingAreaDialogComponent,
-        BusinessAreaDialogComponent,
-        DeleteCompanyDialogComponent,
-        CreateCompanyDialogComponent,
-        DisplayCompanyDialogComponent,
-        OrgUnitListComponent,
-        OrgDetailsCompanyComponent,
-        OrgDetailsCompanyCodeComponent,
-        OrgDetailsChartofaccountsComponent,
-        OrgDetailsControllingareaComponent,
-        OrgDetailsBusinessareaComponent,
-        OrgDetailsSalesareaComponent,
-        OrgDetailsReportingareaComponent,
-        CreateCompanyCodeDialogComponent,
-        DisplayCompanyCodeDialogComponent,
-        EditCompanyCodeDialogComponent,
-        DeleteCompanyCodeDialogComponent,
-        DeleteDialogComponent,
-        ErrorHandlingDialogComponent,
-        ObjectCreatedComponent,
-        UserUpdateDialogComponent,
-
-
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        FontAwesomeModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MaterialModule,
-        FlexLayoutModule,
-        GoogleMapsModule,
-    ],
-    providers: [
-        UsersService, AuthenticationService,
-        RestDataSource, NavigationServiceService, DatePipe, FinanceService,
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
-        { provide: MAT_DIALOG_DATA, useValue: {}}
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomePageComponent,
+    TodoComponent,
+    LoginComponent,
+    SignupComponent,
+    HeaderComponent,
+    ProfileComponent,
+    EditActivityComponent,
+    DowndownDirective,
+    LoadingSpinnerComponent,
+    ActivityCategorysComponent,
+    FooterComponent,
+    SideNavComponent,
+    ModulesComponent,
+    HomePageComponent,
+    LoginDialogComponent,
+    EditCategoryComponent,
+    CreateCategoryComponent,
+    DeleteCategoryDialogComponent,
+    AccountSettingsComponent,
+    BioComponent,
+    RoleAuthComponent,
+    PasswordSecComponent,
+    CreateActivityComponent,
+    ChangesSavedDialogComponent,
+    DeleteActivityDialogComponent,
+    AppLayoutComponent,
+    AuthenticationLayoutComponent,
+    FinanceHomeComponent,
+    FinanceLayoutComponent,
+    FinanceNavbarComponent,
+    FinanceSidenavComponent,
+    GlMasterDataComponent,
+    ProfileSidenavComponent,
+    ProfileLayoutComponent,
+    HomeSidenavComponent,
+    AgricultureDialogueComponent,
+    FinanceDialogueComponent,
+    HrDialogueComponent,
+    MaterialsDialogueComponent,
+    ProjectsDialogueComponent,
+    KnowledgeDialogueComponent,
+    FinanceFooterComponent,
+    SearchDialogComponent,
+    CompanyDialogComponent,
+    ChartOfAccountsDialogComponent,
+    ReportingAreaDialogComponent,
+    ControllingAreaDialogComponent,
+    BusinessAreaDialogComponent,
+    DeleteCompanyDialogComponent,
+    CreateCompanyDialogComponent,
+    DisplayCompanyDialogComponent,
+    OrgUnitListComponent,
+    OrgDetailsCompanyComponent,
+    OrgDetailsCompanyCodeComponent,
+    OrgDetailsChartofaccountsComponent,
+    OrgDetailsControllingareaComponent,
+    OrgDetailsBusinessareaComponent,
+    OrgDetailsSalesareaComponent,
+    OrgDetailsReportingareaComponent,
+    CreateCompanyCodeDialogComponent,
+    DisplayCompanyCodeDialogComponent,
+    EditCompanyCodeDialogComponent,
+    DeleteCompanyCodeDialogComponent,
+    DeleteDialogComponent,
+    ErrorHandlingDialogComponent,
+    ObjectCreatedComponent,
+    UserUpdateDialogComponent,
+    IsoDatePipe,
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FlexLayoutModule,
+    GoogleMapsModule,
+  ],
+  providers: [
+    UsersService,
+    AuthenticationService,
+    RestDataSource,
+    NavigationServiceService,
+    DatePipe,
+    FinanceService,
+    NumberRangesService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(
-    private library: FaIconLibrary) {
-  }
+  constructor(private library: FaIconLibrary) {}
 }

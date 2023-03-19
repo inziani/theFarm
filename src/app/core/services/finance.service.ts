@@ -3,19 +3,19 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 import { environment } from '@environments/environment';
 import { BusinessAreaMasterDataModel, ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel, CompanyMasterDataModel, ControllingAreaMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
-import { Observable, catchError, throwError, BehaviorSubject, Observer } from 'rxjs';
-import { GeneralLedgerMasterDataModel } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
+import { Observable, throwError, BehaviorSubject, Observer } from 'rxjs';
+import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 
 
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class FinanceService {
-
-  public httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  public httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
   public companyListing!: CompanyMasterDataModel[];
   public orgUnitSelected = new EventEmitter<string>();
   private dataSource = new BehaviorSubject<string>('');
@@ -23,9 +23,7 @@ export class FinanceService {
   public companyCodeListing!: CompanyCodeMasterDataModel[];
   public companyCode!: CompanyCodeMasterDataModel;
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   // Cross component communication
   public sendData(data: string) {
@@ -33,7 +31,6 @@ export class FinanceService {
   }
 
   // End of Cross component communication
-
 
   // Orginizational Data
   // Company Data
@@ -50,18 +47,37 @@ export class FinanceService {
     mobileNumber: string,
     email: string
   ): Observable<CompanyMasterDataModel> {
-    return this.http.post<CompanyMasterDataModel>(`${environment.apiUrl}/company/`, JSON.stringify({
-      company, companyName, street, postOfficeBox, postalCode, country, language, currency, landLine, mobileNumber, email
-    }), this.httpOptions);
-
-  };
+    return this.http.post<CompanyMasterDataModel>(
+      `${environment.apiUrl}/company/`,
+      JSON.stringify({
+        company,
+        companyName,
+        street,
+        postOfficeBox,
+        postalCode,
+        country,
+        language,
+        currency,
+        landLine,
+        mobileNumber,
+        email,
+      }),
+      this.httpOptions
+    );
+  }
 
   public fetchCompanyData(): Observable<CompanyMasterDataModel[]> {
-    return this.http.get<CompanyMasterDataModel[]>(`${environment.apiUrl}/company/`, this.httpOptions)
+    return this.http.get<CompanyMasterDataModel[]>(
+      `${environment.apiUrl}/company/`,
+      this.httpOptions
+    );
   }
 
   public fetchSingleCompany(id: number): Observable<CompanyMasterDataModel> {
-    return this.http.get<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/', this.httpOptions);
+    return this.http.get<CompanyMasterDataModel>(
+      `${environment.apiUrl}/company/` + id + '/',
+      this.httpOptions
+    );
   }
 
   public editSingleCompany(
@@ -76,9 +92,10 @@ export class FinanceService {
     currency: string,
     landLine: number,
     mobileNumber: string,
-    email: string,
+    email: string
   ): Observable<CompanyMasterDataModel> {
-    return this.http.patch<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/',
+    return this.http.patch<CompanyMasterDataModel>(
+      `${environment.apiUrl}/company/` + id + '/',
       {
         companyName,
         street,
@@ -89,69 +106,93 @@ export class FinanceService {
         currency,
         landLine,
         mobileNumber,
-        email
-
-    }, this.httpOptions);
+        email,
+      },
+      this.httpOptions
+    );
   }
 
-   public deleteCompany(id: number): Observable<CompanyMasterDataModel> {
-     return this.http.delete<CompanyMasterDataModel>(`${environment.apiUrl}/company/` + id + '/');
+  public deleteCompany(id: number): Observable<CompanyMasterDataModel> {
+    return this.http.delete<CompanyMasterDataModel>(
+      `${environment.apiUrl}/company/` + id + '/'
+    );
   }
 
-
-// Company Code Data
+  // Company Code Data
 
   public fetchCompanyCodeData(): Observable<CompanyCodeMasterDataModel[]> {
-    return this.http.get<CompanyCodeMasterDataModel[]>(`${environment.apiUrl}/companyCode/`, this.httpOptions);
+    return this.http.get<CompanyCodeMasterDataModel[]>(
+      `${environment.apiUrl}/companyCode/`,
+      this.httpOptions
+    );
   }
 
-  public fetchSingleCompanyCode(id: number): Observable<CompanyCodeMasterDataModel> {
-    return this.http.get<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/` + id + '/', this.httpOptions);
-
+  public fetchSingleCompanyCode(
+    id: number
+  ): Observable<CompanyCodeMasterDataModel> {
+    return this.http.get<CompanyCodeMasterDataModel>(
+      `${environment.apiUrl}/companyCode/` + id + '/',
+      this.httpOptions
+    );
   }
 
   public createCompanyCodeMasterData(
     companyCode: number,
     companyCodeName: string,
-    company: string,
+    company: string
   ): Observable<CompanyCodeMasterDataModel> {
-    return this.http.post<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/`, JSON.stringify(
-      {
-      companyCode,
-      companyCodeName,
-      company
-      }
-    ), this.httpOptions);
-  };
+    return this.http.post<CompanyCodeMasterDataModel>(
+      `${environment.apiUrl}/companyCode/`,
+      JSON.stringify({
+        companyCode,
+        companyCodeName,
+        company,
+      }),
+      this.httpOptions
+    );
+  }
 
   public editCompanyCodeMasterData(
     id: number,
     companyCode: number,
     companyCodeName: string,
-    company: string,
-  ): Observable<CompanyCodeMasterDataModel>
-  {
-    return this.http.patch<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/` + id + '/',
+    company: string
+  ): Observable<CompanyCodeMasterDataModel> {
+    return this.http.patch<CompanyCodeMasterDataModel>(
+      `${environment.apiUrl}/companyCode/` + id + '/',
       {
-      companyCode,
-      companyCodeName,
-      company
+        companyCode,
+        companyCodeName,
+        company,
       },
-      this.httpOptions);
-  };
-
-   public deleteCompanyCode(id: number): Observable<CompanyCodeMasterDataModel> {
-     return this.http.delete<CompanyCodeMasterDataModel>(`${environment.apiUrl}/companyCode/` + id + '/');
+      this.httpOptions
+    );
   }
 
-// End of Company Code Data
-// Chart Of Accounts
-  public fetchChartOfAccountsData(): Observable<ChartOfAccountsMasterDataModel[]>{
-    return this.http.get<ChartOfAccountsMasterDataModel[]>(`${environment.apiUrl}/chartOfAccounts/`, this.httpOptions);
+  public deleteCompanyCode(id: number): Observable<CompanyCodeMasterDataModel> {
+    return this.http.delete<CompanyCodeMasterDataModel>(
+      `${environment.apiUrl}/companyCode/` + id + '/'
+    );
   }
 
-  public fetchSingleChartOfAccounts(id: number): Observable<ChartOfAccountsMasterDataModel>{
-    return this.http.get<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
+  // End of Company Code Data
+  // Chart Of Accounts
+  public fetchChartOfAccountsData(): Observable<
+    ChartOfAccountsMasterDataModel[]
+  > {
+    return this.http.get<ChartOfAccountsMasterDataModel[]>(
+      `${environment.apiUrl}/chartOfAccounts/`,
+      this.httpOptions
+    );
+  }
+
+  public fetchSingleChartOfAccounts(
+    id: number
+  ): Observable<ChartOfAccountsMasterDataModel> {
+    return this.http.get<ChartOfAccountsMasterDataModel>(
+      `${environment.apiUrl}/chartOfAccounts/` + id + '/',
+      this.httpOptions
+    );
   }
 
   public createChartOfAccountsMasterData(
@@ -162,14 +203,18 @@ export class FinanceService {
     lengthAccNumber: number,
     blockedForPosting: boolean
   ): Observable<ChartOfAccountsMasterDataModel> {
-    return this.http.post<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/`, {
-      coaCode,
-      companyCode,
-      chartOfAccountsName,
-      language,
-      lengthAccNumber,
-      blockedForPosting
-    }, this.httpOptions);
+    return this.http.post<ChartOfAccountsMasterDataModel>(
+      `${environment.apiUrl}/chartOfAccounts/`,
+      {
+        coaCode,
+        companyCode,
+        chartOfAccountsName,
+        language,
+        lengthAccNumber,
+        blockedForPosting,
+      },
+      this.httpOptions
+    );
   }
 
   public editSingleChartOfAccountsMasterData(
@@ -181,36 +226,58 @@ export class FinanceService {
     lengthAccNumber: number,
     blockedForPosting: boolean
   ): Observable<ChartOfAccountsMasterDataModel> {
-    return this.http.patch<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', {
-      coaCode,
-      companyCode,
-      chartOfAccountsName,
-      language,
-      lengthAccNumber,
-      blockedForPosting
-    }, this.httpOptions);
-
+    return this.http.patch<ChartOfAccountsMasterDataModel>(
+      `${environment.apiUrl}/chartOfAccounts/` + id + '/',
+      {
+        coaCode,
+        companyCode,
+        chartOfAccountsName,
+        language,
+        lengthAccNumber,
+        blockedForPosting,
+      },
+      this.httpOptions
+    );
   }
 
-  public displaySingleChartOfAccountsMasterData(id: number): Observable<ChartOfAccountsMasterDataModel>{
-    return this.http.get<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
+  public displaySingleChartOfAccountsMasterData(
+    id: number
+  ): Observable<ChartOfAccountsMasterDataModel> {
+    return this.http.get<ChartOfAccountsMasterDataModel>(
+      `${environment.apiUrl}/chartOfAccounts/` + id + '/',
+      this.httpOptions
+    );
   }
 
-  public deleteChartOfAccountsMasterData(id: number): Observable<ChartOfAccountsMasterDataModel>{
-    return this.http.delete<ChartOfAccountsMasterDataModel>(`${environment.apiUrl}/chartOfAccounts/` + id + '/', this.httpOptions);
+  public deleteChartOfAccountsMasterData(
+    id: number
+  ): Observable<ChartOfAccountsMasterDataModel> {
+    return this.http.delete<ChartOfAccountsMasterDataModel>(
+      `${environment.apiUrl}/chartOfAccounts/` + id + '/',
+      this.httpOptions
+    );
   }
 
-// End of Chart of accaounts
+  // End of Chart of accaounts
 
-// Beginning of Controlling Area Data
+  // Beginning of Controlling Area Data
 
-  public fetchControllingAreaData(): Observable<ControllingAreaMasterDataModel[]>{
-    return this.http.get<ControllingAreaMasterDataModel[]>(`${environment.apiUrl}/controllingArea/`, this.httpOptions);
-
+  public fetchControllingAreaData(): Observable<
+    ControllingAreaMasterDataModel[]
+  > {
+    return this.http.get<ControllingAreaMasterDataModel[]>(
+      `${environment.apiUrl}/controllingArea/`,
+      this.httpOptions
+    );
   }
 
-  public fetchSingleControllingArea(id: number): Observable<ControllingAreaMasterDataModel>{
-    return this.http.get<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/` + id + '/', this.httpOptions);
+  public fetchSingleControllingArea(
+    id: number
+  ): Observable<ControllingAreaMasterDataModel> {
+    return this.http.get<ControllingAreaMasterDataModel>(
+      `${environment.apiUrl}/controllingArea/` + id + '/',
+      this.httpOptions
+    );
   }
 
   public createControllingAreaMasterData(
@@ -218,14 +285,17 @@ export class FinanceService {
     controllingAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<ControllingAreaMasterDataModel>{
-    return this.http.post<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/`, {
-      controllingArea,
-      controllingAreaName,
-      personResponsible,
-      companyCode
-    },
-    this.httpOptions);
+  ): Observable<ControllingAreaMasterDataModel> {
+    return this.http.post<ControllingAreaMasterDataModel>(
+      `${environment.apiUrl}/controllingArea/`,
+      {
+        controllingArea,
+        controllingAreaName,
+        personResponsible,
+        companyCode,
+      },
+      this.httpOptions
+    );
   }
 
   public editSingleControllingAreaMasterData(
@@ -234,80 +304,197 @@ export class FinanceService {
     controllingAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<ControllingAreaMasterDataModel>{
-    return this.http.patch<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/` + id + '/', {
-      controllingArea,
-      controllingAreaName,
-      personResponsible,
-      companyCode
-    },
-    this.httpOptions);
+  ): Observable<ControllingAreaMasterDataModel> {
+    return this.http.patch<ControllingAreaMasterDataModel>(
+      `${environment.apiUrl}/controllingArea/` + id + '/',
+      {
+        controllingArea,
+        controllingAreaName,
+        personResponsible,
+        companyCode,
+      },
+      this.httpOptions
+    );
   }
 
-  public deleteControllingAreaMasterData(id: number): Observable<ControllingAreaMasterDataModel>{
-    return this.http.delete<ControllingAreaMasterDataModel>(`${environment.apiUrl}/controllingArea/` + id + '/', this.httpOptions);
+  public deleteControllingAreaMasterData(
+    id: number
+  ): Observable<ControllingAreaMasterDataModel> {
+    return this.http.delete<ControllingAreaMasterDataModel>(
+      `${environment.apiUrl}/controllingArea/` + id + '/',
+      this.httpOptions
+    );
   }
-// End of Controlling Area Data
+  // End of Controlling Area Data
 
-// Beginning of Business Area
+  // Beginning of Business Area
 
-public fetchBusinessAreaData(): Observable<BusinessAreaMasterDataModel[]>{
-    return this.http.get<BusinessAreaMasterDataModel[]>(`${environment.apiUrl}/businessArea/`, this.httpOptions);
-
+  public fetchBusinessAreaData(): Observable<BusinessAreaMasterDataModel[]> {
+    return this.http.get<BusinessAreaMasterDataModel[]>(
+      `${environment.apiUrl}/businessArea/`,
+      this.httpOptions
+    );
   }
 
-  public fetchSingleBusinessArea(id: number): Observable<BusinessAreaMasterDataModel>{
-    return this.http.get<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/` + id + '/', this.httpOptions);
+  public fetchSingleBusinessArea(
+    id: number
+  ): Observable<BusinessAreaMasterDataModel> {
+    return this.http.get<BusinessAreaMasterDataModel>(
+      `${environment.apiUrl}/businessArea/` + id + '/',
+      this.httpOptions
+    );
   }
 
-public createBusinessAreaMasterData(
+  public createBusinessAreaMasterData(
     businessArea: string,
     businessAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<BusinessAreaMasterDataModel>{
-    return this.http.post<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/`, {
-      businessArea,
-      businessAreaName,
-      personResponsible,
-      companyCode
-    },
-    this.httpOptions);
-}
+  ): Observable<BusinessAreaMasterDataModel> {
+    return this.http.post<BusinessAreaMasterDataModel>(
+      `${environment.apiUrl}/businessArea/`,
+      {
+        businessArea,
+        businessAreaName,
+        personResponsible,
+        companyCode,
+      },
+      this.httpOptions
+    );
+  }
 
-public editSingleBusinessAreaMasterData(
+  public editSingleBusinessAreaMasterData(
     id: number,
     businessArea: string,
     businessAreaAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<BusinessAreaMasterDataModel>{
-    return this.http.patch<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/` + id + '/', {
-      businessArea,
-      businessAreaAreaName,
-      personResponsible,
-      companyCode
-    },
-    this.httpOptions);
+  ): Observable<BusinessAreaMasterDataModel> {
+    return this.http.patch<BusinessAreaMasterDataModel>(
+      `${environment.apiUrl}/businessArea/` + id + '/',
+      {
+        businessArea,
+        businessAreaAreaName,
+        personResponsible,
+        companyCode,
+      },
+      this.httpOptions
+    );
   }
 
-  public deleteBusinessAreaMasterData(id: number): Observable<BusinessAreaMasterDataModel> {
-    return this.http.delete<BusinessAreaMasterDataModel>(`${environment.apiUrl}/businessArea/` + id + '/', this.httpOptions);
+  public deleteBusinessAreaMasterData(
+    id: number
+  ): Observable<BusinessAreaMasterDataModel> {
+    return this.http.delete<BusinessAreaMasterDataModel>(
+      `${environment.apiUrl}/businessArea/` + id + '/',
+      this.httpOptions
+    );
   }
-// End of Business Area
-// End of Organization Data
+  // End of Business Area
+  // End of Organization Data
 
-  
-// General Ledger Data
+  // General Ledger Data
 
-public createGeneralLedgerAccountMasterData(
-  ): Observable<GeneralLedgerMasterDataModel> {
-    return this.http.post<GeneralLedgerMasterDataModel>(`${environment.apiUrl}/generalLedgerAccountMaster/`, JSON.stringify({}), this.httpOptions);
+  public createGeneralLedgerAccountMasterData(
+    accountNumber: number,
+    companyCode: string,
+    chartOfAccounts: string,
+    accountGroup: string,
+    accountType: string,
+    reconciliationAccountInput: boolean,
+    reconciliationAccountType: string,
+    alternativeGLAccount: number,
+    shortDescription: string,
+    longDescription: string,
+    profitAndLossAccount: boolean,
+    balanceSheetAccount: boolean,
+    accountCurrency: string,
+    balancesInLocalCurrency: boolean,
+    exchangeRateKey: string,
+    taxCategory: string,
+    postingWithoutTaxAllowed: boolean,
+    openItemManagement: boolean,
+    lineItemManagement: boolean,
+    blockedForPosting: boolean,
+    markedForDeletion: boolean,
+    groupAccountNumber: number,
+    tradingPartner: string,
+    sortKey: string,
+    authorizationGroup: string,
+    fieldStatusGroup: string,
+    postAutomaticallyOnly: boolean,
+    relevantToCashFlow: boolean,
+    houseBank: string,
+    houseBankAccountID: number,
+    interestIndicator: boolean,
+    interestCalculationFrequency: number,
+    lastDateOfInterestCalculation: Date,
+    keyDateofLastInterest: Date,
+    controllingArea: string,
+    costElement: number,
+    unitOfMeasure: string,
+    businessArea: string,
+    valuationGroup: string,
+    inflationKey: string,
+    toleranceGroup: string,
+    planningLevel: string,
+    accountManagedinExternalSystem: number,
+    supplementAutomaticPostings: boolean
+  ): Observable<GeneralLedgerMasterData> {
+    return this.http.post<GeneralLedgerMasterData>(
+      `${environment.apiUrl}/generalLedgerAccountMaster/`,
+      {
+        accountNumber,
+        companyCode,
+        chartOfAccounts,
+        accountGroup,
+        accountType,
+        reconciliationAccountInput,
+        reconciliationAccountType,
+        alternativeGLAccount,
+        shortDescription,
+        longDescription,
+        profitAndLossAccount,
+        balanceSheetAccount,
+        accountCurrency,
+        balancesInLocalCurrency,
+        exchangeRateKey,
+        taxCategory,
+        postingWithoutTaxAllowed,
+        openItemManagement,
+        lineItemManagement,
+        blockedForPosting,
+        markedForDeletion,
+        groupAccountNumber,
+        tradingPartner,
+        sortKey,
+        authorizationGroup,
+        fieldStatusGroup,
+        postAutomaticallyOnly,
+        relevantToCashFlow,
+        houseBank,
+        houseBankAccountID,
+        interestIndicator,
+        interestCalculationFrequency,
+        lastDateOfInterestCalculation,
+        keyDateofLastInterest,
+        controllingArea,
+        costElement,
+        unitOfMeasure,
+        businessArea,
+        valuationGroup,
+        inflationKey,
+        toleranceGroup,
+        planningLevel,
+        accountManagedinExternalSystem,
+        supplementAutomaticPostings,
+      },
+      this.httpOptions
+    );
+  }
+  // End of General Ledger Data
 
-    }
-// End of General Ledger Data
-
-// Error Handling
+  // Error Handling
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
 
@@ -318,14 +505,17 @@ public createGeneralLedgerAccountMasterData(
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
       console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
-      errorMessage = `Backend returned code ${error.status}, body was: `, error.error;
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+      (errorMessage = `Backend returned code ${error.status}, body was: `),
+        error.error;
     }
     // Return an observable with a user-facing error message.
-    errorMessage = `Backend returned code ${error.status}, body was: `, error.error;
+    (errorMessage = `Backend returned code ${error.status}, body was: `),
+      error.error;
     return throwError(() => new Error(errorMessage));
   }
 
   // End of Error Handling
-
 }

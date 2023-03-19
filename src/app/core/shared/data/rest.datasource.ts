@@ -2,19 +2,17 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 
 import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
-import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 
-
-import { User, UserProfile } from "../models/user.model";
 import { UserInterface, UserProfileInterface } from "../interfaces/users-interface";
 import { Activity } from "../models/activity.model";
 
 import { ActivityCategoryInterface, ActivityInterface } from "../interfaces/activity-interface";
 import { RandomQuote } from "../interfaces/activity-interface";
-import { CompanyMasterDataModel } from "@app/finance/finance-models/fi-data-models/organization-data-models";
+
 
 import { environment } from "@environments/environment";
 import { ActivityCategory } from "../models/activity-category.models";
@@ -44,7 +42,7 @@ export class RestDataSource {
   public activityCategoryList!: ActivityCategory[];
   public activityList!: Activity[];
   public errorMessage!: string;
-  
+
 
   constructor(private http: HttpClient, private router: Router) {}
 

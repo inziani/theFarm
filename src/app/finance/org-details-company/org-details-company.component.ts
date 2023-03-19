@@ -40,12 +40,12 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
   constructor(
 
-    private financeService: FinanceService,
+    private _financeService: FinanceService,
     private dialogue: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.financeService.fetchCompanyData().subscribe((response) => {
+    this._financeService.fetchCompanyData().subscribe((response) => {
       this.sourceData.data = response;
     });
   }
@@ -77,7 +77,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
     // Fetch data from api
 
-    this.financeService.fetchSingleCompany(id).subscribe((response) => {
+    this._financeService.fetchSingleCompany(id).subscribe((response) => {
       this.company = response;
       dialogConfig.data = this.company;
 
@@ -106,7 +106,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
     // Fetch data from api
 
-    this.financeService.fetchSingleCompany(id).subscribe((response) => {
+    this._financeService.fetchSingleCompany(id).subscribe((response) => {
       this.company = response;
       dialogConfig.data = this.company;
 
@@ -135,7 +135,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
     // Fetch data from api
 
-    this.financeService.fetchSingleCompany(id).subscribe((response) => {
+    this._financeService.fetchSingleCompany(id).subscribe((response) => {
       this.company = response;
       dialogConfig.data = this.company;
 
