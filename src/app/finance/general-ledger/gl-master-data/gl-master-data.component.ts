@@ -23,8 +23,18 @@ export class GlMasterDataComponent implements OnInit {
   public maxDate!: Date;
   public formSubmitted: boolean = false;
   public formGroup = new GLMasterDataFormGroup();
-  public pnlAccountType!: ProfitAndLossAccountType[];
-  public reconciliationAcctType!: ReconciliationAccountType[];
+  public pnlAccountType: ProfitAndLossAccountType[] = [
+    { value: 'Revenue', viewValue: 'Revenue' },
+    { value: 'Expense', viewValue: 'Expense' },
+  ];
+  public reconciliationAcctType: ReconciliationAccountType[] = [
+      { value: 'Assets', viewValue: 'Assets' },
+      { value: 'Accounts Payable', viewValue: 'Accounts Payable' },
+      { value: 'Accounts Receivable', viewValue: 'Accounts Receivable' },
+      { value: 'Petty Cash', viewValue: 'Petty Cash' },
+      { value: 'Banks', viewValue: 'Banks' },
+      { value: 'Materials Management', viewValue: 'Materials Management' },
+    ];
   public generalLedgerAccountMaster!: GeneralLedgerMasterData;
   public readonly!: boolean;
   public errorMessage!: string;
@@ -35,38 +45,13 @@ export class GlMasterDataComponent implements OnInit {
     private _financeService: FinanceService,
     private _datePipe: IsoDatePipe,
     private _numberRanges: NumberRangesService
-  ) {
-    this.pnlAccountType = [
-      { value: 'Revenue', viewValue: 'Revenue' },
-      { value: 'Expense', viewValue: 'Expense' },
-    ];
-
-    this.reconciliationAcctType = [
-      { value: 'Assets', viewValue: 'Assets' },
-      { value: 'Accounts Payable', viewValue: 'Accounts Payable' },
-      { value: 'Accounts Receivable', viewValue: 'Accounts Receivable' },
-      { value: 'Petty Cash', viewValue: 'Petty Cash' },
-      { value: 'Banks', viewValue: 'Banks' },
-      { value: 'Materials Management', viewValue: 'Materials Management' },
-    ];
-  }
+  ) {}
 
   ngOnInit(): void {
     this.readonly = true;
     this.accountNumber = this._numberRanges.accountNumbersStatus;
     console.log('Number Range - ', this.accountNumber);
   }
-
-  // onSave() {
-  //   if (!this.formGroup.valid) {
-  //     return;
-  //   }
-  //   this.formSubmitted = true;
-  //   this.glAccount = this.formGroup.value;
-  //   console.log('Test Form items-', this.glAccount, this.glAccount.accountNumber);
-  //   alert('method being called!')
-  //   this.formGroup.reset();
-  // }
 
   public onSearchGLAccount() {
     const dialogConfig = new MatDialogConfig();

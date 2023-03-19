@@ -185,6 +185,7 @@ import { NumberRangesService } from './core/shared/data/number-ranges.service';
     MaterialModule,
     FlexLayoutModule,
     GoogleMapsModule,
+    
   ],
   providers: [
     UsersService,
