@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 
-import { CompanyCodeMasterDataModel, CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { CompanyCodeMasterData, CompanyMasterData} from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { CompanyCodeMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
 @Component({
@@ -17,13 +17,13 @@ export class DisplayCompanyCodeDialogComponent implements OnInit {
   public isLoading: boolean = false;
   public formSubmitted: boolean = false;
   public formGroup = new CompanyCodeMasterDataFormGroup();
-  public companyCode!: CompanyCodeMasterDataModel;
-  public companyList!: CompanyMasterDataModel[];
+  public companyCode!: CompanyCodeMasterData;
+  public companyList!: CompanyMasterData[];
 
 
   constructor(
     private dialogRef: MatDialogRef<DisplayCompanyCodeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public companyCodeMasterData: CompanyCodeMasterDataModel,
+    @Inject(MAT_DIALOG_DATA) public companyCodeMasterData: CompanyCodeMasterData,
     private financeService: FinanceService
   ) { }
 

@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { ControllingAreaMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
+import { ControllingAreaMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
@@ -20,7 +20,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  public sourceData = new MatTableDataSource<ControllingAreaMasterDataModel>();
+  public sourceData = new MatTableDataSource<ControllingAreaMasterData>();
   public controllingAreaColumnHeaders: string[] = [
     'id',
     'controllingArea',
@@ -33,7 +33,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
   ];
 
   public resultsLength = 0;
-  public controllingArea!: ControllingAreaMasterDataModel;
+  public controllingArea!: ControllingAreaMasterData;
 
 
   constructor(

@@ -47,267 +47,267 @@ export class GLMasterDataFormGroup extends FormGroup {
   constructor() {
     super({
       accountNumber: new GLMasterDataFormControl(
-        "Account Number",
-        "accountNumber",
-        "",
-        Validators.required
+        'Account Number',
+        'accountNumber',
+        '',
+        Validators.compose([Validators.required])
       ),
       companyCode: new GLMasterDataFormControl(
-        "Company Code",
-        "companyCode",
-        "",
+        'Company Code',
+        'companyCode',
+        '',
         Validators.required
       ),
       chartOfAccounts: new GLMasterDataFormControl(
-        "Chart of Accounts",
-        "chartOfAccounts",
-        "",
+        'Chart of Accounts',
+        'chartOfAccounts',
+        '',
         Validators.required
       ),
       accountGroup: new GLMasterDataFormControl(
-        "Account Group",
-        "accountGroup",
-        "",
+        'Account Group',
+        'accountGroup',
+        '',
         Validators.required
       ),
       accountType: new GLMasterDataFormControl(
-        "Account Type",
-        "accountType",
-        "",
+        'Account Type',
+        'accountType',
+        '',
         Validators.required
       ),
       reconciliationAccountInput: new GLMasterDataFormControl(
-        "Reconciliation Account",
-        "reconciliationAccountInput",
-        "",
+        'Reconciliation Account',
+        'reconciliationAccountInput',
+        '',
         Validators.required
       ),
       reconciliationAccountType: new GLMasterDataFormControl(
-        "Reconciliation Account Type",
-        "reconciliationAccountType",
-        "",
+        'Reconciliation Account Type',
+        'reconciliationAccountType',
+        '',
         Validators.required
       ),
       alternativeGLAccount: new GLMasterDataFormControl(
-        "Alternative GL Account",
-        "alternativeGLAccount",
-        "",
+        'Alternative GL Account',
+        'alternativeGLAccount',
+        '',
         Validators.required
       ),
       shortDescription: new GLMasterDataFormControl(
-        "Short Description",
-        "shortDescription",
-        "",
+        'Short Description',
+        'shortDescription',
+        '',
         Validators.required
       ),
       longDescription: new GLMasterDataFormControl(
-        "Long Description",
-        "longDescription",
-        "",
+        'Long Description',
+        'longDescription',
+        '',
         Validators.required
       ),
       profitAndLossAccount: new GLMasterDataFormControl(
-        "Profit and Loss account",
-        "profitAndLossAccount",
-        "",
+        'Profit and Loss account',
+        'profitAndLossAccount',
+        '',
         Validators.required
       ),
       balanceSheetAccount: new GLMasterDataFormControl(
-        "Balance Sheet Account",
-        "balanceSheetAccount",
-        "",
+        'Balance Sheet Account',
+        'balanceSheetAccount',
+        '',
         Validators.required
       ),
       accountCurrency: new GLMasterDataFormControl(
-        "Account Currency",
-        "accountCurrency",
-        "",
+        'Account Currency',
+        'accountCurrency',
+        '',
         Validators.required
       ),
       onlyBalancesInLocalCurrency: new GLMasterDataFormControl(
-        "Only Balances in Local currency",
-        "onlyBalancesInLocalCurrency",
-        "",
+        'Only Balances in Local currency',
+        'onlyBalancesInLocalCurrency',
+        '',
         Validators.requiredTrue
       ),
       exchangeRateKey: new GLMasterDataFormControl(
-        "Exchange Rate Key",
-        "exchangeRateKey",
-        "",
+        'Exchange Rate Key',
+        'exchangeRateKey',
+        '',
         Validators.required
       ),
       taxCategory: new GLMasterDataFormControl(
-        "Tax Category",
-        "taxCategory",
-        "",
+        'Tax Category',
+        'taxCategory',
+        '',
         Validators.required
       ),
       postingWithoutTaxAllowed: new GLMasterDataFormControl(
-        "Posting without tax allowed",
-        "postingWithoutTaxAllowed",
-        "",
+        'Posting without tax allowed',
+        'postingWithoutTaxAllowed',
+        '',
         Validators.required
       ),
       openItemManagement: new GLMasterDataFormControl(
-        "Open Item Management",
-        "openItemManagement",
-        "",
+        'Open Item Management',
+        'openItemManagement',
+        '',
         Validators.required
       ),
       lineItemManagement: new GLMasterDataFormControl(
-        "Line Item Management",
-        "lineItemManagement",
-        "",
+        'Line Item Management',
+        'lineItemManagement',
+        '',
         Validators.required
       ),
       blockedForPosting: new GLMasterDataFormControl(
-        "Blocked for posting",
-        "blockedForPosting",
-        "",
+        'Blocked for posting',
+        'blockedForPosting',
+        '',
         Validators.required
       ),
       markedForDeletion: new GLMasterDataFormControl(
-        "Marked for deletion",
-        "markedForDeletion",
-        "",
+        'Marked for deletion',
+        'markedForDeletion',
+        '',
         Validators.required
       ),
       groupAccountNumber: new GLMasterDataFormControl(
-        "Group Account Number",
-        "groupAccountNumber",
-        "",
+        'Group Account Number',
+        'groupAccountNumber',
+        '',
         Validators.required
       ),
       tradingPartner: new GLMasterDataFormControl(
-        "Trading partner",
-        "tradingPartner",
-        "",
+        'Trading partner',
+        'tradingPartner',
+        '',
         Validators.required
       ),
       sortKey: new GLMasterDataFormControl(
-        "Sort Key",
-        "sortKey",
-        "",
+        'Sort Key',
+        'sortKey',
+        '',
         Validators.required
       ),
       authorizationGroup: new GLMasterDataFormControl(
-        "Authorization Group",
-        "authorizationGroup",
-        "",
+        'Authorization Group',
+        'authorizationGroup',
+        '',
         Validators.required
       ),
       fieldStatusGroup: new GLMasterDataFormControl(
-        "Field Status Group",
-        "fieldStatusGroup",
-        "",
+        'Field Status Group',
+        'fieldStatusGroup',
+        '',
         Validators.required
       ),
       postAutomaticallyOnly: new GLMasterDataFormControl(
-        "Post Automatically only",
-        "postAutomaticallyOnly",
-        "",
+        'Post Automatically only',
+        'postAutomaticallyOnly',
+        '',
         Validators.required
       ),
       relevantToCashFlow: new GLMasterDataFormControl(
-        "Relevant to Cashflow",
-        "relevantToCashFlow",
-        "",
+        'Relevant to Cashflow',
+        'relevantToCashFlow',
+        '',
         Validators.required
       ),
       houseBank: new GLMasterDataFormControl(
-        "House Bank",
-        "houseBank",
-        "",
+        'House Bank',
+        'houseBank',
+        '',
         Validators.required
       ),
       houseBankAccountID: new GLMasterDataFormControl(
-        "House Bank Account ID",
-        "houseBankAccountID",
-        "",
+        'House Bank Account ID',
+        'houseBankAccountID',
+        '',
         Validators.required
       ),
       interestIndicator: new GLMasterDataFormControl(
-        "Interest Indicator",
-        "interestIndicator",
-        "",
+        'Interest Indicator',
+        'interestIndicator',
+        '',
         Validators.required
       ),
       interestCalculationFrequency: new GLMasterDataFormControl(
-        "Interest Calculation Frequency",
-        "interestCalculationFrequency",
-        "",
+        'Interest Calculation Frequency',
+        'interestCalculationFrequency',
+        '',
         Validators.required
       ),
       lastDateOfInterestCalculation: new GLMasterDataFormControl(
-        "Last day of interest calculation",
-        "lastDateOfInterestCalculation",
-        "",
+        'Last day of interest calculation',
+        'lastDateOfInterestCalculation',
+        '',
         Validators.required
       ),
       keyDateofLastInterest: new GLMasterDataFormControl(
-        "Key Date of Last Interest",
-        "keyDateofLastInterest",
-        "",
+        'Key Date of Last Interest',
+        'keyDateofLastInterest',
+        '',
         Validators.required
       ),
       controllingArea: new GLMasterDataFormControl(
-        "Controlling Area",
-        "controllingArea",
-        "",
+        'Controlling Area',
+        'controllingArea',
+        '',
         Validators.required
       ),
       costElement: new GLMasterDataFormControl(
-        "Cost Element",
-        "costElement",
-        "",
+        'Cost Element',
+        'costElement',
+        '',
         Validators.required
       ),
       unitOfMeasure: new GLMasterDataFormControl(
-        "Unit of Measure",
-        "unitOfMeasure",
-        "",
+        'Unit of Measure',
+        'unitOfMeasure',
+        '',
         Validators.required
       ),
       businessArea: new GLMasterDataFormControl(
-        "Business Area",
-        "businessArea",
-        "",
+        'Business Area',
+        'businessArea',
+        '',
         Validators.required
       ),
       valuationGroup: new GLMasterDataFormControl(
-        "Valuation Group",
-        "valuationGroup",
-        "",
+        'Valuation Group',
+        'valuationGroup',
+        '',
         Validators.required
       ),
       inflationKey: new GLMasterDataFormControl(
-        "Inflation Key",
-        "inflationKey",
-        "",
+        'Inflation Key',
+        'inflationKey',
+        '',
         Validators.required
       ),
       toleranceGroup: new GLMasterDataFormControl(
-        "Tolerance Group",
-        "toleranceGroup",
-        "",
+        'Tolerance Group',
+        'toleranceGroup',
+        '',
         Validators.required
       ),
       planningLevel: new GLMasterDataFormControl(
-        "Planning Level",
-        "planningLevel",
-        "",
+        'Planning Level',
+        'planningLevel',
+        '',
         Validators.required
       ),
       accountManagedinExternalSystem: new GLMasterDataFormControl(
-        "Account Managed in External System",
-        "accountManagedinExternalSystem",
-        "",
+        'Account Managed in External System',
+        'accountManagedinExternalSystem',
+        '',
         Validators.required
       ),
       supplementAutomaticPostings: new GLMasterDataFormControl(
-        "Supplement Automatic Postings",
-        "supplementAutomaticPostings",
-        "",
+        'Supplement Automatic Postings',
+        'supplementAutomaticPostings',
+        '',
         Validators.required
       ),
     });

@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { BusinessAreaMasterDataModel, ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel, CompanyMasterDataModel, ControllingAreaMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { BusinessAreaMasterData, ChartOfAccountsMasterData, CompanyCodeMasterData, CompanyMasterData, ControllingAreaMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, throwError, BehaviorSubject, Observer } from 'rxjs';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 
@@ -16,12 +16,11 @@ export class FinanceService {
   public httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
-  public companyListing!: CompanyMasterDataModel[];
+
   public orgUnitSelected = new EventEmitter<string>();
   private dataSource = new BehaviorSubject<string>('');
   public data: Observable<string> = this.dataSource.asObservable();
-  public companyCodeListing!: CompanyCodeMasterDataModel[];
-  public companyCode!: CompanyCodeMasterDataModel;
+
 
   constructor(private http: HttpClient) {}
 
@@ -46,8 +45,8 @@ export class FinanceService {
     landLine: number,
     mobileNumber: string,
     email: string
-  ): Observable<CompanyMasterDataModel> {
-    return this.http.post<CompanyMasterDataModel>(
+  ): Observable<CompanyMasterData> {
+    return this.http.post<CompanyMasterData>(
       `${environment.apiUrl}/company/`,
       JSON.stringify({
         company,
@@ -66,15 +65,15 @@ export class FinanceService {
     );
   }
 
-  public fetchCompanyData(): Observable<CompanyMasterDataModel[]> {
-    return this.http.get<CompanyMasterDataModel[]>(
+  public fetchCompanyData(): Observable<CompanyMasterData[]> {
+    return this.http.get<CompanyMasterData[]>(
       `${environment.apiUrl}/company/`,
       this.httpOptions
     );
   }
 
-  public fetchSingleCompany(id: number): Observable<CompanyMasterDataModel> {
-    return this.http.get<CompanyMasterDataModel>(
+  public fetchSingleCompany(id: number): Observable<CompanyMasterData> {
+    return this.http.get<CompanyMasterData>(
       `${environment.apiUrl}/company/` + id + '/',
       this.httpOptions
     );
@@ -93,8 +92,8 @@ export class FinanceService {
     landLine: number,
     mobileNumber: string,
     email: string
-  ): Observable<CompanyMasterDataModel> {
-    return this.http.patch<CompanyMasterDataModel>(
+  ): Observable<CompanyMasterData> {
+    return this.http.patch<CompanyMasterData>(
       `${environment.apiUrl}/company/` + id + '/',
       {
         companyName,
@@ -112,16 +111,16 @@ export class FinanceService {
     );
   }
 
-  public deleteCompany(id: number): Observable<CompanyMasterDataModel> {
-    return this.http.delete<CompanyMasterDataModel>(
+  public deleteCompany(id: number): Observable<CompanyMasterData> {
+    return this.http.delete<CompanyMasterData>(
       `${environment.apiUrl}/company/` + id + '/'
     );
   }
 
   // Company Code Data
 
-  public fetchCompanyCodeData(): Observable<CompanyCodeMasterDataModel[]> {
-    return this.http.get<CompanyCodeMasterDataModel[]>(
+  public fetchCompanyCodeData(): Observable<CompanyCodeMasterData[]> {
+    return this.http.get<CompanyCodeMasterData[]>(
       `${environment.apiUrl}/companyCode/`,
       this.httpOptions
     );
@@ -129,8 +128,8 @@ export class FinanceService {
 
   public fetchSingleCompanyCode(
     id: number
-  ): Observable<CompanyCodeMasterDataModel> {
-    return this.http.get<CompanyCodeMasterDataModel>(
+  ): Observable<CompanyCodeMasterData> {
+    return this.http.get<CompanyCodeMasterData>(
       `${environment.apiUrl}/companyCode/` + id + '/',
       this.httpOptions
     );
@@ -140,8 +139,8 @@ export class FinanceService {
     companyCode: number,
     companyCodeName: string,
     company: string
-  ): Observable<CompanyCodeMasterDataModel> {
-    return this.http.post<CompanyCodeMasterDataModel>(
+  ): Observable<CompanyCodeMasterData> {
+    return this.http.post<CompanyCodeMasterData>(
       `${environment.apiUrl}/companyCode/`,
       JSON.stringify({
         companyCode,
@@ -157,8 +156,8 @@ export class FinanceService {
     companyCode: number,
     companyCodeName: string,
     company: string
-  ): Observable<CompanyCodeMasterDataModel> {
-    return this.http.patch<CompanyCodeMasterDataModel>(
+  ): Observable<CompanyCodeMasterData> {
+    return this.http.patch<CompanyCodeMasterData>(
       `${environment.apiUrl}/companyCode/` + id + '/',
       {
         companyCode,
@@ -169,8 +168,8 @@ export class FinanceService {
     );
   }
 
-  public deleteCompanyCode(id: number): Observable<CompanyCodeMasterDataModel> {
-    return this.http.delete<CompanyCodeMasterDataModel>(
+  public deleteCompanyCode(id: number): Observable<CompanyCodeMasterData> {
+    return this.http.delete<CompanyCodeMasterData>(
       `${environment.apiUrl}/companyCode/` + id + '/'
     );
   }
@@ -178,9 +177,9 @@ export class FinanceService {
   // End of Company Code Data
   // Chart Of Accounts
   public fetchChartOfAccountsData(): Observable<
-    ChartOfAccountsMasterDataModel[]
+    ChartOfAccountsMasterData[]
   > {
-    return this.http.get<ChartOfAccountsMasterDataModel[]>(
+    return this.http.get<ChartOfAccountsMasterData[]>(
       `${environment.apiUrl}/chartOfAccounts/`,
       this.httpOptions
     );
@@ -188,8 +187,8 @@ export class FinanceService {
 
   public fetchSingleChartOfAccounts(
     id: number
-  ): Observable<ChartOfAccountsMasterDataModel> {
-    return this.http.get<ChartOfAccountsMasterDataModel>(
+  ): Observable<ChartOfAccountsMasterData> {
+    return this.http.get<ChartOfAccountsMasterData>(
       `${environment.apiUrl}/chartOfAccounts/` + id + '/',
       this.httpOptions
     );
@@ -202,8 +201,8 @@ export class FinanceService {
     language: string,
     lengthAccNumber: number,
     blockedForPosting: boolean
-  ): Observable<ChartOfAccountsMasterDataModel> {
-    return this.http.post<ChartOfAccountsMasterDataModel>(
+  ): Observable<ChartOfAccountsMasterData> {
+    return this.http.post<ChartOfAccountsMasterData>(
       `${environment.apiUrl}/chartOfAccounts/`,
       {
         coaCode,
@@ -225,8 +224,8 @@ export class FinanceService {
     language: string,
     lengthAccNumber: number,
     blockedForPosting: boolean
-  ): Observable<ChartOfAccountsMasterDataModel> {
-    return this.http.patch<ChartOfAccountsMasterDataModel>(
+  ): Observable<ChartOfAccountsMasterData> {
+    return this.http.patch<ChartOfAccountsMasterData>(
       `${environment.apiUrl}/chartOfAccounts/` + id + '/',
       {
         coaCode,
@@ -242,8 +241,8 @@ export class FinanceService {
 
   public displaySingleChartOfAccountsMasterData(
     id: number
-  ): Observable<ChartOfAccountsMasterDataModel> {
-    return this.http.get<ChartOfAccountsMasterDataModel>(
+  ): Observable<ChartOfAccountsMasterData> {
+    return this.http.get<ChartOfAccountsMasterData>(
       `${environment.apiUrl}/chartOfAccounts/` + id + '/',
       this.httpOptions
     );
@@ -251,8 +250,8 @@ export class FinanceService {
 
   public deleteChartOfAccountsMasterData(
     id: number
-  ): Observable<ChartOfAccountsMasterDataModel> {
-    return this.http.delete<ChartOfAccountsMasterDataModel>(
+  ): Observable<ChartOfAccountsMasterData> {
+    return this.http.delete<ChartOfAccountsMasterData>(
       `${environment.apiUrl}/chartOfAccounts/` + id + '/',
       this.httpOptions
     );
@@ -263,9 +262,9 @@ export class FinanceService {
   // Beginning of Controlling Area Data
 
   public fetchControllingAreaData(): Observable<
-    ControllingAreaMasterDataModel[]
+    ControllingAreaMasterData[]
   > {
-    return this.http.get<ControllingAreaMasterDataModel[]>(
+    return this.http.get<ControllingAreaMasterData[]>(
       `${environment.apiUrl}/controllingArea/`,
       this.httpOptions
     );
@@ -273,8 +272,8 @@ export class FinanceService {
 
   public fetchSingleControllingArea(
     id: number
-  ): Observable<ControllingAreaMasterDataModel> {
-    return this.http.get<ControllingAreaMasterDataModel>(
+  ): Observable<ControllingAreaMasterData> {
+    return this.http.get<ControllingAreaMasterData>(
       `${environment.apiUrl}/controllingArea/` + id + '/',
       this.httpOptions
     );
@@ -285,8 +284,8 @@ export class FinanceService {
     controllingAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<ControllingAreaMasterDataModel> {
-    return this.http.post<ControllingAreaMasterDataModel>(
+  ): Observable<ControllingAreaMasterData> {
+    return this.http.post<ControllingAreaMasterData>(
       `${environment.apiUrl}/controllingArea/`,
       {
         controllingArea,
@@ -304,8 +303,8 @@ export class FinanceService {
     controllingAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<ControllingAreaMasterDataModel> {
-    return this.http.patch<ControllingAreaMasterDataModel>(
+  ): Observable<ControllingAreaMasterData> {
+    return this.http.patch<ControllingAreaMasterData>(
       `${environment.apiUrl}/controllingArea/` + id + '/',
       {
         controllingArea,
@@ -319,8 +318,8 @@ export class FinanceService {
 
   public deleteControllingAreaMasterData(
     id: number
-  ): Observable<ControllingAreaMasterDataModel> {
-    return this.http.delete<ControllingAreaMasterDataModel>(
+  ): Observable<ControllingAreaMasterData> {
+    return this.http.delete<ControllingAreaMasterData>(
       `${environment.apiUrl}/controllingArea/` + id + '/',
       this.httpOptions
     );
@@ -329,8 +328,8 @@ export class FinanceService {
 
   // Beginning of Business Area
 
-  public fetchBusinessAreaData(): Observable<BusinessAreaMasterDataModel[]> {
-    return this.http.get<BusinessAreaMasterDataModel[]>(
+  public fetchBusinessAreaData(): Observable<BusinessAreaMasterData[]> {
+    return this.http.get<BusinessAreaMasterData[]>(
       `${environment.apiUrl}/businessArea/`,
       this.httpOptions
     );
@@ -338,8 +337,8 @@ export class FinanceService {
 
   public fetchSingleBusinessArea(
     id: number
-  ): Observable<BusinessAreaMasterDataModel> {
-    return this.http.get<BusinessAreaMasterDataModel>(
+  ): Observable<BusinessAreaMasterData> {
+    return this.http.get<BusinessAreaMasterData>(
       `${environment.apiUrl}/businessArea/` + id + '/',
       this.httpOptions
     );
@@ -350,8 +349,8 @@ export class FinanceService {
     businessAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<BusinessAreaMasterDataModel> {
-    return this.http.post<BusinessAreaMasterDataModel>(
+  ): Observable<BusinessAreaMasterData> {
+    return this.http.post<BusinessAreaMasterData>(
       `${environment.apiUrl}/businessArea/`,
       {
         businessArea,
@@ -369,8 +368,8 @@ export class FinanceService {
     businessAreaAreaName: string,
     personResponsible: string,
     companyCode: string
-  ): Observable<BusinessAreaMasterDataModel> {
-    return this.http.patch<BusinessAreaMasterDataModel>(
+  ): Observable<BusinessAreaMasterData> {
+    return this.http.patch<BusinessAreaMasterData>(
       `${environment.apiUrl}/businessArea/` + id + '/',
       {
         businessArea,
@@ -384,8 +383,8 @@ export class FinanceService {
 
   public deleteBusinessAreaMasterData(
     id: number
-  ): Observable<BusinessAreaMasterDataModel> {
-    return this.http.delete<BusinessAreaMasterDataModel>(
+  ): Observable<BusinessAreaMasterData> {
+    return this.http.delete<BusinessAreaMasterData>(
       `${environment.apiUrl}/businessArea/` + id + '/',
       this.httpOptions
     );
@@ -492,6 +491,14 @@ export class FinanceService {
       this.httpOptions
     );
   }
+
+  public fetchGeneralLedgerAccounts(): Observable<GeneralLedgerMasterData>{
+    return this.http.get<GeneralLedgerMasterData>(
+      `${environment.apiUrl}/generalLedgerAccountMaster/`, this.httpOptions
+    );
+  }
+
+
   // End of General Ledger Data
 
   // Error Handling

@@ -6,7 +6,7 @@ import {
 } from "@angular/material/dialog";
 
 import { FinanceService } from "@app/core/services/finance.service";
-import { CompanyMasterDataModel } from "@app/finance/finance-models/fi-data-models/organization-data-models";
+import { CompanyMasterData } from "@app/finance/finance-models/fi-data-models/organization-data-models";
 import { CompanyMasterDataFormGroup } from "@app/finance/finance-models/fi-form-models/co-master-data-models";
 import {
   Currency,
@@ -25,8 +25,8 @@ export class CompanyDialogComponent implements OnInit {
   public isLoading: boolean = false;
   public formSubmitted: boolean = false;
   public formGroup = new CompanyMasterDataFormGroup();
-  public company!: CompanyMasterDataModel;
-  public companyList!: CompanyMasterDataModel[];
+  public company!: CompanyMasterData;
+  public companyList!: CompanyMasterData[];
   public language: Language[] = [
     { value: "en", viewValue: "English" },
     { value: "swa", viewValue: "Kiswahili" },
@@ -47,7 +47,7 @@ export class CompanyDialogComponent implements OnInit {
     public dialog: MatDialog,
     private financeService: FinanceService,
     private dialogRef: MatDialogRef<CompanyDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel
+    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterData
   ) {}
 
   ngOnInit(): void {

@@ -8,7 +8,7 @@ import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/objec
 
 import { FinanceService } from '@app/core/services/finance.service';
 
-import { CompanyCodeMasterDataModel, ControllingAreaMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { CompanyCodeMasterData, ControllingAreaMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { ControllingAreaMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
 @Component({
@@ -22,8 +22,8 @@ export class ControllingAreaDialogComponent implements OnInit {
   public isLoading: boolean = false;
   public readonly!: boolean;
   public formSubmitted: boolean = false;
-  public companyCodeList!: CompanyCodeMasterDataModel[];
-  public controllingArea!: ControllingAreaMasterDataModel;
+  public companyCodeList!: CompanyCodeMasterData[];
+  public controllingArea!: ControllingAreaMasterData;
   public errorMessage!: string;
   public createdItem!: string;
   public changedItem!: string;
@@ -34,7 +34,7 @@ export class ControllingAreaDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<ControllingAreaDialogComponent>,
     private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
-    public controllingAreaDialogueData: ControllingAreaMasterDataModel
+    public controllingAreaDialogueData: ControllingAreaMasterData
   ) {}
 
   ngOnInit(): void {

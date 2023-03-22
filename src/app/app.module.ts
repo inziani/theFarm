@@ -185,7 +185,7 @@ import { NumberRangesService } from './core/shared/data/number-ranges.service';
     MaterialModule,
     FlexLayoutModule,
     GoogleMapsModule,
-    
+
   ],
   providers: [
     UsersService,
@@ -194,6 +194,7 @@ import { NumberRangesService } from './core/shared/data/number-ranges.service';
     NavigationServiceService,
     DatePipe,
     FinanceService,
+    IsoDatePipe,
     NumberRangesService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     {

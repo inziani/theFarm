@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { BusinessAreaMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
+import { BusinessAreaMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { BusinessAreaDialogComponent } from '../finance-dialogues/business-area-dialog/business-area-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
@@ -21,7 +21,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  public sourceData = new MatTableDataSource<BusinessAreaMasterDataModel>();
+  public sourceData = new MatTableDataSource<BusinessAreaMasterData>();
   public businessAreaColumnHeaders: string[] = [
     'id',
     'businessArea',
@@ -33,7 +33,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
     'delete'
   ];
   public resultsLength = 0;
-  public businessArea!: BusinessAreaMasterDataModel;
+  public businessArea!: BusinessAreaMasterData;
   public errorMessage!: string;
 
 

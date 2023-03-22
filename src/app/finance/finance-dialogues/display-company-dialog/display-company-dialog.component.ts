@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Currency, Language } from '@app/finance/finance-interfaces/finance-interfaces';
-import { CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { CompanyMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { CompanyMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
 @Component({
@@ -32,7 +32,7 @@ export class DisplayCompanyDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<DisplayCompanyDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel,
+    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterData,
 
   ) { }
 

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { FinanceService } from '@app/core/services/finance.service';
 
-import { CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { CompanyMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { CompanyMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
 @Component({
@@ -14,19 +14,19 @@ import { CompanyMasterDataFormGroup } from '@app/finance/finance-models/fi-form-
 })
 export class DeleteCompanyDialogComponent implements OnInit {
 
-  public company!: CompanyMasterDataModel;
+  public company!: CompanyMasterData;
   public formGroup = new CompanyMasterDataFormGroup();
   public isLoading: boolean = false;
   public readonly!: boolean;
   public formSubmitted: boolean = false;
-  
+
 
   constructor(
 
     public financeService: FinanceService,
     public dialog: MatDialog,
     private dialogRef: MatDialogRef<DeleteCompanyDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterDataModel,
+    @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterData,
 
   ) {
 

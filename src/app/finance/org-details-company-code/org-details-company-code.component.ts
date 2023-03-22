@@ -8,7 +8,7 @@ import { DeleteCompanyCodeDialogComponent } from '@app/finance/finance-dialogues
 import { EditCompanyCodeDialogComponent } from '@app/finance/finance-dialogues/edit-company-code-dialog/edit-company-code-dialog.component';
 import { CreateCompanyCodeDialogComponent } from '../finance-dialogues/create-company-code-dialog/create-company-code-dialog.component';
 import { DisplayCompanyCodeDialogComponent } from '../finance-dialogues/display-company-code-dialog/display-company-code-dialog.component';
-import { CompanyCodeMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
+import { CompanyCodeMasterData } from '../finance-models/fi-data-models/organization-data-models';
 
 @Component({
   selector: 'app-org-details-company-code',
@@ -30,8 +30,8 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
     "delete"
    ];
   public resultsLength = 0;
-  public companyCode!: CompanyCodeMasterDataModel;
-  public sourceData = new MatTableDataSource<CompanyCodeMasterDataModel>();
+  public companyCode!: CompanyCodeMasterData;
+  public sourceData = new MatTableDataSource<CompanyCodeMasterData>();
 
 
 

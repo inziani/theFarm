@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { FinanceService } from '@app/core/services/finance.service';
-import { CompanyCodeMasterDataModel, CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { CompanyCodeMasterData, CompanyMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { CompanyCodeMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
 @Component({
@@ -17,13 +17,13 @@ export class EditCompanyCodeDialogComponent implements OnInit {
   public isLoading: boolean = false;
   public formSubmitted: boolean = false;
   public formGroup = new CompanyCodeMasterDataFormGroup();
-  public companyCode!: CompanyCodeMasterDataModel;
-  public companyList!: CompanyMasterDataModel[];
+  public companyCode!: CompanyCodeMasterData;
+  public companyList!: CompanyMasterData[];
 
   constructor(
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<EditCompanyCodeDialogComponent>,
-    @Inject (MAT_DIALOG_DATA) public companyCodeMaster: CompanyCodeMasterDataModel,
+    @Inject (MAT_DIALOG_DATA) public companyCodeMaster: CompanyCodeMasterData,
     private financeService: FinanceService
   ) { }
 

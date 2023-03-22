@@ -4,13 +4,19 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { IsoDatePipe } from '@app/_helpers/iso-date.pipe';
 
 import { GLMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
-import { ProfitAndLossAccountType } from '@app/finance/finance-interfaces/pnl-account-interface';
-import { ReconciliationAccountType } from '@app/finance/finance-interfaces/finance-interfaces';
+import {
+  ProfitAndLossAccountType,
+  ReconciliationAccountType
+} from '@app/finance/finance-interfaces/finance-interfaces';
 import { SearchDialogComponent } from '@app/finance/finance-dialogues/search-dialog/search-dialog.component';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 import { FinanceService } from '@app/core/services/finance.service';
 import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
 import { NumberRangesService } from '@app/core/shared/data/number-ranges.service';
+import {
+  CompanyCodeMasterData,
+  ChartOfAccountsMasterData
+} from '@app/finance/finance-models/fi-data-models/organization-data-models';
 
 @Component({
   selector: 'app-gl-master-data',
@@ -28,17 +34,20 @@ export class GlMasterDataComponent implements OnInit {
     { value: 'Expense', viewValue: 'Expense' },
   ];
   public reconciliationAcctType: ReconciliationAccountType[] = [
-      { value: 'Assets', viewValue: 'Assets' },
-      { value: 'Accounts Payable', viewValue: 'Accounts Payable' },
-      { value: 'Accounts Receivable', viewValue: 'Accounts Receivable' },
-      { value: 'Petty Cash', viewValue: 'Petty Cash' },
-      { value: 'Banks', viewValue: 'Banks' },
-      { value: 'Materials Management', viewValue: 'Materials Management' },
-    ];
+    { value: 'Assets', viewValue: 'Assets' },
+    { value: 'Accounts Payable', viewValue: 'Accounts Payable' },
+    { value: 'Accounts Receivable', viewValue: 'Accounts Receivable' },
+    { value: 'Petty Cash', viewValue: 'Petty Cash' },
+    { value: 'Banks', viewValue: 'Banks' },
+    { value: 'Materials Management', viewValue: 'Materials Management' },
+  ];
   public generalLedgerAccountMaster!: GeneralLedgerMasterData;
   public readonly!: boolean;
   public errorMessage!: string;
   public accountNumber!: number;
+  public accNum!: number;
+  public companyCode!: CompanyCodeMasterData[];
+  public chartOfAccounts!: ChartOfAccountsMasterData[];
 
   constructor(
     private _dialog: MatDialog,
@@ -49,8 +58,26 @@ export class GlMasterDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.readonly = true;
-    this.accountNumber = this._numberRanges.accountNumbersStatus;
-    console.log('Number Range - ', this.accountNumber);
+    this._financeService.fetchCompanyCodeData().subscribe({
+      next: (companyCode) => {
+        this.companyCode = companyCode;
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complate'),
+    });
+    this._financeService.fetchChartOfAccountsData().subscribe({
+      next: (chartOfAccounts) => {
+        (this.chartOfAccounts = chartOfAccounts);
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complate'),
+    });
+  }
+
+  public onCreate() {
+    this._numberRanges.createGLAccNum();
+    this.accountNumber = this._numberRanges.glAccountNumber;
+    console.log('AccNum in direct fetch Component - ', this.accountNumber);
   }
 
   public onSearchGLAccount() {
@@ -70,10 +97,12 @@ export class GlMasterDataComponent implements OnInit {
   }
 
   public onCreateGLAccountMaster() {
+    this._numberRanges.createGLAccNum();
     this.generalLedgerAccountMaster = this.formGroup.value;
     return this._financeService
       .createGeneralLedgerAccountMasterData(
-        this.generalLedgerAccountMaster.accountNumber,
+        (this.generalLedgerAccountMaster.accountNumber =
+          this._numberRanges.glAccountNumber),
         this.generalLedgerAccountMaster.companyCode,
         this.generalLedgerAccountMaster.chartOfAccounts,
         this.generalLedgerAccountMaster.accountGroup,

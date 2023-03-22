@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { ChartOfAccountsMasterDataModel } from '../finance-models/fi-data-models/organization-data-models';
+import { ChartOfAccountsMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { FinanceService } from '@app/core/services/finance.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ChartOfAccountsDialogComponent } from '../finance-dialogues/chart-of-accounts-dialog/chart-of-accounts-dialog.component';
@@ -18,8 +18,8 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  public coaCodeListing!: ChartOfAccountsMasterDataModel;
-  public sourceData = new MatTableDataSource<ChartOfAccountsMasterDataModel>();
+  public coaCodeListing!: ChartOfAccountsMasterData;
+  public sourceData = new MatTableDataSource<ChartOfAccountsMasterData>();
   public chartOfAccountsColumnHeaders: string[] = [
     'id',
     'coaCode',
@@ -37,7 +37,7 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
   public create!: string;
   public edit!: string;
   public delete!: string;
-  public chartOfAccounts!: ChartOfAccountsMasterDataModel;
+  public chartOfAccounts!: ChartOfAccountsMasterData;
   public formGroup!: ChartOfAccountsMasterDataFormGroup;
 
 
@@ -87,22 +87,26 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
 
     // Fetch API Data
 
-    this.financeService.fetchSingleChartOfAccounts(id).subscribe(chartOfAccountsData => {
-      this.chartOfAccounts = chartOfAccountsData;
-      dialogConfig.data = this.chartOfAccounts;
+    this.financeService
+      .fetchSingleChartOfAccounts(id)
+      .subscribe((chartOfAccountsData) => {
+        this.chartOfAccounts = chartOfAccountsData;
+        dialogConfig.data = this.chartOfAccounts;
 
-      // Open the DialogeComponent
-      let dialogRef = this.dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
+        // Open the DialogeComponent
+        let dialogRef = this.dialogue.open(
+          ChartOfAccountsDialogComponent,
+          dialogConfig
+        );
 
-      // Return Data from Dialogue
-      dialogRef.afterClosed().subscribe(result => {
-        if (result === undefined) {
-          return
-        } else {
-
-        }
+        // Return Data from Dialogue
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result === undefined) {
+            return;
+          } else {
+          }
+        });
       });
-    });
   }
 
   public onEditChartOfAccounts(process: string, id: number) {

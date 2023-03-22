@@ -13,3 +13,9 @@ export interface Language {
     value: string;
     viewValue: string;
 }
+
+export interface ProfitAndLossAccountType {
+  value: string;
+  viewValue: string;
+}
+

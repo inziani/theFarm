@@ -6,7 +6,7 @@ import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling
 import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
 import { FinanceService } from '@app/core/services/finance.service';
 import { Language } from '@app/finance/finance-interfaces/finance-interfaces';
-import { ChartOfAccountsMasterDataModel, CompanyCodeMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { ChartOfAccountsMasterData, CompanyCodeMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { ChartOfAccountsMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
 
@@ -21,8 +21,8 @@ export class ChartOfAccountsDialogComponent implements OnInit {
   public isLoading: boolean = false;
   public formSubmitted: boolean = false;
   public formGroup = new ChartOfAccountsMasterDataFormGroup();
-  public chartOfAccounts!: ChartOfAccountsMasterDataModel;
-  public companyCodeList!: CompanyCodeMasterDataModel[];
+  public chartOfAccounts!: ChartOfAccountsMasterData;
+  public companyCodeList!: CompanyCodeMasterData[];
   public selectedProcess!: string;
   public language: Language[] = [
     { value: "en", viewValue: "English" },
@@ -44,7 +44,7 @@ export class ChartOfAccountsDialogComponent implements OnInit {
     private financeService: FinanceService,
     private dialogRef: MatDialogRef<ChartOfAccountsDialogComponent>,
     private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public chartOfAccountsDialogueData: ChartOfAccountsMasterDataModel
+    @Inject(MAT_DIALOG_DATA) public chartOfAccountsDialogueData: ChartOfAccountsMasterData
   ) { }
 
   ngOnInit(): void {

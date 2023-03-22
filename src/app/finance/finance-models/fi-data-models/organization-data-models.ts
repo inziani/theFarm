@@ -1,103 +1,76 @@
-export class CompanyMasterDataModel{
+export interface CompanyMasterData{
 
-  constructor(
-
-    public id: number,
-    public company: string,
-    public companyName: string,
-    public street: string,
-    public postOfficeBox: number,
-    public postalCode: number,
-    public country: string,
-    public language: string,
-    public currency: string,
-    public landLine: number,
-    public mobileNumber: string,
-    public email: string
-  ) {
-
-  }
+     id: number,
+     company: string,
+     companyName: string,
+     street: string,
+     postOfficeBox: number,
+     postalCode: number,
+     country: string,
+     language: string,
+     currency: string,
+     landLine: number,
+     mobileNumber: string,
+     email: string
 }
 
-export class CompanyCodeMasterDataModel{
+export interface CompanyCodeMasterData{
 
-  constructor(
-    public id: number,
-    public companyCode: number,
-    public companyCodeName: string,
-    public company: string,
-  ) {
-
-  }
+     id: number,
+     companyCode: number,
+     companyCodeName: string,
+     company: string,
 }
 
-export class ChartOfAccountsMasterDataModel{
+export interface ChartOfAccountsMasterData{
 
-  constructor(
-    public id: number,
-    public coaCode: string,
-    public companyCode: string,
-    public chartOfAccountsName: string,
-    public language: string,
-    public lengthAccNumber: number,
-    public blockedForPosting: boolean
+     id: number,
+     coaCode: string,
+     companyCode: string,
+     chartOfAccountsName: string,
+     language: string,
+     lengthAccNumber: number,
+     blockedForPosting: boolean
 
-  ) {
-
-  }
 }
 
-export class ReportingArea{
+export interface ReportingArea{
 
-  constructor(
-    public id: number,
-    public reportingArea: string,
-    public reportingAreaName: string,
-    public personReponsible: string,
-    public companyCode: string
+     id: number,
+     reportingArea: string,
+     reportingAreaName: string,
+     personReponsible: string,
+     companyCode: string
 
-  ) {
-
-  }
 }
 
-export class ControllingAreaMasterDataModel{
+export interface ControllingAreaMasterData{
 
-  constructor(
-    public id: number,
-    public controllingArea: string,
-    public controllingAreaName: string,
-    public personReponsible: string,
-    public companyCode: string
-  ) {
+     id: number,
+     controllingArea: string,
+     controllingAreaName: string,
+     personReponsible: string,
+     companyCode: string
 
-  }
 }
 
-export class BusinessAreaMasterDataModel{
+export interface BusinessAreaMasterData{
 
-  constructor(
-    public id: number,
-    public businessArea: string,
-    public businessAreaName: string,
-    public personResponsible: string,
-    public companyCode: string
-  ) {
+     id: number,
+     businessArea: string,
+     businessAreaName: string,
+     personResponsible: string,
+     companyCode: string
 
-  }
 }
 
-export class SalesArea{
+export interface SalesArea{
 
-  constructor(
-    public salesArea: string,
-    public salesAreaName: string,
-    public personResponsible: string,
-    public companyCode: string
+     salesArea: string,
+     salesAreaName: string,
+     personResponsible: string,
+     companyCode: string
 
-  ){
-
-  }
 }
 
 

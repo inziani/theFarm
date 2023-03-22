@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { FinanceService } from '@app/core/services/finance.service';
 import { Currency, Language } from '@app/finance/finance-interfaces/finance-interfaces';
-import { CompanyMasterDataModel } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { CompanyMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { CompanyMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
 
 let phoneNumberUtil = PhoneNumberUtil.getInstance();
@@ -20,7 +20,7 @@ export class CreateCompanyDialogComponent implements OnInit {
   public isLoading!: boolean;
   public readonly!: boolean;
   public formGroup = new CompanyMasterDataFormGroup();
-  public company!: CompanyMasterDataModel;
+  public company!: CompanyMasterData;
   public language: Language[] = [
     { value: 'en', viewValue: 'English' },
     { value: 'swa', viewValue: 'Kiswahili' },
