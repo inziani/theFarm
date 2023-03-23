@@ -2,9 +2,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { BusinessAreaMasterData, ChartOfAccountsMasterData, CompanyCodeMasterData, CompanyMasterData, ControllingAreaMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { BusinessAreaMasterData, ChartOfAccountsMasterData, CompanyCodeMasterData, CompanyMasterData, ControllingAreaMasterData, GLAccountGroup } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, throwError, BehaviorSubject, Observer } from 'rxjs';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
+
 
 
 
@@ -20,7 +21,7 @@ export class FinanceService {
   public orgUnitSelected = new EventEmitter<string>();
   private dataSource = new BehaviorSubject<string>('');
   public data: Observable<string> = this.dataSource.asObservable();
-
+  public glAccountGroups!: GLAccountGroup[];
 
   constructor(private http: HttpClient) {}
 
@@ -126,9 +127,7 @@ export class FinanceService {
     );
   }
 
-  public fetchSingleCompanyCode(
-    id: number
-  ): Observable<CompanyCodeMasterData> {
+  public fetchSingleCompanyCode(id: number): Observable<CompanyCodeMasterData> {
     return this.http.get<CompanyCodeMasterData>(
       `${environment.apiUrl}/companyCode/` + id + '/',
       this.httpOptions
@@ -176,9 +175,7 @@ export class FinanceService {
 
   // End of Company Code Data
   // Chart Of Accounts
-  public fetchChartOfAccountsData(): Observable<
-    ChartOfAccountsMasterData[]
-  > {
+  public fetchChartOfAccountsData(): Observable<ChartOfAccountsMasterData[]> {
     return this.http.get<ChartOfAccountsMasterData[]>(
       `${environment.apiUrl}/chartOfAccounts/`,
       this.httpOptions
@@ -261,9 +258,7 @@ export class FinanceService {
 
   // Beginning of Controlling Area Data
 
-  public fetchControllingAreaData(): Observable<
-    ControllingAreaMasterData[]
-  > {
+  public fetchControllingAreaData(): Observable<ControllingAreaMasterData[]> {
     return this.http.get<ControllingAreaMasterData[]>(
       `${environment.apiUrl}/controllingArea/`,
       this.httpOptions
@@ -492,37 +487,26 @@ export class FinanceService {
     );
   }
 
-  public fetchGeneralLedgerAccounts(): Observable<GeneralLedgerMasterData>{
+  public fetchGeneralLedgerAccounts(): Observable<GeneralLedgerMasterData> {
     return this.http.get<GeneralLedgerMasterData>(
-      `${environment.apiUrl}/generalLedgerAccountMaster/`, this.httpOptions
+      `${environment.apiUrl}/generalLedgerAccountMaster/`,
+      this.httpOptions
     );
   }
 
+  // AccountGroups
 
-  // End of General Ledger Data
-
-  // Error Handling
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-
-    if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, body was: `,
-        error.error
-      );
-      (errorMessage = `Backend returned code ${error.status}, body was: `),
-        error.error;
-    }
-    // Return an observable with a user-facing error message.
-    (errorMessage = `Backend returned code ${error.status}, body was: `),
-      error.error;
-    return throwError(() => new Error(errorMessage));
+  public addGLAccountGroup(
+    accountGroup: string,
+    accountGroupDescription: string
+  ): GLAccountGroup {
+    let glAccountGroup: GLAccountGroup = {
+      accountGroup: accountGroup,
+      accountGroupDescription: accountGroupDescription,
+    };
+    this.glAccountGroups.push(glAccountGroup);
+    return glAccountGroup
   }
 
-  // End of Error Handling
+  // End of General Ledger Data
 }

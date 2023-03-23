@@ -3,8 +3,12 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { IsoDatePipe } from '@app/_helpers/iso-date.pipe';
 
-import { GLMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
 import {
+  GLAccountGroupMasterData,
+  GLMasterDataFormGroup,
+} from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
+import {
+
   ProfitAndLossAccountType,
   ReconciliationAccountType
 } from '@app/finance/finance-interfaces/finance-interfaces';
@@ -15,8 +19,10 @@ import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/objec
 import { NumberRangesService } from '@app/core/shared/data/number-ranges.service';
 import {
   CompanyCodeMasterData,
-  ChartOfAccountsMasterData
+  ChartOfAccountsMasterData,
+  GLAccountGroup
 } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-gl-master-data',
@@ -29,6 +35,7 @@ export class GlMasterDataComponent implements OnInit {
   public maxDate!: Date;
   public formSubmitted: boolean = false;
   public formGroup = new GLMasterDataFormGroup();
+  public formGroupAcctGrp = new GLAccountGroupMasterData();
   public pnlAccountType: ProfitAndLossAccountType[] = [
     { value: 'Revenue', viewValue: 'Revenue' },
     { value: 'Expense', viewValue: 'Expense' },
@@ -48,6 +55,7 @@ export class GlMasterDataComponent implements OnInit {
   public accNum!: number;
   public companyCode!: CompanyCodeMasterData[];
   public chartOfAccounts!: ChartOfAccountsMasterData[];
+  public glAccountGroup!: GLAccountGroup;
 
   constructor(
     private _dialog: MatDialog,
@@ -67,7 +75,7 @@ export class GlMasterDataComponent implements OnInit {
     });
     this._financeService.fetchChartOfAccountsData().subscribe({
       next: (chartOfAccounts) => {
-        (this.chartOfAccounts = chartOfAccounts);
+        this.chartOfAccounts = chartOfAccounts;
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complate'),
@@ -156,5 +164,13 @@ export class GlMasterDataComponent implements OnInit {
         error: (err) => (this.errorMessage = err),
         complete: () => console.info('Complete'),
       });
+  }
+
+  public onAddAccountGroup(): GLAccountGroup {
+    this.glAccountGroup = this.formGroupAcctGrp.value;
+    return this._financeService.addGLAccountGroup(
+      this.glAccountGroup.accountGroup,
+      this.glAccountGroup.accountGroupDescription
+    );
   }
 }

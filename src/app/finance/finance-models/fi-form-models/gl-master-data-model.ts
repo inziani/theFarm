@@ -1,5 +1,6 @@
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
+
 export class GLMasterDataFormControl extends FormControl {
   label: string;
   modelProperty: string;
@@ -812,3 +813,14 @@ export class GLMasterDataTaxCodeFormGroup extends FormGroup {
     return messages;
   }
 }
+
+export class GLAccountGroupMasterData extends FormGroup{
+  constructor() {
+    super({
+      accounttGroupCode: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(4)])),
+      accountGroupDescription: new FormControl('', Validators.required)
+    })
+  }
+}
+
+
