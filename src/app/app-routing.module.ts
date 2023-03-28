@@ -25,6 +25,7 @@ import { HrDialogueComponent } from "./core/dialogues/hr-dialogue/hr-dialogue.co
 import { ProjectsDialogueComponent } from "./core/dialogues/projects-dialogue/projects-dialogue.component";
 import { MaterialsDialogueComponent } from "./core/dialogues/materials-dialogue/materials-dialogue.component";
 import { KnowledgeDialogueComponent } from "./core/dialogues/knowledge-dialogue/knowledge-dialogue.component";
+import { GlTransactionCodesComponent } from "./finance/general-ledger/gl-transaction-codes/gl-transaction-codes.component";
 
 
 
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
     path: '', component: FinanceLayoutComponent, children: [
       { path: 'finance', component: FinanceHomeComponent, canActivate: [AuthenticationGuard] },
       { path: 'glmasterdata', component: GlMasterDataComponent, canActivate: [AuthenticationGuard] },
+      { path: 'glhome', component: GlTransactionCodesComponent, canActivate: [AuthenticationGuard]}
 
 
    ], canActivate: [AuthenticationGuard]},

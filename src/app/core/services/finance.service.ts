@@ -18,7 +18,7 @@ export class FinanceService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  public orgUnitSelected = new EventEmitter<string>();
+  public itemSelected = new EventEmitter<string>();
   private dataSource = new BehaviorSubject<string>('');
   public data: Observable<string> = this.dataSource.asObservable();
   public glAccountGroups!: GLAccountGroup[];

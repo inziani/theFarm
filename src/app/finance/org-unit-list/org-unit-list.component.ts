@@ -24,31 +24,31 @@ export class OrgUnitListComponent implements OnInit {
   }
 
   public onSelectCompany() {
-    this.financeService.orgUnitSelected.emit(this.company);
+    this.financeService.itemSelected.emit(this.company);
   }
 
   public onSelectCompanyCode() {
-    this.financeService.orgUnitSelected.emit(this.companyCode);
+    this.financeService.itemSelected.emit(this.companyCode);
   }
 
   public onSelectChartOfAccounts() {
-    this.financeService.orgUnitSelected.emit(this.chartOfAccounts);
+    this.financeService.itemSelected.emit(this.chartOfAccounts);
   }
 
   public onSelectReportingArea() {
-    this.financeService.orgUnitSelected.emit(this.reportingArea);
+    this.financeService.itemSelected.emit(this.reportingArea);
   }
 
   onSelectControllingArea() {
-    this.financeService.orgUnitSelected.emit(this.controllingArea);
+    this.financeService.itemSelected.emit(this.controllingArea);
   }
 
   onSelectBusinessArea() {
-    this.financeService.orgUnitSelected.emit(this.businessArea);
+    this.financeService.itemSelected.emit(this.businessArea);
   }
 
   onSelectSalesArea() {
-    this.financeService.orgUnitSelected.emit(this.salesArea);
+    this.financeService.itemSelected.emit(this.salesArea);
   }
 
 }

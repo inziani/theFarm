@@ -17,7 +17,7 @@ export const GL_TREE_DATA: FinanceNode[] = [
   {
     name: 'General Ledger',
     iconname: 'business',
-    routerLink: '/finance',
+    routerLink: '/glhome',
     children: [
       {
         name: 'Master Data',

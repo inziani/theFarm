@@ -1,0 +1,32 @@
+.card {
+  border-radius: 0;
+  border-color: #03045e;
+  border-width: 2px;
+}
+
+.card-text {
+  font-weight: lighter;
+}
+
+.card-title {
+  font-weight: lighter;
+}
+
+a {
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: rgb(241, 232, 232);
+  color: #03045e;
+  border-radius: 0;
+  text-align: center;
+  font-weight: lighter;
+  border: none;
+}
+
+p {
+  font-size: small;
+  font-weight: lighter;
+}
+

@@ -101,6 +101,8 @@ import { ObjectCreatedComponent } from './core/dialogues/object-created/object-c
 import { UserUpdateDialogComponent } from './core/dialogues/user-update-dialog/user-update-dialog.component';
 import { IsoDatePipe } from './_helpers/iso-date.pipe';
 import { NumberRangesService } from './core/shared/data/number-ranges.service';
+import { GlTransactionCodesComponent } from './finance/general-ledger/gl-transaction-codes/gl-transaction-codes.component';
+import { TransCodeListComponent } from './finance/general-ledger/gl-master-data/trans-code-list/trans-code-list.component';
 
 @NgModule({
   declarations: [
@@ -173,6 +175,8 @@ import { NumberRangesService } from './core/shared/data/number-ranges.service';
     ObjectCreatedComponent,
     UserUpdateDialogComponent,
     IsoDatePipe,
+    GlTransactionCodesComponent,
+    TransCodeListComponent,
   ],
   imports: [
     BrowserModule,
