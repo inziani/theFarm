@@ -7,8 +7,8 @@ import { FinanceService } from '@app/core/services/finance.service';
   styleUrls: ['./trans-code-list.component.css'],
 })
 export class TransCodeListComponent {
-  public accountGroup!: string;
-  public taxCode!: string;
+  public accountGroup: string = 'accountGroup';
+  public taxCode: string = 'taxCode';
 
   constructor(private _financeService: FinanceService) {}
 
@@ -21,4 +21,6 @@ export class TransCodeListComponent {
   public onSelectTaxCode() {
     this._financeService.itemSelected.emit(this.taxCode);
   }
+
+  // ngOnDestroy(): void {}
 }

@@ -17,38 +17,38 @@ export class OrgUnitListComponent implements OnInit {
   public salesArea: string = 'salesArea';
 
   constructor(
-    private financeService: FinanceService
+    private _financeService: FinanceService
   ) { }
 
   ngOnInit(): void {
   }
 
   public onSelectCompany() {
-    this.financeService.itemSelected.emit(this.company);
+    this._financeService.itemSelected.emit(this.company);
   }
 
   public onSelectCompanyCode() {
-    this.financeService.itemSelected.emit(this.companyCode);
+    this._financeService.itemSelected.emit(this.companyCode);
   }
 
   public onSelectChartOfAccounts() {
-    this.financeService.itemSelected.emit(this.chartOfAccounts);
+    this._financeService.itemSelected.emit(this.chartOfAccounts);
   }
 
   public onSelectReportingArea() {
-    this.financeService.itemSelected.emit(this.reportingArea);
+    this._financeService.itemSelected.emit(this.reportingArea);
   }
 
   onSelectControllingArea() {
-    this.financeService.itemSelected.emit(this.controllingArea);
+    this._financeService.itemSelected.emit(this.controllingArea);
   }
 
   onSelectBusinessArea() {
-    this.financeService.itemSelected.emit(this.businessArea);
+    this._financeService.itemSelected.emit(this.businessArea);
   }
 
   onSelectSalesArea() {
-    this.financeService.itemSelected.emit(this.salesArea);
+    this._financeService.itemSelected.emit(this.salesArea);
   }
 
 }

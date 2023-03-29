@@ -1,26 +1,27 @@
 <div class="container my-3 justify-content-center">
-   <h1 class="text-center my-2" style="font-weight: lighter; color: #03045e;">General Ledger Transaction Codes</h1>
-   <div class="row">
+  <h1 class="text-center my-2" style="font-weight: lighter; color: #03045e">
+    General Ledger Transaction Codes
+  </h1>
+  <div class="row">
     <div class="col-md-2">
       <!-- Beginning of Transaction Codes Listing -->
       <app-trans-code-list></app-trans-code-list>
+      <!-- <p>Transaction code Listing</p> -->
       <!-- End of Transactions Codes Listing -->
     </div>
+    <!-- <div class="col-md-10">Is this where the error comes from?</div> -->
     <div class="col-md-10" [ngSwitch]="itemSelected">
       <!-- Beginning of Traansactions codes details -->
-
       <div *ngSwitchCase="'accountGroup'">
-        <p>Account Groups</p>
+       <app-account-group-details></app-account-group-details>
       </div>
       <div *ngSwitchCase="'taxCode'">
-        <p>Tax Codes</p>
+       <app-tax-code-details></app-tax-code-details>
       </div>
       <div *ngSwitchDefault>
-        <p>Default Page</p>
+        <app-finance-landing-page></app-finance-landing-page>
       </div>
-      <!-- End of Transactiion codes details -->
+      <!-- End of Transaction codes details -->
     </div>
-   </div>
+  </div>
 </div>
-
-

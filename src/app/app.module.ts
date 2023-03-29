@@ -102,7 +102,10 @@ import { UserUpdateDialogComponent } from './core/dialogues/user-update-dialog/u
 import { IsoDatePipe } from './_helpers/iso-date.pipe';
 import { NumberRangesService } from './core/shared/data/number-ranges.service';
 import { GlTransactionCodesComponent } from './finance/general-ledger/gl-transaction-codes/gl-transaction-codes.component';
-import { TransCodeListComponent } from './finance/general-ledger/gl-master-data/trans-code-list/trans-code-list.component';
+import { TransCodeListComponent } from './finance/general-ledger/trans-code-list/trans-code-list.component';
+import { AccountGroupDetailsComponent } from './finance/general-ledger/account-group-details/account-group-details.component';
+import { TaxCodeDetailsComponent } from './finance/general-ledger/tax-code-details/tax-code-details.component';
+import { FinanceLandingPageComponent } from './finance/finance-home/finance-landing-page/finance-landing-page.component';
 
 @NgModule({
   declarations: [
@@ -177,6 +180,9 @@ import { TransCodeListComponent } from './finance/general-ledger/gl-master-data/
     IsoDatePipe,
     GlTransactionCodesComponent,
     TransCodeListComponent,
+    AccountGroupDetailsComponent,
+    TaxCodeDetailsComponent,
+    FinanceLandingPageComponent,
   ],
   imports: [
     BrowserModule,
