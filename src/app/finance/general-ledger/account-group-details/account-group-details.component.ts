@@ -22,8 +22,6 @@ export class AccountGroupDetailsComponent {
     'id',
     'accountGroup',
     'accountGroupDescription',
-    'dateCreated',
-    'dateChanged',
     'display',
     'edit',
     'delete',
@@ -32,15 +30,15 @@ export class AccountGroupDetailsComponent {
 
   constructor(
     private _financeService: FinanceService,
-    private _dialog : MatDialog
-  ) { }
+    private _dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this._financeService.glAccountGroupsData.subscribe((response) => {
       this.sourceData.data = response;
     });
 
-    // this.sourceData.data = this._financeService.glAccountGroups;
+    
   }
 
   ngAfterViewInit() {
@@ -50,5 +48,17 @@ export class AccountGroupDetailsComponent {
 
   public onCreateAccountGroup() {
     // Open Dialogue for Account group maintenance
+  }
+
+  public onDisplayAccountGroup(id: number) {
+    // Open Dialogue for Account group maintenance
+  }
+
+  public onEditAccountGroup(id: number) {
+    // Open Dialogue for Account Group Maintenance
+  }
+
+  public onDeleteAccountGroup(id: number) {
+    // Open Dialogue for Account Group Maintenance
   }
 }

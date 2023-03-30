@@ -168,9 +168,6 @@ export class GlMasterDataComponent implements OnInit {
 
   public onAddAccountGroup(): GLAccountGroup {
     this.glAccountGroup = this.formGroupAcctGrp.value;
-    return this._financeService.addGLAccountGroup(
-      this.glAccountGroup.accountGroup,
-      this.glAccountGroup.accountGroupDescription
-    );
+    return this._financeService.addGLAccountGroup(this.glAccountGroup);
   }
 }

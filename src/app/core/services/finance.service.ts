@@ -26,12 +26,20 @@ export class FinanceService {
   public itemSelected = new EventEmitter<string>();
   private _dataSource$ = new BehaviorSubject<string>('');
   readonly data: Observable<string> = this._dataSource$.asObservable();
-  private _glAccountGroups$ = new BehaviorSubject<GLAccountGroup[]>([]);
+  private _glAccountGroupslist: GLAccountGroup[] = [
+    {
+      id: 1,
+      accountGroup: 'accountGroup',
+      accountGroupDescription: 'accountGroupDescription',
+    },
+  ];
+  private _glAccountGroups$ = new BehaviorSubject<GLAccountGroup[]>(this.
+    _glAccountGroupslist
+  );
   readonly glAccountGroupsData: Observable<GLAccountGroup[]> =
     this._glAccountGroups$.asObservable();
 
-  private _glAccountGroupslist!: GLAccountGroup[];
-  private _id = 0
+  private _id = 0;
 
   constructor(private http: HttpClient) {}
 
@@ -511,13 +519,10 @@ export class FinanceService {
 
   // AccountGroups
 
-  public addGLAccountGroup(
-    accountGroup: GLAccountGroup
-  ): GLAccountGroup {
+  public addGLAccountGroup(accountGroup: GLAccountGroup): GLAccountGroup {
     accountGroup.id = ++this._id;
     this._glAccountGroupslist.push(accountGroup);
-    return accountGroup
-
+    return accountGroup;
   }
 
   // End of General Ledger Data

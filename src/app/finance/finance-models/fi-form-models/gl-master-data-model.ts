@@ -814,13 +814,91 @@ export class GLMasterDataTaxCodeFormGroup extends FormGroup {
   }
 }
 
-export class GLAccountGroupMasterData extends FormGroup{
-  constructor() {
-    super({
-      accounttGroupCode: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(4)])),
-      accountGroupDescription: new FormControl('', Validators.required)
-    })
+
+export class CustomFormControl extends FormControl {
+  label: string;
+  modelProperty: string;
+
+  constructor(label: string, property: string, value: any, validator: any) {
+    super(value, validator);
+    this.label = label;
+    this.modelProperty = property;
+  }
+
+  getValidationMessages() {
+    let messages: string[] = [];
+    if (this.errors) {
+      for (let errorName in this.errors) {
+        switch (errorName) {
+          case 'email':
+            messages.push(`Please enter a valid ${this.label} address`);
+            break;
+          case 'required':
+            messages.push(`${this.label} is a required field `);
+            break;
+          case 'minLength':
+            messages.push(
+              `${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`
+            );
+            break;
+          case 'maxLength':
+            messages.push(
+              `The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`
+            );
+            break;
+          case 'pattern':
+            messages.push(
+              `This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `
+            );
+            break;
+        }
+      }
+    }
+
+    return messages;
   }
 }
 
+export class GLAccountGroupMasterData extends FormGroup {
+  constructor() {
+    super({
+      accountGroupCode: new CustomFormControl(
+        'accountGroupCode',
+        'Account Group Code',
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(4)])
+      ),
+      accountGroupDescription: new CustomFormControl(
+        'accountGroupDescription',
+        'Account Group Description',
+        '',
+        Validators.required
+      ),
+    });
+  }
 
+  get accountGroupMasterDataFormControl(): CustomFormControl[] {
+    return Object.keys(this.controls).map(
+      (k) => this.controls[k] as CustomFormControl
+    );
+  }
+  getAccountGroupCodeValidationMessages(accountGroupCode: string): string[] {
+    return (
+      this.controls['accountGroupCode'] as CustomFormControl
+    ).getValidationMessages();
+  }
+  getaccountGroupDescriptionValidationMessages(
+    accountGroupDescription: string
+  ): string[] {
+    return (
+      this.controls['accountGroupDescription'] as CustomFormControl
+    ).getValidationMessages();
+  }
+  getFormValidationMessages(): string[] {
+    let messages: string[] = [];
+    Object.values(this.controls).forEach((c) =>
+      messages.push(...(c as CustomFormControl).getValidationMessages())
+    );
+    return messages;
+  }
+}
