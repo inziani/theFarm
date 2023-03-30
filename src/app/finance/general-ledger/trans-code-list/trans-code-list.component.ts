@@ -15,11 +15,11 @@ export class TransCodeListComponent {
   ngOnInit(): void {}
 
   public onSelectAccountGroup() {
-    this._financeService.itemSelected.emit(this.accountGroup);
+    this._financeService.sendData(this.accountGroup);
   }
 
   public onSelectTaxCode() {
-    this._financeService.itemSelected.emit(this.taxCode);
+    this._financeService.sendData(this.taxCode);
   }
 
   // ngOnDestroy(): void {}

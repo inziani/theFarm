@@ -106,6 +106,8 @@ import { TransCodeListComponent } from './finance/general-ledger/trans-code-list
 import { AccountGroupDetailsComponent } from './finance/general-ledger/account-group-details/account-group-details.component';
 import { TaxCodeDetailsComponent } from './finance/general-ledger/tax-code-details/tax-code-details.component';
 import { FinanceLandingPageComponent } from './finance/finance-home/finance-landing-page/finance-landing-page.component';
+import { AccountGroupDialogComponent } from './finance/general-ledger/gl-dialogues/account-group-dialog/account-group-dialog.component';
+import { TaxCodeDialogComponent } from './finance/general-ledger/gl-dialogues/tax-code-dialog/tax-code-dialog.component';
 
 @NgModule({
   declarations: [
@@ -183,6 +185,8 @@ import { FinanceLandingPageComponent } from './finance/finance-home/finance-land
     AccountGroupDetailsComponent,
     TaxCodeDetailsComponent,
     FinanceLandingPageComponent,
+    AccountGroupDialogComponent,
+    TaxCodeDialogComponent,
   ],
   imports: [
     BrowserModule,

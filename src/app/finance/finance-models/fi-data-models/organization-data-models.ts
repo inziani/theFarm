@@ -74,6 +74,7 @@ export interface SalesArea{
 }
 
 export interface GLAccountGroup {
+  id: number;
   accountGroup: string;
   accountGroupDescription: string;
 }

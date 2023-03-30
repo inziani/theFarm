@@ -13,15 +13,12 @@ export class GlTransactionCodesComponent {
   constructor(private _financeService: FinanceService) {}
 
   ngOnInit(): void {
-    this._financeService.itemSelected.subscribe({
-      next: (transCodeSelected: string) => {
-        this.itemSelected = transCodeSelected;
-        console.log('Items Selected-', transCodeSelected);
-      },
-      error: (err: string) => (this.errorMessage = err),
-      complete: () => console.info('Complete'),
-    });
+
+    this._financeService.data.subscribe({
+      next: (data) => this.itemSelected = data,
+      error: (err) => this.errorMessage = err,
+      complete:()=> console.info('Complete')
+    })
   }
 
-  // ngOnDestroy(): void {}
 }

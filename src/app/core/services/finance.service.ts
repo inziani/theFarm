@@ -2,11 +2,16 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { BusinessAreaMasterData, ChartOfAccountsMasterData, CompanyCodeMasterData, CompanyMasterData, ControllingAreaMasterData, GLAccountGroup } from '@app/finance/finance-models/fi-data-models/organization-data-models';
-import { Observable, throwError, BehaviorSubject, Observer } from 'rxjs';
+import {
+  BusinessAreaMasterData,
+  ChartOfAccountsMasterData,
+  CompanyCodeMasterData,
+  CompanyMasterData,
+  ControllingAreaMasterData,
+  GLAccountGroup
+} from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
-
-
 
 
 
@@ -19,15 +24,25 @@ export class FinanceService {
   };
 
   public itemSelected = new EventEmitter<string>();
-  private dataSource = new BehaviorSubject<string>('');
-  public data: Observable<string> = this.dataSource.asObservable();
-  public glAccountGroups!: GLAccountGroup[];
+  private _dataSource$ = new BehaviorSubject<string>('');
+  readonly data: Observable<string> = this._dataSource$.asObservable();
+  private _glAccountGroups$ = new BehaviorSubject<GLAccountGroup[]>([]);
+  readonly glAccountGroupsData: Observable<GLAccountGroup[]> =
+    this._glAccountGroups$.asObservable();
+
+  private _glAccountGroupslist!: GLAccountGroup[];
+  private _id = 0
 
   constructor(private http: HttpClient) {}
 
   // Cross component communication
   public sendData(data: string) {
-    this.dataSource.next(data);
+    this._dataSource$.next(data);
+  }
+
+  public sendAccountGroupsData() {
+    this._glAccountGroupslist = [];
+    this._glAccountGroups$.next(this._glAccountGroupslist);
   }
 
   // End of Cross component communication
@@ -497,15 +512,12 @@ export class FinanceService {
   // AccountGroups
 
   public addGLAccountGroup(
-    accountGroup: string,
-    accountGroupDescription: string
+    accountGroup: GLAccountGroup
   ): GLAccountGroup {
-    let glAccountGroup: GLAccountGroup = {
-      accountGroup: accountGroup,
-      accountGroupDescription: accountGroupDescription,
-    };
-    this.glAccountGroups.push(glAccountGroup);
-    return glAccountGroup
+    accountGroup.id = ++this._id;
+    this._glAccountGroupslist.push(accountGroup);
+    return accountGroup
+
   }
 
   // End of General Ledger Data
