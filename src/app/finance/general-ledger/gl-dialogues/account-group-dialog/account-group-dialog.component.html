@@ -15,13 +15,13 @@
         <div class="row my-1">
           <label for="inputControllingArea" class="col-md-4 col-form-label">Account Group</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" id="inputAccounttGroupCode" formControlName="accounttGroupCode"
+            <input type="text" class="form-control" id="inputAccountGroupCode" formControlName="accountGroupCode"
               [readonly]="readonly">
           </div>
           <div>
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['accounttGroupCode'].dirty) && formGroup.controls['accounttGroupCode'].invalid">
-              <li *ngFor="let error of formGroup.getAccountGroupCodeValidationMessages('accounttGroupCode')">{{ error}}
+              *ngIf="(formSubmitted || formGroup.controls['accountGroupCode'].dirty) && formGroup.controls['accountGroupCode'].invalid">
+              <li *ngFor="let error of formGroup.getAccountGroupCodeValidationMessages('accountGroupCode')">{{ error}}
               </li>
             </ul>
           </div>
@@ -64,64 +64,34 @@
           </ul>
         </div>
         <div class="row my-1">
-          <label for="inputControllingArea" class="col-md-4 col-form-label">Controlling Area</label>
+          <label for="inputAccountGroupCode" class="col-md-4 col-form-label">Account Group Code</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" id="inputControllingArea" formControlName="controllingArea">
+            <input type="text" class="form-control" id="inputAccountGroupCode" formControlName="accountGroupCode">
           </div>
           <div>
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['controllingArea'].dirty) && formGroup.controls['controllingArea'].invalid">
-              <li *ngFor="let error of formGroup.getControllingAreaValidationMessages('controllingArea')">{{ error}}
+              *ngIf="(formSubmitted || formGroup.controls['accountGroupCode'].dirty) && formGroup.controls['accountGroupCode'].invalid">
+              <li *ngFor="let error of formGroup.getAccountGroupCodeValidationMessages('accountGroupCode')">{{ error}}
               </li>
             </ul>
           </div>
         </div>
         <div class="row my-3">
-          <label for="inputControllingAreaName" class="col-md-4 col-form-label">Controlling Area Name</label>
+          <label for="inputAccountGroupDescription" class="col-md-4 col-form-label">Account Group Description</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" id="inputControllingAreaName" formControlName="controllingAreaName">
+            <input type="text" class="form-control" id="inputAccountGroupDescription" formControlName="accountGroupDescription">
           </div>
           <div>
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['controllingAreaName'].dirty) && formGroup.controls['controllingAreaName'].invalid">
-              <li *ngFor="let error of formGroup.getControllingAreaNameValidationMessages('controllingAreaName')">{{
+              *ngIf="(formSubmitted || formGroup.controls['accountGroupDescription'].dirty) && formGroup.controls['accountGroupDescription'].invalid">
+              <li *ngFor="let error of formGroup.getaccountGroupDescriptionValidationMessages('accountGroupDescription')">{{
                 error}}
               </li>
             </ul>
           </div>
         </div>
-        <div class="row my-3">
-          <label for="inputPersonResponsible" class="col-md-4 col-form-label">Personal Responsible</label>
-          <div class="col-md-8">
-            <input type="text" class="form-control" id="inputpersonResponsible" formControlName="personResponsible">
-          </div>
-          <div>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['personResponsible'].dirty) && formGroup.controls['personResponsible'].invalid">
-              <li *ngFor="let error of formGroup.getPersonResponsibleValidationMessages('personResponsible')">{{ error}}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="row my-3">
-          <label for="inputCompanyCode" class="col-md-4 col-form-label">Company Code</label>
-          <div class="col-md-8">
-            <select class="form-select form-control-lg" aria-label="Default select example" formControlName="companyCode"
-              id="companyCode" name="companyCode">
-              <option class="form-select" selected *ngFor="let companyCode of companyCodeList" [value]="companyCode.id">
-                {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
-              </option>
-            </select>
-          </div>
-          <div>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
-              <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}</li>
-            </ul>
-          </div>
-        </div>
         <mat-dialog-actions align="end" class="my-1">
-          <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onCreateControllingArea()"
+          <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onCreateAccountGroup()"
             [disabled]="!formSubmitted && formGroup.invalid">
             <mat-icon class="mx-2 my-2">save</mat-icon>
             Save
@@ -137,7 +107,7 @@
   <!-- End of Create Template -->
   <!-- Beginning of Edit Template -->
   <div *ngSwitchCase="'edit'">
-    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Controlling Area Information</h2>
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Account Group</h2>
     <mat-dialog-content class="mat-typography">
       <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
         <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
@@ -148,64 +118,34 @@
           </ul>
         </div>
         <div class="row my-1">
-          <label for="inputControllingArea" class="col-md-4 col-form-label">Controlling Area</label>
+          <label for="inputAccountGroupCode" class="col-md-4 col-form-label">Account Group</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" id="inputControllingArea" formControlName="controllingArea">
+            <input type="text" class="form-control" id="inputAccountGroupCode" formControlName="accountGroupCode">
           </div>
           <div>
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['controllingArea'].dirty) && formGroup.controls['controllingArea'].invalid">
-              <li *ngFor="let error of formGroup.getControllingAreaValidationMessages('controllingArea')">{{ error}}
+              *ngIf="(formSubmitted || formGroup.controls['accountGroupCode'].dirty) && formGroup.controls['accountGroupCode'].invalid">
+              <li *ngFor="let error of formGroup.getAccountGroupCodeValidationMessages('accountGroupCode')">{{ error}}
               </li>
             </ul>
           </div>
         </div>
         <div class="row my-3">
-          <label for="inputControllingAreaName" class="col-md-4 col-form-label">Controlling Area Name</label>
+          <label for="inputAccountGroupDescription" class="col-md-4 col-form-label">Account Group Description</label>
           <div class="col-md-8">
-            <input type="text" class="form-control" id="inputControllingAreaName" formControlName="controllingAreaName">
+            <input type="text" class="form-control" id="inputAccountGroupDescription" formControlName="accountGroupDescription">
           </div>
           <div>
             <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['controllingAreaName'].dirty) && formGroup.controls['controllingAreaName'].invalid">
-              <li *ngFor="let error of formGroup.getControllingAreaNameValidationMessages('controllingAreaName')">{{
+              *ngIf="(formSubmitted || formGroup.controls['accountGroupDescription'].dirty) && formGroup.controls['accountGroupDescription'].invalid">
+              <li *ngFor="let error of formGroup.getaccountGroupDescriptionValidationMessages('accountGroupDescription')">{{
                 error}}
               </li>
             </ul>
           </div>
         </div>
-        <div class="row my-3">
-          <label for="inputPersonResponsible" class="col-md-4 col-form-label">Personal Responsible</label>
-          <div class="col-md-8">
-            <input type="text" class="form-control" id="inputpersonResponsible" formControlName="personResponsible">
-          </div>
-          <div>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['personResponsible'].dirty) && formGroup.controls['personResponsible'].invalid">
-              <li *ngFor="let error of formGroup.getPersonResponsibleValidationMessages('personResponsible')">{{ error}}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="row my-3">
-          <label for="inputCompanyCode" class="col-md-4 col-form-label">Company Code</label>
-          <div class="col-md-8">
-            <select class="form-select form-control-lg" aria-label="Default select example" formControlName="companyCode"
-              id="companyCode" name="companyCode">
-              <option class="form-select" selected *ngFor="let companyCode of companyCodeList" [value]="companyCode.id">
-                {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
-              </option>
-            </select>
-          </div>
-          <div>
-            <ul class="text-danger list-unstyled"
-              *ngIf="(formSubmitted || formGroup.controls['companyCode'].dirty) && formGroup.controls['companyCode'].invalid">
-              <li *ngFor="let error of formGroup.getCompanyCodeValidationMessages('companyCode')">{{ error}}</li>
-            </ul>
-          </div>
-        </div>
         <mat-dialog-actions align="end" class="my-1">
-          <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onEditControllingArea()"
+          <button type="submit" mat-raised-button cdkFocusInitial class="mx-1 my-1" (click)="onEditAccountGroup()"
             [disabled]="!formSubmitted && formGroup.invalid">
             <mat-icon class="mx-2 my-2">save</mat-icon>
             Save
@@ -221,20 +161,20 @@
   <!-- End of Edit Template -->
   <!-- Beginning of Delete Template -->
   <div *ngSwitchCase="'delete'">
-    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Delete Controlling Area</h2>
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Delete Account Group</h2>
     <mat-dialog-content>
-      <p style="font-weight: lighter; color: #03045e;">Are you sure you want to delete the following Controlling Area?
+      <p style="font-weight: lighter; color: #03045e;">Are you sure you want to delete the following Account Group ?
       </p>
       <ul>
         <li>
-          <p style="font-weight: lighter; color: #03045e;">Controlling Area - <span class="title-desc">{{
-              controllingArea.controllingArea
+          <p style="font-weight: lighter; color: #03045e;">Account Group - <span class="title-desc">{{
+              accountGroup.accountGroup
               }}</span>
           </p>
         </li>
         <li>
           <p style="font-weight: lighter; color: #03045e;">Controlling Area Name - <span class="title-desc">{{
-              controllingArea.controllingAreaName
+              accountGroup.accountGroupDescription
               }}</span>
           </p>
         </li>
@@ -242,7 +182,7 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end" class="my-1">
       <button type="submit" mat-raised-button cdkFocusInitial mat-dialog-close class="mx-1 my-1"
-        (click)="onDeleteControllingArea()">
+        (click)="onDeleteAccountGroup()">
         <mat-icon class="mx-2 my-2">save</mat-icon>
         Yes
       </button>

@@ -40,17 +40,17 @@ export class CreateCompanyDialogComponent implements OnInit {
   public selectedCountryCode!: number;
 
   constructor(
-    private dialog: MatDialog,
-    private dialogRef: MatDialogRef<CreateCompanyDialogComponent>,
-    public financeService: FinanceService
+    private _dialog: MatDialog,
+    private _dialogRef: MatDialogRef<CreateCompanyDialogComponent>,
+    public _financeService: FinanceService
   ) {}
 
   ngOnInit(): void {}
 
   public onSave() {
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.company = this.formGroup.value;
-    this.financeService
+    this._financeService
       .createCompanyMasterData(
         this.company.company,
         this.company.companyName,
@@ -66,12 +66,11 @@ export class CreateCompanyDialogComponent implements OnInit {
       )
       .subscribe({
         next: (companyCreated) => {
-          this.dialog.open(ChangesSavedDialogComponent, {
+          this._dialog.open(ChangesSavedDialogComponent, {
             data: (this.company = companyCreated),
           });
         },
         error: (err) => {
-          console.log('Phonnumber error message-', err);
           this.errorMessage = err;
         },
         complete: () => console.info('Complete'),
@@ -81,7 +80,7 @@ export class CreateCompanyDialogComponent implements OnInit {
   }
 
   close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
   // ========================https://senoritadeveloper.medium.com/i18n-phone-number-validation-in-angular-81759441dd5a=======
   public internationalCountryPhoneCodes(): void {

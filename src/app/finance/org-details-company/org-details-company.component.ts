@@ -41,7 +41,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
   constructor(
 
     private _financeService: FinanceService,
-    private dialogue: MatDialog
+    private _dialogue: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +62,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
     dialogConfig.panelClass = "companyClass";
     dialogConfig.hasBackdrop = true;
 
-    const dialogRef = this.dialogue.open(CreateCompanyDialogComponent, dialogConfig);
+    const dialogRef = this._dialogue.open(CreateCompanyDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((success) => {
       return success;
     });
@@ -83,7 +83,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
       // Open the dialogue config
 
-      let dialogRef = this.dialogue.open(DisplayCompanyDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(DisplayCompanyDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
 
@@ -112,7 +112,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
       // Open the dialogue config
 
-      let dialogRef = this.dialogue.open(CompanyDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(CompanyDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
 
@@ -141,7 +141,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
       // Open the dialogue config
 
-      let dialogRef = this.dialogue.open(DeleteCompanyDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(DeleteCompanyDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
 

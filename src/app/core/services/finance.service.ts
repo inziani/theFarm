@@ -519,7 +519,7 @@ export class FinanceService {
 
   // AccountGroups
 
-  public addGLAccountGroup(accountGroup: GLAccountGroup): GLAccountGroup {
+  public createGLAccountGroup(accountGroup: GLAccountGroup): GLAccountGroup {
     accountGroup.id = ++this._id;
     this._glAccountGroupslist.push(accountGroup);
     return accountGroup;

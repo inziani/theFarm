@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { GLAccountGroupMasterData } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
 import { GLAccountGroup } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { MatTableDataSource } from '@angular/material/table';
 import { FinanceService } from '@app/core/services/finance.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AccountGroupDialogComponent } from '../gl-dialogues/account-group-dialog/account-group-dialog.component';
+import { CreateCompanyDialogComponent } from '@app/finance/finance-dialogues/create-company-dialog/create-company-dialog.component';
 
 @Component({
   selector: 'app-account-group-details',
@@ -27,10 +28,11 @@ export class AccountGroupDetailsComponent {
     'delete',
   ];
   public resultsLength = 0;
+  public errorMessage!: string;
 
   constructor(
     private _financeService: FinanceService,
-    private _dialog: MatDialog
+    private readonly _matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class AccountGroupDetailsComponent {
       this.sourceData.data = response;
     });
 
-    
+
   }
 
   ngAfterViewInit() {
@@ -47,7 +49,27 @@ export class AccountGroupDetailsComponent {
   }
 
   public onCreateAccountGroup() {
-    // Open Dialogue for Account group maintenance
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '550px';
+    // dialogConfig.panelClass = 'companyClass';
+    dialogConfig.hasBackdrop = true;
+
+     const dialogRef = this._matDialog.open(
+       AccountGroupDialogComponent,
+       dialogConfig
+     );
+
+    dialogRef.afterClosed().subscribe((success) => {
+      return success;
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (success) => console.info('Dialogue Opened'),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
+    });
   }
 
   public onDisplayAccountGroup(id: number) {
