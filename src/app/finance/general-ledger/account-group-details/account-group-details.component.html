@@ -7,8 +7,7 @@
             mat-raised-button
             cdkFocusInitial
             class="mx-1 my-1"
-            (click)="onCreateAccountGroup()"
-          >
+            (click)="onCreateAccountGroup('create')">
             <mat-icon class="mx-2 my-2">note_add</mat-icon>Create Account Group
           </button>
         </span>
@@ -46,7 +45,7 @@
         <ng-container matColumnDef="display">
           <th mat-header-cell *matHeaderCellDef>Display</th>
           <td mat-cell *matCellDef="let row">
-            <a (click)="onDisplayAccountGroup(row.id)">
+            <a (click)="onDisplayAccountGroup('display', row.id)">
               <mat-icon>pageview</mat-icon>
             </a>
           </td>
@@ -56,7 +55,7 @@
           <th mat-header-cell *matHeaderCellDef>Edit</th>
           <td mat-cell *matCellDef="let row">
             <a>
-              <mat-icon (click)="onEditAccountGroup(row.id)">edit</mat-icon>
+              <mat-icon (click)="onEditAccountGroup('edit', row.id)">edit</mat-icon>
             </a>
           </td>
         </ng-container>
@@ -64,7 +63,7 @@
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef>Delete</th>
           <td mat-cell *matCellDef="let row">
-            <mat-icon (click)="onDeleteAccountGroup(row.id)">delete</mat-icon>
+            <mat-icon (click)="onDeleteAccountGroup('delete', row.id)">delete</mat-icon>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="accountGroupColumnHeaders"></tr>

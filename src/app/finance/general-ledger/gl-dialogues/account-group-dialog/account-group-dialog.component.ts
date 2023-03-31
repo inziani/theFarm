@@ -33,7 +33,10 @@ export class AccountGroupDialogComponent {
 
   ngOnInit(): void {
     this._financeService.data.subscribe({
-      next: (selectedProcess) => (this.selectedProcess = selectedProcess),
+      next: (selectedProcess) => {
+        (this.selectedProcess = selectedProcess);
+        console.log('Selected Process - ', selectedProcess);
+      },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complete'),
     });

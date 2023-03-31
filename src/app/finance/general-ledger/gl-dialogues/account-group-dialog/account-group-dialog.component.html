@@ -1,9 +1,9 @@
-<!-- Beginning of Controlling Maintenance Templates -->
+<!-- Beginning of Account Group Maintenance Templates -->
 <div class="col-md-10" [ngSwitch]="selectedProcess">
   <!-- Beginning of Display Template -->
   <div *ngSwitchCase="'display'">
     <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Display Account Group</h2>
-    <mat-dialog-content class="mat-typography">
+     <mat-dialog-content class="mat-typography">
       <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
         <div class="bg-danger text-white p-2 mb-2" *ngIf="formSubmitted && formGroup.invalid">
           <ul>
@@ -52,7 +52,7 @@
   </div>
   <!-- End of Display Template -->
   <!-- Beginning of Create Template -->
-  <div *ngSwitchCase="'create'">
+   <div *ngSwitchCase="'create'">
     <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Create Account Group</h2>
     <mat-dialog-content class="mat-typography">
       <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
@@ -106,7 +106,7 @@
   </div>
   <!-- End of Create Template -->
   <!-- Beginning of Edit Template -->
-  <div *ngSwitchCase="'edit'">
+  <!-- <div *ngSwitchCase="'edit'">
     <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Edit Account Group</h2>
     <mat-dialog-content class="mat-typography">
       <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
@@ -157,10 +157,11 @@
         </mat-dialog-actions>
       </form>
     </mat-dialog-content>
-  </div>
+  </div> -->
   <!-- End of Edit Template -->
+
   <!-- Beginning of Delete Template -->
-  <div *ngSwitchCase="'delete'">
+  <!-- <div *ngSwitchCase="'delete'">
     <h2 mat-dialog-title style="font-weight: lighter; color: #03045e;">Delete Account Group</h2>
     <mat-dialog-content>
       <p style="font-weight: lighter; color: #03045e;">Are you sure you want to delete the following Account Group ?
@@ -173,7 +174,7 @@
           </p>
         </li>
         <li>
-          <p style="font-weight: lighter; color: #03045e;">Controlling Area Name - <span class="title-desc">{{
+          <p style="font-weight: lighter; color: #03045e;">Account Group - <span class="title-desc">{{
               accountGroup.accountGroupDescription
               }}</span>
           </p>
@@ -191,7 +192,8 @@
         No
       </button>
     </mat-dialog-actions>
-  </div>
+  </div> -->
   <!-- End of Delete Template -->
 </div>
-<!-- End of Controlling Area maintainance templates -->
+<!-- End of Account Groups  maintainance templates -->
+

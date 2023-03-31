@@ -7,6 +7,7 @@ import { FinanceService } from '@app/core/services/finance.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountGroupDialogComponent } from '../gl-dialogues/account-group-dialog/account-group-dialog.component';
 import { CreateCompanyDialogComponent } from '@app/finance/finance-dialogues/create-company-dialog/create-company-dialog.component';
+import { TaxCodeDialogComponent } from '../gl-dialogues/tax-code-dialog/tax-code-dialog.component';
 
 @Component({
   selector: 'app-account-group-details',
@@ -48,13 +49,15 @@ export class AccountGroupDetailsComponent {
     this.sourceData.paginator = this.paginator;
   }
 
-  public onCreateAccountGroup() {
+  public onCreateAccountGroup(process: string) {
     const dialogConfig = new MatDialogConfig();
+    this._financeService.sendData(process);
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '550px';
-    // dialogConfig.panelClass = 'companyClass';
+
+
     dialogConfig.hasBackdrop = true;
 
      const dialogRef = this._matDialog.open(
@@ -72,15 +75,18 @@ export class AccountGroupDetailsComponent {
     });
   }
 
-  public onDisplayAccountGroup(id: number) {
+  public onDisplayAccountGroup(process: string, id: number) {
+    this._financeService.sendData(process);
     // Open Dialogue for Account group maintenance
   }
 
-  public onEditAccountGroup(id: number) {
+  public onEditAccountGroup(process: string, id: number) {
+    this._financeService.sendData(process);
     // Open Dialogue for Account Group Maintenance
   }
 
-  public onDeleteAccountGroup(id: number) {
+  public onDeleteAccountGroup(process: string, id: number) {
+    this._financeService.sendData(process);
     // Open Dialogue for Account Group Maintenance
   }
 }
