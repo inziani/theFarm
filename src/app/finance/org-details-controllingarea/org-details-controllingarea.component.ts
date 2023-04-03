@@ -13,10 +13,9 @@ import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-d
 @Component({
   selector: 'app-org-details-controllingarea',
   templateUrl: './org-details-controllingarea.component.html',
-  styleUrls: ['./org-details-controllingarea.component.css']
+  styleUrls: ['./org-details-controllingarea.component.css'],
 })
 export class OrgDetailsControllingareaComponent implements OnInit {
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -29,25 +28,23 @@ export class OrgDetailsControllingareaComponent implements OnInit {
     'companyCode',
     'display',
     'edit',
-    'delete'
+    'delete',
   ];
 
   public resultsLength = 0;
   public controllingArea!: ControllingAreaMasterData;
 
-
   constructor(
     private dialogue: MatDialog,
     private financeService: FinanceService
-
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     this.financeService.fetchControllingAreaData().subscribe({
-      next: (controllingAreaDataFetched) => this.sourceData.data = controllingAreaDataFetched,
+      next: (controllingAreaDataFetched) =>
+        (this.sourceData.data = controllingAreaDataFetched),
       error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
-      complete: () => console.info('complete')
+      complete: () => console.info('complete'),
     });
   }
 
@@ -57,81 +54,83 @@ export class OrgDetailsControllingareaComponent implements OnInit {
   }
 
   public onDisplayControllingArea(process: string, id: number) {
-
     this.financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     // Fetch Data from api
 
     this.financeService.fetchSingleControllingArea(id).subscribe({
-      next: (controllingArea) =>
-      {
+      next: (controllingArea) => {
         this.controllingArea = controllingArea;
         dialogConfig.data = this.controllingArea;
-        let dialogRef = this.dialogue.open(ControllingAreaDialogComponent, dialogConfig);
+        let dialogRef = this.dialogue.open(
+          ControllingAreaDialogComponent,
+          dialogConfig
+        );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
           error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
-          complete: () => console.info('Complete')
-    });
+          complete: () => console.info('Complete'),
+        });
       },
       error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
-      complete: () => console.info('Complete?')
+      complete: () => console.info('Complete?'),
     });
   }
 
   public onCreateControllingArea(process: string) {
-
     let dialogConfig = new MatDialogConfig();
     this.financeService.sendData(process);
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
-    let dialogRef = this.dialogue.open(ControllingAreaDialogComponent, dialogConfig);
+    let dialogRef = this.dialogue.open(
+      ControllingAreaDialogComponent,
+      dialogConfig
+    );
     dialogRef.afterClosed().subscribe({
       next: (result) => result,
       error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
-      complete: () => console.info('complete')
+      complete: () => console.info('complete'),
     });
   }
 
   public onEditControllingArea(process: string, id: number) {
     this.financeService.sendData(process);
-
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     // Fetch Data from api
 
     this.financeService.fetchSingleControllingArea(id).subscribe({
-      next: (controllingArea) =>
-      {
+      next: (controllingArea) => {
         this.controllingArea = controllingArea;
         dialogConfig.data = this.controllingArea;
-        let dialogRef = this.dialogue.open(ControllingAreaDialogComponent, dialogConfig);
+        let dialogRef = this.dialogue.open(
+          ControllingAreaDialogComponent,
+          dialogConfig
+        );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
           error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
-          complete: () => console.info('Complete')
-
-    });
+          complete: () => console.info('Complete'),
+        });
       },
       error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
-      complete: () => console.info('Complete?')
+      complete: () => console.info('Complete?'),
     });
-
   }
   public onDeleteCompanyCode(process: string, id: number) {
     this.financeService.sendData(process);
@@ -139,28 +138,26 @@ export class OrgDetailsControllingareaComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     this.financeService.fetchSingleControllingArea(id).subscribe({
-      next: (controllingArea) =>
-      {
+      next: (controllingArea) => {
         this.controllingArea = controllingArea;
         dialogConfig.data = this.controllingArea;
-        let dialogRef = this.dialogue.open(ControllingAreaDialogComponent, dialogConfig);
+        let dialogRef = this.dialogue.open(
+          ControllingAreaDialogComponent,
+          dialogConfig
+        );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
           error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
-          complete: () => console.info('Complete')
-
-    });
+          complete: () => console.info('Complete'),
+        });
       },
       error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
-      complete: () => console.info('Complete?')
+      complete: () => console.info('Complete?'),
     });
-
-
- }
-
+  }
 }

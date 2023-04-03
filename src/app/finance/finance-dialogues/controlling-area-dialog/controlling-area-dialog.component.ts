@@ -71,8 +71,6 @@ export class ControllingAreaDialogComponent implements OnInit {
         this.controllingArea.companyCode
       )
       .subscribe({
-        // next: (controllingAreaMasterCreated) =>
-        //   this.dialogue.open(ChangesSavedDialogComponent),
         next: (controllingAreaMasterCreated) =>
           this._dialog.open(ObjectCreatedComponent, {
             data: (this.createdItem =
