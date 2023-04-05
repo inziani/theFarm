@@ -6,11 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FinanceService } from '@app/core/services/finance.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountGroupDialogComponent } from '../gl-dialogues/account-group-dialog/account-group-dialog.component';
-import { CreateCompanyDialogComponent } from '@app/finance/finance-dialogues/create-company-dialog/create-company-dialog.component';
-import { TaxCodeDialogComponent } from '../gl-dialogues/tax-code-dialog/tax-code-dialog.component';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
-import { data } from 'autoprefixer';
+
 
 @Component({
   selector: 'app-account-group-details',
@@ -27,7 +25,7 @@ export class AccountGroupDetailsComponent {
   public accountGroupColumnHeaders: string[] = [
     'id',
     'accountGroup',
-    'accountGroupDescription',
+    'description',
     'display',
     'edit',
     'delete',
@@ -41,15 +39,14 @@ export class AccountGroupDetailsComponent {
   ) {}
 
   ngOnInit(): void {
-    this._financeService.glAccountGroupsData.subscribe({
-      next: (accountGroup) => {
-        this.sourceData.data = accountGroup;
+    this._financeService.fetchGLAccountGroupsData().subscribe({
+      next: (accountGroupDataFetched) => {
+        this.sourceData.data = accountGroupDataFetched;
       },
-      error: (err) => this.errorMessage = err,
-      complete:()=> console.info('Complete')
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
     });
   }
-
 
   ngAfterViewInit() {
     this.sourceData.sort = this.sort;
@@ -64,21 +61,18 @@ export class AccountGroupDetailsComponent {
     dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
-     const dialogRef = this._matDialog.open(
-       AccountGroupDialogComponent,
-       dialogConfig
-     );
+    const dialogRef = this._matDialog.open(
+      AccountGroupDialogComponent,
+      dialogConfig
+    );
     dialogRef.afterClosed().subscribe({
       next: (success) => console.info('Opened'),
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complete'),
     });
   }
-
-  public onDisplayAccountGroup(process: string, id: number) {
-
+  public maintainAccountGroup(process: string, id: number) {
     this._financeService.sendData(process);
-
     let dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -88,20 +82,19 @@ export class AccountGroupDetailsComponent {
 
     // fetch data from service
 
-    this._financeService.glAccountGroupsData.subscribe({
+    this._financeService.fetchSingleGLAccountGroup(id).subscribe({
       next: (accountGroup) => {
-        this.accountGroupList = accountGroup
-        dialogConfig.data = this.accountGroupList.filter((accountGroup: GLAccountGroup) => accountGroup.id  === id);
+        this.accountGroup = accountGroup;
+        dialogConfig.data = this.accountGroup;
         let dialogRef = this._matDialog.open(
           AccountGroupDialogComponent,
           dialogConfig
         );
 
-
         dialogRef.afterClosed().subscribe({
           next: (result: string) => result,
           error: (err: string) =>
-            this._matDialog.open(ErrorHandlingDialogComponent, { data: err}),
+            this._matDialog.open(ErrorHandlingDialogComponent, { data: err }),
           complete: () => console.info('Complete'),
         });
       },
@@ -109,15 +102,5 @@ export class AccountGroupDetailsComponent {
       complete: () => console.info('Complete?'),
     });
 
-  }
-
-  public onEditAccountGroup(process: string, id: number) {
-    this._financeService.sendData(process);
-    // Open Dialogue for Account Group Maintenance
-  }
-
-  public onDeleteAccountGroup(process: string, id: number) {
-    this._financeService.sendData(process);
-    // Open Dialogue for Account Group Maintenance
   }
 }

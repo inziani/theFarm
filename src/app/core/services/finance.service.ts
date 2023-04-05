@@ -1,5 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 import {
@@ -8,12 +12,10 @@ import {
   CompanyCodeMasterData,
   CompanyMasterData,
   ControllingAreaMasterData,
-  GLAccountGroup
+  GLAccountGroup,
 } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
-
-
 
 @Injectable({
   providedIn: 'root',
@@ -30,11 +32,11 @@ export class FinanceService {
     {
       id: 1,
       accountGroup: 'accountGroup',
-      accountGroupDescription: 'accountGroupDescription',
+      description: 'accountGroupDescription',
     },
   ];
-  private _glAccountGroups$ = new BehaviorSubject<GLAccountGroup[]>(this.
-    _glAccountGroupslist
+  private _glAccountGroups$ = new BehaviorSubject<GLAccountGroup[]>(
+    this._glAccountGroupslist
   );
   readonly glAccountGroupsData: Observable<GLAccountGroup[]> =
     this._glAccountGroups$.asObservable();
@@ -519,10 +521,57 @@ export class FinanceService {
 
   // AccountGroups
 
-  public createGLAccountGroup(accountGroup: GLAccountGroup): GLAccountGroup {
-    accountGroup.id = ++this._id;
-    this._glAccountGroupslist.push(accountGroup);
-    return accountGroup;
+  // public createGLAccountGroup(accountGroup: GLAccountGroup): GLAccountGroup {
+  //   accountGroup.id = ++this._id;
+  //   this._glAccountGroupslist.push(accountGroup);
+  //   return accountGroup;
+  // }
+
+  public createGLAccountGroup(
+    accountGroup: string,
+    description:string
+  ): Observable<GLAccountGroup> {
+    return this.http.post<GLAccountGroup>(
+      `${environment.apiUrl}/generalLedgerAccountGroup/`,
+      {
+        accountGroup,
+        description
+      },
+      this.httpOptions
+    );
+  }
+
+  public fetchGLAccountGroupsData(): Observable<GLAccountGroup[]> {
+    return this.http.get<GLAccountGroup[]>(
+      `${environment.apiUrl}/generalLedgerAccountGroup/`,
+      this.httpOptions
+    );
+  }
+
+  public fetchSingleGLAccountGroup(id: number): Observable<GLAccountGroup>{
+    return this.http.get<GLAccountGroup>(`${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/', this.httpOptions)
+  }
+
+  public editSingleGLAccountGroup(
+    id: number,
+    accountGroup: string,
+    description: string
+  ): Observable<GLAccountGroup>{
+    return this.http.patch<GLAccountGroup>(
+      `${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/', {
+        accountGroup,
+        description
+      }, this.httpOptions
+    );
+  }
+
+  public deleteAccountGroup(
+    id: number
+  ): Observable<GLAccountGroup> {
+    return this.http.delete<GLAccountGroup>(
+      `${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/',
+      this.httpOptions
+    )
   }
 
   // End of General Ledger Data

@@ -10,6 +10,7 @@ import { FinanceService } from '@app/core/services/finance.service';
 
 import { CompanyCodeMasterData, ControllingAreaMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { ControllingAreaMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
+import { data } from 'autoprefixer';
 
 @Component({
   selector: 'app-controlling-area-dialog',
@@ -100,7 +101,9 @@ export class ControllingAreaDialogComponent implements OnInit {
       )
       .subscribe({
         next: (controllingAreaMasterEdited) =>
-          this._dialog.open(ChangesSavedDialogComponent),
+          this._dialog.open(ChangesSavedDialogComponent, {
+            data: (this.changedItem = controllingAreaMasterEdited.controllingAreaName),
+          }),
         error: (err) => this._dialog.open(ErrorHandlingDialogComponent),
         complete: () => console.info('complete'),
       });

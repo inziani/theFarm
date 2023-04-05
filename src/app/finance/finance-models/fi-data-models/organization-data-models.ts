@@ -74,9 +74,16 @@ export interface SalesArea{
 }
 
 export interface GLAccountGroup {
-  id: number;
-  accountGroup: string;
-  accountGroupDescription: string;
+  id: number,
+  accountGroup: string,
+  description: string
+}
+
+export interface TaxCode {
+  id: number,
+  taxCode: string,
+  taxCodeDescription: string,
+  taxCodePercentage: number
 }
 
 

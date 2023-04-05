@@ -15,8 +15,8 @@ export class GlTransactionCodesComponent {
   ngOnInit(): void {
 
     this._financeService.data.subscribe({
-      next: (data) => this.itemSelected = data,
-      error: (err) => this.errorMessage = err,
+      next: (data: string) => this.itemSelected = data,
+      error: (err: string) => this.errorMessage = err,
       complete:()=> console.info('Complete')
     })
   }

@@ -19,8 +19,6 @@ export class FinanceHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-
     this.financeService.itemSelected.subscribe({
       next: (orgUnit: string) => (this.itemSelected = orgUnit),
       error: (error: string) => (this.errorMessage = error),

@@ -638,28 +638,16 @@ export class GLMasterDataAccountGroupFormControl extends FormControl {
 export class GLMasterDataAccountGroupFormGroup extends FormGroup {
   constructor() {
     super({
-      companyCode: new GLMasterDataAccountGroupFormControl(
-        "Company Code",
-        "companyCode",
-        "",
-        Validators.required
-      ),
-      chartOfAccounts: new GLMasterDataAccountGroupFormControl(
-        "Chart of Accounts",
-        "chartOfAccounts",
-        "",
-        Validators.required
-      ),
       accountGroup: new GLMasterDataAccountGroupFormControl(
-        "Account Group",
-        "accountGroup",
-        "",
-        Validators.required
+        'Account Group',
+        'accountGroup',
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(4)])
       ),
       description: new GLMasterDataAccountGroupFormControl(
-        "Description",
-        "description",
-        "",
+        'Description',
+        'description',
+        '',
         Validators.required
       ),
     });
@@ -671,16 +659,6 @@ export class GLMasterDataAccountGroupFormGroup extends FormGroup {
     );
   }
 
-  getCompanyCodeValidationMessages(companyCode: string): string[] {
-    return (
-      this.controls["companyCode"] as GLMasterDataAccountGroupFormControl
-    ).getValidationMessages();
-  }
-  getChartOfAccountsValidationMessages(chartOfAccounts: string): string[] {
-    return (
-      this.controls["chartOfAccounts"] as GLMasterDataAccountGroupFormControl
-    ).getValidationMessages();
-  }
   getAccountGroupValidationMessages(accountGroup: string): string[] {
     return (
       this.controls["accountGroup"] as GLMasterDataAccountGroupFormControl
@@ -748,12 +726,7 @@ export class GLMasterDataTaxCodeFormControl extends FormControl {
 export class GLMasterDataTaxCodeFormGroup extends FormGroup {
   constructor() {
     super({
-      companyCode: new GLMasterDataTaxCodeFormControl(
-        "Company Code",
-        "companyCode",
-        "",
-        Validators.required
-      ),
+
       taxCode: new GLMasterDataTaxCodeFormControl(
         "Tax Code",
         "taxCode",
@@ -779,12 +752,6 @@ export class GLMasterDataTaxCodeFormGroup extends FormGroup {
     return Object.keys(this.controls).map(
       (k) => this.controls[k] as GLMasterDataTaxCodeFormControl
     );
-  }
-
-  getCompanyCodeValidationMessages(companyCode: string): string[] {
-    return (
-      this.controls["companyCode"] as GLMasterDataTaxCodeFormControl
-    ).getValidationMessages();
   }
   getTaxCodeValidationMessages(taxCode: string): string[] {
     return (
@@ -863,13 +830,13 @@ export class GLAccountGroupMasterData extends FormGroup {
   constructor() {
     super({
       accountGroupCode: new CustomFormControl(
-        'accountGroupCode',
+        'accountGroup',
         'Account Group Code',
         '',
         Validators.compose([Validators.required, Validators.maxLength(4)])
       ),
       accountGroupDescription: new CustomFormControl(
-        'accountGroupDescription',
+        'description',
         'Account Group Description',
         '',
         Validators.required
@@ -882,16 +849,16 @@ export class GLAccountGroupMasterData extends FormGroup {
       (k) => this.controls[k] as CustomFormControl
     );
   }
-  getAccountGroupCodeValidationMessages(accountGroupCode: string): string[] {
+  getAccountGroupCodeValidationMessages(accountGroup: string): string[] {
     return (
-      this.controls['accountGroupCode'] as CustomFormControl
+      this.controls['accountGroup'] as CustomFormControl
     ).getValidationMessages();
   }
   getaccountGroupDescriptionValidationMessages(
-    accountGroupDescription: string
+    description: string
   ): string[] {
     return (
-      this.controls['accountGroupDescription'] as CustomFormControl
+      this.controls['description'] as CustomFormControl
     ).getValidationMessages();
   }
   getFormValidationMessages(): string[] {
