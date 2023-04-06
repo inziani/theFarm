@@ -13,6 +13,7 @@ import {
   CompanyMasterData,
   ControllingAreaMasterData,
   GLAccountGroup,
+  TaxCode,
 } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
@@ -529,13 +530,13 @@ export class FinanceService {
 
   public createGLAccountGroup(
     accountGroup: string,
-    description:string
+    description: string
   ): Observable<GLAccountGroup> {
     return this.http.post<GLAccountGroup>(
       `${environment.apiUrl}/generalLedgerAccountGroup/`,
       {
         accountGroup,
-        description
+        description,
       },
       this.httpOptions
     );
@@ -548,30 +549,84 @@ export class FinanceService {
     );
   }
 
-  public fetchSingleGLAccountGroup(id: number): Observable<GLAccountGroup>{
-    return this.http.get<GLAccountGroup>(`${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/', this.httpOptions)
+  public fetchSingleGLAccountGroup(id: number): Observable<GLAccountGroup> {
+    return this.http.get<GLAccountGroup>(
+      `${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/',
+      this.httpOptions
+    );
   }
 
   public editSingleGLAccountGroup(
     id: number,
     accountGroup: string,
     description: string
-  ): Observable<GLAccountGroup>{
+  ): Observable<GLAccountGroup> {
     return this.http.patch<GLAccountGroup>(
-      `${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/', {
-        accountGroup,
-        description
-      }, this.httpOptions
+      `${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/',
+      {
+        description,
+      },
+      this.httpOptions
     );
   }
 
-  public deleteAccountGroup(
-    id: number
-  ): Observable<GLAccountGroup> {
+  public deleteAccountGroup(id: number): Observable<GLAccountGroup> {
     return this.http.delete<GLAccountGroup>(
       `${environment.apiUrl}/generalLedgerAccountGroup/` + id + '/',
       this.httpOptions
-    )
+    );
+  }
+
+  public createTaxCode(
+    taxCode: string,
+    taxCodeDescription: string,
+    taxCodePercentage: number
+  ): Observable<TaxCode> {
+    return this.http.post<TaxCode>(
+      `${environment.apiUrl}/taxCodes/`,
+      {
+        taxCode,
+        taxCodeDescription,
+        taxCodePercentage,
+      },
+      this.httpOptions
+    );
+  }
+
+  public fetchTaxCodeData(): Observable<TaxCode[]> {
+    return this.http.get<TaxCode[]>(
+      `${environment.apiUrl}/taxCodes/`,
+      this.httpOptions
+    );
+  }
+
+  public fetchSingleTaxCode(id: number): Observable<TaxCode> {
+    return this.http.get<TaxCode>(
+      `${environment.apiUrl}/taxCodes/` + id + '/',
+      this.httpOptions
+    );
+  }
+
+  public editSingleTaxCode(
+    id: number,
+    taxCodeDescription: string,
+    taxCodePercentage: number
+  ): Observable<TaxCode> {
+    return this.http.patch<TaxCode>(
+      `${environment.apiUrl}/taxCodes/` + id + '/',
+      {
+        taxCodeDescription,
+        taxCodePercentage,
+      },
+      this.httpOptions
+    );
+  }
+
+  public deleteTaxCode(id: number): Observable<TaxCode> {
+    return this.http.delete<TaxCode>(
+      `${environment.apiUrl}/taxCodes/` + id + '/',
+      this.httpOptions
+    );
   }
 
   // End of General Ledger Data

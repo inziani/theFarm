@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
@@ -7,7 +7,6 @@ import { FinanceService } from '@app/core/services/finance.service';
 import { GLAccountGroup } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 
 import {
-  GLAccountGroupMasterData,
   GLMasterDataAccountGroupFormGroup,
 } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
 
@@ -36,10 +35,10 @@ export class AccountGroupDialogComponent {
     @Inject(MAT_DIALOG_DATA) public accountGroupData: GLAccountGroup
   ) {
     this.accountGroup = this.accountGroupData;
-    // { id: 12, accountGroup: 'TestCode', accountGroupDescription: 'TestDescription' }
   }
 
   ngOnInit(): void {
+    this.readonly = !this.readonly;
     this._financeService.data.subscribe({
       next: (selectedProcess) => {
         this.selectedProcess = selectedProcess;
@@ -73,18 +72,20 @@ export class AccountGroupDialogComponent {
   public onEditAccountGroup() {
     this._dialogRef.close(this.formGroup.value);
     this.accountGroup = this.formGroup.value;
-    this._financeService.editSingleGLAccountGroup(
-      this.accountGroupData.id,
-      this.accountGroup.accountGroup,
-      this.accountGroup.description
-    ).subscribe({
-      next: (accountGroupEdited) =>
-        this._dialog.open(ChangesSavedDialogComponent, {
-          data: (this.changedItem = accountGroupEdited.description),
-        }),
-      error: (err) => this.errorMessage = err,
-      complete:()=> console.info('Complete')
-    });
+    this._financeService
+      .editSingleGLAccountGroup(
+        this.accountGroupData.id,
+        this.accountGroup.accountGroup,
+        this.accountGroup.description
+      )
+      .subscribe({
+        next: (accountGroupEdited) =>
+          this._dialog.open(ChangesSavedDialogComponent, {
+            data: (this.changedItem = accountGroupEdited.accountGroup),
+          }),
+        error: (err) => (this.errorMessage = err),
+        complete: () => console.info('Complete'),
+      });
   }
 
   public onDeleteAccountGroup() {

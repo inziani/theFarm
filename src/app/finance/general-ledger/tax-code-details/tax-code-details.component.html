@@ -1,1 +1,88 @@
-<p>tax-code-details works!</p>
+<div class="container">
+  <div class="row my-1 justify-content-center">
+    <div class="col-md-6 my-1">
+      <div class="input-group my-1 justify-content-center">
+        <span class="input-group-text" id="inputGroup-sizing-default">
+          <button
+            mat-raised-button
+            cdkFocusInitial
+            class="mx-1 my-1"
+            (click)="onCreateTaxCode('create')">
+            <mat-icon class="mx-2 my-2">note_add</mat-icon>Create Tax Code
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row my-1">
+    <div class="col">
+      <!-- Begining of Table -->
+      <table
+        mat-table
+        [dataSource]="sourceData"
+        class="mat-elevation-z8 my-3"
+        matSort
+        matSortActive="taxCode"
+        matSortDisableClear
+        matSortDirection="desc"
+      >
+        <!-- Number Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+          <td mat-cell *matCellDef="let row">{{ row.id | number }}</td>
+        </ng-container>
+        <!-- Tax Code Column -->
+        <ng-container matColumnDef="taxCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tax Code</th>
+          <td mat-cell *matCellDef="let row">{{ row.taxCode }}</td>
+        </ng-container>
+        <!-- Tax Code Description  Column -->
+        <ng-container matColumnDef="taxCodeDescription">
+          <th mat-header-cell *matHeaderCellDef>Tax Code Description</th>
+          <td mat-cell *matCellDef="let row">{{ row.taxCodeDescription }}</td>
+        </ng-container>
+        <!-- Tax Code Percentage Column  -->
+        <ng-container matColumnDef="taxCodePercentage">
+          <th mat-header-cell *matHeaderCellDef>Tax Code Percentage</th>
+          <td mat-cell *matCellDef="let row">{{ row.taxCodePercentage }}</td>
+        </ng-container>
+        <!-- Display  Column -->
+        <ng-container matColumnDef="display">
+          <th mat-header-cell *matHeaderCellDef>Display</th>
+          <td mat-cell *matCellDef="let row">
+            <a (click)="maintainTaxCode('display', row.id)">
+              <mat-icon>pageview</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Edit  Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>Edit</th>
+          <td mat-cell *matCellDef="let row">
+            <a>
+              <mat-icon (click)="maintainTaxCode('edit', row.id)">edit</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Delete  Column -->
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-icon (click)="maintainTaxCode('delete', row.id)">delete</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="taxCodeColumnHeaders"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: taxCodeColumnHeaders"
+        ></tr>
+      </table>
+      <!-- End of Table -->
+      <mat-paginator
+        [length]="resultsLength"
+        [pageSize]="10"
+        [pageSizeOptions]="[10]"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>
