@@ -1,5 +1,446 @@
-<p>tax-code-dialog works!</p>
- <button type="submit" mat-raised-button cdkFocusInitial mat-dialog-close class="mx-1 my-1">
+<!-- Beginning of Account Group Maintenance Templates -->
+<div class="col-md-10" [ngSwitch]="selectedProcess">
+  <!-- Beginning of Display Template -->
+  <div *ngSwitchCase="'display'">
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e">
+      Display Tax Code
+    </h2>
+    <mat-dialog-content class="mat-typography">
+      <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+        <div
+          class="bg-danger text-white p-2 mb-2"
+          *ngIf="formSubmitted && formGroup.invalid"
+        >
+          <ul>
+            <li *ngFor="let error of formGroup.getFormValidationMessages()">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <div class="row my-1">
+          <label for="inputTaxCode" class="col-md-4 col-form-label"
+            >Tax Code</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCode"
+              formControlName="taxCode"
+              [readonly]="readonly"
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['taxCode'].dirty) &&
+                formGroup.controls['taxCode'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodeValidationMessages('taxCode')
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row my-3">
+          <label for="inputTaxCodeDescription" class="col-md-4 col-form-label"
+            >Tax Code Description</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCodeDescription"
+              formControlName="taxCodeDescription"
+              [readonly]="readonly"
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted ||
+                  formGroup.controls['taxCodeDescription'].dirty) &&
+                formGroup.controls['taxCodeDescription'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodeDescriptionValidationMessages(
+                    'taxCodeDescription'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+                <div class="row my-3">
+          <label for="inputTaxCodePercentage" class="col-md-4 col-form-label"
+            >Tax Code Percentage</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCodePercentage"
+              formControlName="taxCodePercentage"
+              [readonly]="readonly"
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted ||
+                  formGroup.controls['taxCodePercentage'].dirty) &&
+                formGroup.controls['taxCodePercentage'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodePercentageValidationMessages(
+                    'taxCodeDescription'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <mat-dialog-actions align="end" class="my-1">
+          <button mat-raised-button mat-dialog-close cdkFocusInitial>
+            <mat-icon class="mx-2 my-2">close</mat-icon>
+            Close
+          </button>
+        </mat-dialog-actions>
+      </form>
+    </mat-dialog-content>
+  </div>
+  <!-- End of Display Template -->
+  <!-- Beginning of Create Template -->
+  <div *ngSwitchCase="'create'">
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e">
+      Create Tax Code
+    </h2>
+    <mat-dialog-content class="mat-typography">
+      <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+        <div
+          class="bg-danger text-white p-2 mb-2"
+          *ngIf="formSubmitted && formGroup.invalid"
+        >
+          <ul>
+            <li *ngFor="let error of formGroup.getFormValidationMessages()">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <div class="row my-1">
+          <label for="inputTaxCode" class="col-md-4 col-form-label"
+            >Tax Code</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCode"
+              formControlName="taxCode"
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['taxCode'].dirty) &&
+                formGroup.controls['taxCode'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodeValidationMessages('taxCode')
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row my-3">
+          <label for="inpuTaxCodeDescription" class="col-md-4 col-form-label"
+            >Tax Code Description</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCodeDescription"
+              formControlName="taxCodeDescription"
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted ||
+                  formGroup.controls['taxCodeDescription'].dirty) &&
+                formGroup.controls['taxCodeDescription'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodeDescriptionValidationMessages(
+                    'taxCodeDescription'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+                <div class="row my-3">
+          <label for="inputTaxCodePercentage" class="col-md-4 col-form-label"
+            >Tax Code Percentage</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCodePercentage"
+              formControlName="taxCodePercentage"
+             
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted ||
+                  formGroup.controls['taxCodePercentage'].dirty) &&
+                formGroup.controls['taxCodePercentage'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodePercentageValidationMessages(
+                    'taxCodeDescription'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <mat-dialog-actions align="end" class="my-1">
+          <button
+            type="submit"
+            mat-raised-button
+            cdkFocusInitial
+            class="mx-1 my-1"
+            (click)="onCreateTaxCode()"
+            [disabled]="!formSubmitted && formGroup.invalid"
+          >
+            <mat-icon class="mx-2 my-2">save</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button mat-dialog-close cdkFocusInitial>
+            <mat-icon class="mx-2 my-2">close</mat-icon>
+            Close
+          </button>
+        </mat-dialog-actions>
+      </form>
+    </mat-dialog-content>
+  </div>
+  <!-- End of Create Template -->
+  <!-- Beginning of Edit Template -->
+  <div *ngSwitchCase="'edit'">
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e">
+      Edit Tax code
+    </h2>
+    <mat-dialog-content class="mat-typography">
+      <form novalidate [formGroup]="formGroup" *ngIf="!isLoading">
+        <div
+          class="bg-danger text-white p-2 mb-2"
+          *ngIf="formSubmitted && formGroup.invalid"
+        >
+          <ul>
+            <li *ngFor="let error of formGroup.getFormValidationMessages()">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <div class="row my-1">
+          <label for="inputTaxCode" class="col-md-4 col-form-label"
+            >Tax Code</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCode"
+              formControlName="taxCode"
+              [readOnly]="readonly"
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted || formGroup.controls['taxCode'].dirty) &&
+                formGroup.controls['taxCode'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodeValidationMessages('taxCode')
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row my-3">
+          <label for="inputTaxCodeDescription" class="col-md-4 col-form-label"
+            >Tax Code Description</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCodeDescription"
+              formControlName="taxCodeDescription"
+
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted ||
+                  formGroup.controls['taxCodeDescription'].dirty) &&
+                formGroup.controls['taxCodeDescription'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodeDescriptionValidationMessages(
+                    'taxCodeDescription'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+                <div class="row my-3">
+          <label for="inputTaxCodePercentage" class="col-md-4 col-form-label"
+            >Tax Code Percentage</label
+          >
+          <div class="col-md-8">
+            <input
+              type="text"
+              class="form-control"
+              id="inputTaxCodePercentage"
+              formControlName="taxCodePercentage"
+
+            />
+          </div>
+          <div>
+            <ul
+              class="text-danger list-unstyled"
+              *ngIf="
+                (formSubmitted ||
+                  formGroup.controls['taxCodePercentage'].dirty) &&
+                formGroup.controls['taxCodePercentage'].invalid
+              "
+            >
+              <li
+                *ngFor="
+                  let error of formGroup.getTaxCodePercentageValidationMessages(
+                    'taxCodeDescription'
+                  )
+                "
+              >
+                {{ error }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <mat-dialog-actions align="end" class="my-1">
+          <button
+            type="submit"
+            mat-raised-button
+            cdkFocusInitial
+            class="mx-1 my-1"
+            (click)="onEditTaxCode()"
+            [disabled]="!formSubmitted && formGroup.invalid"
+          >
+            <mat-icon class="mx-2 my-2">save</mat-icon>
+            Save
+          </button>
+          <button mat-raised-button mat-dialog-close cdkFocusInitial>
+            <mat-icon class="mx-2 my-2">close</mat-icon>
+            Close
+          </button>
+        </mat-dialog-actions>
+      </form>
+    </mat-dialog-content>
+  </div>
+  <!-- End of Edit Template -->
+
+  <!-- Beginning of Delete Template -->
+  <div *ngSwitchCase="'delete'">
+    <h2 mat-dialog-title style="font-weight: lighter; color: #03045e">
+      Delete Tax Code
+    </h2>
+    <mat-dialog-content>
+      <p style="font-weight: lighter; color: #03045e">
+        Are you sure you want to delete the following Tax Code ?
+      </p>
+      <ul>
+        <li>
+          <p style="font-weight: lighter; color: #03045e">
+            Tax Code -
+            <span class="title-desc">{{ taxCode.taxCode }}</span>
+          </p>
+        </li>
+        <li>
+          <p style="font-weight: lighter; color: #03045e">
+            Tax Code -
+            <span class="title-desc">{{ taxCode.taxCode }}</span>
+          </p>
+        </li>
+      </ul>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" class="my-1">
+      <button
+        type="submit"
+        mat-raised-button
+        cdkFocusInitial
+        mat-dialog-close
+        class="mx-1 my-1"
+        (click)="onDeleteTaxCode()"
+      >
         <mat-icon class="mx-2 my-2">save</mat-icon>
         Yes
       </button>
+      <button mat-raised-button mat-dialog-close cdkFocusInitial>
+        <mat-icon class="mx-2 my-2">close</mat-icon>
+        No
+      </button>
+    </mat-dialog-actions>
+  </div>
+  <!-- End of Delete Template -->
+</div>
+<!-- End of Account Groups  maintainance templates -->

@@ -1,9 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FinanceService } from '@app/core/services/finance.service';
 import { TaxCode } from '@app/finance/finance-models/fi-data-models/organization-data-models';
+import { TaxCodeDialogComponent } from '../gl-dialogues/tax-code-dialog/tax-code-dialog.component';
+import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
 
 @Component({
   selector: 'app-tax-code-details',
@@ -26,8 +29,12 @@ export class TaxCodeDetailsComponent {
     'delete',
   ];
   public resultsLength = 0;
+  public taxCode!: TaxCode;
 
-  constructor(private _financeService: FinanceService) {}
+  constructor(
+    private _financeService: FinanceService,
+    private _matDialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this._financeService.fetchTaxCodeData().subscribe({
@@ -43,10 +50,47 @@ export class TaxCodeDetailsComponent {
   }
 
   public onCreateTaxCode(process: string) {
-    // Open Dialogue Box
+    this._financeService.sendData(process);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '550px';
+    dialogConfig.hasBackdrop = true;
+
+    const dialogRef = this._matDialog.open(
+      TaxCodeDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe({
+      next: (success) => console.info('Tac'),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
+    });
   }
 
   public maintainTaxCode(process: string, id: number) {
-    // Open Dialogue
+    this._financeService.sendData(process);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '550px';
+    dialogConfig.hasBackdrop = true;
+
+    this._financeService.fetchSingleTaxCode(id).subscribe({
+      next: (taxCode) => {
+        this.taxCode = taxCode;
+        dialogConfig.data = this.taxCode;
+        const dialogRef = this._matDialog.open(
+          TaxCodeDialogComponent,
+          dialogConfig
+        );
+        dialogRef.afterClosed().subscribe({
+          next: (result: string) => result,
+          error: (err: string) =>
+            this._matDialog.open(ErrorHandlingDialogComponent, { data: err }),
+          complete: () => console.info('Complete'),
+        });
+      },
+    });
   }
 }

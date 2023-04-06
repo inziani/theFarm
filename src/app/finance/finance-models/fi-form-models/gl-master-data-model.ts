@@ -726,23 +726,22 @@ export class GLMasterDataTaxCodeFormControl extends FormControl {
 export class GLMasterDataTaxCodeFormGroup extends FormGroup {
   constructor() {
     super({
-
       taxCode: new GLMasterDataTaxCodeFormControl(
-        "Tax Code",
-        "taxCode",
-        "",
-        Validators.required
+        'Tax Code',
+        'taxCode',
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(2)])
       ),
       taxCodeDescription: new GLMasterDataTaxCodeFormControl(
-        "Tax Code Description",
-        "taxCodeDescription",
-        "",
+        'Tax Code Description',
+        'taxCodeDescription',
+        '',
         Validators.required
       ),
       taxCodePercentage: new GLMasterDataTaxCodeFormControl(
-        "Tax Code Percentage",
-        "taxCodePercentage",
-        "",
+        'Tax Code Percentage',
+        'taxCodePercentage',
+        '',
         Validators.required
       ),
     });

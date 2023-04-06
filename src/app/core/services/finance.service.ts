@@ -607,7 +607,7 @@ export class FinanceService {
     );
   }
 
-  public editSingleTaxCode(
+  public editTaxCode(
     id: number,
     taxCodeDescription: string,
     taxCodePercentage: number
