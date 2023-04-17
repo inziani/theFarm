@@ -16,8 +16,8 @@ export class ErrorService   {
 
   public openErrorHandlingDialog(
     data: {
-    reason: { detail: string };
-    status: number;
+    // reason: { detail: string };
+    // status: number;
   }) {
     this.isDialogOpen = true;
     let dialogConfig = new MatDialogConfig();

@@ -52,6 +52,7 @@ export class JwtInterceptor implements HttpInterceptor {
           return event;
         }),
         catchError((error: HttpErrorResponse) => {
+          console.log('Zee Error-', error);
           let data = {
             reason: error.error,
             status: error.status,

@@ -9,7 +9,7 @@
 <div class="container">
   <div *ngIf="errorMessage" class="alert alert-danger">
     <mat-icon>error</mat-icon><br>
-    Error Code: {{ errorMessage.status }} -  {{ errorMessage.reason }}
+    Error Code: {{ errorMessage.status }} -  {{ errorMessage.reason.detail }}
   </div>
   <button mat-raised-button color="primary" mat-dialog-close>OK</button>
 </div>
