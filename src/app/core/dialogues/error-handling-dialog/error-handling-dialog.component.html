@@ -1,7 +1,15 @@
-<div class="container">
+<!-- <div class="container">
   <div *ngIf="errorMessage" class="alert alert-danger">
     <mat-icon>error</mat-icon><br>
     {{ errorMessage }}
+  </div>
+  <button mat-raised-button color="primary" mat-dialog-close>OK</button>
+</div> -->
+
+<div class="container">
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    <mat-icon>error</mat-icon><br>
+    Error Code: {{ errorMessage.status }} -  {{ errorMessage.reason }}
   </div>
   <button mat-raised-button color="primary" mat-dialog-close>OK</button>
 </div>

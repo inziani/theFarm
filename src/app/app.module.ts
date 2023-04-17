@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -108,6 +108,7 @@ import { TaxCodeDetailsComponent } from './finance/general-ledger/tax-code-detai
 import { FinanceLandingPageComponent } from './finance/finance-home/finance-landing-page/finance-landing-page.component';
 import { AccountGroupDialogComponent } from './finance/general-ledger/gl-dialogues/account-group-dialog/account-group-dialog.component';
 import { TaxCodeDialogComponent } from './finance/general-ledger/gl-dialogues/tax-code-dialog/tax-code-dialog.component';
+import { ErrorService } from './core/services/error.service';
 
 @NgModule({
   declarations: [
@@ -199,7 +200,6 @@ import { TaxCodeDialogComponent } from './finance/general-ledger/gl-dialogues/ta
     MaterialModule,
     FlexLayoutModule,
     GoogleMapsModule,
-
   ],
   providers: [
     UsersService,
@@ -210,6 +210,8 @@ import { TaxCodeDialogComponent } from './finance/general-ledger/gl-dialogues/ta
     FinanceService,
     IsoDatePipe,
     NumberRangesService,
+    ErrorService,
+    
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -220,5 +222,5 @@ import { TaxCodeDialogComponent } from './finance/general-ledger/gl-dialogues/ta
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(private library: FaIconLibrary) {}
+  constructor() {}
 }

@@ -4,14 +4,16 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpResponse
 } from '@angular/common/http';
 
-import { Observable, throwError, switchMap, catchError } from 'rxjs';
+import { Observable, throwError, catchError, map } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorService } from '@app/core/services/error.service';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { switchMap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -21,14 +23,17 @@ export class JwtInterceptor implements HttpInterceptor {
   public refreshedToken!: any;
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private dialog: MatDialog
+    private _authenticationService: AuthenticationService,
+    private _dialog: MatDialog,
+    private _errorService: ErrorService
 
   ) { }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.accessToken = this.authenticationService.getAccessToken();
+    this._dialog.open(LoadingSpinnerComponent);
+    this.accessToken = this._authenticationService.getAccessToken();
+    // 1. Append the token on any outgoing request
     if (this.accessToken) {
       request = request.clone({
         setHeaders: {
@@ -36,38 +41,25 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
-    return next.handle(request)
-      .pipe(catchError(this.handleError));
-  }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-
-  if (error.status === 0) {
-    // A client-side or network error occurred. Handle it accordingly.
-    console.error('An error occurred:', error.error);
-  } else {
-    // The backend returned an unsuccessful response code.
-    // The response body may contain clues as to what went wrong.
-    console.error(
-      `Backend returned code ${error.status}, body was: `, error.error);
-    switch (error.status) {
-      case 400:
-        errorMessage = 'An object with the same identification code already exists'
-        break;
-      case 401:
-        errorMessage = 'You have entered a wrong email or password. Please correct your entries and try again.'
-        break;
-      case 403:
-        errorMessage = 'You have no authorization for this page.'
-        break;
-      case 500:
-        errorMessage = 'The server is unavailable'
-        break;
-    }
-  }
-  // Return an observable with a user-facing error message.
-  return throwError(() => new Error(errorMessage));
+    return next
+      .handle(request)
+      .pipe(
+        map((event: HttpEvent<Event>) => {
+          if (event instanceof HttpResponse) {
+            console.log('event----->>>', event);
+          }
+          return event;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          let data = {
+            reason: error.error,
+            status: error.status,
+          };
+          this._errorService.openErrorHandlingDialog(data);
+          return throwError(() => error);
+        })
+      );
   }
 }
 
