@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FinanceService } from '@app/core/services/finance.service';
 import { environment } from '@environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -7,9 +8,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NumberRangesService {
-  public glAccountNumber: number = 1000000000;
+  public glAccountNumber!: number;
   private accData$ = new BehaviorSubject<number>(this.glAccountNumber);
   readonly glAccountNumberStatus = this.accData$.asObservable();
+  public errorMessage!: string;
 
   public httpOptions = {
     headers: new HttpHeaders({
@@ -19,17 +21,30 @@ export class NumberRangesService {
   }
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _financeService: FinanceService
   ) {}
 
-  public createGLAccNum() {
-    this.glAccountNumber += 1;
-    let accNumData = this.glAccountNumber
-    console.log('AccNum-', this.glAccountNumber);
-    this.accData$.next(this.glAccountNumber);
-    return this._http.post<Number>(`${environment.apiUrl}/numbers/`, {accNumData}, this.httpOptions);
-  }
+  public generateGLAccountNumber(){
+    this._financeService.fetchGeneralLedgerAccountsList().subscribe({
+      next: (generalLedgerMasterDataList) => {
+        const maxAccNum = generalLedgerMasterDataList.map((glAccountNumber) => glAccountNumber.accountNumber);
+        if (!maxAccNum.length) {
+          this.glAccountNumber = 1000000000
+          this.accData$.next(this.glAccountNumber);
+          // console.log('Account list length -', maxAccNum.length);
+          // console.log('Account Num -', this.glAccountNumber);
+        } else
+        {
+          this.glAccountNumber += Math.max(...maxAccNum);
+          this.accData$.next(this.glAccountNumber);
+        }
+      },
+      error: (err) => this.errorMessage = err,
+      complete: () => console.info('Complete account Number Generation')
+    });
 
   }
+}
 
 

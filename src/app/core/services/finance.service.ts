@@ -43,6 +43,7 @@ export class FinanceService {
     this._glAccountGroups$.asObservable();
 
   private _id = 0;
+  public readonly glAccountNumber!: number;
 
   constructor(private http: HttpClient) {}
 
@@ -513,20 +514,26 @@ export class FinanceService {
     );
   }
 
-  public fetchGeneralLedgerAccounts(): Observable<GeneralLedgerMasterData> {
-    return this.http.get<GeneralLedgerMasterData>(
+  public fetchGeneralLedgerAccountsList(): Observable<
+    GeneralLedgerMasterData[]
+  > {
+    return this.http.get<GeneralLedgerMasterData[]>(
       `${environment.apiUrl}/generalLedgerAccountMaster/`,
       this.httpOptions
     );
   }
 
-  // AccountGroups
+  public fetchSingleGLAccountMaster(
+    id: number
+  ): Observable<GeneralLedgerMasterData> {
+    return this.http.get<GeneralLedgerMasterData>(
+      `${environment.apiUrl}/generalLedgerAccountMaster/`
+      + id + '/',
+      this.httpOptions
+    );
+  }
 
-  // public createGLAccountGroup(accountGroup: GLAccountGroup): GLAccountGroup {
-  //   accountGroup.id = ++this._id;
-  //   this._glAccountGroupslist.push(accountGroup);
-  //   return accountGroup;
-  // }
+  // AccountGroups
 
   public createGLAccountGroup(
     accountGroup: string,
@@ -629,5 +636,6 @@ export class FinanceService {
     );
   }
 
+  
   // End of General Ledger Data
 }

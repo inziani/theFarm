@@ -51,11 +51,12 @@ export class GlMasterDataComponent implements OnInit {
   public generalLedgerAccountMaster!: GeneralLedgerMasterData;
   public readonly!: boolean;
   public errorMessage!: string;
-  public accountNumber!: number;
+  // public accountNumber!: number;
   public accNum!: number;
   public companyCode!: CompanyCodeMasterData[];
   public chartOfAccounts!: ChartOfAccountsMasterData[];
   public glAccountGroup!: GLAccountGroup;
+  public glAccountsMasterList!: GeneralLedgerMasterData[];
 
   constructor(
     private _dialog: MatDialog,
@@ -80,12 +81,7 @@ export class GlMasterDataComponent implements OnInit {
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complate'),
     });
-  }
-
-  public onCreate() {
-    this._numberRanges.createGLAccNum();
-    this.accountNumber = this._numberRanges.glAccountNumber;
-    console.log('AccNum in direct fetch Component - ', this.accountNumber);
+    this._numberRanges.generateGLAccountNumber();
   }
 
   public onSearchGLAccount() {
@@ -96,16 +92,29 @@ export class GlMasterDataComponent implements OnInit {
     dialogConfig.height = '150px';
     const dialogRef = this._dialog.open(SearchDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((success) => {
-      // alert(success);
     });
   }
 
   public onEnableFields() {
     this.readonly = !this.readonly;
+    this._numberRanges.glAccountNumberStatus.subscribe({
+      next: (accNum) => {
+        this.accNum = accNum
+        // console.log(
+        //   'Account Number in Component - ',
+        //   this.accNum
+        // );
+        // console.log('Raw AccNum - ', accNum);
+      },
+      error: (err) => this.errorMessage = err,
+      complete:()=>console.info('New Acc Num generated')
+    });
+    // this.accNum = this._numberRanges.glAccountNumber;
+    // console.log('Account Number in Component itself - ', this.accNum);
   }
 
   public onCreateGLAccountMaster() {
-    this._numberRanges.createGLAccNum();
+    this._numberRanges.generateGLAccountNumber();
     this.generalLedgerAccountMaster = this.formGroup.value;
     return this._financeService
       .createGeneralLedgerAccountMasterData(
@@ -165,5 +174,4 @@ export class GlMasterDataComponent implements OnInit {
         complete: () => console.info('Complete'),
       });
   }
-
 }
