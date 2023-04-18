@@ -1,15 +1,11 @@
-<!-- <div class="container">
-  <div *ngIf="errorMessage" class="alert alert-danger">
-    <mat-icon>error</mat-icon><br>
-    {{ errorMessage }}
-  </div>
-  <button mat-raised-button color="primary" mat-dialog-close>OK</button>
-</div> -->
 
-<div class="container">
-  <div *ngIf="errorMessage" class="alert alert-danger">
+<div class="container my-1">
+  <div *ngIf="errorMessageList" class="alert alert-danger">
     <mat-icon>error</mat-icon><br>
-    Error Code: {{ errorMessage.status }} -  {{ errorMessage.reason.detail }}
+    <ol>
+      <li *ngFor="let message of errorMessageList"><h3>{{ message }}</h3></li>
+    </ol>
+     <h4 class="alert alert-danger">Please correct your entries and try again</h4>
   </div>
-  <button mat-raised-button color="primary" mat-dialog-close>OK</button>
+  <button mat-raised-button color="primary"(click)="close()">OK</button>
 </div>

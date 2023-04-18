@@ -14,7 +14,6 @@ import {
 import { AuthenticationService } from '@app/core/services/authentication.service';
 
 import { Observable } from 'rxjs';
-import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 
 interface JwtPayload{
   user_id: number;
@@ -52,7 +51,14 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    // return true;
+     if (this.authenticationService.isLoggedIn()) {
+       return true;
+     } else {
+       alert('You have no authorization for this page');
+       this.router.navigate(['login']);
+       return false;
+     }
   }
   canDeactivate(
     component: unknown,

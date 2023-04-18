@@ -23,11 +23,14 @@ export class TaxCodeDialogComponent {
   public objectCreated!: string;
   public objectChanged!: string;
 
+
+
   constructor(
     private _financeService: FinanceService,
     private _matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private taxCodeData: TaxCode,
-    private _dialogRef: MatDialogRef<TaxCodeDialogComponent>
+    private _dialogRef: MatDialogRef<TaxCodeDialogComponent>,
+    
   ) {
     this.taxCode = this.taxCodeData;
   }
@@ -57,7 +60,9 @@ export class TaxCodeDialogComponent {
           this._matDialog.open(ObjectCreatedComponent, {
             data: (this.objectCreated = taxCode.taxCode),
           }),
-        error: (err) => (this.errorMessage = err),
+        error: (err) => {
+          (this.errorMessage = err.error)
+        },
         complete: () => console.info('Tax Code Created'),
       });
     this.formGroup.reset();

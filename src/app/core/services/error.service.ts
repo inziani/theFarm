@@ -13,12 +13,7 @@ export class ErrorService   {
     private _dialog: MatDialog,
   ) { }
 
-
-  public openErrorHandlingDialog(
-    data: {
-    // reason: { detail: string };
-    // status: number;
-  }) {
+  public openErrorHandlingDialog(data: string[]) {
     this.isDialogOpen = true;
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

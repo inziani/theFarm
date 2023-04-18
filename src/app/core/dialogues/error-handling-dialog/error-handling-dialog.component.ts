@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ErrorMessage } from '@app/core/shared/interfaces/http.interface';
 
 @Component({
   selector: 'app-error-handling-dialog',
@@ -7,25 +8,23 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./error-handling-dialog.component.css'],
 })
 export class ErrorHandlingDialogComponent implements OnInit {
-  public errorMessage!:
-    {
-      reason: { detail: string },
-      status: number
-    }
-
+  public errorMessageList!: string[];
 
   constructor(
     private matDialogConfig: MatDialogRef<ErrorHandlingDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { reason: { detail: string }; status: number }
+    public data: string []
   ) {
-    this.errorMessage = data;
-    console.log('Error Data - ', data);
+    this.errorMessageList = data;
   }
 
   ngOnInit(): void {}
 
-  close() {
+  public close() {
+    this.errorMessageList = this.errorMessageList.splice(
+      0,
+      this.errorMessageList.length
+    );
     this.matDialogConfig.close();
   }
 }
