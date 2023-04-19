@@ -3,9 +3,9 @@
   <div *ngIf="errorMessageList" class="alert alert-danger">
     <mat-icon>error</mat-icon><br>
     <ol>
-      <li *ngFor="let message of errorMessageList"><h3>{{ message }}</h3></li>
+      <li *ngFor="let message of errorMessageList"><h3>{{ ( message ) }} </h3></li>
     </ol>
-     <h4 class="alert alert-danger">Please correct your entries and try again</h4>
+     <h3 class="alert alert-danger">Please correct your entries and try again</h3>
   </div>
   <button mat-raised-button color="primary"(click)="close()">OK</button>
 </div>

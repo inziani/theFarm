@@ -14,4 +14,5 @@ export class IsoDatePipe extends DatePipe implements PipeTransform {
   transform(value: Date | string | number | null | undefined): string | null {
     return super.transform(value, 'yyyy-MM-dd HH:mm:ss');
   }
+
 }

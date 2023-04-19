@@ -18,7 +18,7 @@ export class ErrorService   {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '550px';
+    dialogConfig.width = '400px';
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = data;
 

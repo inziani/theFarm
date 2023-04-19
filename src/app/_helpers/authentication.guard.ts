@@ -42,7 +42,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
         return true;
       }
       else {
-        alert('You have no authorization for this page');
+        // alert('You have no authorization for this page');
       this.router.navigate(['login']);
       return false;
 
@@ -55,7 +55,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
      if (this.authenticationService.isLoggedIn()) {
        return true;
      } else {
-       alert('You have no authorization for this page');
+      //  alert('You have no authorization for this page');
        this.router.navigate(['login']);
        return false;
      }
