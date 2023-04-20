@@ -19,23 +19,11 @@ import { RoleAuthComponent } from "./core/application-components/profile/role-au
 import { BioComponent } from "./core/application-components/profile/bio/bio.component";
 import { PasswordSecComponent } from "./core/application-components/profile/password-sec/password-sec.component";
 import { ProfileLayoutComponent } from "./profile-layout/profile-layout.component";
-import { AgricultureDialogueComponent } from "./core/dialogues/agriculture-dialogue/agriculture-dialogue.component";
-import { FinanceDialogueComponent } from "./core/dialogues/finance-dialogue/finance-dialogue.component";
-import { HrDialogueComponent } from "./core/dialogues/hr-dialogue/hr-dialogue.component";
-import { ProjectsDialogueComponent } from "./core/dialogues/projects-dialogue/projects-dialogue.component";
-import { MaterialsDialogueComponent } from "./core/dialogues/materials-dialogue/materials-dialogue.component";
-import { KnowledgeDialogueComponent } from "./core/dialogues/knowledge-dialogue/knowledge-dialogue.component";
 import { GlTransactionCodesComponent } from "./finance/general-ledger/gl-transaction-codes/gl-transaction-codes.component";
-
-
-
-
-
 
 const appRoutes: Routes = [
 
   {
-
     // Activity Module layout
     path: '', component: AppLayoutComponent, children: [
       { path: '', component: HomePageComponent },
