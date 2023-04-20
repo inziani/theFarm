@@ -1,15 +1,21 @@
 <div class="main-table-container mat-elevation-z8">
   <div class="table-container">
     <h1 class="to-do-list">Task Categories</h1>
-    <div class="mx-5 text-center">
-<!-- <p>Quote for the day...{{ randomQuote }}</p> -->
-
+    <div class="mx-1 text-center">
       <a>
         <mat-icon (click)="openCreateCategoryDialog()">add_box</mat-icon>
       </a>
     </div>
-    <table mat-table [dataSource]="sourceData" class="example-table" matSort matSortActive="date_created"
-      matSortDisableClear matSortDirection="desc" #refreshTable >
+    <table
+      mat-table
+      [dataSource]="sourceData"
+      class="example-table"
+      matSort
+      matSortActive="date_created"
+      matSortDisableClear
+      matSortDirection="desc"
+      #refreshTable
+    >
       <!-- id Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
@@ -18,41 +24,45 @@
       <!-- Title Column -->
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
-        <td mat-cell *matCellDef="let row">{{row.title}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.title }}</td>
       </ng-container>
       <!-- Description Column -->
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef>Description</th>
-        <td mat-cell *matCellDef="let row">{{row.description}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.description }}</td>
       </ng-container>
       <!-- Category Column -->
       <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef>Category</th>
-        <td mat-cell *matCellDef="let row">{{row.category}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.category }}</td>
       </ng-container>
       <!-- Created Column -->
       <ng-container matColumnDef="date_created">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Created
         </th>
-        <td mat-cell *matCellDef="let row">{{row.date_created | date}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.date_created | date }}</td>
       </ng-container>
       <!-- Change Date Column -->
       <ng-container matColumnDef="date_changed">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Changed
         </th>
-        <td mat-cell *matCellDef="let row">{{row.date_changed | date}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.date_changed | date }}</td>
       </ng-container>
-      <!-- Maintenance Column -->
-      <ng-container matColumnDef="maintenance">
-        <th mat-header-cell *matHeaderCellDef disableClear>
-          Maintenance
-        </th>
+      <!-- Edit Column -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef disableClear>Edit</th>
         <td mat-cell *matCellDef="let row">
           <a (click)="openEditCategoryDialog(row.id)">
             <mat-icon>edit</mat-icon>
           </a>
+        </td>
+      </ng-container>
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef disableClear>Delete</th>
+        <td mat-cell *matCellDef="let row">
           <a (click)="openDeleteCategoryDialog(row.id)">
             <mat-icon>delete</mat-icon>
           </a>
@@ -63,13 +73,19 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           Owner
         </th>
-        <td mat-cell *matCellDef="let row">{{row.owner}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.owner }}</td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="activityCategoryColumnHeaders"></tr>
-      <tr mat-row *matRowDef="let row; columns: activityCategoryColumnHeaders;"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: activityCategoryColumnHeaders"
+      ></tr>
     </table>
   </div>
-  <mat-paginator [length]="resultsLength" [pageSize]="6" [pageSizeOptions]="[6]">
+  <mat-paginator
+    [length]="resultsLength"
+    [pageSize]="6"
+    [pageSizeOptions]="[6]"
+  >
   </mat-paginator>
 </div>
-

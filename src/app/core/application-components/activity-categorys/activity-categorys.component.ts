@@ -16,14 +16,23 @@ import { DeleteCategoryDialogComponent } from '@app/core/dialogues/delete-catego
 @Component({
   selector: 'app-activity-categorys',
   templateUrl: './activity-categorys.component.html',
-  styleUrls: ['./activity-categorys.component.css']
+  styleUrls: ['./activity-categorys.component.css'],
 })
 export class ActivityCategorysComponent implements OnInit {
-
   randomQuote: string = 'God always makes a way';
 
   activityCategoryList!: ActivityCategory[];
-  activityCategoryColumnHeaders: string[] = ['id', 'title', 'description', 'category', 'date_created', 'date_changed', 'maintenance', 'owner'];
+  activityCategoryColumnHeaders: string[] = [
+    'id',
+    'title',
+    'description',
+    'category',
+    'date_created',
+    'date_changed',
+    'edit',
+    'delete',
+    'owner',
+  ];
   sourceData = new MatTableDataSource<ActivityCategoryInterface>();
   resultsLength = 0;
 
@@ -31,26 +40,20 @@ export class ActivityCategorysComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable, { static: true }) refreshTable!: MatTable<any>;
 
-  constructor(
-    private dataSource: RestDataSource,
-    public dialogue: MatDialog,
-  ) { }
+  constructor(private dataSource: RestDataSource, public dialogue: MatDialog) {}
 
   ngOnInit(): void {
-    this.dataSource.fetchActivityCategory().subscribe(categorys => {
+    this.dataSource.fetchActivityCategory().subscribe((categorys) => {
       this.sourceData.data = categorys;
-
-    })
+    });
   }
 
   ngAfterViewInit() {
     this.sourceData.sort = this.sort;
     this.sourceData.paginator = this.paginator;
-
   }
 
   openCreateCategoryDialog() {
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -60,7 +63,7 @@ export class ActivityCategorysComponent implements OnInit {
 
     const dialogRef = this.dialogue.open(CreateCategoryComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(newActivity => {
+    dialogRef.afterClosed().subscribe((newActivity) => {
       // this.refreshTable.renderRows();
     });
   }
@@ -83,21 +86,14 @@ export class ActivityCategorysComponent implements OnInit {
       const dialogRef = this.dialogue.open(EditCategoryComponent, dialogConfig);
 
       // ***Returned data from dialogue
-      dialogRef.afterClosed().subscribe(result => {
-
+      dialogRef.afterClosed().subscribe((result) => {
         if (result == undefined) {
           return;
-        }
-        else {
-
+        } else {
           console.log('Editable Data after else button', result);
-
         }
-
       });
-
     });
-
   }
 
   openDeleteCategoryDialog(id: number) {
@@ -115,25 +111,20 @@ export class ActivityCategorysComponent implements OnInit {
       dialogConfig.data = category;
 
       // ***Open Dialog
-      const dialogRef = this.dialogue.open(DeleteCategoryDialogComponent, dialogConfig);
+      const dialogRef = this.dialogue.open(
+        DeleteCategoryDialogComponent,
+        dialogConfig
+      );
 
       // ***Returned data from dialogue
-      dialogRef.afterClosed().subscribe(result => {
-
+      dialogRef.afterClosed().subscribe((result) => {
         if (result == undefined) {
           return;
-        }
-        else {
-
+        } else {
           console.log('Editable Data after else button', result);
-
         }
-
       });
-
     });
-
-  };
-
   }
+}
 

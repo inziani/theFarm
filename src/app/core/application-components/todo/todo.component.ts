@@ -22,34 +22,37 @@ import { DeleteActivityDialogComponent } from '@app/core/dialogues/delete-activi
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
-
 })
 export class TodoComponent implements OnInit, AfterViewInit {
-
   public activity!: Activity;
   public activityObject = <Activity>{};
   public activityList!: Activity[];
   public todaysDate = new Date();
-  public activityColumnHeaders: string[] = ['id', 'title', 'description','date_created', 'date_changed','status', 'maintenance', 'owner'];
+  public activityColumnHeaders: string[] = [
+    'id',
+    'title',
+    'description',
+    'date_created',
+    'date_changed',
+    'status',
+    'edit',
+    'delete',
+    'owner',
+  ];
   public resultsLength = 0;
   public sourceData = new MatTableDataSource<Activity>();
-  public filter = "";
+  public filter = '';
   public dialogueData: any;
-
-
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   private subscription!: Subscription;
 
-
   constructor(
-
     private activitysService: ActivitysService,
     private dataSource: RestDataSource,
-    private dialogue: MatDialog) {
-
-  }
+    private dialogue: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.onFetchActivityData();
@@ -58,11 +61,11 @@ export class TodoComponent implements OnInit, AfterViewInit {
       (activityList: Activity[]) => {
         this.activityList = activityList;
       }
-    )
+    );
 
-    this.dataSource.fetchActivityList().subscribe(activityList =>
-      this.sourceData.data = activityList);
-
+    this.dataSource
+      .fetchActivityList()
+      .subscribe((activityList) => (this.sourceData.data = activityList));
   }
 
   ngAfterViewInit() {
@@ -71,26 +74,23 @@ export class TodoComponent implements OnInit, AfterViewInit {
   }
 
   doFilter(filterValue: any) {
-    this.sourceData.filter = (JSON.stringify(filterValue)).trim().toLowerCase();
+    this.sourceData.filter = JSON.stringify(filterValue).trim().toLowerCase();
     // console.log(filterValue);
-
   }
 
   onFetchActivityData() {
     this.dataSource.fetchActivityList().subscribe(
-      activityList => {
+      (activityList) => {
         this.activityList = activityList;
         // console.log(this.activityList);
-
       },
-      error => {
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
 
   openCreateActivityDialog() {
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -98,9 +98,8 @@ export class TodoComponent implements OnInit, AfterViewInit {
     dialogConfig.width = '400px';
 
     const dialogRef = this.dialogue.open(CreateActivityComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(newActivity => {
-    })
-  };
+    dialogRef.afterClosed().subscribe((newActivity) => {});
+  }
 
   openEditActivityDialog(id: number) {
     // ***Create dialogue object
@@ -123,25 +122,18 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
       // ***Returned data from dialogue
 
-      dialogRef.afterClosed().subscribe(result => {
-
+      dialogRef.afterClosed().subscribe((result) => {
         if (result == undefined) {
           return;
-        }
-        else {
-
+        } else {
           console.log('Editable Data after else button', result);
-
         }
-
       });
-
     });
-
-  };
+  }
 
   openDeleteActivityDialog(id: number) {
-        // ***create dialog object
+    // ***create dialog object
     const dialogConfig = new MatDialogConfig();
     // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
     dialogConfig.disableClose = true;
@@ -155,28 +147,23 @@ export class TodoComponent implements OnInit, AfterViewInit {
       dialogConfig.data = activity;
 
       // ***Open Dialog
-      const dialogRef = this.dialogue.open(DeleteActivityDialogComponent, dialogConfig);
+      const dialogRef = this.dialogue.open(
+        DeleteActivityDialogComponent,
+        dialogConfig
+      );
 
       // ***Returned data from dialogue
-      dialogRef.afterClosed().subscribe(result => {
-
+      dialogRef.afterClosed().subscribe((result) => {
         if (result == undefined) {
           return;
-        }
-        else {
-
+        } else {
           console.log('Editable Data after else button', result);
-
         }
-
       });
-
     });
-
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }
