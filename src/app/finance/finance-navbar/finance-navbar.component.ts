@@ -13,7 +13,7 @@ export class FinanceNavbarComponent implements OnInit {
    @Output() sideNavToggle = new EventEmitter<void>();
 
   constructor(
-    private authorizationService: AuthenticationService
+    private _authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class FinanceNavbarComponent implements OnInit {
 
   onLogOut() {
 
-   this.authorizationService.onLogout();
+   this._authenticationService.onLogout();
 
   }
 

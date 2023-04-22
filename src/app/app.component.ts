@@ -13,6 +13,7 @@ export class AppComponent {
   public isAuthenticated: boolean = false;
   user: any;
   private userSubscription!: Subscription;
+  public title: string = 'Title'
 
   openSideNav = false;
 

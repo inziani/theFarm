@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  CanActivate, CanActivateChild,
-  CanDeactivate,
-  CanLoad,
+  CanActivateChildFn,
+  // ActivatedRouteSnapshot,
+  // CanActivate, CanActivateChild,
+  // CanDeactivate,
+  // CanLoad,
   Route,
   Router,
   RouterStateSnapshot,
-  UrlSegment,
-  UrlTree }
+ }
   from '@angular/router';
 
 import { AuthenticationService } from '@app/core/services/authentication.service';
@@ -23,54 +24,85 @@ interface JwtPayload{
 
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+// @Injectable({
+//   providedIn: 'root'
+// })
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    ){
+export const canActivate: CanActivateChildFn =
+  (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  const authenticationService = inject(AuthenticationService);
+  const router = inject(Router);
 
+  if (!authenticationService.isAuthenticated) {
+    router.navigate(['login']);
+    authenticationService.onLogout()
+    return false;
   }
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if
-        (this.authenticationService.isLoggedIn()) {
-        return true;
-      }
-      else {
-        // alert('You have no authorization for this page');
-      this.router.navigate(['login']);
-      return false;
+    const validRoles = route.data['authorities'] || [];
+    const userData = authenticationService.userData;
 
-      }
-  }
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // return true;
-     if (this.authenticationService.isLoggedIn()) {
-       return true;
-     } else {
-      //  alert('You have no authorization for this page');
-       this.router.navigate(['login']);
-       return false;
-     }
-  }
-  canDeactivate(
-    component: unknown,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    if (!validRoles.some((r: string) => r === userData?.userInfo?.role)) {
+      router.navigate(['/'])
+
+    }
+    return true
   }
 
-}
+
+
+// export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+
+//   constructor(
+//     private router: Router,
+//     private authenticationService: AuthenticationService,
+//     ){
+
+//   }
+//   canActivate(
+//     route: ActivatedRouteSnapshot,
+//     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+//     // return true
+
+//     // Old Code
+//       if (this.authenticationService.isAuthenticated) {
+//         return true;
+//       } else {
+//         // alert('You have no authorization for this page');
+//         this.router.navigate(['login']);
+//         return false;
+//       }
+
+//     // End of old code
+//   }
+//   canActivateChild(
+//     childRoute: ActivatedRouteSnapshot,
+//     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+//     // return true;
+//     // Old CODE
+//      if (this.authenticationService.isAuthenticated) {
+//        return true;
+//      } else {
+//        //  alert('You have no authorization for this page');
+//        this.router.navigate(['login']);
+//        return false;
+//      }
+//     // end of old code
+//   }
+//   canDeactivate(
+//     component: unknown,
+//     currentRoute: ActivatedRouteSnapshot,
+//     currentState: RouterStateSnapshot,
+//     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+//     return true;
+//   }
+//   canLoad(
+//     route: Route,
+//     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+//     return true;
+//   }
+
+// }

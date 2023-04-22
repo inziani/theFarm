@@ -32,18 +32,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.userSubscription = this.authenticationService.currentUser$.subscribe(
-      user => {
-        this.isAuthenticated = !!user;
-        this.user = user;
-        this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
-          this.userList = users;
-          this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
-          this.currentLoggedInUser = this.loggedInUser;
+    // this.userSubscription = this.authenticationService.currentUser$.subscribe(
+    //   user => {
+    //     this.isAuthenticated = !!user;
+    //     this.user = user;
+    //     this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
+    //       this.userList = users;
+    //       this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
+    //       this.currentLoggedInUser = this.loggedInUser;
 
-        })
+    //     })
 
-      });
+    //   });
   }
 
 

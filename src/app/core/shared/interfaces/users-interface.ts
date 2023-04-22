@@ -53,11 +53,6 @@ export interface JwTAuthenticationResponseInterface {
 }
 
 
-export interface UserCredentials {
-    email: string;
-    password: string;
-}
-
 
 
 

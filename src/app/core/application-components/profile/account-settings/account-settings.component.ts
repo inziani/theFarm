@@ -56,22 +56,22 @@ export class AccountSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.readonly = true;
 
-    this.userSubscription = this.authenticationService.currentUser$.subscribe(
-      user => {
+    // this.userSubscription = this.authenticationService.currentUser$.subscribe(
+    //   user => {
 
-        this.user = user;
-        this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
-          this.userList = users;
-          this.currentLoggedInUser = this.userList.filter((person: User) => person.id === this.user);
-          this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj),
-          {
-            id: NaN, first_name: '', middle_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
-            email: '', gender: '', city: '', country: '', is_active: true, staffType: 'string',  is_staff: true, is_superuser: false, date_joined: new Date(), password: ''
-          });
-          this.formGroup.patchValue(this.patchedUser );
-        });
+    //     this.user = user;
+    //     this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
+    //       this.userList = users;
+    //       this.currentLoggedInUser = this.userList.filter((person: User) => person.id === this.user);
+    //       this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj),
+    //       {
+    //         id: NaN, first_name: '', middle_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
+    //         email: '', gender: '', city: '', country: '', is_active: true, staffType: 'string',  is_staff: true, is_superuser: false, date_joined: new Date(), password: ''
+    //       });
+    //       this.formGroup.patchValue(this.patchedUser );
+    //     });
 
-      });
+    //   });
   }
 
   ngOnDestroy() {

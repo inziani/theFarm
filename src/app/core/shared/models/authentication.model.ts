@@ -1,25 +1,19 @@
-export class LoginCredentials {
+export interface LoginCredentials {
 
-    constructor(
-        public email: string,
-        public password: string) {
+         email: string,
+         password: string
     }
-}
 
-export class SignUpCredentials {
+export  interface SignUpCredentials {
 
-    constructor(
-        public first_name: string,
-        public last_name: string,
-        public date_of_birth: Date,
-        public phone_number: number,
-        public username: string,
-        public gender: string,
-        public city: string,
-        public email: string,
-        public password: string,
-        public confirmPassword: string
-    ) {
-
-    }
+         first_name: string,
+         last_name: string,
+         date_of_birth: Date,
+         phone_number: number,
+         username: string,
+         gender: string,
+         city: string,
+         email: string,
+         password: string,
+         confirmPassword: string
 }

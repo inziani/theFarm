@@ -44,9 +44,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.userSubscription$ = this.authenticationService.currentUser$.subscribe(user => {
-      this.userser = user;
-    });
+    // this.userSubscription$ = this.authenticationService.currentUser$.subscribe(user => {
+    //   this.userser = user;
+    // });
 
   };
 
