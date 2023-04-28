@@ -10,19 +10,19 @@ export const GL_TREE_DATA: FinanceNode[] = [
   {
     name: 'Organizational Structure',
     iconname: 'category',
-    routerLink: '/finance',
+    routerLink: '/financeHome',
     children: [],
   },
 
   {
     name: 'General Ledger',
     iconname: 'business',
-    routerLink: '/glhome',
+    routerLink: '/glTransactionsCodes',
     children: [
       {
         name: 'Master Data',
         iconname: 'library_add',
-        routerLink: '/glmasterdata',
+        routerLink: '""/glTransactionsCodes/glmasterdata',
       },
       {
         name: 'Document Entry',
@@ -45,7 +45,7 @@ export const GL_TREE_DATA: FinanceNode[] = [
   {
     name: 'Payables',
     iconname: 'payment',
-    routerLink: '/finance',
+    routerLink: '/financeHome',
     children: [
       {
         name: 'Master Data',
@@ -72,7 +72,7 @@ export const GL_TREE_DATA: FinanceNode[] = [
   {
     name: 'Receivables',
     iconname: 'receipt',
-    routerLink: '/finance',
+    routerLink: '/financeHome',
     children: [
       {
         name: 'Master Data',
@@ -99,7 +99,7 @@ export const GL_TREE_DATA: FinanceNode[] = [
   {
     name: 'Fixed Assets',
     iconname: 'hd',
-    routerLink: '/finance',
+    routerLink: '/financeHome',
     children: [
       {
         name: 'Master Data',
@@ -126,7 +126,7 @@ export const GL_TREE_DATA: FinanceNode[] = [
   {
     name: 'Banks',
     iconname: 'money',
-    routerLink: '/finance',
+    routerLink: '/financeHome',
     children: [
       {
         name: 'Master Data',
@@ -153,7 +153,7 @@ export const GL_TREE_DATA: FinanceNode[] = [
   {
     name: 'Reporting',
     iconname: 'analytics',
-    routerLink: '/finance',
+    routerLink: '/financeHome',
     children: [],
   },
 ];

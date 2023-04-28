@@ -26,6 +26,18 @@ import { AccountGroupDialogComponent } from './general-ledger/gl-dialogues/accou
 import { TaxCodeDialogComponent } from './general-ledger/gl-dialogues/tax-code-dialog/tax-code-dialog.component';
 import { FinanceNavbarComponent } from './finance-navbar/finance-navbar.component';
 import { FinanceSidenavComponent } from './finance-sidenav/finance-sidenav.component';
+import { CompanyDialogComponent } from './finance-dialogues/company-dialog/company-dialog.component';
+import { ChartOfAccountsDialogComponent } from './finance-dialogues/chart-of-accounts-dialog/chart-of-accounts-dialog.component';
+import { ReportingAreaDialogComponent } from './finance-dialogues/reporting-area-dialog/reporting-area-dialog.component';
+import { ControllingAreaDialogComponent } from './finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
+import { BusinessAreaDialogComponent } from './finance-dialogues/business-area-dialog/business-area-dialog.component';
+import { DeleteCompanyDialogComponent } from './finance-dialogues/delete-company-dialog/delete-company-dialog.component';
+import { CreateCompanyDialogComponent } from './finance-dialogues/create-company-dialog/create-company-dialog.component';
+import { DisplayCompanyDialogComponent } from './finance-dialogues/display-company-dialog/display-company-dialog.component';
+import { CreateCompanyCodeDialogComponent } from './finance-dialogues/create-company-code-dialog/create-company-code-dialog.component';
+import { DisplayCompanyCodeDialogComponent } from './finance-dialogues/display-company-code-dialog/display-company-code-dialog.component';
+import { EditCompanyCodeDialogComponent } from './finance-dialogues/edit-company-code-dialog/edit-company-code-dialog.component';
+import { DeleteCompanyCodeDialogComponent } from './finance-dialogues/delete-company-code-dialog/delete-company-code-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +62,19 @@ import { FinanceSidenavComponent } from './finance-sidenav/finance-sidenav.compo
     TaxCodeDialogComponent,
     FinanceNavbarComponent,
     FinanceSidenavComponent,
-    
+    CompanyDialogComponent,
+    ChartOfAccountsDialogComponent,
+    ReportingAreaDialogComponent,
+    ControllingAreaDialogComponent,
+    BusinessAreaDialogComponent,
+    DeleteCompanyDialogComponent,
+    CreateCompanyDialogComponent,
+    DisplayCompanyDialogComponent,
+    CreateCompanyCodeDialogComponent,
+    DisplayCompanyCodeDialogComponent,
+    EditCompanyCodeDialogComponent,
+    DeleteCompanyCodeDialogComponent,
+
   ],
   imports: [
     CommonModule,

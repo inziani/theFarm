@@ -47,18 +47,7 @@ export class UsersService {
   ) {}
 
   ngOnInit() {
-    // this.userSubscription = this.authenticationService.currentUser$.subscribe(
-    //   (user) => {
-    //     this.isAuthenticated = !!user;
-    //     this.user = user;
-    //     this.loggedInUser = this.fetchUsers().subscribe((users) => {
-    //       this.userList = users;
-    //       this.loggedInUser = this.userList.filter(
-    //         (person: User) => person.id === this.user
-    //       );
-    //     });
-    //   }
-    // );
+
   }
 
   public sendData(data: string) {

@@ -14,7 +14,7 @@ export class SideNavComponent implements OnInit {
 
 
   constructor(
-    private authorizationService: AuthenticationService
+    private _authorizationService: AuthenticationService
   ) {
 
   }
@@ -28,7 +28,7 @@ export class SideNavComponent implements OnInit {
 
   onLogOut() {
 
-    this.authorizationService.onLogout();
+    this._authorizationService.onLogout();
 
   }
 

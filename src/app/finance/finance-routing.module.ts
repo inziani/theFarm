@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FinanceLayoutComponent } from './finance-layout/finance-layout.component';
 import { FinanceHomeComponent } from './finance-home/finance-home.component';
-import { canActivate } from '@app/_helpers/authentication.guard';
+import { authenticationGuard } from '@app/_helpers/authentication.guard';
 import { GlMasterDataComponent } from './general-ledger/gl-master-data/gl-master-data.component';
 import { GlTransactionCodesComponent } from './general-ledger/gl-transaction-codes/gl-transaction-codes.component';
 
@@ -13,22 +13,22 @@ const routes: Routes = [
     component: FinanceLayoutComponent,
     children: [
       {
-        path: 'finance',
+        path: 'financeHome',
         component: FinanceHomeComponent,
-        canActivate: [canActivate],
+        canActivate: [authenticationGuard],
       },
       {
         path: 'glmasterdata',
         component: GlMasterDataComponent,
-        canActivate: [canActivate],
+        canActivate: [authenticationGuard],
       },
       {
-        path: 'glhome',
+        path: 'glTransactionsCodes',
         component: GlTransactionCodesComponent,
-        canActivate: [canActivate],
+        canActivate: [authenticationGuard],
       },
     ],
-    canActivate: [canActivate],
+    canActivate: [authenticationGuard],
   },
 ];
 

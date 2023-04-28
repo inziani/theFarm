@@ -37,9 +37,9 @@
     background-color: #03045e;
 }
 
-/* .mat-sidenav-container {
-    height: calc(100vh - 65px);
-} */
+.mat-sidenav-container {
+    height: 100vh
+}
 
 .tp-section {
    display: flex;

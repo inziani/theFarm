@@ -22,7 +22,7 @@ import { MaterialsDialogueComponent } from '../dialogues/materials-dialogue/mate
 export class HomePageComponent implements OnInit, OnDestroy {
 
   public users: UserInterface[] = [];
-  public userser!: number;
+  // public userser!: number;
   public module!: HomePageModulesInterface;
   public homeModules: HomePageModulesInterface[] = [
     { id: 1, description: 'agriculture' },
@@ -44,9 +44,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // this.userSubscription$ = this.authenticationService.currentUser$.subscribe(user => {
-    //   this.userser = user;
-    // });
+ 
 
   };
 
@@ -119,10 +117,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   }
 
-
-
     ngOnDestroy() {
-     this.userSubscription$.unsubscribe();
+    //  this.userSubscription$.unsubscribe();
   };
 
 

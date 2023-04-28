@@ -93,37 +93,38 @@ export class ProfileComponent implements OnInit {
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
     // this._userSubscription = this._authenticationService.currentUser$
-    //   .pipe(
-    //     tap((user) => {
-    //       this.user = user;
-    //     }),
-    //     switchMap((user) =>
-    //       this._userService.fetchSingleUser(user).pipe(
-    //         tap((currentLoggedInUser) => {
-    //           this.patchedUser = currentLoggedInUser;
-    //           this.first_name = this.patchedUser.first_name;
-    //           this.middle_name = this.patchedUser.middle_name;
-    //           this.last_name = this.patchedUser.last_name;
-    //           this.formGroup.patchValue(this.patchedUser);
-    //         }),
-    //         switchMap((user) =>
-    //           this._userService.fetchSingleUserProfile(user.id).pipe(
-    //             tap((currentLoggedInUserProfile) => {
-    //               this.userProfilePatchedUser = currentLoggedInUserProfile;
-    //               this.formGroupBio.patchValue(this.userProfilePatchedUser);
-    //               this.formGroupHobbies.patchValue(this.userProfilePatchedUser);
-    //               this.imageUrl = currentLoggedInUserProfile.profile_pic;
-    //             })
-    //           )
-    //         )
-    //       )
-    //     )
-    //   )
-    //   .subscribe();
+    this._authenticationService._loggedInUserData$
+      .pipe(
+        tap((user) => {
+          this.user = user.user_id;
+        }),
+        switchMap((user) =>
+          this._userService.fetchSingleUser(user.user_id).pipe(
+            tap((currentLoggedInUser) => {
+              this.patchedUser = currentLoggedInUser;
+              this.first_name = this.patchedUser.first_name;
+              this.middle_name = this.patchedUser.middle_name;
+              this.last_name = this.patchedUser.last_name;
+              this.formGroup.patchValue(this.patchedUser);
+            }),
+            switchMap((user) =>
+              this._userService.fetchSingleUserProfile(user.id).pipe(
+                tap((currentLoggedInUserProfile) => {
+                  this.userProfilePatchedUser = currentLoggedInUserProfile;
+                  this.formGroupBio.patchValue(this.userProfilePatchedUser);
+                  this.formGroupHobbies.patchValue(this.userProfilePatchedUser);
+                  this.imageUrl = currentLoggedInUserProfile.profile_pic;
+                })
+              )
+            )
+          )
+        )
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
-    this._userSubscription.unsubscribe();
+    // this._userSubscription.unsubscribe();
   }
   // Profile Picture Upload
 

@@ -76,7 +76,7 @@ export class AccountSettingsComponent implements OnInit {
 
   ngOnDestroy() {
 
-    this.userSubscription.unsubscribe();
+    // this.userSubscription.unsubscribe();
   }
 
   submitForm() {

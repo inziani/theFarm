@@ -18,37 +18,33 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() homePageNavToggle = new EventEmitter<void>();
 
   public isAuthenticated: boolean = false;
-  private userSubscription!: Subscription;
   public user!: number;
   public userList!: User[];
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
+  public errorMessage!: string;
 
 
   constructor(
-    private userService: UsersService,
-    private authenticationService: AuthenticationService,
-    private route: Router
+    private _userService: UsersService,
+    private _authenticationService: AuthenticationService,
+    private _route: Router
   ) { }
 
   ngOnInit(): void {
-    // this.userSubscription = this.authenticationService.currentUser$.subscribe(
-    //   user => {
-    //     this.isAuthenticated = !!user;
-    //     this.user = user;
-    //     this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
-    //       this.userList = users;
-    //       this.loggedInUser = this.userList.filter((person: User) => person.id === this.user);
-    //       this.currentLoggedInUser = this.loggedInUser;
-
-    //     })
-
-    //   });
+    this._authenticationService._loggedInUserData$.subscribe({
+      next: (loggedInUser) => {
+        this.user = loggedInUser.user_id;
+        this.isAuthenticated = !!this.user;
+      },
+      error: (err) => this.errorMessage = err,
+      complete:()=> console.info()
+    });
   }
 
 
   onSignUp() {
-    this.route.navigate(['signup']);
+    this._route.navigate(['signup']);
 
   }
 
@@ -61,12 +57,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogOut() {
-    this.authenticationService.onLogout();
+    this._authenticationService.onLogout();
   }
 
   ngOnDestroy() {
 
-    this.userSubscription.unsubscribe();
+    // this.userSubscription.unsubscribe();
   }
 
 }

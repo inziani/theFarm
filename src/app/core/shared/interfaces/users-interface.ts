@@ -38,18 +38,18 @@ export interface SignUpResponse {
   email: string,
   username: string
 }
-export interface LoginResponse{
-  tokenType: string,
-  expiryDate: number,
-  iatDate: number,
-  accessToken: string
-  userId: number
-
-}
 
 export interface JwTAuthenticationResponseInterface {
   refresh: string,
   access: string
+}
+
+export interface JWTDecodedTokenInterface {
+  token_type: string;
+  exp: number;
+  iat: number;
+  jti: string;
+  user_id: number;
 }
 
 
