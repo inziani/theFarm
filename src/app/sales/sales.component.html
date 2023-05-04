@@ -1,1 +1,11 @@
-<p>sales works!</p>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" #sidenav role="navigation">
+    <app-sales-sidenav (closeSideNav)="sidenav.close()"></app-sales-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-finance-navbar (sideNavToggle)="sidenav.toggle()"></app-finance-navbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

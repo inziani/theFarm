@@ -26,7 +26,7 @@ export class FinanceHomeComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void{
+  // ngOnDestroy(): void{
 
-  }
+  // }
 }

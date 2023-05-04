@@ -44,7 +44,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
- 
+
 
   };
 
@@ -117,9 +117,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   }
 
-    ngOnDestroy() {
+  ngOnDestroy() {
     //  this.userSubscription$.unsubscribe();
-  };
+  }
 
 
 

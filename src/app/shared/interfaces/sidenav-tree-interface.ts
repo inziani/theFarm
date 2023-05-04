@@ -1,24 +1,18 @@
 
 // File Node with nested structure
-export interface FinanceNode{
+export interface SideNavNode {
   name: string;
-  iconname?: string,
-  routerLink?: string,
-  children?: FinanceNode[];
+  iconname?: string;
+  routerLink?: string;
+  children?: SideNavNode[];
 }
 
 // FlatNode with Expandable and level information
 
-export interface FinanceFlattener{
+export interface SideNavNodeFlattener {
   expandable: boolean;
   name: string;
   level: number;
-
-
-
-
-
-
 }
 
 

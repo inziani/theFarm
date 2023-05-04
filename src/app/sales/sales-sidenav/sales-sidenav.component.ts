@@ -1,23 +1,16 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
-import {
-  MatTreeFlatDataSource,
-  MatTreeFlattener,
-  MatTreeNestedDataSource,
-} from '@angular/material/tree';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
 
-import {
-  SideNavNode,
-  SideNavNodeFlattener,
-} from '../../shared/interfaces/sidenav-tree-interface';
-import { GL_TREE_DATA } from '../finance-data/gl-tree-data';
+import { SideNavNode, SideNavNodeFlattener } from '@app/shared/interfaces/sidenav-tree-interface';
+import { SALES_TREE_DATA } from '../sales-data/sales-tree-data';
 
 @Component({
-  selector: 'app-finance-sidenav',
-  templateUrl: './finance-sidenav.component.html',
-  styleUrls: ['./finance-sidenav.component.css'],
+  selector: 'app-sales-sidenav',
+  templateUrl: './sales-sidenav.component.html',
+  styleUrls: ['./sales-sidenav.component.css'],
 })
-export class FinanceSidenavComponent implements OnInit {
+export class SalesSidenavComponent {
   @Output() closeSideNav = new EventEmitter<void>();
 
   /* Flat Tree TreeControl controls the expand/collapse state of the tree nodes*/
@@ -65,11 +58,9 @@ export class FinanceSidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.flatDataSource.data = GL_TREE_DATA;
-    this.nestedDataSource.data = GL_TREE_DATA;
+    this.flatDataSource.data = SALES_TREE_DATA;
+    this.nestedDataSource.data = SALES_TREE_DATA;
   }
-
-  // Get the nested node using the hasNestedChild
 
   public hasNestedChild(index: number, node: SideNavNode) {
     return node?.children && node.children.length > 0;

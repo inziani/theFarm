@@ -7,7 +7,10 @@ import { SignupComponent } from './core/authentication/signup/signup.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { ProfileComponent } from './core/application-components/profile/profile.component';
-import { authenticationGuard, canMatchModulesGuard } from './_helpers/authentication.guard';
+import {
+  authenticationGuard,
+  canMatchModulesGuard,
+} from './_helpers/authentication.guard';
 import { TodoComponent } from './core/application-components/todo/todo.component';
 import { EditActivityComponent } from './core/application-components/edit-activity/edit-activity.component';
 import { ActivityCategorysComponent } from './core/application-components/activity-categorys/activity-categorys.component';
@@ -15,6 +18,10 @@ import { RoleAuthComponent } from './core/application-components/profile/role-au
 import { BioComponent } from './core/application-components/profile/bio/bio.component';
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
 import { BrowserModule } from '@angular/platform-browser';
+// import { GlMasterDataComponent } from './finance/general-ledger/gl-master-data/gl-master-data.component';
+// import { FinanceLayoutComponent } from './finance/finance-layout/finance-layout.component';
+// import { FinanceHomeComponent } from './finance/finance-home/finance-home.component';
+// import { GlTransactionCodesComponent } from './finance/general-ledger/gl-transaction-codes/gl-transaction-codes.component';
 // import { AppComponent } from "./app.component";
 
 const routes: Routes = [
@@ -82,12 +89,23 @@ const routes: Routes = [
       { path: 'signup', component: SignupComponent },
     ],
   },
+  // Finance Module Layout
 
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // {
+  //   path: '',
+  //   component: FinanceLayoutComponent,
+  //   children: [
+  //     { path: 'financeHome', component: FinanceHomeComponent },
+  //     { path: 'glTransactionsCodes', component: GlTransactionCodesComponent },
+  //     { path: 'glMasterData', component: GlMasterDataComponent },
+  //   ],
+  //   canActivate: [authenticationGuard],
+  // },
+
   {
     path: 'finance',
     loadChildren: () =>
-      import('./finance/finance.module').then((m) => m.FinanceModule),
+      import('./finance/finance-layout/finance-layout.module').then((m) => m.FinanceLayoutModule),
     canMatch: [canMatchModulesGuard],
   },
   {
@@ -96,14 +114,21 @@ const routes: Routes = [
       import('./sales/sales.module').then((m) => m.SalesModule),
     canMatch: [canMatchModulesGuard],
   },
+
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
+  // {
+  //   path: 'finance-layout',
+  //   loadChildren: () =>
+  //     import('./finance/finance-layout/finance-layout.module').then(
+  //       (m) => m.FinanceLayoutModule
+  //     ),
+  // },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes, {enableTracing: true})
-  ],
+  imports: [BrowserModule, RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

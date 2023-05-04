@@ -1,6 +1,6 @@
 import { SideNavNode } from '../../shared/interfaces/sidenav-tree-interface';
 
-export const GL_TREE_DATA: SideNavNode[] = [
+export const SALES_TREE_DATA: SideNavNode[] = [
   {
     name: 'smallFarms',
     iconname: 'home',
@@ -10,34 +10,34 @@ export const GL_TREE_DATA: SideNavNode[] = [
   {
     name: 'Organizational Structure',
     iconname: 'category',
-    routerLink: '/financeHome',
+    routerLink: '/salesHome',
     children: [],
   },
 
   {
-    name: 'General Ledger',
+    name: 'Sales Order',
     iconname: 'business',
-    routerLink: '/glTransactionsCodes',
+    routerLink: '/salesOrder',
     children: [
       {
         name: 'Master Data',
         iconname: 'library_add',
-        routerLink: '/glMasterData',
+        routerLink: '/salesOderMasterData',
       },
       {
         name: 'Document Entry',
         iconname: 'description',
-        routerLink: '/glMasterData',
+        routerLink: '/salesOderMasterData',
       },
       {
         name: 'Balances',
         iconname: 'list',
-        routerLink: '/glMasterData',
+        routerLink: '/salesOderMasterData',
       },
       {
         name: 'Reports',
         iconname: 'analytics',
-        routerLink: '/glMasterData',
+        routerLink: '/salesOderMasterData',
       },
     ],
   },
@@ -45,115 +45,115 @@ export const GL_TREE_DATA: SideNavNode[] = [
   {
     name: 'Payables',
     iconname: 'payment',
-    routerLink: '/financeHome',
+    routerLink: '/salesHome',
     children: [
       {
         name: 'Master Data',
         iconname: 'library_add',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Document Entry',
         iconname: 'description',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Balances',
         iconname: 'list',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Reports',
         iconname: 'analytics',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
     ],
   },
   {
     name: 'Receivables',
     iconname: 'receipt',
-    routerLink: '/financeHome',
+    routerLink: '/salesHome',
     children: [
       {
         name: 'Master Data',
         iconname: 'library_add',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Document Entry',
         iconname: 'description',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Balances',
         iconname: 'list',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Reports',
         iconname: 'analytics',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
     ],
   },
   {
     name: 'Fixed Assets',
     iconname: 'hd',
-    routerLink: '/financeHome',
+    routerLink: '/salesHome',
     children: [
       {
         name: 'Master Data',
         iconname: 'library_add',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Document Entry',
         iconname: 'description',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Balances',
         iconname: 'list',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Reports',
         iconname: 'analytics',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
     ],
   },
   {
     name: 'Banks',
     iconname: 'money',
-    routerLink: '/financeHome',
+    routerLink: '/salesHome',
     children: [
       {
         name: 'Master Data',
         iconname: 'library_add',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Document Entry',
         iconname: 'description',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Balances',
         iconname: 'list',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
       {
         name: 'Reports',
         iconname: 'analytics',
-        routerLink: '/glmasterdata',
+        routerLink: '/salesHome',
       },
     ],
   },
   {
     name: 'Reporting',
     iconname: 'analytics',
-    routerLink: '/financeHome',
+    routerLink: '/salesHome',
     children: [],
   },
 ];
