@@ -18,13 +18,30 @@ import { RoleAuthComponent } from './core/application-components/profile/role-au
 import { BioComponent } from './core/application-components/profile/bio/bio.component';
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
 import { BrowserModule } from '@angular/platform-browser';
-// import { GlMasterDataComponent } from './finance/general-ledger/gl-master-data/gl-master-data.component';
-// import { FinanceLayoutComponent } from './finance/finance-layout/finance-layout.component';
-// import { FinanceHomeComponent } from './finance/finance-home/finance-home.component';
-// import { GlTransactionCodesComponent } from './finance/general-ledger/gl-transaction-codes/gl-transaction-codes.component';
+
 // import { AppComponent } from "./app.component";
 
-const routes: Routes = [
+const AppRoutes: Routes = [
+  {
+    path: 'finance',
+    canMatch: [canMatchModulesGuard],
+    loadChildren: () =>
+      import('./finance/finance-layout/finance-layout.module').then(
+        (m) => m.FinanceLayoutModule
+      ),
+  },
+  {
+    path: 'sales',
+    canMatch: [canMatchModulesGuard],
+    loadChildren: () =>
+      import('./sales/sales.module').then((m) => m.SalesModule),
+  },
+  {
+    path: 'shared',
+    canMatch: [canMatchModulesGuard],
+    loadChildren: () =>
+      import('./shared/shared.module').then((m) => m.SharedModule),
+  },
   {
     // Home Page layout
 
@@ -102,33 +119,11 @@ const routes: Routes = [
   //   canActivate: [authenticationGuard],
   // },
 
-  {
-    path: 'finance',
-    loadChildren: () =>
-      import('./finance/finance-layout/finance-layout.module').then((m) => m.FinanceLayoutModule),
-    canMatch: [canMatchModulesGuard],
-  },
-  {
-    path: 'sales',
-    loadChildren: () =>
-      import('./sales/sales.module').then((m) => m.SalesModule),
-    canMatch: [canMatchModulesGuard],
-  },
-
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
-  // {
-  //   path: 'finance-layout',
-  //   loadChildren: () =>
-  //     import('./finance/finance-layout/finance-layout.module').then(
-  //       (m) => m.FinanceLayoutModule
-  //     ),
-  // },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, RouterModule.forRoot(AppRoutes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

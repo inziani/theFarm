@@ -80,8 +80,6 @@ import { KnowledgeDialogueComponent } from './core/dialogues/knowledge-dialogue/
 import { UserUpdateDialogComponent } from './core/dialogues/user-update-dialog/user-update-dialog.component';
 import { SalesModule } from './sales/sales.module';
 import { FinanceLayoutModule } from './finance/finance-layout/finance-layout.module';
-import { FinanceLayoutRoutingModule } from './finance/finance-layout/finance-layout-routing.module';
-import { SalesRoutingModule } from './sales/sales-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 // Finance components
@@ -216,13 +214,13 @@ export function tokenGetter() {
     MaterialModule,
     FlexLayoutModule,
     GoogleMapsModule,
-    FinanceLayoutRoutingModule,
-    SalesRoutingModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
       },
     }),
+    SalesModule,
+    FinanceLayoutModule,
     SharedModule,
   ],
   providers: [
