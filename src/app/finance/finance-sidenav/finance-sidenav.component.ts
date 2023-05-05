@@ -11,6 +11,7 @@ import {
   SideNavNodeFlattener,
 } from '../../shared/interfaces/sidenav-tree-interface';
 import { GL_TREE_DATA } from '../finance-data/gl-tree-data';
+import { AuthenticationService } from '@app/core/services/authentication.service';
 
 @Component({
   selector: 'app-finance-sidenav',
@@ -57,7 +58,8 @@ export class FinanceSidenavComponent implements OnInit {
     (node) => node.children
   );
 
-  constructor() {
+  constructor(
+    private _authenticationService: AuthenticationService) {
     this.flatDataSource = new MatTreeFlatDataSource(
       this.flatTreeControl,
       this.treeFlattener
@@ -82,5 +84,7 @@ export class FinanceSidenavComponent implements OnInit {
     this.closeSideNav.emit();
   }
 
-  
+  public onLogOut() {
+    this._authenticationService.onLogout();
+  }
 }

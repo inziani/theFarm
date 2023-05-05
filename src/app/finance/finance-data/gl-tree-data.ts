@@ -2,7 +2,7 @@ import { SideNavNode } from '../../shared/interfaces/sidenav-tree-interface';
 
 export const GL_TREE_DATA: SideNavNode[] = [
   {
-    name: 'smallFarms',
+    name: 'smallFarms Home',
     iconname: 'home',
     routerLink: '/home',
     children: [],
@@ -156,11 +156,11 @@ export const GL_TREE_DATA: SideNavNode[] = [
     routerLink: '/financeHome',
     children: [],
   },
-  {
-    name: 'Log Out',
-    iconname: 'logout',
-    routerLink: 'logout',
-    // children: [],
-    
-  },
+  // {
+  //   name: 'Log Out',
+  //   iconname: 'logout',
+  //   routerLink: 'logout',
+  //   // children: [],
+
+  // },
 ];

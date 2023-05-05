@@ -2,7 +2,7 @@ import { SideNavNode } from '../../shared/interfaces/sidenav-tree-interface';
 
 export const SALES_TREE_DATA: SideNavNode[] = [
   {
-    name: 'smallFarms',
+    name: 'smallFarms Home',
     iconname: 'home',
     routerLink: '/home',
     children: [],

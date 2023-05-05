@@ -1,18 +1,34 @@
 <a (click)="onClose()" class="close-sidenav">
   <mat-icon>close</mat-icon>
 </a>
-    <!-- Flat Tree -->
-    <mat-tree [dataSource]="flatDataSource" [treeControl]="flatTreeControl">
-      <mat-tree-node *matTreeNodeDef="let node" routerLink="{{ node.routerLink }}" matTreeNodePadding (click)="onClose()">
-        <div class="leaf-node">
-          <mat-icon>{{ node.iconname }}</mat-icon><span class="nav-caption">{{node.name}}</span>
-        </div>
-      </mat-tree-node>
-      <mat-tree-node *matTreeNodeDef="let node; when hasFlatChild" routerLink="{{ node.routerLink }}" matTreeNodePadding
-        (click)="onClose()">
-        <button mat-icon-button matTreeNodeToggle>
-          <mat-icon>{{ flatTreeControl.isExpanded(node) ? "expand_more": "chevron_right" }}</mat-icon>
-        </button>
-        <mat-icon>{{ node.iconname }}</mat-icon><span class="nav-caption">{{ node.name }}</span>
-      </mat-tree-node>
-    </mat-tree>
+<!-- Flat Tree -->
+<mat-tree [dataSource]="flatDataSource" [treeControl]="flatTreeControl">
+  <mat-tree-node
+    *matTreeNodeDef="let node"
+    routerLink="{{ node.routerLink }}"
+    matTreeNodePadding
+    (click)="onClose()"
+  >
+    <div class="leaf-node">
+      <mat-icon>{{ node.iconname }}</mat-icon
+      ><span class="nav-caption">{{ node.name }}</span>
+    </div>
+  </mat-tree-node>
+  <mat-tree-node
+    *matTreeNodeDef="let node; when: hasFlatChild"
+    routerLink="{{ node.routerLink }}"
+    matTreeNodePadding
+    (click)="onClose()"
+  >
+    <button mat-icon-button matTreeNodeToggle>
+      <mat-icon>{{
+        flatTreeControl.isExpanded(node) ? "expand_more" : "chevron_right"
+      }}</mat-icon>
+    </button>
+    <mat-icon>{{ node.iconname }}</mat-icon
+    ><span class="nav-caption">{{ node.name }}</span>
+  </mat-tree-node>
+</mat-tree>
+<a (click)="onLogOut()" class="logout"><p>Log Out</p>
+  <mat-icon>logout</mat-icon>
+</a>

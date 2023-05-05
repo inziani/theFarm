@@ -59,6 +59,15 @@
   margin-top: 5px;
 }
 
+.logout {
+
+  /* margin-top: 50%; */
+  /* margin-left: 0; */
+  cursor: pointer;
+  color: #03045e;
+  /* margin-top: 5px; */
+}
+
 ul {
   list-style-type: none;
 
