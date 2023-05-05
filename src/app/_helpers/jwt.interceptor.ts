@@ -84,7 +84,7 @@ export class JwtInterceptor implements HttpInterceptor {
       return next.handle(request).pipe(
         map((event: HttpEvent<Event>) => {
           if (event instanceof HttpResponse) {
-            console.log('event----->>>', event);
+            // console.log('event----->>>', event);
           }
           return event;
         }),
@@ -100,9 +100,7 @@ export class JwtInterceptor implements HttpInterceptor {
     }
     else
     {
-
-      console.log('Expired Token should be here ', localStorage.getItem('access_token'));
-
+      // console.log('Expired Token should be here ', localStorage.getItem('access_token'));
       this._authenticationService.onRefreshPage(refreshToken).pipe(
         switchMap((newTokens: JwTAuthenticationResponseInterface) => {
           console.log('Old Refresh Token -', refreshToken)

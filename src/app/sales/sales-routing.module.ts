@@ -8,21 +8,29 @@ import { CommonModule } from '@angular/common';
 const routes: Routes = [
   {
     path: '',
-    component: SalesComponent,
-    pathMatch: 'full',
     children: [
       {
-        path: 'orderProcessing',
-        component: SalesOrderProcessComponent,
+        path: '',
+        component: SalesComponent,
         canActivate: [authenticationGuard],
       },
+      {
+        path: 'salesOrder',
+        component: SalesOrderProcessComponent,
+        canActivate: [authenticationGuard],
+        children: [
+          // { path: 'salesOderMasterData', component: SalesOrderProcessComponent }
+          // { path: 'saleReports', component: SalesOrderProcessComponent, canActivate: [authenticationGuard]},
+        ],
+      },
+      { path: 'saleReports', component: SalesOrderProcessComponent, canActivate: [authenticationGuard]},
+      { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class SalesRoutingModule {}

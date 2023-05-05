@@ -47,10 +47,7 @@ const AppRoutes: Routes = [
 
     path: '',
     component: AppLayoutComponent,
-    children: [
-      { path: '', component: HomePageComponent },
-      { path: 'home', component: HomePageComponent },
-    ],
+    children: [{ path: 'home', component: HomePageComponent }],
   },
 
   //  Profile layout
@@ -118,7 +115,7 @@ const AppRoutes: Routes = [
   //   ],
   //   canActivate: [authenticationGuard],
   // },
-
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
