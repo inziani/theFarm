@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit, inject } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -15,22 +15,29 @@ import {
   map,
   switchMap,
   Subscription,
+  endWith,
 } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ErrorService } from '@app/core/services/error.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { ErrorMessage } from '@app/core/shared/interfaces/http.interface';
 import { environment } from '@environments/environment';
-import { JWTDecodedTokenInterface, JwTAuthenticationResponseInterface } from '@app/core/shared/interfaces/users-interface';
+import {
+  JWTDecodedTokenInterface,
+  JwTAuthenticationResponseInterface,
+} from '@app/core/shared/interfaces/users-interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UnauthorizedServeResponseComponent } from '@app/shared/unauthorized-serve-response/unauthorized-serve-response.component';
+import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
+import { FinanceService } from '@app/core/services/finance.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  // private accessToken: string = '';
-  // private refreshedToken!: string;
+  private _financeService = inject(FinanceService);
   public errorMessage!: ErrorMessage;
   public errorMessageList: string[] = [];
+
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -43,39 +50,16 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-
-    // ***************************Old Code***************************
-
-    // console.log('Local Storage ', this._authenticationService.jwtTokens)
-
-    // console.log('Local Storage Token in Intercept ', this.accessToken);
-    // console.log('access token outside subscribe ', this.accessToken);
-    // if (this.accessToken) {
-    //   request = request.clone({
-    //     setHeaders: {
-    //       Authorization: `Bearer ${this.accessToken}`,
-    //     },
-    //   });
-    // }
-    // if (!request.headers.has('Content-Type')) {
-    //   request = request.clone({
-    //     headers: request.headers.set('Content-Type', 'application/json'),
-    //   });
-    // }
-
-    // request = request.clone({
-    //   headers: request.headers.set('Accept', 'application/json'),
-    // });
-
-    // ************************End of Old Code****************************
-
     // *******************New Code****************************************
 
-    var isTokenExpired = this._jwtHelper.isTokenExpired(localStorage.getItem('access_token'));
-    const refreshToken: string = JSON.stringify(localStorage.getItem('refresh_token'));
+    var isTokenExpired = this._jwtHelper.isTokenExpired(
+      localStorage.getItem('access_token')
+    );
+    const refreshToken: string = JSON.stringify(
+      localStorage.getItem('refresh_token')
+    );
 
-    if (!isTokenExpired)
-    {
+    if (!isTokenExpired) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -90,21 +74,43 @@ export class JwtInterceptor implements HttpInterceptor {
         }),
         catchError((error: HttpErrorResponse) => {
           this.errorMessage = error.error;
+          console.log('Server down Message -', this.errorMessage.status);
           Object.values(this.errorMessage).forEach((message) => {
             this.errorMessageList.push(message);
           });
-          this._errorService.openErrorHandlingDialog(this.errorMessageList);
+          console.log('I hope it gets here -', this.errorMessageList);
+          if (
+            this.errorMessageList.length &&
+            this.errorMessageList[0] === 'true'
+          ) {
+            let dialogConfig = new MatDialogConfig();
+            this._financeService.sendData('500');
+            dialogConfig.disableClose = true;
+            dialogConfig.autoFocus = true;
+            dialogConfig.width = '550px';
+            dialogConfig.hasBackdrop = true;
+            dialogConfig.data = '500';
+
+            let dialogRef = this._dialog.open(
+              UnauthorizedServeResponseComponent,
+              dialogConfig
+            );
+            dialogRef.afterClosed().subscribe({
+              next: (result) => result,
+              error: (err) =>
+                this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
+              complete: () => console.info('complete'),
+            });
+          } else {
+            this._errorService.openErrorHandlingDialog(this.errorMessageList);
+          }
+
           return throwError(() => error);
         })
       );
-    }
-    else
-    {
-      // console.log('Expired Token should be here ', localStorage.getItem('access_token'));
+    } else {
       this._authenticationService.onRefreshPage(refreshToken).pipe(
         switchMap((newTokens: JwTAuthenticationResponseInterface) => {
-          console.log('Old Refresh Token -', refreshToken)
-          console.log('New Refresh Token -', newTokens);
           localStorage.setItem('reload_access_token', newTokens.access);
           localStorage.setItem('reload_refresh_token', newTokens.refresh);
           var loggedInUserData = this._jwtHelper.decodeToken(
@@ -129,7 +135,35 @@ export class JwtInterceptor implements HttpInterceptor {
               Object.values(this.errorMessage).forEach((message) => {
                 this.errorMessageList.push(message);
               });
-              this._errorService.openErrorHandlingDialog(this.errorMessageList);
+              if (
+                this.errorMessageList.length &&
+                this.errorMessageList[0] === 'true'
+              ) {
+                let dialogConfig = new MatDialogConfig();
+                this._financeService.sendData('500');
+                dialogConfig.disableClose = true;
+                dialogConfig.autoFocus = true;
+                dialogConfig.width = '550px';
+                dialogConfig.hasBackdrop = true;
+                dialogConfig.data = '500';
+
+                let dialogRef = this._dialog.open(
+                  UnauthorizedServeResponseComponent,
+                  dialogConfig
+                );
+                dialogRef.afterClosed().subscribe({
+                  next: (result) => result,
+                  error: (err) =>
+                    this._dialog.open(ErrorHandlingDialogComponent, {
+                      data: err,
+                    }),
+                  complete: () => console.info('complete'),
+                });
+              } else {
+                this._errorService.openErrorHandlingDialog(
+                  this.errorMessageList
+                );
+              }
               return throwError(() => error);
             })
           );
@@ -148,12 +182,70 @@ export class JwtInterceptor implements HttpInterceptor {
       }),
       catchError((error: HttpErrorResponse) => {
         this.errorMessage = error.error;
-        Object.values(this.errorMessage).forEach((message) => {
-          this.errorMessageList.push(message);
-        });
-        this._errorService.openErrorHandlingDialog(this.errorMessageList);
+        const parsedMessage: Object = JSON.parse(
+          JSON.stringify(this.errorMessage)
+        );
+        if (Object.keys(parsedMessage)[0] === 'isTrusted') {
+          console.log('parsedObject -', Object.keys(parsedMessage)[0]);
+          console.log('ParsedMessage -', parsedMessage);
+          console.log('ErrorMessage -', this.errorMessage);
+            let dialogConfig = new MatDialogConfig();
+            this._financeService.sendData('500');
+            dialogConfig.disableClose = true;
+            dialogConfig.autoFocus = true;
+            dialogConfig.width = '550px';
+            dialogConfig.hasBackdrop = true;
+            dialogConfig.data = '500';
+
+            let dialogRef = this._dialog.open(
+              UnauthorizedServeResponseComponent,
+              dialogConfig
+            );
+            dialogRef.afterClosed().subscribe({
+              next: (result) => result,
+              error: (err) =>
+                this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
+              complete: () => console.info('complete'),
+            });
+        }
+        else
+        {
+          Object.values(this.errorMessage).forEach((message) => {
+            this.errorMessageList.push(message);
+          });
+          this._errorService.openErrorHandlingDialog(this.errorMessageList);
+        }
         return throwError(() => error);
       })
     );
+  }
+
+  private _errorHandler(error: HttpErrorResponse) {
+    if (error.status === 500) {
+      let dialogConfig = new MatDialogConfig();
+      this._financeService.sendData('500');
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = '550px';
+      dialogConfig.hasBackdrop = true;
+      dialogConfig.data = '500';
+      let dialogRef = this._dialog.open(
+        UnauthorizedServeResponseComponent,
+        dialogConfig
+      );
+      dialogRef.afterClosed().subscribe({
+        next: (result) => result,
+        error: (err) =>
+          this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
+        complete: () => console.info('complete'),
+      });
+    } else {
+    }
+    this.errorMessage = error.error;
+    Object.values(this.errorMessage).forEach((message) => {
+      this.errorMessageList.push(message);
+    });
+    this._errorService.openErrorHandlingDialog(this.errorMessageList);
+    return throwError(() => error);
   }
 }

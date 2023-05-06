@@ -42,7 +42,7 @@ export class FinanceService {
   readonly glAccountGroupsData: Observable<GLAccountGroup[]> =
     this._glAccountGroups$.asObservable();
 
-  private _id = 0;
+  // private _id = 0;
   public readonly glAccountNumber!: number;
 
   constructor(private http: HttpClient) {}

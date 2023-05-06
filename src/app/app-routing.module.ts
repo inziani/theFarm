@@ -18,6 +18,7 @@ import { RoleAuthComponent } from './core/application-components/profile/role-au
 import { BioComponent } from './core/application-components/profile/bio/bio.component';
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { UnauthorizedServeResponseComponent } from './shared/unauthorized-serve-response/unauthorized-serve-response.component';
 
 // import { AppComponent } from "./app.component";
 
@@ -42,14 +43,6 @@ const AppRoutes: Routes = [
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
-  {
-    // Home Page layout
-
-    path: '',
-    component: AppLayoutComponent,
-    children: [{ path: 'home', component: HomePageComponent }],
-  },
-
   //  Profile layout
   {
     path: '',
@@ -103,18 +96,15 @@ const AppRoutes: Routes = [
       { path: 'signup', component: SignupComponent },
     ],
   },
-  // Finance Module Layout
+  // Unauthorized Paths
+  {path: 'unauthorized', component: UnauthorizedServeResponseComponent},
+  {
+    // Home Page layout
 
-  // {
-  //   path: '',
-  //   component: FinanceLayoutComponent,
-  //   children: [
-  //     { path: 'financeHome', component: FinanceHomeComponent },
-  //     { path: 'glTransactionsCodes', component: GlTransactionCodesComponent },
-  //     { path: 'glMasterData', component: GlMasterDataComponent },
-  //   ],
-  //   canActivate: [authenticationGuard],
-  // },
+    path: '',
+    component: AppLayoutComponent,
+    children: [{ path: 'home', component: HomePageComponent }],
+  },
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

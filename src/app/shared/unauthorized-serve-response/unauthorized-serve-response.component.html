@@ -1,0 +1,25 @@
+<div><app-header></app-header></div>
+<div class="container my-3 d-flex justify-content-center">
+  <div class="row">
+    <div class="col-md-12 my-3" [ngSwitch]="navigationError">
+      <div *ngSwitchCase="'unauthorized'">
+        <div class="alert alert-danger align-self-center" role="alert">
+          <h2 style="font-weight: lighter">
+            You are not Authorized to perform this transaction
+          </h2>
+          <mat-dialog-actions align="end" class="my-2">
+            <button mat-raised-button cdkFocusInitial>
+              <mat-icon class="mx-2 my-2">cancel</mat-icon>
+              Cancel
+            </button>
+          </mat-dialog-actions>
+        </div>
+      </div>
+      <div *ngSwitchCase="'500'">
+        <div class="alert alert-info" role="alert">
+          The Server is Unavailable
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

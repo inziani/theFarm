@@ -6,6 +6,8 @@ import { SharedComponent } from './shared.component';
 import { FinanceNavbarComponent } from '@app/finance/finance-navbar/finance-navbar.component';
 import { FinanceSidenavComponent } from '@app/finance/finance-sidenav/finance-sidenav.component';
 import { MaterialModule } from '@app/material.module';
+import { UnauthorizedServeResponseComponent } from './unauthorized-serve-response/unauthorized-serve-response.component';
+import { HeaderComponent } from '@app/core/header/header.component';
 
 
 @NgModule({
@@ -13,8 +15,10 @@ import { MaterialModule } from '@app/material.module';
     SharedComponent,
     FinanceNavbarComponent,
     FinanceSidenavComponent,
+    UnauthorizedServeResponseComponent,
+    HeaderComponent,
   ],
   imports: [CommonModule, SharedRoutingModule, MaterialModule],
-  exports: [FinanceNavbarComponent, FinanceSidenavComponent],
+  exports: [FinanceNavbarComponent, FinanceSidenavComponent, HeaderComponent],
 })
 export class SharedModule {}

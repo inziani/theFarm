@@ -8,8 +8,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 
-  /* .mat-dialog-container{
-    background-color: #03045e;
-    color: #ff9e00;
-  } */
+  .mat-dialog-container{
+    color: #03045e;
+    font-weight: lighter;
+    border-radius: 0 !important;
+  }
 

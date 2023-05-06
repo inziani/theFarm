@@ -10,20 +10,21 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'salesOrder',
+        component: SalesOrderProcessComponent,
+        canActivate: [authenticationGuard],
+        children: [],
+      },
+      {
+        path: 'saleReports',
+        component: SalesOrderProcessComponent,
+        canActivate: [authenticationGuard],
+      },
+      {
         path: '',
         component: SalesComponent,
         canActivate: [authenticationGuard],
       },
-      {
-        path: 'salesOrder',
-        component: SalesOrderProcessComponent,
-        canActivate: [authenticationGuard],
-        children: [
-          // { path: 'salesOderMasterData', component: SalesOrderProcessComponent }
-          // { path: 'saleReports', component: SalesOrderProcessComponent, canActivate: [authenticationGuard]},
-        ],
-      },
-      { path: 'saleReports', component: SalesOrderProcessComponent, canActivate: [authenticationGuard]},
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },

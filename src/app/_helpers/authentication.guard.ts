@@ -12,6 +12,7 @@ import {
   from '@angular/router';
 
 import { AuthenticationService } from '@app/core/services/authentication.service';
+import { FinanceService } from '@app/core/services/finance.service';
 import { tap } from 'rxjs';
 
 
@@ -29,12 +30,17 @@ export const authenticationGuard: CanActivateFn = () => {
 
 export const canMatchModulesGuard: CanMatchFn = () => {
   const route = inject(Router);
+  // const financeService = inject(FinanceService);
+  // const errorMessage = 'unauthorized';
   return inject(AuthenticationService)
     .isLoggedOnData$
     .pipe(
       tap((isLoggedIn) => {
         console.log('Guard Response-', isLoggedIn);
         !isLoggedIn && route.navigate(['login']);
+        // financeService.sendData(errorMessage);
+        // !isLoggedIn && route.navigate(['unauthorized']);
+
       })
     );
 
