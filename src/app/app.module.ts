@@ -42,11 +42,10 @@ import { ErrorHandlingDialogComponent } from './core/dialogues/error-handling-di
 import { ObjectCreatedComponent } from './core/dialogues/object-created/object-created.component';
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { SearchDialogComponent } from './finance/finance-dialogues/search-dialog/search-dialog.component';
-
 import { TodoComponent } from './core/application-components/todo/todo.component';
 import { LoginComponent } from './core/authentication/login/login.component';
 import { SignupComponent } from './core/authentication/signup/signup.component';
-// import { HeaderComponent } from './core/header/header.component';
+import { HeaderComponent } from './core/header/header.component';
 import { ProfileComponent } from './core/application-components/profile/profile.component';
 import { EditActivityComponent } from './core/application-components/edit-activity/edit-activity.component';
 import { LoadingSpinnerComponent } from './core/application-components/loading-spinner/loading-spinner';
@@ -104,7 +103,7 @@ export function tokenGetter() {
     TodoComponent,
     LoginComponent,
     SignupComponent,
-    // HeaderComponent,
+    HeaderComponent,
     ProfileComponent,
     EditActivityComponent,
     LoadingSpinnerComponent,

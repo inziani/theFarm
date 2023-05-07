@@ -5,6 +5,13 @@
 
 }
 
+.alert-info
+{
+  font-weight: lighter;
+  border-radius: 0;
+
+}
+
 .mat-raised-button {
   /* color: white; */
   background-color: #03045e;

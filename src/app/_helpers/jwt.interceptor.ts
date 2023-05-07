@@ -186,9 +186,9 @@ export class JwtInterceptor implements HttpInterceptor {
           JSON.stringify(this.errorMessage)
         );
         if (Object.keys(parsedMessage)[0] === 'isTrusted') {
-          console.log('parsedObject -', Object.keys(parsedMessage)[0]);
-          console.log('ParsedMessage -', parsedMessage);
-          console.log('ErrorMessage -', this.errorMessage);
+          // console.log('parsedObject -', Object.keys(parsedMessage)[0]);
+          // console.log('ParsedMessage -', parsedMessage);
+          // console.log('ErrorMessage -', this.errorMessage);
             let dialogConfig = new MatDialogConfig();
             this._financeService.sendData('500');
             dialogConfig.disableClose = true;
