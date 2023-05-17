@@ -4,17 +4,22 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { map, mapTo, shareReplay, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import {
   JWTDecodedTokenInterface,
   JwTAuthenticationResponseInterface,
-  SignUpResponse,
 } from '../shared/interfaces/users-interface';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
+// import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
-import { User, UserProfile } from '../shared/models/user.model';
+import { User } from '../shared/models/user.model';
+
+import * as fromRoot from '@app/app.reducer';
+import * as UI from '@app/shared/ui.reducer';
+import { Store } from '@ngrx/store';
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +34,7 @@ export class AuthenticationService {
   private _isLoggedOn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public readonly isLoggedOnData$: Observable<boolean> =
     this._isLoggedOn$.asObservable();
-  public  _loggedInUser$ = new BehaviorSubject<JWTDecodedTokenInterface>({
+  public _loggedInUser$ = new BehaviorSubject<JWTDecodedTokenInterface>({
     token_type: 'string',
     exp: NaN,
     iat: NaN,
@@ -43,33 +48,20 @@ export class AuthenticationService {
 
   // *********************End of New Code***********************
 
-  // ******************** Old Code******************************
-  // public currentUser$ = new BehaviorSubject<number>(0);
-  // private _jwtTokens$ = new BehaviorSubject<JwTAuthenticationResponseInterface>(
-  //   {
-  //     access: '',
-  //     refresh: '',
-  //   }
-  // );
-  // readonly tokenData: Observable<JwTAuthenticationResponseInterface> =
-  //   this._jwtTokens$.asObservable();
-
-  // public user$ = new Subject<number>();
-  // public expiryDate!: Date;
-  // public jwtAccessToken!: string;
-  // public jwtRefreshToken!: string;
-  // public payload: any;
-  // public userId!: number;
-  // public token: any;
   public errorMessage!: string;
 
-  constructor(private _http: HttpClient, public router: Router) {}
+  constructor(
+    private _http: HttpClient,
+    public _router: Router,
+    private _store: Store<{ ui: UI.State }>
+  ) {}
 
   // *********************New Code******************************
 
   //  New Methods
 
   public onLogOn(email: string, password: string) {
+    this._store.dispatch({ type: 'START_LOADING' });
     return this._http
       .post<JwTAuthenticationResponseInterface>(
         `${environment.apiUrl}/${environment.jwtLogin}`,
@@ -85,13 +77,14 @@ export class AuthenticationService {
             response.access
           ) as JWTDecodedTokenInterface;
           this._loggedInUser$.next(loggedInUserData);
+          this._store.dispatch({ type: 'STOP_LOADING' });
         })
       );
   }
 
   public onLogout() {
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this._router.navigate(['/login']);
   }
 
   public onRefreshPage(refresh: string) {
@@ -100,19 +93,18 @@ export class AuthenticationService {
       { refresh },
       this.httpOptions
     );
-      // .pipe(
-      //   tap((response) => {
-      //     this._isLoggedOn$.next(true);
-      //     var loggedInUserData = this.jwtHelper.decodeToken(
-      //       response.access
-      //     ) as JWTDecodedTokenInterface;
-      //     this._loggedInUser$.next(loggedInUserData);
-      //   })
-      // );
+    // .pipe(
+    //   tap((response) => {
+    //     this._isLoggedOn$.next(true);
+    //     var loggedInUserData = this.jwtHelper.decodeToken(
+    //       response.access
+    //     ) as JWTDecodedTokenInterface;
+    //     this._loggedInUser$.next(loggedInUserData);
+    //   })
+    // );
   }
 
   // *********************End of New Code***********************
-
 
   // get tokensData(): JwTAuthenticationResponseInterface {
   //   return this._jwtTokens$.value;
