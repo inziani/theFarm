@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { UserProfileInterface } from '@app/core/shared/interfaces/users-interface';
 import { User, UserProfile } from '@app/core/shared/models/user.model';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
 import { UsersService } from '@app/core/services/users.service';
 import { UserUpdateDialogComponent } from '@app/core/dialogues/user-update-dialog/user-update-dialog.component';

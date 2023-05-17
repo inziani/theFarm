@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { FinanceService } from '@app/core/services/finance.service';
 import { Currency, Language } from '@app/finance/finance-interfaces/finance-interfaces';

@@ -3,9 +3,9 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular
 
 import { Subscription } from 'rxjs';
 
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
-import { MatDialog, MatDialogConfig, _closeDialogVia } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig, _closeLegacyDialogVia as _closeDialogVia } from '@angular/material/legacy-dialog';
 
 
 
@@ -13,7 +13,7 @@ import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { ActivitysService } from '@app/core/services/activitys.service';
 import { Activity } from '@app/core/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { CreateActivityComponent } from '../create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from '@app/core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
 

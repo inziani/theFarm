@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 
 import { ChartOfAccountsMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { FinanceService } from '@app/core/services/finance.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { ChartOfAccountsDialogComponent } from '../finance-dialogues/chart-of-accounts-dialog/chart-of-accounts-dialog.component';
 import { ChartOfAccountsMasterDataFormGroup } from '../finance-models/fi-form-models/co-master-data-models';
 

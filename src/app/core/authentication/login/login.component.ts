@@ -9,7 +9,7 @@ import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dia
 
 import { AuthenticationService } from '@app/core/services/authentication.service';
 
-import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, _closeLegacyDialogVia as _closeDialogVia } from '@angular/material/legacy-dialog';
 // import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 // import { Observable } from 'rxjs';
 

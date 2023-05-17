@@ -9,7 +9,7 @@ import { SignUpFormGroup } from '@app/core/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/core/shared/models/authentication.model';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { MatAccordion } from '@angular/material/expansion';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
 
 

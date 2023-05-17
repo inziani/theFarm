@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { Activity } from '@app/core/shared/models/activity.model';
 import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-saved-dialog.component';

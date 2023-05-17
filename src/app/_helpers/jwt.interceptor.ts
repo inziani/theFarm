@@ -18,7 +18,7 @@ import {
   endWith,
 } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { ErrorService } from '@app/core/services/error.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { ErrorMessage } from '@app/core/shared/interfaces/http.interface';

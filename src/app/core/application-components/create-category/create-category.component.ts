@@ -4,7 +4,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivityCategoryFormGroup } from '@app/core/shared/models/activity-category-form.model';
 import { Category } from '@app/core/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 

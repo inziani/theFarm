@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import {
-  MatDialogRef,
-  MatDialog,
-  MAT_DIALOG_DATA,
-} from "@angular/material/dialog";
+  MatLegacyDialogRef as MatDialogRef,
+  MatLegacyDialog as MatDialog,
+  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
+} from "@angular/material/legacy-dialog";
 
 import { FinanceService } from "@app/core/services/finance.service";
 import { CompanyMasterData } from "@app/finance/finance-models/fi-data-models/organization-data-models";
