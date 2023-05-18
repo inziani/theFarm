@@ -1,24 +1,21 @@
 
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import {  Router } from '@angular/router';
 
 import { LoginFormGroup } from '@app/core/shared/models/loginform.model';
 import { LoginCredentials } from '@app/core/shared/models/authentication.model';
 import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dialog.component';
 
 import { AuthenticationService } from '@app/core/services/authentication.service';
+import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
-import { MatLegacyDialog as MatDialog, _closeLegacyDialogVia as _closeDialogVia } from '@angular/material/legacy-dialog';
-// import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-// import { Observable } from 'rxjs';
 
 import * as fromRoot from '@app/app.reducer';
 import * as UI from '@app/shared/ui.reducer';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+// import { map } from 'rxjs/operators';
 
 
 
@@ -39,6 +36,8 @@ export class LoginComponent implements OnInit {
 
 
 
+
+
   public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
@@ -46,7 +45,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    private _dialog: MatDialog,
     private _store: Store<{ui: UI.State}>
   ) {}
 
@@ -65,12 +63,13 @@ export class LoginComponent implements OnInit {
     this._store.dispatch({ type: 'START_LOADING' });
     this.formSubmitted = true;
     this.userLoggingIn = this.formGroup.value;
+    const _dialog: MatDialog = inject(MatDialog);
     this._authenticationService
       .onLogOn(this.userLoggingIn.email, this.userLoggingIn.password)
       .subscribe({
         next: (jwtTokens) => {
           if (jwtTokens) {
-            this._dialog.open(LoginDialogComponent);
+            _dialog.open(LoginDialogComponent);
             this._router.navigate(['activity']);
             this._store.dispatch({ type: 'STOP_LOADING' });
           }

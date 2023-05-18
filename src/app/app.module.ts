@@ -10,7 +10,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 
 
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+// import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import {
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -28,7 +31,8 @@ import {
   FontAwesomeModule
 } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MAT_LEGACY_FORM_FIELD_DEFAULT_OPTIONS as MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/legacy-form-field';
+// import { MAT_LEGACY_FORM_FIELD_DEFAULT_OPTIONS as MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/legacy-form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DatePipe } from '@angular/common';
 
 import { IsoDatePipe } from './_helpers/iso-date.pipe';
@@ -140,12 +144,12 @@ export function tokenGetter() {
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FontAwesomeModule,
+    // FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     GoogleMapsModule,
     JwtModule.forRoot({
       config: {
