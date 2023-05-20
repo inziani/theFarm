@@ -11,12 +11,11 @@ import {
   JWTDecodedTokenInterface,
   JwTAuthenticationResponseInterface,
 } from '../shared/interfaces/users-interface';
-// import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
 import { User } from '../shared/models/user.model';
 
 import * as fromRoot from '@app/app.reducer';
-import * as UI from '@app/shared/ui.reducer';
+import * as UI from '@app/shared/ui.actions';
 import { Store } from '@ngrx/store';
 
 
@@ -53,7 +52,7 @@ export class AuthenticationService {
   constructor(
     private _http: HttpClient,
     public _router: Router,
-    private _store: Store<{ ui: UI.State }>
+    private _store: Store<fromRoot.State >
   ) {}
 
   // *********************New Code******************************
@@ -61,7 +60,7 @@ export class AuthenticationService {
   //  New Methods
 
   public onLogOn(email: string, password: string) {
-    this._store.dispatch({ type: 'START_LOADING' });
+    // this._store.dispatch(new UI.StartLoading());
     return this._http
       .post<JwTAuthenticationResponseInterface>(
         `${environment.apiUrl}/${environment.jwtLogin}`,
@@ -77,7 +76,7 @@ export class AuthenticationService {
             response.access
           ) as JWTDecodedTokenInterface;
           this._loggedInUser$.next(loggedInUserData);
-          this._store.dispatch({ type: 'STOP_LOADING' });
+          // this._store.dispatch(new UI.StopLoading());
         })
       );
   }

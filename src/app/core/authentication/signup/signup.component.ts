@@ -9,7 +9,7 @@ import { SignUpFormGroup } from '@app/core/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/core/shared/models/authentication.model';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { MatAccordion } from '@angular/material/expansion';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
 
 
@@ -39,15 +39,15 @@ export class SignupComponent implements OnInit {
   public errorMessage!: string | null;
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router,
-    private dialog: MatDialog,
-    private route: ActivatedRoute,
-    private dateFormat: DatePipe
+    private _authenticationService: AuthenticationService,
+    private _router: Router,
+    private _dialog: MatDialog,
+    private _route: ActivatedRoute,
+    private _dateFormat: DatePipe
 
   ) {
 
-    this.datePipe = dateFormat;
+    this.datePipe = _dateFormat;
   }
 
   ngOnInit(): void {
@@ -63,7 +63,7 @@ export class SignupComponent implements OnInit {
     this.userSignUp = this.formGroup.value;
     console.log(this.userSignUp);
     this.formSubmitted = true;
-    this.authenticationService.onUserSignOn(
+    this._authenticationService.onUserSignOn(
       this.userSignUp.first_name,
       this.userSignUp.last_name,
       this.datePipe.transform(this.userSignUp.date_of_birth, 'yyyy-MM-dd'),
@@ -75,7 +75,7 @@ export class SignupComponent implements OnInit {
       this.userSignUp.password
     )
       .subscribe({
-        next: (userCreated) => this.dialog.open(ObjectCreatedComponent,
+        next: (userCreated) => this._dialog.open(ObjectCreatedComponent,
           {data: this.userSignUp.username = userCreated.username}),
         error: (err) => this.errorMessage = err,
         complete: () => console.log('Complete')
@@ -83,6 +83,6 @@ export class SignupComponent implements OnInit {
     this.isLoading = false;
     this.formGroup.reset();
     this.formSubmitted = false;
-    this.router.navigate(['/login']);
+    this._router.navigate(['/login']);
   }
 }

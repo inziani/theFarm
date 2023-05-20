@@ -9,14 +9,10 @@ import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dia
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
-
 import * as fromRoot from '@app/app.reducer';
-import * as UI from '@app/shared/ui.reducer';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-// import { map } from 'rxjs/operators';
-
 
 
 
@@ -30,14 +26,8 @@ export class LoginComponent implements OnInit {
   public userLoggingIn!: LoginCredentials;
   public formSubmitted: boolean = false;
   public isLoginMode = true;
-  public isLoading$!: Observable<boolean>
+  public isLoading$!: Observable<boolean>;
   public errorMessage: string = '';
-
-
-
-
-
-
   public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
@@ -45,12 +35,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    private _store: Store<{ui: UI.State}>
+    private _store: Store<fromRoot.State>,
+    private _dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    // this.isLoading$ = this._store.map(state = state.ui.isLoading)
-    this._store.subscribe(state => console.log('this is state in AuthService-' ,state));
+
+    // this.isLoading$ = this._store.select(fromRoot.getIsLoading);
+    console.log('What came here?-', this.isLoading$);
+    this._store.subscribe(state => console.log('this is state in logonComponent-', state));
+
+
 
 
   }
@@ -60,29 +55,24 @@ export class LoginComponent implements OnInit {
       return;
     }
     // this.isLoading = true;
-    this._store.dispatch({ type: 'START_LOADING' });
     this.formSubmitted = true;
     this.userLoggingIn = this.formGroup.value;
-    const _dialog: MatDialog = inject(MatDialog);
     this._authenticationService
       .onLogOn(this.userLoggingIn.email, this.userLoggingIn.password)
       .subscribe({
         next: (jwtTokens) => {
           if (jwtTokens) {
-            _dialog.open(LoginDialogComponent);
+            this._dialog.open(LoginDialogComponent);
             this._router.navigate(['activity']);
-            this._store.dispatch({ type: 'STOP_LOADING' });
           }
         },
         error: (err) => {
           this.errorMessage = err;
-          this._store.dispatch({ type: 'STOP_LOADING' });
         },
         complete: () => console.info('Completed'),
       });
     this.formGroup.reset();
     this.formSubmitted = false;
-    // this.isLoading = false;
   }
 
 

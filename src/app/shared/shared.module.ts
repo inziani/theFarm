@@ -7,6 +7,9 @@ import { FinanceNavbarComponent } from '@app/finance/finance-navbar/finance-navb
 import { FinanceSidenavComponent } from '@app/finance/finance-sidenav/finance-sidenav.component';
 import { MaterialModule } from '@app/material.module';
 import { UnauthorizedServeResponseComponent } from './unauthorized-serve-response/unauthorized-serve-response.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from '@app/app.reducer';
+
 
 
 
@@ -16,9 +19,9 @@ import { UnauthorizedServeResponseComponent } from './unauthorized-serve-respons
     FinanceNavbarComponent,
     FinanceSidenavComponent,
     UnauthorizedServeResponseComponent,
-    
+
   ],
-  imports: [CommonModule, SharedRoutingModule, MaterialModule],
+  imports: [CommonModule, SharedRoutingModule, MaterialModule, StoreModule.forRoot({ globalReducer: reducers.ui})],
   exports: [FinanceNavbarComponent, FinanceSidenavComponent],
 })
 export class SharedModule {}

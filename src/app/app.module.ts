@@ -87,6 +87,7 @@ import { SharedModule } from './shared/shared.module';
 
 
 
+
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
