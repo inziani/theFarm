@@ -7,7 +7,7 @@ import { User } from '@app/core/shared/models/user.model';
 
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '@app/core/services/authentication.service';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { UsersService } from '@app/core/services/users.service';
 
@@ -32,7 +32,7 @@ export class AccountSettingsComponent implements OnInit {
 
   // Logged in User data
   public user!: number;
-  private userSubscription!: Subscription;
+
   public userList!: User[];
   public loggedInUser!: any;
   public currentLoggedInUser!: User[];
@@ -44,39 +44,20 @@ export class AccountSettingsComponent implements OnInit {
   constructor(
 
     private userService: UsersService,
-    private authenticationService: AuthenticationService,
+
     private dialog: MatDialog,
     private dateFormat: DatePipe
 
   ) {
 
-    this.datePipe = dateFormat;
+    this.datePipe = this.dateFormat;
   }
 
   ngOnInit(): void {
     this.readonly = true;
-
-    // this.userSubscription = this.authenticationService.currentUser$.subscribe(
-    //   user => {
-
-    //     this.user = user;
-    //     this.loggedInUser = this.userService.fetchUsers().subscribe(users => {
-    //       this.userList = users;
-    //       this.currentLoggedInUser = this.userList.filter((person: User) => person.id === this.user);
-    //       this.patchedUser = this.currentLoggedInUser.reduce((...obj) => Object.assign(...obj),
-    //       {
-    //         id: NaN, first_name: '', middle_name: '', last_name: '', date_of_birth:'', phone_number: '', username: '',
-    //         email: '', gender: '', city: '', country: '', is_active: true, staffType: 'string',  is_staff: true, is_superuser: false, date_joined: new Date(), password: ''
-    //       });
-    //       this.formGroup.patchValue(this.patchedUser );
-    //     });
-
-    //   });
   }
 
   ngOnDestroy() {
-
-    // this.userSubscription.unsubscribe();
   }
 
   submitForm() {

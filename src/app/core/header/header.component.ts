@@ -1,19 +1,23 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Router } from '@angular/router';
-// import { RestDataSource } from '@app/core/shared/data/rest.datasource';
+
 import { User } from '@app/core/shared/models/user.model';
-// import { Subscription } from 'rxjs';
+
 import { AuthenticationService } from '../services/authentication.service';
 import { UsersService } from '../services/users.service';
-
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   @Output() sideNavToggle = new EventEmitter<void>();
   @Output() homePageNavToggle = new EventEmitter<void>();
 
@@ -24,12 +28,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public currentLoggedInUser!: User[];
   public errorMessage!: string;
 
-
   constructor(
-    private _userService: UsersService,
     private _authenticationService: AuthenticationService,
     private _route: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._authenticationService._loggedInUserData$.subscribe({
@@ -37,15 +39,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.user = loggedInUser.user_id;
         this.isAuthenticated = !!this.user;
       },
-      error: (err) => this.errorMessage = err,
-      complete:()=> console.info()
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info(),
     });
   }
 
-
   onSignUp() {
     this._route.navigate(['signup']);
-
   }
 
   onToggleSidenav() {
@@ -61,8 +61,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
     // this.userSubscription.unsubscribe();
   }
-
 }

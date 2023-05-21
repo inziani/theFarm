@@ -41,9 +41,8 @@ export class UsersService {
   };
 
   constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService,
-    private dataSource: RestDataSource
+    private _http: HttpClient,
+
   ) {}
 
   ngOnInit() {
@@ -56,7 +55,7 @@ export class UsersService {
 
   // Get user listing;
   public getUsersListing(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(`${environment.apiUrl}/users/`);
+    return this._http.get<UserInterface[]>(`${environment.apiUrl}/users/`);
   }
 
   // User creation
@@ -78,7 +77,7 @@ export class UsersService {
     staffType: string,
     password: string
   ): Observable<User> {
-    return this.http.post<User>(
+    return this._http.post<User>(
       `${environment.apiUrl}/users/`,
       {
         username,
@@ -107,7 +106,7 @@ export class UsersService {
     startDate: Date,
     endDate: Date
   ): Observable<EmployeeIDInformation> {
-    return this.http.post<EmployeeIDInformation>(
+    return this._http.post<EmployeeIDInformation>(
       `${environment.apiUrl}/empIDInfo/`,
       {
         identificationDocument,
@@ -121,12 +120,12 @@ export class UsersService {
   }
 
   public fetchUsers(): Observable<User[]> {
-    return this.http
+    return this._http
       .get<User[]>(`${environment.apiUrl}/users/`, this.httpOptions)
       .pipe(shareReplay());
   }
   public fetchSingleUser(id: number): Observable<User> {
-    return this.http.get<User>(
+    return this._http.get<User>(
       `${environment.apiUrl}/users/` + id + '/',
       this.httpOptions
     );
@@ -149,7 +148,7 @@ export class UsersService {
     is_staff: boolean,
     staffType: string
   ): Observable<User> {
-    return this.http.patch<User>(
+    return this._http.patch<User>(
       `${environment.apiUrl}/users/` + id + '/',
       {
         username,
@@ -171,14 +170,14 @@ export class UsersService {
   }
 
   public deleteSingleUser(id: number): Observable<User> {
-    return this.http.delete<User>(
+    return this._http.delete<User>(
       `${environment.apiUrl}/users/` + id + '/',
       this.httpOptions
     );
   }
 
   public fetchUserProfiles(): Observable<UserProfile[]> {
-    return this.http
+    return this._http
       .get<UserProfile[]>(
         `${environment.apiUrl}/user-profile`,
         this.httpOptions
@@ -193,7 +192,7 @@ export class UsersService {
   }
 
   public fetchSingleUserProfile(user: number): Observable<any> {
-    return this.http.get<any>(
+    return this._http.get<any>(
       `${environment.apiUrl}/user-profile/` + user + '/',
       this.httpOptions
     );
@@ -207,7 +206,7 @@ export class UsersService {
     personal_hobbies: string,
     social_hobbies: string
   ): Observable<UserProfile> {
-    return this.http.patch<UserProfile>(
+    return this._http.patch<UserProfile>(
       `${environment.apiUrl}/user-profile/` + user + '/',
       {
         education_bio,
@@ -229,7 +228,7 @@ export class UsersService {
   ): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     formData.append('profile_pic', profile_pic, profile_pic.name);
-    return this.http.put<any>(
+    return this._http.put<any>(
       `${environment.apiUrl}/user-profile/` + id + '/', formData);
   }
 
@@ -244,7 +243,7 @@ export class UsersService {
     email: string,
     password: string
   ): Observable<User> {
-    return this.http.post<User>(
+    return this._http.post<User>(
       `${environment.apiUrl}/register/`,
       JSON.stringify({
         first_name,

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { IsoDatePipe } from '@app/_helpers/iso-date.pipe';
 
@@ -8,9 +8,8 @@ import {
   GLMasterDataFormGroup,
 } from '@app/finance/finance-models/fi-form-models/gl-master-data-model';
 import {
-
   ProfitAndLossAccountType,
-  ReconciliationAccountType
+  ReconciliationAccountType,
 } from '@app/finance/finance-interfaces/finance-interfaces';
 import { SearchDialogComponent } from '@app/finance/finance-dialogues/search-dialog/search-dialog.component';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
@@ -20,9 +19,8 @@ import { NumberRangesService } from '@app/core/shared/data/number-ranges.service
 import {
   CompanyCodeMasterData,
   ChartOfAccountsMasterData,
-  GLAccountGroup
+  GLAccountGroup,
 } from '@app/finance/finance-models/fi-data-models/organization-data-models';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-gl-master-data',
@@ -51,7 +49,6 @@ export class GlMasterDataComponent implements OnInit {
   public generalLedgerAccountMaster!: GeneralLedgerMasterData;
   public readonly!: boolean;
   public errorMessage!: string;
-  // public accountNumber!: number;
   public accNum!: number;
   public companyCode!: CompanyCodeMasterData[];
   public chartOfAccounts!: ChartOfAccountsMasterData[];
@@ -61,7 +58,7 @@ export class GlMasterDataComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _financeService: FinanceService,
-    private _datePipe: IsoDatePipe,
+
     private _numberRanges: NumberRangesService
   ) {}
 
@@ -92,6 +89,7 @@ export class GlMasterDataComponent implements OnInit {
     dialogConfig.height = '150px';
     const dialogRef = this._dialog.open(SearchDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((success) => {
+      console.log(success);
     });
   }
 
@@ -99,18 +97,11 @@ export class GlMasterDataComponent implements OnInit {
     this.readonly = !this.readonly;
     this._numberRanges.glAccountNumberStatus.subscribe({
       next: (accNum) => {
-        this.accNum = accNum
-        // console.log(
-        //   'Account Number in Component - ',
-        //   this.accNum
-        // );
-        // console.log('Raw AccNum - ', accNum);
+        this.accNum = accNum;
       },
-      error: (err) => this.errorMessage = err,
-      complete:()=>console.info('New Acc Num generated')
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('New Acc Num generated'),
     });
-    // this.accNum = this._numberRanges.glAccountNumber;
-    // console.log('Account Number in Component itself - ', this.accNum);
   }
 
   public onCreateGLAccountMaster() {

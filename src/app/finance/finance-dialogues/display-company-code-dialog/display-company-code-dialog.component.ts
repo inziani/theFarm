@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 
 import { CompanyCodeMasterData, CompanyMasterData} from '@app/finance/finance-models/fi-data-models/organization-data-models';
@@ -22,13 +22,13 @@ export class DisplayCompanyCodeDialogComponent implements OnInit {
 
 
   constructor(
-    private dialogRef: MatDialogRef<DisplayCompanyCodeDialogComponent>,
+    private _dialogRef: MatDialogRef<DisplayCompanyCodeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public companyCodeMasterData: CompanyCodeMasterData,
-    private financeService: FinanceService
+    private _financeService: FinanceService
   ) { }
 
   ngOnInit(): void {
-    this.financeService.fetchCompanyData().subscribe(companyList => {
+    this._financeService.fetchCompanyData().subscribe(companyList => {
       this.companyList = companyList;
     });
     this.readonly = true;
@@ -36,7 +36,7 @@ export class DisplayCompanyCodeDialogComponent implements OnInit {
   }
 
  close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 
 }

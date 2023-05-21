@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { FinanceService } from '@app/core/services/finance.service';
 import { CompanyCodeMasterData} from '@app/finance/finance-models/fi-data-models/organization-data-models';
@@ -13,10 +13,10 @@ export class DeleteCompanyCodeDialogComponent implements OnInit {
   public companyCode!: CompanyCodeMasterData;
 
   constructor(
-    private financeService: FinanceService,
-    private dialogRef: MatDialogRef<DeleteCompanyCodeDialogComponent>,
+    private _financeService: FinanceService,
+    private _dialogRef: MatDialogRef<DeleteCompanyCodeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public companyCodeData: CompanyCodeMasterData,
-    private dialog: MatDialog
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -24,20 +24,20 @@ export class DeleteCompanyCodeDialogComponent implements OnInit {
   }
 
    public onDelete() {
-    this.financeService
+    this._financeService
       .deleteCompanyCode(
         this.companyCodeData.id
       )
       .subscribe((companyCodeDeleted) => {
         if (companyCodeDeleted) {
         } else {
-          this.dialog.open(ChangesSavedDialogComponent);
+          this._dialog.open(ChangesSavedDialogComponent);
         }
       });
    }
 
   close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 
 }

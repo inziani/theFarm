@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { FinanceService } from '@app/core/services/finance.service';
 import { CompanyCodeMasterData, CompanyMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
@@ -22,25 +22,25 @@ export class CreateCompanyCodeDialogComponent implements OnInit {
 
 
   constructor(
-    private dialog: MatDialog,
-    private dialogRef: MatDialogRef<CreateCompanyCodeDialogComponent>,
+    private _dialog: MatDialog,
+    private _dialogRef: MatDialogRef<CreateCompanyCodeDialogComponent>,
     @Inject (MAT_DIALOG_DATA) public action:string,
-    private financeService: FinanceService
+    private _financeService: FinanceService
   ) {
 
   }
 
   ngOnInit(): void {
-    this.financeService.fetchCompanyData().subscribe(companyList => {
+    this._financeService.fetchCompanyData().subscribe(companyList => {
       this.companyList = companyList;
 
     })
   }
 
   public onSave() {
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.companyCode = this.formGroup.value;
-    this.financeService
+    this._financeService
       .createCompanyCodeMasterData(
         this.companyCode.companyCode,
         this.companyCode.companyCodeName,
@@ -48,7 +48,7 @@ export class CreateCompanyCodeDialogComponent implements OnInit {
       )
       .subscribe((companyCreated) => {
         if (companyCreated) {
-          this.dialog.open(ChangesSavedDialogComponent);
+          this._dialog.open(ChangesSavedDialogComponent);
         }
       });
     this.formGroup.reset();
@@ -56,7 +56,7 @@ export class CreateCompanyCodeDialogComponent implements OnInit {
   };
 
   public close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 
 }

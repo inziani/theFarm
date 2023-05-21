@@ -15,7 +15,7 @@ import {
   GLAccountGroup,
   TaxCode,
 } from '@app/finance/finance-models/fi-data-models/organization-data-models';
-import { Observable, BehaviorSubject, throwError, catchError } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
 
 @Injectable({

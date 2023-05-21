@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
 import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
@@ -30,7 +30,7 @@ export class TaxCodeDialogComponent {
     private _matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private taxCodeData: TaxCode,
     private _dialogRef: MatDialogRef<TaxCodeDialogComponent>,
-    
+
   ) {
     this.taxCode = this.taxCodeData;
   }

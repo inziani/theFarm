@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatDialog,  MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { FinanceService } from '@app/core/services/finance.service';
 import { DeleteCompanyCodeDialogComponent } from '@app/finance/finance-dialogues/delete-company-code-dialog/delete-company-code-dialog.component';
 import { EditCompanyCodeDialogComponent } from '@app/finance/finance-dialogues/edit-company-code-dialog/edit-company-code-dialog.component';
@@ -37,12 +37,12 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
 
 
   constructor(
-    private dialogue: MatDialog,
-    private financeService: FinanceService
+    private _dialogue: MatDialog,
+    private _financeService: FinanceService
   ) { }
 
   ngOnInit(): void {
-    this.financeService.fetchCompanyCodeData().subscribe(companyCode => {
+    this._financeService.fetchCompanyCodeData().subscribe(companyCode => {
       this.sourceData.data = companyCode;
 
     })
@@ -60,7 +60,7 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
     dialogConfig.width = "550px";
     dialogConfig.hasBackdrop = true;
 
-    const dialogRef = this.dialogue.open(CreateCompanyCodeDialogComponent, dialogConfig);
+    const dialogRef = this._dialogue.open(CreateCompanyCodeDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((success) => {
       return success;
     });
@@ -75,13 +75,13 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
 
     // Fetch data from api
 
-    this.financeService.fetchSingleCompanyCode(id).subscribe((companyCode) => {
+    this._financeService.fetchSingleCompanyCode(id).subscribe((companyCode) => {
       this.companyCode = companyCode;
       dialogConfig.data = this.companyCode;
 
       // Open the dialogue config
 
-      let dialogRef = this.dialogue.open(DisplayCompanyCodeDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(DisplayCompanyCodeDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
 
@@ -104,13 +104,13 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
 
     // Fetch data from api
 
-    this.financeService.fetchSingleCompanyCode(id).subscribe((companyCode) => {
+    this._financeService.fetchSingleCompanyCode(id).subscribe((companyCode) => {
       this.companyCode = companyCode;
       dialogConfig.data = companyCode;
 
       // Open the dialogue config
 
-      let dialogRef = this.dialogue.open(EditCompanyCodeDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(EditCompanyCodeDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
 
@@ -133,13 +133,13 @@ export class OrgDetailsCompanyCodeComponent implements OnInit {
 
     // Fetch data from api
 
-    this.financeService.fetchSingleCompanyCode(id).subscribe((companyCode) => {
+    this._financeService.fetchSingleCompanyCode(id).subscribe((companyCode) => {
       this.companyCode = companyCode;
       dialogConfig.data = this.companyCode;
 
       // Open the dialogue config
 
-      let dialogRef = this.dialogue.open(DeleteCompanyCodeDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(DeleteCompanyCodeDialogComponent, dialogConfig);
 
       // ***Returned data from dialogue
 

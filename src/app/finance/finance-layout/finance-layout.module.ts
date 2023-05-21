@@ -6,8 +6,6 @@ import { FinanceLayoutComponent } from './finance-layout.component';
 // Finance components
 import { FinanceFooterComponent } from '../../finance/finance-footer/finance-footer.component';
 import { FinanceHomeComponent } from '../../finance/finance-home/finance-home.component';
-// import { FinanceNavbarComponent } from '../../finance/finance-navbar/finance-navbar.component';
-// import { FinanceSidenavComponent } from '../../finance/finance-sidenav/finance-sidenav.component';
 import { GlMasterDataComponent } from '../../finance/general-ledger/gl-master-data/gl-master-data.component';
 import { CompanyDialogComponent } from '../../finance/finance-dialogues/company-dialog/company-dialog.component';
 import { ChartOfAccountsDialogComponent } from '../../finance/finance-dialogues/chart-of-accounts-dialog/chart-of-accounts-dialog.component';
@@ -45,8 +43,6 @@ import { SharedModule } from '@app/shared/shared.module';
     FinanceLayoutComponent,
     FinanceHomeComponent,
     FinanceLayoutComponent,
-    // FinanceNavbarComponent,
-    // FinanceSidenavComponent,
     GlMasterDataComponent,
     FinanceFooterComponent,
     CompanyDialogComponent,

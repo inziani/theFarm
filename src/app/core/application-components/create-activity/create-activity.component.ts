@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { Activity } from '@app/core/shared/models/activity.model';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { Status } from '@app/core/shared/interfaces/activity-interface';
 import { ActivityFormGroup } from '@app/core/shared/models/activityform-model';
 import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-interface';
-import { EditActivityComponent } from '../edit-activity/edit-activity.component';
+import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
+
 
 @Component({
   selector: 'app-create-activity',
@@ -27,40 +28,35 @@ export class CreateActivityComponent implements OnInit {
     { value: 'Closed', viewValue: 'Closed' }
   ];
   public formGroup = new ActivityFormGroup();
-  public error!: string;
+  public errorMessage!: string;
 
   constructor(
-    private dataSource: RestDataSource,
-    private dialogRef: MatDialogRef<CreateActivityComponent> ) { }
+    private _dataSource: RestDataSource,
+    private _dialog: MatDialog,
+    private _dialogRef: MatDialogRef<CreateActivityComponent> ) { }
 
   ngOnInit(): void {
-
-    this.dataSource.fetchActivityCategory().subscribe(category => {
+    this._dataSource.fetchActivityCategory().subscribe(category => {
       this.activityCategory = category;
     });
   }
 
-   onAddActivity() {
-    this.dialogRef.close(this.formGroup.value);
+  onAddActivity() {
+    this._dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    this.dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe(success => {
-      console.log(success)
-      if (success) {
-        alert('Activity added successfully');
-        console.log(success);
-      }
-    },
-      error => {
-        this.error = 'The activity was not added.';
-        alert(this.error);
+    this._dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe({
+      next: (newActivity) => {
+        this._dialog.open(ObjectCreatedComponent, { data: newActivity });
+      },
+      error: (err) => {
+        this.errorMessage = err;
         this.isLoading = false;
-      }
-    );
-
+      },
+      complete: () => console.info('Completed')
+    });
   };
 
   close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
-
 }

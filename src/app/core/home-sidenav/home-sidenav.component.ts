@@ -11,7 +11,7 @@ export class HomeSidenavComponent implements OnInit {
   @Output() closedSideNav = new EventEmitter<void>();
 
   constructor(
-    private restDataSource: RestDataSource
+    
   ) { }
 
   ngOnInit(): void {

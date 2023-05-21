@@ -1,22 +1,28 @@
-
-import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  ViewChild,
+} from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig, _closeLegacyDialogVia as _closeDialogVia } from '@angular/material/legacy-dialog';
-
-
+import {
+  MatDialog,
+  MatDialogConfig,
+  _closeDialogVia,
+} from '@angular/material/dialog';
 
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { ActivitysService } from '@app/core/services/activitys.service';
 import { Activity } from '@app/core/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from '../create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from '@app/core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
-
 
 @Component({
   selector: 'app-todo',
@@ -49,21 +55,21 @@ export class TodoComponent implements OnInit, AfterViewInit {
   private subscription!: Subscription;
 
   constructor(
-    private activitysService: ActivitysService,
-    private dataSource: RestDataSource,
-    private dialogue: MatDialog
+    private _activitysService: ActivitysService,
+    private _dataSource: RestDataSource,
+    private _dialogue: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.onFetchActivityData();
-    this.activityList = this.activitysService.getActivitysList();
-    this.subscription = this.activitysService.activityListChanged.subscribe(
+    this.activityList = this._activitysService.getActivitysList();
+    this.subscription = this._activitysService.activityListChanged.subscribe(
       (activityList: Activity[]) => {
         this.activityList = activityList;
       }
     );
 
-    this.dataSource
+    this._dataSource
       .fetchActivityList()
       .subscribe((activityList) => (this.sourceData.data = activityList));
   }
@@ -79,7 +85,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
   }
 
   onFetchActivityData() {
-    this.dataSource.fetchActivityList().subscribe(
+    this._dataSource.fetchActivityList().subscribe(
       (activityList) => {
         this.activityList = activityList;
         // console.log(this.activityList);
@@ -97,8 +103,13 @@ export class TodoComponent implements OnInit, AfterViewInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
 
-    const dialogRef = this.dialogue.open(CreateActivityComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((newActivity) => {});
+    const dialogRef = this._dialogue.open(
+      CreateActivityComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((newActivity) => {
+      console.log(newActivity);
+    });
   }
 
   openEditActivityDialog(id: number) {
@@ -111,14 +122,17 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
     // *** Fetch data from api
 
-    this.dataSource.fetchSingleActivity(id).subscribe((response) => {
+    this._dataSource.fetchSingleActivity(id).subscribe((response) => {
       let activity = response;
       dialogConfig.data = activity;
       // console.log(activity);
 
       // ***Open dialog
 
-      const dialogRef = this.dialogue.open(EditActivityComponent, dialogConfig);
+      const dialogRef = this._dialogue.open(
+        EditActivityComponent,
+        dialogConfig
+      );
 
       // ***Returned data from dialogue
 
@@ -142,12 +156,12 @@ export class TodoComponent implements OnInit, AfterViewInit {
     // dialogConfig.direction = 'rtl'
 
     // ****fetch data from the API
-    this.dataSource.fetchSingleActivity(id).subscribe((response) => {
+    this._dataSource.fetchSingleActivity(id).subscribe((response) => {
       let activity = response;
       dialogConfig.data = activity;
 
       // ***Open Dialog
-      const dialogRef = this.dialogue.open(
+      const dialogRef = this._dialogue.open(
         DeleteActivityDialogComponent,
         dialogConfig
       );

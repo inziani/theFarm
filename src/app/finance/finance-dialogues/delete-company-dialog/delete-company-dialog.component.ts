@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { FinanceService } from '@app/core/services/finance.service';
 
@@ -23,9 +23,9 @@ export class DeleteCompanyDialogComponent implements OnInit {
 
   constructor(
 
-    public financeService: FinanceService,
-    public dialog: MatDialog,
-    private dialogRef: MatDialogRef<DeleteCompanyDialogComponent>,
+    public _financeService: FinanceService,
+    public _dialog: MatDialog,
+    private _dialogRef: MatDialogRef<DeleteCompanyDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterData,
 
   ) {
@@ -37,7 +37,7 @@ export class DeleteCompanyDialogComponent implements OnInit {
   }
 
   public onDelete() {
-    this.financeService
+    this._financeService
       .deleteCompany(
         this.companyData.id
       )
@@ -45,13 +45,13 @@ export class DeleteCompanyDialogComponent implements OnInit {
         if (companyDeleted) {
           console.log(companyDeleted)
         } else {
-          this.dialog.open(ChangesSavedDialogComponent);
+          this._dialog.open(ChangesSavedDialogComponent);
         }
       });
   }
 
   close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 
 }

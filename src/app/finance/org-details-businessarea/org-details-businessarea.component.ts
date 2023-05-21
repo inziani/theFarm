@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import { BusinessAreaMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { BusinessAreaDialogComponent } from '../finance-dialogues/business-area-dialog/business-area-dialog.component';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
-import { ControllingAreaDialogComponent } from '../finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+
 
 @Component({
   selector: 'app-org-details-businessarea',
@@ -39,14 +38,14 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
   constructor(
 
-    private financeService: FinanceService,
-    private dialogue: MatDialog
+    private _financeService: FinanceService,
+    private _dialogue: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.financeService.fetchBusinessAreaData().subscribe({
+    this._financeService.fetchBusinessAreaData().subscribe({
       next: (businessAreaDataFetched) => this.sourceData.data = businessAreaDataFetched,
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('complete')
     });
 
@@ -60,16 +59,16 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
   public onCreateBusinessArea(process: string) {
 
     let dialogConfig = new MatDialogConfig();
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "550px";
     dialogConfig.hasBackdrop = true;
 
-    let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+    let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe({
       next: (result) => result,
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('complete')
     });
 
@@ -77,7 +76,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
   public onDisplayBusinessArea(process: string, id: number) {
 
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -88,21 +87,21 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
     // Fetch Data from api
 
-    this.financeService.fetchSingleBusinessArea(id).subscribe({
+    this._financeService.fetchSingleBusinessArea(id).subscribe({
       next: (businessArea) =>
       {
         this.businessArea = businessArea;
         dialogConfig.data = this.businessArea;
-        let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+        let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
           complete: () => console.info('Complete')
 
     });
       },
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
+      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
       complete: () => console.info('Complete?')
     });
 
@@ -110,7 +109,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
   public onEditBusinessArea(process: string, id: number) {
 
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -120,21 +119,21 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
     // Fetch Data from api
 
-    this.financeService.fetchSingleBusinessArea(id).subscribe({
+    this._financeService.fetchSingleBusinessArea(id).subscribe({
       next: (businessArea) =>
       {
         this.businessArea = businessArea;
         dialogConfig.data = this.businessArea;
-        let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+        let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
           complete: () => console.info('Complete')
 
     });
       },
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('Complete?')
     });
 
@@ -143,7 +142,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
 
   public onDeleteBusinessArea(process: string, id: number) {
 
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -151,21 +150,21 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
     dialogConfig.width = "550px";
     dialogConfig.hasBackdrop = true;
 
-    this.financeService.fetchSingleBusinessArea(id).subscribe({
+    this._financeService.fetchSingleBusinessArea(id).subscribe({
       next: (businessArea) =>
       {
         this.businessArea = businessArea;
         dialogConfig.data = this.businessArea;
-        let dialogRef = this.dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+        let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
           complete: () => console.info('Complete')
 
     });
       },
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('Complete?')
     });
   }

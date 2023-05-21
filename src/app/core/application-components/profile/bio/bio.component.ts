@@ -1,16 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { UserProfileInterface } from '@app/core/shared/interfaces/users-interface';
 import { User, UserProfile } from '@app/core/shared/models/user.model';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
 import { UsersService } from '@app/core/services/users.service';
 import { UserUpdateDialogComponent } from '@app/core/dialogues/user-update-dialog/user-update-dialog.component';
-import { SearchDialogComponent } from '@app/finance/finance-dialogues/search-dialog/search-dialog.component';
 
 @Component({
   selector: 'app-bio',
@@ -50,17 +47,13 @@ export class BioComponent implements OnInit {
   public singleUser!: User;
   public clickedRow = new Set<User>();
 
-  constructor(
-    private dataSource: RestDataSource,
-    private dialog: MatDialog,
-    private userService: UsersService
-  ) {}
+  constructor(private _dialog: MatDialog, private _userService: UsersService) {}
 
   ngOnInit(): void {
-    this.userService.fetchUsers().subscribe({
+    this._userService.fetchUsers().subscribe({
       next: (userList) => (this.sourceData.data = userList),
       error: (err) =>
-        this.dialog.open(ErrorHandlingDialogComponent, {
+        this._dialog.open(ErrorHandlingDialogComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('complete'),
@@ -72,7 +65,7 @@ export class BioComponent implements OnInit {
   }
 
   public addUser(userAction: string) {
-    this.userService.sendData(userAction);
+    this._userService.sendData(userAction);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -82,7 +75,7 @@ export class BioComponent implements OnInit {
 
     // OpenDialog
 
-    let dialogRef = this.dialog.open(UserUpdateDialogComponent, dialogConfig);
+    let dialogRef = this._dialog.open(UserUpdateDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe({
       next: (response) => {
         return response;
@@ -102,7 +95,7 @@ export class BioComponent implements OnInit {
   }
 
   public onDisplayUser(userAction: string, id: number) {
-    this.userService.sendData(userAction);
+    this._userService.sendData(userAction);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -111,11 +104,11 @@ export class BioComponent implements OnInit {
     dialogConfig.hasBackdrop = true;
 
     // Fetch Data from API
-    this.userService.fetchSingleUser(id).subscribe({
+    this._userService.fetchSingleUser(id).subscribe({
       next: (singleUser) => {
         this.singleUser = singleUser;
         dialogConfig.data = this.singleUser;
-        let dialogRef = this.dialog.open(
+        let dialogRef = this._dialog.open(
           UserUpdateDialogComponent,
           dialogConfig
         );
@@ -128,7 +121,7 @@ export class BioComponent implements OnInit {
         });
       },
       error: (err) =>
-        this.dialog.open(ErrorHandlingDialogComponent, {
+        this._dialog.open(ErrorHandlingDialogComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('Complete'),
@@ -136,7 +129,7 @@ export class BioComponent implements OnInit {
   }
 
   public onDeleteUser(userAction: string, id: number) {
-    this.userService.sendData(userAction);
+    this._userService.sendData(userAction);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -146,11 +139,11 @@ export class BioComponent implements OnInit {
 
     // OpenDialog and connect to the API
 
-    this.userService.fetchSingleUser(id).subscribe({
+    this._userService.fetchSingleUser(id).subscribe({
       next: (deleteUser) => {
         this.singleUser = deleteUser;
         dialogConfig.data = this.singleUser;
-        let dialogRef = this.dialog.open(
+        let dialogRef = this._dialog.open(
           UserUpdateDialogComponent,
           dialogConfig
         );
@@ -159,7 +152,7 @@ export class BioComponent implements OnInit {
             return response;
           },
           error: (err) =>
-            this.dialog.open(ErrorHandlingDialogComponent, {
+            this._dialog.open(ErrorHandlingDialogComponent, {
               data: (this.errorMessage = err),
             }),
           complete: () => console.info('Complete'),
@@ -169,7 +162,7 @@ export class BioComponent implements OnInit {
   }
 
   public onEditUser(userAction: string, id: number) {
-    this.userService.sendData(userAction);
+    this._userService.sendData(userAction);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -179,11 +172,11 @@ export class BioComponent implements OnInit {
 
     // Open API to fetch single User Data
 
-    this.userService.fetchSingleUser(id).subscribe({
+    this._userService.fetchSingleUser(id).subscribe({
       next: (changedUser) => {
         this.singleUser = changedUser;
         dialogConfig.data = this.singleUser;
-        let dialogRef = this.dialog.open(
+        let dialogRef = this._dialog.open(
           UserUpdateDialogComponent,
           dialogConfig
         );

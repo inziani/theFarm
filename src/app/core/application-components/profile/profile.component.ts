@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { UsersService } from '@app/core/services/users.service';
@@ -47,7 +47,6 @@ export class ProfileComponent implements OnInit {
   public middle_name!: string;
   public last_name!: string;
   public imageUrl!: string;
-  private _userSubscription!: Subscription;
   public patchedUser!: User;
   public userProfilePatchedUser!: UserProfile;
   public datePipe!: any;

@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import { ChartOfAccountsMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { FinanceService } from '@app/core/services/finance.service';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog,  MatDialogConfig } from '@angular/material/dialog';
 import { ChartOfAccountsDialogComponent } from '../finance-dialogues/chart-of-accounts-dialog/chart-of-accounts-dialog.component';
 import { ChartOfAccountsMasterDataFormGroup } from '../finance-models/fi-form-models/co-master-data-models';
 
@@ -43,12 +43,12 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
 
 
   constructor(
-    private financeService: FinanceService,
-    public dialogue: MatDialog
+    private _financeService: FinanceService,
+    public _dialogue: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.financeService.fetchChartOfAccountsData().subscribe(chartOfAccountsData => {
+    this._financeService.fetchChartOfAccountsData().subscribe(chartOfAccountsData => {
       this.sourceData.data = chartOfAccountsData;
     });
   }
@@ -59,7 +59,7 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
    }
 
   public onCreateChartOfAccounts(process: string) {
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -69,7 +69,7 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
 
     // Open Dialog Creation
 
-    let dialogueRef = this.dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
+    let dialogueRef = this._dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
     dialogueRef.afterClosed().subscribe(result => {
       return result
     });
@@ -77,7 +77,7 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
   }
 
   public onDisplayChartOfAccounts(process: string, id: number) {
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -87,14 +87,14 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
 
     // Fetch API Data
 
-    this.financeService
+    this._financeService
       .fetchSingleChartOfAccounts(id)
       .subscribe((chartOfAccountsData) => {
         this.chartOfAccounts = chartOfAccountsData;
         dialogConfig.data = this.chartOfAccounts;
 
         // Open the DialogeComponent
-        let dialogRef = this.dialogue.open(
+        let dialogRef = this._dialogue.open(
           ChartOfAccountsDialogComponent,
           dialogConfig
         );
@@ -110,7 +110,7 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
   }
 
   public onEditChartOfAccounts(process: string, id: number) {
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -121,12 +121,12 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
 
     // Fetch API Data
 
-    this.financeService.fetchSingleChartOfAccounts(id).subscribe(chartOfAccountsData => {
+    this._financeService.fetchSingleChartOfAccounts(id).subscribe(chartOfAccountsData => {
       this.chartOfAccounts = chartOfAccountsData;
       dialogConfig.data = this.chartOfAccounts;
 
       // Open the DialogeComponent
-      let dialogRef = this.dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
 
       // Return Data from Dialogue
       dialogRef.afterClosed().subscribe(result => {
@@ -141,7 +141,7 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
   }
 
   public onDeleteChartOfAccounts(process: string, id: number) {
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -151,12 +151,12 @@ export class OrgDetailsChartofaccountsComponent implements OnInit {
 
     // Fetch API Data
 
-    this.financeService.fetchSingleChartOfAccounts(id).subscribe(chartOfAccountsData => {
+    this._financeService.fetchSingleChartOfAccounts(id).subscribe(chartOfAccountsData => {
       this.chartOfAccounts = chartOfAccountsData;
       dialogConfig.data = this.chartOfAccounts;
 
       // Open the DialogeComponent
-      let dialogRef = this.dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(ChartOfAccountsDialogComponent, dialogConfig);
 
       // Return Data from Dialogue
       dialogRef.afterClosed().subscribe(result => {

@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import {
-  MatLegacyDialogRef as MatDialogRef,
-  MatLegacyDialog as MatDialog,
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-} from "@angular/material/legacy-dialog";
+  MatDialogRef,
+  MatDialog,
+  MAT_DIALOG_DATA,
+} from "@angular/material/dialog";
 
 import { FinanceService } from "@app/core/services/finance.service";
 import { CompanyMasterData } from "@app/finance/finance-models/fi-data-models/organization-data-models";
@@ -13,7 +13,7 @@ import {
   Language,
 } from "@app/finance/finance-interfaces/finance-interfaces";
 import { ChangesSavedDialogComponent } from "@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component";
-import { data } from "autoprefixer";
+
 
 @Component({
   selector: "app-company-dialog",
@@ -44,9 +44,9 @@ export class CompanyDialogComponent implements OnInit {
   public errorMessage!: string;
 
   constructor(
-    public dialog: MatDialog,
-    private financeService: FinanceService,
-    private dialogRef: MatDialogRef<CompanyDialogComponent>,
+    private _dialog: MatDialog,
+    private _financeService: FinanceService,
+    private _dialogRef: MatDialogRef<CompanyDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public companyData: CompanyMasterData
   ) {}
 
@@ -56,9 +56,9 @@ export class CompanyDialogComponent implements OnInit {
   }
 
   public onSave() {
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.company = this.formGroup.value;
-    this.financeService
+    this._financeService
       .editSingleCompany(
         this.companyData.id,
         this.company.company,
@@ -76,7 +76,7 @@ export class CompanyDialogComponent implements OnInit {
       .subscribe(
         {
           next: (companyEdited) => {
-            this.dialog.open(
+            this._dialog.open(
               ChangesSavedDialogComponent,
               { data: (this.company = companyEdited) }
             )
@@ -92,6 +92,6 @@ export class CompanyDialogComponent implements OnInit {
 
 
   close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 }

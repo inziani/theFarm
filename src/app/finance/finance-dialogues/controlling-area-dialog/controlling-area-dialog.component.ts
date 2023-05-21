@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialog,  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
@@ -10,7 +10,7 @@ import { FinanceService } from '@app/core/services/finance.service';
 
 import { CompanyCodeMasterData, ControllingAreaMasterData } from '@app/finance/finance-models/fi-data-models/organization-data-models';
 import { ControllingAreaMasterDataFormGroup } from '@app/finance/finance-models/fi-form-models/co-master-data-models';
-import { data } from 'autoprefixer';
+
 
 @Component({
   selector: 'app-controlling-area-dialog',
@@ -31,8 +31,8 @@ export class ControllingAreaDialogComponent implements OnInit {
   public deletedItem!: string;
 
   constructor(
-    private financeService: FinanceService,
-    private dialogRef: MatDialogRef<ControllingAreaDialogComponent>,
+    private _financeService: FinanceService,
+    private _dialogRef: MatDialogRef<ControllingAreaDialogComponent>,
     private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
     public controllingAreaDialogueData: ControllingAreaMasterData
@@ -40,7 +40,7 @@ export class ControllingAreaDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    this.financeService.fetchCompanyCodeData().subscribe({
+    this._financeService.fetchCompanyCodeData().subscribe({
       next: (companyCodeData) => (this.companyCodeList = companyCodeData),
       error: (err) => this._dialog.open(ErrorHandlingDialogComponent),
       complete: () => console.info('complete'),
@@ -51,7 +51,7 @@ export class ControllingAreaDialogComponent implements OnInit {
   }
 
   public getData() {
-    this.financeService.data.subscribe((process) => {
+    this._financeService.data.subscribe((process) => {
       this.selectedProcess = process;
     });
   }
@@ -59,12 +59,12 @@ export class ControllingAreaDialogComponent implements OnInit {
   public onCreateControllingArea() {
     // Fetch data from the form and pass it on
 
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.controllingArea = this.formGroup.value;
 
     // Post the Data to the API
 
-    this.financeService
+    this._financeService
       .createControllingAreaMasterData(
         this.controllingArea.companyCode,
         this.controllingArea.controllingAreaName,
@@ -86,12 +86,12 @@ export class ControllingAreaDialogComponent implements OnInit {
   }
 
   public onEditControllingArea() {
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.controllingArea = this.formGroup.value;
 
     // Fetch Data from Form
 
-    this.financeService
+    this._financeService
       .editSingleControllingAreaMasterData(
         this.controllingAreaDialogueData.id,
         this.controllingArea.controllingArea,
@@ -112,7 +112,7 @@ export class ControllingAreaDialogComponent implements OnInit {
   }
 
   public onDeleteControllingArea() {
-    this.financeService
+    this._financeService
       .deleteControllingAreaMasterData(this.controllingArea.id)
       .subscribe({
         next: (controllingAreaDeleted) =>
@@ -127,6 +127,6 @@ export class ControllingAreaDialogComponent implements OnInit {
   }
 
   public close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 }

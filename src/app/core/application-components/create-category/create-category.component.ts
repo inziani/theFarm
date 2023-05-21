@@ -1,12 +1,12 @@
 
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { ActivityCategoryFormGroup } from '@app/core/shared/models/activity-category-form.model';
 import { Category } from '@app/core/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
 
 @Component({
   selector: 'app-create-category',
@@ -20,7 +20,7 @@ export class CreateCategoryComponent implements OnInit {
   isLoading = false;
   formSubmitted: boolean = false;
   activityCategory!: ActivityCategory;
-  error!: string;
+  errorMessage!: string;
   title: string = 'Create task category';
   categorydata!: any;
 
@@ -29,7 +29,6 @@ export class CreateCategoryComponent implements OnInit {
     { value: 'Personal', viewValue: 'Personal' },
     { value: 'Official', viewValue: 'Official' }
   ];
-
 
   constructor(
     private dataSource: RestDataSource,
@@ -44,18 +43,15 @@ export class CreateCategoryComponent implements OnInit {
   onAddActivityCategory() {
     this.dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
-    this.dataSource.addActivityCategory(this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe(success => {
-      if (success) {
-        this.dialog.open(ChangesSavedDialogComponent);
-      }
-    },
-      error => {
-        this.error = 'Login Unsuccessful! Try again';
-        alert(this.error);
+    this.dataSource.addActivityCategory(this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe({
+      next: (newActivityCategory) => {
+        this.dialog.open(ObjectCreatedComponent, { data: newActivityCategory });
+      },
+      error: (err) => {
+        this.errorMessage = err;
         this.isLoading = false;
-      }
-    );
-};
-
-
+      },
+      complete: () => console.info('Completed')
+    });
+  }
 }

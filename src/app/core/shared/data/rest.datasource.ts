@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { map, shareReplay, tap } from 'rxjs/operators';
 
 

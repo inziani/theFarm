@@ -1,13 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 
-import { map } from 'rxjs/operators';
 
 import {
-  MatLegacyDialog as MatDialog,
-  MatLegacyDialogRef as MatDialogRef,
-  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-} from '@angular/material/legacy-dialog';
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 import { ActivitysService } from '@app/core/services/activitys.service';
 import { Activity } from '@app/core/shared/models/activity.model';
@@ -16,7 +14,6 @@ import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { Status } from '@app/core/shared/interfaces/activity-interface';
 import {
   ActivityFormGroup,
-  ActivityFormControl,
 } from '@app/core/shared/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
@@ -43,23 +40,23 @@ export class EditActivityComponent implements OnInit {
   public formGroup = new ActivityFormGroup();
 
   constructor(
-    private activitysService: ActivitysService,
-    private dataSource: RestDataSource,
-    private dialog: MatDialog,
-    private dialogRef: MatDialogRef<EditActivityComponent>,
+    private _activitysService: ActivitysService,
+    private _dataSource: RestDataSource,
+    private _dialog: MatDialog,
+    private _dialogRef: MatDialogRef<EditActivityComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
   ) {}
 
   ngOnInit(): void {
-    this.activityList = this.activitysService.getActivitysList();
-    this.dataSource.fetchActivityCategory().subscribe((category) => {
+    this.activityList = this._activitysService.getActivitysList();
+    this._dataSource.fetchActivityCategory().subscribe((category) => {
       this.activityCategory = category;
     });
     this.formGroup.patchValue(this.dialogDataActivity);
   }
 
   public onFetchActivityData() {
-    this.dataSource.fetchActivityList().subscribe(
+    this._dataSource.fetchActivityList().subscribe(
       (data) => {
         this.activityList = data;
       },
@@ -70,9 +67,9 @@ export class EditActivityComponent implements OnInit {
   }
 
   public onEditActivity() {
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    this.dataSource
+    this._dataSource
       .editActivity(
         this.dialogDataActivity.id,
         this.activity.title,
@@ -82,7 +79,7 @@ export class EditActivityComponent implements OnInit {
       )
       .subscribe({
         next: (activityChanged) =>
-          this.dialog.open(ChangesSavedDialogComponent, {
+          this._dialog.open(ChangesSavedDialogComponent, {
             data: activityChanged.title,
           }),
         error: (err) => (this.errorMessage = err),
@@ -91,6 +88,6 @@ export class EditActivityComponent implements OnInit {
   }
 
   public close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 }

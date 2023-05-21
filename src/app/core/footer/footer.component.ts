@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 
-import { GoogleMap, MapInfoWindow, MapMarker } from "@angular/google-maps";
+
 
 interface ServiceCatalogue {
   value: string;
@@ -41,7 +41,6 @@ export class FooterComponent implements OnInit {
 
 
   }
-
 
   submitContactForm(form: NgForm) {
     console.log('This is so much work!');

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 import { ControllingAreaMasterData } from '../finance-models/fi-data-models/organization-data-models';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog,  MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/core/services/finance.service';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ControllingAreaDialogComponent } from '../finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
@@ -35,15 +35,15 @@ export class OrgDetailsControllingareaComponent implements OnInit {
   public controllingArea!: ControllingAreaMasterData;
 
   constructor(
-    private dialogue: MatDialog,
-    private financeService: FinanceService
+    private _dialogue: MatDialog,
+    private _financeService: FinanceService
   ) {}
 
   ngOnInit(): void {
-    this.financeService.fetchControllingAreaData().subscribe({
+    this._financeService.fetchControllingAreaData().subscribe({
       next: (controllingAreaDataFetched) =>
         (this.sourceData.data = controllingAreaDataFetched),
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
       complete: () => console.info('complete'),
     });
   }
@@ -54,7 +54,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
   }
 
   public onDisplayControllingArea(process: string, id: number) {
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -64,47 +64,47 @@ export class OrgDetailsControllingareaComponent implements OnInit {
 
     // Fetch Data from api
 
-    this.financeService.fetchSingleControllingArea(id).subscribe({
+    this._financeService.fetchSingleControllingArea(id).subscribe({
       next: (controllingArea) => {
         this.controllingArea = controllingArea;
         dialogConfig.data = this.controllingArea;
-        let dialogRef = this.dialogue.open(
+        let dialogRef = this._dialogue.open(
           ControllingAreaDialogComponent,
           dialogConfig
         );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
           complete: () => console.info('Complete'),
         });
       },
-      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this._dialogue.open(ChangesSavedDialogComponent),
       complete: () => console.info('Complete?'),
     });
   }
 
   public onCreateControllingArea(process: string) {
     let dialogConfig = new MatDialogConfig();
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
-    let dialogRef = this.dialogue.open(
+    let dialogRef = this._dialogue.open(
       ControllingAreaDialogComponent,
       dialogConfig
     );
     dialogRef.afterClosed().subscribe({
       next: (result) => result,
-      error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
       complete: () => console.info('complete'),
     });
   }
 
   public onEditControllingArea(process: string, id: number) {
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -113,27 +113,27 @@ export class OrgDetailsControllingareaComponent implements OnInit {
 
     // Fetch Data from api
 
-    this.financeService.fetchSingleControllingArea(id).subscribe({
+    this._financeService.fetchSingleControllingArea(id).subscribe({
       next: (controllingArea) => {
         this.controllingArea = controllingArea;
         dialogConfig.data = this.controllingArea;
-        let dialogRef = this.dialogue.open(
+        let dialogRef = this._dialogue.open(
           ControllingAreaDialogComponent,
           dialogConfig
         );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
           complete: () => console.info('Complete'),
         });
       },
-      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this._dialogue.open(ChangesSavedDialogComponent),
       complete: () => console.info('Complete?'),
     });
   }
   public onDeleteCompanyCode(process: string, id: number) {
-    this.financeService.sendData(process);
+    this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -141,22 +141,22 @@ export class OrgDetailsControllingareaComponent implements OnInit {
     dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
-    this.financeService.fetchSingleControllingArea(id).subscribe({
+    this._financeService.fetchSingleControllingArea(id).subscribe({
       next: (controllingArea) => {
         this.controllingArea = controllingArea;
         dialogConfig.data = this.controllingArea;
-        let dialogRef = this.dialogue.open(
+        let dialogRef = this._dialogue.open(
           ControllingAreaDialogComponent,
           dialogConfig
         );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this.dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
           complete: () => console.info('Complete'),
         });
       },
-      error: (err) => this.dialogue.open(ChangesSavedDialogComponent),
+      error: (err) => this._dialogue.open(ChangesSavedDialogComponent),
       complete: () => console.info('Complete?'),
     });
   }

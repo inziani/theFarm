@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
 import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
@@ -41,15 +41,15 @@ export class ChartOfAccountsDialogComponent implements OnInit {
   public deletedItem!: string;
 
   constructor(
-    private financeService: FinanceService,
-    private dialogRef: MatDialogRef<ChartOfAccountsDialogComponent>,
-    private dialog: MatDialog,
+    private _financeService: FinanceService,
+    private _dialogRef: MatDialogRef<ChartOfAccountsDialogComponent>,
+    private _dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public chartOfAccountsDialogueData: ChartOfAccountsMasterData
   ) { }
 
   ngOnInit(): void {
     this.getData();
-    this.financeService.fetchCompanyCodeData().subscribe({
+    this._financeService.fetchCompanyCodeData().subscribe({
       next: (companyCodeListing) => this.companyCodeList = companyCodeListing,
       error: (err) => this.errorMessage = err,
       complete: () => console.info('completed')
@@ -62,7 +62,7 @@ export class ChartOfAccountsDialogComponent implements OnInit {
   }
 
   public getData() {
-    this.financeService.data.subscribe({
+    this._financeService.data.subscribe({
       next: (process) => this.selectedProcess = process,
       error: (err) => this.errorMessage = err,
       complete: () => console.info('Complete')
@@ -73,12 +73,12 @@ export class ChartOfAccountsDialogComponent implements OnInit {
 
     // Fetch data from the dialogue and pass it on to the form- Close the dialogue too
 
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.chartOfAccounts = this.formGroup.value;
 
     // Post data to API through the service
 
-    this.financeService.createChartOfAccountsMasterData(
+    this._financeService.createChartOfAccountsMasterData(
       this.chartOfAccounts.coaCode,
       this.chartOfAccounts.companyCode,
       this.chartOfAccounts.chartOfAccountsName,
@@ -86,9 +86,9 @@ export class ChartOfAccountsDialogComponent implements OnInit {
       this.chartOfAccounts.lengthAccNumber,
       this.chartOfAccounts.blockedForPosting
     ).subscribe({
-      next: (chartOfAccountsCreated) => this.dialog.open(ObjectCreatedComponent,
+      next: (chartOfAccountsCreated) => this._dialog.open(ObjectCreatedComponent,
         { data: this.createdItem = chartOfAccountsCreated.chartOfAccountsName}),
-      error: (err) => this.dialog.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
+      error: (err) => this._dialog.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
       complete: () => console.info('complete')
     });
     this.formGroup.reset;
@@ -96,9 +96,9 @@ export class ChartOfAccountsDialogComponent implements OnInit {
   };
 
   public onEditChartOfAccounts() {
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.chartOfAccounts = this.formGroup.value;
-    this.financeService.editSingleChartOfAccountsMasterData(
+    this._financeService.editSingleChartOfAccountsMasterData(
       this.chartOfAccountsDialogueData.id,
       this.chartOfAccounts.coaCode,
       this.chartOfAccounts.companyCode,
@@ -108,8 +108,8 @@ export class ChartOfAccountsDialogComponent implements OnInit {
       this.chartOfAccounts.blockedForPosting
     ).
       subscribe({
-        next: (chartOfAccountsEdited) => this.dialog.open(ChangesSavedDialogComponent, {data: this.changedItem = chartOfAccountsEdited.chartOfAccountsName}),
-        error: (err) => this.dialog.open(ErrorHandlingDialogComponent, {data:
+        next: (chartOfAccountsEdited) => this._dialog.open(ChangesSavedDialogComponent, {data: this.changedItem = chartOfAccountsEdited.chartOfAccountsName}),
+        error: (err) => this._dialog.open(ErrorHandlingDialogComponent, {data:
           this.errorMessage = err
         }),
         complete: () => console.info('complete')
@@ -120,17 +120,17 @@ export class ChartOfAccountsDialogComponent implements OnInit {
   }
 
   public onDeleteChartOfAccounts() {
-    this.financeService.
+    this._financeService.
       deleteChartOfAccountsMasterData(this.chartOfAccounts.id).
       subscribe({
-        next: (chartOfAccountsDeleted) => this.dialog.open(DeleteDialogComponent, { data: this.deletedItem = this.chartOfAccounts.chartOfAccountsName}),
-        error: (err) => this.dialog.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
+        next: (chartOfAccountsDeleted) => this._dialog.open(DeleteDialogComponent, { data: this.deletedItem = this.chartOfAccounts.chartOfAccountsName}),
+        error: (err) => this._dialog.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
         complete: () => console.info('complete')
       });
   }
 
   public close() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 
 }

@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTable as MatTable, MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-interface';
@@ -65,6 +65,7 @@ export class ActivityCategorysComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((newActivity) => {
       // this.refreshTable.renderRows();
+      console.log(newActivity);
     });
   }
 

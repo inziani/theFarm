@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FinanceService } from '@app/core/services/finance.service';
-import { environment } from '@environments/environment';
+
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -32,8 +32,7 @@ export class NumberRangesService {
         if (!maxAccNum.length) {
           this.glAccountNumber = 1000000000
           this.accData$.next(this.glAccountNumber);
-          // console.log('Account list length -', maxAccNum.length);
-          // console.log('Account Num -', this.glAccountNumber);
+        
         } else
         {
           this.glAccountNumber += Math.max(...maxAccNum);
