@@ -9,7 +9,7 @@ import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dia
 import { AuthenticationService } from '@app/core/services/authentication.service';
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
-import * as fromRoot from '@app/app.reducer';
+import * as fromRoot from '@app/store/reducers/ui.reducer';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    private _store: Store<fromRoot.State>,
+    private _store: Store<fromRoot.UIState>,
     private _dialog: MatDialog
   ) {}
 

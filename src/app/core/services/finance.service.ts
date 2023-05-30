@@ -14,9 +14,9 @@ import {
   ControllingAreaMasterData,
   GLAccountGroup,
   TaxCode,
-} from '@app/finance/finance-models/fi-data-models/organization-data-models';
+} from '@app/features/finance/finance-models/fi-data-models/organization-data-models';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { GeneralLedgerMasterData } from '@app/finance/finance-models/fi-data-models/gl-account-master-model';
+import { GeneralLedgerMasterData } from '@app/features/finance/finance-models/fi-data-models/gl-account-master-model';
 
 @Injectable({
   providedIn: 'root',
@@ -545,7 +545,7 @@ export class FinanceService {
         description,
       },
       this.httpOptions
-    )
+    );
   }
 
   public fetchGLAccountGroupsData(): Observable<GLAccountGroup[]> {

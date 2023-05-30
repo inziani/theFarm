@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog,  MatDialogConfig } from '@angular/material/dialog';
 
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -33,14 +33,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
     { id: 6, description: 'knowledgeMgt' }
   ];
 
-  private userSubscription$!: Subscription;
-
-
   constructor(
 
 
-    private authenticationService: AuthenticationService,
-    public dialog: MatDialog
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +49,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-      const dialogRef = this.dialog.open(AgricultureDialogueComponent, dialogConfig);
+      const dialogRef = this._dialog.open(AgricultureDialogueComponent, dialogConfig);
        dialogRef.afterClosed().subscribe(success => {
       console.log(success);
     });
@@ -64,7 +60,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    const dialogRef = this.dialog.open(FinanceDialogueComponent, dialogConfig);
+    const dialogRef = this._dialog.open(FinanceDialogueComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(success => {
       console.log(success);
     });
@@ -75,7 +71,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    const dialogRef = this.dialog.open(HrDialogueComponent, dialogConfig);
+    const dialogRef = this._dialog.open(HrDialogueComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(success => {
       console.log(success);
     });
@@ -86,7 +82,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    const dialogRef = this.dialog.open(MaterialsDialogueComponent, dialogConfig);
+    const dialogRef = this._dialog.open(MaterialsDialogueComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(success => {
       console.log(success);
     });
@@ -98,7 +94,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    const dialogRef = this.dialog.open(ProjectsDialogueComponent, dialogConfig);
+    const dialogRef = this._dialog.open(ProjectsDialogueComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(success => {
       console.log(success);
     });
@@ -110,7 +106,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
-    const dialogRef = this.dialog.open(KnowledgeDialogueComponent, dialogConfig);
+    const dialogRef = this._dialog.open(KnowledgeDialogueComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(success => {
       console.log(success);
     });

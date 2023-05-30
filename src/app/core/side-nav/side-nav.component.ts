@@ -22,11 +22,11 @@ export class SideNavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClose() {
+  public onClose() {
     this.closeSideNav.emit();
   }
 
-  onLogOut() {
+  public onLogOut() {
 
     this._authorizationService.onLogout();
 

@@ -14,7 +14,7 @@ import {
 import { Router } from '@angular/router';
 import { User } from '../shared/models/user.model';
 
-import * as fromRoot from '@app/app.reducer';
+// import * as fromRoot from '@app/app.reducer';
 
 import { Store } from '@ngrx/store';
 
@@ -50,7 +50,7 @@ export class AuthenticationService {
   constructor(
     private _http: HttpClient,
     public _router: Router,
-    private _store: Store<fromRoot.State>
+    // private _store: Store<fromRoot.State>
   ) {}
 
   // *********************New Code******************************

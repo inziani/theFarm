@@ -27,7 +27,7 @@ const AppRoutes: Routes = [
     path: 'finance',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
-      import('./finance/finance-layout/finance-layout.module').then(
+      import('./features/finance/finance-layout/finance-layout.module').then(
         (m) => m.FinanceLayoutModule
       ),
   },
@@ -35,7 +35,7 @@ const AppRoutes: Routes = [
     path: 'sales',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
-      import('./sales/sales.module').then((m) => m.SalesModule),
+      import('./features/sales/sales.module').then((m) => m.SalesModule),
   },
   {
     path: 'shared',
@@ -97,7 +97,7 @@ const AppRoutes: Routes = [
     ],
   },
   // Unauthorized Paths
-  {path: 'unauthorized', component: UnauthorizedServeResponseComponent},
+  { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
   {
     // Home Page layout
 
