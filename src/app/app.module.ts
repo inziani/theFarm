@@ -35,7 +35,6 @@ import { EditActivityComponent } from './core/application-components/edit-activi
 import { LoadingSpinnerComponent } from './core/application-components/loading-spinner/loading-spinner';
 import { ActivityCategorysComponent } from './core/application-components/activity-categorys/activity-categorys.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { SideNavComponent } from './core/side-nav/side-nav.component';
 import { ModulesComponent } from './core/modules/modules.component';
 import { HomePageComponent } from './core/home-page/home-page.component';
 import { LoginDialogComponent } from './core/dialogues/login-dialog/login-dialog.component';
@@ -119,7 +118,6 @@ export function tokenGetter() {
     LoadingSpinnerComponent,
     ActivityCategorysComponent,
     FooterComponent,
-    SideNavComponent,
     ModulesComponent,
     HomePageComponent,
     LoginDialogComponent,
