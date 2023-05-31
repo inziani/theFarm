@@ -1,0 +1,339 @@
+<div class="container my-5 mx-auto my-auto">
+  <div class="text-center my-5">
+    <h1>Sign up</h1>
+  </div>
+  <form
+    (ngSubmit)="submitForm()"
+    novalidate
+    [formGroup]="formGroup"
+    *ngIf="!isLoading"
+  >
+    <div
+      class="bg-danger text-white p-2 mb-2"
+      *ngIf="formSubmitted && formGroup.invalid"
+    >
+      <ul>
+        <li *ngFor="let error of formGroup.getFormValidationMessages()">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <label for="firstName" class="form-label">First Name</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          aria-label="First name"
+          id="first_name"
+          name="first_name"
+          formControlName="first_name"
+        />
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['first_name'].dirty) &&
+            formGroup.controls['first_name'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getfirstNameValidationMessages(
+                'first_name'
+              )
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          aria-label="Last name"
+          id="last_name"
+          name="last_name"
+          formControlName="last_name"
+        />
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['last_name'].dirty) &&
+            formGroup.controls['last_name'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getlastNameValidationMessages('last_name')
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input
+          type="date"
+          max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+          class="form-control form-control-lg"
+          aria-label="Birthday"
+          id="date_of_birth"
+          name="date_of_birth"
+          formControlName="date_of_birth"
+        />
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['date_of_birth'].dirty) &&
+            formGroup.controls['date_of_birth'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getBirthDayValidationMessages(
+                'date_of_birth'
+              )
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <label for="telephoneNumber" class="form-label">Telephone Number</label>
+        <input
+          type="tel"
+          class="form-control form-control-lg"
+          aria-label="Telephone Number"
+          id="phone_number"
+          name="phone_number"
+          formControlName="phone_number"
+        />
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['phone_number'].dirty) &&
+            formGroup.controls['phone_number'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getPhoneNumberValidationMessages(
+                'phone_number'
+              )
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="Username"
+          aria-label="username"
+          id="username"
+          name="username"
+          formControlName="username"
+        />
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['username'].dirty) &&
+            formGroup.controls['username'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getUserNameValidationMessages('username')
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control form-control-lg"
+          aria-label="email"
+          id="email"
+          name="email"
+          formControlName="email"
+        />
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['email'].dirty) &&
+            formGroup.controls['email'].invalid
+          "
+        >
+          <li
+            *ngFor="let error of formGroup.getEmailValidationMessages('email')"
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <label for="gender" class="form-label">Gender</label>
+        <select
+          class="form-select form-control-lg"
+          aria-label="Default select example"
+          formControlName="gender"
+          id="gender"
+          name="gender"
+        >
+          <option
+            class="form-select"
+            selected
+            *ngFor="let gender of gender"
+            [value]="gender.value"
+          >
+            <p style="color: #fb8500; background-color: #03045e">
+              {{ gender.viewValue }}
+            </p>
+          </option>
+        </select>
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['gender'].dirty) &&
+            formGroup.controls['gender'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getUserNameValidationMessages('gender')
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <label for="city" class="form-label">City</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          aria-label="City"
+          id="city"
+          name="city"
+          formControlName="city"
+        />
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['city'].dirty) &&
+            formGroup.controls['city'].invalid
+          "
+        >
+          <li
+            *ngFor="let error of formGroup.getEmailValidationMessages('city')"
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-3 my-1 justify-content-center">
+      <div class="col-md-4">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control form-control-lg"
+          aria-label="Password"
+          id="password"
+          name="password"
+          formControlName="password"
+        />
+        <div id="passwordHint" class="form-text">
+          Your Password must contain 12 characters or more.
+        </div>
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['password'].dirty) &&
+            formGroup.controls['password'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getPasswordValidationMessages('password')
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control form-control-lg"
+          aria-label="Confirm Password"
+          id="confirmPassword"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+        />
+        <div id="confirmPasswordHint" class="form-text">
+          Your Passwords must be the same.
+        </div>
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['confirmPassword'].dirty) &&
+            formGroup.controls['confirmPassword'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getConfirmPasswordValidationMessages(
+                'confirmPassword'
+              )
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" class="my-3">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        class="my-3"
+        [disabled]="!formSubmitted && formGroup.invalid"
+      >
+        Sign Up</button
+      ><br />
+      <a class="register" routerLink="/login" style="color: #fb8500">
+        <mat-icon>login</mat-icon>
+        <span>
+          <p class="mx-3" style="font-weight: lighter">Sign In</p>
+        </span>
+      </a>
+      <br />
+      <p class="mb-5">
+        <span>
+          <a style="color: #fb8500" routerLink="/home">
+            <mat-icon>home</mat-icon>
+          </a>
+        </span>
+      </p>
+    </div>
+  </form>
+</div>

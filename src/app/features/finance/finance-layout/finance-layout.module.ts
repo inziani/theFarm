@@ -35,7 +35,6 @@ import { FinanceLandingPageComponent } from '../finance-home/finance-landing-pag
 import { AccountGroupDialogComponent } from '../general-ledger/gl-dialogues/account-group-dialog/account-group-dialog.component';
 import { TaxCodeDialogComponent } from '../general-ledger/gl-dialogues/tax-code-dialog/tax-code-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@app/material.module';
 import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
@@ -78,7 +77,6 @@ import { SharedModule } from '@app/shared/shared.module';
     FinanceLayoutRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     SharedModule,
   ],
 })

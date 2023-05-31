@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { HomePageComponent } from './core/home-page/home-page.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
-import { LoginComponent } from './core/authentication/login/login.component';
-import { SignupComponent } from './core/authentication/signup/signup.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { SignupComponent } from './authentication/signup/signup.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { ProfileComponent } from './core/application-components/profile/profile.component';
@@ -89,12 +89,14 @@ const AppRoutes: Routes = [
 
   {
     // Authentication Module layout
-    path: '',
-    component: AuthenticationLayoutComponent,
-    children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent },
-    ],
+    // path: '',
+    // component: AuthenticationLayoutComponent,
+    // children: [
+    //   { path: 'login', component: LoginComponent },
+    //   { path: 'signup', component: SignupComponent },
+    // ],
+
+    path: 'authentication', loadChildren: ()=> import('./authentication/authentication.module').then((m)=>m.AuthenticationModule),
   },
   // Unauthorized Paths
   { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
@@ -106,6 +108,13 @@ const AppRoutes: Routes = [
     children: [{ path: 'home', component: HomePageComponent }],
   },
   { path: '', component: HomePageComponent, pathMatch: 'full' },
+  {
+    path: 'authentication',
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 

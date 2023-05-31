@@ -7,8 +7,8 @@ import { FinanceNavbarComponent } from '@app/features/finance/finance-navbar/fin
 import { FinanceSidenavComponent } from '@app/features/finance/finance-sidenav/finance-sidenav.component';
 import { MaterialModule } from '@app/material.module';
 import { UnauthorizedServeResponseComponent } from './unauthorized-serve-response/unauthorized-serve-response.component';
-// import { StoreModule } from '@ngrx/store';
-// import { reducers } from '@app/app.reducer';
+import { SideNavComponent } from '@app/core/side-nav/side-nav.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,10 +16,17 @@ import { UnauthorizedServeResponseComponent } from './unauthorized-serve-respons
     FinanceNavbarComponent,
     FinanceSidenavComponent,
     UnauthorizedServeResponseComponent,
+    SideNavComponent,
   ],
   imports: [CommonModule, SharedRoutingModule, MaterialModule],
-  exports: [FinanceNavbarComponent, FinanceSidenavComponent],
+  exports: [
+    FinanceNavbarComponent,
+    FinanceSidenavComponent,
+    SideNavComponent,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+  ],
 })
 export class SharedModule {}
-
-// StoreModule.forRoot({ globalReducer: reducers.ui });
