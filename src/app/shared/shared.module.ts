@@ -9,6 +9,8 @@ import { FinanceSidenavComponent } from '@app/features/finance/finance-sidenav/f
 import { MaterialModule } from '@app/material.module';
 import { UnauthorizedServeResponseComponent } from './unauthorized-serve-response/unauthorized-serve-response.component';
 import { SideNavComponent } from '@app/core/side-nav/side-nav.component';
+import { HomeSidenavComponent } from '@app/core/home-sidenav/home-sidenav.component';
+import { HeaderComponent } from '@app/core/header/header.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { SideNavComponent } from '@app/core/side-nav/side-nav.component';
     FinanceSidenavComponent,
     UnauthorizedServeResponseComponent,
     SideNavComponent,
+    HomeSidenavComponent,
+    HeaderComponent,
   ],
   imports: [CommonModule, SharedRoutingModule, MaterialModule],
   exports: [

@@ -17,9 +17,21 @@ import { PasswordSecComponent } from './core/application-components/profile/pass
 import { BrowserModule } from '@angular/platform-browser';
 import { UnauthorizedServeResponseComponent } from './shared/unauthorized-serve-response/unauthorized-serve-response.component';
 
-// import { AppComponent } from "./app.component";
-
 const AppRoutes: Routes = [
+  // Home Page layout
+  // {
+  //   path: '',
+  //   component: AppLayoutComponent,
+  //   children: [{ path: 'home', component: HomePageComponent }],
+  // },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
+  {
+    path: 'authentication',
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
   {
     path: 'finance',
     canMatch: [canMatchModulesGuard],
@@ -93,21 +105,6 @@ const AppRoutes: Routes = [
   },
   // Unauthorized Paths
   { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
-  {
-    // Home Page layout
-
-    path: '',
-    component: AppLayoutComponent,
-    children: [{ path: 'home', component: HomePageComponent }],
-  },
-  { path: '', component: HomePageComponent, pathMatch: 'full' },
-  {
-    path: 'authentication',
-    loadChildren: () =>
-      import('./authentication/authentication.module').then(
-        (m) => m.AuthenticationModule
-      ),
-  },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 

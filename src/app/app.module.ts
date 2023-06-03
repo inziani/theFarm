@@ -29,7 +29,7 @@ import { ObjectCreatedComponent } from './core/dialogues/object-created/object-c
 import { ChangesSavedDialogComponent } from './core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { SearchDialogComponent } from './features/finance/finance-dialogues/search-dialog/search-dialog.component';
 import { TodoComponent } from './core/application-components/todo/todo.component';
-import { HeaderComponent } from './core/header/header.component';
+// import { HeaderComponent } from './core/header/header.component';
 import { ProfileComponent } from './core/application-components/profile/profile.component';
 import { EditActivityComponent } from './core/application-components/edit-activity/edit-activity.component';
 import { LoadingSpinnerComponent } from './core/application-components/loading-spinner/loading-spinner';
@@ -51,7 +51,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
 import { ProfileSidenavComponent } from './core/application-components/profile/profile-sidenav/profile-sidenav.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
-import { HomeSidenavComponent } from './core/home-sidenav/home-sidenav.component';
+// import { HomeSidenavComponent } from './core/home-sidenav/home-sidenav.component';
 import { AgricultureDialogueComponent } from './core/dialogues/agriculture-dialogue/agriculture-dialogue.component';
 import { FinanceDialogueComponent } from './core/dialogues/finance-dialogue/finance-dialogue.component';
 import { HrDialogueComponent } from './core/dialogues/hr-dialogue/hr-dialogue.component';
@@ -112,7 +112,7 @@ export function tokenGetter() {
     UserUpdateDialogComponent,
     HomePageComponent,
     TodoComponent,
-    HeaderComponent,
+    // HeaderComponent,
     ProfileComponent,
     EditActivityComponent,
     LoadingSpinnerComponent,
@@ -134,7 +134,7 @@ export function tokenGetter() {
     AuthenticationLayoutComponent,
     ProfileSidenavComponent,
     ProfileLayoutComponent,
-    HomeSidenavComponent,
+    // HomeSidenavComponent,
     AgricultureDialogueComponent,
     FinanceDialogueComponent,
     HrDialogueComponent,
