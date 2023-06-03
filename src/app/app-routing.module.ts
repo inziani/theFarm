@@ -19,11 +19,11 @@ import { UnauthorizedServeResponseComponent } from './shared/unauthorized-serve-
 
 const AppRoutes: Routes = [
   // Home Page layout
-  // {
-  //   path: '',
-  //   component: AppLayoutComponent,
-  //   children: [{ path: 'home', component: HomePageComponent }],
-  // },
+  {
+    path: '',
+    component: AppLayoutComponent,
+    children: [{ path: 'home', component: HomePageComponent }],
+  },
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   {
     path: 'authentication',
