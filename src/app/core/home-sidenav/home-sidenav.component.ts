@@ -1,25 +1,20 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { RestDataSource } from '../shared/data/rest.datasource';
 
 @Component({
   selector: 'app-home-sidenav',
   templateUrl: './home-sidenav.component.html',
-  styleUrls: ['./home-sidenav.component.css']
+  styleUrls: ['./home-sidenav.component.css'],
 })
 export class HomeSidenavComponent implements OnInit {
-
   @Output() closedSideNav = new EventEmitter<void>();
+  public isAuthenticated: boolean = false;
+  showFiller = false;
 
-  constructor(
-    
-  ) { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onClose() {
-
     this.closedSideNav.emit();
   }
-
 }
