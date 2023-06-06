@@ -1,71 +1,63 @@
-
-
 .mat-option {
-  background-color:#03045e;
+  background-color: #03045e;
   color: #ff9e00;
-
 }
 
-.mat-raised-button{
+.mat-raised-button {
   width: 50%;
   border-radius: 0;
-
 }
 
 textarea {
   resize: none;
-
 }
 .mat-form-field-appearance-outline .mat-form-field-outline {
-
   color: #03045e;
-
 }
 
-.mat-primary{
+.mat-primary {
   background-color: #ff9e00;
   color: #03045e;
 }
 
-.contact-us{
+.contact-us {
   width: 100%;
   background-color: transparent;
   align-items: center;
 }
 
-.copyright{
+.copyright {
   height: 20vh;
   text-align: center;
 }
 
 .mat-card {
-
   color: #03045e;
   background-color: antiquewhite;
+}
+.mat-input-element {
+  color: #03045e;
+}
 
-  }
-  .mat-input-element{
-    color: #03045e;
-  }
+.mat-icon {
+  font-size: 25px;
+}
 
- .mat-icon{
-   font-size: 25px;
- }
-
- .form-control{
+.form-control {
   color: #ff9e00;
   background-color: #03045e;
   border-color: #ff9e00;
   border-width: thin;
   border-radius: 0;
- }
+}
 
- .form-select{
+.form-select {
   background-color: #03045e;
   color: #ff9e00;
   border-color: #ff9e00;
   border-radius: 0;
+}
 
- }
-
-
+.btn-outline {
+  border-radius: 0 !important;
+}

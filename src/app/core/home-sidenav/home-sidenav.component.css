@@ -1,4 +1,4 @@
-.mat-form-field + .mat-form-field {
+/* .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
 
@@ -92,4 +92,35 @@ h4 {
   cursor: pointer;
   color: #ff9e00;
   margin-top: 12px;
+} */
+
+.close-sidenav {
+  right: 15px;
+  position: absolute;
+  cursor: pointer;
+  color: #ff9e00;
+  margin-top: 12px;
+}
+
+/* .mat-nav-list {
+  margin-top: 50%;
+  margin-left: 10px;
+  color: #ff9e00;
+} */
+
+a {
+  text-decoration: none;
+  color: #ff9e00;
+  font-size: 0.875rem;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+/* .mat-list-item {
+  color: #ff9e00;
+  font-weight: lighter;
+  font-size: 0.875rem;
+} */
+.list-style {
+  color: #ff9e00;
 }

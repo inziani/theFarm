@@ -1,72 +1,113 @@
-
 <div class="container">
   <!-- Contact us header -->
-    <div>
-    <h1 class="my-5" style="text-align: center;">contact Us..</h1>
+  <div>
+    <h1 class="my-5" style="text-align: center">contact Us..</h1>
   </div>
   <!-- Contact details -->
-<div class="row g-5">
+  <div class="row g-5 justify-content-center">
+    <!-- Form Side  -->
 
-  <!-- Form Side  -->
+    <div class="col-md-8">
+      <form>
+        <div class="mb-3">
+          <label for="Name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="Name" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+          />
+          <div id="email" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="Subject" class="form-label">Subject</label>
+          <select class="form-select" aria-label="Default select example">
+            <option
+              class="form-select"
+              selected
+              *ngFor="let service of services"
+              [value]="service.value"
+            >
+              <p style="color: #fb8500; background-color: #03045e">
+                {{ service.viewValue }}
+              </p>
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="YourMessage" class="form-label">Your message</label>
+          <textarea class="form-control" id="YourMessage" rows="8"></textarea>
+        </div>
+        <div class="mb-3">
+          <button
+            class="btn btn-outline"
+            style="
+              background-color: #fb8500;
+              color: #03045e;
+              position: center;
+              font-size: medium;
+            "
+          >
+            Submit
+          </button>
+        </div>
+        <!-- <div fxLayout="column" fxLayoutAlign="center center" class="my-5">
+          <button class="my-3" mat-raised-button color="primary" type="submit">
+            Submit
+          </button>
+        </div> -->
+      </form>
+    </div>
 
-  <div class="col-md-12">
-    <form>
-      <div class="mb-3">
-        <label for="Name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="Name">
+    <!-- Contact details side -->
+    <div class="col-md-12">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        fxLayoutGap="20px"
+        fxLayout.lt-md="column"
+        fxLayoutGap.lt-md="20px"
+        fxLayoutAlign.lt-md="center center"
+        class="mx-5"
+      >
+        <!-- Contact Us -->
+        <mat-icon>location_on</mat-icon
+        ><span class="nav-caption"
+          ><div id="emailHelp" class="form-text">
+            Wambugu Groove, Parklands, Nairobi
+          </div></span
+        >
+        <mat-icon>email</mat-icon
+        ><span class="nav-caption">
+          <div id="emailHelp" class="form-text">info@smallfarms.org</div>
+        </span>
+        <mat-icon>phone</mat-icon
+        ><span class="nav-caption">
+          <div id="emailHelp" class="form-text">Phone: (+254) 707021822</div>
+        </span>
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-        <div id="email" class="form-text">We'll never share your email with anyone else.</div>
+      <!-- Social Media -->
+      <div class="my-3" style="text-align: center">
+        <mat-icon class="mx-2 my-5">facebook</mat-icon>
+        <mat-icon class="mx-2 my-5">whatsapp</mat-icon>
+        <mat-icon class="mx-2 my-5">facebook</mat-icon>
+        <mat-icon class="mx-2 my-5">whatsapp</mat-icon>
       </div>
-      <div class="mb-3">
-      <label for="Subject" class="form-label">Subject</label>
-      <select class="form-select" aria-label="Default select example">
-        <option class="form-select" selected *ngFor="let service of services"
-        [value]="service.value">
-        <p style="color: #fb8500; background-color: #03045e;">{{service.viewValue}}</p>
-        </option>
-      </select>
-      </div>
-      <div class="mb-3">
-        <label for="YourMessage" class="form-label">Your message</label>
-        <textarea class="form-control" id="YourMessage" rows="8"></textarea>
-      </div>
-      <div fxLayout='column' fxLayoutAlign="center center" class="my-5">
-        <button class="my-3" mat-raised-button color="primary" type="submit">Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
-
-  <!-- Contact details side -->
-  <div class="col-md-12" >
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.lt-md="column" fxLayoutGap.lt-md="20px"
-      fxLayoutAlign.lt-md="center center" class="mx-5">
-      <!-- Contact Us -->
-       <mat-icon>location_on</mat-icon><span class="nav-caption"><div id="emailHelp" class="form-text">Wambugu Groove, Parklands, Nairobi</div></span>
-      <mat-icon>email</mat-icon><span class="nav-caption">
-        <div id="emailHelp" class="form-text">info@smallfarms.org</div>
-      </span>
-      <mat-icon>phone</mat-icon><span class="nav-caption">
-        <div id="emailHelp" class="form-text">Phone: (+254) 707021822</div>
-      </span>
-    </div>
-    <!-- Social Media -->
-    <div class="my-3" style="text-align: center;">
-      <mat-icon class="mx-2 my-5">facebook</mat-icon>
-      <mat-icon class="mx-2 my-5">whatsapp</mat-icon>
-      <mat-icon class="mx-2 my-5">facebook</mat-icon>
-      <mat-icon class="mx-2 my-5">whatsapp</mat-icon>
-    </div>
-</div>
-</div>
-    <!-- Copyright  -->
-    <div>
-      <small>
-        <p class="copyright">Copyright &copy;smallFarms <span>{{ date | date: 'yyyy' }}</span> all rights
-          reserved
-        </p>
-      </small>
-    </div>
+  <!-- Copyright  -->
+  <div>
+    <small>
+      <p class="copyright">
+        Copyright &copy;smallFarms <span>{{ date | date : "yyyy" }}</span> all
+        rights reserved
+      </p>
+    </small>
+  </div>
 </div>
