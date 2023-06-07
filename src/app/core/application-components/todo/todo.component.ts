@@ -17,12 +17,12 @@ import {
 } from '@angular/material/dialog';
 
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { ActivitysService } from '@app/core/services/activitys.service';
+import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Activity } from '@app/core/shared/models/activity.model';
 import { EditActivityComponent } from '../edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from '../create-activity/create-activity.component';
-import { DeleteActivityDialogComponent } from '@app/core/dialogues/delete-activity-dialog/delete-activity-dialog.component';
+import { DeleteActivityDialogComponent } from '@app/core/home-page/home-page-dialogues/delete-activity-dialog/delete-activity-dialog.component';
 
 @Component({
   selector: 'app-todo',

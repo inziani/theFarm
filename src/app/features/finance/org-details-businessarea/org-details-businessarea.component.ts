@@ -6,17 +6,15 @@ import { MatSort } from '@angular/material/sort';
 import { BusinessAreaMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { BusinessAreaDialogComponent } from '../finance-dialogues/business-area-dialog/business-area-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FinanceService } from '@app/core/services/finance.service';
-import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
-
+import { FinanceService } from '@app/_helpers/services/finance.service';
+import { ErrorHandlingDialogComponent } from '@app/core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
 
 @Component({
   selector: 'app-org-details-businessarea',
   templateUrl: './org-details-businessarea.component.html',
-  styleUrls: ['./org-details-businessarea.component.css']
+  styleUrls: ['./org-details-businessarea.component.css'],
 })
 export class OrgDetailsBusinessareaComponent implements OnInit {
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -29,26 +27,27 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
     'companyCode',
     'display',
     'edit',
-    'delete'
+    'delete',
   ];
   public resultsLength = 0;
   public businessArea!: BusinessAreaMasterData;
   public errorMessage!: string;
 
-
   constructor(
-
     private _financeService: FinanceService,
     private _dialogue: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._financeService.fetchBusinessAreaData().subscribe({
-      next: (businessAreaDataFetched) => this.sourceData.data = businessAreaDataFetched,
-      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
-      complete: () => console.info('complete')
+      next: (businessAreaDataFetched) =>
+        (this.sourceData.data = businessAreaDataFetched),
+      error: (err) =>
+        this._dialogue.open(ErrorHandlingDialogComponent, {
+          data: (this.errorMessage = err),
+        }),
+      complete: () => console.info('complete'),
     });
-
   }
 
   ngAfterViewInit() {
@@ -57,115 +56,134 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
   }
 
   public onCreateBusinessArea(process: string) {
-
     let dialogConfig = new MatDialogConfig();
     this._financeService.sendData(process);
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
-    let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+    let dialogRef = this._dialogue.open(
+      BusinessAreaDialogComponent,
+      dialogConfig
+    );
     dialogRef.afterClosed().subscribe({
       next: (result) => result,
-      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
-      complete: () => console.info('complete')
+      error: (err) =>
+        this._dialogue.open(ErrorHandlingDialogComponent, {
+          data: (this.errorMessage = err),
+        }),
+      complete: () => console.info('complete'),
     });
-
   }
 
   public onDisplayBusinessArea(process: string, id: number) {
-
     this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
     dialogConfig.panelClass = 'custom-modal';
 
     // Fetch Data from api
 
     this._financeService.fetchSingleBusinessArea(id).subscribe({
-      next: (businessArea) =>
-      {
+      next: (businessArea) => {
         this.businessArea = businessArea;
         dialogConfig.data = this.businessArea;
-        let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+        let dialogRef = this._dialogue.open(
+          BusinessAreaDialogComponent,
+          dialogConfig
+        );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
-          complete: () => console.info('Complete')
-
-    });
+          error: (err) =>
+            this._dialogue.open(ErrorHandlingDialogComponent, {
+              data: (this.errorMessage = err),
+            }),
+          complete: () => console.info('Complete'),
+        });
       },
-      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, {data: this.errorMessage = err}),
-      complete: () => console.info('Complete?')
+      error: (err) =>
+        this._dialogue.open(ErrorHandlingDialogComponent, {
+          data: (this.errorMessage = err),
+        }),
+      complete: () => console.info('Complete?'),
     });
-
   }
 
   public onEditBusinessArea(process: string, id: number) {
-
     this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     // Fetch Data from api
 
     this._financeService.fetchSingleBusinessArea(id).subscribe({
-      next: (businessArea) =>
-      {
+      next: (businessArea) => {
         this.businessArea = businessArea;
         dialogConfig.data = this.businessArea;
-        let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+        let dialogRef = this._dialogue.open(
+          BusinessAreaDialogComponent,
+          dialogConfig
+        );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
-          complete: () => console.info('Complete')
-
-    });
+          error: (err) =>
+            this._dialogue.open(ErrorHandlingDialogComponent, {
+              data: (this.errorMessage = err),
+            }),
+          complete: () => console.info('Complete'),
+        });
       },
-      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
-      complete: () => console.info('Complete?')
+      error: (err) =>
+        this._dialogue.open(ErrorHandlingDialogComponent, {
+          data: (this.errorMessage = err),
+        }),
+      complete: () => console.info('Complete?'),
     });
-
-
   }
 
   public onDeleteBusinessArea(process: string, id: number) {
-
     this._financeService.sendData(process);
 
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     this._financeService.fetchSingleBusinessArea(id).subscribe({
-      next: (businessArea) =>
-      {
+      next: (businessArea) => {
         this.businessArea = businessArea;
         dialogConfig.data = this.businessArea;
-        let dialogRef = this._dialogue.open(BusinessAreaDialogComponent, dialogConfig);
+        let dialogRef = this._dialogue.open(
+          BusinessAreaDialogComponent,
+          dialogConfig
+        );
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
-          complete: () => console.info('Complete')
-
-    });
+          error: (err) =>
+            this._dialogue.open(ErrorHandlingDialogComponent, {
+              data: (this.errorMessage = err),
+            }),
+          complete: () => console.info('Complete'),
+        });
       },
-      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent, { data: this.errorMessage = err}),
-      complete: () => console.info('Complete?')
+      error: (err) =>
+        this._dialogue.open(ErrorHandlingDialogComponent, {
+          data: (this.errorMessage = err),
+        }),
+      complete: () => console.info('Complete?'),
     });
   }
 }

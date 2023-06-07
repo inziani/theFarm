@@ -1,12 +1,16 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import {
+  MatLegacyDialog as MatDialog,
+  MatLegacyDialogRef as MatDialogRef,
+  MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
+} from '@angular/material/legacy-dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatLegacyRadioChange as MatRadioChange } from '@angular/material/legacy-radio';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { UsersService } from '@app/core/services/users.service';
+import { UsersService } from '@app/_helpers/services/users.service';
 import { Gender, StaffType } from '@app/core/shared/interfaces/users-interface';
 import {
   UserUpdateFormGroup,
@@ -20,7 +24,6 @@ import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-sav
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ErrorHandlingDialogComponent } from '../error-handling-dialog/error-handling-dialog.component';
 import { ObjectCreatedComponent } from '../object-created/object-created.component';
-
 
 @Component({
   selector: 'app-user-update-dialog',

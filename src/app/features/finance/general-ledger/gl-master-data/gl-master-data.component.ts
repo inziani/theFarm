@@ -13,8 +13,8 @@ import {
 } from '@app/features/finance/finance-interfaces/finance-interfaces';
 import { SearchDialogComponent } from '@app/features/finance/finance-dialogues/search-dialog/search-dialog.component';
 import { GeneralLedgerMasterData } from '@app/features/finance/finance-models/fi-data-models/gl-account-master-model';
-import { FinanceService } from '@app/core/services/finance.service';
-import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
+import { FinanceService } from '@app/_helpers/services/finance.service';
+import { ObjectCreatedComponent } from '@app/core/home-page/home-page-dialogues/object-created/object-created.component';
 import { NumberRangesService } from '@app/core/shared/data/number-ranges.service';
 import {
   CompanyCodeMasterData,

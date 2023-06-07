@@ -6,16 +6,14 @@ import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { Status } from '@app/core/shared/interfaces/activity-interface';
 import { ActivityFormGroup } from '@app/core/shared/models/activityform-model';
 import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-interface';
-import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
-
+import { ObjectCreatedComponent } from '@app/core/home-page/home-page-dialogues/object-created/object-created.component';
 
 @Component({
   selector: 'app-create-activity',
   templateUrl: './create-activity.component.html',
-  styleUrls: ['./create-activity.component.css']
+  styleUrls: ['./create-activity.component.css'],
 })
 export class CreateActivityComponent implements OnInit {
-
   public activity!: Activity;
   public isLoading = false;
   public formSubmitted: boolean = false;
@@ -25,7 +23,7 @@ export class CreateActivityComponent implements OnInit {
     { value: 'Created', viewValue: 'Created' },
     { value: 'Work in progress', viewValue: 'Work in progress' },
     { value: 'Completed', viewValue: 'Completed' },
-    { value: 'Closed', viewValue: 'Closed' }
+    { value: 'Closed', viewValue: 'Closed' },
   ];
   public formGroup = new ActivityFormGroup();
   public errorMessage!: string;
@@ -33,10 +31,11 @@ export class CreateActivityComponent implements OnInit {
   constructor(
     private _dataSource: RestDataSource,
     private _dialog: MatDialog,
-    private _dialogRef: MatDialogRef<CreateActivityComponent> ) { }
+    private _dialogRef: MatDialogRef<CreateActivityComponent>
+  ) {}
 
   ngOnInit(): void {
-    this._dataSource.fetchActivityCategory().subscribe(category => {
+    this._dataSource.fetchActivityCategory().subscribe((category) => {
       this.activityCategory = category;
     });
   }
@@ -44,17 +43,24 @@ export class CreateActivityComponent implements OnInit {
   onAddActivity() {
     this._dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    this._dataSource.addActivity(this.activity.title, this.activity.description, this.activity.status, this.activity.activity_category).subscribe({
-      next: (newActivity) => {
-        this._dialog.open(ObjectCreatedComponent, { data: newActivity });
-      },
-      error: (err) => {
-        this.errorMessage = err;
-        this.isLoading = false;
-      },
-      complete: () => console.info('Completed')
-    });
-  };
+    this._dataSource
+      .addActivity(
+        this.activity.title,
+        this.activity.description,
+        this.activity.status,
+        this.activity.activity_category
+      )
+      .subscribe({
+        next: (newActivity) => {
+          this._dialog.open(ObjectCreatedComponent, { data: newActivity });
+        },
+        error: (err) => {
+          this.errorMessage = err;
+          this.isLoading = false;
+        },
+        complete: () => console.info('Completed'),
+      });
+  }
 
   close() {
     this._dialogRef.close();

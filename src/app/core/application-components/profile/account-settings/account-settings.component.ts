@@ -6,21 +6,20 @@ import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { User } from '@app/core/shared/models/user.model';
 
 import { Subscription } from 'rxjs';
-import { AuthenticationService } from '@app/core/services/authentication.service';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
-import { UsersService } from '@app/core/services/users.service';
+import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { UsersService } from '@app/_helpers/services/users.service';
 
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
-  styleUrls: ['./account-settings.component.css']
+  styleUrls: ['./account-settings.component.css'],
 })
 export class AccountSettingsComponent implements OnInit {
-
   genders: Gender[] = [
     { value: 'Female', viewValue: 'Female' },
-    { value: 'Male', viewValue: 'Male' }
+    { value: 'Male', viewValue: 'Male' },
   ];
 
   // Form Data
@@ -40,16 +39,12 @@ export class AccountSettingsComponent implements OnInit {
   public datePipe!: any;
   public errorMessage!: string;
 
-
   constructor(
-
-    private userService: UsersService,
+    private _userService: UsersService,
 
     private dialog: MatDialog,
     private dateFormat: DatePipe
-
   ) {
-
     this.datePipe = this.dateFormat;
   }
 
@@ -57,39 +52,43 @@ export class AccountSettingsComponent implements OnInit {
     this.readonly = true;
   }
 
-  ngOnDestroy() {
-  }
+  ngOnDestroy() {}
 
   submitForm() {
     this.patchedUser = this.formGroup.value;
-    return this.userService.editUserInformation(
-      this.patchedUser.id,
-      this.patchedUser.first_name,
-      this.patchedUser.middle_name,
-      this.patchedUser.last_name,
-      this.datePipe.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
-      this.patchedUser.phone_number,
-      this.patchedUser.username,
-      this.patchedUser.email,
-      this.patchedUser.gender,
-      this.patchedUser.city,
-      this.patchedUser.country,
-      this.patchedUser.is_active,
-      this.patchedUser.is_superuser,
-      this.patchedUser.is_staff,
-      this.patchedUser.staffType
-    ).
-      subscribe({
-        next: (patchedUser) => this.dialog.open(ChangesSavedDialogComponent, { data: this.patchedUser = patchedUser }),
-        error: (err) => { this.errorMessage = err },
-        complete: () => console.info('Complete')
-    });
-   }
+    return this._userService
+      .editUserInformation(
+        this.patchedUser.id,
+        this.patchedUser.first_name,
+        this.patchedUser.middle_name,
+        this.patchedUser.last_name,
+        this.datePipe.transform(this.patchedUser.date_of_birth, 'yyyy-MM-dd'),
+        this.patchedUser.phone_number,
+        this.patchedUser.username,
+        this.patchedUser.email,
+        this.patchedUser.gender,
+        this.patchedUser.city,
+        this.patchedUser.country,
+        this.patchedUser.is_active,
+        this.patchedUser.is_superuser,
+        this.patchedUser.is_staff,
+        this.patchedUser.staffType
+      )
+      .subscribe({
+        next: (patchedUser) =>
+          this.dialog.open(ChangesSavedDialogComponent, {
+            data: (this.patchedUser = patchedUser),
+          }),
+        error: (err) => {
+          this.errorMessage = err;
+        },
+        complete: () => console.info('Complete'),
+      });
+  }
 
   public update(): void {
     this.readonly = !this.readonly;
     this.formGroup.controls.gender.enable();
     this.formGroup.controls.date_of_birth.enable();
   }
-
 }

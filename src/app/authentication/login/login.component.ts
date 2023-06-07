@@ -1,20 +1,17 @@
-
 import { Component, OnInit, inject } from '@angular/core';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { LoginFormGroup } from '@app/core/shared/models/loginform.model';
 import { LoginCredentials } from '@app/core/shared/models/authentication.model';
-import { LoginDialogComponent } from '@app/core/dialogues/login-dialog/login-dialog.component';
+import { LoginDialogComponent } from '@app/core/home-page/home-page-dialogues/login-dialog/login-dialog.component';
 
-import { AuthenticationService } from '@app/core/services/authentication.service';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
 import * as fromRoot from '@app/store/reducers/ui.reducer';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-
 
 @Component({
   selector: 'app-login',
@@ -40,14 +37,11 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     // this.isLoading$ = this._store.select(fromRoot.getIsLoading);
     console.log('What came here?-', this.isLoading$);
-    this._store.subscribe(state => console.log('this is state in logonComponent-', state));
-
-
-
-
+    this._store.subscribe((state) =>
+      console.log('this is state in logonComponent-', state)
+    );
   }
 
   public submitForm() {
@@ -74,6 +68,4 @@ export class LoginComponent implements OnInit {
     this.formGroup.reset();
     this.formSubmitted = false;
   }
-
-
 }

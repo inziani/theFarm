@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FinanceService } from '@app/core/services/finance.service';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 
 @Component({
   selector: 'app-trans-code-list',

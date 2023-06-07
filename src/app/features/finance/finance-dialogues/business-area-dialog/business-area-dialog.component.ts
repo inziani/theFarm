@@ -4,11 +4,11 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
-import { DeleteDialogComponent } from '@app/core/dialogues/delete-dialog/delete-dialog.component';
-import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
-import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
-import { FinanceService } from '@app/core/services/finance.service';
+import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { DeleteDialogComponent } from '@app/core/home-page/home-page-dialogues/delete-dialog/delete-dialog.component';
+import { ErrorHandlingDialogComponent } from '@app/core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ObjectCreatedComponent } from '@app/core/home-page/home-page-dialogues/object-created/object-created.component';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 import {
   BusinessAreaMasterData,
   CompanyCodeMasterData,

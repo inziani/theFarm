@@ -20,4 +20,6 @@ import { MaterialModule } from '@app/material.module';
     MaterialModule,
   ],
 })
-export class AuthenticationModule {}
+export class AuthenticationModule {
+  constructor() {}
+}

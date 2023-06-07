@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, CanMatchFn, Router } from '@angular/router';
 
-import { AuthenticationService } from '@app/core/services/authentication.service';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 // import { FinanceService } from '@app/core/services/finance.service';
 import { tap } from 'rxjs';
 

@@ -5,14 +5,14 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 
-import { FinanceService } from '@app/core/services/finance.service';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 import { CompanyMasterData } from '@app/features/finance/finance-models/fi-data-models/organization-data-models';
 import { CompanyMasterDataFormGroup } from '@app/features/finance/finance-models/fi-form-models/co-master-data-models';
 import {
   Currency,
   Language,
 } from '@app/features/finance/finance-interfaces/finance-interfaces';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-company-dialog',

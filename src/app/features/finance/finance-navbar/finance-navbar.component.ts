@@ -1,34 +1,24 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { AuthenticationService } from '@app/core/services/authentication.service';
-
-
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 
 @Component({
   selector: 'app-finance-navbar',
   templateUrl: './finance-navbar.component.html',
-  styleUrls: ['./finance-navbar.component.css']
+  styleUrls: ['./finance-navbar.component.css'],
 })
 export class FinanceNavbarComponent implements OnInit {
-   @Output() sideNavToggle = new EventEmitter<void>();
+  @Output() sideNavToggle = new EventEmitter<void>();
 
-  constructor(
-    private _authenticationService: AuthenticationService
-  ) { }
+  constructor(private _authenticationService: AuthenticationService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-   onToggleSidenav() {
-
+  onToggleSidenav() {
     this.sideNavToggle.emit();
-
-   }
+  }
 
   onLogOut() {
-
-   this._authenticationService.onLogout();
-
+    this._authenticationService.onLogout();
   }
-
 }

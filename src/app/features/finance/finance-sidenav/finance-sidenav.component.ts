@@ -11,7 +11,7 @@ import {
   SideNavNodeFlattener,
 } from '../../../shared/interfaces/sidenav-tree-interface';
 import { GL_TREE_DATA } from '../finance-data/gl-tree-data';
-import { AuthenticationService } from '@app/core/services/authentication.service';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 
 @Component({
   selector: 'app-finance-sidenav',

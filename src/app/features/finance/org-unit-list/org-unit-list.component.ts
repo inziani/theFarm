@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FinanceService } from '@app/core/services/finance.service';
-
+import { FinanceService } from '@app/_helpers/services/finance.service';
 
 @Component({
   selector: 'app-org-unit-list',
   templateUrl: './org-unit-list.component.html',
-  styleUrls: ['./org-unit-list.component.css']
+  styleUrls: ['./org-unit-list.component.css'],
 })
 export class OrgUnitListComponent implements OnInit {
   public company: string = 'company';
@@ -16,12 +15,9 @@ export class OrgUnitListComponent implements OnInit {
   public businessArea: string = 'businessArea';
   public salesArea: string = 'salesArea';
 
-  constructor(
-    private _financeService: FinanceService
-  ) { }
+  constructor(private _financeService: FinanceService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public onSelectCompany() {
     this._financeService.itemSelected.emit(this.company);
@@ -50,5 +46,4 @@ export class OrgUnitListComponent implements OnInit {
   onSelectSalesArea() {
     this._financeService.itemSelected.emit(this.salesArea);
   }
-
 }

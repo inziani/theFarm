@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FinanceService } from '@app/core/services/finance.service';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 import { CompanyDialogComponent } from '../finance-dialogues/company-dialog/company-dialog.component';
 import { CreateCompanyDialogComponent } from '../finance-dialogues/create-company-dialog/create-company-dialog.component';
 import { DeleteCompanyDialogComponent } from '../finance-dialogues/delete-company-dialog/delete-company-dialog.component';
@@ -13,7 +13,7 @@ import { CompanyMasterData } from '../finance-models/fi-data-models/organization
 @Component({
   selector: 'app-org-details-company',
   templateUrl: './org-details-company.component.html',
-  styleUrls: ['./org-details-company.component.css']
+  styleUrls: ['./org-details-company.component.css'],
 })
 export class OrgDetailsCompanyComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -23,46 +23,47 @@ export class OrgDetailsCompanyComponent implements OnInit {
   public company!: CompanyMasterData;
   public sourceData = new MatTableDataSource<CompanyMasterData>();
   public companyColumnHeaders: string[] = [
-    "id",
-    "company",
-    "companyName",
-    "country",
-    "language",
-    "currency",
-    "mobileNumber",
-    "email",
-    "display",
-    "edit",
-    "delete"
+    'id',
+    'company',
+    'companyName',
+    'country',
+    'language',
+    'currency',
+    'mobileNumber',
+    'email',
+    'display',
+    'edit',
+    'delete',
   ];
   public resultsLength = 0;
 
-
   constructor(
-
     private _financeService: FinanceService,
     private _dialogue: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._financeService.fetchCompanyData().subscribe((response) => {
       this.sourceData.data = response;
     });
   }
-   ngAfterViewInit() {
+  ngAfterViewInit() {
     this.sourceData.sort = this.sort;
     this.sourceData.paginator = this.paginator;
-   }
+  }
 
   public onCreateCompany() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
-    dialogConfig.panelClass = "companyClass";
+    dialogConfig.width = '550px';
+    dialogConfig.panelClass = 'companyClass';
     dialogConfig.hasBackdrop = true;
 
-    const dialogRef = this._dialogue.open(CreateCompanyDialogComponent, dialogConfig);
+    const dialogRef = this._dialogue.open(
+      CreateCompanyDialogComponent,
+      dialogConfig
+    );
     dialogRef.afterClosed().subscribe((success) => {
       return success;
     });
@@ -72,7 +73,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     // Fetch data from api
@@ -83,7 +84,10 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
       // Open the dialogue config
 
-      let dialogRef = this._dialogue.open(DisplayCompanyDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(
+        DisplayCompanyDialogComponent,
+        dialogConfig
+      );
 
       // ***Returned data from dialogue
 
@@ -91,7 +95,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
         if (result == undefined) {
           return;
         } else {
-          console.log("Editable Data after else button", result);
+          console.log('Editable Data after else button', result);
         }
       });
     });
@@ -101,7 +105,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     // Fetch data from api
@@ -120,7 +124,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
         if (result == undefined) {
           return;
         } else {
-          console.log("Editable Data after else button", result);
+          console.log('Editable Data after else button', result);
         }
       });
     });
@@ -130,7 +134,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "550px";
+    dialogConfig.width = '550px';
     dialogConfig.hasBackdrop = true;
 
     // Fetch data from api
@@ -141,7 +145,10 @@ export class OrgDetailsCompanyComponent implements OnInit {
 
       // Open the dialogue config
 
-      let dialogRef = this._dialogue.open(DeleteCompanyDialogComponent, dialogConfig);
+      let dialogRef = this._dialogue.open(
+        DeleteCompanyDialogComponent,
+        dialogConfig
+      );
 
       // ***Returned data from dialogue
 
@@ -149,7 +156,7 @@ export class OrgDetailsCompanyComponent implements OnInit {
         if (result == undefined) {
           return;
         } else {
-          console.log("Editable Data after else button", result);
+          console.log('Editable Data after else button', result);
         }
       });
     });

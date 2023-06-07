@@ -3,13 +3,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 // import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthenticationService } from '@app/core/services/authentication.service';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { SignUpFormGroup } from '@app/core/shared/models/signupform.model';
 import { SignUpCredentials } from '@app/core/shared/models/authentication.model';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatDialog } from '@angular/material/dialog';
-import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
+import { ObjectCreatedComponent } from '@app/core/home-page/home-page-dialogues/object-created/object-created.component';
 
 @Component({
   selector: 'app-signup',

@@ -5,9 +5,9 @@ import { MatSort } from '@angular/material/sort';
 
 import { User, UserProfile } from '@app/core/shared/models/user.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
-import { UsersService } from '@app/core/services/users.service';
-import { UserUpdateDialogComponent } from '@app/core/dialogues/user-update-dialog/user-update-dialog.component';
+import { ErrorHandlingDialogComponent } from '@app/core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { UsersService } from '@app/_helpers/services/users.service';
+import { UserUpdateDialogComponent } from '@app/core/home-page/home-page-dialogues/user-update-dialog/user-update-dialog.component';
 
 @Component({
   selector: 'app-bio',

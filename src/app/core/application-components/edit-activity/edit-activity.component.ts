@@ -1,21 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 
-import { ActivitysService } from '@app/core/services/activitys.service';
+import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Activity } from '@app/core/shared/models/activity.model';
 import { ActivityCategoryInterface } from '@app/core/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { Status } from '@app/core/shared/interfaces/activity-interface';
-import {
-  ActivityFormGroup,
-} from '@app/core/shared/models/activityform-model';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ActivityFormGroup } from '@app/core/shared/models/activityform-model';
+import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-edit-activity',

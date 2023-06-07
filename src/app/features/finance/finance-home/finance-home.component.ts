@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FinanceService } from '@app/core/services/finance.service';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 
 @Component({
   selector: 'app-finance-home',

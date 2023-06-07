@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 
 import { User } from '@app/core/shared/models/user.model';
 
-import { AuthenticationService } from '../services/authentication.service';
-import { UsersService } from '../services/users.service';
+import { AuthenticationService } from '../../_helpers/services/authentication.service';
+import { UsersService } from '../../_helpers/services/users.service';
 
 @Component({
   selector: 'app-header',

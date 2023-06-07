@@ -3,19 +3,20 @@ import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 
-import { Observable, Subscription, BehaviorSubject, map, shareReplay } from 'rxjs';
+import {
+  Observable,
+  Subscription,
+  BehaviorSubject,
+  map,
+  shareReplay,
+} from 'rxjs';
 
-
-import { UserInterface } from '../shared/interfaces/users-interface';
+import { UserInterface } from '../../core/shared/interfaces/users-interface';
 import {
   EmployeeIDInformation,
   User,
   UserProfile,
 } from '@app/core/shared/models/user.model';
-
-import { AuthenticationService } from './authentication.service';
-import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-
 
 @Injectable({
   providedIn: 'root',
@@ -40,14 +41,9 @@ export class UsersService {
     }),
   };
 
-  constructor(
-    private _http: HttpClient,
+  constructor(private _http: HttpClient) {}
 
-  ) {}
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   public sendData(data: string) {
     this.userAction.next(data);
@@ -229,7 +225,9 @@ export class UsersService {
     const formData: FormData = new FormData();
     formData.append('profile_pic', profile_pic, profile_pic.name);
     return this._http.put<any>(
-      `${environment.apiUrl}/user-profile/` + id + '/', formData);
+      `${environment.apiUrl}/user-profile/` + id + '/',
+      formData
+    );
   }
 
   public oneEditUserProfilePersonalInformation(

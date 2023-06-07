@@ -2,9 +2,9 @@ import { DatePipe } from '@angular/common';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
-import { AuthenticationService } from '@app/core/services/authentication.service';
-import { UsersService } from '@app/core/services/users.service';
+import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
+import { UsersService } from '@app/_helpers/services/users.service';
 
 import { ProfilePageGridInterface } from '@app/core/shared/interfaces/grids-interface';
 import { Gender } from '@app/core/shared/interfaces/users-interface';
@@ -14,10 +14,7 @@ import {
   UserHobbiesUserUpdateFormGroup,
   UserProfilePictureUpdateFormGroup,
 } from '@app/core/shared/models/user-update-form.model';
-import {
-  User,
-  UserProfile,
-} from '@app/core/shared/models/user.model';
+import { User, UserProfile } from '@app/core/shared/models/user.model';
 import { Subscription, switchMap, tap, map, mapTo, Observable } from 'rxjs';
 
 @Component({
@@ -73,7 +70,6 @@ export class ProfileComponent implements OnInit {
   public imagePreview = '';
   public imageInfos?: Observable<any>;
   public pictureLoadingSuccess!: string;
-
 
   // End of picture data
 
@@ -143,7 +139,6 @@ export class ProfileComponent implements OnInit {
         const reader = new FileReader();
 
         reader.onload = (e: any) => {
-
           this.imagePreview = e.target.result;
         };
         reader.readAsDataURL(this.currentFile);
@@ -161,10 +156,7 @@ export class ProfileComponent implements OnInit {
         this.currentFile = file;
 
         this._userService
-          .uploadProfilePicture(
-            this.patchedUser.id,
-            this.currentFile
-          )
+          .uploadProfilePicture(this.patchedUser.id, this.currentFile)
           .subscribe({
             next: (event: any) => {
               if (event.type === HttpEventType.UploadProgress) {
@@ -191,9 +183,9 @@ export class ProfileComponent implements OnInit {
       }
     }
     this.selectedFiles = undefined;
-    this.imagePreview = ''
+    this.imagePreview = '';
     this._dialog.open(ChangesSavedDialogComponent, {
-      data: (this.pictureLoadingSuccess ='The Picture'),
+      data: (this.pictureLoadingSuccess = 'The Picture'),
     });
   }
 

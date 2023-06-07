@@ -5,8 +5,8 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
-import { FinanceService } from '@app/core/services/finance.service';
+import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 import {
   CompanyCodeMasterData,
   CompanyMasterData,

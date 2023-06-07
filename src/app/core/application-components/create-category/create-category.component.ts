@@ -1,21 +1,22 @@
-
 import { Component, OnInit, Inject } from '@angular/core';
 
 import { ActivityCategoryFormGroup } from '@app/core/shared/models/activity-category-form.model';
 import { Category } from '@app/core/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
-import { ObjectCreatedComponent } from '@app/core/dialogues/object-created/object-created.component';
+import { ObjectCreatedComponent } from '@app/core/home-page/home-page-dialogues/object-created/object-created.component';
 
 @Component({
   selector: 'app-create-category',
   templateUrl: './create-category.component.html',
-  styleUrls: ['./create-category.component.css']
+  styleUrls: ['./create-category.component.css'],
 })
 export class CreateCategoryComponent implements OnInit {
-
-
   formGroup = new ActivityCategoryFormGroup();
   isLoading = false;
   formSubmitted: boolean = false;
@@ -24,10 +25,9 @@ export class CreateCategoryComponent implements OnInit {
   title: string = 'Create task category';
   categorydata!: any;
 
-
   category: Category[] = [
     { value: 'Personal', viewValue: 'Personal' },
-    { value: 'Official', viewValue: 'Official' }
+    { value: 'Official', viewValue: 'Official' },
   ];
 
   constructor(
@@ -35,23 +35,30 @@ export class CreateCategoryComponent implements OnInit {
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<CreateCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogDataCategory: any
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onAddActivityCategory() {
     this.dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
-    this.dataSource.addActivityCategory(this.activityCategory.title, this.activityCategory.description, this.activityCategory.category).subscribe({
-      next: (newActivityCategory) => {
-        this.dialog.open(ObjectCreatedComponent, { data: newActivityCategory });
-      },
-      error: (err) => {
-        this.errorMessage = err;
-        this.isLoading = false;
-      },
-      complete: () => console.info('Completed')
-    });
+    this.dataSource
+      .addActivityCategory(
+        this.activityCategory.title,
+        this.activityCategory.description,
+        this.activityCategory.category
+      )
+      .subscribe({
+        next: (newActivityCategory) => {
+          this.dialog.open(ObjectCreatedComponent, {
+            data: newActivityCategory,
+          });
+        },
+        error: (err) => {
+          this.errorMessage = err;
+          this.isLoading = false;
+        },
+        complete: () => console.info('Completed'),
+      });
   }
 }

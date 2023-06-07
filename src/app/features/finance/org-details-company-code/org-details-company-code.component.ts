@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FinanceService } from '@app/core/services/finance.service';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 import { DeleteCompanyCodeDialogComponent } from '@app/features/finance/finance-dialogues/delete-company-code-dialog/delete-company-code-dialog.component';
 import { EditCompanyCodeDialogComponent } from '@app/features/finance/finance-dialogues/edit-company-code-dialog/edit-company-code-dialog.component';
 import { CreateCompanyCodeDialogComponent } from '../finance-dialogues/create-company-code-dialog/create-company-code-dialog.component';

@@ -10,7 +10,7 @@ import { ActivityCategoryFormGroup } from '@app/core/shared/models/activity-cate
 import { Category } from '@app/core/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/core/shared/data/rest.datasource';
 import { ActivityCategory } from '@app/core/shared/models/activity-category.models';
-import { ChangesSavedDialogComponent } from '@app/core/dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-edit-category',

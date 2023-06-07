@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FinanceService } from '@app/core/services/finance.service';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 
 @Component({
   selector: 'app-gl-transaction-codes',
@@ -13,12 +13,10 @@ export class GlTransactionCodesComponent {
   constructor(private _financeService: FinanceService) {}
 
   ngOnInit(): void {
-
     this._financeService.data.subscribe({
-      next: (data: string) => this.itemSelected = data,
-      error: (err: string) => this.errorMessage = err,
-      complete:()=> console.info('Complete')
-    })
+      next: (data: string) => (this.itemSelected = data),
+      error: (err: string) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
+    });
   }
-
 }

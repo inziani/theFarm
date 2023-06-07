@@ -8,17 +8,10 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 
-import {
-  Observable,
-  throwError,
-  catchError,
-  map,
-  switchMap,
-
-} from 'rxjs';
-import { AuthenticationService } from '@app/core/services/authentication.service';
+import { Observable, throwError, catchError, map, switchMap } from 'rxjs';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ErrorService } from '@app/core/services/error.service';
+import { ErrorService } from '@app/_helpers/services/error.service';
 import { ErrorMessage } from '@app/core/shared/interfaces/http.interface';
 
 import {
@@ -27,15 +20,14 @@ import {
 } from '@app/core/shared/interfaces/users-interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UnauthorizedServeResponseComponent } from '@app/shared/unauthorized-serve-response/unauthorized-serve-response.component';
-import { ErrorHandlingDialogComponent } from '@app/core/dialogues/error-handling-dialog/error-handling-dialog.component';
-import { FinanceService } from '@app/core/services/finance.service';
+import { ErrorHandlingDialogComponent } from '@app/core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { FinanceService } from '@app/_helpers/services/finance.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   private _financeService = inject(FinanceService);
   public errorMessage!: ErrorMessage;
   public errorMessageList: string[] = [];
-
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -184,28 +176,25 @@ export class JwtInterceptor implements HttpInterceptor {
           JSON.stringify(this.errorMessage)
         );
         if (Object.keys(parsedMessage)[0] === 'isTrusted') {
+          let dialogConfig = new MatDialogConfig();
+          this._financeService.sendData('500');
+          dialogConfig.disableClose = true;
+          dialogConfig.autoFocus = true;
+          dialogConfig.width = '550px';
+          dialogConfig.hasBackdrop = true;
+          dialogConfig.data = '500';
 
-            let dialogConfig = new MatDialogConfig();
-            this._financeService.sendData('500');
-            dialogConfig.disableClose = true;
-            dialogConfig.autoFocus = true;
-            dialogConfig.width = '550px';
-            dialogConfig.hasBackdrop = true;
-            dialogConfig.data = '500';
-
-            let dialogRef = this._dialog.open(
-              UnauthorizedServeResponseComponent,
-              dialogConfig
-            );
-            dialogRef.afterClosed().subscribe({
-              next: (result) => result,
-              error: (err) =>
-                this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
-              complete: () => console.info('complete'),
-            });
-        }
-        else
-        {
+          let dialogRef = this._dialog.open(
+            UnauthorizedServeResponseComponent,
+            dialogConfig
+          );
+          dialogRef.afterClosed().subscribe({
+            next: (result) => result,
+            error: (err) =>
+              this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
+            complete: () => console.info('complete'),
+          });
+        } else {
           Object.values(this.errorMessage).forEach((message) => {
             this.errorMessageList.push(message);
           });

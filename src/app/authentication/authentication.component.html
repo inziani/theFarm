@@ -4,7 +4,25 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <main>
+      <div class="container my-3 justify-content-center">
+        <!-- Page details -->
+        <div class="row">
+          <div class="col-md-12" [ngSwitch]="itemSelected">
+            <div *ngSwitchCase="'login'">
+              <app-login></app-login>
+            </div>
+            <div *ngSwitchCase="'signup'">
+              <app-signup></app-signup>
+            </div>
+            <div *ngSwitchDefault>
+              <app-login></app-login>
+            </div>
+            <!-- End of Page details -->
+          </div>
+        </div>
+      </div>
+
       <router-outlet></router-outlet>
     </main>
-    </mat-sidenav-content>
-    </mat-sidenav-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

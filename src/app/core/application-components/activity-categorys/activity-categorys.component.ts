@@ -11,7 +11,7 @@ import { ActivityCategory } from '@app/core/shared/models/activity-category.mode
 
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
-import { DeleteCategoryDialogComponent } from '@app/core/dialogues/delete-category-dialog/delete-category-dialog.component';
+import { DeleteCategoryDialogComponent } from '@app/core/home-page/home-page-dialogues/delete-category-dialog/delete-category-dialog.component';
 
 @Component({
   selector: 'app-activity-categorys',
@@ -128,4 +128,3 @@ export class ActivityCategorysComponent implements OnInit {
     });
   }
 }
-

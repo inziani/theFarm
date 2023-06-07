@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { HomePageComponent } from './core/home-page/home-page.component';
-// import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { ProfileComponent } from './core/application-components/profile/profile.component';
 import {
