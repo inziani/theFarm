@@ -1,6 +1,6 @@
 .mat-option {
   background-color: #03045e;
-  color: #ff9e00;
+  color: #fb8500;
 }
 
 .mat-raised-button {
@@ -16,7 +16,7 @@ textarea {
 }
 
 .mat-primary {
-  background-color: #ff9e00;
+  background-color: #fb8500;
   color: #03045e;
 }
 
@@ -44,20 +44,25 @@ textarea {
 }
 
 .form-control {
-  color: #ff9e00;
+  color: #fb8500;
   background-color: #03045e;
-  border-color: #ff9e00;
+  border-color: #fb8500;
   border-width: thin;
   border-radius: 0;
 }
 
 .form-select {
   background-color: #03045e;
-  color: #ff9e00;
-  border-color: #ff9e00;
+  color: #fb8500;
+  border-color: #fb8500;
   border-radius: 0;
 }
 
 .btn-outline {
   border-radius: 0 !important;
+  /* background-color: #03045e;
+  color: #ff9e00; */
+  background-color: #fb8500;
+  color: #03045e;
+  border-width: 0;
 }

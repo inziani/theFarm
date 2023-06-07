@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { HomePageComponent } from './core/home-page/home-page.component';
-import { AppLayoutComponent } from './app-layout/app-layout.component';
+// import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { ProfileComponent } from './core/application-components/profile/profile.component';
 import {
@@ -19,13 +19,10 @@ import { UnauthorizedServeResponseComponent } from './shared/unauthorized-serve-
 
 const AppRoutes: Routes = [
   // Home Page layout
-  {
-    path: '',
-    component: AppLayoutComponent,
-    children: [{ path: 'home', component: HomePageComponent }],
-  },
+
   { path: '', component: HomePageComponent, pathMatch: 'full' },
   {
+    // Authentication
     path: 'authentication',
     loadChildren: () =>
       import('./authentication/authentication.module').then(
@@ -96,16 +93,9 @@ const AppRoutes: Routes = [
     canActivate: [authenticationGuard],
   },
 
-  {
-    path: 'authentication',
-    loadChildren: () =>
-      import('./authentication/authentication.module').then(
-        (m) => m.AuthenticationModule
-      ),
-  },
   // Unauthorized Paths
   { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
