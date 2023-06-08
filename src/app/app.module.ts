@@ -45,7 +45,6 @@ import { RoleAuthComponent } from './core/application-components/profile/role-au
 import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
 import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from './core/home-page/home-page-dialogues/delete-activity-dialog/delete-activity-dialog.component';
-import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component';
 import { ProfileSidenavComponent } from './core/application-components/profile/profile-sidenav/profile-sidenav.component';
 import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
 import { HomeSidenavComponent } from './core/home-sidenav/home-sidenav.component';
@@ -126,7 +125,6 @@ export function tokenGetter() {
     PasswordSecComponent,
     CreateActivityComponent,
     DeleteActivityDialogComponent,
-    AuthenticationLayoutComponent,
     ProfileSidenavComponent,
     ProfileLayoutComponent,
     HomeSidenavComponent,

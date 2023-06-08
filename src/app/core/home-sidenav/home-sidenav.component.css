@@ -26,18 +26,7 @@ html {
   color: #ff9e00;
 }
 
-.mat-sidenav-container,
-.mat-sidenav-content,
-.mat-sidenav {
-  background-color: #03045e;
-  color: #ff9e00;
-  height: 100%;
-}
 
-.mat-nav-list {
-  margin-top: 50%;
-  margin-left: 10px;
-}
 
 .mat-sidenav {
   width: 250px;
@@ -123,4 +112,17 @@ a {
 } */
 .list-style {
   color: #ff9e00;
+}
+
+.mat-sidenav-container,
+.mat-sidenav-content,
+.mat-sidenav {
+  background-color: #03045e;
+  color: #ff9e00;
+  height: 100%;
+}
+
+.mat-nav-list {
+  margin-top: 50%;
+  margin-left: 10px;
 }
