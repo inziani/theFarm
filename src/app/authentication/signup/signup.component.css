@@ -1,40 +1,39 @@
-
 ::placeholder {
   color: #03045e;
   opacity: 1;
   font-size: medium;
 }
-.container{
+.container {
   color: #fb8500;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
   background-color: #03045e;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
-.form-control{
+.form-control {
   background-color: #fb8500;
   color: #03045e;
   border: none;
   font-size: medium;
   border-radius: 0 !important;
-  font-weight:lighter;
+  font-weight: lighter;
 }
 
- .form-select {
-   background-color: #fb8500;
-   color: #03045e;
-   border: none;
-   font-size: medium;
-   font-weight: lighter;
-  border-radius: 0 !important
- }
+.form-select {
+  background-color: #fb8500;
+  color: #03045e;
+  border: none;
+  font-size: medium;
+  font-weight: lighter;
+  border-radius: 0 !important;
+}
 
-.mat-form-field{
-   width: 400px;
-   display: inline;
-   border: none;
+.mat-form-field {
+  width: 400px;
+  display: inline;
+  border: none;
 }
 
 /* .signup-form{
@@ -42,30 +41,33 @@
    height: 100%;
 
 } */
-.name{
-   display: inline-block;
+.name {
+  display: inline-block;
 }
 
-.mat-raised-button{
-   width: 50%;
-   color: #03045e;
-   background-color:#fb8500;
-   height: 45px;
-   border-radius: 0;
+.mat-raised-button {
+  width: 50%;
+  color: #03045e;
+  background-color: #fb8500;
+  height: 45px;
+  border-radius: 0;
 }
 
-.register{
+.register {
   display: inline-flex;
   vertical-align: middle;
 }
-a{
+a {
   text-decoration: none;
 }
 
-.form-label{
+.form-label {
   font-weight: lighter;
 }
 
 .form-text {
   font-weight: lighter;
+}
+.btn-outline {
+  border-radius: 0 !important;
 }
