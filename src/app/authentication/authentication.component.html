@@ -7,7 +7,7 @@
       <div class="container my-3 justify-content-center">
         <!-- Page details -->
         <div class="row">
-          <div class="col-md-12" [ngSwitch]="itemSelected">
+          <div class="col-md-12" [ngSwitch]="userAction">
             <div *ngSwitchCase="'login'">
               <app-login></app-login>
             </div>
