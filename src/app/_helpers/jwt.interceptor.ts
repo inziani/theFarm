@@ -12,15 +12,15 @@ import { Observable, throwError, catchError, map, switchMap } from 'rxjs';
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ErrorService } from '@app/_helpers/services/error.service';
-import { ErrorMessage } from '@app/core/shared/interfaces/http.interface';
+import { ErrorMessage } from '@app/shared/interfaces/http.interface';
 
 import {
   JWTDecodedTokenInterface,
   JwTAuthenticationResponseInterface,
-} from '@app/core/shared/interfaces/users-interface';
+} from '@app/shared/interfaces/users-interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UnauthorizedServeResponseComponent } from '@app/shared/unauthorized-serve-response/unauthorized-serve-response.component';
-import { ErrorHandlingDialogComponent } from '@app/core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { UnauthorizedServeResponseComponent } from '@app/shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
+import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 import { FinanceService } from '@app/_helpers/services/finance.service';
 
 @Injectable()

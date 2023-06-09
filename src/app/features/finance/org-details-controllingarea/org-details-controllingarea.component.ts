@@ -6,9 +6,9 @@ import { MatSort } from '@angular/material/sort';
 import { ControllingAreaMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/_helpers/services/finance.service';
-import { ErrorHandlingDialogComponent } from '@app/core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ControllingAreaDialogComponent } from '../finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
-import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-org-details-controllingarea',

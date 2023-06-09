@@ -7,7 +7,7 @@ import { BusinessAreaMasterData } from '../finance-models/fi-data-models/organiz
 import { BusinessAreaDialogComponent } from '../finance-dialogues/business-area-dialog/business-area-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/_helpers/services/finance.service';
-import { ErrorHandlingDialogComponent } from '@app/core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 
 @Component({
   selector: 'app-org-details-businessarea',

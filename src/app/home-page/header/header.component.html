@@ -1,0 +1,61 @@
+<nav class="navbar my-3">
+  <div class="container-fluid">
+    <button mat-icon-button (click)="onToggleSidenav()" *ngIf="isAuthenticated">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button
+      class="d-lg-none"
+      mat-icon-button
+      (click)="onHomePageSideNavToggle()"
+      *ngIf="!isAuthenticated"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a routerLink="/home">
+      <h4 class="d-none d-md-block d-sm-none navbar-brand">smallFarms</h4></a
+    >
+    <ul class="navigation-items list-inline d-flex d-none d-md-block d-sm-none">
+      <li class="list-inline-item">
+        <a routerLink="/home" *ngIf="!isAuthenticated">Home</a>
+      </li>
+      <li class="list-inline-item">
+        <a routerLink="/home" *ngIf="!isAuthenticated">About</a>
+      </li>
+      <li class="list-inline-item">
+        <a routerLink="/home" *ngIf="!isAuthenticated">Contact Us</a>
+      </li>
+      <li class="list-inline-item">
+        <a
+          routerLink="/authentication"
+          *ngIf="!isAuthenticated"
+          (click)="onLogIn()"
+          >Log In
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a
+          routerLink="/authentication"
+          *ngIf="!isAuthenticated"
+          (click)="(onSignUp)"
+          >Sign Up</a
+        >
+      </li>
+      <li *ngIf="isAuthenticated">
+        <a
+          routerLink="/profile"
+          *ngFor="let loggedInUser of currentLoggedInUser"
+          >{{ loggedInUser.username }}
+        </a>
+      </li>
+    </ul>
+    <form class="d-flex">
+      <input
+        class="form-control"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-success mx-1" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

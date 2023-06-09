@@ -1,20 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Router } from '@angular/router';
-import { HomePageComponent } from './core/home-page/home-page.component';
-import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
-import { ProfileComponent } from './core/application-components/profile/profile.component';
-import {
-  authenticationGuard,
-  canMatchModulesGuard,
-} from './_helpers/authentication.guard';
-import { TodoComponent } from './core/application-components/todo/todo.component';
-import { EditActivityComponent } from './core/application-components/edit-activity/edit-activity.component';
-import { ActivityCategorysComponent } from './core/application-components/activity-categorys/activity-categorys.component';
-import { RoleAuthComponent } from './core/application-components/profile/role-auth/role-auth.component';
-import { BioComponent } from './core/application-components/profile/bio/bio.component';
-import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
+import { HomePageComponent } from './home-page/home-page.component';
+
+import { canMatchModulesGuard } from './_helpers/authentication.guard';
 import { BrowserModule } from '@angular/platform-browser';
-import { UnauthorizedServeResponseComponent } from './shared/unauthorized-serve-response/unauthorized-serve-response.component';
+import { UnauthorizedServeResponseComponent } from './shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
 
 const AppRoutes: Routes = [
   // Home Page layout
@@ -50,46 +40,10 @@ const AppRoutes: Routes = [
   },
   //  Profile layout
   {
-    path: '',
-    component: ProfileLayoutComponent,
-    children: [
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        canActivate: [authenticationGuard],
-      },
-      {
-        path: 'activity',
-        component: TodoComponent,
-        canActivate: [authenticationGuard],
-      },
-      {
-        path: 'newActivity',
-        component: EditActivityComponent,
-        canActivate: [authenticationGuard],
-      },
-      {
-        path: 'activityCategory',
-        component: ActivityCategorysComponent,
-        canActivate: [authenticationGuard],
-      },
-      {
-        path: 'roleauth',
-        component: RoleAuthComponent,
-        canActivate: [authenticationGuard],
-      },
-      {
-        path: 'bio',
-        component: BioComponent,
-        canActivate: [authenticationGuard],
-      },
-      {
-        path: 'security',
-        component: PasswordSecComponent,
-        canActivate: [authenticationGuard],
-      },
-    ],
-    canActivate: [authenticationGuard],
+    path: 'profile',
+    canMatch: [canMatchModulesGuard],
+    loadChildren: () =>
+      import('./profile/profile.module').then((m) => m.ProfileModule),
   },
 
   // Unauthorized Paths

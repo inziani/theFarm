@@ -12,7 +12,7 @@ import {
   Currency,
   Language,
 } from '@app/features/finance/finance-interfaces/finance-interfaces';
-import { ChangesSavedDialogComponent } from '@app/core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-company-dialog',

@@ -9,52 +9,50 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersService } from './_helpers/services/users.service';
 import { AuthenticationService } from './_helpers/services/authentication.service';
 import { NavigationServiceService } from './_helpers/services/navigation-service.service';
-import { RestDataSource } from './core/shared/data/rest.datasource';
-import { DowndownDirective } from './core/shared/directives/dropdown.directive';
+import { RestDataSource } from './shared/data/rest.datasource';
+import { DowndownDirective } from './shared/directives/dropdown.directive';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DatePipe } from '@angular/common';
 import { IsoDatePipe } from './_helpers/iso-date.pipe';
-import { NumberRangesService } from './core/shared/data/number-ranges.service';
+import { NumberRangesService } from './shared/data/number-ranges.service';
 import { FinanceService } from './_helpers/services/finance.service';
 import { ErrorService } from './_helpers/services/error.service';
 
 import { AppComponent } from './app.component';
-import { DeleteDialogComponent } from './core/home-page/home-page-dialogues/delete-dialog/delete-dialog.component';
-import { ErrorHandlingDialogComponent } from './core/home-page/home-page-dialogues/error-handling-dialog/error-handling-dialog.component';
-import { ObjectCreatedComponent } from './core/home-page/home-page-dialogues/object-created/object-created.component';
-import { ChangesSavedDialogComponent } from './core/home-page/home-page-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { DeleteDialogComponent } from './shared/user-feedback-dialogues/delete-dialog/delete-dialog.component';
+import { ErrorHandlingDialogComponent } from './shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ObjectCreatedComponent } from './shared/user-feedback-dialogues/object-created/object-created.component';
+import { ChangesSavedDialogComponent } from './shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { SearchDialogComponent } from './features/finance/finance-dialogues/search-dialog/search-dialog.component';
-import { TodoComponent } from './core/application-components/todo/todo.component';
-import { HeaderComponent } from './core/header/header.component';
-import { ProfileComponent } from './core/application-components/profile/profile.component';
-import { EditActivityComponent } from './core/application-components/edit-activity/edit-activity.component';
-import { LoadingSpinnerComponent } from './core/application-components/loading-spinner/loading-spinner';
-import { ActivityCategorysComponent } from './core/application-components/activity-categorys/activity-categorys.component';
-import { FooterComponent } from './core/footer/footer.component';
-import { HomePageComponent } from './core/home-page/home-page.component';
-import { LoginDialogComponent } from './core/home-page/home-page-dialogues/login-dialog/login-dialog.component';
-import { EditCategoryComponent } from './core/application-components/edit-category/edit-category.component';
-import { CreateCategoryComponent } from './core/application-components/create-category/create-category.component';
-import { DeleteCategoryDialogComponent } from './core/home-page/home-page-dialogues/delete-category-dialog/delete-category-dialog.component';
-import { AccountSettingsComponent } from './core/application-components/profile/account-settings/account-settings.component';
-import { BioComponent } from './core/application-components/profile/bio/bio.component';
-import { RoleAuthComponent } from './core/application-components/profile/role-auth/role-auth.component';
-import { PasswordSecComponent } from './core/application-components/profile/password-sec/password-sec.component';
-import { CreateActivityComponent } from './core/application-components/create-activity/create-activity.component';
-import { DeleteActivityDialogComponent } from './core/home-page/home-page-dialogues/delete-activity-dialog/delete-activity-dialog.component';
-import { ProfileSidenavComponent } from './core/application-components/profile/profile-sidenav/profile-sidenav.component';
-import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
-import { HomeSidenavComponent } from './core/home-sidenav/home-sidenav.component';
-import { AgricultureDialogueComponent } from './core/home-page/home-page-dialogues/agriculture-dialogue/agriculture-dialogue.component';
-import { FinanceDialogueComponent } from './core/home-page/home-page-dialogues/finance-dialogue/finance-dialogue.component';
-import { HrDialogueComponent } from './core/home-page/home-page-dialogues/hr-dialogue/hr-dialogue.component';
-import { MaterialsDialogueComponent } from './core/home-page/home-page-dialogues/materials-dialogue/materials-dialogue.component';
-import { ProjectsDialogueComponent } from './core/home-page/home-page-dialogues/projects-dialogue/projects-dialogue.component';
-import { KnowledgeDialogueComponent } from './core/home-page/home-page-dialogues/knowledge-dialogue/knowledge-dialogue.component';
-import { UserUpdateDialogComponent } from './core/home-page/home-page-dialogues/user-update-dialog/user-update-dialog.component';
+import { TodoComponent } from './profile/todo/todo.component';
+import { HeaderComponent } from './home-page/header/header.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditActivityComponent } from './profile/todo/edit-activity/edit-activity.component';
+import { LoadingSpinnerComponent } from './shared/user-feedback-dialogues/loading-spinner/loading-spinner';
+import { ActivityCategorysComponent } from './profile/todo/activity-categorys/activity-categorys.component';
+import { FooterComponent } from './home-page/footer/footer.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LoginDialogComponent } from './shared/user-feedback-dialogues/login-dialog/login-dialog.component';
+import { EditCategoryComponent } from './profile/todo/edit-category/edit-category.component';
+import { CreateCategoryComponent } from './profile/todo/create-category/create-category.component';
+import { DeleteCategoryDialogComponent } from './shared/user-feedback-dialogues/delete-category-dialog/delete-category-dialog.component';
+import { AccountSettingsComponent } from './profile/account-settings/account-settings.component';
+import { BioComponent } from './profile/bio/bio.component';
+import { PasswordSecComponent } from './profile/password-sec/password-sec.component';
+import { CreateActivityComponent } from './profile/todo/create-activity/create-activity.component';
+import { DeleteActivityDialogComponent } from './shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
+import { ProfileSidenavComponent } from './profile/profile-sidenav/profile-sidenav.component';
+import { HomeSidenavComponent } from './home-page/home-sidenav/home-sidenav.component';
+import { AgricultureDialogueComponent } from './home-page/home-page-dialogues/agriculture-dialogue/agriculture-dialogue.component';
+import { FinanceDialogueComponent } from './home-page/home-page-dialogues/finance-dialogue/finance-dialogue.component';
+import { HrDialogueComponent } from './home-page/home-page-dialogues/hr-dialogue/hr-dialogue.component';
+import { MaterialsDialogueComponent } from './home-page/home-page-dialogues/materials-dialogue/materials-dialogue.component';
+import { ProjectsDialogueComponent } from './home-page/home-page-dialogues/projects-dialogue/projects-dialogue.component';
+import { KnowledgeDialogueComponent } from './home-page/home-page-dialogues/knowledge-dialogue/knowledge-dialogue.component';
+import { UserUpdateDialogComponent } from './shared/user-update-dialog/user-update-dialog.component';
 import { SalesModule } from './features/sales/sales.module';
 import { FinanceLayoutModule } from './features/finance/finance-layout/finance-layout.module';
 import { SharedModule } from './shared/shared.module';
@@ -121,12 +119,10 @@ export function tokenGetter() {
     DeleteCategoryDialogComponent,
     AccountSettingsComponent,
     BioComponent,
-    RoleAuthComponent,
     PasswordSecComponent,
     CreateActivityComponent,
     DeleteActivityDialogComponent,
     ProfileSidenavComponent,
-    ProfileLayoutComponent,
     HomeSidenavComponent,
     AgricultureDialogueComponent,
     FinanceDialogueComponent,

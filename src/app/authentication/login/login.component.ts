@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginFormGroup } from '@app/core/shared/models/loginform.model';
-import { LoginCredentials } from '@app/core/shared/models/authentication.model';
-import { LoginDialogComponent } from '@app/core/home-page/home-page-dialogues/login-dialog/login-dialog.component';
+import { LoginFormGroup } from '@app/authentication/models/loginform.model';
+import { LoginCredentials } from '@app/authentication/models/authentication.model';
+import { LoginDialogComponent } from '@app/shared/user-feedback-dialogues/login-dialog/login-dialog.component';
 
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { MatDialog, _closeDialogVia } from '@angular/material/dialog';

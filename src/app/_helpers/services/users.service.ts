@@ -11,12 +11,12 @@ import {
   shareReplay,
 } from 'rxjs';
 
-import { UserInterface } from '../../core/shared/interfaces/users-interface';
+import { UserInterface } from '../../shared/interfaces/users-interface';
 import {
   EmployeeIDInformation,
   User,
   UserProfile,
-} from '@app/core/shared/models/user.model';
+} from '@app/authentication/models/user.model';
 
 @Injectable({
   providedIn: 'root',

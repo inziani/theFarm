@@ -1,40 +1,30 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RestDataSource } from './core/shared/data/rest.datasource';
-
+import { RestDataSource } from './shared/data/rest.datasource';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
   public isAuthenticated: boolean = false;
   user: any;
   private userSubscription!: Subscription;
-  public title: string = 'Title'
+  public title: string = 'Title';
 
   openSideNav = false;
 
-  constructor(
-
-    private dataSource: RestDataSource,
-  ) {
-
-  }
+  constructor(private dataSource: RestDataSource) {}
 
   ngOnInit() {
-
-    this.userSubscription = this.dataSource.user.subscribe(
-      user => {
-        this.isAuthenticated = !!user;
-        this.user = user;
-      });
-
+    this.userSubscription = this.dataSource.user.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      this.user = user;
+    });
   }
 
   sideNavToggle() {
-    return this.openSideNav = true;
+    return (this.openSideNav = true);
   }
 }
