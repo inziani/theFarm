@@ -12,7 +12,12 @@
       <mat-icon>menu</mat-icon>
     </button>
     <a routerLink="/home">
-      <h4 class="d-none d-md-block d-sm-none navbar-brand">smallFarms</h4></a
+      <h4
+        class="d-none d-md-block d-sm-none navbar-brand"
+        *ngIf="!isAuthenticated"
+      >
+        smallFarms
+      </h4></a
     >
     <ul class="navigation-items list-inline d-flex d-none d-md-block d-sm-none">
       <li class="list-inline-item">
