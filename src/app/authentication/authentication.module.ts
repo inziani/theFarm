@@ -8,6 +8,8 @@ import { SharedModule } from '@app/shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MaterialModule } from '@app/material.module';
+import { StoreModule } from '@ngrx/store';
+import { userLoginAuthenticationReducer } from './store/reducers/authentication.reducer';
 
 @NgModule({
   declarations: [AuthenticationComponent, LoginComponent, SignupComponent],
@@ -18,6 +20,7 @@ import { MaterialModule } from '@app/material.module';
     AuthenticationRoutingModule,
     SharedModule,
     MaterialModule,
+    StoreModule.forFeature('authentication', userLoginAuthenticationReducer),
   ],
 })
 export class AuthenticationModule {

@@ -65,12 +65,9 @@ import {
   Action,
   ActionReducerFactory,
 } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
-
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { reducers } from './store';
 import { environment } from '@environments/environment';
 import { InitialState } from '@ngrx/store/src/models';
 import { uiReducer } from './store/reducers/ui.reducer';
@@ -135,7 +132,6 @@ export function tokenGetter() {
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    // FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -152,12 +148,12 @@ export function tokenGetter() {
 
     // NgRX State Management
 
-    // StoreModule.forRoot(reducers as any, { metaReducers }),
-    StoreModule.forRoot({ ui: uiReducer }),
-    StoreModule.forFeature('ui', reducers),
-    EffectsModule.forRoot(),
-    storeDevTools,
-    StoreRouterConnectingModule.forRoot(),
+    StoreModule.forRoot({ ui: uiReducer }, {}),
+    StoreDevtoolsModule.instrument({
+      name: 'smallFarms',
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   exports: [SharedModule],
 
