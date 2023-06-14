@@ -79,8 +79,10 @@ export class AuthenticationService {
   }
 
   public onLogout() {
+    console.log('Is it getting Here?');
+    this._isLoggedOn$.next(false);
     localStorage.clear();
-    this._router.navigate(['/login']);
+    this._router.navigate(['/authentication/login']);
   }
 
   public onRefreshPage(refresh: string) {

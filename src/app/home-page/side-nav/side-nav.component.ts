@@ -10,7 +10,7 @@ export class SideNavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
   openPanel: boolean = false;
 
-  constructor(private _authorizationService: AuthenticationService) {}
+  constructor(private _authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {}
 
@@ -19,6 +19,7 @@ export class SideNavComponent implements OnInit {
   }
 
   public onLogOut() {
-    this._authorizationService.onLogout();
+    console.log('Logout not working');
+    this._authenticationService.onLogout();
   }
 }
