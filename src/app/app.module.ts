@@ -71,6 +71,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '@environments/environment';
 import { InitialState } from '@ngrx/store/src/models';
 import { uiReducer } from './store/reducers/ui.reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
@@ -154,6 +155,7 @@ export function tokenGetter() {
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([]),
   ],
   exports: [SharedModule],
 

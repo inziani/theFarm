@@ -1,10 +1,7 @@
-import { UserEmployeePersonalData } from '@app/authentication/models/user.model';
 import { createAction, props } from '@ngrx/store';
 
 // export const userEmail = createAction('[Authentication] User Email');
-// export const isAuthenticated = createAction(
-//   '[Authentication] Is User Authenticated'
-// );
+
 export interface UserLogIn {
   userEmail: string;
   isAuthenticated: boolean;
@@ -13,6 +10,7 @@ export interface UserLogIn {
 export const rememberMeCheckBox = createAction(
   '[Authentication] Remember Me CheckBox'
 );
+export const maskUserEmail = createAction('[Authentication] Mask User Email');
 
 export const logIn = createAction(
   '[AuthenticationUserLogin] User Login',
