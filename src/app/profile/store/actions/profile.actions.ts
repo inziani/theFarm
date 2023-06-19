@@ -1,12 +1,14 @@
 import { Activity } from '@app/profile/todo/models/activity.model';
 import { createAction, props } from '@ngrx/store';
 
-export const fetchActivityData = createAction('[Profile] Load Activity List');
+export const loadActivities = createAction('[Activity] Load');
+export const fetchActivityIdData = createAction('[Activity] Load Activity ID');
 export const fetchActivityDataSuccess = createAction(
-  '[Profile] Load Activity Data Sucess',
+  '[Activity] Load Activity Data Success',
   props<{ activity: Activity[] }>()
 );
 export const fetchActivityDataFailure = createAction(
-  '[Profile] Load Activity List Failed',
+  '[Activity] Load Activity List Failed',
   props<{ error: string }>()
 );
+export const showActivity = createAction('[Activity] Show Activity');

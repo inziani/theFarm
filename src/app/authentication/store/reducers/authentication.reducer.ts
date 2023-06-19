@@ -1,13 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import * as AuthenticationActions from '../actions/authentication.actions';
 
-export interface AuthenticationLoginState {
-  rememberMeCheckBox: boolean;
-  login: {
-    userEmail: string;
-    isAuthenticated: boolean;
-  };
-}
+import * as AuthenticationActions from '../actions/authentication.actions';
+import { AuthenticationLoginState } from '../state/authentication.state';
 
 const initialLoginState: AuthenticationLoginState = {
   login: {
@@ -41,16 +35,3 @@ export const userLoginAuthenticationReducer =
       }
     )
   );
-
-// export const authenticationReducer = createReducer<AuthenticationState>(
-//   initialState,
-//   on(AuthenticationActions.isAuthenticated, (state): AuthenticationState => {
-//     console.log('Original State: ' + JSON.stringify(state));
-//     return {
-//       ...state,
-//       email: state.email,
-//       isAuthenticated: !state.isAuthenticated,
-//       rememberMeCheckBox: !state.rememberMeCheckBox,
-//     };
-//   })
-// );

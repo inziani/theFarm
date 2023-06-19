@@ -9,7 +9,7 @@ import {
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Activity } from '@app/profile/todo/models/activity.model';
 import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-interface';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+// import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { Status } from '@app/shared/interfaces/activity-interface';
 import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
@@ -38,22 +38,22 @@ export class EditActivityComponent implements OnInit {
 
   constructor(
     private _activitysService: ActivitysService,
-    private _dataSource: RestDataSource,
+    // private _dataSource: RestDataSource,
     private _dialog: MatDialog,
     private _dialogRef: MatDialogRef<EditActivityComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
   ) {}
 
   ngOnInit(): void {
-    this.activityList = this._activitysService.getActivitysList();
-    this._dataSource.fetchActivityCategory().subscribe((category) => {
+    // this.activityList = this._activitysService.getActivitysList();
+    this._activitysService.fetchActivityCategory().subscribe((category) => {
       this.activityCategory = category;
     });
     this.formGroup.patchValue(this.dialogDataActivity);
   }
 
   public onFetchActivityData() {
-    this._dataSource.fetchActivityList().subscribe(
+    this._activitysService.fetchActivityData().subscribe(
       (data) => {
         this.activityList = data;
       },
@@ -66,7 +66,7 @@ export class EditActivityComponent implements OnInit {
   public onEditActivity() {
     this._dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    this._dataSource
+    this._activitysService
       .editActivity(
         this.dialogDataActivity.id,
         this.activity.title,

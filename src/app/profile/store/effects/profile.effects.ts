@@ -15,7 +15,7 @@ export class ProfileEffects {
 
   public loadActivities$ = createEffect(() => {
     return this._actions$.pipe(
-      ofType(ActivityActions.fetchActivityData),
+      ofType(ActivityActions.fetchActivityIdData),
       mergeMap(() =>
         this._activityService
           .fetchActivityData()

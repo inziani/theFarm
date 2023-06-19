@@ -4,27 +4,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Activity } from '@app/profile/todo/models/activity.model';
 import { environment } from '@environments/environment';
+import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-interface';
 
 @Injectable({ providedIn: 'root' })
 export class ActivitysService {
   error = new Subject<string>();
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  activityListChanged = new Subject<Activity[]>();
+  // activityListChanged = new Subject<Activity[]>();
 
-  private activityList: Activity[] = [];
+  // private activityList: Activity[] = [];
 
   constructor(private http: HttpClient) {}
 
-  addActivityonList(activity: Activity) {
-    this.activityList.push(activity);
-    this.activityListChanged.next(this.activityList.slice());
-  }
+  // public addActivityonList(activity: Activity) {
+  //   this.activityList.push(activity);
+  //   this.activityListChanged.next(this.activityList.slice());
+  // }
 
-  getActivitysList() {
-    return this.activityList;
-  }
+  // public getActivitysList() {
+  //   return this.activityList;
+  // }
 
-  getSingleActivityRequest(id: number): Observable<Activity[]> {
+  // ***************************Activity************************************
+
+  public fetchSingleActivity(id: number): Observable<Activity[]> {
     return this.http.get<Activity[]>(
       `${environment.apiUrl}/activitys/` + id + '/',
       { headers: this.httpHeaders }
@@ -37,7 +40,7 @@ export class ActivitysService {
     });
   }
 
-  addNewActivity(
+  public addNewActivity(
     title: string,
     slug: number,
     activityCategory: string,
@@ -57,7 +60,66 @@ export class ActivitysService {
     );
   }
 
-  deleteActivity() {
+  public editActivity(
+    id: number,
+    title: string,
+    description: string,
+    status: string,
+    activity_category: number
+  ) {
+    return this.http.patch<any>(
+      `${environment.apiUrl}/activitys/` + id + '/',
+      { title, description, status, activity_category },
+      { headers: this.httpHeaders }
+    );
+  }
+
+  public deleteActivity() {
     return this.http.delete(`${environment.apiUrl}/activitys/`);
+  }
+
+  // **************************Activity Category*************************************
+
+  public fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
+    return this.http.get<ActivityCategoryInterface[]>(
+      `${environment.apiUrl}/activityscategorys/`,
+      { headers: this.httpHeaders }
+    );
+  }
+
+  public fetchSingleActivityCategory(
+    id: number
+  ): Observable<ActivityCategoryInterface> {
+    return this.http.get<ActivityCategoryInterface>(
+      `${environment.apiUrl}/activityscategorys/` + id + '/',
+      { headers: this.httpHeaders }
+    );
+  }
+
+  public editActivityCategory(
+    id: number,
+    title: string,
+    description: string,
+    category: string
+  ): Observable<ActivityCategoryInterface> {
+    return this.http.patch<ActivityCategoryInterface>(
+      `${environment.apiUrl}/activityscategorys/` + id + '/',
+      { title, description, category },
+      { headers: this.httpHeaders }
+    );
+  }
+
+  public deleteActivityCategory(
+    id: number
+  ): Observable<ActivityCategoryInterface> {
+    return this.http.delete<ActivityCategoryInterface>(
+      `${environment.apiUrl}/activityscategorys/` + id + '/'
+    );
+  }
+  public fetchActivityCategoryData(): Observable<ActivityCategoryInterface[]> {
+    return this.http.get<ActivityCategoryInterface[]>(
+      `${environment.apiUrl}/activityscategorys/`,
+      { headers: this.httpHeaders }
+    );
   }
 }

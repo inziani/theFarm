@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
@@ -16,13 +16,17 @@ import {
   _closeDialogVia,
 } from '@angular/material/dialog';
 
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+// import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Activity } from '@app/profile/todo/models/activity.model';
 import { EditActivityComponent } from './edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
+import { Store } from '@ngrx/store';
+import { State } from '../store/state/profile.state';
+import * as ActivityActions from '../store/actions/profile.actions';
+import * as ActivitiySelectors from '../store/selectors/profile.selectors';
 
 @Component({
   selector: 'app-todo',
@@ -32,7 +36,7 @@ import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogu
 export class TodoComponent implements OnInit, AfterViewInit {
   public activity!: Activity;
   public activityObject = <Activity>{};
-  public activityList!: Activity[];
+  public activityList$!: Observable<Activity[]>;
   public todaysDate = new Date();
   public activityColumnHeaders: string[] = [
     'id',
@@ -52,26 +56,21 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  private subscription!: Subscription;
+  // private subscription!: Subscription;
 
   constructor(
     private _activitysService: ActivitysService,
-    private _dataSource: RestDataSource,
-    private _dialogue: MatDialog
+    private _dialogue: MatDialog,
+    private _store: Store<State>
   ) {}
 
   ngOnInit(): void {
-    this.onFetchActivityData();
-    this.activityList = this._activitysService.getActivitysList();
-    this.subscription = this._activitysService.activityListChanged.subscribe(
-      (activityList: Activity[]) => {
-        this.activityList = activityList;
-      }
-    );
+    // this._activitysService
+    //   .fetchActivityData()
+    //   .subscribe((activityList) => (this.sourceData.data = activityList));
+    this.activityList$ = this._store.select(ActivitiySelectors.getActivityList);
 
-    this._dataSource
-      .fetchActivityList()
-      .subscribe((activityList) => (this.sourceData.data = activityList));
+    this._store.dispatch(ActivityActions.loadActivities());
   }
 
   ngAfterViewInit() {
@@ -81,22 +80,9 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
   doFilter(filterValue: any) {
     this.sourceData.filter = JSON.stringify(filterValue).trim().toLowerCase();
-    // console.log(filterValue);
   }
 
-  onFetchActivityData() {
-    this._dataSource.fetchActivityList().subscribe(
-      (activityList) => {
-        this.activityList = activityList;
-        // console.log(this.activityList);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  openCreateActivityDialog() {
+  public openCreateActivityDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -112,7 +98,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openEditActivityDialog(id: number) {
+  public openEditActivityDialog(id: number) {
     // ***Create dialogue object
     const dialogConfig = new MatDialogConfig();
     // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
@@ -122,10 +108,9 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
     // *** Fetch data from api
 
-    this._dataSource.fetchSingleActivity(id).subscribe((response) => {
+    this._activitysService.fetchSingleActivity(id).subscribe((response) => {
       let activity = response;
       dialogConfig.data = activity;
-      // console.log(activity);
 
       // ***Open dialog
 
@@ -156,7 +141,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
     // dialogConfig.direction = 'rtl'
 
     // ****fetch data from the API
-    this._dataSource.fetchSingleActivity(id).subscribe((response) => {
+    this._activitysService.fetchSingleActivity(id).subscribe((response) => {
       let activity = response;
       dialogConfig.data = activity;
 
@@ -178,6 +163,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 }

@@ -1,14 +1,45 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducers/profile.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ProfileEffects } from './store/effects/profile.effects';
 
+import { ProfileComponent } from './profile.component';
+import { EditActivityComponent } from './todo/edit-activity/edit-activity.component';
+import { ActivityCategorysComponent } from './todo/activity-categorys/activity-categorys.component';
+import { EditCategoryComponent } from './todo/edit-category/edit-category.component';
+import { CreateCategoryComponent } from './todo/create-category/create-category.component';
+import { ProfileSidenavComponent } from './profile-sidenav/profile-sidenav.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { BioComponent } from './bio/bio.component';
+import { PasswordSecComponent } from './password-sec/password-sec.component';
+import { CreateActivityComponent } from './todo/create-activity/create-activity.component';
+import { TodoComponent } from './todo/todo.component';
+import { MaterialModule } from '@app/material.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ProfileComponent,
+    EditActivityComponent,
+    ActivityCategorysComponent,
+    EditCategoryComponent,
+    CreateCategoryComponent,
+    AccountSettingsComponent,
+    BioComponent,
+    PasswordSecComponent,
+    CreateActivityComponent,
+    ProfileSidenavComponent,
+    TodoComponent,
+  ],
   imports: [
-    CommonModule,
-    ProfileRoutingModule
-  ]
+    ProfileRoutingModule,
+    MaterialModule,
+    SharedModule,
+    StoreModule.forFeature('profile', reducer),
+    EffectsModule.forFeature([ProfileEffects]),
+  ],
 })
-export class ProfileModule { }
+export class ProfileModule {}

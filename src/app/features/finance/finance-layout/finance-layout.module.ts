@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 
 import { FinanceLayoutRoutingModule } from './finance-layout-routing.module';
 import { FinanceLayoutComponent } from './finance-layout.component';
@@ -34,7 +34,7 @@ import { TaxCodeDetailsComponent } from '../general-ledger/tax-code-details/tax-
 import { FinanceLandingPageComponent } from '../finance-home/finance-landing-page/finance-landing-page.component';
 import { AccountGroupDialogComponent } from '../general-ledger/gl-dialogues/account-group-dialog/account-group-dialog.component';
 import { TaxCodeDialogComponent } from '../general-ledger/gl-dialogues/tax-code-dialog/tax-code-dialog.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
@@ -73,10 +73,10 @@ import { SharedModule } from '@app/shared/shared.module';
     TaxCodeDialogComponent,
   ],
   imports: [
-    CommonModule,
+    // CommonModule,
     FinanceLayoutRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
+    // FormsModule,
+    // ReactiveFormsModule,
     SharedModule,
   ],
 })

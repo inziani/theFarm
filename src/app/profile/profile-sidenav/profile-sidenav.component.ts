@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { AuthenticationService } from '@app/_helpers/services/authentication.service';
+// import { RestDataSource } from '@app/shared/data/rest.datasource';
 
 @Component({
   selector: 'app-profile-sidenav',
@@ -9,7 +10,10 @@ import { RestDataSource } from '@app/shared/data/rest.datasource';
 export class ProfileSidenavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
 
-  constructor(private restDataSource: RestDataSource) {}
+  constructor(
+    // private restDataSource: RestDataSource
+    private _authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -18,6 +22,7 @@ export class ProfileSidenavComponent implements OnInit {
   }
 
   onLogOut() {
-    this.restDataSource.removeToken();
+    this._authenticationService.onLogout();
+    // this.restDataSource.removeToken();
   }
 }
