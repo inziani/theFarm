@@ -68,7 +68,6 @@ export class JwtInterceptor implements HttpInterceptor {
           Object.values(this.errorMessage).forEach((message) => {
             this.errorMessageList.push(message);
           });
-          console.log('I hope it gets here -', this.errorMessageList);
           if (
             this.errorMessageList.length &&
             this.errorMessageList[0] === 'true'

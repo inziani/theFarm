@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 
 import { canMatchModulesGuard } from './_helpers/authentication.guard';
@@ -7,9 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UnauthorizedServeResponseComponent } from './shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
 
 const AppRoutes: Routes = [
-  // Home Page layout
-
-  { path: '', component: HomePageComponent, pathMatch: 'full' },
   {
     // Authentication
     path: 'authentication',
@@ -38,16 +35,14 @@ const AppRoutes: Routes = [
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
-  //  Profile layout
   {
     path: 'profile',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
-
-  // Unauthorized Paths
   { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

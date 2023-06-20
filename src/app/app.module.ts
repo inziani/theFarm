@@ -1,8 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -38,10 +36,6 @@ import { HrDialogueComponent } from './home-page/home-page-dialogues/hr-dialogue
 import { MaterialsDialogueComponent } from './home-page/home-page-dialogues/materials-dialogue/materials-dialogue.component';
 import { ProjectsDialogueComponent } from './home-page/home-page-dialogues/projects-dialogue/projects-dialogue.component';
 import { KnowledgeDialogueComponent } from './home-page/home-page-dialogues/knowledge-dialogue/knowledge-dialogue.component';
-
-// Features Modules
-// import { SalesModule } from './features/sales/sales.module';
-// import { FinanceLayoutModule } from './features/finance/finance-layout/finance-layout.module';
 import { SharedModule } from './shared/shared.module';
 
 // StateManagement - NgRX
@@ -97,12 +91,9 @@ export function tokenGetter() {
     KnowledgeDialogueComponent,
   ],
   imports: [
-    // CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    // FormsModule,
-    // ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     GoogleMapsModule,
@@ -111,8 +102,7 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
       },
     }),
-    // SalesModule,
-    // FinanceLayoutModule,
+
     SharedModule,
 
     // NgRX State Management

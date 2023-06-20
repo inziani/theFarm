@@ -10,22 +10,8 @@ import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-inter
 export class ActivitysService {
   error = new Subject<string>();
   httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  // activityListChanged = new Subject<Activity[]>();
-
-  // private activityList: Activity[] = [];
 
   constructor(private http: HttpClient) {}
-
-  // public addActivityonList(activity: Activity) {
-  //   this.activityList.push(activity);
-  //   this.activityListChanged.next(this.activityList.slice());
-  // }
-
-  // public getActivitysList() {
-  //   return this.activityList;
-  // }
-
-  // ***************************Activity************************************
 
   public fetchSingleActivity(id: number): Observable<Activity[]> {
     return this.http.get<Activity[]>(

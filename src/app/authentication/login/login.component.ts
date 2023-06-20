@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
         next: (jwtTokens) => {
           if (jwtTokens) {
             this._dialog.open(LoginDialogComponent);
-            this._router.navigate(['/profile/activity']);
+            this._router.navigate(['/profile']);
           }
         },
         error: (err) => {

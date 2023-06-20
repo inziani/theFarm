@@ -15,7 +15,7 @@ import {
   UserProfilePictureUpdateFormGroup,
 } from '@app/authentication/models/user-update-form.model';
 import { User, UserProfile } from '@app/authentication/models/user.model';
-import { Subscription, switchMap, tap, map, mapTo, Observable } from 'rxjs';
+import { switchMap, tap, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -83,11 +83,15 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._userService.data.subscribe({
+      next: (routeSelected) => (this.itemSelected = routeSelected),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Route Selected'),
+    });
     this.readonly = true;
     this.isDisabled = true;
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
-    // this._userSubscription = this._authenticationService.currentUser$
     this._authenticationService._loggedInUserData$
       .pipe(
         tap((user) => {

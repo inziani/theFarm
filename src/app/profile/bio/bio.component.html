@@ -1,142 +1,695 @@
-<!-- User Management -->
-<div class="container my-3 justify-content-center">
-  <h1 class="text-center my-2" style="font-weight: lighter; color: #fb8500;">User Management</h1>
-  <div class="row my-5 justify-content-center">
-    <div class="col-md-6 my-3">
-      <div class="input-group my-1 justify-content-center">
-        <span class="input-group-text" id="inputGroup-sizing-default" >
-            <input (keyup)="applyFilter($event)" #input
-            class="form-control mx-4" type="text" placeholder="Search" aria-label="default input example">
+<div class="container my-3 mx-5">
+  <div class="row">
+    <!-- Profile picture sections -->
+    <div class="col-md-4 my-5">
+      <div class="row">
+        <form [formGroup]="formGroupProfilePicture">
+          <div class="col-md-12 justify-content-center my-5">
+            <mat-card class="profile-picture">
+              <img mat-card-md-image class="mt-3" [src]="imageUrl" />
+              <h3 style="color: #fb8500; font-weight: lighter" class="my-3">
+                {{ first_name }} {{ middle_name }} {{ last_name }}
+              </h3>
+              <mat-card-title-group class="mt-3">
+                <mat-card-title></mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+              </mat-card-title-group>
 
-        </span>
+              <!-- Profile picture upload -->
+              <mat-card-content>
+                <input
+                  formControlName="profile_pic"
+                  class="profile-picture-upload"
+                  type="file"
+                  accept="image/*"
+                  (change)="selectFile($event)"
+                />
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-sm"
+                  [disabled]="!selectedFiles"
+                  (click)="uploadPicture()"
+                >
+                  Save Picture
+                </button>
+                <!-- Picture loading and preview section -->
+                <div>
+                  <img [src]="imagePreview" class="preview" />
+                </div>
+                <div *ngIf="currentFile && progress" class="progress my-3">
+                  <div
+                    class="progress-bar progress-bar-info"
+                    role="progressbar"
+                    attr.aria-valuenow="{{ progress }}"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    [ngStyle]="{ width: progress + '%' }"
+                  >
+                    {{ progress }}%
+                  </div>
+                </div>
+                <div
+                  *ngIf="imageLoadStatusMessage"
+                  class="alert alert-danger"
+                  role="alert"
+                >
+                  {{ imageLoadStatusMessage }}
+                </div>
+              </mat-card-content>
+              <!-- End of Picture loading and preview section -->
+            </mat-card>
+          </div>
+        </form>
+      </div>
+      <!-- End of Profile Picture  -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="container my-2 justify-content-center">
+            <div class="row">
+              <div class="col">
+                <div class="d-grid gap-3">
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="submit"
+                    (click)="onSelectPersonalInformation()"
+                  >
+                    <a>
+                      <p>Personal Information</p>
+                    </a>
+                  </button>
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="button"
+                    (click)="onSelectBio()"
+                  >
+                    <a>
+                      <p class="card-title">Bio</p>
+                    </a>
+                  </button>
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="button"
+                  >
+                    <a>
+                      <p class="card-title" (click)="onSelectInterests()">
+                        Interests
+                      </p>
+                    </a>
+                  </button>
+                  <button
+                    class="btn btn-primary mat-elevation-z8"
+                    type="button"
+                  >
+                    <a>
+                      <p class="card-title" (click)="onSelectSettings()">
+                        Settings
+                      </p>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-6 my-3">
-      <div class="input-group my-1 justify-content-center">
-        <span class="input-group-text justify-content-center" id="inputGroup-sizing-default" >
-            <mat-icon class="mx-2 my-2" (click)="addUser('add')">note_add</mat-icon>Add User
-        </span>
+    <div class="col-md-8 my-5 justify-content-center" [ngSwitch]="itemSelected">
+      <!-- Official Personal Information -->
+      <div
+        *ngSwitchCase="'personalInformation'"
+        class="mat-elevation-z8 mx-5 my-5 p-5"
+      >
+        <div class="container justify-content-center">
+          <h1 style="font-weight: light; text-align: center">
+            Edit Personal Information
+          </h1>
+          <form [formGroup]="formGroup" novalidate id="personalInformation">
+            <fieldset [disabled]="isDisabled">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="first_name" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="first_name"
+                    formControlName="first_name"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['first_name'].dirty) &&
+                      formGroup.controls['first_name'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getfirstNameValidationMessages(
+                          'first_name'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <label for="middle_name" class="form-label"
+                    >Middle Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="middle_name"
+                    formControlName="middle_name"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['middle_name'].dirty) &&
+                      formGroup.controls['middle_name'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getMiddleNameValidationMessages(
+                          'middle_name'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="last_name" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="last_name"
+                    formControlName="last_name"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['last_name'].dirty) &&
+                      formGroup.controls['last_name'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getlastNameValidationMessages(
+                          'last_name'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <label for="date_of_birth" class="form-label">Birthday</label>
+                  <input
+                    class="form-control"
+                    id="date_of_birth"
+                    type="date"
+                    max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+                    formControlName="date_of_birth"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['date_of_birth'].dirty) &&
+                      formGroup.controls['date_of_birth'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getBirthDayValidationMessages(
+                          'date_of_birth'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="phone_number" class="form-label"
+                    >Telephone Number</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phone_number"
+                    formControlName="phone_number"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted ||
+                        formGroup.controls['phone_number'].dirty) &&
+                      formGroup.controls['phone_number'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getPhoneNumberValidationMessages(
+                          'phone_number'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    formControlName="username"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['username'].dirty) &&
+                      formGroup.controls['username'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getUserNameValidationMessages(
+                          'username'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="email" class="form-label">email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['email'].dirty) &&
+                      formGroup.controls['email'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getEmailValidationMessages(
+                          'email'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="gender" class="form-label">Gender</label>
+                  <select
+                    class="form-select form-control"
+                    id="gender"
+                    name="gender"
+                    formControlName="gender"
+                  >
+                    <option
+                      class="form-select"
+                      selected
+                      *ngFor="let gender of gender"
+                      [value]="gender.value"
+                    >
+                      <p style="color: #fb8500; background-color: #03045e">
+                        {{ gender.viewValue }}
+                      </p>
+                    </option>
+                  </select>
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['gender'].dirty) &&
+                      formGroup.controls['gender'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getGenderValidationMessages(
+                          'gender'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="city" class="form-label">City</label>
+                  <input
+                    type="city"
+                    class="form-control"
+                    id="city"
+                    formControlName="city"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['city'].dirty) &&
+                      formGroup.controls['city'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getCityValidationMessages('city')
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <label for="country" class="form-label">Country</label>
+                  <input
+                    type="country"
+                    class="form-control"
+                    id="country"
+                    formControlName="country"
+                  />
+                  <ul
+                    class="text-danger list-unstyled"
+                    *ngIf="
+                      (formSubmitted || formGroup.controls['country'].dirty) &&
+                      formGroup.controls['country'].invalid
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let error of formGroup.getCountryValidationMessages(
+                          'country'
+                        )
+                      "
+                    >
+                      {{ error }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </fieldset>
+            <div class="mt-3 mb-5">
+              <div>
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  (click)="update()"
+                >
+                  Edit
+                </button>
+                <button
+                  type="submit"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="!formSubmitted && formGroup.invalid"
+                  (click)="submitPersonalInformationForm()"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="row my-1">
-    <div class="col">
-      <!-- Begining of Table -->
-      <table mat-table [dataSource]="sourceData" class="mat-elevation-z8 my-3" matSort matSortActive="last_name"
-        matSortDisableClear matSortDirection="asc">
-        <!-- id Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
-          <td mat-cell *matCellDef="let row">{{ row.id | number }}</td>
-        </ng-container>
-        <!-- username Column -->
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
-          <td mat-cell *matCellDef="let row">{{row.username}}</td>
-        </ng-container>
-        <!-- email Column -->
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef>Email</th>
-          <td mat-cell *matCellDef="let row">{{row.email}}</td>
-        </ng-container>
-        <!-- first_name -->
-        <ng-container matColumnDef="first_name">
-          <th mat-header-cell *matHeaderCellDef>First Name</th>
-          <td mat-cell *matCellDef="let row">{{row.first_name}}</td>
-        </ng-container>
-        <!-- Middle Name-->
-        <ng-container matColumnDef="middle_name">
-          <th mat-header-cell *matHeaderCellDef>Middle Name</th>
-          <td mat-cell *matCellDef="let row">{{row.middle_name}}</td>
-        </ng-container>
-      <!-- Last Name-->
-      <ng-container matColumnDef="last_name">
-        <th mat-header-cell *matHeaderCellDef>Last Name</th>
-        <td mat-cell *matCellDef="let row">{{row.last_name}}</td>
-      </ng-container>
-      <!-- Phone Number -->
-      <ng-container matColumnDef="phone_number">
-        <th mat-header-cell *matHeaderCellDef>Phone Number</th>
-        <td mat-cell *matCellDef="let row">{{row.phone_number}}</td>
-      </ng-container>
-      <!-- Date of Birth -->
-      <ng-container matColumnDef="date_of_birth">
-        <th mat-header-cell *matHeaderCellDef>Date of Birth</th>
-        <td mat-cell *matCellDef="let row">{{row.date_of_birth | date }}</td>
-      </ng-container>
-      <!-- Gender -->
-      <ng-container matColumnDef="gender">
-        <th mat-header-cell *matHeaderCellDef>Gender</th>
-        <td mat-cell *matCellDef="let row">{{row.gender}}</td>
-      </ng-container>
-      <!-- City -->
-      <ng-container matColumnDef="city">
-        <th mat-header-cell *matHeaderCellDef>City</th>
-        <td mat-cell *matCellDef="let row">{{row.city}}</td>
-      </ng-container>
-      <!-- Country -->
-      <ng-container matColumnDef="country">
-        <th mat-header-cell *matHeaderCellDef>Country</th>
-        <td mat-cell *matCellDef="let row">{{row.country}}</td>
-      </ng-container>
-      <!-- is_active -->
-      <ng-container matColumnDef="is_active">
-        <th mat-header-cell *matHeaderCellDef>Active</th>
-        <td mat-cell *matCellDef="let row">{{row.is_active}}</td>
-      </ng-container>
-      <!-- is_superuser -->
-      <ng-container matColumnDef="is_superuser">
-        <th mat-header-cell *matHeaderCellDef>Superuser</th>
-        <td mat-cell *matCellDef="let row">{{row.is_superuser}}</td>
-      </ng-container>
-      <!-- is_staff -->
-      <ng-container matColumnDef="is_staff">
-        <th mat-header-cell *matHeaderCellDef>Staff</th>
-        <td mat-cell *matCellDef="let row">{{row.is_staff}}</td>
-      </ng-container>
-      <!-- Date Joined -->
-      <ng-container matColumnDef="date_joined">
-        <th mat-header-cell *matHeaderCellDef>Date Joined</th>
-        <td mat-cell *matCellDef="let row">{{row.date_joined | date }}</td>
-      </ng-container>
-        <!-- Display  Column -->
-        <ng-container matColumnDef="display">
-          <th mat-header-cell *matHeaderCellDef>Display</th>
-          <td mat-cell *matCellDef="let row">
-            <a (click)="onDisplayUser('display', row.id)">
-              <mat-icon>pageview</mat-icon>
-            </a>
-          </td>
-        </ng-container>
-        <!-- Edit  Column -->
-        <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef>Edit</th>
-          <td mat-cell *matCellDef="let row">
-            <a>
-              <mat-icon (click)="onEditUser('edit', row.id)">edit</mat-icon>
-            </a>
-          </td>
-        </ng-container>
-        <!-- Delete  Column -->
-        <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef>Delete</th>
-          <td mat-cell *matCellDef="let row">
-            <mat-icon (click)="onDeleteUser('delete', row.id)">delete</mat-icon>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="userColumnHeaders"></tr>
-        <tr
-        mat-row
-        (click)="clickedRow.add(row)"
-        [class.clicked-row]="clickedRow.has(row)"
-        *matRowDef="let row; columns: userColumnHeaders;"></tr>
-        <!-- Row shown when there is no matching data in the filter -->
-        <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the Search item "{{input.value}}"</td></tr>
-      </table>
-      <!-- End of Table -->
-      <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10]"></mat-paginator>
+      <!-- End of Official Personal Information -->
+      <!-- Beginning of Hobbies -->
+      <div
+        *ngSwitchCase="'interests'"
+        class="mat-elevation-z8 mx-5 my-5 p-5"
+        style="background-color: #03045e"
+      >
+        <h1 style="font-weight: lighter">Hobbies</h1>
+        <form [formGroup]="formGroupHobbies" novalidate id="hobbies">
+          <fieldset [disabled]="isDisabled">
+            <div class="row my-3">
+              <div class="col-md-12">
+                <label for="professional" class="form-label">
+                  <h2 style="font-weight: lighter">Professional</h2></label
+                >
+                <textarea
+                  rows="10"
+                  formControlName="professional_hobbies"
+                ></textarea>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-md-12">
+                <label for="personal" class="form-label"
+                  ><h2 style="font-weight: lighter">Personal</h2></label
+                >
+                <textarea
+                  rows="10"
+                  formControlName="personal_hobbies"
+                ></textarea>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-md-12">
+                <label for="social" class="form-label">
+                  <h2 style="font-weight: lighter">Social</h2></label
+                >
+                <textarea rows="10" formControlName="social_hobbies"></textarea>
+              </div>
+            </div>
+          </fieldset>
+          <div class="mt-3 mb-5">
+            <div>
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                (click)="update()"
+              >
+                Edit
+              </button>
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                [disabled]="!formSubmitted && formGroup.invalid"
+                (click)="submitUserProfileHobbiesForm()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- End of Hobbies -->
+      <!-- Beginning of Bio -->
+      <div *ngSwitchCase="'bio'" class="mat-elevation-z8 mx-5 my-5 p-5">
+        <h1 style="font-weight: lighter">Bio</h1>
+        <form [formGroup]="formGroupBio" novalidate>
+          <fieldset [disabled]="isDisabled" id="bio">
+            <div class="row my-3">
+              <div class="col-md-12">
+                <label for="education" class="form-label"
+                  ><h2 style="font-weight: lighter">Education</h2></label
+                >
+                <textarea rows="10" formControlName="education_bio"></textarea>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-md-12">
+                <label for="professional" class="form-label">
+                  <h2 style="font-weight: lighter">Professional</h2></label
+                >
+                <textarea
+                  rows="10"
+                  formControlName="professional_bio"
+                ></textarea>
+              </div>
+            </div>
+          </fieldset>
+          <div class="mt-3 mb-5">
+            <div>
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                (click)="update()"
+              >
+                Edit
+              </button>
+              <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                [disabled]="!formSubmitted && formGroup.invalid"
+                (click)="submitUserProfileBioForm()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Beginning of settings -->
+      <div *ngSwitchCase="'settings'" class="mat-elevation-z8 mx-5 my-5 p-5">
+        Settings
+      </div>
+      <!-- End of Settings -->
+      <div *ngSwitchDefault class="mat-elevation-z8 mx-5 my-5 p-5">
+        <!-- Default template to be displayed -->
+        <!-- Official Personal Information -->
+        <div class="container justify-content-center">
+          <h1 style="font-weight: light; text-align: center">
+            Your Personal Information
+          </h1>
+          <form [formGroup]="formGroup" novalidate>
+            <fieldset [disabled]="isDisabled">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="first_name" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="first_name"
+                    formControlName="first_name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="middle_name" class="form-label"
+                    >Middle Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="middle_name"
+                    formControlName="middle_name"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="last_name" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="last_name"
+                    formControlName="last_name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="date_of_birth" class="form-label">Birthday</label>
+                  <input
+                    class="form-control"
+                    id="date_of_birth"
+                    type="date"
+                    max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+                    formControlName="date_of_birth"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    formControlName="username"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="phone_number" class="form-label"
+                    >Telephone Number</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phone_number"
+                    formControlName="phone_number"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="gender" class="form-label">Gender</label>
+                  <select
+                    class="form-select form-control"
+                    id="gender"
+                    name="gender"
+                    formControlName="gender"
+                  >
+                    <option
+                      class="form-select"
+                      selected
+                      *ngFor="let gender of gender"
+                      [value]="gender.value"
+                    >
+                      <p style="color: #fb8500; background-color: #03045e">
+                        {{ gender.viewValue }}
+                      </p>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="city" class="form-label">City</label>
+                  <input
+                    type="city"
+                    class="form-control"
+                    id="city"
+                    formControlName="city"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="country" class="form-label">Country</label>
+                  <input
+                    type="country"
+                    class="form-control"
+                    id="country"
+                    formControlName="country"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <div class="mt-3 mb-5"></div>
+          </form>
+        </div>
+        <!-- End of Official Personal Information -->
+        <!-- End of default template to be displayed -->
+      </div>
     </div>
   </div>
 </div>
-

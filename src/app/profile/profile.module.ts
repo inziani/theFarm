@@ -17,7 +17,6 @@ import { BioComponent } from './bio/bio.component';
 import { PasswordSecComponent } from './password-sec/password-sec.component';
 import { CreateActivityComponent } from './todo/create-activity/create-activity.component';
 import { TodoComponent } from './todo/todo.component';
-import { MaterialModule } from '@app/material.module';
 import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { SharedModule } from '@app/shared/shared.module';
   ],
   imports: [
     ProfileRoutingModule,
-    MaterialModule,
     SharedModule,
     StoreModule.forFeature('profile', reducer),
     EffectsModule.forFeature([ProfileEffects]),

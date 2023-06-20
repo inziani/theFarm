@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
-// import { RestDataSource } from '@app/shared/data/rest.datasource';
+import { FinanceService } from '@app/_helpers/services/finance.service';
+import { UsersService } from '@app/_helpers/services/users.service';
 
 @Component({
   selector: 'app-profile-sidenav',
@@ -10,9 +12,16 @@ import { AuthenticationService } from '@app/_helpers/services/authentication.ser
 export class ProfileSidenavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
 
+  public home!: string;
+  public activity!: string;
+  public activityCategory!: string;
+  public bio!: string;
+  public security!: string;
+
   constructor(
-    // private restDataSource: RestDataSource
-    private _authenticationService: AuthenticationService
+    private _authenticationService: AuthenticationService,
+    private _router: Router,
+    private _userService: UsersService
   ) {}
 
   ngOnInit(): void {}
@@ -21,8 +30,12 @@ export class ProfileSidenavComponent implements OnInit {
     this.closeSideNav.emit();
   }
 
-  onLogOut() {
+  public onSelecthome() {
+    this._userService.sendData(this.home);
+  }
+
+  public onLogOut() {
     this._authenticationService.onLogout();
-    // this.restDataSource.removeToken();
+    this._router.navigate(['/login']);
   }
 }
