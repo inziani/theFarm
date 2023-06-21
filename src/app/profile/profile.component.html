@@ -1,11 +1,107 @@
-<mat-sidenav-container>
+<div class="row justify-content-center">
+  <app-header></app-header>
+  <div>
+    <h2 class="text-center my-2" style="font-weight: lighter; color: #ff9e00">
+      My Personal Information
+    </h2>
+  </div>
+  <div class="row">
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          routerLink="/home"
+        >
+          Home
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="onSelectActivity()"
+        >
+          Tasks
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="onSelectActivityCategory()"
+        >
+          Tasks Category
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="onSelectBio()"
+        >
+          My Account
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="onSelectSecurity()"
+        >
+          Security
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="onLogOut()"
+        >
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" [ngSwitch]="itemSelected">
+      <div *ngSwitchCase="'activity'">
+        <app-todo></app-todo>
+      </div>
+      <div *ngSwitchCase="'activityCategory'">
+        <app-activity-categorys></app-activity-categorys>
+      </div>
+      <div *ngSwitchCase="'bio'">
+        <app-bio></app-bio>
+      </div>
+      <div *ngSwitchCase="'security'">
+        <app-password-sec></app-password-sec>
+      </div>
+      <div *ngSwitchDefault>
+        <app-bio></app-bio>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <mat-sidenav-container>
   <mat-sidenav mode="side" #sidenav role="navigation">
     <app-profile-sidenav (closeSideNav)="sidenav.close()"></app-profile-sidenav>
   </mat-sidenav>
   <mat-sidenav-content [ngSwitch]="itemSelected">
     <app-header (sideNavToggle)="sidenav.toggle()"></app-header>
-    <!-- <main>
-      <div class="container" > -->
+     <main>
+      <div class="container" >
     <div *ngSwitchCase="'activity'">
       <app-todo></app-todo>
     </div>
@@ -21,9 +117,9 @@
     <div *ngSwitchDefault>
       <app-bio></app-bio>
     </div>
-    <!-- End of Organizational details -->
-    <!-- </div> -->
+    End of Organizational details
+    </div>
     <router-outlet></router-outlet>
-    <!-- </main> -->
+    </main>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->

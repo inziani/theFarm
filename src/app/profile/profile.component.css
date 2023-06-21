@@ -1,7 +1,7 @@
 :host {
   background-color: #03045e;
   display: block;
-  height: 100vh;
+  height: fit-content;
 }
 
 a {
@@ -56,13 +56,13 @@ a {
   cursor: pointer;
 }
 
-.btn-primary {
-  color: #fb8500;
+.btn-outline-success {
+  background-color: #03045e;
   border-radius: 0;
-  text-align: center;
+  color: #ff9e00;
+  border-color: #ff9e00;
+  font-size: medium;
   font-weight: lighter;
-  border: none;
-  background-color: transparent;
 }
 
 p {

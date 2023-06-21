@@ -5,17 +5,21 @@
   <a mat-list-item routerLink="/home" (click)="onClose()">
     <mat-icon>home</mat-icon><span class="nav-caption">Home</span>
   </a>
-  <a mat-list-item routerLink="activity" (click)="onClose()">
+  <a mat-list-item routerLink="activity" (click)="onSelectActivity()">
     <mat-icon>add_box</mat-icon><span class="nav-caption">Tasks</span>
   </a>
-  <a mat-list-item routerLink="activityCategory" (click)="onClose()">
+  <a
+    mat-list-item
+    routerLink="activityCategory"
+    (click)="onSelectActivityCategory()"
+  >
     <mat-icon>add_circle_outline</mat-icon
     ><span class="nav-caption">Task Category</span>
   </a>
-  <a mat-list-item routerLink="bio" (click)="onClose()">
+  <a mat-list-item routerLink="bio" (click)="onSelectBio()">
     <mat-icon>person</mat-icon><span class="nav-caption">My Account</span>
   </a>
-  <a mat-list-item routerLink="security" (click)="onClose()">
+  <a mat-list-item routerLink="security" (click)="onSelectSecurity()">
     <mat-icon>security</mat-icon><span class="nav-caption">Security</span>
   </a>
   <a mat-list-item (click)="onLogOut()">

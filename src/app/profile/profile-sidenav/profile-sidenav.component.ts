@@ -12,11 +12,11 @@ import { UsersService } from '@app/_helpers/services/users.service';
 export class ProfileSidenavComponent implements OnInit {
   @Output() closeSideNav = new EventEmitter<void>();
 
-  public home!: string;
-  public activity!: string;
-  public activityCategory!: string;
-  public bio!: string;
-  public security!: string;
+  public home: string = 'home';
+  public activity: string = 'activity';
+  public activityCategory: string = 'activityCategory';
+  public bio: string = 'bio';
+  public security: string = 'security';
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -30,10 +30,18 @@ export class ProfileSidenavComponent implements OnInit {
     this.closeSideNav.emit();
   }
 
-  public onSelecthome() {
-    this._userService.sendData(this.home);
+  public onSelectActivity() {
+    this._userService.sendData(this.activity);
   }
-
+  public onSelectActivityCategory() {
+    this._userService.sendData(this.activityCategory);
+  }
+  public onSelectBio() {
+    this._userService.sendData(this.bio);
+  }
+  public onSelectSecurity() {
+    this._userService.sendData(this.security);
+  }
   public onLogOut() {
     this._authenticationService.onLogout();
     this._router.navigate(['/login']);

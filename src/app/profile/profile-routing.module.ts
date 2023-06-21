@@ -7,21 +7,13 @@ import { PasswordSecComponent } from './password-sec/password-sec.component';
 import { BioComponent } from './bio/bio.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ProfileComponent,
-    children: [
-      { path: 'activity', component: TodoComponent },
-      { path: 'activityCategory', component: ActivityCategorysComponent },
-      { path: 'bio', component: BioComponent },
-      { path: 'security', component: PasswordSecComponent },
-      { path: '', component: ProfileComponent },
-      { path: '**', redirectTo: '', pathMatch: 'full' },
-    ],
-  },
+  { path: 'activity', component: TodoComponent },
+  { path: 'activityCategory', component: ActivityCategorysComponent },
+  { path: 'bio', component: BioComponent },
+  { path: 'security', component: PasswordSecComponent },
+  { path: '', component: ProfileComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
-
-// Note to self - Bio Component remains unsused
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
