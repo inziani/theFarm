@@ -5,7 +5,7 @@ export const loadActivities = createAction('[Activity] Load');
 export const fetchActivityIdData = createAction('[Activity] Load Activity ID');
 export const fetchActivityDataSuccess = createAction(
   '[Activity] Load Activity Data Success',
-  props<{ activity: Activity[] }>()
+  props<{ activityList: Activity[] }>()
 );
 export const fetchActivityDataFailure = createAction(
   '[Activity] Load Activity List Failed',

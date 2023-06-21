@@ -1,12 +1,6 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  AfterViewInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
@@ -16,7 +10,6 @@ import {
   _closeDialogVia,
 } from '@angular/material/dialog';
 
-// import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Activity } from '@app/profile/todo/models/activity.model';
 import { EditActivityComponent } from './edit-activity/edit-activity.component';
@@ -37,6 +30,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
   public activity!: Activity;
   public activityObject = <Activity>{};
   public activityList$!: Observable<Activity[]>;
+  public errorMessage$!: Observable<string>;
   public todaysDate = new Date();
   public activityColumnHeaders: string[] = [
     'id',
@@ -56,7 +50,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // private subscription!: Subscription;
+  public errorMessage!: string;
 
   constructor(
     private _activitysService: ActivitysService,
@@ -69,6 +63,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
     //   .fetchActivityData()
     //   .subscribe((activityList) => (this.sourceData.data = activityList));
     this.activityList$ = this._store.select(ActivitiySelectors.getActivityList);
+    this.errorMessage$ = this._store.select(ActivitiySelectors.getError);
 
     this._store.dispatch(ActivityActions.loadActivities());
   }

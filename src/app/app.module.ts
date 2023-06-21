@@ -48,25 +48,10 @@ import {
 } from '@ngrx/store';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { storeFreeze } from 'ngrx-store-freeze';
+// import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '@environments/environment';
-import { InitialState } from '@ngrx/store/src/models';
-import { uiReducer } from './store/reducers/ui.reducer';
+// import { InitialState } from '@ngrx/store/src/models';
 import { EffectsModule } from '@ngrx/effects';
-
-export const metaReducers: MetaReducer<any>[] = !environment.production
-  ? [storeFreeze]
-  : [];
-
-export const storeDevTools: ModuleWithProviders<any>[] = !environment.production
-  ? [StoreDevtoolsModule.instrument()]
-  : [];
-
-export declare type StoreConfig<T, V extends Action = Action> = {
-  initialState?: InitialState<T>;
-  reducerFactory?: ActionReducerFactory<T, V>;
-  metaReducers?: MetaReducer<T, V>[];
-};
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');

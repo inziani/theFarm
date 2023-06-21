@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './store/reducers/profile.reducer';
+import { profileReducer } from './store/reducers/profile.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileEffects } from './store/effects/profile.effects';
 
@@ -36,7 +36,7 @@ import { SharedModule } from '@app/shared/shared.module';
   imports: [
     ProfileRoutingModule,
     SharedModule,
-    StoreModule.forFeature('profile', reducer),
+    StoreModule.forFeature('profile', profileReducer),
     EffectsModule.forFeature([ProfileEffects]),
   ],
 })

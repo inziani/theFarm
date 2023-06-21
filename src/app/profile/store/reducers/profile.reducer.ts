@@ -9,7 +9,7 @@ const initialState: ActivityState = {
   showActivity: false,
 };
 
-export const reducer = createReducer<ActivityState>(
+export const profileReducer = createReducer<ActivityState>(
   initialState,
   on(ActivityActions.fetchActivityIdData, (state) => {
     return {
@@ -22,7 +22,7 @@ export const reducer = createReducer<ActivityState>(
     (state, action): ActivityState => {
       return {
         ...state,
-        activityList: action.activity,
+        activityList: action.activityList,
       };
     }
   ),
@@ -35,7 +35,7 @@ export const reducer = createReducer<ActivityState>(
   on(ActivityActions.showActivity, (state) => {
     return {
       ...state,
-      showActivity: state.showActivity,
+      showActivity: !state.showActivity,
     };
   })
 );
