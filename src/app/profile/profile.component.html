@@ -1,7 +1,8 @@
-<div class="row justify-content-center">
-  <app-header></app-header>
+<!-- <div class="container">
+  <app-header></app-header> -->
+<div class="justify-content-center container">
   <div>
-    <h2 class="text-center my-2" style="font-weight: lighter; color: #ff9e00">
+    <h2 class="text-center my-2" style="font-weight: lighter; color: #03045e">
       My Personal Information
     </h2>
   </div>
@@ -93,33 +94,4 @@
     </div>
   </div>
 </div>
-
-<!-- <mat-sidenav-container>
-  <mat-sidenav mode="side" #sidenav role="navigation">
-    <app-profile-sidenav (closeSideNav)="sidenav.close()"></app-profile-sidenav>
-  </mat-sidenav>
-  <mat-sidenav-content [ngSwitch]="itemSelected">
-    <app-header (sideNavToggle)="sidenav.toggle()"></app-header>
-     <main>
-      <div class="container" >
-    <div *ngSwitchCase="'activity'">
-      <app-todo></app-todo>
-    </div>
-    <div *ngSwitchCase="'activityCategory'">
-      <app-activity-categorys></app-activity-categorys>
-    </div>
-    <div *ngSwitchCase="'bio'">
-      <app-bio></app-bio>
-    </div>
-    <div *ngSwitchCase="'security'">
-      <app-password-sec></app-password-sec>
-    </div>
-    <div *ngSwitchDefault>
-      <app-bio></app-bio>
-    </div>
-    End of Organizational details
-    </div>
-    <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
+<!-- </div> -->
