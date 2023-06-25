@@ -30,6 +30,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
   public activity!: Activity;
   public activityObject = <Activity>{};
   public activityList$!: Observable<Activity[]>;
+  public activityList!: Activity[];
   public errorMessage$!: Observable<string>;
   public todaysDate = new Date();
   public activityColumnHeaders: string[] = [
@@ -59,13 +60,25 @@ export class TodoComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    // this._activitysService
-    //   .fetchActivityData()
-    //   .subscribe((activityList) => (this.sourceData.data = activityList));
+    // this._activitysService.fetchActivityData().subscribe({
+    //   next: (activityList) => {
+    //     this.sourceData.data = activityList;
+    //     console.log('APIActivityData - ', activityList);
+    //   },
+    //   error: (err) => (this.errorMessage = err),
+    //   complete: () => console.info('Complete'),
+    // });
+
     this.activityList$ = this._store.select(ActivitiySelectors.getActivityList);
+
     this.errorMessage$ = this._store.select(ActivitiySelectors.getError);
 
     this._store.dispatch(ActivityActions.loadActivities());
+    // this._store.dispatch(
+    //   ActivityActions.fetchActivityDataSuccess({
+    //     activityList: this.activityList,
+    //   })
+    // );
   }
 
   ngAfterViewInit() {

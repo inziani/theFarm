@@ -1,3 +1,16 @@
+<div class="card-body">
+  <div class="list-group">
+    <div
+      class="list-group-item list-group-item-action rounded-0"
+      *ngFor="let activityList of activityList$ | async"
+    >
+      <h1 style="color: coral">Print Here</h1>
+      {{ activityList.id }}, {{ activityList.title }},
+      {{ activityList.description }}, {{ activityList.activity_category }}
+    </div>
+  </div>
+</div>
+
 <div class="main-table-container mat-elevation-z8">
   <div class="table-container">
     <h1 class="to-do-list">Task List</h1>

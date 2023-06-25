@@ -53,6 +53,10 @@ import { environment } from '@environments/environment';
 // import { InitialState } from '@ngrx/store/src/models';
 import { EffectsModule } from '@ngrx/effects';
 
+import { profileReducer } from './profile/store/reducers/profile.reducer';
+import { userLoginAuthenticationReducer } from './authentication/store/reducers/authentication.reducer';
+import { ProfileEffects } from './profile/store/effects/profile.effects';
+
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
@@ -98,7 +102,7 @@ export function tokenGetter() {
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(),
   ],
   exports: [SharedModule],
 
