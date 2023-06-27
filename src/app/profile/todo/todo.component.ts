@@ -67,8 +67,8 @@ export class TodoComponent implements OnInit, AfterViewInit {
           ]({ activityList })
         ),
     });
-    // this.activityList$ = this._store.select((store) => store.activityList);
-    this.activityList$ = this._store.select(ActivitySelectors.getActivity);
+    this.activityList$ = this._store.select((store) => store.activityList);
+    // this.activityList$ = this._store.select(ActivitySelectors.getActivity);
   }
 
   ngAfterViewInit() {
