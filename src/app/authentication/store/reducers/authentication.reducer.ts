@@ -17,7 +17,6 @@ export const userLoginAuthenticationReducer =
     on(
       AuthenticationActions.logIn,
       (state, action): AuthenticationLoginState => {
-        console.log('Original Login State');
         return {
           ...state,
           login: action.userDetails,

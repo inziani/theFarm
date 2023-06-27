@@ -3,39 +3,41 @@ import { ActivityState } from '../state/profile.state';
 import * as ActivityActions from '../actions/profile.actions';
 
 const initialState: ActivityState = {
-  currentActivityId: null,
   activityList: [],
-  error: '',
-  showActivity: false,
+  currentActivity: {
+    id: NaN,
+    title: '',
+    description: '',
+    status: '',
+    activity_category: NaN,
+  },
+  deleteActivityID: NaN,
+  result: '',
+  isLoading: false,
+  isLoadingSuccess: false,
+  isLoadingFailure: false,
 };
 
-export const profileReducer = createReducer<ActivityState>(
+export const activityReducer = createReducer<ActivityState>(
   initialState,
-  on(ActivityActions.fetchActivityIdData, (state) => {
-    return {
-      ...state,
-      currentActivityId: state.currentActivityId,
-    };
-  }),
   on(
-    ActivityActions.fetchActivityDataSuccess,
+    ActivityActions.ActivityActions['[Activity]RetrieveActivityList'],
+    (state) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+  ),
+  on(
+    ActivityActions.ActivityActions['[Activity]RetrievedActivityListSuccess'],
     (state, action): ActivityState => {
       return {
         ...state,
         activityList: action.activityList,
+        isLoading: false,
+        isLoadingSuccess: true,
       };
     }
-  ),
-  on(ActivityActions.fetchActivityDataFailure, (state) => {
-    return {
-      ...state,
-      error: state.error,
-    };
-  }),
-  on(ActivityActions.showActivity, (state) => {
-    return {
-      ...state,
-      showActivity: !state.showActivity,
-    };
-  })
+  )
 );

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as ActivityActions from '../actions/profile.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
-import { Activity } from '@app/profile/todo/models/activity.model';
+// import { Activity } from '@app/profile/todo/models/activity.model';
 
 @Injectable()
 export class ProfileEffects {
@@ -13,23 +13,29 @@ export class ProfileEffects {
     private _activityService: ActivitysService
   ) {}
 
-  public loadActivities$ = createEffect(() => {
+  public activityEffects$ = createEffect(() => {
     return this._actions$.pipe(
-      ofType(ActivityActions.fetchActivityDataSuccess),
+      ofType(
+        ActivityActions.ActivityActions[
+          '[Activity]RetrievedActivityListSuccess'
+        ]
+      ),
       mergeMap(() =>
         this._activityService.fetchActivityData().pipe(
-          map((activityList) =>
-            ActivityActions.fetchActivityDataSuccess({
-              activityList: activityList,
-            })
-          ),
-
-            catchError((error) =>
-              of(ActivityActions.fetchActivityDataFailure({ error }))
+          map((activityList) => {
+            return ActivityActions.ActivityActions[
+              '[Activity]RetrievedActivityListSuccess'
+            ]({ activityList });
+          }),
+          catchError((error: string) =>
+            of(
+              ActivityActions.ActivityActions[
+                '[Activity]RetrieveActivityListFailure'
+              ]({ errorMessage: error })
             )
           )
         )
       )
     );
-  };
-
+  });
+}

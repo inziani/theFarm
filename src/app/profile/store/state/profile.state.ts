@@ -2,12 +2,16 @@ import { Activity } from '@app/profile/todo/models/activity.model';
 import * as AppState from '@app/store/state/app.state';
 
 export interface State extends AppState.State {
-  profile: ActivityState;
+  activity: ActivityState;
+ 
 }
 
 export interface ActivityState {
-  currentActivityId: null;
   activityList: Activity[];
-  error: string;
-  showActivity: boolean;
+  currentActivity: Activity;
+  deleteActivityID: number;
+  result?: '';
+  isLoading: boolean;
+  isLoadingSuccess: boolean;
+  isLoadingFailure: boolean;
 }

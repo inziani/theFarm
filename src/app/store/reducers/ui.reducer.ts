@@ -20,21 +20,6 @@ export const uiReducer = createReducer(
   on(UIActions.NO_ACTION, () => initialState)
 );
 
-// export const uiFeatureKey = 'ui'
-// export function uiReducer(state: UIState = initialState, action: UIActions): UIState {
-//   switch (action.type) {
-//     case START_LOADING:
-//       return {
-//         isLoading: true,
-//       };
-//     case STOP_LOADING:
-//       return {
-//         isLoading: false,
-//       };
-//     default: {
-//       return state;
-//     }
-//   }
-// }
+
 
 export const getIsLoading = (state: UIState) => state.isLoading;
