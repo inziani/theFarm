@@ -17,9 +17,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
 import { Store } from '@ngrx/store';
-import { State } from '../store/state/profile.state';
+import { ActivityState } from '../store/state/profile.state';
 import * as ActivityActions from '../store/actions/profile.actions';
-import * as ActivitiySelectors from '../store/selectors/profile.selectors';
+import * as ActivitySelectors from '../store/selectors/profile.selectors';
 
 @Component({
   selector: 'app-todo',
@@ -55,7 +55,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
   constructor(
     private _activitysService: ActivitysService,
     private _dialogue: MatDialog,
-    private _store: Store<State>
+    private _store: Store<ActivityState>
   ) {}
 
   ngOnInit(): void {
@@ -67,9 +67,8 @@ export class TodoComponent implements OnInit, AfterViewInit {
           ]({ activityList })
         ),
     });
-    this.activityList$ = this._store.select(
-      (store) => store.activity.activityList
-    );
+    // this.activityList$ = this._store.select((store) => store.activityList);
+    this.activityList$ = this._store.select(ActivitySelectors.getActivity);
   }
 
   ngAfterViewInit() {
