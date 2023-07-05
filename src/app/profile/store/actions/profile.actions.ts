@@ -5,11 +5,14 @@ import {
   emptyProps,
   props,
 } from '@ngrx/store';
-
+import { ActivityState } from '../state/profile.state';
 
 export const ActivityActions = createActionGroup({
   source: 'Activity Page',
   events: {
+    '[Activity] Set Current Activity': props<{ activityId: number }>(),
+    '[Activity] Clear Current Activity]': emptyProps(),
+    '[Activity] Initialize Current Activity]': emptyProps(),
     '[Activity] Retrieve Activity List': emptyProps(),
     '[Activity] Retrieved Activity List Success': props<{
       activityList: Activity[];
@@ -19,3 +22,5 @@ export const ActivityActions = createActionGroup({
     }>(),
   },
 });
+
+//  Edit Activity

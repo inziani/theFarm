@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
 import * as ActivityActions from '../actions/profile.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
-// import { Activity } from '@app/profile/todo/models/activity.model';
 
 @Injectable()
 export class ProfileEffects {
@@ -16,9 +14,7 @@ export class ProfileEffects {
   public activityEffects$ = createEffect(() => {
     return this._actions$.pipe(
       ofType(
-        ActivityActions.ActivityActions[
-          '[Activity]RetrievedActivityListSuccess'
-        ]
+        ActivityActions.ActivityActions['[Activity]RetrieveActivityList']
       ),
       mergeMap(() =>
         this._activityService.fetchActivityData().pipe(
