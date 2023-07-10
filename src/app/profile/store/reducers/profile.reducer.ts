@@ -56,7 +56,7 @@ export const activityReducer = createReducer<ActivityState>(
     }
   ),
   on(
-    ActivityActions.ActivityActions['[Activity]RetrievedActivityListSuccess'],
+    ActivityActions.ActivityActions['[Activity]RetrieveActivityListSuccess'],
     (state, action): ActivityState => {
       return {
         ...state,

@@ -13,14 +13,12 @@ export class ProfileEffects {
 
   public activityEffects$ = createEffect(() => {
     return this._actions$.pipe(
-      ofType(
-        ActivityActions.ActivityActions['[Activity]RetrieveActivityList']
-      ),
+      ofType(ActivityActions.ActivityActions['[Activity]RetrieveActivityList']),
       mergeMap(() =>
         this._activityService.fetchActivityData().pipe(
           map((activityList) => {
             return ActivityActions.ActivityActions[
-              '[Activity]RetrievedActivityListSuccess'
+              '[Activity]RetrieveActivityListSuccess'
             ]({ activityList });
           }),
           catchError((error: string) =>

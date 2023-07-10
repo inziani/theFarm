@@ -36,7 +36,7 @@ import { SharedModule } from '@app/shared/shared.module';
   imports: [
     ProfileRoutingModule,
     SharedModule,
-    StoreModule.forFeature('profile', activityReducer),
+    StoreModule.forFeature('activity', activityReducer),
     EffectsModule.forFeature([ProfileEffects]),
   ],
 })

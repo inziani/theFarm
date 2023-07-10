@@ -1,29 +1,15 @@
-<div class="card-body" *ngIf="activityList$ | async">
-  <div class="list-group">
-    <div class="list-group-item list-group-item-action rounded-0">
-      <div *ngFor="let activity of activityList" style="color: coral">
-        <p style="color: #fb8500">
-          Surely? {{ activity.id }}, {{ activity.title }},
-          {{ activity.description }}
-        </p>
-        Print Here
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="main-table-container mat-elevation-z8">
+<div class="main-table-container">
   <div class="table-container">
     <h1 class="to-do-list">Task List</h1>
-    <div class="mx-1 text-center">
+    <div class="mx-1 my-2 text-center">
       <a>
         <mat-icon (click)="openCreateActivityDialog()">add_box</mat-icon>
       </a>
     </div>
     <table
+      class="my-2"
       mat-table
       [dataSource]="sourceData"
-      class="example-table"
       matSort
       matSortActive="date_created"
       matSortDisableClear

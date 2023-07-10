@@ -14,7 +14,7 @@ export const ActivityActions = createActionGroup({
     '[Activity] Clear Current Activity]': emptyProps(),
     '[Activity] Initialize Current Activity]': emptyProps(),
     '[Activity] Retrieve Activity List': emptyProps(),
-    '[Activity] Retrieved Activity List Success': props<{
+    '[Activity] Retrieve Activity List Success': props<{
       activityList: Activity[];
     }>(),
     '[Activity] Retrieve Activity List Failure': props<{

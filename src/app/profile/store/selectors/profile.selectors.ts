@@ -1,7 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ActivityState } from '../state/profile.state';
 
-
 const getActivityFeatureState =
   createFeatureSelector<ActivityState>('activity');
 

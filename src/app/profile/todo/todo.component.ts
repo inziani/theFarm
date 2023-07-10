@@ -17,7 +17,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
 import { Store } from '@ngrx/store';
-// import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { ActivityState } from '../store/state/profile.state';
 import * as ActivityActions from '../store/actions/profile.actions';
 import * as ActivitySelectors from '../store/selectors/profile.selectors';
@@ -31,7 +30,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
   public activity!: Activity;
   public activityObject = <Activity>{};
   public activityList$!: Observable<Activity[]>;
-  public activityList!: Activity[];
   public errorMessage$!: Observable<string>;
   public todaysDate = new Date();
   public activityColumnHeaders: string[] = [
@@ -64,17 +62,15 @@ export class TodoComponent implements OnInit, AfterViewInit {
     this._store.dispatch(
       ActivityActions.ActivityActions['[Activity]RetrieveActivityList']()
     );
-    this.activityList$ = this._store
-      .select(ActivitySelectors.getActivityList
-      );
-
-    this._activitysService.fetchActivityData().subscribe({
+    // this.activityList$ = this._store.select(ActivitySelectors.getActivityList);
+    this._store.select(ActivitySelectors.getActivityList).subscribe({
       next: (activityList) => {
         this.sourceData.data = activityList;
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.log('Complete'),
     });
+
   }
 
   ngAfterViewInit() {
