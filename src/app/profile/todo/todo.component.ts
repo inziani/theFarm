@@ -70,7 +70,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
       error: (err) => (this.errorMessage = err),
       complete: () => console.log('Complete'),
     });
-
   }
 
   ngAfterViewInit() {
@@ -108,27 +107,54 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
     // *** Fetch data from api
 
-    this._activitysService.fetchSingleActivity(id).subscribe((response) => {
-      let activity = response;
-      dialogConfig.data = activity;
+    this._store.dispatch(
+      ActivityActions.ActivityActions['[Activity]SetCurrentActivityID']({
+        activityId: id,
+      })
+    );
 
-      // ***Open dialog
+    this._store.select(ActivitySelectors.getCurrentActivityDetails).subscribe({
+      next: (selectedActivity) => {
+        dialogConfig.data = selectedActivity;
+        console.log('Dialogue Data - ', dialogConfig.data);
+        // Open Dialog
+        const dialogRef = this._dialogue.open(
+          EditActivityComponent,
+          dialogConfig
+        );
+        // ***Returned data from dialogue
 
-      const dialogRef = this._dialogue.open(
-        EditActivityComponent,
-        dialogConfig
-      );
-
-      // ***Returned data from dialogue
-
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result == undefined) {
-          return;
-        } else {
-          console.log('Editable Data after else button', result);
-        }
-      });
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result == undefined) {
+            return;
+          } else {
+            console.log('Editable Data after else button', result);
+          }
+        });
+      },
     });
+
+    // this._activitysService.fetchSingleActivity(id).subscribe((response) => {
+    //   let activity = response;
+    //   dialogConfig.data = activity;
+
+    // ***Open dialog
+
+    // const dialogRef = this._dialogue.open(
+    //   EditActivityComponent,
+    //   dialogConfig
+    // );
+
+    // ***Returned data from dialogue
+
+    //   dialogRef.afterClosed().subscribe((result) => {
+    //     if (result == undefined) {
+    //       return;
+    //     } else {
+    //       console.log('Editable Data after else button', result);
+    //     }
+    //   });
+    // });
   }
 
   openDeleteActivityDialog(id: number) {

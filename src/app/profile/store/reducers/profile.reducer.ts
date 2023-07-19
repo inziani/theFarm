@@ -4,6 +4,13 @@ import * as ActivityActions from '../actions/profile.actions';
 
 const initialState: ActivityState = {
   currentActivityId: NaN,
+  // activity: {
+  //     id: NaN,
+  //     title: '',
+  //     description: '',
+  //     status: '',
+  //     activity_category: NaN
+  // },
   activityList: [
     {
       id: 1,
@@ -19,7 +26,7 @@ const initialState: ActivityState = {
 export const activityReducer = createReducer<ActivityState>(
   initialState,
   on(
-    ActivityActions.ActivityActions['[Activity]SetCurrentActivity'],
+    ActivityActions.ActivityActions['[Activity]SetCurrentActivityID'],
     (state, action): ActivityState => {
       return {
         ...state,

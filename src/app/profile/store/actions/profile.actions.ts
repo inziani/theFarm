@@ -1,16 +1,11 @@
 import { Activity } from '@app/profile/todo/models/activity.model';
-import {
-  createAction,
-  createActionGroup,
-  emptyProps,
-  props,
-} from '@ngrx/store';
-import { ActivityState } from '../state/profile.state';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
+//***********************************Activity********************************************************************************
 export const ActivityActions = createActionGroup({
   source: 'Activity Page',
   events: {
-    '[Activity] Set Current Activity': props<{ activityId: number }>(),
+    '[Activity] Set Current Activity ID': props<{ activityId: number }>(),
     '[Activity] Clear Current Activity]': emptyProps(),
     '[Activity] Initialize Current Activity]': emptyProps(),
     '[Activity] Retrieve Activity List': emptyProps(),
@@ -24,3 +19,5 @@ export const ActivityActions = createActionGroup({
 });
 
 //  Edit Activity
+
+//***********************************End of Activity***********************************************************************
