@@ -13,6 +13,9 @@ import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-inter
 import { Status } from '@app/shared/interfaces/activity-interface';
 import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { Store } from '@ngrx/store';
+import { ActivityState } from '../../store/state/profile.state';
+import * as ActivityActions from '../../store/actions/profile.actions';
 
 @Component({
   selector: 'app-edit-activity',
@@ -41,11 +44,11 @@ export class EditActivityComponent implements OnInit {
     // private _dataSource: RestDataSource,
     private _dialog: MatDialog,
     private _dialogRef: MatDialogRef<EditActivityComponent>,
+    private _store: Store<ActivityState>,
     @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
   ) {}
 
   ngOnInit(): void {
-    // this.activityList = this._activitysService.getActivitysList();
     this._activitysService.fetchActivityCategory().subscribe((category) => {
       this.activityCategory = category;
     });
@@ -53,35 +56,43 @@ export class EditActivityComponent implements OnInit {
   }
 
   public onFetchActivityData() {
-    this._activitysService.fetchActivityData().subscribe(
-      (data) => {
+    this._activitysService.fetchActivityData().subscribe({
+      next: (data) => {
         this.activityList = data;
       },
-      (error) => {
-        console.log(error);
-      }
-    );
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
+    });
   }
 
   public onEditActivity() {
     this._dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    this._activitysService
-      .editActivity(
-        this.dialogDataActivity.id,
-        this.activity.title,
-        this.activity.description,
-        this.activity.status,
-        this.activity.activity_category
-      )
-      .subscribe({
-        next: (activityChanged) =>
-          this._dialog.open(ChangesSavedDialogComponent, {
-            data: activityChanged.title,
-          }),
-        error: (err) => (this.errorMessage = err),
-        complete: () => console.info('Completed'),
-      });
+    console.log('activity', this.activity);
+    this._store.dispatch(
+      ActivityActions.ActivityActions['[Activity]EditActivity']({
+        activity: this.activity,
+      })
+    );
+    this._dialog.openDialogs(
+      ChangesSavedDialogComponent, data: {this.activity.title});
+
+    // this._activitysService
+    //   .editActivity(
+    //     this.dialogDataActivity.id,
+    //     this.activity.title,
+    //     this.activity.description,
+    //     this.activity.status,
+    //     this.activity.activity_category
+    //   )
+    //   .subscribe({
+    //     next: (activityChanged) =>
+    //       this._dialog.open(ChangesSavedDialogComponent, {
+    //         data: activityChanged.title,
+    //       }),
+    //     error: (err) => (this.errorMessage = err),
+    //     complete: () => console.info('Completed'),
+    //   });
   }
 
   public close() {

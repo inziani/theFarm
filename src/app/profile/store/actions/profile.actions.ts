@@ -15,9 +15,16 @@ export const ActivityActions = createActionGroup({
     '[Activity] Retrieve Activity List Failure': props<{
       errorMessage: string;
     }>(),
+
+    //***************************Start of Edit Activity*****************************************************************
+    '[Activity] Edit Activity': props<{ activity: Activity }>(),
+    '[Activity] Edit Activity Success': props<{ activity: Activity }>(),
+    '[Activity] Edit Activity Fail': props<{ error: string }>(),
+
+    //***************************End of Edit Activity*******************************************************************
   },
 });
 
-//  Edit Activity
+
 
 //***********************************End of Activity***********************************************************************

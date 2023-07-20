@@ -1,16 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { ActivityState } from '../state/profile.state';
 import * as ActivityActions from '../actions/profile.actions';
+import { identity } from 'rxjs';
 
 const initialState: ActivityState = {
   currentActivityId: NaN,
-  // activity: {
-  //     id: NaN,
-  //     title: '',
-  //     description: '',
-  //     status: '',
-  //     activity_category: NaN
-  // },
   activityList: [
     {
       id: 1,
@@ -81,5 +75,25 @@ export const activityReducer = createReducer<ActivityState>(
         error: action.errorMessage,
       };
     }
-  )
+  ),
+  on(
+    ActivityActions.ActivityActions['[Activity]EditActivitySuccess'],
+    (state, action) => {
+      const updatedActivityList = state.activityList.map((item) =>
+        action.activity.id === item.id ? action.activity : item
+      );
+      return {
+        ...state,
+        activityList: updatedActivityList,
+        currentActivityId: action.activity.id,
+        error: ''
+      }
+    }
+  ),
+  on(ActivityActions.ActivityActions['[Activity]EditActivityFail'], (state, action) => {
+    return {
+      ...state,
+      error: action.error
+    }
+  })
 );

@@ -46,19 +46,39 @@ export class ActivityFormControl extends FormControl{
 export class ActivityFormGroup extends FormGroup{
 
    constructor() {
-        super({
+     super({
+       id: new ActivityFormControl(
+         'Id',
+         'id',
+         '',
+         Validators.compose([])
+       ),
 
-          title: new ActivityFormControl("Title", "title", "", Validators.compose([
-            Validators.required,
-            Validators.maxLength(32)
-          ])),
-          description: new ActivityFormControl("Description", "description", "", Validators.compose([
-            Validators.required,
-            Validators.maxLength(132)
-            ])),
-          status: new ActivityFormControl("Status", "status", "", Validators.required),
-          activity_category: new ActivityFormControl("Activity Category", "activity_category", "", Validators.required),
-        });
+       title: new ActivityFormControl(
+         'Title',
+         'title',
+         '',
+         Validators.compose([Validators.required, Validators.maxLength(32)])
+       ),
+       description: new ActivityFormControl(
+         'Description',
+         'description',
+         '',
+         Validators.compose([Validators.required, Validators.maxLength(132)])
+       ),
+       status: new ActivityFormControl(
+         'Status',
+         'status',
+         '',
+         Validators.required
+       ),
+       activity_category: new ActivityFormControl(
+         'Activity Category',
+         'activity_category',
+         '',
+         Validators.required
+       ),
+     });
     }
 
     get ActivityFormControl(): ActivityFormControl[] {

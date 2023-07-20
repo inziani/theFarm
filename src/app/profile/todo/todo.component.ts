@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
-import { Observable, pipe, map, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, SortDirection } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import {
   MatDialog,
   MatDialogConfig,
