@@ -101,7 +101,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
     // ***Create dialogue object
     const dialogConfig = new MatDialogConfig();
     // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
 
@@ -116,14 +116,13 @@ export class TodoComponent implements OnInit, AfterViewInit {
     this._store.select(ActivitySelectors.getCurrentActivityDetails).subscribe({
       next: (selectedActivity) => {
         dialogConfig.data = selectedActivity;
-        console.log('Dialogue Data - ', dialogConfig.data);
+
         // Open Dialog
         const dialogRef = this._dialogue.open(
           EditActivityComponent,
           dialogConfig
         );
         // ***Returned data from dialogue
-
         dialogRef.afterClosed().subscribe((result) => {
           if (result == undefined) {
             return;

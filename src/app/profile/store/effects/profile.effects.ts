@@ -4,11 +4,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as ActivityActions from '../actions/profile.actions';
 import { catchError, concatMap, map, mergeMap, of } from 'rxjs';
 
+
 @Injectable()
 export class ProfileEffects {
   constructor(
     private _actions$: Actions,
-    private _activityService: ActivitysService
+    private _activityService: ActivitysService,
+
+
   ) {}
 
   public loadActivitiesEffect$ = createEffect(() => {

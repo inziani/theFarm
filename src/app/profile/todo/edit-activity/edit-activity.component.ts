@@ -16,6 +16,7 @@ import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/profile.state';
 import * as ActivityActions from '../../store/actions/profile.actions';
+import { take } from 'rxjs/internal/operators/take';
 
 @Component({
   selector: 'app-edit-activity',
@@ -68,14 +69,20 @@ export class EditActivityComponent implements OnInit {
   public onEditActivity() {
     this._dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
-    console.log('activity', this.activity);
     this._store.dispatch(
       ActivityActions.ActivityActions['[Activity]EditActivity']({
         activity: this.activity,
       })
-    );
-    this._dialog.openDialogs(
-      ChangesSavedDialogComponent, data: {this.activity.title});
+    )
+    // this._dialog.open(ChangesSavedDialogComponent, {
+    //   data: this.activity.title,
+    // });
+    // this._dialogRef
+    //   .afterClosed()
+    //   .pipe(take(1))
+    //   .subscribe((result) => {
+    //     console.log('Dialogue close in Tasks-', result);
+    //   });
 
     // this._activitysService
     //   .editActivity(
