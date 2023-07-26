@@ -48,3 +48,11 @@ export const getError = createSelector(
   getActivityFeatureState,
   (state) => state.error
 );
+export const currentActivityCategoryId = createSelector(
+  getActivityFeatureState,
+  (state) => state.currentActivityCategoryId
+);
+export const getActivityCategoryList = createSelector(
+  getActivityFeatureState,
+  (state) => state.activityCategoryList
+);

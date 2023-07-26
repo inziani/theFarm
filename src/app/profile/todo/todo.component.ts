@@ -62,7 +62,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
     this._store.dispatch(
       ActivityActions.ActivityActions['[Activity]RetrieveActivityList']()
     );
-    // this.activityList$ = this._store.select(ActivitySelectors.getActivityList);
+
     this._store.select(ActivitySelectors.getActivityList).subscribe({
       next: (activityList) => {
         this.sourceData.data = activityList;

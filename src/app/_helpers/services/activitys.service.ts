@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Activity } from '@app/profile/todo/models/activity.model';
 import { environment } from '@environments/environment';
 import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-interface';
+import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
 
 @Injectable({ providedIn: 'root' })
 export class ActivitysService {
@@ -66,8 +67,8 @@ export class ActivitysService {
 
   // **************************Activity Category*************************************
 
-  public fetchActivityCategory(): Observable<ActivityCategoryInterface[]> {
-    return this.http.get<ActivityCategoryInterface[]>(
+  public fetchActivityCategory(): Observable<ActivityCategory[]> {
+    return this.http.get<ActivityCategory[]>(
       `${environment.apiUrl}/activityscategorys/`,
       { headers: this.httpHeaders }
     );
@@ -102,8 +103,8 @@ export class ActivitysService {
       `${environment.apiUrl}/activityscategorys/` + id + '/'
     );
   }
-  public fetchActivityCategoryData(): Observable<ActivityCategoryInterface[]> {
-    return this.http.get<ActivityCategoryInterface[]>(
+  public fetchActivityCategoryData(): Observable<ActivityCategory[]> {
+    return this.http.get<ActivityCategory[]>(
       `${environment.apiUrl}/activityscategorys/`,
       { headers: this.httpHeaders }
     );

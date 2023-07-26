@@ -1,9 +1,10 @@
 import { Activity } from '@app/profile/todo/models/activity.model';
+import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 //***********************************Activity********************************************************************************
 export const ActivityActions = createActionGroup({
-  source: 'Activity Page',
+  source: 'Activity',
   events: {
     '[Activity] Set Current Activity ID': props<{ activityId: number }>(),
     '[Activity] Clear Current Activity]': emptyProps(),
@@ -22,9 +23,21 @@ export const ActivityActions = createActionGroup({
     '[Activity] Edit Activity Fail': props<{ error: string }>(),
 
     //***************************End of Edit Activity*******************************************************************
+    //***********************************End of Activity****************************************************************
   },
 });
 
-
-
-//***********************************End of Activity***********************************************************************
+export const ActivityCategoryActions = createActionGroup({
+  source: 'Activity Category',
+  events: {
+    // **************************Fetch Activity Category List****************************************************************
+    '[ActivityCategory] Retrieve Activity Category List': emptyProps(),
+    '[ActivityCategory] Retrieve Activity Category List Success': props<{
+      activityCategoryList: ActivityCategory[];
+    }>(),
+    '[ActivityCategory] Retrieve Activity Category List Failure': props<{
+      errorMessage: string;
+    }>(),
+    // **************************End fetch of Activity Category List*********************************************************
+  },
+});

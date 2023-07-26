@@ -1,10 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { ActivityState } from '../state/profile.state';
 import * as ActivityActions from '../actions/profile.actions';
-import { identity } from 'rxjs';
 
 const initialState: ActivityState = {
   currentActivityId: NaN,
+  currentActivityCategoryId: NaN,
   activityList: [
     {
       id: 1,
@@ -14,6 +14,7 @@ const initialState: ActivityState = {
       activity_category: 1,
     },
   ],
+  activityCategoryList: [],
   error: '',
 };
 
@@ -51,7 +52,6 @@ export const activityReducer = createReducer<ActivityState>(
     (state) => {
       return {
         ...state,
-        isLoading: true,
         activityList: state.activityList,
       };
     }
@@ -86,14 +86,52 @@ export const activityReducer = createReducer<ActivityState>(
         ...state,
         activityList: updatedActivityList,
         currentActivityId: action.activity.id,
-        error: ''
-      }
+        error: '',
+      };
     }
   ),
-  on(ActivityActions.ActivityActions['[Activity]EditActivityFail'], (state, action) => {
-    return {
-      ...state,
-      error: action.error
+  on(
+    ActivityActions.ActivityActions['[Activity]EditActivityFail'],
+    (state, action) => {
+      return {
+        ...state,
+        error: action.error,
+      };
     }
-  })
+  ),
+  on(
+    ActivityActions.ActivityCategoryActions[
+      '[ActivityCategory]RetrieveActivityCategoryList'
+    ],
+    (state) => {
+      return {
+        ...state,
+        activityCategoryList: state.activityCategoryList,
+      };
+    }
+  ),
+  on(
+    ActivityActions.ActivityCategoryActions[
+      '[ActivityCategory]RetrieveActivityCategoryListSuccess'
+    ],
+    (state, action): ActivityState => {
+      return {
+        ...state,
+        activityCategoryList: action.activityCategoryList,
+        error: '',
+      };
+    }
+  ),
+  on(
+    ActivityActions.ActivityCategoryActions[
+      '[ActivityCategory]RetrieveActivityCategoryListFailure'
+    ],
+    (state, action): ActivityState => {
+      return {
+        ...state,
+        activityCategoryList: [],
+        error: action.errorMessage,
+      };
+    }
+  )
 );

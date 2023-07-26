@@ -16,7 +16,6 @@ import { PasswordSecComponent } from './password-sec/password-sec.component';
 import { CreateActivityComponent } from './todo/create-activity/create-activity.component';
 import { TodoComponent } from './todo/todo.component';
 import { SharedModule } from '@app/shared/shared.module';
-import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { BrowserModule } from '@angular/platform-browser';
     TodoComponent,
   ],
   imports: [
-    BrowserModule,
     ProfileRoutingModule,
     SharedModule,
     StoreModule.forFeature('activity', activityReducer),

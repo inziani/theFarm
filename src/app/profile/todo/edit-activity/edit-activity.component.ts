@@ -8,15 +8,14 @@ import {
 
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Activity } from '@app/profile/todo/models/activity.model';
-import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-interface';
-// import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { Status } from '@app/shared/interfaces/activity-interface';
 import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/profile.state';
 import * as ActivityActions from '../../store/actions/profile.actions';
-import { take } from 'rxjs/internal/operators/take';
+import * as ActivitySelectors from '../../store/selectors/profile.selectors'
+import { ActivityCategory } from '../models/activity-category.models';
 
 @Component({
   selector: 'app-edit-activity',
@@ -26,7 +25,7 @@ import { take } from 'rxjs/internal/operators/take';
 export class EditActivityComponent implements OnInit {
   public selectedValue: any;
   public title: string = 'Edit Task';
-  public activityCategory!: ActivityCategoryInterface[];
+  public activityCategoryList!: ActivityCategory[];
   public activity!: Activity;
   public isLoading = false;
   public formSubmitted: boolean = false;
@@ -41,8 +40,6 @@ export class EditActivityComponent implements OnInit {
   public formGroup = new ActivityFormGroup();
 
   constructor(
-    private _activitysService: ActivitysService,
-    // private _dataSource: RestDataSource,
     private _dialog: MatDialog,
     private _dialogRef: MatDialogRef<EditActivityComponent>,
     private _store: Store<ActivityState>,
@@ -50,33 +47,34 @@ export class EditActivityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._activitysService.fetchActivityCategory().subscribe((category) => {
-      this.activityCategory = category;
+    // this._activitysService.fetchActivityCategory().subscribe((category) => {
+    //   this.activityCategory = category;
+    // });
+    this._store.dispatch(ActivityActions.ActivityCategoryActions['[ActivityCategory]RetrieveActivityCategoryList']());
+    this._store.select(ActivitySelectors.getActivityCategoryList).subscribe({
+      next: (activityCategoryList) => {
+        this.activityCategoryList = activityCategoryList
+        console.log('Tired of State -', this.activityCategoryList);
+      },
+      error: (err) => this.errorMessage = err,
+      complete:()=> console.info('Completed')
     });
     this.formGroup.patchValue(this.dialogDataActivity);
   }
 
-  public onFetchActivityData() {
-    this._activitysService.fetchActivityData().subscribe({
-      next: (data) => {
-        this.activityList = data;
-      },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('Complete'),
-    });
-  }
 
   public onEditActivity() {
-    this._dialogRef.close(this.formGroup.value);
+    // this._dialogRef.close(this.formGroup.value);
     this.activity = this.formGroup.value;
     this._store.dispatch(
       ActivityActions.ActivityActions['[Activity]EditActivity']({
         activity: this.activity,
       })
-    )
-    // this._dialog.open(ChangesSavedDialogComponent, {
-    //   data: this.activity.title,
-    // });
+    );
+    // this._dialogRef.close();
+    this._dialog.open(ChangesSavedDialogComponent, {
+      data: this.activity.title,
+    });
     // this._dialogRef
     //   .afterClosed()
     //   .pipe(take(1))
