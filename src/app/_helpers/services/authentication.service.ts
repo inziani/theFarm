@@ -12,7 +12,7 @@ import {
   JwTAuthenticationResponseInterface,
 } from '../..//shared/interfaces/users-interface';
 import { Router } from '@angular/router';
-import { User } from '@app/authentication/models/user.model';
+import { User } from '@app/features/human-resources/models/user.model';
 
 // import * as fromRoot from '@app/app.reducer';
 
@@ -72,6 +72,7 @@ export class AuthenticationService {
           var loggedInUserData = this.jwtHelper.decodeToken(
             response.access
           ) as JWTDecodedTokenInterface;
+          console.log('UserData - ', loggedInUserData);
           this._loggedInUser$.next(loggedInUserData);
           // this._store.dispatch(new UI.StopLoading());
         })

@@ -43,6 +43,7 @@ const AppRoutes: Routes = [
   },
   { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
   { path: '', component: HomePageComponent, pathMatch: 'full' },
+  { path: 'human-resources', loadChildren: () => import('./features/human-resources/human-resources.module').then(m => m.HumanResourcesModule) },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

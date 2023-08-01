@@ -29,18 +29,17 @@ export class ActivitysService {
 
   public addNewActivity(
     title: string,
-    slug: number,
-    activityCategory: string,
+    // slug: number,
     description: string,
+    activity_category: string,
     status: string
   ): Observable<Activity> {
     return this.http.post<Activity>(
       `${environment.apiUrl}/activitys/`,
       JSON.stringify({
         title,
-        slug,
-        activityCategory,
         description,
+        activity_category,
         status,
       }),
       { headers: this.httpHeaders }

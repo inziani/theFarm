@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 
 import { UserUpdateFormGroup } from '@app/authentication/models/user-update-form.model';
 import { Gender } from '@app/shared/interfaces/users-interface';
-import { User } from '@app/authentication/models/user.model';
+import { User } from '@app/features/human-resources/models/user.model';
 
 // import { Subscription } from 'rxjs';
 // import { AuthenticationService } from '@app/_helpers/services/authentication.service';

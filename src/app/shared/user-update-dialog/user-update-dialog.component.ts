@@ -18,7 +18,7 @@ import {
 import {
   User,
   EmployeeIDInformation,
-} from '@app/authentication/models/user.model';
+} from '@app/features/human-resources/models/user.model';
 import { ChangesSavedDialogComponent } from '../user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '../user-feedback-dialogues/delete-dialog/delete-dialog.component';
 import { ErrorHandlingDialogComponent } from '../user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';

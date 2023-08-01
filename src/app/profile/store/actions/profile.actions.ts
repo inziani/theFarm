@@ -17,6 +17,13 @@ export const ActivityActions = createActionGroup({
       errorMessage: string;
     }>(),
 
+    //***************************Start of Create Activity*****************************************************************
+    '[Activity] Create Activity': props<{ activity: Activity }>(),
+    '[Activity] Create Activity Success': props<{ activity: Activity }>(),
+    '[Activity] Create Activity Fail': props<{ error: string }>(),
+
+    //***************************End of Create Activity*******************************************************************
+
     //***************************Start of Edit Activity*****************************************************************
     '[Activity] Edit Activity': props<{ activity: Activity }>(),
     '[Activity] Edit Activity Success': props<{ activity: Activity }>(),

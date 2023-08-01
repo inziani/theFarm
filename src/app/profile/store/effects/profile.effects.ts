@@ -59,6 +59,39 @@ export class ProfileEffects {
     );
   });
 
+  public createActivityEffect$ = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(ActivityActions.ActivityActions['[Activity]CreateActivity']),
+      concatMap((action) =>
+        this._activityService
+          .addNewActivity(
+            action.activity.title,
+            action.activity.description,
+            String(action.activity.activity_category),
+            action.activity.status
+          )
+          .pipe(
+            map((activity) =>
+              ActivityActions.ActivityActions[
+                '[Activity]CreateActivitySuccess'
+              ]({
+                activity,
+              })
+            ),
+            catchError((error) =>
+              of(
+                ActivityActions.ActivityActions['[Activity]CreateActivityFail'](
+                  {
+                    error,
+                  }
+                )
+              )
+            )
+          )
+      )
+    );
+  });
+
   public editActivityEffect$ = createEffect(() => {
     return this._actions$.pipe(
       ofType(ActivityActions.ActivityActions['[Activity]EditActivity']),

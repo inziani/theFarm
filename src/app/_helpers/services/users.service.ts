@@ -16,7 +16,7 @@ import {
   EmployeeIDInformation,
   User,
   UserProfile,
-} from '@app/authentication/models/user.model';
+} from '@app/features/human-resources/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -69,9 +69,7 @@ export class UsersService {
     country: string,
     is_active: boolean,
     is_superuser: boolean,
-    is_staff: boolean,
-    staffType: string,
-    password: string
+    is_staff: boolean
   ): Observable<User> {
     return this._http.post<User>(
       `${environment.apiUrl}/users/`,
@@ -89,7 +87,6 @@ export class UsersService {
         is_active,
         is_superuser,
         is_staff,
-        password,
       },
       this.httpOptions
     );

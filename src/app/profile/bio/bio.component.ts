@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User, UserProfile } from '@app/authentication/models/user.model';
+import {
+  User,
+  UserProfile,
+} from '@app/features/human-resources/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UsersService } from '@app/_helpers/services/users.service';

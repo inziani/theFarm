@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '@app/authentication/models/user.model';
+import { User } from '@app/features/human-resources/models/user.model';
 
 import { AuthenticationService } from '../../_helpers/services/authentication.service';
 import { UsersService } from '@app/_helpers/services/users.service';

@@ -8,6 +8,7 @@ const initialState: ActivityState = {
   activityList: [
     {
       id: 1,
+      // slug: 1,
       title: 'JwT Authentication',
       description: 'Load and Refresh using JwT token Authentication',
       status: 'Work in progress',
@@ -76,6 +77,22 @@ export const activityReducer = createReducer<ActivityState>(
       };
     }
   ),
+  on(ActivityActions.ActivityActions['[Activity]CreateActivitySuccess'], (state, action) => {
+    const updatedActivityList = state.activityList.map((item)=>
+      action.activity.id === item.id ? action.activity : item);
+    return {
+      ...state,
+      activityList: updatedActivityList,
+      currentActivityId : action.activity.id,
+      error: ''
+    }
+  }),
+  on(ActivityActions.ActivityActions['[Activity]CreateActivityFail'], (state, action) => {
+    return {
+      ...state,
+      error: action.error
+    }
+  }),
   on(
     ActivityActions.ActivityActions['[Activity]EditActivitySuccess'],
     (state, action) => {
