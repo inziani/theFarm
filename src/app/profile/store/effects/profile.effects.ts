@@ -30,7 +30,8 @@ export class ProfileEffects {
           )
         )
       )
-    );
+    )
+
   });
 
   public loadActivityCategorysEffects = createEffect(() => {
