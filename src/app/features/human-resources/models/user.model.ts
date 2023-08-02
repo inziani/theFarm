@@ -1,22 +1,23 @@
 import { FormControl } from '@angular/forms';
 
 export interface User {
-  id: number;
-  username: string;
-  email: string;
-  first_name: string;
-  middle_name: string;
-  last_name: string;
-  phone_number: string;
-  date_of_birth: string;
-  gender: string;
-  city: string;
-  country: string;
-  is_active: boolean;
-  is_superuser: boolean;
-  is_staff: boolean;
-  staffType: string;
-  date_joined: Date;
+  id: number
+  username: string
+  email: string
+  first_name: string
+  middle_name: string
+  last_name: string
+  phone_number: string
+  date_of_birth: string
+  gender: string
+  city: string
+  country: string
+  is_active: boolean
+  is_superuser: boolean
+  is_staff: boolean
+  staffType: string
+  date_joined: Date
+  password: string
 }
 
 export interface UserProfile {

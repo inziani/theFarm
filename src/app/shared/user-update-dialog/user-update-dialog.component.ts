@@ -135,8 +135,8 @@ export class UserUpdateDialogComponent implements OnInit {
         this.staffUser.is_active,
         this.staffUser.is_superuser,
         this.staffUser.is_staff,
-        this.staffUser.staffType,
-        this.staffUser.password
+        // this.staffUser.staffType,
+        // this.staffUser.password
       )
       .subscribe({
         next: (userCreated) =>

@@ -14,9 +14,7 @@ import { userLoginAuthenticationReducer } from './store/reducers/authentication.
 @NgModule({
   declarations: [AuthenticationComponent, LoginComponent, SignupComponent],
   imports: [
-    // CommonModule,
-    // FormsModule,
-    // ReactiveFormsModule,
+
     AuthenticationRoutingModule,
     SharedModule,
     MaterialModule,

@@ -6,18 +6,17 @@ import { StoreModule } from '@ngrx/store';
 import { HumanResourcesRoutingModule } from './human-resources-routing.module';
 import { HumanResourcesComponent } from './human-resources.component';
 import { SharedModule } from '@app/shared/shared.module';
-
+import { UserEffects } from './store/effects/user.effects';
+import { userReducer } from './store/reducers/user.reducer';
 
 @NgModule({
-  declarations: [
-    HumanResourcesComponent
-  ],
+  declarations: [HumanResourcesComponent],
   imports: [
     CommonModule,
     HumanResourcesRoutingModule,
     SharedModule,
     StoreModule.forFeature('user', userReducer),
     EffectsModule.forFeature([UserEffects]),
-  ]
+  ],
 })
-export class HumanResourcesModule { }
+export class HumanResourcesModule {}

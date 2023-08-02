@@ -40,22 +40,11 @@ import { SharedModule } from './shared/shared.module';
 
 // StateManagement - NgRX
 
-import {
-  StoreModule,
-  MetaReducer,
-  Action,
-  ActionReducerFactory,
-} from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-// import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '@environments/environment';
-// import { InitialState } from '@ngrx/store/src/models';
 import { EffectsModule } from '@ngrx/effects';
-
-// import { profileReducer } from './profile/store/reducers/profile.reducer';
-// import { userLoginAuthenticationReducer } from './authentication/store/reducers/authentication.reducer';
-// import { ProfileEffects } from './profile/store/effects/profile.effects';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
