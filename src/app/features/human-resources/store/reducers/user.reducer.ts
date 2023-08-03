@@ -1,54 +1,37 @@
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, on } from '@ngrx/store';
 
-import { UserState } from "../state/user.state";
-import * as UserActions from '../actions/user.actions';
+import { UserState } from '../state/user.state';
+import { UserActions } from '../actions/user.actions';
 
 const initialState: UserState = {
+  jwtToken: { refresh: '', access: '' },
   currentUserId: NaN,
+  isAuthenticated: false,
   userList: [],
-  error: ''
-}
-
+  error: '',
+};
 
 export const userReducer = createReducer<UserState>(
   initialState,
-  on(UserActions.UserActions['[User]SetCurrentUserId'], (state, action) => {
+
+  on(UserActions['[User]RetrieveUserList'], (state) => {
     return {
       ...state,
-      currentUserId: action.userId
-    }
+      userList: state.userList,
+    };
   }),
-  on(UserActions.UserActions['[User]ClearCurrentUser'], (state) => {
-    return {
-      ...state,
-      currentUserId: null
-    }
-  }),
-  on(UserActions.UserActions['[User]InitializeCurrentUser'], (state) => {
-    return {
-      ...state,
-      currentUserId: 0
-    }
-  }),
-  on(UserActions.UserActions['[User]RetrieveUserList'], (state) => {
-    return {
-      ...state,
-      userList: state.userList
-    }
-  }),
-  on(UserActions.UserActions['[User]RetrieveUserListSuccess'], (state, action) => {
+  on(UserActions['[User]RetrieveUserListSuccess'], (state, action) => {
     return {
       ...state,
       userList: action.userList,
-      error: ''
-    }
+      error: '',
+    };
   }),
-  on(UserActions.UserActions['[User]RetrieveUserListFail'], (state, action) => {
+  on(UserActions['[User]RetrieveUserListFail'], (state, action) => {
     return {
       ...state,
       userList: [],
-      error: action.errorMessage
-    }
+      error: action.errorMessage,
+    };
   })
-
-)
+);

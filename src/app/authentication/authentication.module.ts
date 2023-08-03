@@ -9,16 +9,15 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MaterialModule } from '@app/material.module';
 import { StoreModule } from '@ngrx/store';
-import { userLoginAuthenticationReducer } from './store/reducers/authentication.reducer';
+import { authenticationReducer } from './store/reducers/authentication.reducer';
 
 @NgModule({
   declarations: [AuthenticationComponent, LoginComponent, SignupComponent],
   imports: [
-
     AuthenticationRoutingModule,
     SharedModule,
     MaterialModule,
-    StoreModule.forFeature('authentication', userLoginAuthenticationReducer),
+    StoreModule.forFeature('authentication', authenticationReducer),
   ],
 })
 export class AuthenticationModule {

@@ -34,23 +34,28 @@ export interface StaffType {
   viewValue: string;
 }
 
-export interface SignUpResponse {
-  email: string,
-  username: string
-}
+// export interface SignUpResponse {
+//   email: string,
+//   username: string
+// }
 
-export interface JwTAuthenticationResponseInterface {
-  refresh: string,
-  access: string
-}
+// export interface UserLogin {
+//   email: string;
+//   password: string;
+// }
 
-export interface JWTDecodedTokenInterface {
-  token_type: string;
-  exp: number;
-  iat: number;
-  jti: string;
-  user_id: number;
-}
+// export interface JwTAuthenticationResponseInterface {
+//   refresh: string,
+//   access: string
+// }
+
+// export interface JWTDecodedTokenInterface {
+//   token_type: string;
+//   exp: number;
+//   iat: number;
+//   jti: string;
+//   user_id: number;
+// }
 
 
 

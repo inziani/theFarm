@@ -1,12 +1,28 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AuthenticationLoginState } from '../state/authentication.state';
+import { AuthenticationState } from '../state/authentication.state';
 
-const getlogin = createFeatureSelector<AuthenticationLoginState>('login');
-export const getLogin = createSelector(getlogin, (state) => state.login);
+const selectAuthenticationFeatures =
+  createFeatureSelector<AuthenticationState>('authentication');
 
-const getrememberMeCheckBox =
-  createFeatureSelector<AuthenticationLoginState>('remeberMeCheckBox');
-export const getRememberMeCheckBox = createSelector(
-  getrememberMeCheckBox,
+export const selectRememberMeCheckBox = createSelector(
+  selectAuthenticationFeatures,
   (state) => state.rememberMeCheckBox
+);
+
+export const selectMaskUserEmail = createSelector(
+  selectAuthenticationFeatures,
+  (state) => state.maskUserEmail
+);
+export const selectJwtToken = createSelector(
+  selectAuthenticationFeatures,
+  (state) => state.jwtToken
+);
+export const selectIsAuthenticated = createSelector(
+  selectAuthenticationFeatures,
+  (state) => state.isAuthenticated
+);
+
+export const selectError = createSelector(
+  selectAuthenticationFeatures,
+  (state) => state.error
 );

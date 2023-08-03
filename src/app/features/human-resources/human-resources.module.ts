@@ -8,12 +8,14 @@ import { HumanResourcesComponent } from './human-resources.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { UserEffects } from './store/effects/user.effects';
 import { userReducer } from './store/reducers/user.reducer';
+import { MaterialModule } from '@app/material.module';
 
 @NgModule({
   declarations: [HumanResourcesComponent],
   imports: [
     CommonModule,
     HumanResourcesRoutingModule,
+    MaterialModule,
     SharedModule,
     StoreModule.forFeature('user', userReducer),
     EffectsModule.forFeature([UserEffects]),

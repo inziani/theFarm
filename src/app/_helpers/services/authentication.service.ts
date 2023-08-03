@@ -3,20 +3,16 @@ import { Injectable } from '@angular/core';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import {
   JWTDecodedTokenInterface,
   JwTAuthenticationResponseInterface,
-} from '../..//shared/interfaces/users-interface';
+} from '../../authentication/models/authentication.model';
 import { Router } from '@angular/router';
 import { User } from '@app/features/human-resources/models/user.model';
-
-// import * as fromRoot from '@app/app.reducer';
-
-// import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
@@ -56,8 +52,15 @@ export class AuthenticationService {
 
   //  New Methods
 
+  public onLogOnTest(email: string, password: string) {
+    return this._http.post<JwTAuthenticationResponseInterface>(
+      `${environment.apiUrl}/${environment.jwtLogin}`,
+      JSON.stringify({ email, password }),
+      this.httpOptions
+    );
+  }
+
   public onLogOn(email: string, password: string) {
-    // this._store.dispatch(new UI.StartLoading());
     return this._http
       .post<JwTAuthenticationResponseInterface>(
         `${environment.apiUrl}/${environment.jwtLogin}`,
@@ -72,15 +75,12 @@ export class AuthenticationService {
           var loggedInUserData = this.jwtHelper.decodeToken(
             response.access
           ) as JWTDecodedTokenInterface;
-          console.log('UserData - ', loggedInUserData);
           this._loggedInUser$.next(loggedInUserData);
-          // this._store.dispatch(new UI.StopLoading());
         })
       );
   }
 
   public onLogout() {
-    console.log('Is it getting Here?');
     this._isLoggedOn$.next(false);
     localStorage.clear();
     this._router.navigate(['/authentication/login']);

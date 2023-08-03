@@ -17,7 +17,7 @@ import { ErrorMessage } from '@app/shared/interfaces/http.interface';
 import {
   JWTDecodedTokenInterface,
   JwTAuthenticationResponseInterface,
-} from '@app/shared/interfaces/users-interface';
+} from '../authentication/models/authentication.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UnauthorizedServeResponseComponent } from '@app/shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
 import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';

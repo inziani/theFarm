@@ -5,12 +5,14 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { User } from '@app/features/human-resources/models/user.model';
 
 import { AuthenticationService } from '../../_helpers/services/authentication.service';
 import { UsersService } from '@app/_helpers/services/users.service';
+import { Store } from '@ngrx/store';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
 
 @Component({
   selector: 'app-header',
@@ -32,8 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private _authenticationService: AuthenticationService,
-    private _route: Router,
-    private _userService: UsersService
+    private _userService: UsersService,
+    private _store: Store<AuthenticationState>
   ) {}
 
   ngOnInit(): void {
@@ -45,11 +47,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       error: (err) => (this.errorMessage = err),
       complete: () => console.info(),
     });
+   
   }
-
-  // public onSignUp() {
-  //   this._route.navigate(['signup']);
-  // }
 
   public onLogIn() {
     this._userService.sendData(this.logInUserAction);

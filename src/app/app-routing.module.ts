@@ -30,6 +30,12 @@ const AppRoutes: Routes = [
       import('./features/sales/sales.module').then((m) => m.SalesModule),
   },
   {
+    path: 'humanResources',
+    canMatch: [canMatchModulesGuard],
+    loadChildren: ()=> import ('./features/human-resources/human-resources.module').then((m)=> m.HumanResourcesModule)
+
+  },
+  {
     path: 'shared',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>

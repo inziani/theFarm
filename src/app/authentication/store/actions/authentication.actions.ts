@@ -1,19 +1,29 @@
-import { createAction, props } from '@ngrx/store';
+import {
+  JwTAuthenticationResponseInterface,
+  UserLogin,
+} from '../../models/authentication.model';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-// export const userEmail = createAction('[Authentication] User Email');
-
-export interface UserLogIn {
-  userEmail: string;
-  isAuthenticated: boolean;
-}
-
-export const rememberMeCheckBox = createAction(
-  '[Authentication] Remember Me CheckBox'
-);
-export const maskUserEmail = createAction('[Authentication] Mask User Email');
-
-export const logIn = createAction(
-  '[AuthenticationUserLogin] User Login',
-  props<{ userDetails: UserLogIn }>()
-);
-export const logOut = createAction('[AuthenticationUserLogOut] User LogOut');
+export const AuthenticationActions = createActionGroup({
+  source: 'User',
+  events: {
+    '[Authentication] User LogIn': props<{ userLogInCredentials: UserLogin }>(),
+    '[Authentication] Remember Me CheckBox': emptyProps(),
+    '[Authentication] Mask User Email': emptyProps(),
+    '[Authentication] User LogIn Sucess': props<{
+      jwtToken: JwTAuthenticationResponseInterface;
+    }>(),
+    '[Authentication] User LogIn Fail': props<{
+      errorMessage: string;
+    }>(),
+    '[Authentication] User LogOut': props<{
+      userLogInCredentials: UserLogin;
+    }>(),
+    '[Authentication] User LogOut Sucess': props<{
+      jwtToken: JwTAuthenticationResponseInterface;
+    }>(),
+    '[Authentication] User LogOut Fail': props<{
+      errorMessage: string;
+    }>(),
+  },
+});

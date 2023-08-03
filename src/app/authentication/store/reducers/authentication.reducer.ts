@@ -1,36 +1,54 @@
 import { createReducer, on } from '@ngrx/store';
 
-import * as AuthenticationActions from '../actions/authentication.actions';
-import { AuthenticationLoginState } from '../state/authentication.state';
+import { AuthenticationActions } from '../actions/authentication.actions';
+import { AuthenticationState } from '../state/authentication.state';
 
-const initialLoginState: AuthenticationLoginState = {
-  login: {
-    userEmail: '',
-    isAuthenticated: false,
-  },
+const initialLoginState: AuthenticationState = {
   rememberMeCheckBox: false,
+  maskUserEmail: true,
+  jwtToken: { access: '', refresh: '' },
+  isAuthenticated: false,
+  error: '',
 };
 
-export const userLoginAuthenticationReducer =
-  createReducer<AuthenticationLoginState>(
-    initialLoginState,
-    on(
-      AuthenticationActions.logIn,
-      (state, action): AuthenticationLoginState => {
-        return {
-          ...state,
-          login: action.userDetails,
-        };
-      }
-    ),
-    on(
-      AuthenticationActions.rememberMeCheckBox,
-      (state): AuthenticationLoginState => {
-        console.log('Remember me Checkbox');
-        return {
-          ...state,
-          rememberMeCheckBox: !state.rememberMeCheckBox,
-        };
-      }
-    )
-  );
+export const authenticationReducer = createReducer<AuthenticationState>(
+  initialLoginState,
+  on(
+    AuthenticationActions['[Authentication]UserLogInSucess'],
+    (state, action): AuthenticationState => {
+      return {
+        ...state,
+        isAuthenticated: !state.isAuthenticated,
+        jwtToken: action.jwtToken,
+        error: '',
+      };
+    }
+  ),
+  on(
+    AuthenticationActions['[Authentication]UserLogInFail'],
+    (state, action): AuthenticationState => {
+      return {
+        ...state,
+        error: action.errorMessage,
+      };
+    }
+  ),
+  on(
+    AuthenticationActions['[Authentication]RememberMeCheckBox'],
+    (state): AuthenticationState => {
+      return {
+        ...state,
+        rememberMeCheckBox: !state.rememberMeCheckBox,
+      };
+    }
+  ),
+  on(
+    AuthenticationActions['[Authentication]MaskUserEmail'],
+    (state): AuthenticationState => {
+      return {
+        ...state,
+        maskUserEmail: !state.maskUserEmail,
+      };
+    }
+  )
+);

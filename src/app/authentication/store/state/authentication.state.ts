@@ -1,13 +1,14 @@
+import { JwTAuthenticationResponseInterface } from '../../models/authentication.model';
 import * as AppState from '@app/store/state/app.state';
 
 export interface State extends AppState.State {
-  login: AuthenticationLoginState;
+  login: AuthenticationState;
 }
 
-export interface AuthenticationLoginState {
+export interface AuthenticationState {
   rememberMeCheckBox: boolean;
-  login: {
-    userEmail: string;
-    isAuthenticated: boolean;
-  };
+  maskUserEmail: boolean;
+  jwtToken: JwTAuthenticationResponseInterface;
+  isAuthenticated: boolean;
+  error: string;
 }

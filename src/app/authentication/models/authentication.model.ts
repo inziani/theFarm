@@ -1,8 +1,22 @@
-export interface LoginCredentials {
 
-         email: string,
-         password: string
-    }
+
+export interface UserLogin {
+  email: string;
+  password: string;
+}
+
+export interface JwTAuthenticationResponseInterface {
+  refresh: string,
+  access: string
+}
+
+export interface JWTDecodedTokenInterface {
+  token_type: string;
+  exp: number;
+  iat: number;
+  jti: string;
+  user_id: number;
+}
 
 export  interface SignUpCredentials {
 
