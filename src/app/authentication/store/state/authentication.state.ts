@@ -11,4 +11,5 @@ export interface AuthenticationState {
   jwtToken: JwTAuthenticationResponseInterface;
   isAuthenticated: boolean;
   error: string;
+  isLoading: boolean;
 }

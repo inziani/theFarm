@@ -41,7 +41,13 @@ export class LoginComponent implements OnInit {
     private _dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._store.select(selectJwtToken).subscribe({
+      next: (token) => console.log('Store Token - ', token),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed Token Fetching'),
+    });
+  }
 
   public checkRememberMeBox() {
     this._store.dispatch(
@@ -57,14 +63,11 @@ export class LoginComponent implements OnInit {
     this.userLoggingIn = this.formGroup.value;
     this._store.dispatch(
       AuthenticationActions['[Authentication]UserLogIn']({
-        userLogInCredentials: this.userLoggingIn,
+        userLogin: this.userLoggingIn,
       })
     );
-    // this._dialog.open(LoginDialogComponent, { data: this.userLoggingIn.email });
-    // this._router.navigate(['/profile']);
-
     this._authenticationService
-      .onLogOn(this.userLoggingIn.email, this.userLoggingIn.password)
+      .onLogOnTest(this.userLoggingIn.email, this.userLoggingIn.password)
       .subscribe({
         next: (jwtTokens) => {
           if (jwtTokens) {
@@ -79,12 +82,5 @@ export class LoginComponent implements OnInit {
       });
     this.formGroup.reset();
     this.formSubmitted = false;
-    this._store.select(selectJwtToken).subscribe({
-      next: (token) => {
-        console.log('The Token login? - ', token);
-      },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('Section Completed'),
-    });
   }
 }

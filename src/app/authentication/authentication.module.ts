@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { AuthenticationComponent } from './authentication.component';
@@ -10,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { MaterialModule } from '@app/material.module';
 import { StoreModule } from '@ngrx/store';
 import { authenticationReducer } from './store/reducers/authentication.reducer';
+import { AuthenticationEffects } from './store/effects/authentication.effects';
 
 @NgModule({
   declarations: [AuthenticationComponent, LoginComponent, SignupComponent],
@@ -18,6 +18,7 @@ import { authenticationReducer } from './store/reducers/authentication.reducer';
     SharedModule,
     MaterialModule,
     StoreModule.forFeature('authentication', authenticationReducer),
+    EffectsModule.forFeature([AuthenticationEffects]),
   ],
 })
 export class AuthenticationModule {

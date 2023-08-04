@@ -9,18 +9,23 @@ const initialLoginState: AuthenticationState = {
   jwtToken: { access: '', refresh: '' },
   isAuthenticated: false,
   error: '',
+  isLoading: false,
 };
 
 export const authenticationReducer = createReducer<AuthenticationState>(
   initialLoginState,
+  // on(AuthenticationActions['[Authentication]UserLogIn'], (state) => {
+  //   return {
+  //     ...state,
+  //     isLoading: !state.isLoading,
+  //   };
+  // }),
   on(
     AuthenticationActions['[Authentication]UserLogInSucess'],
     (state, action): AuthenticationState => {
       return {
         ...state,
-        isAuthenticated: !state.isAuthenticated,
         jwtToken: action.jwtToken,
-        error: '',
       };
     }
   ),

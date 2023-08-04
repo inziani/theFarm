@@ -7,7 +7,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 export const AuthenticationActions = createActionGroup({
   source: 'User',
   events: {
-    '[Authentication] User LogIn': props<{ userLogInCredentials: UserLogin }>(),
+    '[Authentication] User LogIn': props<{ userLogin: UserLogin }>(),
     '[Authentication] Remember Me CheckBox': emptyProps(),
     '[Authentication] Mask User Email': emptyProps(),
     '[Authentication] User LogIn Sucess': props<{
