@@ -17,7 +17,10 @@ import { AuthenticationEffects } from './store/effects/authentication.effects';
     AuthenticationRoutingModule,
     SharedModule,
     MaterialModule,
-    StoreModule.forFeature('authentication', authenticationReducer),
+    StoreModule.forFeature(
+      'authentication',
+      authenticationReducer
+    ),
     EffectsModule.forFeature([AuthenticationEffects]),
   ],
 })

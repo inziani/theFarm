@@ -12,7 +12,13 @@ import { AuthenticationService } from '../../_helpers/services/authentication.se
 import { UsersService } from '@app/_helpers/services/users.service';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
-import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
+import {
+  selectIsAuthenticated,
+  selectJwtToken,
+} from '@app/authentication/store/selectors/authentication.selector';
+import { JWTDecodedTokenInterface } from '@app/authentication/models/authentication.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
+// import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
 
 @Component({
   selector: 'app-header',
@@ -25,13 +31,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuthenticated: boolean = false;
   public user!: number;
-  public userList!: User[];
-  public loggedInUser!: any;
-  public currentLoggedInUser!: User[];
+  // public userList!: User[];
+  // public loggedInUser!: any;
+  // public currentLoggedInUser!: User[];
   public errorMessage!: string;
   public logInUserAction: string = 'login';
   public signUpUserAction: string = 'signup';
-
+  public jwtHelper = new JwtHelperService();
   constructor(
     private _authenticationService: AuthenticationService,
     private _userService: UsersService,
@@ -39,15 +45,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._authenticationService._loggedInUserData$.subscribe({
+    this._store.select(selectIsAuthenticated).subscribe({
       next: (loggedInUser) => {
-        this.user = loggedInUser.user_id;
-        this.isAuthenticated = !!this.user;
+        this.isAuthenticated = loggedInUser;
       },
       error: (err) => (this.errorMessage = err),
-      complete: () => console.info(),
+      complete: () => console.info('Completed'),
     });
-   
+
+    this._store.select(selectJwtToken).subscribe({
+      next: (token) => {
+        const jwtDecodeToken = this.jwtHelper.decodeToken(
+          token?.access
+        ) as JWTDecodedTokenInterface;
+        this.user = jwtDecodeToken?.user_id;
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed Token Fetching'),
+    });
   }
 
   public onLogIn() {
@@ -58,15 +73,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this._userService.sendData(this.signUpUserAction);
   }
 
-  onToggleSidenav() {
+  public onToggleSidenav() {
     this.sideNavToggle.emit();
   }
 
-  onHomePageSideNavToggle() {
+  public onHomePageSideNavToggle() {
     this.homePageNavToggle.emit();
   }
 
-  onLogOut() {
+  public onLogOut() {
     this._authenticationService.onLogout();
   }
 

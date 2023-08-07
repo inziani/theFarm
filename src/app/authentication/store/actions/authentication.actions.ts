@@ -25,5 +25,6 @@ export const AuthenticationActions = createActionGroup({
     '[Authentication] User LogOut Fail': props<{
       errorMessage: string;
     }>(),
+    '[Authentication] Fetch User':emptyProps()
   },
 });

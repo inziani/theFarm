@@ -2,7 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginFormGroup } from '@app/authentication/models/loginform.model';
-import { UserLogin } from '@app/authentication/models/authentication.model';
+import {
+  JWTDecodedTokenInterface,
+  UserLogin,
+} from '@app/authentication/models/authentication.model';
 import { LoginDialogComponent } from '@app/shared/user-feedback-dialogues/login-dialog/login-dialog.component';
 
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
@@ -11,9 +14,9 @@ import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { State } from '../store/state/authentication.state';
-// import { se } from '../store/selectors/authentication.selector';
 import { AuthenticationActions } from '../store/actions/authentication.actions';
 import { selectJwtToken } from '../store/selectors/authentication.selector';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +36,7 @@ export class LoginComponent implements OnInit {
   }
   public isAuthenticated!: boolean;
   // public UserLogInFromAction!: AuthenticationActions.UserLogIn;
+  public jwtHelper = new JwtHelperService();
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -43,7 +47,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.select(selectJwtToken).subscribe({
-      next: (token) => console.log('Store Token - ', token),
+      next: (token) => {
+        console.log('Store Token - ', token);
+        const jwtDecodeToken = this.jwtHelper.decodeToken(
+          token.access
+        ) as JWTDecodedTokenInterface;
+        console.log('jwtDecodeToken-', jwtDecodeToken);
+      },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed Token Fetching'),
     });

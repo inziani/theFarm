@@ -13,6 +13,9 @@ import {
 } from '../../authentication/models/authentication.model';
 import { Router } from '@angular/router';
 import { User } from '@app/features/human-resources/models/user.model';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { Store } from '@ngrx/store';
+import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +30,7 @@ export class AuthenticationService {
   private _isLoggedOn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public readonly isLoggedOnData$: Observable<boolean> =
     this._isLoggedOn$.asObservable();
+
   public _loggedInUser$ = new BehaviorSubject<JWTDecodedTokenInterface>({
     token_type: 'string',
     exp: NaN,
@@ -45,8 +49,15 @@ export class AuthenticationService {
 
   constructor(
     private _http: HttpClient,
-    public _router: Router // private _store: Store<fromRoot.State>
-  ) {}
+    public _router: Router,
+    private _store: Store<AuthenticationState>
+  ) {
+    this._store.select(selectJwtToken).subscribe({
+      next: (token) => console.log('Auth service tokens-', token),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complated'),
+    });
+  }
 
   // *********************New Code******************************
 
