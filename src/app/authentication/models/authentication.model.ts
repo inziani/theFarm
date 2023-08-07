@@ -31,21 +31,22 @@ export interface SignUpCredentials {
   password: string;
   confirmPassword: string;
 }
-@Injectable()
-export class AuthenticatedUser implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {
-    // this._store.select(selectJwtToken).subscribe({
-    //   next: (token) => {
-    //     console.log('Store Token - ', token);
-    //     const jwtDecodeToken = this.jwtHelper.decodeToken(
-    //       token.access
-    //     ) as JWTDecodedTokenInterface;
-    //     console.log('jwtDecodeToken-', jwtDecodeToken);
-    //   },
-    //   error: (err) => (this.errorMessage = err),
-    //   complete: () => console.info('Completed Token Fetching'),
-    // });
-  }
-}
+// @Injectable()
+// export class AuthenticatedUser implements OnInit {
+//   constructor() {}
+
+//   ngOnInit(): void {
+//     // this._store.select(selectJwtToken).subscribe({
+//     //   next: (token) => {
+//     //     console.log('Store Token - ', token);
+//     //     const jwtDecodeToken = this.jwtHelper.decodeToken(
+//     //       token.access
+//     //     ) as JWTDecodedTokenInterface;
+//     //     console.log('jwtDecodeToken-', jwtDecodeToken);
+//     //   },
+//     //   error: (err) => (this.errorMessage = err),
+//     //   complete: () => console.info('Completed Token Fetching'),
+//     // });
+//   }
+// }
