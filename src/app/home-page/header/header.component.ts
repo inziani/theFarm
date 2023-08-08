@@ -16,8 +16,14 @@ import {
   selectIsAuthenticated,
   selectJwtToken,
 } from '@app/authentication/store/selectors/authentication.selector';
-import { JWTDecodedTokenInterface } from '@app/authentication/models/authentication.model';
+import {
+  JWTDecodedTokenInterface,
+  JwTAuthenticationResponseInterface,
+} from '@app/authentication/models/authentication.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { map } from 'rxjs';
+import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+import { selectUserList } from '@app/features/human-resources/store/selectors/user.selector';
 // import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
 
 @Component({
@@ -31,9 +37,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuthenticated: boolean = false;
   public user!: number;
-  // public userList!: User[];
+  public currentLoggedInUser!: User;
+  public username!: string;
+  // public userList!: User[]
   // public loggedInUser!: any;
-  // public currentLoggedInUser!: User[];
+
   public errorMessage!: string;
   public logInUserAction: string = 'login';
   public signUpUserAction: string = 'signup';
@@ -46,8 +54,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._store.select(selectIsAuthenticated).subscribe({
-      next: (loggedInUser) => {
-        this.isAuthenticated = loggedInUser;
+      next: (isAuthenticated) => {
+        this.isAuthenticated = isAuthenticated;
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed'),
@@ -63,6 +71,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed Token Fetching'),
     });
+    this._store.select(selectJwtToken).pipe(
+      map((tokenMap: JwTAuthenticationResponseInterface) => {
+        const jwtDecodeToken = this.jwtHelper.decodeToken(
+          tokenMap?.access
+        ) as JWTDecodedTokenInterface;
+        this.user = jwtDecodeToken?.user_id;
+        console.log('UserId Mathogs - ', this.user);
+        this._store.select(selectUserList).subscribe({
+          next: (users) => {
+            console.log('UserList Mathogs - ', users);
+            // this.currentLoggedInUser = users.find(
+            //   (user) => user.id === this.user
+            // )!;
+            // this.username = this.currentLoggedInUser.username;
+            // console.log(
+            //   'Mathogothanio currentLoggedInUser - ',
+            //   this.currentLoggedInUser,
+            //   this.username
+            // );
+            // console.log(
+            //   'Mathogothanio - unsername ',
+
+            //   this.username
+            // );
+          },
+          error: (err) => (this.errorMessage = err),
+          complete: () => console.info('Completed'),
+        });
+      })
+    );
   }
 
   public onLogIn() {

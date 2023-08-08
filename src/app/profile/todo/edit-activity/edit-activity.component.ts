@@ -54,7 +54,6 @@ export class EditActivityComponent implements OnInit {
     this._store.select(ActivitySelectors.getActivityCategoryList).subscribe({
       next: (activityCategoryList) => {
         this.activityCategoryList = activityCategoryList;
-        console.log('Tired of State -', this.activityCategoryList);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed'),

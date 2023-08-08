@@ -46,10 +46,8 @@
         >
       </li>
       <li *ngIf="isAuthenticated">
-        <a
-          routerLink="/profile"
-          *ngFor="let loggedInUser of currentLoggedInUser"
-          >{{ loggedInUser.username }}
+        <a routerLink="/profile">
+          Logged in As {{ username }}
         </a>
       </li>
     </ul>

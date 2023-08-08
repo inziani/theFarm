@@ -95,6 +95,7 @@ export class BioComponent implements OnInit {
     this.isDisabled = true;
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+
     this._authenticationService._loggedInUserData$
       .pipe(
         tap((user) => {
@@ -124,6 +125,8 @@ export class BioComponent implements OnInit {
       )
       .subscribe();
   }
+
+  
   ngAfterViewInit() {}
   public selectFile(event: any): void {
     this.imageLoadStatusMessage = '';
