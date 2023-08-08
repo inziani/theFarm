@@ -1,4 +1,8 @@
 import {
+  User,
+  UserProfile,
+} from '@app/features/human-resources/models/user.model';
+import {
   JwTAuthenticationResponseInterface,
   UserLogin,
 } from '../../models/authentication.model';
@@ -24,7 +28,24 @@ export const AuthenticationActions = createActionGroup({
     }>(),
     '[Authentication] User LogOut Fail': props<{
       errorMessage: string;
+      jwtToken: JwTAuthenticationResponseInterface;
     }>(),
-    '[Authentication] Fetch User':emptyProps()
+    '[Authentication] Current User Id': props<{ userId: number }>(),
+    '[Authentication] Fetch User': props<{ user: User }>(),
+    '[Authentication] Fetch User List': emptyProps(),
+    '[Authentication] Fetch User List Success': props<{ users: User[] }>(),
+    '[Authentication] Fetch User List Failure': props<{
+      errorMessage: string;
+    }>(),
+    '[Authentication] Fetch User Profile': props<{
+      userProfile: UserProfile;
+    }>(),
+    '[Authentication] Fetch User Profile List': emptyProps(),
+    '[Authentication] Fetch User Profile List Success': props<{
+      userProfiles: UserProfile[];
+    }>(),
+    '[Authentication] Fetch User  Profile List Failure': props<{
+      errorMessage: string;
+    }>(),
   },
 });

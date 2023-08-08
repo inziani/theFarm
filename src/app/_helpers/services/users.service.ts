@@ -11,7 +11,6 @@ import {
   shareReplay,
 } from 'rxjs';
 
-import { UserInterface } from '../../shared/interfaces/users-interface';
 import {
   EmployeeIDInformation,
   User,
@@ -47,11 +46,6 @@ export class UsersService {
 
   public sendData(data: string) {
     this.userAction.next(data);
-  }
-
-  // Get user listing;
-  public getUsersListing(): Observable<UserInterface[]> {
-    return this._http.get<UserInterface[]>(`${environment.apiUrl}/users/`);
   }
 
   // User creation
@@ -117,6 +111,7 @@ export class UsersService {
       .get<User[]>(`${environment.apiUrl}/users/`, this.httpOptions)
       .pipe(shareReplay());
   }
+
   public fetchSingleUser(id: number): Observable<User> {
     return this._http.get<User>(
       `${environment.apiUrl}/users/` + id + '/',
@@ -182,6 +177,12 @@ export class UsersService {
         }),
         shareReplay()
       );
+  }
+  public fetchUserProfilesState(): Observable<UserProfile[]> {
+    return this._http.get<UserProfile[]>(
+      `${environment.apiUrl}/user-profile`,
+      this.httpOptions
+    );
   }
 
   public fetchSingleUserProfile(user: number): Observable<any> {
