@@ -17,6 +17,7 @@ import { State } from '../store/state/authentication.state';
 import { AuthenticationActions } from '../store/actions/authentication.actions';
 import { selectJwtToken } from '../store/selectors/authentication.selector';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { selectUserList } from '@app/features/human-resources/store/selectors/user.selector';
 
 @Component({
   selector: 'app-login',
@@ -46,16 +47,11 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._store.select(selectJwtToken).subscribe({
-      next: (token) => {
-        console.log('Store Token - ', token);
-        const jwtDecodeToken = this.jwtHelper.decodeToken(
-          token.access
-        ) as JWTDecodedTokenInterface;
-        console.log('jwtDecodeToken-', jwtDecodeToken);
-      },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('Completed Token Fetching'),
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]FetchUserList']()
+    );
+    this._store.select(selectUserList).subscribe({
+      next: (userList) => console.log(userList),
     });
   }
 

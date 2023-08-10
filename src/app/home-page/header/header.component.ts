@@ -71,36 +71,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed Token Fetching'),
     });
-    this._store.select(selectJwtToken).pipe(
-      map((tokenMap: JwTAuthenticationResponseInterface) => {
-        const jwtDecodeToken = this.jwtHelper.decodeToken(
-          tokenMap?.access
-        ) as JWTDecodedTokenInterface;
-        this.user = jwtDecodeToken?.user_id;
-        console.log('UserId Mathogs - ', this.user);
-        this._store.select(selectUserList).subscribe({
-          next: (users) => {
-            console.log('UserList Mathogs - ', users);
-            // this.currentLoggedInUser = users.find(
-            //   (user) => user.id === this.user
-            // )!;
-            // this.username = this.currentLoggedInUser.username;
-            // console.log(
-            //   'Mathogothanio currentLoggedInUser - ',
-            //   this.currentLoggedInUser,
-            //   this.username
-            // );
-            // console.log(
-            //   'Mathogothanio - unsername ',
+    // this._store.select(selectJwtToken).pipe(
+    //   map((tokenMap: JwTAuthenticationResponseInterface) => {
+    //     const jwtDecodeToken = this.jwtHelper.decodeToken(
+    //       tokenMap?.access
+    //     ) as JWTDecodedTokenInterface;
+    //     this.user = jwtDecodeToken?.user_id;
+    //     console.log('UserId Mathogs - ', this.user);
+    //     this._store.select(selectUserList).subscribe({
+    //       next: (users) => {
+    //         console.log('UserList Mathogs - ', users);
+    // this.currentLoggedInUser = users.find(
+    //   (user) => user.id === this.user
+    // )!;
+    // this.username = this.currentLoggedInUser.username;
+    // console.log(
+    //   'Mathogothanio currentLoggedInUser - ',
+    //   this.currentLoggedInUser,
+    //   this.username
+    // );
+    // console.log(
+    //   'Mathogothanio - unsername ',
 
-            //   this.username
-            // );
-          },
-          error: (err) => (this.errorMessage = err),
-          complete: () => console.info('Completed'),
-        });
-      })
-    );
+    //   this.username
+    // );
+    //       },
+    //       error: (err) => (this.errorMessage = err),
+    //       complete: () => console.info('Completed'),
+    //     });
+    //   })
+    // );
   }
 
   public onLogIn() {

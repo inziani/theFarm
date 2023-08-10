@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { UsersService } from '@app/_helpers/services/users.service';
 
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, map, mapTo, switchMap, switchMapTo, tap } from 'rxjs';
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { DatePipe } from '@angular/common';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
@@ -21,6 +21,12 @@ import {
   UserProfilePictureUpdateFormGroup,
   UserUpdateFormGroup,
 } from '@app/authentication/models/user-update-form.model';
+import { Store } from '@ngrx/store';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
+import { JWTDecodedTokenInterface } from '@app/authentication/models/authentication.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
 
 @Component({
   selector: 'app-bio',
@@ -28,6 +34,7 @@ import {
   styleUrls: ['./bio.component.css'],
 })
 export class BioComponent implements OnInit {
+  public jwtHelper = new JwtHelperService();
   //  Start of Bio
   public itemSelected!: string;
   public formGroup = new UserUpdateFormGroup();
@@ -85,7 +92,8 @@ export class BioComponent implements OnInit {
     private _authenticationService: AuthenticationService,
     private _dialog: MatDialog,
     private _dateFormat: DatePipe,
-    private _userService: UsersService
+    private _userService: UsersService,
+    private _store: Store<AuthenticationState>
   ) {
     this.datePipe = _dateFormat;
   }
@@ -124,9 +132,44 @@ export class BioComponent implements OnInit {
         )
       )
       .subscribe();
+
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]CurrentUserId']({ userId: 1 })
+    );
+    this._store.select(selectJwtToken).subscribe({
+      next: (token) => {
+        const jwtDecodeToken = this.jwtHelper.decodeToken(
+          token?.access
+        ) as JWTDecodedTokenInterface;
+        this.user = jwtDecodeToken?.user_id;
+        console.log('Admin Page user', this.user);
+        console.log('Admin Page token', token);
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed Token Fetching'),
+    });
+
+    this._store
+      .select(selectJwtToken)
+      .pipe(
+        map((token) => {
+          const jwtDecodedToken = this.jwtHelper.decodeToken(token?.access);
+          this.user = jwtDecodedToken?.user_id;
+          console.log('RxJS Operators Token - ', jwtDecodedToken);
+          console.log('RxJS Operators userId - ', this.user);
+          this._store.dispatch(
+            AuthenticationActions['[Authentication]CurrentUserId']({
+              userId: this.user,
+            })
+          );
+        }),
+        tap((_userId) => {
+          console.log('Is the Swtich Map working -', _userId);
+        })
+      )
+      .subscribe();
   }
 
-  
   ngAfterViewInit() {}
   public selectFile(event: any): void {
     this.imageLoadStatusMessage = '';
