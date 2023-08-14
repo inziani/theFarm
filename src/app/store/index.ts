@@ -11,12 +11,12 @@ import * as fromAuthentication from '../authentication/store/reducers/authentica
 import * as fromProfile from '../profile/store/reducers/profile.reducer';
 
 export interface UIState {
-  authentication: fromUIAuthenticationState.AuthenticationLoginState;
+  authentication: fromUIAuthenticationState.AuthenticationState;
   profile: fromUIProfileState.ActivityState;
 }
 
 export const reducers: ActionReducerMap<UIState> = {
-  authentication: fromAuthentication.userLoginAuthenticationReducer,
+  authentication: fromAuthentication.authenticationReducer,
   profile: fromProfile.activityReducer,
 };
 

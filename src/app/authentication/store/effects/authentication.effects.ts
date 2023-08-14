@@ -20,16 +20,19 @@ export class AuthenticationEffects {
         this._authenticationService
           .onLogOnTest(action.userLogin.email, action.userLogin.password)
           .pipe(
-            map((jwtToken) =>
-              AuthenticationActions['[Authentication]UserLogInSucess']({
-                jwtToken,
-              })
+            map(
+              (jwtToken) =>
+                AuthenticationActions['[Authentication]UserLogInSucess']({
+                  jwtToken,
+                })
+              // routeAction.routeto('profile')
             ),
             catchError((error: string) =>
               of(
                 AuthenticationActions['[Authentication]UserLogInFail']({
                   errorMessage: error,
                 })
+                // routeAction.routeto('login')
               )
             )
           )

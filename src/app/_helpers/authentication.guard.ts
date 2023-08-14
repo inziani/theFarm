@@ -11,7 +11,6 @@ export const authenticationGuard: CanActivateFn = () => {
     .select(selectIsAuthenticated)
     .pipe(
       tap((isAuthenticated) => {
-        console.log('Guard Authentication Status -', isAuthenticated);
         !isAuthenticated && route.navigate(['unauthorized']);
       })
     );
