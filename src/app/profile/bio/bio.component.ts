@@ -133,9 +133,7 @@ export class BioComponent implements OnInit {
       )
       .subscribe();
 
-    this._store.dispatch(
-      AuthenticationActions['[Authentication]CurrentUserId']({ userId: 1 })
-    );
+  
     this._store.select(selectJwtToken).subscribe({
       next: (token) => {
         const jwtDecodeToken = this.jwtHelper.decodeToken(

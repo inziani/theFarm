@@ -13,11 +13,15 @@ import { MatDialog, _closeDialogVia } from '@angular/material/dialog';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { State } from '../store/state/authentication.state';
+import {
+  AuthenticationState,
+  State,
+} from '../store/state/authentication.state';
 import { AuthenticationActions } from '../store/actions/authentication.actions';
-import { selectJwtToken } from '../store/selectors/authentication.selector';
+// import { selectJwtToken } from '../store/selectors/authentication.selector';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { selectUserList } from '@app/features/human-resources/store/selectors/user.selector';
+// import { selectUserList } from '@app/features/human-resources/store/selectors/user.selector';
+// import { ActivityActions } from '@app/profile/store/actions/profile.actions';
 
 @Component({
   selector: 'app-login',
@@ -36,24 +40,16 @@ export class LoginComponent implements OnInit {
     this.isLoginMode = !this.isLoginMode;
   }
   public isAuthenticated!: boolean;
-  // public UserLogInFromAction!: AuthenticationActions.UserLogIn;
   public jwtHelper = new JwtHelperService();
 
   constructor(
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    private _store: Store<State>,
+    private _store: Store<AuthenticationState>,
     private _dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {
-    this._store.dispatch(
-      AuthenticationActions['[Authentication]FetchUserList']()
-    );
-    this._store.select(selectUserList).subscribe({
-      next: (userList) => console.log(userList),
-    });
-  }
+  ngOnInit(): void {}
 
   public checkRememberMeBox() {
     this._store.dispatch(
@@ -72,20 +68,23 @@ export class LoginComponent implements OnInit {
         userLogin: this.userLoggingIn,
       })
     );
-    this._authenticationService
-      .onLogOnTest(this.userLoggingIn.email, this.userLoggingIn.password)
-      .subscribe({
-        next: (jwtTokens) => {
-          if (jwtTokens) {
-            this._dialog.open(LoginDialogComponent);
-            this._router.navigate(['/profile']);
-          }
-        },
-        error: (err) => {
-          this.errorMessage = err;
-        },
-        complete: () => console.info('Completed'),
-      });
+    this._router.navigate(['/home']);
+    // this._dialog.open(LoginDialogComponent);
+
+    // this._authenticationService
+    //   .onLogOnTest(this.userLoggingIn.email, this.userLoggingIn.password)
+    //   .subscribe({
+    //     next: (jwtTokens) => {
+    //       if (jwtTokens) {
+    //         this._dialog.open(LoginDialogComponent);
+    //         this._router.navigate(['/profile']);
+    //       }
+    //     },
+    //     error: (err) => {
+    //       this.errorMessage = err;
+    //     },
+    //     complete: () => console.info('Completed'),
+    //   });
     this.formGroup.reset();
     this.formSubmitted = false;
   }

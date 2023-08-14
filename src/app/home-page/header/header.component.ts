@@ -36,12 +36,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output() homePageNavToggle = new EventEmitter<void>();
 
   public isAuthenticated: boolean = false;
-  public user!: number;
+  public userId!: number;
   public currentLoggedInUser!: User;
   public username!: string;
-  // public userList!: User[]
-  // public loggedInUser!: any;
-
   public errorMessage!: string;
   public logInUserAction: string = 'login';
   public signUpUserAction: string = 'signup';
@@ -56,6 +53,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this._store.select(selectIsAuthenticated).subscribe({
       next: (isAuthenticated) => {
         this.isAuthenticated = isAuthenticated;
+        console.log('isAuthenticated - ', isAuthenticated);
+        console.log('StateIsAuthenticated - ', this.isAuthenticated);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed'),
@@ -66,41 +65,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const jwtDecodeToken = this.jwtHelper.decodeToken(
           token?.access
         ) as JWTDecodedTokenInterface;
-        this.user = jwtDecodeToken?.user_id;
+        this.userId = jwtDecodeToken?.user_id;
+        console.log('Header User ID -', this.userId);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed Token Fetching'),
     });
-    // this._store.select(selectJwtToken).pipe(
-    //   map((tokenMap: JwTAuthenticationResponseInterface) => {
-    //     const jwtDecodeToken = this.jwtHelper.decodeToken(
-    //       tokenMap?.access
-    //     ) as JWTDecodedTokenInterface;
-    //     this.user = jwtDecodeToken?.user_id;
-    //     console.log('UserId Mathogs - ', this.user);
-    //     this._store.select(selectUserList).subscribe({
-    //       next: (users) => {
-    //         console.log('UserList Mathogs - ', users);
-    // this.currentLoggedInUser = users.find(
-    //   (user) => user.id === this.user
-    // )!;
-    // this.username = this.currentLoggedInUser.username;
-    // console.log(
-    //   'Mathogothanio currentLoggedInUser - ',
-    //   this.currentLoggedInUser,
-    //   this.username
-    // );
-    // console.log(
-    //   'Mathogothanio - unsername ',
-
-    //   this.username
-    // );
-    //       },
-    //       error: (err) => (this.errorMessage = err),
-    //       complete: () => console.info('Completed'),
-    //     });
-    //   })
-    // );
   }
 
   public onLogIn() {

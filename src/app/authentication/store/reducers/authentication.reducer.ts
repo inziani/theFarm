@@ -59,6 +59,8 @@ export const authenticationReducer = createReducer<AuthenticationState>(
       return {
         ...state,
         jwtToken: action.jwtToken,
+        isLoading: !state.isLoading,
+        isAuthenticated: !state.isAuthenticated,
       };
     }
   ),

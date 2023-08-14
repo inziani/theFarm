@@ -16,7 +16,7 @@ export const selectMaskUserEmail = createSelector(
 
 export const selectIsAuthenticated = createSelector(
   selectAuthenticationFeatures,
-  (state) => !state?.isAuthenticated
+  (state) => state?.isAuthenticated
 );
 
 export const selectError = createSelector(
