@@ -42,26 +42,11 @@ export const selectCurrentUserId = createSelector(
 export const selectUser = createSelector(
   selectAuthenticationFeatures,
   selectCurrentUserId,
-  (state, userId) => {
-    return userId ? state.users.find((user) => user.id === userId) : null;
-  }
+  (state) => state.user
 );
 
 export const selectUserProfile = createSelector(
   selectAuthenticationFeatures,
   selectCurrentUserId,
-  (state, userId) => {
-    return userId
-      ? state.userProfiles.find((userProfile) => userProfile.user === userId)
-      : null;
-  }
-);
-
-export const selectUsers = createSelector(
-  selectAuthenticationFeatures,
-  (state) => state.users
-);
-export const selectUserProfiles = createSelector(
-  selectAuthenticationFeatures,
-  (state) => state.userProfiles
+  (state) => state.userProfile
 );

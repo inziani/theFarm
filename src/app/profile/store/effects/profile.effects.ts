@@ -9,10 +9,9 @@ import { catchError, concatMap, map, mergeMap, of } from 'rxjs';
 
 @Injectable()
 export class ProfileEffects {
-  constructor(
-    private _actions$: Actions,
-    private _activityService: ActivitysService
-  ) {}
+  // ngrxOnEffects() {
+  //   return ActivityActions['[Activity]RetrieveActivityList']();
+  // }
 
   public loadActivitiesEffect$ = createEffect(() => {
     return this._actions$.pipe(
@@ -20,21 +19,20 @@ export class ProfileEffects {
       mergeMap(() =>
         this._activityService.fetchActivityData().pipe(
           map((activityList) => {
-            return ActivityActions[
-              '[Activity]RetrieveActivityListSuccess'
-            ]({ activityList });
+            return ActivityActions['[Activity]RetrieveActivityListSuccess']({
+              activityList,
+            });
           }),
           catchError((error: string) =>
             of(
-              ActivityActions[
-                '[Activity]RetrieveActivityListFailure'
-              ]({ errorMessage: error })
+              ActivityActions['[Activity]RetrieveActivityListFailure']({
+                errorMessage: error,
+              })
             )
           )
         )
       )
-    )
-
+    );
   });
 
   public loadActivityCategorysEffects = createEffect(() => {
@@ -76,19 +74,15 @@ export class ProfileEffects {
           )
           .pipe(
             map((activity) =>
-              ActivityActions[
-                '[Activity]CreateActivitySuccess'
-              ]({
-                activity
+              ActivityActions['[Activity]CreateActivitySuccess']({
+                activity,
               })
             ),
             catchError((error) =>
               of(
-                ActivityActions['[Activity]CreateActivityFail'](
-                  {
-                    error
-                  }
-                )
+                ActivityActions['[Activity]CreateActivityFail']({
+                  error,
+                })
               )
             )
           )
@@ -125,4 +119,9 @@ export class ProfileEffects {
       )
     );
   });
+
+  constructor(
+    private _actions$: Actions,
+    private _activityService: ActivitysService
+  ) {}
 }

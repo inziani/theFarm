@@ -41,7 +41,7 @@ import { SharedModule } from './shared/shared.module';
 // StateManagement - NgRX
 
 import { StoreModule } from '@ngrx/store';
-
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -85,13 +85,14 @@ export function tokenGetter() {
 
     // NgRX State Management
 
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ router: routerReducer }),
     StoreDevtoolsModule.instrument({
       name: 'smallFarms',
       maxAge: 25,
       logOnly: environment.production,
     }),
     EffectsModule.forRoot(),
+    StoreRouterConnectingModule.forRoot(),
   ],
   exports: [SharedModule],
 

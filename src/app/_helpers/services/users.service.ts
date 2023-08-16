@@ -178,12 +178,6 @@ export class UsersService {
         shareReplay()
       );
   }
-  public fetchUserProfilesState(): Observable<UserProfile[]> {
-    return this._http.get<UserProfile[]>(
-      `${environment.apiUrl}/user-profile`,
-      this.httpOptions
-    );
-  }
 
   public fetchSingleUserProfile(user: number): Observable<any> {
     return this._http.get<any>(

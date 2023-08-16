@@ -10,7 +10,30 @@ export class ErrorService {
 
   constructor(private _dialog: MatDialog) {}
 
-  public openErrorHandlingDialog(data: string[]) {
+  public openErrorHandlingDialog(data: string[] | string) {
+    this.isDialogOpen = true;
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.data = data;
+
+    const dialogRef = this._dialog.open(
+      ErrorHandlingDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        console.log('The dialog is closed');
+        this.isDialogOpen = false;
+        let animal;
+        animal = result;
+      },
+    });
+  }
+
+  public logInErrorHandlingDialog(data: string) {
     this.isDialogOpen = true;
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

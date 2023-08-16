@@ -7,6 +7,7 @@ import {
   UserLogin,
 } from '../../models/authentication.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { AuthenticationState } from '../state/authentication.state';
 
 export const AuthenticationActions = createActionGroup({
   source: 'User',
@@ -20,31 +21,26 @@ export const AuthenticationActions = createActionGroup({
     '[Authentication] User LogIn Fail': props<{
       errorMessage: string;
     }>(),
-    '[Authentication] User LogOut': props<{
-      userLogInCredentials: UserLogin;
-    }>(),
-    '[Authentication] User LogOut Sucess': props<{
-      jwtToken: JwTAuthenticationResponseInterface;
-    }>(),
-    '[Authentication] User LogOut Fail': props<{
-      errorMessage: string;
-      jwtToken: JwTAuthenticationResponseInterface;
-    }>(),
+    // '[Authentication] User LogOut': props<{
+    //   userLogInCredentials: UserLogin;
+    // }>(),
+    '[Authentication] User LogOut Sucess':
+      emptyProps(),
+      // jwtToken: JwTAuthenticationResponseInterface;
+      // state: AuthenticationState
+    // '[Authentication] User LogOut Fail': props<{
+    //   errorMessage: string;
+    //   jwtToken: JwTAuthenticationResponseInterface;
+    // }>(),
     '[Authentication] Current User Id': props<{ userId: number }>(),
-    '[Authentication] Fetch User': props<{ user: User }>(),
-    '[Authentication] Fetch User List': emptyProps(),
-    '[Authentication] Fetch User List Success': props<{ users: User[] }>(),
-    '[Authentication] Fetch User List Failure': props<{
+    '[Authentication] Fetch User Success': props<{ user: User }>(),
+    '[Authentication] Fetch User Failure': props<{
       errorMessage: string;
     }>(),
-    '[Authentication] Fetch User Profile': props<{
+    '[Authentication] Fetch User Profile Success': props<{
       userProfile: UserProfile;
     }>(),
-    '[Authentication] Fetch User Profile List': emptyProps(),
-    '[Authentication] Fetch User Profile List Success': props<{
-      userProfiles: UserProfile[];
-    }>(),
-    '[Authentication] Fetch User  Profile List Failure': props<{
+    '[Authentication] Fetch User Profile  Failure': props<{
       errorMessage: string;
     }>(),
   },

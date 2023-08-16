@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
 
 @Component({
   selector: 'app-profile',
@@ -13,11 +16,6 @@ export class ProfileComponent implements OnInit {
   public readonly!: boolean;
   public isDisabled!: boolean;
   public errorMessage!: string;
-
-  constructor(
-    private _authenticationService: AuthenticationService,
-    private _router: Router
-  ) {}
 
   ngOnInit(): void {}
 
@@ -36,7 +34,15 @@ export class ProfileComponent implements OnInit {
     this.itemSelected = 'security';
   }
   public onLogOut() {
-    this._authenticationService.onLogout();
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]UserLogOutSucess']()
+    );
     this._router.navigate(['/authentication/login']);
   }
+
+  constructor(
+    // private _authenticationService: AuthenticationService,
+    private _router: Router,
+    private _store: Store<AuthenticationState>
+  ) {}
 }

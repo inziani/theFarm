@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-
 import { AuthenticationActions } from '../actions/authentication.actions';
 import { AuthenticationState } from '../state/authentication.state';
+import { initialState } from '@app/store/reducers/ui.reducer';
 
 export const initialLoginState: AuthenticationState = {
   rememberMeCheckBox: false,
@@ -29,7 +29,6 @@ export const initialLoginState: AuthenticationState = {
     date_joined: new Date(),
     password: '',
   },
-  users: [],
   userProfile: {
     user: NaN,
     education_bio: '',
@@ -41,7 +40,6 @@ export const initialLoginState: AuthenticationState = {
     create_at: new Date(),
     updated_at: new Date(),
   },
-  userProfiles: [],
   error: '',
 };
 
@@ -74,6 +72,14 @@ export const authenticationReducer = createReducer<AuthenticationState>(
     }
   ),
   on(
+    AuthenticationActions['[Authentication]UserLogOutSucess'],
+    (): AuthenticationState => {
+      return {
+        ...initialLoginState,
+      };
+    }
+  ),
+  on(
     AuthenticationActions['[Authentication]RememberMeCheckBox'],
     (state): AuthenticationState => {
       return {
@@ -101,25 +107,16 @@ export const authenticationReducer = createReducer<AuthenticationState>(
     }
   ),
   on(
-    AuthenticationActions['[Authentication]FetchUserList'],
-    (state): AuthenticationState => {
-      return {
-        ...state,
-        users: state.users,
-      };
-    }
-  ),
-  on(
-    AuthenticationActions['[Authentication]FetchUserListSuccess'],
+    AuthenticationActions['[Authentication]FetchUserSuccess'],
     (state, action): AuthenticationState => {
       return {
         ...state,
-        users: action.users,
+        user: action.user,
       };
     }
   ),
   on(
-    AuthenticationActions['[Authentication]FetchUserListFailure'],
+    AuthenticationActions['[Authentication]FetchUserFailure'],
     (state, action): AuthenticationState => {
       return {
         ...state,
@@ -128,26 +125,17 @@ export const authenticationReducer = createReducer<AuthenticationState>(
     }
   ),
   on(
-    AuthenticationActions['[Authentication]FetchUserProfile'],
-    (state): AuthenticationState => {
-      return {
-        ...state,
-        userProfiles: state.userProfiles,
-      };
-    }
-  ),
-  on(
-    AuthenticationActions['[Authentication]FetchUserProfileListSuccess'],
+    AuthenticationActions['[Authentication]FetchUserProfileSuccess'],
     (state, action): AuthenticationState => {
       return {
         ...state,
-        userProfiles: action.userProfiles,
+        userProfile: action.userProfile,
       };
     }
   ),
   on(
-    AuthenticationActions['[Authentication]FetchUserProfileListFailure'],
-    (state, action) => {
+    AuthenticationActions['[Authentication]FetchUserProfileFailure'],
+    (state, action): AuthenticationState => {
       return {
         ...state,
         error: action.errorMessage,

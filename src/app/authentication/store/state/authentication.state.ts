@@ -16,9 +16,7 @@ export interface AuthenticationState {
   jwtToken: JwTAuthenticationResponseInterface;
   userId: number;
   user: User;
-  users: User[];
   userProfile: UserProfile;
-  userProfiles: UserProfile[];
   error: string;
 
 

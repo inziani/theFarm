@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
   User,
   UserProfile,
 } from '@app/features/human-resources/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
-
 import { UsersService } from '@app/_helpers/services/users.service';
-
-import { Observable, map, mapTo, switchMap, switchMapTo, tap } from 'rxjs';
-import { AuthenticationService } from '@app/_helpers/services/authentication.service';
-import { DatePipe } from '@angular/common';
+import { Observable, map } from 'rxjs';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { ProfilePageGridInterface } from '@app/shared/interfaces/grids-interface';
@@ -23,8 +18,11 @@ import {
 } from '@app/authentication/models/user-update-form.model';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
-import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
-import { JWTDecodedTokenInterface } from '@app/authentication/models/authentication.model';
+import {
+  selectJwtToken,
+  selectUser,
+  selectUserProfile,
+} from '@app/authentication/store/selectors/authentication.selector';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
 
@@ -56,7 +54,7 @@ export class BioComponent implements OnInit {
   public first_name!: string;
   public middle_name!: string;
   public last_name!: string;
-  public imageUrl!: string;
+  public imageUrl!: { url: string };
   public patchedUser!: User;
   public userProfilePatchedUser!: UserProfile;
   public datePipe!: any;
@@ -88,63 +86,28 @@ export class BioComponent implements OnInit {
 
   // End of Bio
 
-  constructor(
-    private _authenticationService: AuthenticationService,
-    private _dialog: MatDialog,
-    private _dateFormat: DatePipe,
-    private _userService: UsersService,
-    private _store: Store<AuthenticationState>
-  ) {
-    this.datePipe = _dateFormat;
-  }
-
   ngOnInit(): void {
     this.readonly = true;
     this.isDisabled = true;
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
 
-    this._authenticationService._loggedInUserData$
-      .pipe(
-        tap((user) => {
-          this.user = user.user_id;
-        }),
-        switchMap((user) =>
-          this._userService.fetchSingleUser(user.user_id).pipe(
-            tap((currentLoggedInUser) => {
-              this.patchedUser = currentLoggedInUser;
-              this.first_name = this.patchedUser.first_name;
-              this.middle_name = this.patchedUser.middle_name;
-              this.last_name = this.patchedUser.last_name;
-              this.formGroup.patchValue(this.patchedUser);
-            }),
-            switchMap((user) =>
-              this._userService.fetchSingleUserProfile(user.id).pipe(
-                tap((currentLoggedInUserProfile) => {
-                  this.userProfilePatchedUser = currentLoggedInUserProfile;
-                  this.formGroupBio.patchValue(this.userProfilePatchedUser);
-                  this.formGroupHobbies.patchValue(this.userProfilePatchedUser);
-                  this.imageUrl = currentLoggedInUserProfile.profile_pic;
-                })
-              )
-            )
-          )
-        )
-      )
-      .subscribe();
-
-  
-    this._store.select(selectJwtToken).subscribe({
-      next: (token) => {
-        const jwtDecodeToken = this.jwtHelper.decodeToken(
-          token?.access
-        ) as JWTDecodedTokenInterface;
-        this.user = jwtDecodeToken?.user_id;
-        console.log('Admin Page user', this.user);
-        console.log('Admin Page token', token);
+    this._store.select(selectUser).subscribe({
+      next: (user) => {
+        this.patchedUser = user;
+        this.first_name = this.patchedUser.first_name;
+        this.middle_name = this.patchedUser.middle_name;
+        this.last_name = this.patchedUser.last_name;
+        this.formGroup.patchValue(this.patchedUser);
       },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('Completed Token Fetching'),
+    });
+    this._store.select(selectUserProfile).subscribe({
+      next: (userProfile) => {
+        this.userProfilePatchedUser = userProfile;
+        this.formGroupBio.patchValue(this.userProfilePatchedUser);
+        this.formGroupHobbies.patchValue(this.userProfilePatchedUser);
+        this.imageUrl = userProfile.profile_pic;
+      },
     });
 
     this._store
@@ -153,16 +116,11 @@ export class BioComponent implements OnInit {
         map((token) => {
           const jwtDecodedToken = this.jwtHelper.decodeToken(token?.access);
           this.user = jwtDecodedToken?.user_id;
-          console.log('RxJS Operators Token - ', jwtDecodedToken);
-          console.log('RxJS Operators userId - ', this.user);
           this._store.dispatch(
             AuthenticationActions['[Authentication]CurrentUserId']({
               userId: this.user,
             })
           );
-        }),
-        tap((_userId) => {
-          console.log('Is the Swtich Map working -', _userId);
         })
       )
       .subscribe();
@@ -345,4 +303,10 @@ export class BioComponent implements OnInit {
   public onSelectSettings() {
     this.itemSelected = 'settings';
   }
+
+  constructor(
+    private _dialog: MatDialog,
+    private _userService: UsersService,
+    private _store: Store<AuthenticationState>
+  ) {}
 }

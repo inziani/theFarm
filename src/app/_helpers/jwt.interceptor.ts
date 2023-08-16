@@ -22,19 +22,17 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UnauthorizedServeResponseComponent } from '@app/shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
 import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 import { FinanceService } from '@app/_helpers/services/finance.service';
+import { Store } from '@ngrx/store';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   private _financeService = inject(FinanceService);
   public errorMessage!: ErrorMessage;
   public errorMessageList: string[] = [];
-
-  constructor(
-    private _authenticationService: AuthenticationService,
-    private _dialog: MatDialog,
-    private _errorService: ErrorService,
-    private _jwtHelper: JwtHelperService
-  ) {}
+  private _accessToken!: string;
+  private _refreshToken!: string;
 
   intercept(
     request: HttpRequest<any>,
@@ -42,17 +40,26 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     // *******************New Code****************************************
 
-    var isTokenExpired = this._jwtHelper.isTokenExpired(
-      localStorage.getItem('access_token')
-    );
-    const refreshToken: string = JSON.stringify(
-      localStorage.getItem('refresh_token')
-    );
+    // var isTokenExpired = this._jwtHelper.isTokenExpired(
+    //   localStorage.getItem('access_token')
+    // );
+    // const refreshToken: string = JSON.stringify(
+    //   localStorage.getItem('refresh_token')
+    // );
+
+    this._store.select(selectJwtToken).subscribe({
+      next: (token) => {
+        this._accessToken = token.access;
+        this._refreshToken = token.refresh;
+      },
+    });
+
+    const isTokenExpired = this._jwtHelper.isTokenExpired(this._accessToken);
 
     if (!isTokenExpired) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          Authorization: `Bearer ${this._accessToken}`,
         },
       });
       return next.handle(request).pipe(
@@ -98,7 +105,7 @@ export class JwtInterceptor implements HttpInterceptor {
         })
       );
     } else {
-      this._authenticationService.onRefreshPage(refreshToken).pipe(
+      this._authenticationService.onRefreshPage(this._refreshToken).pipe(
         switchMap((newTokens: JwTAuthenticationResponseInterface) => {
           localStorage.setItem('reload_access_token', newTokens.access);
           localStorage.setItem('reload_refresh_token', newTokens.refresh);
@@ -193,6 +200,13 @@ export class JwtInterceptor implements HttpInterceptor {
               this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
             complete: () => console.info('complete'),
           });
+        } else if (error.status === 401) {
+          // Object.values(this.errorMessage).forEach((message) => {
+          //   this.errorMessageList.push(message);
+          // this._errorService.logInErrorHandlingDialog('You not Logged In.');
+          // });
+          // alert('You are not logged in');
+          // do nothing
         } else {
           Object.values(this.errorMessage).forEach((message) => {
             this.errorMessageList.push(message);
@@ -232,4 +246,12 @@ export class JwtInterceptor implements HttpInterceptor {
     this._errorService.openErrorHandlingDialog(this.errorMessageList);
     return throwError(() => error);
   }
+
+  constructor(
+    private _authenticationService: AuthenticationService,
+    private _dialog: MatDialog,
+    private _errorService: ErrorService,
+    private _jwtHelper: JwtHelperService,
+    private _store: Store<AuthenticationState>
+  ) {}
 }

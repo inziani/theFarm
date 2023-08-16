@@ -49,14 +49,14 @@ export class AuthenticationService {
 
   constructor(
     private _http: HttpClient,
-    public _router: Router,
-    private _store: Store<AuthenticationState>
-  ) {
-    this._store.select(selectJwtToken).subscribe({
-      next: (token) => console.log('Auth service tokens-', token),
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('Complated'),
-    });
+    public _router: Router
+  ) // private _store: Store<AuthenticationState>
+  {
+    // this._store.select(selectJwtToken).subscribe({
+    //   next: (token) => console.log('Auth service tokens-', token),
+    //   error: (err) => (this.errorMessage = err),
+    //   complete: () => console.info('Complated'),
+    // });
   }
 
   // *********************New Code******************************
@@ -103,83 +103,7 @@ export class AuthenticationService {
       { refresh },
       this.httpOptions
     );
-    // .pipe(
-    //   tap((response) => {
-    //     this._isLoggedOn$.next(true);
-    //     var loggedInUserData = this.jwtHelper.decodeToken(
-    //       response.access
-    //     ) as JWTDecodedTokenInterface;
-    //     this._loggedInUser$.next(loggedInUserData);
-    //   })
-    // );
   }
-
-  // *********************End of New Code***********************
-
-  // get tokensData(): JwTAuthenticationResponseInterface {
-  //   return this._jwtTokens$.value;
-  // }
-  // public getToken(email: string, password: string): Observable<any> {
-  //   return this._http
-  //     .post<any>(
-  //       `${environment.apiUrl}/${environment.jwtLogin}`,
-  //       JSON.stringify({ email, password }),
-  //       this.httpOptions
-  //     )
-  //     .pipe(
-  //       map((loginResponse: any) => {
-  //         this.jwtAccessToken = loginResponse.access;
-  //         this.jwtRefreshToken = loginResponse.refresh;
-  //         this._jwtTokens$.next(loginResponse);
-  //         return this.jwtAccessToken, this.jwtRefreshToken;
-  //       }),
-  //       tap((loginResponse) => {
-  //         this._saveUser(loginResponse);
-  //       }),
-  //       shareReplay()
-  //     );
-  // }
-  // private _saveUser(loginResponse: any) {
-  //   type customJwtPayLoad = JwtPayload & { userPayloadData: string };
-  //   let decodedToken = jwtDecode<customJwtPayLoad>(loginResponse);
-  //   this.payload = JSON.stringify(decodedToken);
-  //   let finaldecodedToken = JSON.parse(this.payload);
-  //   this.userId = finaldecodedToken.user_id;
-  //   this.expiryDate = new Date(finaldecodedToken.exp * 1000);
-  //   this.currentUser$.next(this.userId);
-  //   return this.payload;
-  // public isLoggedIn$() {
-  //   if (this.jwtAccessToken) return of(true);
-  //   return of(false);
-  // }
-  // public onLogout() {
-  //   this.currentUser$.next(NaN);
-  //   localStorage.clear();
-  //   this.router.navigate(['/login']);
-  // }
-
-  // public getAccessToken() {
-  //   return this.jwtAccessToken;
-  // }
-
-  // public getRefreshedToken() {
-  //   return this.jwtRefreshToken;
-  // }
-
-  // public generateRefreshToken() {
-  //   let refresh = this.getRefreshedToken();
-  //   return this._http
-  //     .post(
-  //       `${environment.apiUrl}/${environment.jwtRefresh}`,
-  //       JSON.stringify({ refresh }),
-  //       this.httpOptions
-  //     )
-  //     .pipe((tokenRefresh) => {
-  //       this.token = tokenRefresh;
-  //       return this.token;
-  //     });
-  // }
-  // **********************End of old code********************
 
   public onUserSignOn(
     first_name: string,
