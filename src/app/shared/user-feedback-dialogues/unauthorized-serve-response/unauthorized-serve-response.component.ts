@@ -10,13 +10,16 @@ export class UnauthorizedServeResponseComponent {
   public navigationError!: string;
   public errorMessage!: string;
 
-  constructor(private _financeService: FinanceService) {}
-
   ngOnInit() {
     this._financeService.data.subscribe({
-      next: (data: string) => (this.navigationError = data),
+      next: (data: string) => {
+        (this.navigationError = data);
+        console.log('NavigationError - ', this.navigationError)
+      },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('completed'),
     });
   }
+
+  constructor(private _financeService: FinanceService) {}
 }

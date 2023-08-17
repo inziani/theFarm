@@ -37,6 +37,7 @@ export class HomePageComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '600px';
+    // dialogConfig.panelClass = 'custom-dialogue-box'
     const dialogRef = this._dialog.open(
       AgricultureDialogueComponent,
       dialogConfig

@@ -50,3 +50,8 @@ export const selectUserProfile = createSelector(
   selectCurrentUserId,
   (state) => state.userProfile
 );
+
+export const selectNavigationError = createSelector(
+  selectAuthenticationFeatures,
+  (state) => state.navigationError
+);

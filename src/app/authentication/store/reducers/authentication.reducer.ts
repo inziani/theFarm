@@ -41,6 +41,7 @@ export const initialLoginState: AuthenticationState = {
     updated_at: new Date(),
   },
   error: '',
+  navigationError: '',
 };
 
 export const authenticationReducer = createReducer<AuthenticationState>(
@@ -139,6 +140,15 @@ export const authenticationReducer = createReducer<AuthenticationState>(
       return {
         ...state,
         error: action.errorMessage,
+      };
+    }
+  ),
+  on(
+    AuthenticationActions['[Authentication]Unauthorized'],
+    (state, action): AuthenticationState => {
+      return {
+        ...state,
+        navigationError: action.navigationError,
       };
     }
   )

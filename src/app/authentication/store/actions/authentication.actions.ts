@@ -35,5 +35,7 @@ export const AuthenticationActions = createActionGroup({
     '[Authentication] Fetch User Profile  Failure': props<{
       errorMessage: string;
     }>(),
+    '[Authentication] Unauthorized': props<{ navigationError: string}>(),
   },
+
 });

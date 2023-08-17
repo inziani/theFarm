@@ -74,6 +74,7 @@ export class JwtInterceptor implements HttpInterceptor {
     } else {
     }
     this.errorMessage = error.error;
+
     Object.values(this.errorMessage).forEach((message) => {
       this.errorMessageList.push(message);
     });

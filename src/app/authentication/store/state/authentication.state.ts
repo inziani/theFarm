@@ -18,6 +18,7 @@ export interface AuthenticationState {
   user: User;
   userProfile: UserProfile;
   error: string;
+  navigationError: string;
 
 
 }
