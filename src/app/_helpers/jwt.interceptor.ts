@@ -25,6 +25,7 @@ import { FinanceService } from '@app/_helpers/services/finance.service';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
+import { LoginDialogComponent } from '@app/shared/user-feedback-dialogues/login-dialog/login-dialog.component';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -203,10 +204,11 @@ export class JwtInterceptor implements HttpInterceptor {
         } else if (error.status === 401) {
           // Object.values(this.errorMessage).forEach((message) => {
           //   this.errorMessageList.push(message);
-          // this._errorService.logInErrorHandlingDialog('You not Logged In.');
+          this._errorService.logInErrorHandlingDialog('You not Logged In.');
           // });
           // alert('You are not logged in');
           // do nothing
+          // this._dialog.open(LoginDialogComponent);
         } else {
           Object.values(this.errorMessage).forEach((message) => {
             this.errorMessageList.push(message);
