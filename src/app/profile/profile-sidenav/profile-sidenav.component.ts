@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/_helpers/services/authentication.service';
-import { FinanceService } from '@app/_helpers/services/finance.service';
 import { UsersService } from '@app/_helpers/services/users.service';
+import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-profile-sidenav',
@@ -17,12 +18,6 @@ export class ProfileSidenavComponent implements OnInit {
   public activityCategory: string = 'activityCategory';
   public bio: string = 'bio';
   public security: string = 'security';
-
-  constructor(
-    private _authenticationService: AuthenticationService,
-    private _router: Router,
-    private _userService: UsersService
-  ) {}
 
   ngOnInit(): void {}
 
@@ -43,7 +38,15 @@ export class ProfileSidenavComponent implements OnInit {
     this._userService.sendData(this.security);
   }
   public onLogOut() {
-    this._authenticationService.onLogout();
-    this._router.navigate(['/login']);
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]UserLogOutSucess']()
+    );
+    this._router.navigate(['/authentication/login']);
   }
+
+  constructor(
+    private _store: Store<AuthenticationState>,
+    private _router: Router,
+    private _userService: UsersService
+  ) {}
 }

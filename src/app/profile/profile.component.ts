@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
@@ -41,7 +40,6 @@ export class ProfileComponent implements OnInit {
   }
 
   constructor(
-    // private _authenticationService: AuthenticationService,
     private _router: Router,
     private _store: Store<AuthenticationState>
   ) {}

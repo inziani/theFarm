@@ -6,18 +6,17 @@ import {
   Output,
 } from '@angular/core';
 
-import { User } from '@app/features/human-resources/models/user.model';
-import { AuthenticationService } from '../../_helpers/services/authentication.service';
 import { UsersService } from '@app/_helpers/services/users.service';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import {
-  selectCurrentUserId,
   selectIsAuthenticated,
   selectUser,
 } from '@app/authentication/store/selectors/authentication.selector';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -68,14 +67,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public onLogOut() {
-    this._authenticationService.onLogout();
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]UserLogOutSucess']()
+    );
+    this._router.navigate(['/authentication/login']);
   }
 
-  ngOnDestroy() {
-    // this.userSubscription.unsubscribe();
-  }
+  ngOnDestroy() {}
   constructor(
-    private _authenticationService: AuthenticationService,
+    private _router: Router,
     private _userService: UsersService,
     private _store: Store<AuthenticationState>
   ) {}

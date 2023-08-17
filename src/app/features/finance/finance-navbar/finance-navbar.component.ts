@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AuthenticationService } from '@app/_helpers/services/authentication.service';
+import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-finance-navbar',
@@ -10,8 +13,6 @@ import { AuthenticationService } from '@app/_helpers/services/authentication.ser
 export class FinanceNavbarComponent implements OnInit {
   @Output() sideNavToggle = new EventEmitter<void>();
 
-  constructor(private _authenticationService: AuthenticationService) {}
-
   ngOnInit(): void {}
 
   onToggleSidenav() {
@@ -19,6 +20,14 @@ export class FinanceNavbarComponent implements OnInit {
   }
 
   onLogOut() {
-    this._authenticationService.onLogout();
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]UserLogOutSucess']()
+    );
+    this._router.navigate(['/authentication/login']);
   }
+
+  constructor(
+    private _store: Store<AuthenticationState>,
+    private _router: Router
+  ) {}
 }

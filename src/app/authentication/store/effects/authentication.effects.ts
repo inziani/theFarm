@@ -9,18 +9,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '@app/shared/user-feedback-dialogues/login-dialog/login-dialog.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-
 @Injectable()
 export class AuthenticationEffects {
   public jwtHelper = new JwtHelperService();
-  
 
   public userLoginEffect$ = createEffect(() => {
     return this._actions$.pipe(
       ofType(AuthenticationActions['[Authentication]UserLogIn']),
       concatMap((action) =>
         this._authenticationService
-          .onLogOnTest(action.userLogin.email, action.userLogin.password)
+          .onLogOn(action.userLogin.email, action.userLogin.password)
           .pipe(
             map((jwtToken) =>
               AuthenticationActions['[Authentication]UserLogInSucess']({
@@ -87,9 +85,7 @@ export class AuthenticationEffects {
   redirectToProfilePage = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(
-          AuthenticationActions['[Authentication]UserLogInSucess']
-        ),
+        ofType(AuthenticationActions['[Authentication]UserLogInSucess']),
 
         tap(() => {
           this._dialog.open(LoginDialogComponent);
@@ -102,9 +98,7 @@ export class AuthenticationEffects {
   redirectToLoginPage = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(
-          AuthenticationActions['[Authentication]UserLogOutSucess']
-        ),
+        ofType(AuthenticationActions['[Authentication]UserLogOutSucess']),
 
         tap(() => {
           this._router.navigate(['/login']);

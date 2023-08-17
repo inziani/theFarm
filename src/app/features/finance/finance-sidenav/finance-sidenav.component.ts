@@ -11,7 +11,10 @@ import {
   SideNavNodeFlattener,
 } from '../../../shared/interfaces/sidenav-tree-interface';
 import { GL_TREE_DATA } from '../finance-data/gl-tree-data';
-import { AuthenticationService } from '@app/_helpers/services/authentication.service';
+import { Store } from '@ngrx/store';
+import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { Router } from '@angular/router';
+import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
 
 @Component({
   selector: 'app-finance-sidenav',
@@ -58,13 +61,6 @@ export class FinanceSidenavComponent implements OnInit {
     (node) => node.children
   );
 
-  constructor(private _authenticationService: AuthenticationService) {
-    this.flatDataSource = new MatTreeFlatDataSource(
-      this.flatTreeControl,
-      this.treeFlattener
-    );
-  }
-
   ngOnInit(): void {
     this.flatDataSource.data = GL_TREE_DATA;
     this.nestedDataSource.data = GL_TREE_DATA;
@@ -84,6 +80,19 @@ export class FinanceSidenavComponent implements OnInit {
   }
 
   public onLogOut() {
-    this._authenticationService.onLogout();
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]UserLogOutSucess']()
+    );
+    this._router.navigate(['/authentication/login']);
+  }
+
+  constructor(
+    private _store: Store<AuthenticationState>,
+    private _router: Router
+  ) {
+    this.flatDataSource = new MatTreeFlatDataSource(
+      this.flatTreeControl,
+      this.treeFlattener
+    );
   }
 }

@@ -1,21 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { JwtHelperService } from '@auth0/angular-jwt';
-
-import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import {
-  JWTDecodedTokenInterface,
-  JwTAuthenticationResponseInterface,
-} from '../../authentication/models/authentication.model';
+import { JwTAuthenticationResponseInterface } from '../../authentication/models/authentication.model';
 import { Router } from '@angular/router';
 import { User } from '@app/features/human-resources/models/user.model';
-import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
-import { Store } from '@ngrx/store';
-import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -25,45 +15,25 @@ export class AuthenticationService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  // *********************New Code******************************
+  // private _isLoggedOn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  // public readonly isLoggedOnData$: Observable<boolean> =
+  //   this._isLoggedOn$.asObservable();
 
-  private _isLoggedOn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public readonly isLoggedOnData$: Observable<boolean> =
-    this._isLoggedOn$.asObservable();
+  // public _loggedInUser$ = new BehaviorSubject<JWTDecodedTokenInterface>({
+  //   token_type: 'string',
+  //   exp: NaN,
+  //   iat: NaN,
+  //   jti: 'string',
+  //   user_id: NaN,
+  // });
+  // public readonly _loggedInUserData$: Observable<JWTDecodedTokenInterface> =
+  //   this._loggedInUser$.asObservable();
 
-  public _loggedInUser$ = new BehaviorSubject<JWTDecodedTokenInterface>({
-    token_type: 'string',
-    exp: NaN,
-    iat: NaN,
-    jti: 'string',
-    user_id: NaN,
-  });
-  public readonly _loggedInUserData$: Observable<JWTDecodedTokenInterface> =
-    this._loggedInUser$.asObservable();
+  // public jwtHelper = new JwtHelperService();
 
-  public jwtHelper = new JwtHelperService();
+  // public errorMessage!: string;
 
-  // *********************End of New Code***********************
-
-  public errorMessage!: string;
-
-  constructor(
-    private _http: HttpClient,
-    public _router: Router
-  ) // private _store: Store<AuthenticationState>
-  {
-    // this._store.select(selectJwtToken).subscribe({
-    //   next: (token) => console.log('Auth service tokens-', token),
-    //   error: (err) => (this.errorMessage = err),
-    //   complete: () => console.info('Complated'),
-    // });
-  }
-
-  // *********************New Code******************************
-
-  //  New Methods
-
-  public onLogOnTest(email: string, password: string) {
+  public onLogOn(email: string, password: string) {
     return this._http.post<JwTAuthenticationResponseInterface>(
       `${environment.apiUrl}/${environment.jwtLogin}`,
       JSON.stringify({ email, password }),
@@ -71,34 +41,8 @@ export class AuthenticationService {
     );
   }
 
-  public onLogOn(email: string, password: string) {
-    return this._http
-      .post<JwTAuthenticationResponseInterface>(
-        `${environment.apiUrl}/${environment.jwtLogin}`,
-        JSON.stringify({ email, password }),
-        this.httpOptions
-      )
-      .pipe(
-        tap((response) => {
-          this._isLoggedOn$.next(true);
-          localStorage.setItem('access_token', response.access);
-          localStorage.setItem('refresh_token', response.refresh);
-          var loggedInUserData = this.jwtHelper.decodeToken(
-            response.access
-          ) as JWTDecodedTokenInterface;
-          this._loggedInUser$.next(loggedInUserData);
-        })
-      );
-  }
-
-  public onLogout() {
-    this._isLoggedOn$.next(false);
-    localStorage.clear();
-    this._router.navigate(['/authentication/login']);
-  }
-
   public onRefreshPage(refresh: string) {
-    return this._http.post<any>(
+    return this._http.post<string>(
       `${environment.apiUrl}/${environment.jwtRefresh}`,
       { refresh },
       this.httpOptions
@@ -169,4 +113,6 @@ export class AuthenticationService {
       this.httpOptions
     );
   }
+
+  constructor(private _http: HttpClient, public _router: Router) {}
 }
