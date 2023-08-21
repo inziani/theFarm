@@ -1,20 +1,37 @@
-
 <div class="container my-3 d-flex justify-content-center">
   <div class="row">
     <div class="col-md-12 my-3" [ngSwitch]="navigationError">
       <div *ngSwitchCase="'unauthorized'">
         <mat-dialog-actions align="end" class="my-3">
-            <button mat-raised-button cdkFocusInitial>
-              <mat-icon class="mx-2 my-2">cancel</mat-icon>
-              You are not Authorized to Perform this Transaction
-            </button>
-          </mat-dialog-actions>
+          <button mat-raised-button cdkFocusInitial (click)="onCancel()">
+            <mat-icon class="mx-2 my-2">cancel</mat-icon>
+            You are not Authorized to Perform this Transaction
+          </button>
+        </mat-dialog-actions>
       </div>
       <div *ngSwitchCase="'500'">
         <mat-dialog-actions align="end" class="my-3">
-          <button mat-raised-button mat-dialog-close cdkFocusInitial>
+          <button
+            mat-raised-button
+            mat-dialog-close
+            cdkFocusInitial
+            (click)="onCancel()"
+          >
             <mat-icon class="mx-2 my-2">cancel</mat-icon>
             The Server is Unavailable
+          </button>
+        </mat-dialog-actions>
+      </div>
+      <div *ngngSwitchDefault>
+        <mat-dialog-actions align="end" class="my-3">
+          <button
+            mat-raised-button
+            mat-dialog-close
+            cdkFocusInitial
+            (click)="onCancel()"
+          >
+            <mat-icon class="mx-2 my-2">cancel</mat-icon>
+            You are not Authorized to Perform this Transaction
           </button>
         </mat-dialog-actions>
       </div>

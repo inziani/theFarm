@@ -33,9 +33,9 @@ export class ProfileComponent implements OnInit {
     this.itemSelected = 'security';
   }
   public onLogOut() {
-    this._store.dispatch(
-      AuthenticationActions['[Authentication]UserLogOutSucess']()
-    );
+    // this._store.dispatch(
+    //   AuthenticationActions['[Authentication]UserLogOutSucess']()
+    // );
     this._router.navigate(['/authentication/login']);
   }
 

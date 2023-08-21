@@ -8,19 +8,17 @@ import { tap } from 'rxjs';
 
 export const authenticationGuard: CanActivateFn = () => {
   const route = inject(Router);
-  const  _store = inject(Store<AuthenticationState>)
+  const _store = inject(Store<AuthenticationState>);
   return inject(Store<AuthenticationState>)
     .select(selectIsAuthenticated)
     .pipe(
       tap((isAuthenticated) => {
         !isAuthenticated && route.navigate(['unauthorized']);
-        _store.dispatch(
-          AuthenticationActions['[Authentication]Unauthorized']({
-            navigationError: 'unauthorized'
-          })
-        );
-
-
+        // _store.dispatch(
+        //   AuthenticationActions['[Authentication]Unauthorized']({
+        //     navigationError: 'unauthorized'
+        //   })
+        // );
       })
     );
 };

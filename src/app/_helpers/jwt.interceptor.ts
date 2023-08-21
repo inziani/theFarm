@@ -53,7 +53,10 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   private _errorHandler = (error: HttpErrorResponse) => {
-    if (error.status === 500) {
+    // switch(error.status ){
+    // case 500:
+    // }
+    if (error.status === 0) {
       let dialogConfig = new MatDialogConfig();
       this._financeService.sendData('500');
       dialogConfig.disableClose = true;
@@ -71,15 +74,18 @@ export class JwtInterceptor implements HttpInterceptor {
           this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
         complete: () => console.info('complete'),
       });
-    } else {
+      //
     }
+    //  else {
     this.errorMessage = error.error;
-
+    console.log('Error Message - ', error.status);
+    console.log('Error Message - ', error.error);
     Object.values(this.errorMessage).forEach((message) => {
       this.errorMessageList.push(message);
+      console.log('Error Message List', this.errorMessageList);
     });
     this._errorService.openErrorHandlingDialog(this.errorMessageList);
-
+    // }
     return throwError(() => error);
   };
 
