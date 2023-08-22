@@ -53,17 +53,17 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   private _errorHandler = (error: HttpErrorResponse) => {
-    // switch(error.status ){
-    // case 500:
-    // }
-    if (error.status === 0) {
+    if (error.status) {
+      this.errorMessage = error.error.detail;
+      console.log('Error Message - ', error.status);
+      console.log('Error Message - ', error.error.detail);
+      // this._financeService.sendData('unauthorized');
       let dialogConfig = new MatDialogConfig();
-      this._financeService.sendData('500');
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '550px';
       dialogConfig.hasBackdrop = true;
-      dialogConfig.data = '500';
+      dialogConfig.data = this.errorMessage;
       let dialogRef = this._dialog.open(
         UnauthorizedServeResponseComponent,
         dialogConfig
@@ -71,21 +71,12 @@ export class JwtInterceptor implements HttpInterceptor {
       dialogRef.afterClosed().subscribe({
         next: (result) => result,
         error: (err) =>
-          this._dialog.open(ErrorHandlingDialogComponent, { data: err }),
+          this._dialog.open(ErrorHandlingDialogComponent, {
+            data: err,
+          }),
         complete: () => console.info('complete'),
       });
-      //
     }
-    //  else {
-    this.errorMessage = error.error;
-    console.log('Error Message - ', error.status);
-    console.log('Error Message - ', error.error);
-    Object.values(this.errorMessage).forEach((message) => {
-      this.errorMessageList.push(message);
-      console.log('Error Message List', this.errorMessageList);
-    });
-    this._errorService.openErrorHandlingDialog(this.errorMessageList);
-    // }
     return throwError(() => error);
   };
 

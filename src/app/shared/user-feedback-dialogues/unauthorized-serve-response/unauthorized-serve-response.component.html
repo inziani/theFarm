@@ -1,11 +1,32 @@
 <div class="container my-3 d-flex justify-content-center">
   <div class="row">
+    <div class="col-md-12 my-3">
+      <mat-dialog-actions align="end" class="my-3">
+        <button cdkFocusInitial (click)="onCancel()">
+          <mat-icon style="color: red" class="mx-2 my-2 fw-bolder"
+            >cancel</mat-icon
+          >
+          <p class="fw-bolder" style="color: red">{{ errorMessage }}</p>
+        </button>
+      </mat-dialog-actions>
+    </div>
+  </div>
+</div>
+<!--
+ <div class="container my-3 d-flex justify-content-center">
+  <div class="row">
     <div class="col-md-12 my-3" [ngSwitch]="navigationError">
       <div *ngSwitchCase="'unauthorized'">
         <mat-dialog-actions align="end" class="my-3">
-          <button mat-raised-button cdkFocusInitial (click)="onCancel()">
-            <mat-icon class="mx-2 my-2">cancel</mat-icon>
-            You are not Authorized to Perform this Transaction
+          <button
+            style="background-color: #03045e; border-radius: 0"
+            cdkFocusInitial
+            (click)="onCancel()"
+          >
+            <mat-icon style="color: red" class="mx-2 my-2 fw-bolder"
+              >cancel</mat-icon
+            >
+            <p class="fw-bolder" style="color: red">{{ errorMessage }}</p>
           </button>
         </mat-dialog-actions>
       </div>
@@ -18,7 +39,7 @@
             (click)="onCancel()"
           >
             <mat-icon class="mx-2 my-2">cancel</mat-icon>
-            The Server is Unavailable
+            {{ errorMessage }}
           </button>
         </mat-dialog-actions>
       </div>
@@ -31,10 +52,10 @@
             (click)="onCancel()"
           >
             <mat-icon class="mx-2 my-2">cancel</mat-icon>
-            You are not Authorized to Perform this Transaction
+            {{ errorMessage }}
           </button>
         </mat-dialog-actions>
       </div>
     </div>
   </div>
-</div>
+</div> -->
