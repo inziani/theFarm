@@ -12,7 +12,7 @@ import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/profile.state';
-import * as ActivityActions from '../../store/actions/profile.actions';
+import * as ActivityActions from '../../store/actions/activity.actions';
 import * as ActivitySelectors from '../../store/selectors/profile.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
 

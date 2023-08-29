@@ -18,7 +18,7 @@ import { CreateActivityComponent } from './create-activity/create-activity.compo
 import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../store/state/profile.state';
-import * as ActivityActions from '../store/actions/profile.actions';
+import * as ActivityActions from '../store/actions/activity.actions';
 import * as ActivitySelectors from '../store/selectors/profile.selectors';
 
 @Component({

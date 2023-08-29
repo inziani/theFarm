@@ -37,10 +37,18 @@ export class UnauthorizedServeResponseComponent {
   }
 
   public onCancel() {
-    if (this.isAuthenticated) {
-      this._router.navigate(['/login']);
-    } else this._location.back();
+    // if (this.isAuthenticated) {
+    //   this._location.back();
+    //   this.matDialogConfig.close();
+    // } else {
+    this.matDialogConfig.close();
+    this._router.navigate(['/home']);
+    // }
   }
+
+  // public close() {
+  //   this.matDialogConfig.close();
+  // }
 
   constructor(
     private _financeService: FinanceService,

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   ActivityActions,
   ActivityCategoryActions,
-} from '../actions/profile.actions';
+} from '../actions/activity.actions';
 import { catchError, concatMap, map, mergeMap, of } from 'rxjs';
 
 @Injectable()
@@ -105,7 +105,7 @@ export class ProfileEffects {
           .pipe(
             map((activity) =>
               ActivityActions['[Activity]EditActivitySuccess']({
-                activity,
+                activityUpdate: { id: activity.id, changes: activity },
               })
             ),
             catchError((error) =>

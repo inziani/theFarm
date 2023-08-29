@@ -10,7 +10,7 @@ import { ActivityState } from '@app/profile/store/state/profile.state';
 import {
   ActivityCategoryActions,
   ActivityActions,
-} from '@app/profile/store/actions/profile.actions';
+} from '@app/profile/store/actions/activity.actions';
 import * as ActivitySelectors from '../../store/selectors/profile.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
 
