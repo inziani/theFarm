@@ -2,30 +2,27 @@ import { Injectable } from '@angular/core';
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  ActivityActions,
-  ActivityCategoryActions,
+  ActivityPageActions,
+  ActivityAPIActions,
 } from '../actions/activity.actions';
-import { catchError, concatMap, map, mergeMap, of } from 'rxjs';
+
+import { catchError, concatMap, exhaustMap, map, mergeMap, of } from 'rxjs';
 
 @Injectable()
-export class ProfileEffects {
-  // ngrxOnEffects() {
-  //   return ActivityActions['[Activity]RetrieveActivityList']();
-  // }
-
+export class ActivityEffects {
   public loadActivitiesEffect$ = createEffect(() => {
     return this._actions$.pipe(
-      ofType(ActivityActions['[Activity]RetrieveActivityList']),
-      mergeMap(() =>
+      ofType(ActivityPageActions['[ActivityPage]LoadActivities']),
+      exhaustMap(() =>
         this._activityService.fetchActivityData().pipe(
           map((activityList) => {
-            return ActivityActions['[Activity]RetrieveActivityListSuccess']({
+            return ActivityAPIActions['[ActivityAPI]LoadActivitesSuccess']({
               activityList,
             });
           }),
           catchError((error: string) =>
             of(
-              ActivityActions['[Activity]RetrieveActivityListFailure']({
+              ActivityAPIActions['[ActivityAPI]LoadActivitiesFailure']({
                 errorMessage: error,
               })
             )
@@ -35,36 +32,10 @@ export class ProfileEffects {
     );
   });
 
-  public loadActivityCategorysEffects = createEffect(() => {
-    return this._actions$.pipe(
-      ofType(
-        ActivityCategoryActions[
-          '[ActivityCategory]RetrieveActivityCategoryList'
-        ]
-      ),
-      mergeMap(() =>
-        this._activityService.fetchActivityCategoryData().pipe(
-          map((activityCategoryList) => {
-            return ActivityCategoryActions[
-              '[ActivityCategory]RetrieveActivityCategoryListSuccess'
-            ]({ activityCategoryList });
-          }),
-          catchError((error: string) =>
-            of(
-              ActivityCategoryActions[
-                '[ActivityCategory]RetrieveActivityCategoryListFailure'
-              ]({ errorMessage: error })
-            )
-          )
-        )
-      )
-    );
-  });
-
   public createActivityEffect$ = createEffect(() => {
     return this._actions$.pipe(
-      ofType(ActivityActions['[Activity]CreateActivity']),
-      concatMap((action) =>
+      ofType(ActivityPageActions['[ActivityPage]CreateActivity']),
+      mergeMap((action) =>
         this._activityService
           .addNewActivity(
             action.activity.title,
@@ -74,13 +45,13 @@ export class ProfileEffects {
           )
           .pipe(
             map((activity) =>
-              ActivityActions['[Activity]CreateActivitySuccess']({
+              ActivityAPIActions['[ActivityAPI]CreateActivitySuccess']({
                 activity,
               })
             ),
             catchError((error) =>
               of(
-                ActivityActions['[Activity]CreateActivityFail']({
+                ActivityAPIActions['[ActivityAPI]CreateActivityFail']({
                   error,
                 })
               )
@@ -92,7 +63,7 @@ export class ProfileEffects {
 
   public editActivityEffect$ = createEffect(() => {
     return this._actions$.pipe(
-      ofType(ActivityActions['[Activity]EditActivity']),
+      ofType(ActivityPageActions['[ActivityPage]EditActivity']),
       concatMap((action) =>
         this._activityService
           .editActivity(
@@ -104,18 +75,38 @@ export class ProfileEffects {
           )
           .pipe(
             map((activity) =>
-              ActivityActions['[Activity]EditActivitySuccess']({
+              ActivityAPIActions['[ActivityAPI]EditActivitySuccess']({
                 activityUpdate: { id: activity.id, changes: activity },
               })
             ),
             catchError((error) =>
               of(
-                ActivityActions['[Activity]EditActivityFail']({
+                ActivityAPIActions['[ActivityAPI]EditActivityFail']({
                   error,
                 })
               )
             )
           )
+      )
+    );
+  });
+
+  public deleteActivityEffect$ = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(ActivityPageActions['[ActivityPage]DeleteActivity']),
+      mergeMap((activityId) =>
+        this._activityService.deleteActivity(activityId.activityId).pipe(
+          map(() =>
+            ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']()
+          ),
+          catchError((error) =>
+            of(
+              ActivityAPIActions['[ActivityAPI]CreateActivityFail']({
+                error,
+              })
+            )
+          )
+        )
       )
     );
   });

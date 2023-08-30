@@ -5,10 +5,10 @@ import {
   // createSelector,
 } from '@ngrx/store';
 import * as fromUIAuthenticationState from '../authentication/store/state/authentication.state';
-import * as fromUIProfileState from '../profile/store/state/profile.state';
+import * as fromUIProfileState from '../profile/store/state/activity.state';
 
 import * as fromAuthentication from '../authentication/store/reducers/authentication.reducer';
-import * as fromProfile from '../profile/store/reducers/profile.reducer';
+import * as fromProfile from '../profile/store/reducers/acivity.reducer';
 
 export interface UIState {
   authentication: fromUIAuthenticationState.AuthenticationState;

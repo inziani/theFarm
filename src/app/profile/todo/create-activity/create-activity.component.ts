@@ -6,12 +6,12 @@ import { Status } from '@app/shared/interfaces/activity-interface';
 import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
 import { Store } from '@ngrx/store';
-import { ActivityState } from '@app/profile/store/state/profile.state';
+import { ActivityState } from '@app/profile/store/state/activity.state';
 import {
   ActivityCategoryActions,
   ActivityActions,
 } from '@app/profile/store/actions/activity.actions';
-import * as ActivitySelectors from '../../store/selectors/profile.selectors';
+import * as ActivitySelectors from '../../store/selectors/activity.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
 
 @Component({

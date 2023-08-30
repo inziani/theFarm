@@ -6,10 +6,11 @@ import { Update } from '@ngrx/entity';
 export const ActivityPageActions = createActionGroup({
   source: 'Activity Page',
   events: {
-    '[Activity] Load Activities': emptyProps(),
-    '[Activity] Create Activity': props<{ activity: Activity }>(),
-    '[Activity] Edit Activity': props<{ activity: Activity }>(),
-    '[Activity] Delete Activity': props<{ activityId: number }>(),
+    '[ActivityPage] Load Activities': emptyProps(),
+    '[ActivityPage] Select Single Activity': props<{ activityId: number }>(),
+    '[ActivityPage] Create Activity': props<{ activity: Activity }>(),
+    '[ActivityPage] Edit Activity': props<{ activity: Activity }>(),
+    '[ActivityPage] Delete Activity': props<{ activityId: number }>(),
   },
 });
 
@@ -17,7 +18,7 @@ export const ActivityAPIActions = createActionGroup({
   source: 'Activity API',
   events: {
     '[ActivityAPI] Load Activites Success': props<{
-      activityCategoryList: Activity[];
+      activityList: Activity[];
     }>(),
     '[ActivityAPI] Load Activities Failure': props<{
       errorMessage: string;
@@ -28,7 +29,7 @@ export const ActivityAPIActions = createActionGroup({
       activityUpdate: Update<Activity>;
     }>(),
     '[ActivityAPI] Edit Activity Fail': props<{ error: string }>(),
-    '[ActivityAPI] Delete Activity Success': props<{ activityId: number }>(),
+    '[ActivityAPI] Delete Activity Success': emptyProps(),
     '[ActivityAPI] Delete Activity Fail': props<{ error: string }>(),
   },
 });

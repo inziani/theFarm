@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { activityReducer } from './store/reducers/profile.reducer';
+import { activityReducer } from './store/reducers/acivity.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { ProfileEffects } from './store/effects/profile.effects';
+import { ActivityEffects } from './store/effects/activity.effects';
 import { ProfileComponent } from './profile.component';
 import { EditActivityComponent } from './todo/edit-activity/edit-activity.component';
 import { ActivityCategorysComponent } from './todo/activity-categorys/activity-categorys.component';
@@ -16,6 +16,7 @@ import { PasswordSecComponent } from './password-sec/password-sec.component';
 import { CreateActivityComponent } from './todo/create-activity/create-activity.component';
 import { TodoComponent } from './todo/todo.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { ActivityCategoryEffects } from './store/effects/activity-category.effects';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { SharedModule } from '@app/shared/shared.module';
     ProfileRoutingModule,
     SharedModule,
     StoreModule.forFeature('activity', activityReducer),
-    EffectsModule.forFeature([ProfileEffects]),
+    EffectsModule.forFeature([ActivityEffects, ActivityCategoryEffects]),
   ],
 })
 export class ProfileModule {}

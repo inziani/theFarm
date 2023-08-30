@@ -60,8 +60,8 @@ export class ActivitysService {
     );
   }
 
-  public deleteActivity() {
-    return this.http.delete(`${environment.apiUrl}/activitys/`);
+  public deleteActivity(id: number) {
+    return this.http.delete(`${environment.apiUrl}/activitys/` + id + '/');
   }
 
   // **************************Activity Category*************************************

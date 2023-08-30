@@ -1,87 +1,55 @@
 import { createReducer, on } from '@ngrx/store';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { ActivityState } from '../state/profile.state';
-import { ActivityActions } from '../actions/activity.actions';
+import { ActivityState } from '../state/activity.state';
+import {
+  ActivityPageActions,
+  ActivityAPIActions,
+} from '../actions/activity.actions';
 import { Activity } from '@app/profile/todo/models/activity.model';
 
 export const activityAdapter: EntityAdapter<Activity> =
   createEntityAdapter<Activity>({});
 
-const { selectIds, selectAll, selectEntities } = activityAdapter.getSelectors();
+// const { selectIds, selectAll, selectEntities } = activityAdapter.getSelectors();
 
-export const selectCurrentActivityId = selectIds;
-export const selectActivityEntities = selectEntities;
-export const selectActivities = selectAll;
+// export const selectCurrentActivityId = selectIds;
+// export const selectActivityEntities = selectEntities;
+// export const selectActivities = selectAll;
 
 export const initialState: ActivityState = activityAdapter.getInitialState({
-  // currentActivityId: NaN,
   // currentActivityCategoryId: NaN,
-  // activityList: [
-  //   {
-  //     id: 1,
-
-  //     title: 'JwT Authentication',
-  //     description: 'Load and Refresh using JwT token Authentication',
-  //     status: 'Work in progress',
-  //     activity_category: 1,
-  //   },
-  // ],
-  // activityCategoryList: [],
+  loading: false,
+  activities: [],
+  activityId: NaN,
   error: '',
 });
 
 export const activityReducer = createReducer<ActivityState>(
   initialState,
-  // on(
-  //   ActivityActions.ActivityActions['[Activity]SetCurrentActivityID'],
-  //   (state, action): ActivityState => {
-  //     return {
-  //       ...state,
-  //       currentActivityId: action.activityId,
-  //     };
-  //   }
-  // ),
-  // on(
-  //   ActivityActions.ActivityActions['[Activity]ClearCurrentActivity]'],
-  //   (state): ActivityState => {
-  //     return {
-  //       ...state,
-  //       currentActivityId: null,
-  //     };
-  //   }
-  // ),
-  // on(
-  //   ActivityActions.ActivityActions['[Activity]InitializeCurrentActivity]'],
-  //   (state): ActivityState => {
-  //     return {
-  //       ...state,
-  //       currentActivityId: 0,
-  //     };
-  //   }
-  // ),
+
   on(
-    ActivityActions['[Activity]RetrieveActivityList'],
+    ActivityPageActions['[ActivityPage]LoadActivities'],
 
     (state) => activityAdapter.setAll([], { ...state })
   ),
   on(
-    ActivityActions['[Activity]RetrieveActivityListSuccess'],
+    ActivityAPIActions['[ActivityAPI]LoadActivitesSuccess'],
     (state, { activityList }) =>
       activityAdapter.setAll(activityList, { ...state, error: '' })
   ),
   on(
-    ActivityActions['[Activity]RetrieveActivityListFailure'],
+    ActivityAPIActions['[ActivityAPI]LoadActivitiesFailure'],
     (state, { errorMessage }) =>
       activityAdapter.setAll([], { ...state, error: errorMessage })
   ),
 
-  on(ActivityActions['[Activity]CreateActivity'], (state) => ({
+  on(ActivityPageActions['[ActivityPage]CreateActivity'], (state) => ({
     ...state,
     error: '',
   })),
   on(
-    ActivityActions['[Activity]CreateActivitySuccess'],
+    ActivityAPIActions['[ActivityAPI]CreateActivitySuccess'],
     (state, { activity }) =>
       activityAdapter.addOne(activity, { ...state, error: '' })
   ),
@@ -99,18 +67,18 @@ export const activityReducer = createReducer<ActivityState>(
   //     };
   //   }
   // ),
-  on(ActivityActions['[Activity]CreateActivityFail'], (state, action) => {
+  on(ActivityAPIActions['[ActivityAPI]CreateActivityFail'], (state, action) => {
     return {
       ...state,
       error: action.error,
     };
   }),
   on(
-    ActivityActions['[Activity]EditActivitySuccess'],
+    ActivityAPIActions['[ActivityAPI]EditActivitySuccess'],
     (state, { activityUpdate }) =>
       activityAdapter.updateOne(activityUpdate, { ...state, error: '' })
   ),
-  on(ActivityActions['[Activity]EditActivityFail'], (state, action) => {
+  on(ActivityAPIActions['[ActivityAPI]EditActivityFail'], (state, action) => {
     return {
       ...state,
       error: action.error,

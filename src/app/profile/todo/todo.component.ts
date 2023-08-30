@@ -17,9 +17,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
 import { Store } from '@ngrx/store';
-import { ActivityState } from '../store/state/profile.state';
-import * as ActivityActions from '../store/actions/activity.actions';
-import * as ActivitySelectors from '../store/selectors/profile.selectors';
+import { ActivityState } from '../store/state/activity.state';
+import { ActivityPageActions, ActivityAPIActions } from '../store/actions/activity.actions';
+import { selectActivities, selectActivityDetail } from '../store/selectors/activity.selectors';
 
 @Component({
   selector: 'app-todo',
@@ -60,10 +60,10 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._store.dispatch(
-      ActivityActions.ActivityActions['[Activity]RetrieveActivityList']()
+      ActivityPageActions['[ActivityPage]LoadActivities']()
     );
 
-    this._store.select(ActivitySelectors.getActivityList).subscribe({
+    this._store.select(selectActivities).subscribe({
       next: (activityList) => {
         this.sourceData.data = activityList;
       },
@@ -108,12 +108,10 @@ export class TodoComponent implements OnInit, AfterViewInit {
     // *** Fetch data from api
 
     this._store.dispatch(
-      ActivityActions.ActivityActions['[Activity]SetCurrentActivityID']({
-        activityId: id,
-      })
+      ActivityPageActions['[ActivityPage]SelectSingleActivity']({ activityId: id})
     );
 
-    this._store.select(ActivitySelectors.getCurrentActivityDetails).subscribe({
+    this._store.select(selectActivityDetail).subscribe({
       next: (selectedActivity) => {
         dialogConfig.data = selectedActivity;
 

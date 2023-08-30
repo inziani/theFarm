@@ -11,10 +11,10 @@ export const ActivityCategoryPageActions = createActionGroup({
 export const ActivityCategoryAPIActions = createActionGroup({
   source: 'Activity Category API',
   events: {
-    '[ActivityCategoryAPI] Retrieve Activity Category List Success': props<{
+    '[ActivityCategoryAPI] Load Activity Categories Success': props<{
       activityCategoryList: ActivityCategory[];
     }>(),
-    '[ActivityCategoryAPI] Retrieve Activity Category List Failure': props<{
+    '[ActivityCategoryAPI] Load Activity Categories Failure': props<{
       errorMessage: string;
     }>(),
   },
