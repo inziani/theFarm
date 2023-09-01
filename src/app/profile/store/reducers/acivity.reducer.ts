@@ -105,12 +105,12 @@ export const activityReducer = createReducer<ActivityState>(
       errorMessage: errorMessage,
     })
   ),
-  on(ActivityPageActions['[ActivityPage]DeleteActivity'], (state) => ({
-    ...state,
-    loading: true,
-  })),
+  // on(ActivityPageActions['[ActivityPage]DeleteActivity'], (state) => ({
+  //   ...state,
+  //   loading: true,
+  // })),
   on(
-    ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess'],
+    ActivityPageActions['[ActivityPage]DeleteActivity'],
     (state, { activityId }) =>
       activityAdapter.removeOne(activityId, {
         ...state,
@@ -118,6 +118,15 @@ export const activityReducer = createReducer<ActivityState>(
         errorMessage: '',
       })
   ),
+  // on(
+  //   ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess'],
+  //   (state, { activityId }) =>
+  //     activityAdapter.removeOne(activityId, {
+  //       ...state,
+  //       loading: false,
+  //       errorMessage: '',
+  //     })
+  // ),
   on(
     ActivityAPIActions['[ActivityAPI]DeleteActivityFail'],
     (state, { errorMessage }) => ({

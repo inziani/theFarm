@@ -12,17 +12,16 @@ import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/activity.state';
-import {
-  ActivityPageActions,
-} from '../../store/actions/activity.actions';
+import { ActivityPageActions } from '../../store/actions/activity.actions';
 import {
   selectActivities,
   selectActivitiesEntities,
-, selectLoading,
+  selectLoading,
   selectActivityErrorMessage,
-  selectActivityById
+  selectActivityById,
 } from '../../store/selectors/activity.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
+import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
 
 @Component({
   selector: 'app-edit-activity',
@@ -54,11 +53,10 @@ export class EditActivityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']()
-    );
-    this._store.select(ActivitySelectors.getActivityCategoryList).subscribe({
-      next: (activityCategoryList) => {
-        this.activityCategoryList = activityCategoryList;
+    this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
+    this._store.select(selectActivityCategories).subscribe({
+      next: (activityCategories) => {
+        this.activityCategoryList = activityCategories;
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed'),

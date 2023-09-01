@@ -7,12 +7,10 @@ import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '@app/profile/store/state/activity.state';
-import {
-  ActivityCategoryActions,
-  ActivityActions,
-} from '@app/profile/store/actions/activity.actions';
-import * as ActivitySelectors from '../../store/selectors/activity.selectors';
+import { ActivityPageActions } from '@app/profile/store/actions/activity.actions';
+import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
+import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity-category.actions';
 
 @Component({
   selector: 'app-create-activity',
@@ -42,13 +40,13 @@ export class CreateActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(
-      ActivityCategoryActions[
-        '[ActivityCategory]RetrieveActivityCategoryList'
+      ActivityCategoryPageActions[
+        '[ActivityCategoryPage]LoadActivityCategories'
       ]()
     );
-    this._store.select(ActivitySelectors.getActivityCategoryList).subscribe({
-      next: (activityCategoryList) => {
-        this.activityCategory = activityCategoryList;
+    this._store.select(selectActivityCategories).subscribe({
+      next: (activityCategories) => {
+        this.activityCategory = activityCategories;
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complete'),
@@ -58,7 +56,7 @@ export class CreateActivityComponent implements OnInit {
   onAddActivity() {
     this.activity = this.formGroup.value;
     this._store.dispatch(
-      ActivityActions['[Activity]CreateActivity']({
+      ActivityPageActions['[ActivityPage]CreateActivity']({
         activity: this.activity,
       })
     );

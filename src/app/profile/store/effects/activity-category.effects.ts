@@ -12,14 +12,16 @@ export class ActivityCategoryEffects {
   public loadActivityCategorysEffects = createEffect(() => {
     return this._actions$.pipe(
       ofType(
-        ActivityCategoryPageActions['[ActivityCategory]LoadActivityCategories']
+        ActivityCategoryPageActions[
+          '[ActivityCategoryPage]LoadActivityCategories'
+        ]
       ),
       concatMap(() =>
         this._activityService.fetchActivityCategoryData().pipe(
-          map((activityCategoryList) => {
+          map((activityCategories) => {
             return ActivityCategoryAPIActions[
               '[ActivityCategoryAPI]LoadActivityCategoriesSuccess'
-            ]({ activityCategoryList });
+            ]({ activityCategories });
           }),
           catchError((error: string) =>
             of(

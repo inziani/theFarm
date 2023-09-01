@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { catchError, concatMap, exhaustMap, map, mergeMap, of } from 'rxjs';
+
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   ActivityPageActions,
   ActivityAPIActions,
 } from '../actions/activity.actions';
-
-import { catchError, concatMap, exhaustMap, map, mergeMap, of } from 'rxjs';
 
 @Injectable()
 export class ActivityEffects {
@@ -96,11 +96,7 @@ export class ActivityEffects {
       ofType(ActivityPageActions['[ActivityPage]DeleteActivity']),
       mergeMap((activityId) =>
         this._activityService.deleteActivity(activityId.activityId).pipe(
-          map(() =>
-            ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']({
-              activityId
-            })
-          ),
+          map(() => ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']()),
           catchError((errorMessage) =>
             of(
               ActivityAPIActions['[ActivityAPI]CreateActivityFail']({

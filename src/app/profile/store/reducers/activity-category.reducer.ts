@@ -25,9 +25,9 @@ export function sortByTitle(a: ActivityCategory, b: ActivityCategory): string {
 const { selectIds, selectAll, selectEntities, selectTotal } =
   activityCategoryAdapter.getSelectors();
 
-export const selectCurrentActivityIds = selectIds;
-export const selectActivityEntities = selectEntities;
-export const selectActivities = selectAll;
+export const selectCurrentActivityCategoryIds = selectIds;
+export const selectActivityCategoryEntities = selectEntities;
+export const selectActivityCategories = selectAll;
 export const selectTotals = selectTotal;
 
 export const initialState: ActivityCategoryState =
@@ -36,7 +36,7 @@ export const initialState: ActivityCategoryState =
     errorMessage: '',
   });
 
-export const activityReducer = createReducer<ActivityCategoryState>(
+export const activityCategoryReducer = createReducer<ActivityCategoryState>(
   initialState,
 
   on(
