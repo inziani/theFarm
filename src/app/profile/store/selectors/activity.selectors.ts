@@ -1,87 +1,32 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ActivityState } from '../state/activity.state';
-// import {
-//   selectActivities,
-//   selectCurrentActivityId,
+import * as ActivitiesSelectors from '../reducers/acivity.reducer';
 
-// } from '../reducers/acivity.reducer';
 
-const selectActivityFeatureState =
+export const selectActivityState =
   createFeatureSelector<ActivityState>('activity');
 
-  export const selectLoading = createSelector(
-    selectActivityFeatureState,
-    (activityState) => activityState.loading
-  );
-
 export const selectActivities = createSelector(
-  selectActivityFeatureState,
-  (activityState) => activityState.activities
+  selectActivityState,
+  ActivitiesSelectors.selectActivities
 );
 
-export const selectActivityId = createSelector(
-  selectActivityFeatureState,
-  (activityState) => activityState.activityId
+export const selectActivitiesEntities = createSelector(
+  selectActivityState,
+  ActivitiesSelectors.selectActivityEntities
 );
 
-export const selectActivityDetail = createSelector(
-  selectActivityFeatureState,
-  selectActivityId,
-  (activityState, activityDetail) => {
-    return activityDetail
-      ? activityState.activities.find(
-          (activity) => activity.id === activityDetail
-        )
-      : null;
-  }
+export const selectLoading = createSelector(
+  selectActivityState,
+  (activityState) => activityState.loading
 );
 
 export const selectActivityErrorMessage = createSelector(
-  selectActivityFeatureState,
-  (activityState) => activityState.error
+  selectActivityState,
+  (activityState) => activityState.errorMessage
 );
 
-
-
-// export const getActivityEntities = createSelector(
-//   getActivityFeatureState,
-//   selectActivityDictionary
-// );
-
-// export const getCurrentActivityDetails = createSelector(
-//   getActivityEntities,
-//   ()
-// );
-
-
-
-// export const getCurrentActivity = createSelector(
-//   getActivityFeatureState,
-//   getCurrentActivityId,
-//   (state, currentActivityId) => {
-//     // Start here
-//     if (currentActivityId === 0) {
-//       return {
-//         id: 0,
-//         title: 'string',
-//         description: 'string',
-//         status: 'string',
-//         activity_category: 0,
-//       };
-//     } else {
-//       return currentActivityId
-//         ? state.activityList.find((p) => p.id === currentActivityId)
-//         : null;
-//     }
-//     // Ends here
-//   }
-// );
-
-// export const currentActivityCategoryId = createSelector(
-//   getActivityFeatureState,
-//   (state) => state.currentActivityCategoryId
-// );
-// export const getActivityCategoryList = createSelector(
-//   getActivityFeatureState,
-//   (state) => state.activityCategoryList
-// );
+export const selectActivityById = (id: number)=> createSelector(
+  selectActivitiesEntities,
+  activityEntities => activityEntities[id]
+);

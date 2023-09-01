@@ -15,9 +15,9 @@ export class ActivityEffects {
       ofType(ActivityPageActions['[ActivityPage]LoadActivities']),
       exhaustMap(() =>
         this._activityService.fetchActivityData().pipe(
-          map((activityList) => {
+          map((activities) => {
             return ActivityAPIActions['[ActivityAPI]LoadActivitesSuccess']({
-              activityList,
+              activities,
             });
           }),
           catchError((error: string) =>
@@ -49,10 +49,10 @@ export class ActivityEffects {
                 activity,
               })
             ),
-            catchError((error) =>
+            catchError((errorMessage) =>
               of(
                 ActivityAPIActions['[ActivityAPI]CreateActivityFail']({
-                  error,
+                  errorMessage,
                 })
               )
             )
@@ -76,13 +76,13 @@ export class ActivityEffects {
           .pipe(
             map((activity) =>
               ActivityAPIActions['[ActivityAPI]EditActivitySuccess']({
-                activityUpdate: { id: activity.id, changes: activity },
+                activity: { id: activity.id, changes: activity },
               })
             ),
-            catchError((error) =>
+            catchError((errorMessage) =>
               of(
                 ActivityAPIActions['[ActivityAPI]EditActivityFail']({
-                  error,
+                  errorMessage,
                 })
               )
             )
@@ -96,13 +96,11 @@ export class ActivityEffects {
       ofType(ActivityPageActions['[ActivityPage]DeleteActivity']),
       mergeMap((activityId) =>
         this._activityService.deleteActivity(activityId.activityId).pipe(
-          map(() =>
-            ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']()
-          ),
-          catchError((error) =>
+          map(() => ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']()),
+          catchError((errorMessage) =>
             of(
               ActivityAPIActions['[ActivityAPI]CreateActivityFail']({
-                error,
+                errorMessage,
               })
             )
           )
