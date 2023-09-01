@@ -1,126 +1,155 @@
 import { createReducer, on } from '@ngrx/store';
 import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
 import { ActivityCategoryState } from '../state/activity-category.state';
 import {
-  ActivityPageActions,
-  ActivityAPIActions,
-} from '../actions/activity.actions';
-import { Activity } from '@app/profile/todo/models/activity.model';
+  ActivityCategoryPageActions,
+  ActivityCategoryAPIActions,
+} from '../actions/activity-category.actions';
 
-export const activityAdapter: EntityAdapter<Activity> =
-  createEntityAdapter<Activity>({
+import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
+
+export const activityCategoryAdapter: EntityAdapter<ActivityCategory> =
+  createEntityAdapter<ActivityCategory>({
     selectId,
     // sortByTitle
   });
 
-export function selectId(activity: Activity): number {
-  return activity.id;
+export function selectId(activityCategory: ActivityCategory): number {
+  return activityCategory.id;
 }
 
-export function sortByTitle(a: Activity, b: Activity): string {
+export function sortByTitle(a: ActivityCategory, b: ActivityCategory): string {
   return a.title.localeCompare(b.title).toString();
 }
 
 const { selectIds, selectAll, selectEntities, selectTotal } =
-  activityAdapter.getSelectors();
+  activityCategoryAdapter.getSelectors();
 
-export const selectCurrentActivityId = selectIds;
+export const selectCurrentActivityIds = selectIds;
 export const selectActivityEntities = selectEntities;
 export const selectActivities = selectAll;
+export const selectTotals = selectTotal;
 
-export const initialState: ActivityState = activityAdapter.getInitialState({
-  loading: false,
-  errorMessage: '',
-});
+export const initialState: ActivityCategoryState =
+  activityCategoryAdapter.getInitialState({
+    loading: false,
+    errorMessage: '',
+  });
 
-export const activityReducer = createReducer<ActivityState>(
+export const activityReducer = createReducer<ActivityCategoryState>(
   initialState,
 
   on(
-    ActivityPageActions['[ActivityPage]LoadActivities'],
+    ActivityCategoryPageActions['[ActivityCategoryPage]LoadActivityCategories'],
 
     (state) =>
-      activityAdapter.setAll([], { ...state, loading: true, errorMessage: '' })
+      activityCategoryAdapter.setAll([], {
+        ...state,
+        loading: true,
+        errorMessage: '',
+      })
   ),
   on(
-    ActivityAPIActions['[ActivityAPI]LoadActivitesSuccess'],
-    (state, { activities }) =>
-      activityAdapter.setAll(activities, {
+    ActivityCategoryAPIActions[
+      '[ActivityCategoryAPI]LoadActivityCategoriesSuccess'
+    ],
+    (state, { activityCategories }) =>
+      activityCategoryAdapter.setAll(activityCategories, {
         ...state,
         loading: false,
         error: '',
       })
   ),
   on(
-    ActivityAPIActions['[ActivityAPI]LoadActivitiesFailure'],
+    ActivityCategoryAPIActions[
+      '[ActivityCategoryAPI]LoadActivityCategoriesFailure'
+    ],
     (state, { errorMessage }) =>
-      activityAdapter.setAll([], {
+      activityCategoryAdapter.setAll([], {
         ...state,
         loading: false,
         error: errorMessage,
       })
   ),
 
-  on(ActivityPageActions['[ActivityPage]CreateActivity'], (state) => ({
-    ...state,
-    loading: true,
-    errorMessage: '',
-  })),
   on(
-    ActivityAPIActions['[ActivityAPI]CreateActivitySuccess'],
-    (state, { activity }) =>
-      activityAdapter.addOne(activity, {
+    ActivityCategoryPageActions['[ActivityCategoryPage]CreateActivityCategory'],
+    (state) => ({
+      ...state,
+      loading: true,
+      errorMessage: '',
+    })
+  ),
+  on(
+    ActivityCategoryAPIActions[
+      '[ActivityCategoryAPI]CreateActivityCategorySuccess'
+    ],
+    (state, { activityCategory }) =>
+      activityCategoryAdapter.addOne(activityCategory, {
         ...state,
         loading: false,
         errorMessage: '',
       })
   ),
   on(
-    ActivityAPIActions['[ActivityAPI]CreateActivityFail'],
+    ActivityCategoryAPIActions[
+      '[ActivityCategoryAPI]CreateActivityCategoryFail'
+    ],
     (state, { errorMessage }) => ({
       ...state,
       loading: false,
       errorMessage: errorMessage,
     })
   ),
-  on(ActivityPageActions['[ActivityPage]EditActivity'], (state) => ({
-    ...state,
-    loading: true,
-    errorMessage: '',
-  })),
   on(
-    ActivityAPIActions['[ActivityAPI]EditActivitySuccess'],
-    (state, { activity }) =>
-      activityAdapter.updateOne(activity, {
+    ActivityCategoryPageActions['[ActivityCategoryPage]EditActivityCategory'],
+    (state) => ({
+      ...state,
+      loading: true,
+      errorMessage: '',
+    })
+  ),
+  on(
+    ActivityCategoryAPIActions[
+      '[ActivityCategoryAPI]EditActivityCategorySuccess'
+    ],
+    (state, { activityCategory }) =>
+      activityCategoryAdapter.updateOne(activityCategory, {
         ...state,
         loading: false,
         error: '',
       })
   ),
   on(
-    ActivityAPIActions['[ActivityAPI]EditActivityFail'],
+    ActivityCategoryAPIActions['[ActivityCategoryAPI]EditActivityCategoryFail'],
     (state, { errorMessage }) => ({
       ...state,
       loading: false,
       errorMessage: errorMessage,
     })
   ),
-  on(ActivityPageActions['[ActivityPage]DeleteActivity'], (state) => ({
-    ...state,
-    loading: true,
-  })),
   on(
-    ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess'],
-    (state, { activityId }) =>
-      activityAdapter.removeOne(activityId, {
+    ActivityCategoryPageActions['[ActivityCategoryPage]DeleteActivityCategory'],
+    (state) => ({
+      ...state,
+      loading: true,
+    })
+  ),
+  on(
+    ActivityCategoryAPIActions[
+      '[ActivityCategoryAPI]DeleteActivityCategorySuccess'
+    ],
+    (state, { activityCategoryId }) =>
+      activityCategoryAdapter.removeOne(activityCategoryId, {
         ...state,
         loading: false,
         errorMessage: '',
       })
   ),
   on(
-    ActivityAPIActions['[ActivityAPI]DeleteActivityFail'],
+    ActivityCategoryAPIActions[
+      '[ActivityCategoryAPI]DeleteActivityCategoryFail'
+    ],
     (state, { errorMessage }) => ({
       ...state,
       loading: false,
