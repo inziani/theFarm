@@ -5,8 +5,8 @@ import {
   ActivityCategoryPageActions,
   ActivityCategoryAPIActions,
 } from '../actions/activity-category.actions';
-
 import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
+
 
 export const activityCategoryAdapter: EntityAdapter<ActivityCategory> =
   createEntityAdapter<ActivityCategory>({
