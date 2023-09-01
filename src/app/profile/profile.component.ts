@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
-import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+
 
 @Component({
   selector: 'app-profile',

@@ -29,7 +29,7 @@ export const ActivityAPIActions = createActionGroup({
       activity: Update<Activity>;
     }>(),
     '[ActivityAPI] Edit Activity Fail': props<{ errorMessage: string }>(),
-    '[ActivityAPI] Delete Activity Success':emptyProps(),
+    '[ActivityAPI] Delete Activity Success': props<{ activityId: number }>(),
     '[ActivityAPI] Delete Activity Fail': props<{ errorMessage: string }>(),
   },
 });

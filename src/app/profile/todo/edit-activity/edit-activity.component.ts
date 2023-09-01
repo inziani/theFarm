@@ -12,8 +12,16 @@ import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/activity.state';
-import * as ActivityActions from '../../store/actions/activity.actions';
-import * as ActivitySelectors from '../../store/selectors/activity.selectors';
+import {
+  ActivityPageActions,
+} from '../../store/actions/activity.actions';
+import {
+  selectActivities,
+  selectActivitiesEntities,
+, selectLoading,
+  selectActivityErrorMessage,
+  selectActivityById
+} from '../../store/selectors/activity.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
 
 @Component({
@@ -46,10 +54,7 @@ export class EditActivityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._store.dispatch(
-      ActivityActions.ActivityCategoryActions[
-        '[ActivityCategory]RetrieveActivityCategoryList'
-      ]()
+    this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']()
     );
     this._store.select(ActivitySelectors.getActivityCategoryList).subscribe({
       next: (activityCategoryList) => {
@@ -64,7 +69,7 @@ export class EditActivityComponent implements OnInit {
   public onEditActivity() {
     this.activity = this.formGroup.value;
     this._store.dispatch(
-      ActivityActions.ActivityActions['[Activity]EditActivity']({
+      ActivityPageActions['[ActivityPage]EditActivity']({
         activity: this.activity,
       })
     );

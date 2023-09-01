@@ -96,7 +96,11 @@ export class ActivityEffects {
       ofType(ActivityPageActions['[ActivityPage]DeleteActivity']),
       mergeMap((activityId) =>
         this._activityService.deleteActivity(activityId.activityId).pipe(
-          map(() => ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']()),
+          map(() =>
+            ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']({
+              activityId
+            })
+          ),
           catchError((errorMessage) =>
             of(
               ActivityAPIActions['[ActivityAPI]CreateActivityFail']({
