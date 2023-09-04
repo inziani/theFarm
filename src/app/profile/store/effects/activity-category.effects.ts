@@ -5,7 +5,7 @@ import {
   ActivityCategoryPageActions,
   ActivityCategoryAPIActions,
 } from '../actions/activity-category.actions';
-import { catchError, concatMap, map, of } from 'rxjs';
+import { catchError, exhaustMap, map, of } from 'rxjs';
 
 @Injectable()
 export class ActivityCategoryEffects {
@@ -16,7 +16,7 @@ export class ActivityCategoryEffects {
           '[ActivityCategoryPage]LoadActivityCategories'
         ]
       ),
-      concatMap(() =>
+      exhaustMap(() =>
         this._activityService.fetchActivityCategoryData().pipe(
           map((activityCategories) => {
             return ActivityCategoryAPIActions[

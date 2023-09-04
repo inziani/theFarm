@@ -53,7 +53,7 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   private _errorHandler = (error: HttpErrorResponse) => {
-    if (error.status) {
+    if (error.status === 0) {
       this.errorMessage = error.error.detail;
       console.log('Error Message - ', error.status);
       console.log('Error Message - ', error.error.detail);

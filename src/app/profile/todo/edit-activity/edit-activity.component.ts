@@ -13,13 +13,6 @@ import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/activity.state';
 import { ActivityPageActions } from '../../store/actions/activity.actions';
-import {
-  selectActivities,
-  selectActivitiesEntities,
-  selectLoading,
-  selectActivityErrorMessage,
-  selectActivityById,
-} from '../../store/selectors/activity.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
 import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
 

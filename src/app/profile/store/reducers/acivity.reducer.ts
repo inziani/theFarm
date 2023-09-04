@@ -1,5 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import {
+  Comparer,
+  EntityAdapter,
+  IdSelector,
+  createEntityAdapter,
+} from '@ngrx/entity';
 
 import { ActivityState } from '../state/activity.state';
 import {
@@ -8,25 +13,22 @@ import {
 } from '../actions/activity.actions';
 import { Activity } from '@app/profile/todo/models/activity.model';
 
-export const activityAdapter: EntityAdapter<Activity> =
-  createEntityAdapter<Activity>({
-    selectId,
-    // sortByTitle
-  });
+export const selectId: IdSelector<Activity> = ({ id }) => id;
+export const sortByTitle: Comparer<Activity> = (s1, s2) =>
+  s1.title.localeCompare(s2.title);
 
-export function selectId(activity: Activity): number {
-  return activity.id;
-}
+export const activityAdapter: EntityAdapter<Activity> = createEntityAdapter<Activity>({
+  selectId,
+  // sortByTitle,
+});
 
-export function sortByTitle(a: Activity, b: Activity): string {
-  return a.title.localeCompare(b.title).toString();
-}
-
-const { selectIds, selectAll, selectEntities,selectTotal } = activityAdapter.getSelectors();
+const { selectIds, selectAll, selectEntities, selectTotal } =
+  activityAdapter.getSelectors();
 
 export const selectCurrentActivityId = selectIds;
 export const selectActivityEntities = selectEntities;
 export const selectActivities = selectAll;
+export const selectActivityTotals = selectTotal
 
 export const initialState: ActivityState = activityAdapter.getInitialState({
   loading: false,
@@ -105,10 +107,6 @@ export const activityReducer = createReducer<ActivityState>(
       errorMessage: errorMessage,
     })
   ),
-  // on(ActivityPageActions['[ActivityPage]DeleteActivity'], (state) => ({
-  //   ...state,
-  //   loading: true,
-  // })),
   on(
     ActivityPageActions['[ActivityPage]DeleteActivity'],
     (state, { activityId }) =>
