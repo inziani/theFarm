@@ -5,7 +5,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({

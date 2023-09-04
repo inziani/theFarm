@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile.component';
-import { TodoComponent } from './todo/todo.component';
-import { ActivityCategorysComponent } from './todo/activity-categorys/activity-categorys.component';
+import { TodoComponent } from './user-activity/todo/todo.component';
+import { ActivityCategorysComponent } from './user-activity/activity-categorys/activity-categorys.component';
 import { PasswordSecComponent } from './password-sec/password-sec.component';
 import { BioComponent } from './bio/bio.component';
 

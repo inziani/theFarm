@@ -7,8 +7,8 @@ import {
 } from '@angular/material/dialog';
 
 import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({

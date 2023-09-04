@@ -41,6 +41,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _store: Store<AuthenticationState>
+   
   ) {}
 }

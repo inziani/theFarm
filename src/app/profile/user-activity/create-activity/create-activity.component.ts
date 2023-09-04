@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { Status } from '@app/shared/interfaces/activity-interface';
-import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
+import { ActivityFormGroup } from '@app/profile/user-activity/models/activityform-model';
 import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '@app/profile/store/state/activity.state';

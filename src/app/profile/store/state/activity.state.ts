@@ -1,5 +1,5 @@
 import { EntityState } from '@ngrx/entity';
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 import * as AppState from '@app/store/state/app.state';
 
 export interface State extends AppState.State {

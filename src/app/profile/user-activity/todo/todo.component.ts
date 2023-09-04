@@ -11,18 +11,20 @@ import {
 } from '@angular/material/dialog';
 
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
-import { Activity } from '@app/profile/todo/models/activity.model';
-import { EditActivityComponent } from './edit-activity/edit-activity.component';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
+import { EditActivityComponent } from '../../user-activity/edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { CreateActivityComponent } from './create-activity/create-activity.component';
+import { CreateActivityComponent } from '../../user-activity/create-activity/create-activity.component';
 import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
 import { Store } from '@ngrx/store';
-import { ActivityState } from '../store/state/activity.state';
-import { ActivityPageActions } from '../store/actions/activity.actions';
+import { ActivityState } from '../../store/state/activity.state';
+import { ActivityPageActions } from '../../store/actions/activity.actions';
 import {
   selectActivities,
   selectActivityById,
-} from '../store/selectors/activity.selectors';
+} from '../../store/selectors/activity.selectors';
+import { ActivityCategoryPageActions } from '../../store/actions/activity-category.actions';
+import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
 
 @Component({
   selector: 'app-todo',
@@ -55,22 +57,17 @@ export class TodoComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   public errorMessage!: string;
 
-  constructor(
-    private _activitysService: ActivitysService,
-    private _dialogue: MatDialog,
-    private _store: Store<ActivityState>
-  ) {}
-
   ngOnInit(): void {
     this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
-
     this._store.select(selectActivities).subscribe({
       next: (activityList) => {
         this.sourceData.data = activityList;
+        console.log('Activities Source Data - ', this.sourceData.data);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.log('Complete'),
     });
+
   }
 
   ngAfterViewInit() {
@@ -133,28 +130,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
         });
       },
     });
-
-    // this._activitysService.fetchSingleActivity(id).subscribe((response) => {
-    //   let activity = response;
-    //   dialogConfig.data = activity;
-
-    // ***Open dialog
-
-    // const dialogRef = this._dialogue.open(
-    //   EditActivityComponent,
-    //   dialogConfig
-    // );
-
-    // ***Returned data from dialogue
-
-    //   dialogRef.afterClosed().subscribe((result) => {
-    //     if (result == undefined) {
-    //       return;
-    //     } else {
-    //       console.log('Editable Data after else button', result);
-    //     }
-    //   });
-    // });
   }
 
   openDeleteActivityDialog(id: number) {
@@ -191,4 +166,10 @@ export class TodoComponent implements OnInit, AfterViewInit {
   ngOnDestroy() {
     // this.subscription.unsubscribe();
   }
+
+  constructor(
+    private _activitysService: ActivitysService,
+    private _dialogue: MatDialog,
+    private _store: Store<ActivityState>
+  ) {}
 }

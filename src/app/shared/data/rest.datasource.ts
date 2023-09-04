@@ -10,7 +10,7 @@ import {
   UserInterface,
   UserProfileInterface,
 } from '@app/shared/interfaces/users-interface';
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 
 import {
   ActivityCategoryInterface,
@@ -19,7 +19,7 @@ import {
 import { RandomQuote } from '../interfaces/activity-interface';
 
 import { environment } from '@environments/environment';
-import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
+import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 import { Router } from '@angular/router';
 import { SortDirection } from '@angular/material/sort';
 

@@ -6,10 +6,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 
-import { ActivityCategoryFormGroup } from '@app/profile/todo/models/activity-category-form.model';
+import { ActivityCategoryFormGroup } from '@app/profile/user-activity/models/activity-category-form.model';
 import { Category } from '@app/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
-import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
+import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({

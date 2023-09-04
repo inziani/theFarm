@@ -1,7 +1,6 @@
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-
 
 export const ActivityPageActions = createActionGroup({
   source: 'Activity Page',

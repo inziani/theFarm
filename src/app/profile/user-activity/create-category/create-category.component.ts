@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { ActivityCategoryFormGroup } from '@app/profile/todo/models/activity-category-form.model';
+import { ActivityCategoryFormGroup } from '@app/profile/user-activity/models/activity-category-form.model';
 import { Category } from '@app/shared/interfaces/activity-interface';
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import {
@@ -8,7 +8,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
+import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
 
 @Component({

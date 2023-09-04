@@ -2,10 +2,10 @@ import { Observable, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { environment } from '@environments/environment';
 import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-interface';
-import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
+import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 
 @Injectable({ providedIn: 'root' })
 export class ActivitysService {

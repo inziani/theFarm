@@ -6,9 +6,9 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 
-import { Activity } from '@app/profile/todo/models/activity.model';
+import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { Status } from '@app/shared/interfaces/activity-interface';
-import { ActivityFormGroup } from '@app/profile/todo/models/activityform-model';
+import { ActivityFormGroup } from '@app/profile/user-activity/models/activityform-model';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/activity.state';

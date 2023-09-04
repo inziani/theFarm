@@ -1,4 +1,4 @@
-import { ActivityCategory } from '@app/profile/todo/models/activity-category.models';
+import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 import { Update } from '@ngrx/entity';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
