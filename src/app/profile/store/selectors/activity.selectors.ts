@@ -9,6 +9,7 @@ export const selectActivityState =
 export const selectActivities = createSelector(
   selectActivityState,
   ActivitiesSelectors.selectActivities
+
 );
 
 export const selectActivitiesEntities = createSelector(

@@ -36,24 +36,28 @@ export class ActivityCategorysComponent implements OnInit {
   public sourceData = new MatTableDataSource<ActivityCategory>();
   public resultsLength = 0;
   public errorMessage!: string;
+  public activityCategories$ = this._store.select(selectActivityCategories);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable, { static: true }) refreshTable!: MatTable<any>;
 
   ngOnInit(): void {
-    this._store.dispatch(
-      ActivityCategoryPageActions[
-        '[ActivityCategoryPage]LoadActivityCategories'
-      ]()
-    );
+   
     this._store.select(selectActivityCategories).subscribe({
       next: (activityCategory) => {
-        console.log('Entities select all -', activityCategory);
+        this.sourceData.data = activityCategory;
+        this.activityCategoryList = activityCategory;
+        console.log(
+          'Entities select all activity categories -',
+          this.sourceData.data
+        );
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complete'),
     });
+
+    console.log('Listing - ', this.activityCategoryList);
   }
 
   ngAfterViewInit() {

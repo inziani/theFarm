@@ -53,7 +53,7 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   private _errorHandler = (error: HttpErrorResponse) => {
-    if (error.status === 0) {
+    if (error.status) {
       this.errorMessage = error.error.detail;
       console.log('Error Message - ', error.status);
       console.log('Error Message - ', error.error.detail);
@@ -64,6 +64,29 @@ export class JwtInterceptor implements HttpInterceptor {
       dialogConfig.width = '550px';
       dialogConfig.hasBackdrop = true;
       dialogConfig.data = this.errorMessage;
+      let dialogRef = this._dialog.open(
+        UnauthorizedServeResponseComponent,
+        dialogConfig
+      );
+      dialogRef.afterClosed().subscribe({
+        next: (result) => result,
+        error: (err) =>
+          this._dialog.open(ErrorHandlingDialogComponent, {
+            data: err,
+          }),
+        complete: () => console.info('complete'),
+      });
+    } else {
+      // this.errorMessage = error.error.detail;
+      console.log('Error Message - ', error.status);
+      console.log('Error Message - ', error.error.detail);
+      // this._financeService.sendData('unauthorized');
+      let dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = '550px';
+      dialogConfig.hasBackdrop = true;
+      dialogConfig.data = 'The serveris unavailable';
       let dialogRef = this._dialog.open(
         UnauthorizedServeResponseComponent,
         dialogConfig

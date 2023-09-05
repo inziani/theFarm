@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+import { ActivityCategoryState } from './store/state/activity-category.state';
+import { ActivityCategoryPageActions } from './store/actions/activity-category.actions';
 
 
 @Component({
@@ -25,6 +27,11 @@ export class ProfileComponent implements OnInit {
   }
   public onSelectActivityCategory() {
     this.itemSelected = 'activityCategory';
+     this._store.dispatch(
+       ActivityCategoryPageActions[
+         '[ActivityCategoryPage]LoadActivityCategories'
+       ]()
+     );
   }
   public onSelectBio() {
     this.itemSelected = 'bio';
@@ -41,6 +48,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _router: Router,
-   
+    private _store: Store<ActivityCategoryState>
+
   ) {}
 }
