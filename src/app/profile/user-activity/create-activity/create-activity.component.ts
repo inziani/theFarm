@@ -8,7 +8,7 @@ import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/obje
 import { Store } from '@ngrx/store';
 import { ActivityState } from '@app/profile/store/state/activity.state';
 import { ActivityPageActions } from '@app/profile/store/actions/activity.actions';
-import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
+import { selectAllActivityCategories } from '../../store/selectors/activity-category.selectors';
 import { ActivityCategory } from '../models/activity-category.models';
 import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity-category.actions';
 
@@ -44,7 +44,7 @@ export class CreateActivityComponent implements OnInit {
         '[ActivityCategoryPage]LoadActivityCategories'
       ]()
     );
-    this._store.select(selectActivityCategories).subscribe({
+    this._store.select(selectAllActivityCategories).subscribe({
       next: (activityCategories) => {
         this.activityCategory = activityCategories;
       },

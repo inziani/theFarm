@@ -1,25 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { ActivityCategoryState } from '../state/activity-category.state';
 import {
   ActivityCategoryPageActions,
   ActivityCategoryAPIActions,
 } from '../actions/activity-category.actions';
-import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
-
-export const activityCategoryAdapter: EntityAdapter<ActivityCategory> =
-  createEntityAdapter<ActivityCategory>({
-    selectId,
-    // sortByTitle
-  });
-
-export function selectId(activityCategory: ActivityCategory): number {
-  return activityCategory.id;
-}
-
-export function sortByTitle(a: ActivityCategory, b: ActivityCategory): string {
-  return a.title.localeCompare(b.title).toString();
-}
+import { activityCategoryAdapter } from '../adapters/activity-category.adapters';
 
 export const initialState: ActivityCategoryState =
   activityCategoryAdapter.getInitialState({
@@ -27,9 +12,9 @@ export const initialState: ActivityCategoryState =
     errorMessage: '',
   });
 
+
 export const activityCategoryReducer = createReducer<ActivityCategoryState>(
   initialState,
-
   on(
     ActivityCategoryPageActions['[ActivityCategoryPage]LoadActivityCategories'],
 

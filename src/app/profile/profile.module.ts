@@ -16,9 +16,8 @@ import { CreateActivityComponent } from './user-activity/create-activity/create-
 import { TodoComponent } from '../profile/user-activity/todo/todo.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { ActivityCategoryEffects } from './store/effects/activity-category.effects';
-import { profileReducers } from './store/reducers/profile-reducer';
-import { activityReducer } from './store/reducers/acivity.reducer';
-import { activityCategoryReducer } from './store/reducers/activity-category.reducer';
+import * as fromActivityReducer from './store/reducers/acivity.reducer';
+import * as fromActivityCategoryReducer from './store/reducers/activity-category.reducer';
 
 @NgModule({
   declarations: [
@@ -37,9 +36,10 @@ import { activityCategoryReducer } from './store/reducers/activity-category.redu
   imports: [
     ProfileRoutingModule,
     SharedModule,
+
     StoreModule.forFeature('profileModule', {
-      activity: activityReducer,
-      activityCategory: activityCategoryReducer,
+      activity: fromActivityReducer.activityReducer,
+      activityCategory: fromActivityCategoryReducer.activityCategoryReducer,
     }),
     EffectsModule.forFeature([ActivityEffects, ActivityCategoryEffects]),
   ],

@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/activity.state';
 import { ActivityPageActions } from '../../store/actions/activity.actions';
 import { ActivityCategory } from '../models/activity-category.models';
-import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
+import { selectAllActivityCategories } from '../../store/selectors/activity-category.selectors';
 
 @Component({
   selector: 'app-edit-activity',
@@ -47,7 +47,7 @@ export class EditActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
-    this._store.select(selectActivityCategories).subscribe({
+    this._store.select(selectAllActivityCategories).subscribe({
       next: (activityCategories) => {
         this.activityCategoryList = activityCategories;
       },

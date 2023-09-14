@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-
 import { ActivityState } from '../state/activity.state';
 import {
   ActivityPageActions,
@@ -14,13 +13,10 @@ export const initialState: ActivityState = activityAdapter.getInitialState({
 
 export const activityReducer = createReducer<ActivityState>(
   initialState,
-
-  on(
-    ActivityPageActions['[ActivityPage]LoadActivities'],
-
-    (state) =>
-      activityAdapter.setAll([], { ...state, loading: true, errorMessage: '' })
+  on(ActivityPageActions['[ActivityPage]LoadActivities'], (state) =>
+    activityAdapter.setAll([], { ...state, loading: true, errorMessage: '' })
   ),
+
   on(
     ActivityAPIActions['[ActivityAPI]LoadActivitesSuccess'],
     (state, { activities }) =>

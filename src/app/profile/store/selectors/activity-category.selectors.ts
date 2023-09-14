@@ -11,7 +11,7 @@ const {
 
 export const selectActivityCategoryState =
   createFeatureSelector<ProfileModuleState['activityCategory']>(
-    'profileModule'
+    'activityCategory'
   );
 
 export const selectAllActivityCategories = createSelector(

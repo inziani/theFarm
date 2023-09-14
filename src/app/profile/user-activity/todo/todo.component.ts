@@ -23,8 +23,7 @@ import {
   selectAllActivities,
   selectActivityById,
 } from '../../store/selectors/activity.selectors';
-// import { ActivityCategoryPageActions } from '../../store/actions/activity-category.actions';
-// import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
+
 
 @Component({
   selector: 'app-todo',
@@ -34,7 +33,7 @@ import {
 export class TodoComponent implements OnInit, AfterViewInit {
   public activity!: Activity;
   public activityObject = <Activity>{};
-  public activityList$!: Observable<Activity[]>;
+  public activityList$ = this._store.select(selectAllActivities);
   public errorMessage$!: Observable<string>;
   public todaysDate = new Date();
   public activityColumnHeaders: string[] = [
@@ -58,15 +57,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
   public errorMessage!: string;
 
   ngOnInit(): void {
-    this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
-    this._store.select(selectAllActivities).subscribe({
-      next: (activityList) => {
-        this.sourceData.data = activityList;
-        console.log('Activities Source Data - ', this.sourceData.data);
-      },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.log('Complete'),
-    });
+    console.log('are they already loaded? -', this.activityList$);
   }
 
   ngAfterViewInit() {

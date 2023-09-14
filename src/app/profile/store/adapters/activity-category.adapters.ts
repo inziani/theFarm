@@ -13,6 +13,6 @@ export const sortByTitle: Comparer<ActivityCategory> = (s1, s2) =>
 
 export const activityCategoryAdapter: EntityAdapter<ActivityCategory> =
   createEntityAdapter<ActivityCategory>({
-    selectId,
+    selectId: (activityCatagory: ActivityCategory)=> activityCatagory.id,
     sortComparer: false,
   });

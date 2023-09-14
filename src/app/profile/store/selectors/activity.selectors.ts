@@ -10,7 +10,7 @@ const {
 } = activityAdapter.getSelectors();
 
 export const selectActivityState =
-  createFeatureSelector<ProfileModuleState['activity']>('profileModule');
+  createFeatureSelector<ProfileModuleState['activity']>('activity');
 
 export const selectAllActivities = createSelector(
   selectActivityState,
