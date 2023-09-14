@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import { ActivityCategoryState } from './store/state/activity-category.state';
 import { ActivityCategoryPageActions } from './store/actions/activity-category.actions';
+import { ActivityPageActions } from './store/actions/activity.actions';
 
 
 @Component({
@@ -24,6 +25,11 @@ export class ProfileComponent implements OnInit {
 
   public onSelectActivity() {
     this.itemSelected = 'activity';
+     this._store.dispatch(
+       ActivityPageActions[
+         '[ActivityPage]LoadActivities'
+       ]()
+     );
   }
   public onSelectActivityCategory() {
     this.itemSelected = 'activityCategory';

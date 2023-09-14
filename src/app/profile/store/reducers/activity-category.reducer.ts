@@ -21,14 +21,6 @@ export function sortByTitle(a: ActivityCategory, b: ActivityCategory): string {
   return a.title.localeCompare(b.title).toString();
 }
 
-const { selectIds, selectAll, selectEntities, selectTotal } =
-  activityCategoryAdapter.getSelectors();
-
-export const selectCurrentActivityCategoryIds = selectIds;
-export const selectActivityCategoryEntities = selectEntities;
-export const selectActivityCategories = selectAll;
-export const selectTotals = selectTotal;
-
 export const initialState: ActivityCategoryState =
   activityCategoryAdapter.getInitialState({
     loading: false,

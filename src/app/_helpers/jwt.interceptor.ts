@@ -9,20 +9,16 @@ import {
 
 import { Observable, throwError, catchError } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ErrorService } from '@app/_helpers/services/error.service';
 import { ErrorMessage } from '@app/shared/interfaces/http.interface';
-
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UnauthorizedServeResponseComponent } from '@app/shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
 import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
-import { FinanceService } from '@app/_helpers/services/finance.service';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import { selectJwtToken } from '@app/authentication/store/selectors/authentication.selector';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  private _financeService = inject(FinanceService);
   public errorMessage!: ErrorMessage;
   public errorMessageList: string[] = [];
   private _accessToken!: string;
@@ -55,9 +51,6 @@ export class JwtInterceptor implements HttpInterceptor {
   private _errorHandler = (error: HttpErrorResponse) => {
     if (error.status) {
       this.errorMessage = error.error.detail;
-      console.log('Error Message - ', error.status);
-      console.log('Error Message - ', error.error.detail);
-      // this._financeService.sendData('unauthorized');
       let dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -77,16 +70,12 @@ export class JwtInterceptor implements HttpInterceptor {
         complete: () => console.info('complete'),
       });
     } else {
-      // this.errorMessage = error.error.detail;
-      console.log('Error Message - ', error.status);
-      console.log('Error Message - ', error.error.detail);
-      // this._financeService.sendData('unauthorized');
       let dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = '550px';
       dialogConfig.hasBackdrop = true;
-      dialogConfig.data = 'The serveris unavailable';
+      dialogConfig.data = 'The serveris un-available';
       let dialogRef = this._dialog.open(
         UnauthorizedServeResponseComponent,
         dialogConfig
@@ -105,7 +94,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
   constructor(
     private _dialog: MatDialog,
-    private _errorService: ErrorService,
     private _jwtHelper: JwtHelperService,
     private _store: Store<AuthenticationState>
   ) {}

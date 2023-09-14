@@ -1,28 +1,44 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ActivityCategoryState } from '../state/activity-category.state';
-import * as ActivityCategorySelectors from '../reducers/activity-category.reducer';
+import { ProfileModuleState } from '../state/profile-module.state';
+import { activityCategoryAdapter } from '../adapters/activity-category.adapters';
+
+const {
+  selectIds: selectIds,
+  selectAll: selectAll,
+  selectEntities: selectEntities,
+  selectTotal: selectTotal,
+} = activityCategoryAdapter.getSelectors();
 
 export const selectActivityCategoryState =
-  createFeatureSelector<ActivityCategoryState>('activityCategory');
+  createFeatureSelector<ProfileModuleState['activityCategory']>(
+    'profileModule'
+  );
 
-export const selectActivityCategories = createSelector(
+export const selectAllActivityCategories = createSelector(
   selectActivityCategoryState,
-  ActivityCategorySelectors.selectActivityCategories
+  selectAll
 );
-
 export const selectActivityCategoryEntities = createSelector(
   selectActivityCategoryState,
-  ActivityCategorySelectors.selectActivityCategoryEntities
+  selectEntities
+);
+export const selectActivityCategoryIds = createSelector(
+  selectActivityCategoryState,
+  selectIds
+);
+export const selectActivityCategoryCount = createSelector(
+  selectActivityCategoryState,
+  selectTotal
 );
 
 export const selectLoading = createSelector(
   selectActivityCategoryState,
-  (activityCategoryState) => activityCategoryState.loading
+  (selectActivityCategoryState) => selectActivityCategoryState.loading
 );
 
-export const selectActivityErrorMessage = createSelector(
+export const selectActivityCategoryErrorMessage = createSelector(
   selectActivityCategoryState,
-  (activityCategoryState) => activityCategoryState.errorMessage
+  (selectActivityCategoryState) => selectActivityCategoryState.errorMessage
 );
 
 export const selectActivityCategoryById = (id: number) =>

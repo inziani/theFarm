@@ -25,6 +25,7 @@ import {
 } from '@app/authentication/store/selectors/authentication.selector';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+import { ActivityPageActions } from '../store/actions/activity.actions';
 
 @Component({
   selector: 'app-bio',
@@ -302,6 +303,7 @@ export class BioComponent implements OnInit {
 
   public onSelectSettings() {
     this.itemSelected = 'settings';
+    this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
   }
 
   constructor(

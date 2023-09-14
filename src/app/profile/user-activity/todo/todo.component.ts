@@ -20,11 +20,11 @@ import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/activity.state';
 import { ActivityPageActions } from '../../store/actions/activity.actions';
 import {
-  selectActivities,
+  selectAllActivities,
   selectActivityById,
 } from '../../store/selectors/activity.selectors';
-import { ActivityCategoryPageActions } from '../../store/actions/activity-category.actions';
-import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
+// import { ActivityCategoryPageActions } from '../../store/actions/activity-category.actions';
+// import { selectActivityCategories } from '../../store/selectors/activity-category.selectors';
 
 @Component({
   selector: 'app-todo',
@@ -59,7 +59,7 @@ export class TodoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
-    this._store.select(selectActivities).subscribe({
+    this._store.select(selectAllActivities).subscribe({
       next: (activityList) => {
         this.sourceData.data = activityList;
         console.log('Activities Source Data - ', this.sourceData.data);
@@ -67,7 +67,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
       error: (err) => (this.errorMessage = err),
       complete: () => console.log('Complete'),
     });
-
   }
 
   ngAfterViewInit() {

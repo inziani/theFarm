@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-
 import { UserUpdateFormGroup } from '@app/authentication/models/user-update-form.model';
 import { Gender } from '@app/shared/interfaces/users-interface';
 import { User } from '@app/features/human-resources/models/user.model';
-
-// import { Subscription } from 'rxjs';
-// import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { UsersService } from '@app/_helpers/services/users.service';
@@ -38,15 +34,6 @@ export class AccountSettingsComponent implements OnInit {
   public patchedUser!: User;
   public datePipe!: any;
   public errorMessage!: string;
-
-  constructor(
-    private _userService: UsersService,
-
-    private dialog: MatDialog,
-    private dateFormat: DatePipe
-  ) {
-    this.datePipe = this.dateFormat;
-  }
 
   ngOnInit(): void {
     this.readonly = true;
@@ -90,5 +77,13 @@ export class AccountSettingsComponent implements OnInit {
     this.readonly = !this.readonly;
     this.formGroup.controls.gender.enable();
     this.formGroup.controls.date_of_birth.enable();
+  }
+
+  constructor(
+    private _userService: UsersService,
+    private dialog: MatDialog,
+    private dateFormat: DatePipe
+  ) {
+    this.datePipe = this.dateFormat;
   }
 }

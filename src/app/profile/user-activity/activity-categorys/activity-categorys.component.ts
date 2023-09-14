@@ -4,16 +4,17 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-interface';
+// import { ActivityCategoryInterface } from '@app/shared/interfaces/activity-interface';
 import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 
-import { EditCategoryComponent } from '../edit-category/edit-category.component';
+// import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
-import { DeleteCategoryDialogComponent } from '@app/shared/user-feedback-dialogues/delete-category-dialog/delete-category-dialog.component';
+// import { DeleteCategoryDialogComponent } from '@app/shared/user-feedback-dialogues/delete-category-dialog/delete-category-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityCategoryState } from '@app/profile/store/state/activity-category.state';
-import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity-category.actions';
-import { selectActivityCategories } from '@app/profile/store/reducers/activity-category.reducer';
+import { selectActivityCategoryEntities, selectAllActivityCategories } from '@app/profile/store/selectors/activity-category.selectors';
+// import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity-category.actions';
+// import { selectActivityCategories } from '@app/profile/store/reducers/activity-category.reducer';
 
 @Component({
   selector: 'app-activity-categorys',
@@ -36,28 +37,14 @@ export class ActivityCategorysComponent implements OnInit {
   public sourceData = new MatTableDataSource<ActivityCategory>();
   public resultsLength = 0;
   public errorMessage!: string;
-  public activityCategories$ = this._store.select(selectActivityCategories);
+  public activityCategories$ = this._store.select(selectAllActivityCategories);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable, { static: true }) refreshTable!: MatTable<any>;
 
   ngOnInit(): void {
-   
-    this._store.select(selectActivityCategories).subscribe({
-      next: (activityCategory) => {
-        this.sourceData.data = activityCategory;
-        this.activityCategoryList = activityCategory;
-        console.log(
-          'Entities select all activity categories -',
-          this.sourceData.data
-        );
-      },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('Complete'),
-    });
-
-    console.log('Listing - ', this.activityCategoryList);
+    console.log('are they already loaded? -', this.activityCategories$);
   }
 
   ngAfterViewInit() {
@@ -67,7 +54,6 @@ export class ActivityCategorysComponent implements OnInit {
 
   openCreateCategoryDialog() {
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';

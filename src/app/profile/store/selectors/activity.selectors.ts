@@ -1,20 +1,29 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ActivityState } from '../state/activity.state';
-import * as ActivitiesSelectors from '../reducers/acivity.reducer';
+import { ProfileModuleState } from '../state/profile-module.state';
+import { activityAdapter } from '../adapters/activity.adapter';
 
+const {
+  selectIds: selectIds,
+  selectAll: selectAll,
+  selectEntities: selectEntities,
+  selectTotal: selectTotal,
+} = activityAdapter.getSelectors();
 
 export const selectActivityState =
-  createFeatureSelector<ActivityState>('activity');
+  createFeatureSelector<ProfileModuleState['activity']>('profileModule');
 
-export const selectActivities = createSelector(
+export const selectAllActivities = createSelector(
   selectActivityState,
-  ActivitiesSelectors.selectActivities
-
+  selectAll
 );
-
 export const selectActivitiesEntities = createSelector(
   selectActivityState,
-  ActivitiesSelectors.selectActivityEntities
+  selectEntities
+);
+export const selectActitityIds = createSelector(selectActivityState, selectIds);
+export const selectActivityCount = createSelector(
+  selectActivityState,
+  selectTotal
 );
 
 export const selectLoading = createSelector(
@@ -27,7 +36,8 @@ export const selectActivityErrorMessage = createSelector(
   (activityState) => activityState.errorMessage
 );
 
-export const selectActivityById = (id: number)=> createSelector(
-  selectActivitiesEntities,
-  activityEntities => activityEntities[id]
-);
+export const selectActivityById = (id: number) =>
+  createSelector(
+    selectActivitiesEntities,
+    (activityEntities) => activityEntities[id]
+  );
