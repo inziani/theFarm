@@ -1,15 +1,12 @@
-
-import { ActivityCategoryState } from './activity-category.state';
 import * as AppState from '@app/store/state/app.state';
-import { ActivityState } from './activity.state';
+import * as ActivityState from './activity.state';
+import * as ActivityCategoryState from './activity-category.state';
 
 export interface State extends AppState.State {
-  profileModuleState: ProfileModuleState
+  profileModuleState: ProfileModuleState;
 }
 
 export interface ProfileModuleState {
-  activity: ActivityState,
-  activityCategory: ActivityCategoryState
+  activity: ActivityState.ActivityState;
+  activityCategory: ActivityCategoryState.ActivityCategoryState;
 }
-
-

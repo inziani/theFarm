@@ -24,7 +24,6 @@ import {
   selectActivityById,
 } from '../../store/selectors/activity.selectors';
 
-
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -57,7 +56,11 @@ export class TodoComponent implements OnInit, AfterViewInit {
   public errorMessage!: string;
 
   ngOnInit(): void {
-    console.log('are they already loaded? -', this.activityList$);
+    this.activityList$.subscribe({
+      next: (activityList) => (this.sourceData.data = activityList),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
+    });
   }
 
   ngAfterViewInit() {

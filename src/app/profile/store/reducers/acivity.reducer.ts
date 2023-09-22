@@ -16,7 +16,6 @@ export const activityReducer = createReducer<ActivityState>(
   on(ActivityPageActions['[ActivityPage]LoadActivities'], (state) =>
     activityAdapter.setAll([], { ...state, loading: true, errorMessage: '' })
   ),
-
   on(
     ActivityAPIActions['[ActivityAPI]LoadActivitesSuccess'],
     (state, { activities }) =>
@@ -35,7 +34,6 @@ export const activityReducer = createReducer<ActivityState>(
         error: errorMessage,
       })
   ),
-
   on(ActivityPageActions['[ActivityPage]CreateActivity'], (state) => ({
     ...state,
     loading: true,

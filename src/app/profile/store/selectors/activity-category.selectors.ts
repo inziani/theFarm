@@ -1,23 +1,29 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { ProfileModuleState } from '../state/profile-module.state';
-import { activityCategoryAdapter } from '../adapters/activity-category.adapters';
+import * as activityCategoryAdapter from '../adapters/activity-category.adapters';
+
+
+export const getProfileModuleStore =
+  createFeatureSelector<ProfileModuleState>('profileModule');
+
+export const selectActivityCategoryState = createSelector(
+  getProfileModuleStore,
+  (activityCategory) => activityCategory.activityCategory
+);
 
 const {
   selectIds: selectIds,
   selectAll: selectAll,
   selectEntities: selectEntities,
   selectTotal: selectTotal,
-} = activityCategoryAdapter.getSelectors();
-
-export const selectActivityCategoryState =
-  createFeatureSelector<ProfileModuleState['activityCategory']>(
-    'activityCategory'
-  );
+} = activityCategoryAdapter.activityCategoryAdapter.getSelectors();
 
 export const selectAllActivityCategories = createSelector(
   selectActivityCategoryState,
   selectAll
 );
+
 export const selectActivityCategoryEntities = createSelector(
   selectActivityCategoryState,
   selectEntities

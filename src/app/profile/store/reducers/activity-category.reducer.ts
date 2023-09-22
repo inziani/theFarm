@@ -12,7 +12,6 @@ export const initialState: ActivityCategoryState =
     errorMessage: '',
   });
 
-
 export const activityCategoryReducer = createReducer<ActivityCategoryState>(
   initialState,
   on(
@@ -47,7 +46,6 @@ export const activityCategoryReducer = createReducer<ActivityCategoryState>(
         error: errorMessage,
       })
   ),
-
   on(
     ActivityCategoryPageActions['[ActivityCategoryPage]CreateActivityCategory'],
     (state) => ({
@@ -109,6 +107,7 @@ export const activityCategoryReducer = createReducer<ActivityCategoryState>(
     (state) => ({
       ...state,
       loading: true,
+      errorMessage: ''
     })
   ),
   on(

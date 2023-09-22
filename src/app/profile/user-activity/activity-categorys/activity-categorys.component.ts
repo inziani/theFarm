@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  Signal,
+  ViewChild,
+  signal,
+} from '@angular/core';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,7 +17,8 @@ import { CreateCategoryComponent } from '../create-category/create-category.comp
 import { Store } from '@ngrx/store';
 import { ActivityCategoryState } from '@app/profile/store/state/activity-category.state';
 import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity-category.actions';
-import { selectAllActivityCategories } from '@app/profile/store/selectors/activity-category.selectors';
+import * as ActivityCategorySelectors from '@app/profile/store/selectors/activity-category.selectors';
+// import { selectAllActivityCategories } from '@app/profile/store/selectors/activity-category.selectors';
 
 @Component({
   selector: 'app-activity-categorys',
@@ -33,19 +41,27 @@ export class ActivityCategorysComponent implements OnInit {
   public sourceData = new MatTableDataSource<ActivityCategory>();
   public resultsLength = 0;
   public errorMessage!: string;
-  public activityCategories$ = this._store.select(selectAllActivityCategories);
+
+  // public activityCategories!: Signal<ActivityCategory[]>;
+  // public activityCategories = this._store.selectSignal(
+  //   selectAllActivityCategories
+  // );
+  public activityCategories$ = this._store.select(
+    ActivityCategorySelectors.selectAllActivityCategories
+  );
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable, { static: true }) refreshTable!: MatTable<any>;
 
   ngOnInit(): void {
-    this._store.dispatch(
-      ActivityCategoryPageActions[
-        '[ActivityCategoryPage]LoadActivityCategories'
-      ]()
-    );
-    console.log('are they already loaded? -', this.activityCategories$);
+    this.activityCategories$.subscribe({
+      next: (activityCategory) => {
+        this.sourceData.data = activityCategory;
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Complete'),
+    });
   }
 
   ngAfterViewInit() {

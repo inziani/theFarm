@@ -47,13 +47,13 @@ export class EditActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
-    this._store.select(selectAllActivityCategories).subscribe({
-      next: (activityCategories) => {
-        this.activityCategoryList = activityCategories;
-      },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('Completed'),
-    });
+    // this._store.select(selectAllActivityCategories).subscribe({
+    //   next: (activityCategories) => {
+    //     this.activityCategoryList = activityCategories;
+    //   },
+    //   error: (err) => (this.errorMessage = err),
+    //   complete: () => console.info('Completed'),
+    // });
     this.formGroup.patchValue(this.dialogDataActivity);
   }
 
