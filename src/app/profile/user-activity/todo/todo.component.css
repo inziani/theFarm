@@ -1,17 +1,39 @@
-.to-do-list {
+/* .to-do-list {
   text-align: center;
+  color: #fb8500;
+  font-weight: lighter;
+}
+.table {
+  background-color: #03045e;
+  color: #fb8500;
+}
+
+.paginator {
+  color: #fb8500;
+  background-color: #03045e;
+}
+
+:host {
+  background-color: #03045e;
+  display: block;
+  height: 100vh;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-.roundrect {
-  border-radius: 50%;
+.mat-icon {
+  color: #fb8500;
 }
 
-body {
+/* .roundrect {
+  border-radius: 50%;
+} */
+
+/* body {
   height: 100vh;
   background: #03045e;
-}
+} */
+/*
 .main-table-container {
   position: relative;
   margin-top: 5rem;
@@ -59,8 +81,4 @@ a {
   cursor: pointer;
 }
 
-:host {
-  background-color: #03045e;
-  display: block;
-  height: 100vh;
-}
+ */ 
