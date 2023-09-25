@@ -1,22 +1,10 @@
-<table
-  class="table-responsive-md"
-  mat-table
-  [dataSource]="sourceData"
-  matSort
-  matSortActive="date_created"
-  matSortDisableClear
-  matSortDirection="asc"
->
-  <thead class="table-dark">
-    
-    ...
-  </thead>
-  <tbody>
-    ...
-  </tbody>
-</table>
-
 <div class="table-responsive-md">
+  <h1 class="to-do-list my-3 text-center">Task List</h1>
+  <div class="text-center">
+    <a>
+      <mat-icon (click)="openCreateActivityDialog()">add_box</mat-icon>
+    </a>
+  </div>
   <table
     class="table"
     mat-table
@@ -101,7 +89,7 @@
 
 <!-- Old Table -->
 
-<h1 class="to-do-list my-3">Task List</h1>
+<h1 class="to-do-list my-3 text-center">Task List</h1>
 <div class="text-center">
   <a>
     <mat-icon (click)="openCreateActivityDialog()">add_box</mat-icon>
