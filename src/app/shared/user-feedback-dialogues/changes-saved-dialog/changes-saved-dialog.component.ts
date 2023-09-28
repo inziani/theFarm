@@ -7,7 +7,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./changes-saved-dialog.component.css'],
 })
 export class ChangesSavedDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public changedItem: string) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public changedItem: string) { }
 
   ngOnInit(): void {}
 }

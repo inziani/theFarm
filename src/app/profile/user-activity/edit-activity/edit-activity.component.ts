@@ -15,6 +15,10 @@ import { ActivityState } from '../../store/state/activity.state';
 import { ActivityPageActions } from '../../store/actions/activity.actions';
 import { ActivityCategory } from '../models/activity-category.models';
 import { selectAllActivityCategories } from '../../store/selectors/activity-category.selectors';
+import {
+  ActivityCategoryAPIActions,
+  ActivityCategoryPageActions,
+} from '@app/profile/store/actions/activity-category.actions';
 
 @Component({
   selector: 'app-edit-activity',
@@ -46,14 +50,19 @@ export class EditActivityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
-    // this._store.select(selectAllActivityCategories).subscribe({
-    //   next: (activityCategories) => {
-    //     this.activityCategoryList = activityCategories;
-    //   },
-    //   error: (err) => (this.errorMessage = err),
-    //   complete: () => console.info('Completed'),
-    // });
+    this._store.dispatch(
+      ActivityCategoryPageActions[
+        '[ActivityCategoryPage]LoadActivityCategories'
+      ]()
+    );
+    this._store.select(selectAllActivityCategories).subscribe({
+      next: (activityCategories) => {
+        this.activityCategoryList = activityCategories;
+        console.log('ActivityCatagory is blank?-', activityCategories);
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed'),
+    });
     this.formGroup.patchValue(this.dialogDataActivity);
   }
 

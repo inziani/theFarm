@@ -39,11 +39,7 @@ export class CreateActivityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._store.dispatch(
-      ActivityCategoryPageActions[
-        '[ActivityCategoryPage]LoadActivityCategories'
-      ]()
-    );
+
     this._store.select(selectAllActivityCategories).subscribe({
       next: (activityCategories) => {
         this.activityCategory = activityCategories;
@@ -53,7 +49,7 @@ export class CreateActivityComponent implements OnInit {
     });
   }
 
-  onAddActivity() {
+  public onAddActivity() {
     this.activity = this.formGroup.value;
     this._store.dispatch(
       ActivityPageActions['[ActivityPage]CreateActivity']({
@@ -63,7 +59,7 @@ export class CreateActivityComponent implements OnInit {
     this._dialog.open(ObjectCreatedComponent, { data: this.activity.title });
   }
 
-  close() {
+  public close() {
     this._dialogRef.close();
   }
 }

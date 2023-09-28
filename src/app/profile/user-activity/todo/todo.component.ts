@@ -15,10 +15,9 @@ import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { EditActivityComponent } from '../../user-activity/edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { CreateActivityComponent } from '../../user-activity/create-activity/create-activity.component';
-import { DeleteActivityDialogComponent } from '@app/shared/user-feedback-dialogues/delete-activity-dialog/delete-activity-dialog.component';
+import { DeleteActivityDialogComponent } from '@app/profile/user-activity/delete-activity-dialog/delete-activity-dialog.component';
 import { Store } from '@ngrx/store';
 import { ActivityState } from '../../store/state/activity.state';
-import { ActivityPageActions } from '../../store/actions/activity.actions';
 import {
   selectAllActivities,
   selectActivityById,
@@ -84,7 +83,11 @@ export class TodoComponent implements OnInit, AfterViewInit {
       dialogConfig
     );
     dialogRef.afterClosed().subscribe((newActivity) => {
-      console.log(newActivity);
+      if (newActivity == undefined) {
+        return;
+      } else {
+        console.log('Editable Data after else button', newActivity);
+      }
     });
   }
 
@@ -92,67 +95,92 @@ export class TodoComponent implements OnInit, AfterViewInit {
     // ***Create dialogue object
     const dialogConfig = new MatDialogConfig();
     // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
 
     // *** Fetch data from api
 
-    this._store.dispatch(
-      ActivityPageActions['[ActivityPage]SelectSingleActivity']({
-        activityId: id,
-      })
-    );
-
     this._store.select(selectActivityById(id)).subscribe({
       next: (selectedActivity) => {
         dialogConfig.data = selectedActivity;
-
-        // Open Dialog
-        const dialogRef = this._dialogue.open(
-          EditActivityComponent,
-          dialogConfig
-        );
-        // ***Returned data from dialogue
-        dialogRef.afterClosed().subscribe((result) => {
-          if (result == undefined) {
-            return;
-          } else {
-            console.log('Editable Data after else button', result);
-          }
-        });
       },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed'),
+    });
+    // **Open Dialog
+    const dialogRef = this._dialogue.open(EditActivityComponent, dialogConfig);
+    // ***Returned data from dialogue
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == undefined) {
+        return;
+      } else {
+        console.log('Editable Data after else button', result);
+      }
     });
   }
 
-  openDeleteActivityDialog(id: number) {
-    // ***create dialog object
+  // openDeleteActivityDialog(id: number) {
+  //   // ***create dialog object
+  //   const dialogConfig = new MatDialogConfig();
+  //   // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.width = '400px';
+
+  //   // ****fetch data from the API
+
+  //   this._activitysService.fetchSingleActivity(id).subscribe((response) => {
+  //     let activity = response;
+  //     dialogConfig.data = activity;
+
+  //     // ***Open Dialog
+  //     const dialogRef = this._dialogue.open(
+  //       DeleteActivityDialogComponent,
+  //       dialogConfig
+  //     );
+
+  //     // ***Returned data from dialogue
+  //     dialogRef.afterClosed().subscribe((result) => {
+  //       if (result == undefined) {
+  //         return;
+  //       } else {
+  //         console.log('Editable Data after else button', result);
+  //       }
+  //     });
+  //   });
+  // }
+
+  public openDeleteActivityDialog(id: number) {
+    // ***Create dialogue object
     const dialogConfig = new MatDialogConfig();
     // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
-    // dialogConfig.direction = 'rtl'
 
-    // ****fetch data from the API
-    this._activitysService.fetchSingleActivity(id).subscribe((response) => {
-      let activity = response;
-      dialogConfig.data = activity;
+    // *** Fetch data from api
 
-      // ***Open Dialog
-      const dialogRef = this._dialogue.open(
-        DeleteActivityDialogComponent,
-        dialogConfig
-      );
-
-      // ***Returned data from dialogue
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result == undefined) {
-          return;
-        } else {
-          console.log('Editable Data after else button', result);
-        }
-      });
+    this._store.select(selectActivityById(id)).subscribe({
+      next: (selectedActivity) => {
+        dialogConfig.data = selectedActivity;
+        this.activity = selectedActivity!;
+      },
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed'),
+    });
+    // **Open Dialog
+    const dialogRef = this._dialogue.open(
+      DeleteActivityDialogComponent,
+      dialogConfig
+    );
+    // ***Returned data from dialogue
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == undefined) {
+        return;
+      } else {
+        console.log('Editable Data after else button', result);
+      }
     });
   }
 

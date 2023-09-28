@@ -9,7 +9,7 @@ import {
 import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 import { Activity } from '@app/profile/user-activity/models/activity.model';
-import { ChangesSavedDialogComponent } from '../changes-saved-dialog/changes-saved-dialog.component';
+import { ChangesSavedDialogComponent } from '../../../shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 
 @Component({
   selector: 'app-delete-category-dialog',
