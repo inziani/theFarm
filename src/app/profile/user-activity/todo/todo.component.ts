@@ -10,7 +10,6 @@ import {
   _closeDialogVia,
 } from '@angular/material/dialog';
 
-import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { EditActivityComponent } from '../../user-activity/edit-activity/edit-activity.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -120,37 +119,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // openDeleteActivityDialog(id: number) {
-  //   // ***create dialog object
-  //   const dialogConfig = new MatDialogConfig();
-  //   // ***stop user from closing dialog by clicking elsewhere and other dialog configuration
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.width = '400px';
-
-  //   // ****fetch data from the API
-
-  //   this._activitysService.fetchSingleActivity(id).subscribe((response) => {
-  //     let activity = response;
-  //     dialogConfig.data = activity;
-
-  //     // ***Open Dialog
-  //     const dialogRef = this._dialogue.open(
-  //       DeleteActivityDialogComponent,
-  //       dialogConfig
-  //     );
-
-  //     // ***Returned data from dialogue
-  //     dialogRef.afterClosed().subscribe((result) => {
-  //       if (result == undefined) {
-  //         return;
-  //       } else {
-  //         console.log('Editable Data after else button', result);
-  //       }
-  //     });
-  //   });
-  // }
-
   public openDeleteActivityDialog(id: number) {
     // ***Create dialogue object
     const dialogConfig = new MatDialogConfig();
@@ -189,7 +157,6 @@ export class TodoComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private _activitysService: ActivitysService,
     private _dialogue: MatDialog,
     private _store: Store<ActivityState>
   ) {}
