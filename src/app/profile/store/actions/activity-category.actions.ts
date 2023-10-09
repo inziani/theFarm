@@ -16,7 +16,7 @@ export const ActivityCategoryPageActions = createActionGroup({
       activityCategory: ActivityCategory;
     }>(),
     '[ActivityCategoryPage] Delete Activity Category': props<{
-      ActivityCategoryId: number;
+      activityCategoryId: number;
     }>(),
   },
 });

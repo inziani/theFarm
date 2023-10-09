@@ -5,46 +5,106 @@
 </mat-dialog-content>
 
 <mat-dialog-content [formGroup]="formGroup">
-
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input type="text" matInput placeholder="Title" id="title" name="title" formControlName="title">
-    <ul class="text-danger list-unstyled"
-      *ngIf="(formSubmitted || formGroup.controls['title'].dirty) && formGroup.controls['title'].invalid">
-      <li *ngFor="let error of formGroup.getTitleNameValidationMessages('title')">{{ error}}</li>
+    <input
+      type="text"
+      matInput
+      placeholder="Title"
+      id="title"
+      name="title"
+      formControlName="title"
+    />
+    <ul
+      class="text-danger list-unstyled"
+      *ngIf="
+        (formSubmitted || formGroup.controls['title'].dirty) &&
+        formGroup.controls['title'].invalid
+      "
+    >
+      <li
+        *ngFor="let error of formGroup.getTitleNameValidationMessages('title')"
+      >
+        {{ error }}
+      </li>
     </ul>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Description</mat-label>
-    <input type="text" matInput placeholder="Description" id="description" name="description"
-      formControlName="description">
-    <ul class="text-danger list-unstyled"
-      *ngIf="(formSubmitted || formGroup.controls['description'].dirty) && formGroup.controls['description'].invalid">
-      <li *ngFor="let error of formGroup.getDescriptionValidationMessages('description')">{{ error}}</li>
+    <input
+      type="text"
+      matInput
+      placeholder="Description"
+      id="description"
+      name="description"
+      formControlName="description"
+    />
+    <ul
+      class="text-danger list-unstyled"
+      *ngIf="
+        (formSubmitted || formGroup.controls['description'].dirty) &&
+        formGroup.controls['description'].invalid
+      "
+    >
+      <li
+        *ngFor="
+          let error of formGroup.getDescriptionValidationMessages('description')
+        "
+      >
+        {{ error }}
+      </li>
     </ul>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Category</mat-label>
-    <mat-select formControlName="category" placeholder="Category" id="category" name="category">
+    <mat-select
+      formControlName="category"
+      placeholder="Category"
+      id="category"
+      name="category"
+    >
       <mat-option *ngFor="let category of category" [value]="category.value">
         {{ category.viewValue }}
       </mat-option>
     </mat-select>
-    <ul class="text-danger list-unstyled"
-      *ngIf="(formSubmitted || formGroup.controls['category'].dirty) && formGroup.controls['category'].invalid">
-      <li *ngFor="let error of formGroup.getActivityCategoryValidationMessages('category')">{{ error}}
+    <ul
+      class="text-danger list-unstyled"
+      *ngIf="
+        (formSubmitted || formGroup.controls['category'].dirty) &&
+        formGroup.controls['category'].invalid
+      "
+    >
+      <li
+        *ngFor="
+          let error of formGroup.getActivityCategoryValidationMessages(
+            'category'
+          )
+        "
+      >
+        {{ error }}
       </li>
     </ul>
   </mat-form-field>
-
 </mat-dialog-content>
 
 <mat-dialog-actions>
-
-  <button type="submit" mat-raised-button color="primary" [disabled]="!formSubmitted && formGroup.invalid"
-    (click)="onEditActivityCategory()">Submit</button>
-  <button type="submit" mat-raised-button color="primary" mat-dialog-close="true">Close</button>
-
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    mat-dialog-close="true"
+    [disabled]="!formSubmitted && formGroup.invalid"
+    (click)="onEditActivityCategory()"
+  >
+    Submit
+  </button>
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    mat-dialog-close="true"
+  >
+    Close
+  </button>
 </mat-dialog-actions>
-

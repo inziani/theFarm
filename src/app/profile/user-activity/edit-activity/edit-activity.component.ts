@@ -42,13 +42,6 @@ export class EditActivityComponent implements OnInit {
   ];
   public formGroup = new ActivityFormGroup();
 
-  constructor(
-    private _dialog: MatDialog,
-    private _dialogRef: MatDialogRef<EditActivityComponent>,
-    private _store: Store<ActivityState>,
-    @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
-  ) {}
-
   ngOnInit(): void {
     this._store.dispatch(
       ActivityCategoryPageActions[
@@ -58,7 +51,6 @@ export class EditActivityComponent implements OnInit {
     this._store.select(selectAllActivityCategories).subscribe({
       next: (activityCategories) => {
         this.activityCategoryList = activityCategories;
-        console.log('ActivityCatagory is blank?-', activityCategories);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed'),
@@ -81,4 +73,11 @@ export class EditActivityComponent implements OnInit {
   public close() {
     this._dialogRef.close();
   }
+
+  constructor(
+    private _dialog: MatDialog,
+    private _dialogRef: MatDialogRef<EditActivityComponent>,
+    private _store: Store<ActivityState>,
+    @Inject(MAT_DIALOG_DATA) public dialogDataActivity: any
+  ) {}
 }

@@ -66,6 +66,21 @@ export class ActivitysService {
 
   // **************************Activity Category*************************************
 
+  public addNewActivityCategory(
+    title: string,
+    description: string,
+    category: string
+  ): Observable<ActivityCategory> {
+    return this.http.post<ActivityCategory>(
+      `${environment.apiUrl}/activityscategorys/`,
+      JSON.stringify({
+        title,
+        description,
+        category,
+      }),
+      { headers: this.httpHeaders }
+    );
+  }
   public fetchActivityCategory(): Observable<ActivityCategory[]> {
     return this.http.get<ActivityCategory[]>(
       `${environment.apiUrl}/activityscategorys/`,
@@ -87,8 +102,8 @@ export class ActivitysService {
     title: string,
     description: string,
     category: string
-  ): Observable<ActivityCategoryInterface> {
-    return this.http.patch<ActivityCategoryInterface>(
+  ): Observable<ActivityCategory> {
+    return this.http.patch<ActivityCategory>(
       `${environment.apiUrl}/activityscategorys/` + id + '/',
       { title, description, category },
       { headers: this.httpHeaders }

@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-
 import { ActivityCategoryFormGroup } from '@app/profile/user-activity/models/activity-category-form.model';
 import { Category } from '@app/shared/interfaces/activity-interface';
-import { RestDataSource } from '@app/shared/data/rest.datasource';
 import {
   MatDialog,
   MatDialogRef,
@@ -10,6 +8,8 @@ import {
 } from '@angular/material/dialog';
 import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
+import { Store } from '@ngrx/store';
+import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity-category.actions';
 
 @Component({
   selector: 'app-create-category',
@@ -30,35 +30,31 @@ export class CreateCategoryComponent implements OnInit {
     { value: 'Official', viewValue: 'Official' },
   ];
 
-  constructor(
-    private dataSource: RestDataSource,
-    private dialog: MatDialog,
-    private dialogRef: MatDialogRef<CreateCategoryComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogDataCategory: any
-  ) {}
-
   ngOnInit(): void {}
 
   onAddActivityCategory() {
-    this.dialogRef.close(this.formGroup.value);
+    this._dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
-    this.dataSource
-      .addActivityCategory(
-        this.activityCategory.title,
-        this.activityCategory.description,
-        this.activityCategory.category
-      )
-      .subscribe({
-        next: (newActivityCategory) => {
-          this.dialog.open(ObjectCreatedComponent, {
-            data: newActivityCategory,
-          });
-        },
-        error: (err) => {
-          this.errorMessage = err;
-          this.isLoading = false;
-        },
-        complete: () => console.info('Completed'),
-      });
+    this._store.dispatch(
+      ActivityCategoryPageActions[
+        '[ActivityCategoryPage]CreateActivityCategory'
+      ]({
+        activityCategory: this.activityCategory,
+      })
+    );
+    this._dialog.open(ObjectCreatedComponent, {
+      data: this.activityCategory.title,
+    });
   }
+
+  public close() {
+    this._dialogRef.close();
+  }
+
+  constructor(
+    private _dialog: MatDialog,
+    private _dialogRef: MatDialogRef<CreateCategoryComponent>,
+    private _store: Store,
+    @Inject(MAT_DIALOG_DATA) public dialogDataCategory: any
+  ) {}
 }

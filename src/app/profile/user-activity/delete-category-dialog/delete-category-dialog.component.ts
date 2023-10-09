@@ -10,6 +10,9 @@ import { RestDataSource } from '@app/shared/data/rest.datasource';
 import { ActivityCategory } from '@app/profile/user-activity/models/activity-category.models';
 import { Activity } from '@app/profile/user-activity/models/activity.model';
 import { ChangesSavedDialogComponent } from '../../../shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { Store } from '@ngrx/store';
+import { DeleteDialogComponent } from '@app/shared/user-feedback-dialogues/delete-dialog/delete-dialog.component';
+import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity-category.actions';
 
 @Component({
   selector: 'app-delete-category-dialog',
@@ -23,31 +26,28 @@ export class DeleteCategoryDialogComponent implements OnInit {
   public activityCategory!: ActivityCategory;
   public activity!: Activity;
 
-  constructor(
-    private dataSource: RestDataSource,
-    private dialog: MatDialog,
-    private dialogRef: MatDialogRef<DeleteCategoryDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public deleteCategoryDialogData: any
-  ) {}
-
   ngOnInit(): void {
     this.activityCategory = this.deleteCategoryDialogData;
+    console.log('Deletion -', this.activityCategory);
   }
 
   onDeleteActivityCategory() {
-    this.dataSource.deleteActivityCategory(this.activityCategory.id).subscribe(
-      (success) => {
-        if (success) {
-          console.log(success);
-        } else {
-          this.dialog.open(ChangesSavedDialogComponent);
-        }
-      },
-      (error) => {
-        this.error = error;
-        alert(this.error);
-        this.isLoading = false;
-      }
+    this._store.dispatch(
+      ActivityCategoryPageActions[
+        '[ActivityCategoryPage]DeleteActivityCategory'
+      ]({
+        activityCategoryId: this.activityCategory.id,
+      })
     );
+    this._dialog.open(DeleteDialogComponent, {
+      data: this.activityCategory.title,
+    });
   }
+
+  constructor(
+    private _dialog: MatDialog,
+    private _store: Store,
+    private _dialogRef: MatDialogRef<DeleteCategoryDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public deleteCategoryDialogData: ActivityCategory
+  ) {}
 }

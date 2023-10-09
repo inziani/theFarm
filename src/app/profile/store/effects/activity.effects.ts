@@ -6,7 +6,7 @@ import {
   map,
   mergeMap,
   of,
-  tap,
+  // tap,
 } from 'rxjs';
 
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
@@ -15,7 +15,7 @@ import {
   ActivityPageActions,
   ActivityAPIActions,
 } from '../actions/activity.actions';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 @Injectable()
 export class ActivityEffects {
@@ -91,7 +91,7 @@ export class ActivityEffects {
             catchError((errorMessage) =>
               of(
                 ActivityAPIActions['[ActivityAPI]EditActivityFail']({
-                  errorMessage,
+                  errorMessage
                 })
               )
             )
@@ -136,6 +136,6 @@ export class ActivityEffects {
   constructor(
     private _actions$: Actions,
     private _activityService: ActivitysService,
-    private _router: Router
+    // private _router: Router
   ) {}
 }
