@@ -17,13 +17,13 @@ import { ActivityCategoryPageActions } from '@app/profile/store/actions/activity
   styleUrls: ['./create-category.component.css'],
 })
 export class CreateCategoryComponent implements OnInit {
-  formGroup = new ActivityCategoryFormGroup();
-  isLoading = false;
-  formSubmitted: boolean = false;
-  activityCategory!: ActivityCategory;
-  errorMessage!: string;
-  title: string = 'Create task category';
-  categorydata!: any;
+  public formGroup = new ActivityCategoryFormGroup();
+  public isLoading = false;
+  public formSubmitted: boolean = false;
+  public activityCategory!: ActivityCategory;
+  public errorMessage!: string;
+  public title: string = 'Create task category';
+  public categorydata!: any;
 
   category: Category[] = [
     { value: 'Personal', viewValue: 'Personal' },
@@ -32,7 +32,7 @@ export class CreateCategoryComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onAddActivityCategory() {
+  public onAddActivityCategory() {
     this._dialogRef.close(this.formGroup.value);
     this.activityCategory = this.formGroup.value;
     this._store.dispatch(

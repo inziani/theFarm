@@ -15,10 +15,10 @@ import { AuthenticationService } from './_helpers/services/authentication.servic
 import { NavigationServiceService } from './_helpers/services/navigation-service.service';
 import { RestDataSource } from './shared/data/rest.datasource';
 import { DowndownDirective } from './shared/directives/dropdown.directive';
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { JwtInterceptor } from './_helpers/interceptors/jwt.interceptor';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { DatePipe } from '@angular/common';
-import { IsoDatePipe } from './_helpers/iso-date.pipe';
+import { IsoDatePipe } from './_helpers/pipes/iso-date.pipe';
 import { NumberRangesService } from './shared/data/number-ranges.service';
 import { FinanceService } from './_helpers/services/finance.service';
 import { ErrorService } from './_helpers/services/error.service';

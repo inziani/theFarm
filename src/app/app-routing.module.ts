@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 
-import { canMatchModulesGuard } from './_helpers/authentication.guard';
+import { canMatchModulesGuard } from './_helpers/guards/authentication.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { UnauthorizedServeResponseComponent } from './shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
 
@@ -32,8 +32,10 @@ const AppRoutes: Routes = [
   {
     path: 'humanResources',
     canMatch: [canMatchModulesGuard],
-    loadChildren: ()=> import ('./features/human-resources/human-resources.module').then((m)=> m.HumanResourcesModule)
-
+    loadChildren: () =>
+      import('./features/human-resources/human-resources.module').then(
+        (m) => m.HumanResourcesModule
+      ),
   },
   {
     path: 'shared',
@@ -49,7 +51,13 @@ const AppRoutes: Routes = [
   },
   { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
   { path: '', component: HomePageComponent, pathMatch: 'full' },
-  { path: 'human-resources', loadChildren: () => import('./features/human-resources/human-resources.module').then(m => m.HumanResourcesModule) },
+  {
+    path: 'human-resources',
+    loadChildren: () =>
+      import('./features/human-resources/human-resources.module').then(
+        (m) => m.HumanResourcesModule
+      ),
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
