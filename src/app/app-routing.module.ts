@@ -5,6 +5,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { canMatchModulesGuard } from './_helpers/guards/authentication.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { UnauthorizedServeResponseComponent } from './shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
+import { ErrorHandlingDialogComponent } from './shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 
 const AppRoutes: Routes = [
   {
@@ -15,6 +16,7 @@ const AppRoutes: Routes = [
         (m) => m.AuthenticationModule
       ),
   },
+  // Finance
   {
     path: 'finance',
     canMatch: [canMatchModulesGuard],
@@ -23,46 +25,53 @@ const AppRoutes: Routes = [
         (m) => m.FinanceLayoutModule
       ),
   },
+  // Sales
   {
     path: 'sales',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./features/sales/sales.module').then((m) => m.SalesModule),
   },
-  {
-    path: 'humanResources',
-    canMatch: [canMatchModulesGuard],
-    loadChildren: () =>
-      import('./features/human-resources/human-resources.module').then(
-        (m) => m.HumanResourcesModule
-      ),
-  },
+
+  // Shared
   {
     path: 'shared',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./shared/shared.module').then((m) => m.SharedModule),
   },
+  // Profile
   {
     path: 'profile',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
-  { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
-  { path: '', component: HomePageComponent, pathMatch: 'full' },
+  // Human Resources
   {
     path: 'human-resources',
+    canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./features/human-resources/human-resources.module').then(
         (m) => m.HumanResourcesModule
       ),
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  {
+    path: 'home',
+    component: HomePageComponent,
+    pathMatch: 'full',
+  },
+  // { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
+  // { path: 'error', component: ErrorHandlingDialogComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [BrowserModule, RouterModule.forRoot(AppRoutes)],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(AppRoutes, { enableTracing: true }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

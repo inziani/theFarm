@@ -8,23 +8,7 @@ import { RestDataSource } from './shared/data/rest.datasource';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public isAuthenticated: boolean = false;
-  user: any;
-  private userSubscription!: Subscription;
-  public title: string = 'Title';
+  ngOnInit() {}
 
-  openSideNav = false;
-
-  constructor(private dataSource: RestDataSource) {}
-
-  ngOnInit() {
-    this.userSubscription = this.dataSource.user.subscribe((user) => {
-      this.isAuthenticated = !!user;
-      this.user = user;
-    });
-  }
-
-  sideNavToggle() {
-    return (this.openSideNav = true);
-  }
+  constructor() {}
 }
