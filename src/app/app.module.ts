@@ -45,6 +45,7 @@ import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { ErrorsComponent } from './errors/errors.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -67,6 +68,7 @@ export function tokenGetter() {
     MaterialsDialogueComponent,
     ProjectsDialogueComponent,
     KnowledgeDialogueComponent,
+    ErrorsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, } from '@angular/router';
 import { SalesComponent } from './sales.component';
 import { SalesOrderProcessComponent } from '@app/features/sales/sales-order-process/sales-order-process.component';
 import { authenticationGuard } from '@app/_helpers/guards/authentication.guard';
@@ -12,7 +12,6 @@ const routes: Routes = [
         path: 'salesOrder',
         component: SalesOrderProcessComponent,
         canActivate: [authenticationGuard],
-        children: [],
       },
       {
         path: 'saleReports',

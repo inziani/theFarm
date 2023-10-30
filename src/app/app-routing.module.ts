@@ -6,6 +6,7 @@ import { canMatchModulesGuard } from './_helpers/guards/authentication.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { UnauthorizedServeResponseComponent } from './shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
 import { ErrorHandlingDialogComponent } from './shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ErrorsComponent } from './errors/errors.component';
 
 const AppRoutes: Routes = [
   {
@@ -49,7 +50,7 @@ const AppRoutes: Routes = [
   },
   // Human Resources
   {
-    path: 'human-resources',
+    path: 'humanresources',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./features/human-resources/human-resources.module').then(
@@ -64,7 +65,10 @@ const AppRoutes: Routes = [
   // { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
   // { path: 'error', component: ErrorHandlingDialogComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: '**',
+    component: ErrorsComponent,
+  },
 ];
 
 @NgModule({

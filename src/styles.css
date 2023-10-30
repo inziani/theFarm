@@ -14,3 +14,9 @@ body {
 .dialog-boxes{
   border-radius: 0;
 }
+
+.active-Items{
+  color: red;
+  font-weight: bolder;
+  background-color: black;
+}

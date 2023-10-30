@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
+// import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import { ActivityCategoryState } from './store/state/activity-category.state';
 import { ActivityCategoryPageActions } from './store/actions/activity-category.actions';
 import { ActivityPageActions } from './store/actions/activity.actions';
@@ -46,9 +46,7 @@ export class ProfileComponent implements OnInit {
     this.itemSelected = 'security';
   }
   public onLogOut() {
-    // this._store.dispatch(
-    //   AuthenticationActions['[Authentication]UserLogOutSucess']()
-    // );
+
     this._router.navigate(['/authentication/login']);
   }
 
