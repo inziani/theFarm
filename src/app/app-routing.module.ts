@@ -62,8 +62,9 @@ const AppRoutes: Routes = [
     component: HomePageComponent,
     pathMatch: 'full',
   },
-  // { path: 'unauthorized', component: UnauthorizedServeResponseComponent },
-  // { path: 'error', component: ErrorHandlingDialogComponent },
+  {
+    path: 'error',
+  component: ErrorsComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: '**',

@@ -1,14 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ErrorHandlingDialogComponent } from '../../shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ErrorService {
   public isDialogOpen!: Boolean;
+  private _dataSource$ = new BehaviorSubject<any>('');
+  readonly _data: Observable<any> = this._dataSource$.asObservable();
 
   constructor(private _dialog: MatDialog) {}
+
+  // Cross component communication
+  public sendData(data: any) {
+    this._dataSource$.next(data);
+  }
 
   public openErrorHandlingDialog(data: string[] | string) {
     this.isDialogOpen = true;
