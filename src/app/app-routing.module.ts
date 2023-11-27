@@ -64,7 +64,8 @@ const AppRoutes: Routes = [
   },
   {
     path: 'error',
-  component: ErrorsComponent},
+    component: ErrorsComponent,
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: '**',

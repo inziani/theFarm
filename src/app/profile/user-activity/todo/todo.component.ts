@@ -21,6 +21,7 @@ import {
   selectAllActivities,
   selectActivityById,
 } from '../../store/selectors/activity.selectors';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-todo',
@@ -28,6 +29,7 @@ import {
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit, AfterViewInit {
+  public test!: Activity[];
   public activity!: Activity;
   public activityObject = <Activity>{};
   public activityList$ = this._store.select(selectAllActivities);
@@ -152,12 +154,11 @@ export class TodoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
-  }
+  ngOnDestroy() {}
 
   constructor(
     private _dialogue: MatDialog,
-    private _store: Store<ActivityState>
+    private _store: Store<ActivityState>,
+    private _activatedroute: ActivatedRoute
   ) {}
 }

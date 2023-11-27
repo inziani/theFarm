@@ -22,7 +22,7 @@ export class ActivitysService {
   }
 
   public fetchActivityData(): Observable<Activity[]> {
-    return this.http.get<Activity[]>(`${environment.apiUrl}/activitys`, {
+    return this.http.get<Activity[]>(`${environment.apiUrl}/activitys/`, {
       headers: this.httpHeaders,
     });
   }

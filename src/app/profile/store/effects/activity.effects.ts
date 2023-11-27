@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
+  Observable,
   catchError,
   concatMap,
   exhaustMap,
+  filter,
   map,
   mergeMap,
   of,
@@ -15,12 +17,15 @@ import {
   ActivityPageActions,
   ActivityAPIActions,
 } from '../actions/activity.actions';
-// import { Router } from '@angular/router';
+
 
 @Injectable()
 export class ActivityEffects {
-  public loadActivitiesEffect$ = createEffect(() => {
+
+
+  public loadActivitiesEffects$ = createEffect(() => {
     return this._actions$.pipe(
+
       ofType(ActivityPageActions['[ActivityPage]LoadActivities']),
       exhaustMap(() =>
         this._activityService.fetchActivityData().pipe(
@@ -40,6 +45,8 @@ export class ActivityEffects {
       )
     );
   });
+
+
 
   public createActivityEffect$ = createEffect(() => {
     return this._actions$.pipe(
@@ -91,7 +98,7 @@ export class ActivityEffects {
             catchError((errorMessage) =>
               of(
                 ActivityAPIActions['[ActivityAPI]EditActivityFail']({
-                  errorMessage
+                  errorMessage,
                 })
               )
             )
@@ -122,20 +129,10 @@ export class ActivityEffects {
     );
   });
 
-  // redirectToActivityPage = createEffect(() =>
-  //   this._actions$.pipe(
-  //     ofType(
-  //       ActivityAPIActions['[ActivityAPI]CreateActivitySuccess'],
-  //       ActivityAPIActions['[ActivityAPI]EditActivitySuccess'],
-  //       ActivityAPIActions['[ActivityAPI]DeleteActivitySuccess']
-  //     ),
-  //     tap(() => this._router.navigate(['/profile']))
-  //   )
-  // );
 
   constructor(
     private _actions$: Actions,
-    private _activityService: ActivitysService,
-    // private _router: Router
+    private _activityService: ActivitysService
+
   ) {}
 }

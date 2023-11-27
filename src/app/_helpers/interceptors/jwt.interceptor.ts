@@ -55,6 +55,7 @@ export class JwtInterceptor implements HttpInterceptor {
     if (error.status) {
       this.errorMessage = error.error.detail;
       this._errorService.sendData(this.errorMessage);
+      console.log('ErrorMessageInInterceptor - ', this.errorMessage);
       this._router.navigate(['/error']);
 
       // Begining of Dialogue component
