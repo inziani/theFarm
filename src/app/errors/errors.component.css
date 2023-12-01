@@ -1,0 +1,12 @@
+.alert-danger {
+  border-radius: 0;
+  color: red;
+  font-weight: lighter;
+}
+.mat-icon {
+  color: red;
+}
+
+h2 {
+  font-weight: lighter;
+}

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
-
 import { canMatchModulesGuard } from './_helpers/guards/authentication.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { UnauthorizedServeResponseComponent } from './shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
-import { ErrorHandlingDialogComponent } from './shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+
 import { ErrorsComponent } from './errors/errors.component';
 
 const AppRoutes: Routes = [
@@ -43,14 +42,14 @@ const AppRoutes: Routes = [
   },
   // Profile
   {
-    path: 'profile',
+    path: 'profileUrl',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   // Human Resources
   {
-    path: 'humanresources',
+    path: 'human-resources',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
       import('./features/human-resources/human-resources.module').then(
@@ -63,12 +62,20 @@ const AppRoutes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'un-authorized',
+    component: ErrorsComponent,
+    pathMatch: 'full',
+  },
+  {
     path: 'error',
     component: ErrorsComponent,
+    pathMatch: 'full',
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full',
     component: ErrorsComponent,
   },
 ];

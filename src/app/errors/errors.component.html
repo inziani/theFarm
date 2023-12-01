@@ -1,10 +1,19 @@
-<div class="container my-1">
-  <div class="alert alert-danger">
-    <mat-icon>error</mat-icon><br />
-    <p>An Error Has Occured</p>
-     <p>HTTP Error Occured -  {{ httpErrorMessage }}</p>
+
+
+<div class="container my-5 justify-content-center alert alert-danger">
+  <h1 class="text-center" style="font-weight: lighter">
+    <mat-icon>error</mat-icon>
+    <h1>Error</h1>
+  </h1>
+  <div class="row text-center">
+    <div class="col-md-12" [ngSwitch]="httpErrorMessage">
+      <div *ngSwitchCase="'Unknown Error'">
+        <h2>The Server is Not Available</h2>
+      </div>
+      <div *ngSwitchDefault>
+        <h2>{{ httpErrorMessage }}</h2>
+      </div>
+      <mat-icon class="my-1" routerLink="/home">home</mat-icon>
+    </div>
   </div>
-  <button mat-raised-button color="primary" routerLink="/home">
-    <mat-icon>home</mat-icon>
-  </button>
 </div>

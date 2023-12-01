@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FinanceService } from '@app/_helpers/services/finance.service';
 import { TaxCode } from '@app/features/finance/finance-models/fi-data-models/organization-data-models';
 import { TaxCodeDialogComponent } from '../gl-dialogues/tax-code-dialog/tax-code-dialog.component';
-import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ErrorsComponent } from '@app/errors/errors.component';
 
 @Component({
   selector: 'app-tax-code-details',
@@ -87,7 +87,7 @@ export class TaxCodeDetailsComponent {
         dialogRef.afterClosed().subscribe({
           next: (result: string) => result,
           error: (err: string) =>
-            this._matDialog.open(ErrorHandlingDialogComponent, { data: err }),
+            this._matDialog.open(ErrorsComponent, { data: err }),
           complete: () => console.info('Complete'),
         });
       },

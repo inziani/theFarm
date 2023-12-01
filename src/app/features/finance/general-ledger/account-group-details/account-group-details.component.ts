@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FinanceService } from '@app/_helpers/services/finance.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountGroupDialogComponent } from '../gl-dialogues/account-group-dialog/account-group-dialog.component';
-import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ErrorsComponent } from '@app/errors/errors.component';
 
 @Component({
   selector: 'app-account-group-details',
@@ -93,7 +93,7 @@ export class AccountGroupDetailsComponent {
         dialogRef.afterClosed().subscribe({
           next: (result: string) => result,
           error: (err: string) =>
-            this._matDialog.open(ErrorHandlingDialogComponent, { data: err }),
+            this._matDialog.open(ErrorsComponent, { data: err }),
           complete: () => console.info('Complete'),
         });
       },

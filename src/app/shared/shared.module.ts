@@ -13,11 +13,11 @@ import { DeleteActivityDialogComponent } from '../profile/user-activity/delete-a
 import { DeleteCategoryDialogComponent } from '../profile/user-activity/delete-category-dialog/delete-category-dialog.component';
 import { UserUpdateDialogComponent } from './user-update-dialog/user-update-dialog.component';
 import { DeleteDialogComponent } from './user-feedback-dialogues/delete-dialog/delete-dialog.component';
-import { ErrorHandlingDialogComponent } from './user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ObjectCreatedComponent } from './user-feedback-dialogues/object-created/object-created.component';
 import { ChangesSavedDialogComponent } from './user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { LoginDialogComponent } from './user-feedback-dialogues/login-dialog/login-dialog.component';
 import { HeaderComponent } from '../home-page/header/header.component';
+
 
 @NgModule({
   declarations: [
@@ -30,11 +30,11 @@ import { HeaderComponent } from '../home-page/header/header.component';
     DeleteCategoryDialogComponent,
     UserUpdateDialogComponent,
     DeleteDialogComponent,
-    ErrorHandlingDialogComponent,
     ObjectCreatedComponent,
     ChangesSavedDialogComponent,
     LoginDialogComponent,
     HeaderComponent,
+
   ],
   imports: [
     CommonModule,
@@ -57,11 +57,12 @@ import { HeaderComponent } from '../home-page/header/header.component';
     DeleteCategoryDialogComponent,
     UserUpdateDialogComponent,
     DeleteDialogComponent,
-    ErrorHandlingDialogComponent,
     ObjectCreatedComponent,
     ChangesSavedDialogComponent,
     LoginDialogComponent,
     HeaderComponent,
+    MaterialModule
+
   ],
 })
 export class SharedModule {}

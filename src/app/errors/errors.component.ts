@@ -15,6 +15,7 @@ export class ErrorsComponent implements OnInit {
       next: (serviceErrorMessage) => {
         this.httpErrorMessage = serviceErrorMessage;
         console.log('Error Service Message- ', this.httpErrorMessage);
+        console.log('Error Service Message Raw- ', serviceErrorMessage);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed'),

@@ -6,9 +6,10 @@ import { MatSort } from '@angular/material/sort';
 import { ControllingAreaMasterData } from '../finance-models/fi-data-models/organization-data-models';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/_helpers/services/finance.service';
-import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+
 import { ControllingAreaDialogComponent } from '../finance-dialogues/controlling-area-dialog/controlling-area-dialog.component';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
+import { ErrorsComponent } from '@app/errors/errors.component';
 
 @Component({
   selector: 'app-org-details-controllingarea',
@@ -43,7 +44,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
     this._financeService.fetchControllingAreaData().subscribe({
       next: (controllingAreaDataFetched) =>
         (this.sourceData.data = controllingAreaDataFetched),
-      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
+      error: (err) => this._dialogue.open(ErrorsComponent),
       complete: () => console.info('complete'),
     });
   }
@@ -75,7 +76,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this._dialogue.open(ErrorsComponent),
           complete: () => console.info('Complete'),
         });
       },
@@ -98,7 +99,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe({
       next: (result) => result,
-      error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
+      error: (err) => this._dialogue.open(ErrorsComponent),
       complete: () => console.info('complete'),
     });
   }
@@ -124,7 +125,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this._dialogue.open(ErrorsComponent),
           complete: () => console.info('Complete'),
         });
       },
@@ -152,7 +153,7 @@ export class OrgDetailsControllingareaComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
-          error: (err) => this._dialogue.open(ErrorHandlingDialogComponent),
+          error: (err) => this._dialogue.open(ErrorsComponent),
           complete: () => console.info('Complete'),
         });
       },

@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ErrorHandlingDialogComponent } from '../../shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ErrorsComponent } from '@app/errors/errors.component';
+
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -8,8 +9,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ErrorService {
   public isDialogOpen!: Boolean;
-  private _dataSource$ = new BehaviorSubject<any>('');
-  readonly _data: Observable<any> = this._dataSource$.asObservable();
+  private _dataSource$ = new BehaviorSubject<string>('');
+  readonly _data: Observable<string> = this._dataSource$.asObservable();
 
   constructor(private _dialog: MatDialog) {}
 
@@ -27,10 +28,7 @@ export class ErrorService {
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = data;
 
-    const dialogRef = this._dialog.open(
-      ErrorHandlingDialogComponent,
-      dialogConfig
-    );
+    const dialogRef = this._dialog.open(ErrorsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe({
       next: (result) => {
         console.log('The dialog is closed');
@@ -50,10 +48,7 @@ export class ErrorService {
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = data;
 
-    const dialogRef = this._dialog.open(
-      ErrorHandlingDialogComponent,
-      dialogConfig
-    );
+    const dialogRef = this._dialog.open(ErrorsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe({
       next: (result) => {
         console.log('The dialog is closed');

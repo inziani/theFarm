@@ -21,8 +21,9 @@ import {
 } from '@app/features/human-resources/models/user.model';
 import { ChangesSavedDialogComponent } from '../user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '../user-feedback-dialogues/delete-dialog/delete-dialog.component';
-import { ErrorHandlingDialogComponent } from '../user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+
 import { ObjectCreatedComponent } from '../user-feedback-dialogues/object-created/object-created.component';
+import { ErrorsComponent } from '@app/errors/errors.component';
 
 @Component({
   selector: 'app-user-update-dialog',
@@ -134,7 +135,7 @@ export class UserUpdateDialogComponent implements OnInit {
         this.staffUser.country,
         this.staffUser.is_active,
         this.staffUser.is_superuser,
-        this.staffUser.is_staff,
+        this.staffUser.is_staff
         // this.staffUser.staffType,
         // this.staffUser.password
       )
@@ -218,7 +219,7 @@ export class UserUpdateDialogComponent implements OnInit {
           data: (this.deletedUser = this.staffUser.username),
         }),
       error: (err) =>
-        this._dialog.open(ErrorHandlingDialogComponent, {
+        this._dialog.open(ErrorsComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('Completed'),

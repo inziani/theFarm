@@ -89,7 +89,7 @@ export class AuthenticationEffects {
 
         tap(() => {
           this._dialog.open(LoginDialogComponent);
-          this._router.navigate(['/profile']);
+          this._router.navigate(['/profileUrl']);
         })
       ),
     { dispatch: false }

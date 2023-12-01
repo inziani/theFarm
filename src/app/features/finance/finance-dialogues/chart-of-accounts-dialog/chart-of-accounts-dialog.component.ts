@@ -6,7 +6,6 @@ import {
 } from '@angular/material/dialog';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '@app/shared/user-feedback-dialogues/delete-dialog/delete-dialog.component';
-import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
 import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
 import { FinanceService } from '@app/_helpers/services/finance.service';
 import { Language } from '@app/features/finance/finance-interfaces/finance-interfaces';
@@ -15,6 +14,7 @@ import {
   CompanyCodeMasterData,
 } from '@app/features/finance/finance-models/fi-data-models/organization-data-models';
 import { ChartOfAccountsMasterDataFormGroup } from '@app/features/finance/finance-models/fi-form-models/co-master-data-models';
+import { ErrorsComponent } from '@app/errors/errors.component';
 
 @Component({
   selector: 'app-chart-of-accounts-dialog',
@@ -98,7 +98,7 @@ export class ChartOfAccountsDialogComponent implements OnInit {
               chartOfAccountsCreated.chartOfAccountsName),
           }),
         error: (err) =>
-          this._dialog.open(ErrorHandlingDialogComponent, {
+          this._dialog.open(ErrorsComponent, {
             data: (this.errorMessage = err),
           }),
         complete: () => console.info('complete'),
@@ -127,7 +127,7 @@ export class ChartOfAccountsDialogComponent implements OnInit {
               chartOfAccountsEdited.chartOfAccountsName),
           }),
         error: (err) =>
-          this._dialog.open(ErrorHandlingDialogComponent, {
+          this._dialog.open(ErrorsComponent, {
             data: (this.errorMessage = err),
           }),
         complete: () => console.info('complete'),
@@ -145,7 +145,7 @@ export class ChartOfAccountsDialogComponent implements OnInit {
             data: (this.deletedItem = this.chartOfAccounts.chartOfAccountsName),
           }),
         error: (err) =>
-          this._dialog.open(ErrorHandlingDialogComponent, {
+          this._dialog.open(ErrorsComponent, {
             data: (this.errorMessage = err),
           }),
         complete: () => console.info('complete'),

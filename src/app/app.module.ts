@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //  Features Modules
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
-//  Services . directives and other helpers
 import { JwtModule } from '@auth0/angular-jwt';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersService } from './_helpers/services/users.service';

@@ -7,7 +7,7 @@ import {
 
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { DeleteDialogComponent } from '@app/shared/user-feedback-dialogues/delete-dialog/delete-dialog.component';
-import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+
 import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
 
 import { FinanceService } from '@app/_helpers/services/finance.service';
@@ -17,6 +17,7 @@ import {
   ControllingAreaMasterData,
 } from '@app/features/finance/finance-models/fi-data-models/organization-data-models';
 import { ControllingAreaMasterDataFormGroup } from '@app/features/finance/finance-models/fi-form-models/co-master-data-models';
+import { ErrorsComponent } from '@app/errors/errors.component';
 
 @Component({
   selector: 'app-controlling-area-dialog',
@@ -48,7 +49,7 @@ export class ControllingAreaDialogComponent implements OnInit {
     this.getData();
     this._financeService.fetchCompanyCodeData().subscribe({
       next: (companyCodeData) => (this.companyCodeList = companyCodeData),
-      error: (err) => this._dialog.open(ErrorHandlingDialogComponent),
+      error: (err) => this._dialog.open(ErrorsComponent),
       complete: () => console.info('complete'),
     });
 
@@ -84,7 +85,7 @@ export class ControllingAreaDialogComponent implements OnInit {
               controllingAreaMasterCreated.controllingAreaName),
           }),
 
-        error: (err) => this._dialog.open(ErrorHandlingDialogComponent),
+        error: (err) => this._dialog.open(ErrorsComponent),
         complete: () => console.info('Complete'),
       });
     this.formGroup.reset;
@@ -111,7 +112,7 @@ export class ControllingAreaDialogComponent implements OnInit {
             data: (this.changedItem =
               controllingAreaMasterEdited.controllingAreaName),
           }),
-        error: (err) => this._dialog.open(ErrorHandlingDialogComponent),
+        error: (err) => this._dialog.open(ErrorsComponent),
         complete: () => console.info('complete'),
       });
     this.formGroup.reset;
@@ -127,7 +128,7 @@ export class ControllingAreaDialogComponent implements OnInit {
             data: controllingAreaDeleted.controllingAreaName,
           }),
         error: (err) =>
-          this._dialog.open(ErrorHandlingDialogComponent, {
+          this._dialog.open(ErrorsComponent, {
             data: (this.errorMessage = err),
           }),
         complete: () => console.info('complete'),

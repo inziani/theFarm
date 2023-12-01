@@ -15,23 +15,6 @@ export class AuthenticationService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  // private _isLoggedOn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  // public readonly isLoggedOnData$: Observable<boolean> =
-  //   this._isLoggedOn$.asObservable();
-
-  // public _loggedInUser$ = new BehaviorSubject<JWTDecodedTokenInterface>({
-  //   token_type: 'string',
-  //   exp: NaN,
-  //   iat: NaN,
-  //   jti: 'string',
-  //   user_id: NaN,
-  // });
-  // public readonly _loggedInUserData$: Observable<JWTDecodedTokenInterface> =
-  //   this._loggedInUser$.asObservable();
-
-  // public jwtHelper = new JwtHelperService();
-
-  // public errorMessage!: string;
 
   public onLogOn(email: string, password: string) {
     return this._http.post<JwTAuthenticationResponseInterface>(

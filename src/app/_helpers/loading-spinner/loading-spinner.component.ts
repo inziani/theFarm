@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loading-spinner.component.css']
 })
 export class LoadingSpinnerComponent implements OnInit {
+  public routing: boolean = false;
 
   constructor() { }
 

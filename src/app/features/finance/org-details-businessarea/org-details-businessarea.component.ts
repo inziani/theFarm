@@ -7,7 +7,7 @@ import { BusinessAreaMasterData } from '../finance-models/fi-data-models/organiz
 import { BusinessAreaDialogComponent } from '../finance-dialogues/business-area-dialog/business-area-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FinanceService } from '@app/_helpers/services/finance.service';
-import { ErrorHandlingDialogComponent } from '@app/shared/user-feedback-dialogues/error-handling-dialog/error-handling-dialog.component';
+import { ErrorsComponent } from '@app/errors/errors.component';
 
 @Component({
   selector: 'app-org-details-businessarea',
@@ -43,7 +43,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
       next: (businessAreaDataFetched) =>
         (this.sourceData.data = businessAreaDataFetched),
       error: (err) =>
-        this._dialogue.open(ErrorHandlingDialogComponent, {
+        this._dialogue.open(ErrorsComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('complete'),
@@ -70,7 +70,7 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (result) => result,
       error: (err) =>
-        this._dialogue.open(ErrorHandlingDialogComponent, {
+        this._dialogue.open(ErrorsComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('complete'),
@@ -101,14 +101,14 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
           error: (err) =>
-            this._dialogue.open(ErrorHandlingDialogComponent, {
+            this._dialogue.open(ErrorsComponent, {
               data: (this.errorMessage = err),
             }),
           complete: () => console.info('Complete'),
         });
       },
       error: (err) =>
-        this._dialogue.open(ErrorHandlingDialogComponent, {
+        this._dialogue.open(ErrorsComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('Complete?'),
@@ -138,14 +138,14 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
           error: (err) =>
-            this._dialogue.open(ErrorHandlingDialogComponent, {
+            this._dialogue.open(ErrorsComponent, {
               data: (this.errorMessage = err),
             }),
           complete: () => console.info('Complete'),
         });
       },
       error: (err) =>
-        this._dialogue.open(ErrorHandlingDialogComponent, {
+        this._dialogue.open(ErrorsComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('Complete?'),
@@ -173,14 +173,14 @@ export class OrgDetailsBusinessareaComponent implements OnInit {
         dialogRef.afterClosed().subscribe({
           next: (result) => result,
           error: (err) =>
-            this._dialogue.open(ErrorHandlingDialogComponent, {
+            this._dialogue.open(ErrorsComponent, {
               data: (this.errorMessage = err),
             }),
           complete: () => console.info('Complete'),
         });
       },
       error: (err) =>
-        this._dialogue.open(ErrorHandlingDialogComponent, {
+        this._dialogue.open(ErrorsComponent, {
           data: (this.errorMessage = err),
         }),
       complete: () => console.info('Complete?'),
