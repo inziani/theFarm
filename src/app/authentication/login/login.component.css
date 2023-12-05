@@ -4,52 +4,51 @@
   font-size: medium;
 }
 
-input.ng-dirty.ng-invalid
-{ border: 2px solid #ff0000 }
+input.ng-dirty.ng-invalid {
+  border: 2px solid #fb8500;
+}
 
-input.ng-dirty.ng-valid
-{ border: 2px solid #6bc502 }
+input.ng-dirty.ng-valid {
+  border: 2px solid #6bc502;
+}
 
-.login-form{
+.login-form {
   background-color: #03045e;
   color: #fb8500;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.form-check-input{
+.form-check-input {
   color: #03045e;
   background-color: #fb8500;
   border-radius: 0 !important;
   font-weight: lighter;
+}
+.form-control {
+  border-radius: 0 !important;
+}
+.btn-outline {
+  border-radius: 0 !important;
+}
 
-}
-.form-control{
-  border-radius: 0 !important
-}
-.btn-outline{
-  border-radius: 0 !important
-}
-
-.form-label{
+.form-label {
   font-size: medium;
   font-weight: lighter;
 }
 
-.form-text{
+.form-text {
   font-weight: lighter;
 }
 
 .form-check-label {
   font-weight: lighter;
 }
-.alert{
-  border:none;
+.alert {
+  border: none;
   font-weight: lighter;
   background-color: transparent;
   font-size: medium;
 }
-
-

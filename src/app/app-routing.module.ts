@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { canMatchModulesGuard } from './_helpers/guards/authentication.guard';
 import { BrowserModule } from '@angular/platform-browser';
-import { UnauthorizedServeResponseComponent } from './shared/user-feedback-dialogues/unauthorized-serve-response/unauthorized-serve-response.component';
-
 import { ErrorsComponent } from './errors/errors.component';
 
 const AppRoutes: Routes = [

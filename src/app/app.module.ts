@@ -45,6 +45,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ErrorsComponent } from './errors/errors.component';
+import { uiReducer } from './store/reducers/ui.reducer';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -86,7 +87,7 @@ export function tokenGetter() {
 
     // NgRX State Management
 
-    StoreModule.forRoot({ router: routerReducer }),
+    StoreModule.forRoot({ router: routerReducer, appModule: uiReducer }),
     StoreDevtoolsModule.instrument({
       name: 'smallFarms',
       maxAge: 25,

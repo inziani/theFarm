@@ -14,6 +14,7 @@ export const AuthenticationActions = createActionGroup({
   events: {
     '[Authentication] User LogIn': props<{ userLogin: UserLogin }>(),
     '[Authentication] Remember Me CheckBox': emptyProps(),
+    '[Authentication] Load Spinner': props<{ isLoading: boolean}>(),
     '[Authentication] Mask User Email': emptyProps(),
     '[Authentication] User LogIn Sucess': props<{
       jwtToken: JwTAuthenticationResponseInterface;
@@ -22,8 +23,7 @@ export const AuthenticationActions = createActionGroup({
       errorMessage: string;
     }>(),
 
-    '[Authentication] User LogOut Sucess':
-      emptyProps(),
+    '[Authentication] User LogOut Sucess': emptyProps(),
     '[Authentication] Current User Id': props<{ userId: number }>(),
     '[Authentication] Fetch User Success': props<{ user: User }>(),
     '[Authentication] Fetch User Failure': props<{
@@ -35,7 +35,6 @@ export const AuthenticationActions = createActionGroup({
     '[Authentication] Fetch User Profile  Failure': props<{
       errorMessage: string;
     }>(),
-    '[Authentication] Unauthorized': props<{ navigationError: string}>(),
+    '[Authentication] Unauthorized': props<{ navigationError: string }>(),
   },
-
 });

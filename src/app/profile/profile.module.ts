@@ -35,7 +35,6 @@ import * as profileReducers from './store/reducers/profile-reducer';
   imports: [
     ProfileRoutingModule,
     SharedModule,
-
     StoreModule.forFeature('profileModule', profileReducers.profileReducers),
     EffectsModule.forFeature([ActivityEffects, ActivityCategoryEffects]),
   ],

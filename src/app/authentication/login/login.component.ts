@@ -5,6 +5,7 @@ import { _closeDialogVia } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '../store/state/authentication.state';
 import { AuthenticationActions } from '../store/actions/authentication.actions';
+import { UIActions } from '@app/store/actions/ui.actions';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,13 @@ export class LoginComponent implements OnInit {
   public formGroup = new LoginFormGroup();
   public userLoggingIn!: UserLogin;
   public formSubmitted: boolean = false;
+  public isLoading!: boolean;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._store.dispatch(
+      UIActions['[UILoadingPage]StartLoading']({ isLoading: true })
+    );
+  }
 
   public checkRememberMeBox() {
     this._store.dispatch(
@@ -28,15 +34,18 @@ export class LoginComponent implements OnInit {
     if (!this.formGroup.valid) {
       return;
     }
-    this.formSubmitted = true;
-    this.userLoggingIn = this.formGroup.value;
-    this._store.dispatch(
-      AuthenticationActions['[Authentication]UserLogIn']({
-        userLogin: this.userLoggingIn,
-      })
-    );
-    this.formGroup.reset();
-    this.formSubmitted = false;
+
+    setTimeout(() => {
+      this.formSubmitted = true;
+      this.userLoggingIn = this.formGroup.value;
+      this._store.dispatch(
+        AuthenticationActions['[Authentication]UserLogIn']({
+          userLogin: this.userLoggingIn,
+        })
+      );
+      this.formGroup.reset();
+      this.formSubmitted = false;
+    }, 5000);
   }
   constructor(private _store: Store<AuthenticationState>) {}
 }

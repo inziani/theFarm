@@ -30,7 +30,8 @@ export class AuthenticationEffects {
               of(
                 AuthenticationActions['[Authentication]UserLogInFail']({
                   errorMessage: error,
-                })
+                }),
+                AuthenticationActions['[Authentication]LoadSpinner']({isLoading: false})
               )
             )
           )
@@ -52,6 +53,9 @@ export class AuthenticationEffects {
             of(
               AuthenticationActions['[Authentication]FetchUserFailure']({
                 errorMessage: error,
+              }),
+              AuthenticationActions['[Authentication]LoadSpinner']({
+                isLoading: false,
               })
             )
           )
@@ -74,6 +78,9 @@ export class AuthenticationEffects {
             of(
               AuthenticationActions['[Authentication]FetchUserProfileFailure']({
                 errorMessage: error,
+              }),
+              AuthenticationActions['[Authentication]LoadSpinner']({
+                isLoading: false,
               })
             )
           )

@@ -26,7 +26,7 @@ export const selectError = createSelector(
 
 export const selectIsLoading = createSelector(
   selectAuthenticationFeatures,
-  (state) => state.error
+  (state) => state.isLoading
 );
 
 export const selectJwtToken = createSelector(

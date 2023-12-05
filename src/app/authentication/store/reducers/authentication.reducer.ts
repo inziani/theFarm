@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthenticationActions } from '../actions/authentication.actions';
 import { AuthenticationState } from '../state/authentication.state';
-import { initialState } from '@app/store/reducers/ui.reducer';
 
 export const initialLoginState: AuthenticationState = {
   rememberMeCheckBox: false,
@@ -49,7 +48,13 @@ export const authenticationReducer = createReducer<AuthenticationState>(
   on(AuthenticationActions['[Authentication]UserLogIn'], (state) => {
     return {
       ...state,
-      isLoading: !state.isLoading,
+      // isLoading: !state.isLoading,
+    };
+  }),
+  on(AuthenticationActions['[Authentication]LoadSpinner'], (state, action) => {
+    return {
+      ...state,
+      isLoading: action.isLoading,
     };
   }),
   on(
@@ -68,6 +73,7 @@ export const authenticationReducer = createReducer<AuthenticationState>(
     (state, action): AuthenticationState => {
       return {
         ...state,
+        isLoading: !state.isLoading,
         error: action.errorMessage,
       };
     }

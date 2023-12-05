@@ -1,15 +1,7 @@
-
-
 <main>
-
   <router-outlet></router-outlet>
+  <div *ngIf="isLoading">
+
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 </main>
-
-
-
-
-
-
-
-
-
