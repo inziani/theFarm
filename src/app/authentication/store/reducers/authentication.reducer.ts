@@ -2,10 +2,10 @@ import { createReducer, on } from '@ngrx/store';
 import { AuthenticationActions } from '../actions/authentication.actions';
 import { AuthenticationState } from '../state/authentication.state';
 
+
 export const initialLoginState: AuthenticationState = {
   rememberMeCheckBox: false,
   maskUserEmail: true,
-  isLoading: false,
   isAuthenticated: false,
   jwtToken: { access: '', refresh: '' },
   userId: NaN,
@@ -48,13 +48,6 @@ export const authenticationReducer = createReducer<AuthenticationState>(
   on(AuthenticationActions['[Authentication]UserLogIn'], (state) => {
     return {
       ...state,
-      // isLoading: !state.isLoading,
-    };
-  }),
-  on(AuthenticationActions['[Authentication]LoadSpinner'], (state, action) => {
-    return {
-      ...state,
-      isLoading: action.isLoading,
     };
   }),
   on(
@@ -63,7 +56,6 @@ export const authenticationReducer = createReducer<AuthenticationState>(
       return {
         ...state,
         jwtToken: action.jwtToken,
-        isLoading: !state.isLoading,
         isAuthenticated: !state.isAuthenticated,
       };
     }
@@ -73,16 +65,16 @@ export const authenticationReducer = createReducer<AuthenticationState>(
     (state, action): AuthenticationState => {
       return {
         ...state,
-        isLoading: !state.isLoading,
         error: action.errorMessage,
       };
     }
   ),
   on(
     AuthenticationActions['[Authentication]UserLogOutSucess'],
-    (): AuthenticationState => {
+    (state): AuthenticationState => {
       return {
-        ...initialLoginState,
+        ...state,
+        isAuthenticated: false,
       };
     }
   ),

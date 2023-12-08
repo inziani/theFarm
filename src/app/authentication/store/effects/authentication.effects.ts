@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '@app/shared/user-feedback-dialogues/login-dialog/login-dialog.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Store } from '@ngrx/store';
+import { State } from '@app/store/state/ui.state';
+import { UIActions } from '@app/store/actions/ui.actions';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -25,13 +28,24 @@ export class AuthenticationEffects {
                 jwtToken,
               })
             ),
-
+            tap(() =>
+              this._store.dispatch(
+                UIActions['[UILoadingPage]StopLoading']({ isLoading: false })
+              )
+            ),
             catchError((error: string) =>
               of(
                 AuthenticationActions['[Authentication]UserLogInFail']({
                   errorMessage: error,
-                }),
-                AuthenticationActions['[Authentication]LoadSpinner']({isLoading: false})
+                })
+              ).pipe(
+                tap(() =>
+                  this._store.dispatch(
+                    UIActions['[UILoadingPage]StopLoading']({
+                      isLoading: false,
+                    })
+                  )
+                )
               )
             )
           )
@@ -54,13 +68,13 @@ export class AuthenticationEffects {
               AuthenticationActions['[Authentication]FetchUserFailure']({
                 errorMessage: error,
               }),
-              AuthenticationActions['[Authentication]LoadSpinner']({
-                isLoading: false,
-              })
+              UIActions['[UILoadingPage]StopLoading']({ isLoading: false })
             )
           )
         )
       )
+
+      // here
     );
   });
 
@@ -79,9 +93,7 @@ export class AuthenticationEffects {
               AuthenticationActions['[Authentication]FetchUserProfileFailure']({
                 errorMessage: error,
               }),
-              AuthenticationActions['[Authentication]LoadSpinner']({
-                isLoading: false,
-              })
+              UIActions['[UILoadingPage]StopLoading']({ isLoading: false })
             )
           )
         )
@@ -95,7 +107,7 @@ export class AuthenticationEffects {
         ofType(AuthenticationActions['[Authentication]UserLogInSucess']),
 
         tap(() => {
-          this._dialog.open(LoginDialogComponent);
+          // this._dialog.open(LoginDialogComponent);
           this._router.navigate(['/profileUrl']);
         })
       ),
@@ -106,7 +118,6 @@ export class AuthenticationEffects {
     () =>
       this._actions$.pipe(
         ofType(AuthenticationActions['[Authentication]UserLogOutSucess']),
-
         tap(() => {
           this._router.navigate(['/login']);
         })
@@ -119,6 +130,7 @@ export class AuthenticationEffects {
     private _authenticationService: AuthenticationService,
     private _userService: UsersService,
     private _router: Router,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _store: Store<State>
   ) {}
 }

@@ -24,11 +24,6 @@ export const selectError = createSelector(
   (state) => state.error
 );
 
-export const selectIsLoading = createSelector(
-  selectAuthenticationFeatures,
-  (state) => state.isLoading
-);
-
 export const selectJwtToken = createSelector(
   selectAuthenticationFeatures,
   (state) => state?.jwtToken

@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { GoogleMapsModule } from '@angular/google-maps';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //  Features Modules
@@ -26,7 +25,6 @@ import { ErrorService } from './_helpers/services/error.service';
 import { AppComponent } from './app.component';
 import { SearchDialogComponent } from './features/finance/finance-dialogues/search-dialog/search-dialog.component';
 import { FooterComponent } from './home-page/footer/footer.component';
-import { LoadingSpinnerComponent } from './shared/user-feedback-dialogues/loading-spinner/loading-spinner';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HomeSidenavComponent } from './home-page/home-sidenav/home-sidenav.component';
 import { AgricultureDialogueComponent } from './home-page/home-page-dialogues/agriculture-dialogue/agriculture-dialogue.component';
@@ -46,6 +44,7 @@ import { environment } from '@environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ErrorsComponent } from './errors/errors.component';
 import { uiReducer } from './store/reducers/ui.reducer';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -58,7 +57,6 @@ export function tokenGetter() {
     IsoDatePipe,
     SearchDialogComponent,
     HomePageComponent,
-    LoadingSpinnerComponent,
     FooterComponent,
     HomePageComponent,
     HomeSidenavComponent,
@@ -69,6 +67,7 @@ export function tokenGetter() {
     ProjectsDialogueComponent,
     KnowledgeDialogueComponent,
     ErrorsComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +75,6 @@ export function tokenGetter() {
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    GoogleMapsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

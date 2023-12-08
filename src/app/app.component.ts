@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { State } from './store/state/ui.state';
@@ -9,7 +9,7 @@ import { selectIsLoading } from './store/selectors/ui.selectors';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public errorMessage!: string;
   public isLoading!: boolean;
 
@@ -27,7 +27,7 @@ export class AppComponent {
     this._store.select(selectIsLoading).subscribe({
       next: (loadingState) => {
         this.isLoading = loadingState;
-        console.log('UIisLoading - ', loadingState);
+        console.log('UIisLoading in app Component - ', loadingState);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.log('Completed'),

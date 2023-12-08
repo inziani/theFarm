@@ -10,15 +10,9 @@ import { MaterialModule } from '@app/material.module';
 import { StoreModule } from '@ngrx/store';
 import { authenticationReducer } from './store/reducers/authentication.reducer';
 import { AuthenticationEffects } from './store/effects/authentication.effects';
-import { LoadingSpinnerComponent } from '@app/_helpers/loading-spinner/loading-spinner.component';
 
 @NgModule({
-  declarations: [
-    AuthenticationComponent,
-    LoginComponent,
-    SignupComponent,
-    LoadingSpinnerComponent,
-  ],
+  declarations: [AuthenticationComponent, LoginComponent, SignupComponent],
   imports: [
     AuthenticationRoutingModule,
     SharedModule,

@@ -9,7 +9,7 @@ import { UsersService } from '@app/_helpers/services/users.service';
 export class AuthenticationComponent implements OnInit {
   public userAction!: string;
   public errorMessage!: string;
-
+  public isLoading = true;
   constructor(private _userService: UsersService) {}
 
   ngOnInit() {

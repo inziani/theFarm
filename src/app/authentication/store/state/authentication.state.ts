@@ -12,7 +12,6 @@ export interface State extends AppState.State {
 export interface AuthenticationState {
   rememberMeCheckBox: boolean;
   maskUserEmail: boolean;
-  isLoading: boolean;
   isAuthenticated: boolean;
   jwtToken: JwTAuthenticationResponseInterface;
   userId: number;

@@ -14,7 +14,6 @@ export const AuthenticationActions = createActionGroup({
   events: {
     '[Authentication] User LogIn': props<{ userLogin: UserLogin }>(),
     '[Authentication] Remember Me CheckBox': emptyProps(),
-    '[Authentication] Load Spinner': props<{ isLoading: boolean}>(),
     '[Authentication] Mask User Email': emptyProps(),
     '[Authentication] User LogIn Sucess': props<{
       jwtToken: JwTAuthenticationResponseInterface;

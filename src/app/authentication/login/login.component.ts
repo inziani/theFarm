@@ -16,13 +16,8 @@ export class LoginComponent implements OnInit {
   public formGroup = new LoginFormGroup();
   public userLoggingIn!: UserLogin;
   public formSubmitted: boolean = false;
-  public isLoading!: boolean;
 
-  ngOnInit(): void {
-    this._store.dispatch(
-      UIActions['[UILoadingPage]StartLoading']({ isLoading: true })
-    );
-  }
+  ngOnInit(): void {}
 
   public checkRememberMeBox() {
     this._store.dispatch(
@@ -34,18 +29,18 @@ export class LoginComponent implements OnInit {
     if (!this.formGroup.valid) {
       return;
     }
-
-    setTimeout(() => {
-      this.formSubmitted = true;
-      this.userLoggingIn = this.formGroup.value;
-      this._store.dispatch(
-        AuthenticationActions['[Authentication]UserLogIn']({
-          userLogin: this.userLoggingIn,
-        })
-      );
-      this.formGroup.reset();
-      this.formSubmitted = false;
-    }, 5000);
+    this.formSubmitted = true;
+    this.userLoggingIn = this.formGroup.value;
+    this._store.dispatch(
+      UIActions['[UILoadingPage]StartLoading']({ isLoading: true })
+    );
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]UserLogIn']({
+        userLogin: this.userLoggingIn,
+      })
+    );
+    this.formGroup.reset();
+    this.formSubmitted = false;
   }
   constructor(private _store: Store<AuthenticationState>) {}
 }
