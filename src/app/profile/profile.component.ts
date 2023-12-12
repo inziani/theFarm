@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   public isDisabled!: boolean;
   public errorMessage!: string;
 
+
   ngOnInit(): void {}
 
   ngOnDestroy() {}
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   public onSelectActivity() {
     this.itemSelected = 'activity';
     this._store.dispatch(ActivityPageActions['[ActivityPage]LoadActivities']());
+
   }
   public onSelectActivityCategory() {
     this.itemSelected = 'activityCategory';

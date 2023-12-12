@@ -39,4 +39,10 @@ import * as profileReducers from './store/reducers/profile-reducer';
     EffectsModule.forFeature([ActivityEffects, ActivityCategoryEffects]),
   ],
 })
-export class ProfileModule {}
+export class ProfileModule {
+
+
+  constructor() {
+
+  }
+}
