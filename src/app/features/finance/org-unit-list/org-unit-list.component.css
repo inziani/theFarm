@@ -30,3 +30,8 @@ p {
   font-weight: lighter;
 }
 
+.btn:active,
+.btn:focus {
+  background-color: #03045e;
+  color: rgb(241, 232, 232);
+}
