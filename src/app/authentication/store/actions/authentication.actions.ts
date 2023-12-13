@@ -3,11 +3,11 @@ import {
   UserProfile,
 } from '@app/features/human-resources/models/user.model';
 import {
+  AutoLoginUser,
   JwTAuthenticationResponseInterface,
   UserLogin,
 } from '../../models/authentication.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-
 
 export const AuthenticationActions = createActionGroup({
   source: 'User',
@@ -23,6 +23,12 @@ export const AuthenticationActions = createActionGroup({
     }>(),
 
     '[Authentication] User LogOut Sucess': emptyProps(),
+
+    '[Authentication] User Auto Login': emptyProps(),
+    '[Authentication] User Auto Success': props<{ user: AutoLoginUser }>(),
+    '[Authentication] User Auto Login Failure ': props<{
+      errorMessage: string;
+    }>(),
     '[Authentication] Current User Id': props<{ userId: number }>(),
     '[Authentication] Fetch User Success': props<{ user: User }>(),
     '[Authentication] Fetch User Failure': props<{

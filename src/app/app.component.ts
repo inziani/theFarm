@@ -3,6 +3,8 @@ import { NavigationStart, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { State } from './store/state/ui.state';
 import { selectIsLoading } from './store/selectors/ui.selectors';
+import { AuthenticationActions } from './authentication/store/actions/authentication.actions';
+import { AuthenticationState } from './authentication/store/state/authentication.state';
 
 @Component({
   selector: 'app-root',
@@ -27,15 +29,18 @@ export class AppComponent implements OnInit {
     this._store.select(selectIsLoading).subscribe({
       next: (loadingState) => {
         this.isLoading = loadingState;
-        console.log('UIisLoading in app Component - ', loadingState);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.log('Completed'),
     });
+    this._store.dispatch(
+      AuthenticationActions['[Authentication]UserAutoLogin']()
+    );
   }
 
   constructor(
     private readonly _router: Router,
-    private readonly _store: Store<State>
+    private readonly _store: Store<State | AuthenticationState>,
+  
   ) {}
 }

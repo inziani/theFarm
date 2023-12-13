@@ -5,7 +5,6 @@ import { TodoComponent } from './user-activity/todo/todo.component';
 import { ActivityCategorysComponent } from './user-activity/activity-categorys/activity-categorys.component';
 import { PasswordSecComponent } from './password-sec/password-sec.component';
 import { BioComponent } from './bio/bio.component';
-//import { profileResolver } from '@app/_helpers/resolvers/profile/profile.resolver';
 
 const routes: Routes = [
   {

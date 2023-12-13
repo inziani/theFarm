@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthenticationActions } from '../actions/authentication.actions';
-import { catchError, map, of, concatMap, tap } from 'rxjs';
+import { catchError, map, of, concatMap, tap, mergeMap } from 'rxjs';
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { UsersService } from '@app/_helpers/services/users.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginDialogComponent } from '@app/shared/user-feedback-dialogues/login-dialog/login-dialog.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Store } from '@ngrx/store';
 import { State } from '@app/store/state/ui.state';
 import { UIActions } from '@app/store/actions/ui.actions';
+import jwtDecode from 'jwt-decode';
+import { JWTDecodedTokenInterface } from '@app/authentication/models/authentication.model';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -23,16 +24,18 @@ export class AuthenticationEffects {
         this._authenticationService
           .onLogOn(action.userLogin.email, action.userLogin.password)
           .pipe(
-            map((jwtToken) =>
-              AuthenticationActions['[Authentication]UserLogInSucess']({
-                jwtToken,
-              })
-            ),
-            tap(() =>
+            map((jwtToken) => {
+              const decodedToken: JWTDecodedTokenInterface = jwtDecode(
+                jwtToken.access
+              );
+              this._authenticationService.setUserInLocalStorage(decodedToken);
               this._store.dispatch(
                 UIActions['[UILoadingPage]StopLoading']({ isLoading: false })
-              )
-            ),
+              );
+              return AuthenticationActions['[Authentication]UserLogInSucess']({
+                jwtToken,
+              });
+            }),
             catchError((error: string) =>
               of(
                 AuthenticationActions['[Authentication]UserLogInFail']({
@@ -50,6 +53,29 @@ export class AuthenticationEffects {
             )
           )
       )
+    );
+  });
+
+  // public userLogOutEffects$ = createEffect(() => {
+  //   return this._actions$.pipe(
+  //     ofType(AuthenticationActions['[Authentication]UserLogOutSucess']),
+  //     tap(async () => this._authenticationService.removeTokenFromStorage())
+  //   );
+  // });
+
+  public userAutoLoginEffect$ = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(AuthenticationActions['[Authentication]UserAutoLogin']),
+      concatMap((action) => {
+        const jwtToken = this._authenticationService.getUserFromLocalStorage();
+        console.log('Effects No idea What the hell- ', jwtToken);
+        console.log('Effects No idea What the hell action- ', action);
+        return of(
+          AuthenticationActions['[Authentication]UserAutoSuccess']({
+            user: jwtToken,
+          })
+        );
+      })
     );
   });
 
@@ -104,10 +130,14 @@ export class AuthenticationEffects {
   redirectToProfilePage = createEffect(
     () =>
       this._actions$.pipe(
-        ofType(AuthenticationActions['[Authentication]UserLogInSucess']),
+        ofType(
+          ...[
+            AuthenticationActions['[Authentication]UserLogInSucess'],
+            AuthenticationActions['[Authentication]FetchUserSuccess'],
+          ]
+        ),
 
         tap(() => {
-          // this._dialog.open(LoginDialogComponent);
           this._router.navigate(['/profileUrl']);
         })
       ),
