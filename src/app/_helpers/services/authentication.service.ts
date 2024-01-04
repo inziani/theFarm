@@ -1,26 +1,27 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable, tap, timeInterval } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import {
-  AutoLoginUser,
-  JWTDecodedTokenInterface,
-  JwTAuthenticationResponseInterface,
-} from '../../authentication/models/authentication.model';
+import { JwTAuthenticationResponseInterface } from '../../authentication/models/authentication.model';
 import { Router } from '@angular/router';
 import { User } from '@app/features/human-resources/models/user.model';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   public httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+    withCredentials: true,
+    origin: 'http://localhost:4200',
+    accept: 'application/json',
   };
+
   public erroMessage!: string;
-  public timeOutInterval!: any;
 
   public onLogOn(
     email: string,
@@ -41,56 +42,10 @@ export class AuthenticationService {
     );
   }
 
-  public formatJwtToken(jwtTokens: JwTAuthenticationResponseInterface) {
-    const decodedToken: JWTDecodedTokenInterface = jwtDecode(jwtTokens.access);
-    const jwtToken = new JWTDecodedTokenInterface(
-      decodedToken.tokenType,
-      decodedToken.expiryDate,
-      decodedToken.IssueDate,
-      decodedToken.replayJTIDate,
-      decodedToken.userId
-    );
-    return jwtToken;
-  }
-
-  public setUserInLocalStorage(jwtToken: JWTDecodedTokenInterface) {
-    localStorage.setItem('jwtToken', JSON.stringify(jwtToken));
-    this.runTimeOutInterval(jwtToken);
-  }
-
-  public runTimeOutInterval(jwtToken: JWTDecodedTokenInterface) {
-    const todaysDate = new Date().getTime() / 1000;
-    const tokenExpirationDate = new Date(jwtToken.expiryDate).getTime();
-    const timeInterval = tokenExpirationDate - todaysDate;
-
-    this.timeOutInterval = setTimeout(() => {
-      // logout or get refresh token
-    }, timeInterval);
-  }
-  public getUserFromLocalStorage() {
-    const userDataString = localStorage.getItem('jwtToken');
-    if (userDataString) {
-      const jwtToken = JSON.parse(userDataString);
-      console.log('What the Hell?', jwtToken);
-      const token = new AutoLoginUser(
-        jwtToken.email,
-        jwtToken.id,
-        jwtToken.jwtToken,
-        jwtToken.jwtTokenExpirationDate,
-      );
-      this.runTimeOutInterval(jwtToken);
-      return jwtToken;
-    }
-    return null;
-  }
-
   public onLogOut() {
-    localStorage.removeItem('jwtToken');
-    if (this.timeOutInterval) {
-      clearTimeout(this.timeOutInterval);
-      this.timeOutInterval = null;
-    }
+    // Logout Code over here to use with Effects
   }
+
   public onUserSignOn(
     first_name: string,
     last_name: string,

@@ -24,10 +24,10 @@ export const selectError = createSelector(
   (state) => state.error
 );
 
-export const selectJwtToken = createSelector(
-  selectAuthenticationFeatures,
-  (state) => state?.jwtToken
-);
+// export const selectJwtToken = createSelector(
+//   selectAuthenticationFeatures,
+//   (state) => state?.jwtToken
+// );
 
 export const selectCurrentUserId = createSelector(
   selectAuthenticationFeatures,

@@ -9,7 +9,8 @@ export class AutoLoginUser {
     private id: string,
     private jwtToken: string,
     private jwtTokenExpirationDate: string
-  ) {}
+  ) { }
+
   get userEmail() {
     return this.email;
   }
@@ -34,11 +35,11 @@ export interface JwTAuthenticationResponseInterface {
 
 export class JWTDecodedTokenInterface {
   constructor(
-    private token_type: string,
-    private exp: number,
-    private iat: number,
-    private jti: string,
-    private user_id: number
+    public token_type: string,
+    public exp: number,
+    public iat: number,
+    public jti: string,
+    public user_id: number
   ) {}
 
   get tokenType() {

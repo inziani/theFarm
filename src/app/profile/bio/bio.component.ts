@@ -19,7 +19,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import {
-  selectJwtToken,
+  // selectJwtToken,
   selectUser,
   selectUserProfile,
 } from '@app/authentication/store/selectors/authentication.selector';
@@ -111,20 +111,20 @@ export class BioComponent implements OnInit {
       },
     });
 
-    this._store
-      .select(selectJwtToken)
-      .pipe(
-        map((token) => {
-          const jwtDecodedToken = this.jwtHelper.decodeToken(token?.access);
-          this.user = jwtDecodedToken?.user_id;
-          this._store.dispatch(
-            AuthenticationActions['[Authentication]CurrentUserId']({
-              userId: this.user,
-            })
-          );
-        })
-      )
-      .subscribe();
+    // this._store
+    //   .select(selectJwtToken)
+    //   .pipe(
+    //     map((token) => {
+    //       const jwtDecodedToken = this.jwtHelper.decodeToken(token?.access);
+    //       this.user = jwtDecodedToken?.user_id;
+    //       this._store.dispatch(
+    //         AuthenticationActions['[Authentication]CurrentUserId']({
+    //           userId: this.user,
+    //         })
+    //       );
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   ngAfterViewInit() {}

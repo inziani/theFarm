@@ -10,8 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Store } from '@ngrx/store';
 import { State } from '@app/store/state/ui.state';
 import { UIActions } from '@app/store/actions/ui.actions';
-import jwtDecode from 'jwt-decode';
-import { JWTDecodedTokenInterface } from '@app/authentication/models/authentication.model';
+import { JwtInterceptor } from '@app/_helpers/interceptors/jwt.interceptor';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -25,10 +24,8 @@ export class AuthenticationEffects {
           .onLogOn(action.userLogin.email, action.userLogin.password)
           .pipe(
             map((jwtToken) => {
-              const decodedToken: JWTDecodedTokenInterface = jwtDecode(
-                jwtToken.access
-              );
-              this._authenticationService.setUserInLocalStorage(decodedToken);
+              JwtInterceptor._accessToken = jwtToken.access;
+              console.log('Token being sent to Interceptor -', jwtToken);
               this._store.dispatch(
                 UIActions['[UILoadingPage]StopLoading']({ isLoading: false })
               );
@@ -56,28 +53,21 @@ export class AuthenticationEffects {
     );
   });
 
-  // public userLogOutEffects$ = createEffect(() => {
+  // public userAutoLoginEffect$ = createEffect(() => {
   //   return this._actions$.pipe(
-  //     ofType(AuthenticationActions['[Authentication]UserLogOutSucess']),
-  //     tap(async () => this._authenticationService.removeTokenFromStorage())
+  //     ofType(AuthenticationActions['[Authentication]UserAutoLogin']),
+  //     mergeMap((action) => {
+  //       const jwtToken = this._authenticationService.getUserFromLocalStorage();
+  //       console.log('Effects No idea What the hell- ', jwtToken);
+  //       console.log('Effects No idea What the hell action- ', action);
+  //       return of(
+  //         AuthenticationActions['[Authentication]UserAutoLoginSuccess']({
+  //           jwtUser: jwtToken,
+  //         })
+  //       );
+  //     })
   //   );
   // });
-
-  public userAutoLoginEffect$ = createEffect(() => {
-    return this._actions$.pipe(
-      ofType(AuthenticationActions['[Authentication]UserAutoLogin']),
-      concatMap((action) => {
-        const jwtToken = this._authenticationService.getUserFromLocalStorage();
-        console.log('Effects No idea What the hell- ', jwtToken);
-        console.log('Effects No idea What the hell action- ', action);
-        return of(
-          AuthenticationActions['[Authentication]UserAutoSuccess']({
-            user: jwtToken,
-          })
-        );
-      })
-    );
-  });
 
   public loadUserEffect$ = createEffect(() => {
     return this._actions$.pipe(

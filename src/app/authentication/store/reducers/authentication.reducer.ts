@@ -2,12 +2,11 @@ import { createReducer, on } from '@ngrx/store';
 import { AuthenticationActions } from '../actions/authentication.actions';
 import { AuthenticationState } from '../state/authentication.state';
 
-
 export const initialLoginState: AuthenticationState = {
   rememberMeCheckBox: false,
   maskUserEmail: true,
   isAuthenticated: false,
-  jwtToken: { access: '', refresh: '' },
+  // jwtToken: { access: '', refresh: '' },
   userId: NaN,
   user: {
     id: NaN,
@@ -28,6 +27,8 @@ export const initialLoginState: AuthenticationState = {
     date_joined: new Date(),
     password: '',
   },
+
+
   userProfile: {
     user: NaN,
     education_bio: '',
@@ -55,7 +56,7 @@ export const authenticationReducer = createReducer<AuthenticationState>(
     (state, action): AuthenticationState => {
       return {
         ...state,
-        jwtToken: action.jwtToken,
+        // jwtToken: action.jwtToken,
         isAuthenticated: !state.isAuthenticated,
       };
     }
@@ -69,6 +70,15 @@ export const authenticationReducer = createReducer<AuthenticationState>(
       };
     }
   ),
+  // on(
+  //   AuthenticationActions['[Authentication]UserAutoLoginSuccess'],
+  //   (state, action): AuthenticationState => {
+  //     return {
+  //       ...state,
+  //       // jwtUser: action.jwtUser,
+  //     };
+  //   }
+  // ),
   on(
     AuthenticationActions['[Authentication]UserLogOutSucess'],
     (state): AuthenticationState => {

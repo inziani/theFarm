@@ -109,13 +109,6 @@ export class RestDataSource {
     this.router.navigate(['/login']);
   }
 
-  fetchRandomQuotes() {
-    return this.http.get<RandomQuote>(
-      `${environment.randomQuotesURL}/random.json/`,
-      this.httpOptions
-    );
-  }
-
   addActivityCategory(
     title: string,
     description: string,

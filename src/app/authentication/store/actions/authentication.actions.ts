@@ -4,6 +4,7 @@ import {
 } from '@app/features/human-resources/models/user.model';
 import {
   AutoLoginUser,
+  JWTDecodedTokenInterface,
   JwTAuthenticationResponseInterface,
   UserLogin,
 } from '../../models/authentication.model';
@@ -25,7 +26,10 @@ export const AuthenticationActions = createActionGroup({
     '[Authentication] User LogOut Sucess': emptyProps(),
 
     '[Authentication] User Auto Login': emptyProps(),
-    '[Authentication] User Auto Success': props<{ user: AutoLoginUser }>(),
+    '[Authentication] User Auto LogOut': emptyProps(),
+    '[Authentication] User Auto Login Success': props<{
+      jwtUser: JWTDecodedTokenInterface;
+    }>(),
     '[Authentication] User Auto Login Failure ': props<{
       errorMessage: string;
     }>(),

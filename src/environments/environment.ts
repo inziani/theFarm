@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   apiUrl: "http://localhost:8000",
-  randomQuotesURL: "http://quotes.stormconsultancy.co.uk",
   jwtLogin: 'api/token/',
   jwtRefresh: 'api/token/refresh/'
 
