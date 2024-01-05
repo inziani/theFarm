@@ -11,6 +11,10 @@ import { Store } from '@ngrx/store';
 import { State } from '@app/store/state/ui.state';
 import { UIActions } from '@app/store/actions/ui.actions';
 import { JwtInterceptor } from '@app/_helpers/interceptors/jwt.interceptor';
+import {
+  JWTDecodedTokenInterface,
+  JwTAuthenticationResponseInterface,
+} from '@app/authentication/models/authentication.model';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -25,7 +29,13 @@ export class AuthenticationEffects {
           .pipe(
             map((jwtToken) => {
               JwtInterceptor._accessToken = jwtToken.access;
-              console.log('Token being sent to Interceptor -', jwtToken);
+              const jwtDecodedToken: JWTDecodedTokenInterface | null =
+                this.jwtHelper.decodeToken(jwtToken?.access);
+              this._store.dispatch(
+                AuthenticationActions['[Authentication]CurrentUserId']({
+                  userId: jwtDecodedToken?.user_id,
+                })
+              );
               this._store.dispatch(
                 UIActions['[UILoadingPage]StopLoading']({ isLoading: false })
               );
@@ -53,22 +63,6 @@ export class AuthenticationEffects {
     );
   });
 
-  // public userAutoLoginEffect$ = createEffect(() => {
-  //   return this._actions$.pipe(
-  //     ofType(AuthenticationActions['[Authentication]UserAutoLogin']),
-  //     mergeMap((action) => {
-  //       const jwtToken = this._authenticationService.getUserFromLocalStorage();
-  //       console.log('Effects No idea What the hell- ', jwtToken);
-  //       console.log('Effects No idea What the hell action- ', action);
-  //       return of(
-  //         AuthenticationActions['[Authentication]UserAutoLoginSuccess']({
-  //           jwtUser: jwtToken,
-  //         })
-  //       );
-  //     })
-  //   );
-  // });
-
   public loadUserEffect$ = createEffect(() => {
     return this._actions$.pipe(
       ofType(AuthenticationActions['[Authentication]CurrentUserId']),
@@ -89,8 +83,6 @@ export class AuthenticationEffects {
           )
         )
       )
-
-      // here
     );
   });
 

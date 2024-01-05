@@ -23,7 +23,7 @@ import {
   selectUser,
   selectUserProfile,
 } from '@app/authentication/store/selectors/authentication.selector';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
 import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
 import { ActivityPageActions } from '../store/actions/activity.actions';
 
@@ -111,20 +111,6 @@ export class BioComponent implements OnInit {
       },
     });
 
-    // this._store
-    //   .select(selectJwtToken)
-    //   .pipe(
-    //     map((token) => {
-    //       const jwtDecodedToken = this.jwtHelper.decodeToken(token?.access);
-    //       this.user = jwtDecodedToken?.user_id;
-    //       this._store.dispatch(
-    //         AuthenticationActions['[Authentication]CurrentUserId']({
-    //           userId: this.user,
-    //         })
-    //       );
-    //     })
-    //   )
-    //   .subscribe();
   }
 
   ngAfterViewInit() {}

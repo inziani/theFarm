@@ -16,9 +16,7 @@ export class AuthenticationService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
-    withCredentials: true,
-    origin: 'http://localhost:4200',
-    accept: 'application/json',
+    withCredentials: true ,
   };
 
   public erroMessage!: string;
