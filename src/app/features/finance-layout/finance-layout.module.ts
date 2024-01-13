@@ -39,6 +39,7 @@ import { StoreModule } from '@ngrx/store';
 import * as financeReducers from './store/reducers/finance.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GeneralLedgerMasterDataEffect } from './store/effects/generel-ledger-master-data.effects';
+import { GeneralLedgerReportsComponent } from './finance-Folder/general-ledger/general-ledger-reports/general-ledger-reports.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { GeneralLedgerMasterDataEffect } from './store/effects/generel-ledger-ma
     FinanceLandingPageComponent,
     AccountGroupDialogComponent,
     TaxCodeDialogComponent,
+    GeneralLedgerReportsComponent,
   ],
   imports: [
     FinanceLayoutRoutingModule,

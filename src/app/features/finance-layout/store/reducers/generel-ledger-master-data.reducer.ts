@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { GeneralLedgerMasterDataState } from '../state/master-data/gl-master-data.state';
 import {
   GeneralLedgerMasterDataPageActions,
-  GeneralLedgerMasterDataAPI,
+  GeneralLedgerMasterDataAPIActions,
 } from '../actions/master-data/gl-master-data.actions';
 import { generalLedgerMasterDataAdapter } from '../adapters/general-ledger-master-data.adapter';
 
@@ -17,7 +17,7 @@ export const generalLedgerMasterDataReducer =
     initialState,
     on(
       GeneralLedgerMasterDataPageActions[
-        '[GeneralLedgerMasterDataPage]LoadGeneralLedgerAccountsMaster'
+        '[GeneralLedgerMasterDataPageActions]LoadGeneralLedgerAccountsMaster'
       ],
       (state) =>
         generalLedgerMasterDataAdapter.setAll([], {
@@ -27,8 +27,8 @@ export const generalLedgerMasterDataReducer =
         })
     ),
     on(
-      GeneralLedgerMasterDataAPI[
-        '[GeneralLedgerMasterDataAPI]LoadGeneralLedgerAccountsMasterSuccess'
+      GeneralLedgerMasterDataAPIActions[
+        '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterSuccess'
       ],
       (state, { GlAccountsMasters }) =>
         generalLedgerMasterDataAdapter.setAll(GlAccountsMasters, {
@@ -39,7 +39,7 @@ export const generalLedgerMasterDataReducer =
     ),
     on(
       GeneralLedgerMasterDataPageActions[
-        '[GeneralLedgerMasterDataPage]CreateGeneralLedgerAccountsMaster'
+        '[GeneralLedgerMasterDataPageActions]CreateGeneralLedgerAccountsMaster'
       ],
       (state) => ({
         ...state,
@@ -48,8 +48,8 @@ export const generalLedgerMasterDataReducer =
       })
     ),
     on(
-      GeneralLedgerMasterDataAPI[
-        '[GeneralLedgerMasterDataAPI]CreateGeneralLedgerAccountsMasterSuccess'
+      GeneralLedgerMasterDataAPIActions[
+        '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterSuccess'
       ],
       (state, { GlAccountsMaster }) =>
         generalLedgerMasterDataAdapter.addOne(GlAccountsMaster, {
@@ -59,8 +59,8 @@ export const generalLedgerMasterDataReducer =
         })
     ),
     on(
-      GeneralLedgerMasterDataAPI[
-        '[GeneralLedgerMasterDataAPI]CreateGeneralLedgerAccountsMasterFail'
+      GeneralLedgerMasterDataAPIActions[
+        '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterFail'
       ],
       (state, { errorMessage }) => ({
         ...state,
@@ -70,13 +70,13 @@ export const generalLedgerMasterDataReducer =
     ),
     on(
       GeneralLedgerMasterDataPageActions[
-        '[GeneralLedgerMasterDataPage]EditGeneralLedgerAccountsMaster'
+        '[GeneralLedgerMasterDataPageActions]EditGeneralLedgerAccountsMaster'
       ],
       (state) => ({ ...state, loading: true, errorMessage: '' })
     ),
     on(
-      GeneralLedgerMasterDataAPI[
-        '[GeneralLedgerMasterDataAPI]EditGeneralLedgerAccountsMasterSuccess'
+      GeneralLedgerMasterDataAPIActions[
+        '[GeneralLedgerMasterDataAPIActions]EditGeneralLedgerAccountsMasterSuccess'
       ],
       (state, { GlAccountMaster }) =>
         generalLedgerMasterDataAdapter.updateOne(GlAccountMaster, {
@@ -86,8 +86,8 @@ export const generalLedgerMasterDataReducer =
         })
     ),
     on(
-      GeneralLedgerMasterDataAPI[
-        '[GeneralLedgerMasterDataAPI]EditGeneralLedgerAccountsMasterFail'
+      GeneralLedgerMasterDataAPIActions[
+        '[GeneralLedgerMasterDataAPIActions]EditGeneralLedgerAccountsMasterFail'
       ],
       (state, { errorMessage }) => ({
         ...state,
@@ -97,13 +97,13 @@ export const generalLedgerMasterDataReducer =
     ),
     on(
       GeneralLedgerMasterDataPageActions[
-        '[GeneralLedgerMasterDataPage]DeleteGeneralLedgerAccountsMaster'
+        '[GeneralLedgerMasterDataPageActions]DeleteGeneralLedgerAccountsMaster'
       ],
       (state) => ({ ...state, loading: false, errorMessage: '' })
     ),
     on(
-      GeneralLedgerMasterDataAPI[
-        '[GeneralLedgerMasterDataAPI]DeleteGeneralLedgerAccountsMasterSuccess'
+      GeneralLedgerMasterDataAPIActions[
+        '[GeneralLedgerMasterDataAPIActions]DeleteGeneralLedgerAccountsMasterSuccess'
       ],
       (state, { GlAccountMasterId }) =>
         generalLedgerMasterDataAdapter.removeOne(GlAccountMasterId, {
@@ -113,8 +113,8 @@ export const generalLedgerMasterDataReducer =
         })
     ),
     on(
-      GeneralLedgerMasterDataAPI[
-        '[GeneralLedgerMasterDataAPI]DeleteGeneralLedgerAccountsMasterFail'
+      GeneralLedgerMasterDataAPIActions[
+        '[GeneralLedgerMasterDataAPIActions]DeleteGeneralLedgerAccountsMasterFail'
       ],
       (state, { errorMessage }) => ({
         ...state,
