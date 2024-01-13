@@ -15,6 +15,8 @@ import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import { Router } from '@angular/router';
 import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+import { GeneralLedgerMasterDataPageActions } from '../../store/actions/master-data/gl-master-data.actions';
+import { GeneralLedgerMasterDataState } from '../../store/state/master-data/gl-master-data.state';
 
 @Component({
   selector: 'app-finance-sidenav',
@@ -64,6 +66,11 @@ export class FinanceSidenavComponent implements OnInit {
   ngOnInit(): void {
     this.flatDataSource.data = GL_TREE_DATA;
     this.nestedDataSource.data = GL_TREE_DATA;
+    this._store.dispatch(
+      GeneralLedgerMasterDataPageActions[
+        '[GeneralLedgerMasterDataPageActions]LoadGeneralLedgerAccountsMaster'
+      ]()
+    );
   }
 
   // Get the nested node using the hasNestedChild
@@ -87,7 +94,7 @@ export class FinanceSidenavComponent implements OnInit {
   }
 
   constructor(
-    private _store: Store<AuthenticationState>,
+    private _store: Store<AuthenticationState | GeneralLedgerMasterDataState>,
     private _router: Router
   ) {
     this.flatDataSource = new MatTreeFlatDataSource(
