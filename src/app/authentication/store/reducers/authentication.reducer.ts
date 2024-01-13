@@ -28,7 +28,6 @@ export const initialLoginState: AuthenticationState = {
     password: '',
   },
 
-
   userProfile: {
     user: NaN,
     education_bio: '',
@@ -56,7 +55,6 @@ export const authenticationReducer = createReducer<AuthenticationState>(
     (state, action): AuthenticationState => {
       return {
         ...state,
-        // jwtToken: action.jwtToken,
         isAuthenticated: !state.isAuthenticated,
       };
     }
@@ -70,15 +68,39 @@ export const authenticationReducer = createReducer<AuthenticationState>(
       };
     }
   ),
-  // on(
-  //   AuthenticationActions['[Authentication]UserAutoLoginSuccess'],
-  //   (state, action): AuthenticationState => {
-  //     return {
-  //       ...state,
-  //       // jwtUser: action.jwtUser,
-  //     };
-  //   }
-  // ),
+  on(AuthenticationActions['[Authentication]UserAutoLogin'], (state) => {
+    return {
+      ...state,
+    };
+  }),
+  on(
+    AuthenticationActions['[Authentication]UserAutoLoginSuccess'],
+    (state, action): AuthenticationState => {
+      return {
+        ...state,
+        isAuthenticated: !state.isAuthenticated,
+      };
+    }
+  ),
+  on(
+    AuthenticationActions['[Authentication]UserAutoLoginFailure'],
+    (state, action): AuthenticationState => {
+      return {
+        ...state,
+        error: action.errorMessage,
+        isAuthenticated: !state.isAuthenticated,
+      };
+    }
+  ),
+  on(
+    AuthenticationActions['[Authentication]UserLogInFail'],
+    (state, action): AuthenticationState => {
+      return {
+        ...state,
+        error: action.errorMessage,
+      };
+    }
+  ),
   on(
     AuthenticationActions['[Authentication]UserLogOutSucess'],
     (state): AuthenticationState => {

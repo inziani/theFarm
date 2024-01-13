@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-  Observable,
   catchError,
   concatMap,
   exhaustMap,
-  filter,
   map,
   mergeMap,
-  of,
-  // tap,
+  of
 } from 'rxjs';
 
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
@@ -25,7 +22,6 @@ export class ActivityEffects {
 
   public loadActivitiesEffects$ = createEffect(() => {
     return this._actions$.pipe(
-
       ofType(ActivityPageActions['[ActivityPage]LoadActivities']),
       exhaustMap(() =>
         this._activityService.fetchActivityData().pipe(

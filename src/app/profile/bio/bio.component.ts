@@ -5,7 +5,7 @@ import {
 } from '@app/features/human-resources/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from '@app/_helpers/services/users.service';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ChangesSavedDialogComponent } from '@app/shared/user-feedback-dialogues/changes-saved-dialog/changes-saved-dialog.component';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { ProfilePageGridInterface } from '@app/shared/interfaces/grids-interface';
@@ -23,8 +23,7 @@ import {
   selectUser,
   selectUserProfile,
 } from '@app/authentication/store/selectors/authentication.selector';
-import { JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
-import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ActivityPageActions } from '../store/actions/activity.actions';
 
 @Component({

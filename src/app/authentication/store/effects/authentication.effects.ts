@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthenticationActions } from '../actions/authentication.actions';
-import { catchError, map, of, concatMap, tap, mergeMap } from 'rxjs';
+import { catchError, map, of, concatMap, tap, exhaustMap } from 'rxjs';
 import { AuthenticationService } from '@app/_helpers/services/authentication.service';
 import { UsersService } from '@app/_helpers/services/users.service';
 import { Router } from '@angular/router';
@@ -11,10 +11,7 @@ import { Store } from '@ngrx/store';
 import { State } from '@app/store/state/ui.state';
 import { UIActions } from '@app/store/actions/ui.actions';
 import { JwtInterceptor } from '@app/_helpers/interceptors/jwt.interceptor';
-import {
-  JWTDecodedTokenInterface,
-  JwTAuthenticationResponseInterface,
-} from '@app/authentication/models/authentication.model';
+import { JWTDecodedTokenInterface } from '@app/authentication/models/authentication.model';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -29,6 +26,8 @@ export class AuthenticationEffects {
           .pipe(
             map((jwtToken) => {
               JwtInterceptor._accessToken = jwtToken.access;
+              localStorage.setItem('token', jwtToken.access);
+              localStorage.setItem('refreshToken', jwtToken.refresh);
               const jwtDecodedToken: JWTDecodedTokenInterface | null =
                 this.jwtHelper.decodeToken(jwtToken?.access);
               this._store.dispatch(
@@ -59,6 +58,51 @@ export class AuthenticationEffects {
               )
             )
           )
+      )
+    );
+  });
+
+  public autoLoginEffect$ = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(AuthenticationActions['[Authentication]UserAutoLogin']),
+      concatMap(() =>
+        this._authenticationService.onRefreshPage().pipe(
+          map((jwtToken) => {
+            JwtInterceptor._accessToken = jwtToken.access;
+            localStorage.setItem('token', jwtToken.access);
+            localStorage.setItem('refreshToken', jwtToken.refresh);
+            const jwtDecodedToken: JWTDecodedTokenInterface | null =
+              this.jwtHelper.decodeToken(jwtToken?.access);
+            this._store.dispatch(
+              AuthenticationActions['[Authentication]CurrentUserId']({
+                userId: jwtDecodedToken?.user_id,
+              })
+            );
+            this._store.dispatch(
+              UIActions['[UILoadingPage]StopLoading']({ isLoading: false })
+            );
+            return AuthenticationActions[
+              '[Authentication]UserAutoLoginSuccess'
+            ]({
+              jwtToken,
+            });
+          }),
+          catchError((error: string) =>
+            of(
+              AuthenticationActions['[Authentication]UserAutoLoginFailure']({
+                errorMessage: error,
+              })
+            ).pipe(
+              tap(() =>
+                this._store.dispatch(
+                  UIActions['[UILoadingPage]StopLoading']({
+                    isLoading: false,
+                  })
+                )
+              )
+            )
+          )
+        )
       )
     );
   });

@@ -23,7 +23,7 @@ import { ErrorService } from './_helpers/services/error.service';
 
 // App Module Components
 import { AppComponent } from './app.component';
-import { SearchDialogComponent } from './features/finance/finance-dialogues/search-dialog/search-dialog.component';
+import { SearchDialogComponent } from './features/finance-layout/finance-Folder/finance-dialogues/search-dialog/search-dialog.component';
 import { FooterComponent } from './home-page/footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HomeSidenavComponent } from './home-page/home-sidenav/home-sidenav.component';

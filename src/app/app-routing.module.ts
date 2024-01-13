@@ -19,7 +19,7 @@ const AppRoutes: Routes = [
     path: 'finance',
     canMatch: [canMatchModulesGuard],
     loadChildren: () =>
-      import('./features/finance/finance-layout/finance-layout.module').then(
+      import('./features/finance-layout/finance-layout.module').then(
         (m) => m.FinanceLayoutModule
       ),
   },

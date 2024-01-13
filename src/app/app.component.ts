@@ -5,6 +5,7 @@ import { State } from './store/state/ui.state';
 import { selectIsLoading } from './store/selectors/ui.selectors';
 import { AuthenticationActions } from './authentication/store/actions/authentication.actions';
 import { AuthenticationState } from './authentication/store/state/authentication.state';
+import { AuthenticationService } from './_helpers/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly _router: Router,
-    private readonly _store: Store<State | AuthenticationState>,
-  
+    private readonly _store: Store<State | AuthenticationState>
   ) {}
 }

@@ -16,7 +16,7 @@ export class AuthenticationService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
-    withCredentials: true ,
+    withCredentials: true,
   };
 
   public erroMessage!: string;
@@ -32,12 +32,24 @@ export class AuthenticationService {
     );
   }
 
-  public onRefreshPage(refresh: string) {
-    return this._http.post<string>(
+  public onRefreshPage(): Observable<JwTAuthenticationResponseInterface> {
+    const input = {
+      jwtToken: this.getToken(),
+      refreshToken: this.getRefreshToken,
+    };
+    console.log('This refresh function has been called');
+    return this._http.post<JwTAuthenticationResponseInterface>(
       `${environment.apiUrl}/${environment.jwtRefresh}`,
-      { refresh },
+      { input },
       this.httpOptions
     );
+  }
+
+  public getToken() {
+    return localStorage.getItem('token') || '';
+  }
+  public getRefreshToken() {
+    return localStorage.getItem('refreshToken') || '';
   }
 
   public onLogOut() {

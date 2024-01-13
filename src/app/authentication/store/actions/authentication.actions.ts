@@ -26,14 +26,14 @@ export const AuthenticationActions = createActionGroup({
     '[Authentication] User LogOut Sucess': emptyProps(),
 
     '[Authentication] User Auto Login': emptyProps(),
-    '[Authentication] User Auto LogOut': emptyProps(),
     '[Authentication] User Auto Login Success': props<{
-      jwtUser: JWTDecodedTokenInterface;
-
+      jwtToken: JwTAuthenticationResponseInterface;
     }>(),
     '[Authentication] User Auto Login Failure ': props<{
       errorMessage: string;
     }>(),
+    '[Authentication] User Auto LogOut': emptyProps(),
+
     '[Authentication] Current User Id': props<{ userId: any }>(),
     '[Authentication] Fetch User Success': props<{ user: User }>(),
     '[Authentication] Fetch User Failure': props<{
