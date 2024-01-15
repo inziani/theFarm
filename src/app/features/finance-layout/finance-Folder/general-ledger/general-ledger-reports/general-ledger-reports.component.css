@@ -1,0 +1,46 @@
+.body {
+  background-color: #03045e;
+}
+
+a {
+  text-decoration: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+.btn-outline-success {
+  background-color: #03045e;
+  border-radius: 0;
+  color: #ff9e00;
+  border-color: #ff9e00;
+  font-size: medium;
+  font-weight: lighter;
+}
+
+p {
+  font-weight: lighter;
+}
+
+a {
+  text-decoration: none;
+  color: #ff9e00;
+  font-size: 0.875rem;
+  font-weight: lighter;
+}
+
+a:hover,
+a:active {
+  color: #bfd7ff;
+}
+
+h4 {
+  font-weight: lighter;
+}
+
+.btn:active,
+.btn:focus {
+  background-color: #ff9e00;
+  color: #03045e;
+}

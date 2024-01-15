@@ -40,6 +40,9 @@ import * as financeReducers from './store/reducers/finance.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GeneralLedgerMasterDataEffect } from './store/effects/generel-ledger-master-data.effects';
 import { GeneralLedgerReportsComponent } from './finance-Folder/general-ledger/general-ledger-reports/general-ledger-reports.component';
+import { MasterDataReportComponent } from './finance-Folder/general-ledger/general-ledger-reports/master-data-report/master-data-report.component';
+import { GlLineItemsComponent } from './finance-Folder/general-ledger/general-ledger-reports/gl-line-items/gl-line-items.component';
+import { TrialBalanceComponent } from './finance-Folder/general-ledger/general-ledger-reports/trial-balance/trial-balance.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +79,9 @@ import { GeneralLedgerReportsComponent } from './finance-Folder/general-ledger/g
     AccountGroupDialogComponent,
     TaxCodeDialogComponent,
     GeneralLedgerReportsComponent,
+    MasterDataReportComponent,
+    GlLineItemsComponent,
+    TrialBalanceComponent,
   ],
   imports: [
     FinanceLayoutRoutingModule,

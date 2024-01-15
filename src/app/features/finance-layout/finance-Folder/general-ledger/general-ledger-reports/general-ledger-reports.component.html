@@ -1,1 +1,95 @@
-<p>general-ledger-reports works!</p>
+<div class="justify-content-center container">
+  <div>
+    <h2 class="text-center my-3" style="font-weight: lighter; color: #03045e">
+      Generel Ledger Reporting
+    </h2>
+  </div>
+  <div class="row">
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          routerLink="/home"
+        >
+          Home
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="OnSelectChartOfAccounts()"
+        >
+          Chart of Accounts List
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="OnSelectAccountLineItems()"
+        >
+          Account Line Items
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="OnSelectTrialBalance()"
+        >
+          Trial Balance
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="OnSelectToBeDetermined()"
+        >
+          To Be Determined
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2 my-3">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-outline-success"
+          type="button"
+          (click)="OnSelectToBeDetermined()"
+        >
+          To Be Determined
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" [ngSwitch]="ReportSelected">
+      <div *ngSwitchCase="'masterData'">
+        <app-master-data-report></app-master-data-report>
+      </div>
+      <div *ngSwitchCase="'accountLineItems'">
+        <app-gl-line-items></app-gl-line-items>
+      </div>
+      <div *ngSwitchCase="'trialBalance'">
+        <app-trial-balance></app-trial-balance>
+      </div>
+      <div *ngSwitchCase="'tba'">
+        <app-master-data-report></app-master-data-report>
+      </div>
+      <div *ngSwitchDefault>
+        <app-master-data-report></app-master-data-report>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
