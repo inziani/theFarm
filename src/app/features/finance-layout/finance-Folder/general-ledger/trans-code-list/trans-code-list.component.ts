@@ -22,5 +22,5 @@ export class TransCodeListComponent {
     this._financeService.sendData(this.taxCode);
   }
 
-  // ngOnDestroy(): void {}
+  
 }

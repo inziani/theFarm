@@ -416,6 +416,13 @@ export class FinanceService {
 
   // General Ledger Data
 
+  public ledgerCreation(): Observable<any> {
+    return this.http.post<any>(
+      `${environment.apiUrl}/generalLedgerAccountMaster/`,
+      this.httpOptions
+    );
+  }
+
   public createGeneralLedgerAccountMasterData(
     accountNumber: number,
     companyCode: string,
@@ -447,10 +454,10 @@ export class FinanceService {
     relevantToCashFlow: boolean,
     houseBank: string,
     houseBankAccountID: number,
-    interestIndicator: boolean,
-    interestCalculationFrequency: number,
-    lastDateOfInterestCalculation: Date,
-    keyDateofLastInterest: Date,
+    // interestIndicator: boolean,
+    // interestCalculationFrequency: number,
+    // lastDateOfInterestCalculation: Date,
+    // keyDateofLastInterest: Date,
     controllingArea: string,
     costElement: number,
     unitOfMeasure: string,
@@ -495,10 +502,10 @@ export class FinanceService {
         relevantToCashFlow,
         houseBank,
         houseBankAccountID,
-        interestIndicator,
-        interestCalculationFrequency,
-        lastDateOfInterestCalculation,
-        keyDateofLastInterest,
+        // interestIndicator,
+        // interestCalculationFrequency,
+        // lastDateOfInterestCalculation,
+        // keyDateofLastInterest,
         controllingArea,
         costElement,
         unitOfMeasure,

@@ -29,7 +29,7 @@ import { ActivatedRoute, Route } from '@angular/router';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit, AfterViewInit {
-  public test!: Activity[];
+
   public activity!: Activity;
   public activityObject = <Activity>{};
   public activityList$ = this._store.select(selectAllActivities);

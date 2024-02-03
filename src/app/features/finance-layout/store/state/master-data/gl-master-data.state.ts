@@ -3,11 +3,12 @@ import { GeneralLedgerMasterData } from '@app/features/finance-layout/finance-Fo
 import * as AppState from '@app/store/state/ui.state';
 
 export interface State extends AppState.State {
-  generalLedgerMasterDataState: GeneralLedgerMasterDataState;
+  generalLedgerMasterData: GeneralLedgerMasterDataState;
 }
 
 export interface GeneralLedgerMasterDataState
   extends EntityState<GeneralLedgerMasterData> {
   loading: boolean;
   errorMessage: string;
+  GeneralLedgerMasterDataFieldNames: GeneralLedgerMasterData;
 }

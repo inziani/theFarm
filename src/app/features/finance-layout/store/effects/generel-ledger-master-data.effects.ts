@@ -19,7 +19,6 @@ export class GeneralLedgerMasterDataEffect {
       exhaustMap(() =>
         this._financeService.fetchGeneralLedgerAccountsList().pipe(
           map((GlAccountsMasters) => {
-            console.log('Its Should be an empty List-', GlAccountsMasters);
             return GeneralLedgerMasterDataAPIActions[
               '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterSuccess'
             ]({

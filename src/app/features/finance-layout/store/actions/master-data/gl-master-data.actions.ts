@@ -6,6 +6,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 export const GeneralLedgerMasterDataPageActions = createActionGroup({
   source: 'General Ledger Master Data Page',
   events: {
+  
     '[GeneralLedgerMasterDataPageActions] Load General Ledger Accounts Master':
       emptyProps(),
     '[GeneralLedgerMasterDataPageActions] Select Single General Ledger Accounts Master':

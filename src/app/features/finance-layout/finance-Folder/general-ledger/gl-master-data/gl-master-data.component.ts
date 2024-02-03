@@ -98,19 +98,40 @@ export class GlMasterDataComponent implements OnInit {
     this._numberRanges.glAccountNumberStatus.subscribe({
       next: (accNum) => {
         this.accNum = accNum;
+        console.log('Account Number -', this.accNum);
       },
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('New Acc Num generated'),
     });
   }
 
+  // public onCreateGLAccountMaster() {
+  //   console.log('Is it calling this function?');
+  //   return this._financeService.fetchGeneralLedgerAccountsList().subscribe({
+  //     next: (what) => {
+  //       console.log('What is the creation Feedback?', what);
+  //     },
+  //     error: (err) => (this.errorMessage = err),
+  //     complete: () => console.info('Complete'),
+  //   });
+  // }
+
   public onCreateGLAccountMaster() {
-    this._numberRanges.generateGLAccountNumber();
+    if (!this.formGroup.valid) {
+      return;
+    }
+    console.log('Is the GL master creation getting here?');
+    // this._numberRanges.generateGLAccountNumber();
     this.generalLedgerAccountMaster = this.formGroup.value;
+    console.log(
+      'The create method is not working - ',
+      this.generalLedgerAccountMaster
+    );
     return this._financeService
       .createGeneralLedgerAccountMasterData(
-        (this.generalLedgerAccountMaster.accountNumber =
-          this._numberRanges.glAccountNumber),
+        // (this.generalLedgerAccountMaster.accountNumber =
+        //   this._numberRanges.glAccountNumber),
+        this.generalLedgerAccountMaster.accountNumber,
         this.generalLedgerAccountMaster.companyCode,
         this.generalLedgerAccountMaster.chartOfAccounts,
         this.generalLedgerAccountMaster.accountGroup,
@@ -140,10 +161,10 @@ export class GlMasterDataComponent implements OnInit {
         this.generalLedgerAccountMaster.relevantToCashFlow,
         this.generalLedgerAccountMaster.houseBank,
         this.generalLedgerAccountMaster.houseBankAccountID,
-        this.generalLedgerAccountMaster.interestIndicator,
-        this.generalLedgerAccountMaster.interestCalculationFrequency,
-        this.generalLedgerAccountMaster.lastDateOfInterestCalculation,
-        this.generalLedgerAccountMaster.keyDateofLastInterest,
+        // this.generalLedgerAccountMaster.interestIndicator,
+        // this.generalLedgerAccountMaster.interestCalculationFrequency,
+        // this.generalLedgerAccountMaster.lastDateOfInterestCalculation,
+        // this.generalLedgerAccountMaster.keyDateofLastInterest,
         this.generalLedgerAccountMaster.controllingArea,
         this.generalLedgerAccountMaster.costElement,
         this.generalLedgerAccountMaster.unitOfMeasure,

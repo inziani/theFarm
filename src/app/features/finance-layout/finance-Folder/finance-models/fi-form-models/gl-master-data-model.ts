@@ -1,5 +1,4 @@
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class GLMasterDataFormControl extends FormControl {
   label: string;
@@ -16,23 +15,23 @@ export class GLMasterDataFormControl extends FormControl {
     if (this.errors) {
       for (let errorName in this.errors) {
         switch (errorName) {
-          case "email":
+          case 'email':
             messages.push(`Please enter a valid ${this.label} address`);
             break;
-          case "required":
+          case 'required':
             messages.push(`${this.label} is a required field `);
             break;
-          case "minLength":
+          case 'minLength':
             messages.push(
-              `${this.label} must be at least ${this.errors["minLength"].requiredLength} characters.`
+              `${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`
             );
             break;
-          case "maxLength":
+          case 'maxLength':
             messages.push(
-              `The ${this.label} must be ${this.errors["maxLength"].requiredLength} characters`
+              `The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`
             );
             break;
-          case "pattern":
+          case 'pattern':
             messages.push(
               `This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `
             );
@@ -129,7 +128,7 @@ export class GLMasterDataFormGroup extends FormGroup {
         'Only Balances in Local currency',
         'onlyBalancesInLocalCurrency',
         '',
-        Validators.requiredTrue
+        Validators.required
       ),
       exchangeRateKey: new GLMasterDataFormControl(
         'Exchange Rate Key',
@@ -227,30 +226,30 @@ export class GLMasterDataFormGroup extends FormGroup {
         '',
         Validators.required
       ),
-      interestIndicator: new GLMasterDataFormControl(
-        'Interest Indicator',
-        'interestIndicator',
-        '',
-        Validators.required
-      ),
-      interestCalculationFrequency: new GLMasterDataFormControl(
-        'Interest Calculation Frequency',
-        'interestCalculationFrequency',
-        '',
-        Validators.required
-      ),
-      lastDateOfInterestCalculation: new GLMasterDataFormControl(
-        'Last day of interest calculation',
-        'lastDateOfInterestCalculation',
-        '',
-        Validators.required
-      ),
-      keyDateofLastInterest: new GLMasterDataFormControl(
-        'Key Date of Last Interest',
-        'keyDateofLastInterest',
-        '',
-        Validators.required
-      ),
+      // interestIndicator: new GLMasterDataFormControl(
+      //   'Interest Indicator',
+      //   'interestIndicator',
+      //   '',
+      //   Validators.required
+      // ),
+      // interestCalculationFrequency: new GLMasterDataFormControl(
+      //   'Interest Calculation Frequency',
+      //   'interestCalculationFrequency',
+      //   '',
+      //   Validators.required
+      // ),
+      // lastDateOfInterestCalculation: new GLMasterDataFormControl(
+      //   'Last day of interest calculation',
+      //   'lastDateOfInterestCalculation',
+      //   '',
+      //   Validators.required
+      // ),
+      // keyDateofLastInterest: new GLMasterDataFormControl(
+      //   'Key Date of Last Interest',
+      //   'keyDateofLastInterest',
+      //   '',
+      //   Validators.required
+      // ),
       controllingArea: new GLMasterDataFormControl(
         'Controlling Area',
         'controllingArea',
@@ -321,28 +320,28 @@ export class GLMasterDataFormGroup extends FormGroup {
   }
   getAccountNumberValidationMessages(accountNumber: string): string[] {
     return (
-      this.controls["accountNumber"] as GLMasterDataFormControl
+      this.controls['accountNumber'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getCompanyCodeValidationMessages(companyCode: string): string[] {
     return (
-      this.controls["companyCode"] as GLMasterDataFormControl
+      this.controls['companyCode'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
   getChartOfAccountsValidationMessages(chartOfAccounts: string): string[] {
     return (
-      this.controls["chartOfAccounts"] as GLMasterDataFormControl
+      this.controls['chartOfAccounts'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getAccountGroupValidationMessages(accountGroup: string): string[] {
     return (
-      this.controls["accountGroup"] as GLMasterDataFormControl
+      this.controls['accountGroup'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getAccountTypeValidationMessages(accountType: string): string[] {
     return (
-      this.controls["accountType"] as GLMasterDataFormControl
+      this.controls['accountType'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
@@ -350,14 +349,14 @@ export class GLMasterDataFormGroup extends FormGroup {
     reconciliationAccountInput: string
   ): string[] {
     return (
-      this.controls["reconciliationAccountInput"] as GLMasterDataFormControl
+      this.controls['reconciliationAccountInput'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getReconciliationAccountTypeValidationMessages(
     reconciliationAccountType: string
   ): string[] {
     return (
-      this.controls["reconciliationAccountType"] as GLMasterDataFormControl
+      this.controls['reconciliationAccountType'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
@@ -365,221 +364,221 @@ export class GLMasterDataFormGroup extends FormGroup {
     alternativeGLAccount: string
   ): string[] {
     return (
-      this.controls["alternativeGLAccount"] as GLMasterDataFormControl
+      this.controls['alternativeGLAccount'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
   getShortDescriptionValidationMessages(shortDescription: string): string[] {
     return (
-      this.controls["shortDescription"] as GLMasterDataFormControl
+      this.controls['shortDescription'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
   getLongDescriptionValidationMessages(longDescription: string): string[] {
     return (
-      this.controls["longDescription"] as GLMasterDataFormControl
+      this.controls['longDescription'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getProfitAndLossAccountValidationMessages(
     profitAndLossAccount: string
   ): string[] {
     return (
-      this.controls["profitAndLossAccount"] as GLMasterDataFormControl
+      this.controls['profitAndLossAccount'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getbalanceSheetAccountValidationMessages(
     balanceSheetAccount: string
   ): string[] {
     return (
-      this.controls["balanceSheetAccount"] as GLMasterDataFormControl
+      this.controls['balanceSheetAccount'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getAccountCurrencyValidationMessages(accountCurrency: string): string[] {
     return (
-      this.controls["accountCurrency"] as GLMasterDataFormControl
+      this.controls['accountCurrency'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getonlyBalancesInLocalCurrencyValidationMessages(
     onlyBalancesInLocalCurrency: string
   ): string[] {
     return (
-      this.controls["onlyBalancesInLocalCurrency"] as GLMasterDataFormControl
+      this.controls[onlyBalancesInLocalCurrency] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getExchangeRateKeyValidationMessages(exchangeRateKey: string): string[] {
     return (
-      this.controls["exchangeRateKey"] as GLMasterDataFormControl
+      this.controls['exchangeRateKey'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getTaxCategoryValidationMessages(taxCategory: string): string[] {
     return (
-      this.controls["taxCategory"] as GLMasterDataFormControl
+      this.controls['taxCategory'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getPostingWithoutTaxAllowedValidationMessages(
     postingWithoutTaxAllowed: string
   ): string[] {
     return (
-      this.controls["postingWithoutTaxAllowed"] as GLMasterDataFormControl
+      this.controls['postingWithoutTaxAllowed'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getOpenItemManagementValidationMessages(
     openItemManagement: string
   ): string[] {
     return (
-      this.controls["openItemManagement"] as GLMasterDataFormControl
+      this.controls['openItemManagement'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getLineItemManagementMessages(lineItemManagement: string): string[] {
     return (
-      this.controls["lineItemManagement"] as GLMasterDataFormControl
+      this.controls['lineItemManagement'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getBlockedForPostingValidationMessages(blockedForPosting: string): string[] {
     return (
-      this.controls["blockedForPosting"] as GLMasterDataFormControl
+      this.controls['blockedForPosting'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getMarkedForDeletionValidationMessages(markedForDeletion: string): string[] {
     return (
-      this.controls["markedForDeletion"] as GLMasterDataFormControl
+      this.controls['markedForDeletion'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getGroupAccountNumberValidationMessages(
     groupAccountNumber: string
   ): string[] {
     return (
-      this.controls["groupAccountNumber"] as GLMasterDataFormControl
+      this.controls['groupAccountNumber'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getTradingPartnerValidationMessages(tradingPartner: string): string[] {
     return (
-      this.controls["tradingPartner"] as GLMasterDataFormControl
+      this.controls['tradingPartner'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getSortKeyValidationMessages(sortKey: string): string[] {
     return (
-      this.controls["sortKey"] as GLMasterDataFormControl
+      this.controls['sortKey'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getAuthorizationGroupValidationMessages(
     authorizationGroup: string
   ): string[] {
     return (
-      this.controls["authorizationGroup"] as GLMasterDataFormControl
+      this.controls['authorizationGroup'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getFieldStatusGroupValidationMessages(fieldStatusGroup: string): string[] {
     return (
-      this.controls["fieldStatusGroup"] as GLMasterDataFormControl
+      this.controls['fieldStatusGroup'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getPostAutomaticallyOnlyValidationMessages(
     postAutomaticallyOnly: string
   ): string[] {
     return (
-      this.controls["postAutomaticallyOnly"] as GLMasterDataFormControl
+      this.controls['postAutomaticallyOnly'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getRelevantToCashFlowValidationMessages(
     relevantToCashFlow: string
   ): string[] {
     return (
-      this.controls["relevantToCashFlow"] as GLMasterDataFormControl
+      this.controls['relevantToCashFlow'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getHouseBankValidationMessages(houseBank: string): string[] {
     return (
-      this.controls["houseBank"] as GLMasterDataFormControl
+      this.controls['houseBank'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getHouseBankAccountIDValidationMessages(
     houseBankAccountID: string
   ): string[] {
     return (
-      this.controls["houseBankAccountID"] as GLMasterDataFormControl
+      this.controls['houseBankAccountID'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
-  getInterestIndicatorValidationMessages(interestIndicator: string): string[] {
-    return (
-      this.controls["interestIndicator"] as GLMasterDataFormControl
-    ).getValidationMessages();
-  }
+  // getInterestIndicatorValidationMessages(interestIndicator: string): string[] {
+  //   return (
+  //     this.controls['interestIndicator'] as GLMasterDataFormControl
+  //   ).getValidationMessages();
+  // }
 
-  getInterestCalculationFrequencyValidationMessages(
-    interestCalculationFrequency: string
-  ): string[] {
-    return (
-      this.controls["interestCalculationFrequency"] as GLMasterDataFormControl
-    ).getValidationMessages();
-  }
-  getLastDateOfInterestCalculationValidationMessages(
-    lastDateOfInterestCalculation: string
-  ): string[] {
-    return (
-      this.controls["lastDateOfInterestCalculation"] as GLMasterDataFormControl
-    ).getValidationMessages();
-  }
-  getKeyDateofLastInterestValidationMessages(
-    keyDateofLastInterest: string
-  ): string[] {
-    return (
-      this.controls["keyDateofLastInterest"] as GLMasterDataFormControl
-    ).getValidationMessages();
-  }
+  // getInterestCalculationFrequencyValidationMessages(
+  //   interestCalculationFrequency: string
+  // ): string[] {
+  //   return (
+  //     this.controls['interestCalculationFrequency'] as GLMasterDataFormControl
+  //   ).getValidationMessages();
+  // }
+  // getLastDateOfInterestCalculationValidationMessages(
+  //   lastDateOfInterestCalculation: string
+  // ): string[] {
+  //   return (
+  //     this.controls['lastDateOfInterestCalculation'] as GLMasterDataFormControl
+  //   ).getValidationMessages();
+  // }
+  // getKeyDateofLastInterestValidationMessages(
+  //   keyDateofLastInterest: string
+  // ): string[] {
+  //   return (
+  //     this.controls['keyDateofLastInterest'] as GLMasterDataFormControl
+  //   ).getValidationMessages();
+  // }
   getControllingAreaValidationMessages(controllingArea: string): string[] {
     return (
-      this.controls["controllingArea"] as GLMasterDataFormControl
+      this.controls['controllingArea'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getCostElementValidationMessages(costElement: string): string[] {
     return (
-      this.controls["costElement"] as GLMasterDataFormControl
+      this.controls['costElement'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getUnitOfMeasureValidationMessages(unitOfMeasure: string): string[] {
     return (
-      this.controls["unitOfMeasure"] as GLMasterDataFormControl
+      this.controls['unitOfMeasure'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
   getBusinessAreaValidationMessages(businessArea: string): string[] {
     return (
-      this.controls["businessArea"] as GLMasterDataFormControl
+      this.controls['businessArea'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
   getValuationGroupMessages(valuationGroup: string): string[] {
     return (
-      this.controls["valuationGroup"] as GLMasterDataFormControl
+      this.controls['valuationGroup'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getInflationKeyMessages(inflationKey: string): string[] {
     return (
-      this.controls["inflationKey"] as GLMasterDataFormControl
+      this.controls['inflationKey'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
   getToleranceGroupMessages(toleranceGroup: string): string[] {
     return (
-      this.controls["toleranceGroup"] as GLMasterDataFormControl
+      this.controls['toleranceGroup'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getplanningLevelValidationMessages(planningLevel: string): string[] {
     return (
-      this.controls["planningLevel"] as GLMasterDataFormControl
+      this.controls['planningLevel'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getAccountManagedinExternalSystemValidationMessages(
     accountManagedinExternalSystem: string
   ): string[] {
     return (
-      this.controls["accountManagedinExternalSystem"] as GLMasterDataFormControl
+      this.controls['accountManagedinExternalSystem'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
   getSupplementAutomaticPostingsMessages(planningLevel: string): string[] {
     return (
-      this.controls["supplementAutomaticPostings"] as GLMasterDataFormControl
+      this.controls['supplementAutomaticPostings'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
 
@@ -607,23 +606,23 @@ export class GLMasterDataAccountGroupFormControl extends FormControl {
     if (this.errors) {
       for (let errorName in this.errors) {
         switch (errorName) {
-          case "email":
+          case 'email':
             messages.push(`Please enter a valid ${this.label} address`);
             break;
-          case "required":
+          case 'required':
             messages.push(`${this.label} is a required field `);
             break;
-          case "minLength":
+          case 'minLength':
             messages.push(
-              `${this.label} must be at least ${this.errors["minLength"].requiredLength} characters.`
+              `${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`
             );
             break;
-          case "maxLength":
+          case 'maxLength':
             messages.push(
-              `The ${this.label} must be ${this.errors["maxLength"].requiredLength} characters`
+              `The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`
             );
             break;
-          case "pattern":
+          case 'pattern':
             messages.push(
               `This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `
             );
@@ -661,12 +660,12 @@ export class GLMasterDataAccountGroupFormGroup extends FormGroup {
 
   getAccountGroupValidationMessages(accountGroup: string): string[] {
     return (
-      this.controls["accountGroup"] as GLMasterDataAccountGroupFormControl
+      this.controls['accountGroup'] as GLMasterDataAccountGroupFormControl
     ).getValidationMessages();
   }
   getDescriptionValidationMessages(description: string): string[] {
     return (
-      this.controls["description"] as GLMasterDataAccountGroupFormControl
+      this.controls['description'] as GLMasterDataAccountGroupFormControl
     ).getValidationMessages();
   }
   getFormValidationMessages(): string[] {
@@ -695,23 +694,23 @@ export class GLMasterDataTaxCodeFormControl extends FormControl {
     if (this.errors) {
       for (let errorName in this.errors) {
         switch (errorName) {
-          case "email":
+          case 'email':
             messages.push(`Please enter a valid ${this.label} address`);
             break;
-          case "required":
+          case 'required':
             messages.push(`${this.label} is a required field `);
             break;
-          case "minLength":
+          case 'minLength':
             messages.push(
-              `${this.label} must be at least ${this.errors["minLength"].requiredLength} characters.`
+              `${this.label} must be at least ${this.errors['minLength'].requiredLength} characters.`
             );
             break;
-          case "maxLength":
+          case 'maxLength':
             messages.push(
-              `The ${this.label} must be ${this.errors["maxLength"].requiredLength} characters`
+              `The ${this.label} must be ${this.errors['maxLength'].requiredLength} characters`
             );
             break;
-          case "pattern":
+          case 'pattern':
             messages.push(
               `This ${this.label} must have a atleast one Number, a special character, uppercase and lowercase letter `
             );
@@ -754,19 +753,19 @@ export class GLMasterDataTaxCodeFormGroup extends FormGroup {
   }
   getTaxCodeValidationMessages(taxCode: string): string[] {
     return (
-      this.controls["taxCode"] as GLMasterDataTaxCodeFormControl
+      this.controls['taxCode'] as GLMasterDataTaxCodeFormControl
     ).getValidationMessages();
   }
   getTaxCodeDescriptionValidationMessages(
     taxCodeDescription: string
   ): string[] {
     return (
-      this.controls["taxCodeDescription"] as GLMasterDataTaxCodeFormControl
+      this.controls['taxCodeDescription'] as GLMasterDataTaxCodeFormControl
     ).getValidationMessages();
   }
   getTaxCodePercentageValidationMessages(taxCodePercentage: string): string[] {
     return (
-      this.controls["taxCodePercentage"] as GLMasterDataTaxCodeFormControl
+      this.controls['taxCodePercentage'] as GLMasterDataTaxCodeFormControl
     ).getValidationMessages();
   }
   getFormValidationMessages(): string[] {
@@ -779,7 +778,6 @@ export class GLMasterDataTaxCodeFormGroup extends FormGroup {
     return messages;
   }
 }
-
 
 export class CustomFormControl extends FormControl {
   label: string;
@@ -853,9 +851,7 @@ export class GLAccountGroupMasterData extends FormGroup {
       this.controls['accountGroup'] as CustomFormControl
     ).getValidationMessages();
   }
-  getaccountGroupDescriptionValidationMessages(
-    description: string
-  ): string[] {
+  getaccountGroupDescriptionValidationMessages(description: string): string[] {
     return (
       this.controls['description'] as CustomFormControl
     ).getValidationMessages();

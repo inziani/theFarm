@@ -30,10 +30,10 @@ export interface GeneralLedgerMasterData {
   relevantToCashFlow: boolean;
   houseBank: string;
   houseBankAccountID: number;
-  interestIndicator: boolean;
-  interestCalculationFrequency: number;
-  lastDateOfInterestCalculation: Date;
-  keyDateofLastInterest: Date;
+  // interestIndicator: boolean;
+  // interestCalculationFrequency: number;
+  // lastDateOfInterestCalculation: Date;
+  // keyDateofLastInterest: Date;
   controllingArea: string;
   costElement: number;
   unitOfMeasure: string;
