@@ -7,7 +7,7 @@ import {
   selectGeneralLedgerMasterDateHeaders,
 } from '@app/features/finance-layout/store/selectors/general-ledger.selectors';
 import { GeneralLedgerMasterData } from '../../../finance-models/fi-data-models/gl-account-master-model';
-import { selectActivitiesEntities } from '@app/profile/store/selectors/activity.selectors';
+
 
 @Component({
   selector: 'app-master-data-report',
@@ -16,8 +16,6 @@ import { selectActivitiesEntities } from '@app/profile/store/selectors/activity.
 })
 export class MasterDataReportComponent implements OnInit {
   public GeneralLedgerMasterDataHeaders!: GeneralLedgerMasterData;
-
-
   public GeneralLedgerMasterDataList$ = this._store.select(
     selectAllGeneralLedgerMasterData
   );
