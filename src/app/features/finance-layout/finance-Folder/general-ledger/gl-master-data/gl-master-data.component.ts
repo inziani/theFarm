@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { IsoDatePipe } from '@app/_helpers/pipes/iso-date.pipe';
+// import { IsoDatePipe } from '@app/_helpers/pipes/iso-date.pipe';
 
 import {
   GLAccountGroupMasterData,
@@ -14,13 +14,16 @@ import {
 import { SearchDialogComponent } from '@app/features/finance-layout/finance-Folder/finance-dialogues/search-dialog/search-dialog.component';
 import { GeneralLedgerMasterData } from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/gl-account-master-model';
 import { FinanceService } from '@app/_helpers/services/finance.service';
-import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
-import { NumberRangesService } from '@app/shared/data/number-ranges.service';
+// import { NumberRangesService } from '@app/shared/data/number-ranges.service';
 import {
   CompanyCodeMasterData,
   ChartOfAccountsMasterData,
   GLAccountGroup,
 } from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/organization-data-models';
+import { GeneralLedgerMasterDataState } from '@app/features/finance-layout/store/state/master-data/gl-master-data.state';
+import { Store } from '@ngrx/store';
+import { GeneralLedgerMasterDataPageActions } from '@app/features/finance-layout/store/actions/master-data/gl-master-data.actions';
+import { ObjectCreatedComponent } from '@app/shared/user-feedback-dialogues/object-created/object-created.component';
 
 @Component({
   selector: 'app-gl-master-data',
@@ -46,7 +49,7 @@ export class GlMasterDataComponent implements OnInit {
     { value: 'Banks', viewValue: 'Banks' },
     { value: 'Materials Management', viewValue: 'Materials Management' },
   ];
-  public generalLedgerAccountMaster!: GeneralLedgerMasterData;
+  public GeneralLedgerAccountMaster!: GeneralLedgerMasterData;
   public readonly!: boolean;
   public errorMessage!: string;
   public accNum!: number;
@@ -54,13 +57,16 @@ export class GlMasterDataComponent implements OnInit {
   public chartOfAccounts!: ChartOfAccountsMasterData[];
   public glAccountGroup!: GLAccountGroup;
   public glAccountsMasterList!: GeneralLedgerMasterData[];
+  // public accountType!: string;
+  public accountType!: boolean;
 
-  constructor(
-    private _dialog: MatDialog,
-    private _financeService: FinanceService,
-
-    private _numberRanges: NumberRangesService
-  ) {}
+  public AccountType = [
+    {
+      label: 'Profit and Loss Account',
+      value: true,
+    },
+    { label: 'Balance Sheet Account', value: false },
+  ];
 
   ngOnInit(): void {
     this.readonly = true;
@@ -78,7 +84,12 @@ export class GlMasterDataComponent implements OnInit {
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complate'),
     });
-    this._numberRanges.generateGLAccountNumber();
+  }
+
+  public onRadioButtonChange(event: any) {
+    // this.accountType = event.target.value;
+    this.accountType = !this.accountType
+    console.log('Radio Button-', this.accountType);
   }
 
   public onSearchGLAccount() {
@@ -95,95 +106,25 @@ export class GlMasterDataComponent implements OnInit {
 
   public onEnableFields() {
     this.readonly = !this.readonly;
-    this._numberRanges.glAccountNumberStatus.subscribe({
-      next: (accNum) => {
-        this.accNum = accNum;
-        console.log('Account Number -', this.accNum);
-      },
-      error: (err) => (this.errorMessage = err),
-      complete: () => console.info('New Acc Num generated'),
-    });
   }
-
-  // public onCreateGLAccountMaster() {
-  //   console.log('Is it calling this function?');
-  //   return this._financeService.fetchGeneralLedgerAccountsList().subscribe({
-  //     next: (what) => {
-  //       console.log('What is the creation Feedback?', what);
-  //     },
-  //     error: (err) => (this.errorMessage = err),
-  //     complete: () => console.info('Complete'),
-  //   });
-  // }
 
   public onCreateGLAccountMaster() {
-    if (!this.formGroup.valid) {
+    if (this.formGroup.valid) {
       return;
     }
-    console.log('Is the GL master creation getting here?');
-    // this._numberRanges.generateGLAccountNumber();
-    this.generalLedgerAccountMaster = this.formGroup.value;
-    console.log(
-      'The create method is not working - ',
-      this.generalLedgerAccountMaster
+    this.GeneralLedgerAccountMaster = this.formGroup.value;
+    this._store.dispatch(
+      GeneralLedgerMasterDataPageActions[
+        '[GeneralLedgerMasterDataPageActions]CreateGeneralLedgerAccountsMaster'
+      ]({ GlAccountMaster: this.GeneralLedgerAccountMaster })
     );
-    return this._financeService
-      .createGeneralLedgerAccountMasterData(
-        // (this.generalLedgerAccountMaster.accountNumber =
-        //   this._numberRanges.glAccountNumber),
-        this.generalLedgerAccountMaster.accountNumber,
-        this.generalLedgerAccountMaster.companyCode,
-        this.generalLedgerAccountMaster.chartOfAccounts,
-        this.generalLedgerAccountMaster.accountGroup,
-        this.generalLedgerAccountMaster.accountType,
-        this.generalLedgerAccountMaster.reconciliationAccountInput,
-        this.generalLedgerAccountMaster.reconciliationAccountType,
-        this.generalLedgerAccountMaster.alternativeGLAccount,
-        this.generalLedgerAccountMaster.shortDescription,
-        this.generalLedgerAccountMaster.longDescription,
-        this.generalLedgerAccountMaster.profitAndLossAccount,
-        this.generalLedgerAccountMaster.balanceSheetAccount,
-        this.generalLedgerAccountMaster.accountCurrency,
-        this.generalLedgerAccountMaster.balancesInLocalCurrency,
-        this.generalLedgerAccountMaster.exchangeRateKey,
-        this.generalLedgerAccountMaster.taxCategory,
-        this.generalLedgerAccountMaster.postingWithoutTaxAllowed,
-        this.generalLedgerAccountMaster.openItemManagement,
-        this.generalLedgerAccountMaster.lineItemManagement,
-        this.generalLedgerAccountMaster.blockedForPosting,
-        this.generalLedgerAccountMaster.markedForDeletion,
-        this.generalLedgerAccountMaster.groupAccountNumber,
-        this.generalLedgerAccountMaster.tradingPartner,
-        this.generalLedgerAccountMaster.sortKey,
-        this.generalLedgerAccountMaster.authorizationGroup,
-        this.generalLedgerAccountMaster.fieldStatusGroup,
-        this.generalLedgerAccountMaster.postAutomaticallyOnly,
-        this.generalLedgerAccountMaster.relevantToCashFlow,
-        this.generalLedgerAccountMaster.houseBank,
-        this.generalLedgerAccountMaster.houseBankAccountID,
-        // this.generalLedgerAccountMaster.interestIndicator,
-        // this.generalLedgerAccountMaster.interestCalculationFrequency,
-        // this.generalLedgerAccountMaster.lastDateOfInterestCalculation,
-        // this.generalLedgerAccountMaster.keyDateofLastInterest,
-        this.generalLedgerAccountMaster.controllingArea,
-        this.generalLedgerAccountMaster.costElement,
-        this.generalLedgerAccountMaster.unitOfMeasure,
-        this.generalLedgerAccountMaster.businessArea,
-        this.generalLedgerAccountMaster.valuationGroup,
-        this.generalLedgerAccountMaster.inflationKey,
-        this.generalLedgerAccountMaster.toleranceGroup,
-        this.generalLedgerAccountMaster.planningLevel,
-        this.generalLedgerAccountMaster.accountManagedinExternalSystem,
-        this.generalLedgerAccountMaster.supplementAutomaticPostings
-      )
-      .subscribe({
-        next: (accountMasterCreated) =>
-          this._dialog.open(ObjectCreatedComponent, {
-            data: (this.generalLedgerAccountMaster.accountNumber =
-              accountMasterCreated.accountNumber),
-          }),
-        error: (err) => (this.errorMessage = err),
-        complete: () => console.info('Complete'),
-      });
+    alert('Is it getting here?');
+    console.log('Please print -', this.GeneralLedgerAccountMaster);
   }
+
+  constructor(
+    private _dialog: MatDialog,
+    private _financeService: FinanceService,
+    private _store: Store<GeneralLedgerMasterDataState>
+  ) {}
 }

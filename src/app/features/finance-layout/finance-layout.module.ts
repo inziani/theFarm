@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
 
 import { FinanceLayoutRoutingModule } from './finance-layout-routing.module';
 import { FinanceLayoutComponent } from './finance-layout.component';
@@ -84,6 +83,7 @@ import { TrialBalanceComponent } from './finance-Folder/general-ledger/general-l
     TrialBalanceComponent,
   ],
   imports: [
+
     FinanceLayoutRoutingModule,
     SharedModule,
     StoreModule.forFeature('financeModule', financeReducers.financeReducers),

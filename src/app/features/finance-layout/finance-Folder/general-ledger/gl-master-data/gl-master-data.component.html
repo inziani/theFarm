@@ -1,3 +1,24 @@
+<!-- Beginning of Test Radio Button -->
+<!-- <div class="container">
+  <h1>Test Radio Button</h1>
+  <div class="form-check" *ngFor="let AccontType of AccountType">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="AccontType"
+      id="flexRadioDefault1"
+      value="{{ AccontType.value }}"
+      (change)="onRadioButtonChange($event)"
+    />
+    <label class="form-check-label" for="flexRadioDefault1">
+      {{ AccontType.label }}
+    </label>
+  </div>
+  <h3>Print the Radio Button Selection Here >>> {{ accountType }}</h3>
+</div> -->
+
+<!-- End of Test Radio Button -->
+
 <div class="container">
   <h1 class="text-center my-4" style="font-weight: lighter">
     General Ledger Master Data Maintenance
@@ -7,6 +28,7 @@
     [formGroup]="formGroup"
     *ngIf="!isLoading"
     style="font-weight: lighter"
+    (ngSubmit)="onCreateGLAccountMaster()"
   >
     <div
       class="bg-danger text-white p-2 mb-2"
@@ -69,7 +91,7 @@
               class="form-select"
               selected
               *ngFor="let companyCode of companyCode"
-              [value]="companyCode.companyCode"
+              [value]="companyCode.id"
             >
               <p>
                 {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
@@ -113,7 +135,7 @@
               class="form-select"
               selected
               *ngFor="let chartOfAccounts of chartOfAccounts"
-              [value]="chartOfAccounts.coaCode"
+              [value]="chartOfAccounts.id"
             >
               <p>
                 {{ chartOfAccounts.coaCode }}
@@ -141,6 +163,7 @@
           </li>
         </ul>
       </div>
+
       <div class="col-md-6 my-5">
         <div class="input-group my-3 justify-content-center">
           <span
@@ -177,7 +200,9 @@
         </div>
       </div>
     </div>
+
     <!-- Begining of test -->
+
     <!-- Tabs Content and Headers -->
     <div class="row my-5 border border-primary mx-2">
       <div class="col-md-12 my-5">
@@ -286,7 +311,35 @@
                   </li>
                 </ul>
                 <p>Reporting</p>
-                <div class="form-check">
+
+                <div class="form-check" *ngFor="let AccountType of AccountType">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="AccontType"
+                    id="flexRadioDefault1"
+                    formControlName="balanceSheetAccount"
+                    [value]="AccountType.value"
+                    (change)="onRadioButtonChange($event)"
+                  />
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="AccontType"
+                    id="flexRadioDefault1"
+                    formControlName="profitAndLossAccount"
+                    [value]="AccountType.value"
+                    (change)="onRadioButtonChange($event)"
+                  />
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    {{ AccountType.label }}
+                  </label>
+                </div>
+                <h3>
+                  Print the Radio Button Selection Here >>> {{ accountType }}
+                </h3>
+
+                <!-- <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -298,8 +351,8 @@
                   <label class="form-check-label" for="flexRadioDefault1">
                     <p>Balance Sheet Account</p>
                   </label>
-                </div>
-                <div class="form-check">
+                </div> -->
+                <!-- <div class="form-check">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -310,9 +363,12 @@
                     formControlName="profitAndLossAccount"
                   />
                   <label class="form-check-label" for="flexRadioDefault2">
-                    <p>Profit and Loss Statement Account</p>
+                    <p>
+                      Profit and Loss Statement
+                      Account[value]="chartOfAccounts.id"
+                    </p>
                   </label>
-                </div>
+                </div> -->
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >P&l Statement Account Type</span
@@ -1228,9 +1284,7 @@
               </div>
             </div>
 
-
             <!-- Interest Calculation Information -->
-
 
             <!-- Interest Information end -->
           </div>

@@ -5,7 +5,7 @@ import {
   GeneralLedgerMasterDataPageActions,
   GeneralLedgerMasterDataAPIActions,
 } from '../actions/master-data/gl-master-data.actions';
-import { catchError, exhaustMap, map, of } from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, of } from 'rxjs';
 
 @Injectable()
 export class GeneralLedgerMasterDataEffect {
@@ -19,6 +19,7 @@ export class GeneralLedgerMasterDataEffect {
       exhaustMap(() =>
         this._financeService.fetchGeneralLedgerAccountsList().pipe(
           map((GlAccountsMasters) => {
+            console.log('Effects General Ledger Master - ', GlAccountsMasters);
             return GeneralLedgerMasterDataAPIActions[
               '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterSuccess'
             ]({
@@ -33,6 +34,78 @@ export class GeneralLedgerMasterDataEffect {
             )
           )
         )
+      )
+    );
+  });
+
+  public CreateGeneralLedgerAccountsMaster$ = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(
+        GeneralLedgerMasterDataPageActions[
+          '[GeneralLedgerMasterDataPageActions]CreateGeneralLedgerAccountsMaster'
+        ]
+      ),
+      mergeMap((action) =>
+        this._financeService
+          .createGeneralLedgerAccountMasterData(
+            action.GlAccountMaster.accountNumber,
+            action.GlAccountMaster.companyCode,
+            action.GlAccountMaster.chartOfAccounts,
+            action.GlAccountMaster.accountGroup,
+            action.GlAccountMaster.accountType,
+            action.GlAccountMaster.reconciliationAccountInput,
+            action.GlAccountMaster.reconciliationAccountType,
+            action.GlAccountMaster.alternativeGLAccount,
+            action.GlAccountMaster.shortDescription,
+            action.GlAccountMaster.longDescription,
+            action.GlAccountMaster.profitAndLossAccount,
+            action.GlAccountMaster.balanceSheetAccount,
+            action.GlAccountMaster.accountCurrency,
+            action.GlAccountMaster.balancesInLocalCurrency,
+            action.GlAccountMaster.exchangeRateKey,
+            action.GlAccountMaster.taxCategory,
+            action.GlAccountMaster.postingWithoutTaxAllowed,
+            action.GlAccountMaster.openItemManagement,
+            action.GlAccountMaster.lineItemManagement,
+            action.GlAccountMaster.blockedForPosting,
+            action.GlAccountMaster.markedForDeletion,
+            action.GlAccountMaster.groupAccountNumber,
+            action.GlAccountMaster.tradingPartner,
+            action.GlAccountMaster.sortKey,
+            action.GlAccountMaster.authorizationGroup,
+            action.GlAccountMaster.fieldStatusGroup,
+            action.GlAccountMaster.postAutomaticallyOnly,
+            action.GlAccountMaster.relevantToCashFlow,
+            action.GlAccountMaster.houseBank,
+            action.GlAccountMaster.houseBankAccountID,
+            action.GlAccountMaster.controllingArea,
+            action.GlAccountMaster.costElement,
+            action.GlAccountMaster.unitOfMeasure,
+            action.GlAccountMaster.businessArea,
+            action.GlAccountMaster.valuationGroup,
+            action.GlAccountMaster.inflationKey,
+            action.GlAccountMaster.toleranceGroup,
+            action.GlAccountMaster.planningLevel,
+            action.GlAccountMaster.accountManagedinExternalSystem,
+            action.GlAccountMaster.supplementAutomaticPostings
+          )
+          .pipe(
+            map((GlAccountsMasters) => {
+              console.log('Is the effect being called - ', GlAccountsMasters);
+              return GeneralLedgerMasterDataAPIActions[
+                '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterSuccess'
+              ]({
+                GlAccountsMaster: GlAccountsMasters,
+              });
+            }),
+            catchError((error: string) =>
+              of(
+                GeneralLedgerMasterDataAPIActions[
+                  '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterFail'
+                ]({ errorMessage: error })
+              )
+            )
+          )
       )
     );
   });
