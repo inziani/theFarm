@@ -106,18 +106,24 @@ export class GLMasterDataFormGroup extends FormGroup {
         '',
         Validators.required
       ),
-      profitAndLossAccount: new GLMasterDataFormControl(
-        'Profit and Loss account',
-        'profitAndLossAccount',
+      financialStatementAccount: new GLMasterDataFormControl(
+        'Financial Statement Account',
+        'Financial Statement Account',
         '',
         Validators.required
       ),
-      balanceSheetAccount: new GLMasterDataFormControl(
-        'Balance Sheet Account',
-        'balanceSheetAccount',
-        '',
-        Validators.required
-      ),
+      // profitAndLossAccount: new GLMasterDataFormControl(
+      //   'Profit and Loss account',
+      //   'profitAndLossAccount',
+      //   '',
+      //   Validators.required
+      // ),
+      // balanceSheetAccount: new GLMasterDataFormControl(
+      //   'Balance Sheet Account',
+      //   'balanceSheetAccount',
+      //   '',
+      //   Validators.required
+      // ),
       accountCurrency: new GLMasterDataFormControl(
         'Account Currency',
         'accountCurrency',
@@ -379,20 +385,29 @@ export class GLMasterDataFormGroup extends FormGroup {
       this.controls['longDescription'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
-  getProfitAndLossAccountValidationMessages(
-    profitAndLossAccount: string
+
+  getFinancialStatementAccountValidationMessages(
+    financialStatementAccount: string
   ): string[] {
     return (
-      this.controls['profitAndLossAccount'] as GLMasterDataFormControl
+      this.controls['financialStatementAccount'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
-  getbalanceSheetAccountValidationMessages(
-    balanceSheetAccount: string
-  ): string[] {
-    return (
-      this.controls['balanceSheetAccount'] as GLMasterDataFormControl
-    ).getValidationMessages();
-  }
+
+  // getProfitAndLossAccountValidationMessages(
+  //   profitAndLossAccount: string
+  // ): string[] {
+  //   return (
+  //     this.controls['profitAndLossAccount'] as GLMasterDataFormControl
+  //   ).getValidationMessages();
+  // }
+  // getbalanceSheetAccountValidationMessages(
+  //   balanceSheetAccount: string
+  // ): string[] {
+  //   return (
+  //     this.controls['balanceSheetAccount'] as GLMasterDataFormControl
+  //   ).getValidationMessages();
+  // }
   getAccountCurrencyValidationMessages(accountCurrency: string): string[] {
     return (
       this.controls['accountCurrency'] as GLMasterDataFormControl

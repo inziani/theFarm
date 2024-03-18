@@ -57,15 +57,64 @@ export class GlMasterDataComponent implements OnInit {
   public chartOfAccounts!: ChartOfAccountsMasterData[];
   public glAccountGroup!: GLAccountGroup;
   public glAccountsMasterList!: GeneralLedgerMasterData[];
-  // public accountType!: string;
   public accountType!: boolean;
 
-  public AccountType = [
+  public FinancialStatementAccount = [
     {
       label: 'Profit and Loss Account',
-      value: true,
+      value: 'Profit and Loss Account',
     },
-    { label: 'Balance Sheet Account', value: false },
+    {
+      label: 'Balance Sheet Account',
+      value: 'Balance Sheet Account',
+    },
+  ];
+
+  public Currency = [
+    {
+      label: 'Kenya Shilling',
+      value: 'KSH',
+    },
+    {
+      label: 'Uganda Shilling',
+      value: 'UGX',
+    },
+    {
+      label: 'Tanzania Shilling',
+      value: 'TZS',
+    },
+    {
+      label: 'United States Dollar',
+      value: 'USD',
+    },
+    {
+      label: 'British Pound',
+      value: 'GBP',
+    },
+  ];
+
+  public ACCOUNTTYPE = [
+    {
+      label: 'ASSETS',
+      value: 'Assets',
+    },
+
+    {
+      value: 'Accounts Payable',
+      label: 'PAYABLES',
+    },
+    {
+      label: 'RECEIVABLES',
+      value: 'Accounts Receivable',
+    },
+    {
+      label: 'MATERIALS',
+      value: 'Materials',
+    },
+    {
+      label: 'GL',
+      value: 'General Ledger'
+    },
   ];
 
   ngOnInit(): void {
@@ -88,7 +137,7 @@ export class GlMasterDataComponent implements OnInit {
 
   public onRadioButtonChange(event: any) {
     // this.accountType = event.target.value;
-    this.accountType = !this.accountType
+    this.accountType = !this.accountType;
     console.log('Radio Button-', this.accountType);
   }
 

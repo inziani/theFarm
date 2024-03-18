@@ -1,24 +1,3 @@
-<!-- Beginning of Test Radio Button -->
-<!-- <div class="container">
-  <h1>Test Radio Button</h1>
-  <div class="form-check" *ngFor="let AccontType of AccountType">
-    <input
-      class="form-check-input"
-      type="radio"
-      name="AccontType"
-      id="flexRadioDefault1"
-      value="{{ AccontType.value }}"
-      (change)="onRadioButtonChange($event)"
-    />
-    <label class="form-check-label" for="flexRadioDefault1">
-      {{ AccontType.label }}
-    </label>
-  </div>
-  <h3>Print the Radio Button Selection Here >>> {{ accountType }}</h3>
-</div> -->
-
-<!-- End of Test Radio Button -->
-
 <div class="container">
   <h1 class="text-center my-4" style="font-weight: lighter">
     General Ledger Master Data Maintenance
@@ -91,7 +70,7 @@
               class="form-select"
               selected
               *ngFor="let companyCode of companyCode"
-              [value]="companyCode.id"
+              [value]="companyCode.companyCode"
             >
               <p>
                 {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
@@ -135,7 +114,7 @@
               class="form-select"
               selected
               *ngFor="let chartOfAccounts of chartOfAccounts"
-              [value]="chartOfAccounts.id"
+              [value]="chartOfAccounts.coaCode"
             >
               <p>
                 {{ chartOfAccounts.coaCode }}
@@ -252,15 +231,27 @@
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >GL Account Type</span
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
+                  <!-- Select Beginning -->
+                  <select
+                    class="form-select form-control"
+                    aria-label="Default select example"
                     formControlName="accountType"
-                    [readonly]="readonly"
-                  />
+                    id="accountType"
+                    name="accountType"
+                  >
+                    <option
+                      class="form-select"
+                      selected
+                      *ngFor="let accountType of ACCOUNTTYPE"
+                      [value]="accountType.value"
+                    >
+                      <p>
+                        {{ accountType.value }}
+                      </p>
+                    </option>
+                  </select>
                 </div>
+                <!-- End of Select -->
                 <ul
                   class="text-danger list-unstyled"
                   *ngIf="
@@ -311,89 +302,35 @@
                   </li>
                 </ul>
                 <p>Reporting</p>
-
-                <div class="form-check" *ngFor="let AccountType of AccountType">
+                <div
+                  class="form-check"
+                  *ngFor="let item of FinancialStatementAccount"
+                >
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="AccontType"
+                    name="flexRadioDefault"
                     id="flexRadioDefault1"
-                    formControlName="balanceSheetAccount"
-                    [value]="AccountType.value"
-                    (change)="onRadioButtonChange($event)"
-                  />
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="AccontType"
-                    id="flexRadioDefault1"
-                    formControlName="profitAndLossAccount"
-                    [value]="AccountType.value"
-                    (change)="onRadioButtonChange($event)"
+                    formControlName="financialStatementAccount"
+                    [value]="item.value"
                   />
                   <label class="form-check-label" for="flexRadioDefault1">
-                    {{ AccountType.label }}
+                    <p>{{ item.label }}</p>
                   </label>
                 </div>
-                <h3>
-                  Print the Radio Button Selection Here >>> {{ accountType }}
-                </h3>
 
-                <!-- <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                    [readonly]="readonly"
-                    formControlName="balanceSheetAccount"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    <p>Balance Sheet Account</p>
-                  </label>
-                </div> -->
-                <!-- <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                    checked
-                    [readonly]="readonly"
-                    formControlName="profitAndLossAccount"
-                  />
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    <p>
-                      Profit and Loss Statement
-                      Account[value]="chartOfAccounts.id"
-                    </p>
-                  </label>
-                </div> -->
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-default"
-                    >P&l Statement Account Type</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
-                    formControlName="profitAndLossAccount"
-                    [readonly]="readonly"
-                  />
-                </div>
                 <ul
                   class="text-danger list-unstyled"
                   *ngIf="
                     (formSubmitted ||
-                      formGroup.controls['profitAndLossAccount'].dirty) &&
-                    formGroup.controls['profitAndLossAccount'].invalid
+                      formGroup.controls['financialStatementAccount'].dirty) &&
+                    formGroup.controls['financialStatementAccount'].invalid
                   "
                 >
                   <li
                     *ngFor="
-                      let error of formGroup.getProfitAndLossAccountValidationMessages(
-                        'profitAndLossAccount'
+                      let error of formGroup.getFinancialStatementAccountValidationMessages(
+                        ''
                       )
                     "
                   >
@@ -546,15 +483,28 @@
                   <span class="input-group-text" id="inputGroup-sizing-default"
                     >Account Currency</span
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
+                  <!-- Select Beginning -->
+                  <select
+                    class="form-select form-control"
+                    aria-label="Default select example"
                     formControlName="accountCurrency"
-                    [readonly]="readonly"
-                  />
+                    id="accountCurrency"
+                    name="accountCurrency"
+                  >
+                    <option
+                      class="form-select"
+                      selected
+                      *ngFor="let Currency of Currency"
+                      [value]="Currency.value"
+                    >
+                      <p>
+                        {{ Currency.value }}
+                      </p>
+                    </option>
+                  </select>
+                  <!-- End of Select -->
                 </div>
+
                 <ul
                   class="text-danger list-unstyled"
                   *ngIf="
