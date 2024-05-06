@@ -67,31 +67,31 @@ export class GLMasterDataFormGroup extends FormGroup {
       accountGroup: new GLMasterDataFormControl(
         'Account Group',
         'accountGroup',
-        '',
+        'GL01',
         Validators.required
       ),
       accountType: new GLMasterDataFormControl(
         'Account Type',
         'accountType',
-        '',
+        'General Ledger',
         Validators.required
       ),
       reconciliationAccountInput: new GLMasterDataFormControl(
         'Reconciliation Account',
         'reconciliationAccountInput',
-        '',
+        'False',
         Validators.required
       ),
       reconciliationAccountType: new GLMasterDataFormControl(
         'Reconciliation Account Type',
         'reconciliationAccountType',
-        '',
+        'General Ledger',
         Validators.required
       ),
       alternativeGLAccount: new GLMasterDataFormControl(
         'Alternative GL Account',
         'alternativeGLAccount',
-        '',
+        '0',
         Validators.required
       ),
       shortDescription: new GLMasterDataFormControl(
@@ -109,153 +109,118 @@ export class GLMasterDataFormGroup extends FormGroup {
       financialStatementAccount: new GLMasterDataFormControl(
         'Financial Statement Account',
         'Financial Statement Account',
-        '',
+        'Balance Sheet Account',
         Validators.required
       ),
-      // profitAndLossAccount: new GLMasterDataFormControl(
-      //   'Profit and Loss account',
-      //   'profitAndLossAccount',
-      //   '',
-      //   Validators.required
-      // ),
-      // balanceSheetAccount: new GLMasterDataFormControl(
-      //   'Balance Sheet Account',
-      //   'balanceSheetAccount',
-      //   '',
-      //   Validators.required
-      // ),
+
       accountCurrency: new GLMasterDataFormControl(
         'Account Currency',
         'accountCurrency',
-        '',
+        'KSH',
         Validators.required
       ),
       onlyBalancesInLocalCurrency: new GLMasterDataFormControl(
         'Only Balances in Local currency',
         'onlyBalancesInLocalCurrency',
-        '',
+        'False',
         Validators.required
       ),
       exchangeRateKey: new GLMasterDataFormControl(
         'Exchange Rate Key',
         'exchangeRateKey',
-        '',
+        'ERK',
         Validators.required
       ),
       taxCategory: new GLMasterDataFormControl(
         'Tax Category',
         'taxCategory',
-        '',
+        'V0',
         Validators.required
       ),
       postingWithoutTaxAllowed: new GLMasterDataFormControl(
         'Posting without tax allowed',
         'postingWithoutTaxAllowed',
-        '',
+        'True',
         Validators.required
       ),
       openItemManagement: new GLMasterDataFormControl(
         'Open Item Management',
         'openItemManagement',
-        '',
+        'True',
         Validators.required
       ),
       lineItemManagement: new GLMasterDataFormControl(
         'Line Item Management',
         'lineItemManagement',
-        '',
+        'True',
         Validators.required
       ),
       blockedForPosting: new GLMasterDataFormControl(
         'Blocked for posting',
         'blockedForPosting',
-        '',
+        'False',
         Validators.required
       ),
       markedForDeletion: new GLMasterDataFormControl(
         'Marked for deletion',
         'markedForDeletion',
-        '',
+        'False',
         Validators.required
       ),
       groupAccountNumber: new GLMasterDataFormControl(
         'Group Account Number',
         'groupAccountNumber',
-        '',
+        '0',
         Validators.required
       ),
       tradingPartner: new GLMasterDataFormControl(
         'Trading partner',
         'tradingPartner',
-        '',
+        '0',
         Validators.required
       ),
       sortKey: new GLMasterDataFormControl(
         'Sort Key',
         'sortKey',
-        '',
+        'OO',
         Validators.required
       ),
       authorizationGroup: new GLMasterDataFormControl(
         'Authorization Group',
         'authorizationGroup',
-        '',
+        'GL00',
         Validators.required
       ),
       fieldStatusGroup: new GLMasterDataFormControl(
         'Field Status Group',
         'fieldStatusGroup',
-        '',
+        'FS00',
         Validators.required
       ),
       postAutomaticallyOnly: new GLMasterDataFormControl(
         'Post Automatically only',
         'postAutomaticallyOnly',
-        '',
+        'False',
         Validators.required
       ),
       relevantToCashFlow: new GLMasterDataFormControl(
         'Relevant to Cashflow',
         'relevantToCashFlow',
-        '',
+        'True',
         Validators.required
       ),
       houseBank: new GLMasterDataFormControl(
         'House Bank',
         'houseBank',
-        '',
+        'H100',
         Validators.required
       ),
       houseBankAccountID: new GLMasterDataFormControl(
         'House Bank Account ID',
         'houseBankAccountID',
-        '',
+        '0',
         Validators.required
       ),
-      // interestIndicator: new GLMasterDataFormControl(
-      //   'Interest Indicator',
-      //   'interestIndicator',
-      //   '',
-      //   Validators.required
-      // ),
-      // interestCalculationFrequency: new GLMasterDataFormControl(
-      //   'Interest Calculation Frequency',
-      //   'interestCalculationFrequency',
-      //   '',
-      //   Validators.required
-      // ),
-      // lastDateOfInterestCalculation: new GLMasterDataFormControl(
-      //   'Last day of interest calculation',
-      //   'lastDateOfInterestCalculation',
-      //   '',
-      //   Validators.required
-      // ),
-      // keyDateofLastInterest: new GLMasterDataFormControl(
-      //   'Key Date of Last Interest',
-      //   'keyDateofLastInterest',
-      //   '',
-      //   Validators.required
-      // ),
       controllingArea: new GLMasterDataFormControl(
         'Controlling Area',
         'controllingArea',
@@ -265,13 +230,13 @@ export class GLMasterDataFormGroup extends FormGroup {
       costElement: new GLMasterDataFormControl(
         'Cost Element',
         'costElement',
-        '',
+        '0',
         Validators.required
       ),
       unitOfMeasure: new GLMasterDataFormControl(
         'Unit of Measure',
         'unitOfMeasure',
-        '',
+        'UOM',
         Validators.required
       ),
       businessArea: new GLMasterDataFormControl(
@@ -283,37 +248,37 @@ export class GLMasterDataFormGroup extends FormGroup {
       valuationGroup: new GLMasterDataFormControl(
         'Valuation Group',
         'valuationGroup',
-        '',
+        'VG00',
         Validators.required
       ),
       inflationKey: new GLMasterDataFormControl(
         'Inflation Key',
         'inflationKey',
-        '',
+        'IK',
         Validators.required
       ),
       toleranceGroup: new GLMasterDataFormControl(
         'Tolerance Group',
         'toleranceGroup',
-        '',
+        'TG00',
         Validators.required
       ),
       planningLevel: new GLMasterDataFormControl(
         'Planning Level',
         'planningLevel',
-        '',
+        '00',
         Validators.required
       ),
       accountManagedinExternalSystem: new GLMasterDataFormControl(
         'Account Managed in External System',
         'accountManagedinExternalSystem',
-        '',
+        'False',
         Validators.required
       ),
       supplementAutomaticPostings: new GLMasterDataFormControl(
         'Supplement Automatic Postings',
         'supplementAutomaticPostings',
-        '',
+        'True',
         Validators.required
       ),
     });
@@ -394,20 +359,7 @@ export class GLMasterDataFormGroup extends FormGroup {
     ).getValidationMessages();
   }
 
-  // getProfitAndLossAccountValidationMessages(
-  //   profitAndLossAccount: string
-  // ): string[] {
-  //   return (
-  //     this.controls['profitAndLossAccount'] as GLMasterDataFormControl
-  //   ).getValidationMessages();
-  // }
-  // getbalanceSheetAccountValidationMessages(
-  //   balanceSheetAccount: string
-  // ): string[] {
-  //   return (
-  //     this.controls['balanceSheetAccount'] as GLMasterDataFormControl
-  //   ).getValidationMessages();
-  // }
+
   getAccountCurrencyValidationMessages(accountCurrency: string): string[] {
     return (
       this.controls['accountCurrency'] as GLMasterDataFormControl
@@ -514,33 +466,7 @@ export class GLMasterDataFormGroup extends FormGroup {
       this.controls['houseBankAccountID'] as GLMasterDataFormControl
     ).getValidationMessages();
   }
-  // getInterestIndicatorValidationMessages(interestIndicator: string): string[] {
-  //   return (
-  //     this.controls['interestIndicator'] as GLMasterDataFormControl
-  //   ).getValidationMessages();
-  // }
-
-  // getInterestCalculationFrequencyValidationMessages(
-  //   interestCalculationFrequency: string
-  // ): string[] {
-  //   return (
-  //     this.controls['interestCalculationFrequency'] as GLMasterDataFormControl
-  //   ).getValidationMessages();
-  // }
-  // getLastDateOfInterestCalculationValidationMessages(
-  //   lastDateOfInterestCalculation: string
-  // ): string[] {
-  //   return (
-  //     this.controls['lastDateOfInterestCalculation'] as GLMasterDataFormControl
-  //   ).getValidationMessages();
-  // }
-  // getKeyDateofLastInterestValidationMessages(
-  //   keyDateofLastInterest: string
-  // ): string[] {
-  //   return (
-  //     this.controls['keyDateofLastInterest'] as GLMasterDataFormControl
-  //   ).getValidationMessages();
-  // }
+ 
   getControllingAreaValidationMessages(controllingArea: string): string[] {
     return (
       this.controls['controllingArea'] as GLMasterDataFormControl

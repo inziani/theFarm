@@ -70,15 +70,15 @@
               class="form-select"
               selected
               *ngFor="let companyCode of companyCode"
-              [value]="companyCode.companyCode"
+              [value]="companyCode.id"
             >
               <p>
                 {{ companyCode.companyCode }} {{ companyCode.companyCodeName }}
               </p>
             </option>
           </select>
-          <!-- End of Select field -->
         </div>
+        <!-- End of Select field -->
         <div>
           <ul
             class="text-danger list-unstyled"
@@ -98,6 +98,55 @@
             </li>
           </ul>
         </div>
+
+        <!-- Controlling Area -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >Controlling Area</span
+          >
+          <!-- Select field -->
+
+          <select
+            class="form-select form-control"
+            aria-label="Default select example"
+            formControlName="controllingArea"
+            id="controllingArea"
+            name="controllingArea"
+          >
+            <option
+              class="form-select"
+              selected
+              *ngFor="let controllingArea of ControllingArea"
+              [value]="controllingArea.id"
+            >
+              <p>
+                {{ controllingArea.controllingArea }}
+                {{ controllingArea.controllingArea }}
+              </p>
+            </option>
+          </select>
+        </div>
+        <!-- End of Select field -->
+        <div>
+          <ul
+            class="text-danger list-unstyled"
+            *ngIf="
+              (formSubmitted || formGroup.controls['controllingArea'].dirty) &&
+              formGroup.controls['controllingArea'].invalid
+            "
+          >
+            <li
+              *ngFor="
+                let error of formGroup.getControllingAreaValidationMessages(
+                  'controllingArea'
+                )
+              "
+            >
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <!-- End of Controlling Area -->
         <div class="input-group mb-3">
           <span class="input-group-text" id="inputGroup-sizing-default"
             >Chart of Accounts</span
@@ -114,7 +163,7 @@
               class="form-select"
               selected
               *ngFor="let chartOfAccounts of chartOfAccounts"
-              [value]="chartOfAccounts.coaCode"
+              [value]="chartOfAccounts.id"
             >
               <p>
                 {{ chartOfAccounts.coaCode }}
@@ -135,6 +184,51 @@
             *ngFor="
               let error of formGroup.getChartOfAccountsValidationMessages(
                 'chartOfAccounts'
+              )
+            "
+          >
+            {{ error }}
+          </li>
+        </ul>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default"
+            >Business Area</span
+          >
+          <!-- Select field -->
+
+          <select
+            class="form-select form-control"
+            aria-label="Default select example"
+            formControlName="businessArea"
+            id="businessArea"
+            name="businessArea"
+          >
+            <option
+              class="form-select"
+              selected
+              *ngFor="let businessArea of BusinessArea"
+              [value]="businessArea.id"
+            >
+              <p>
+                {{ businessArea.businessArea }}
+                {{ businessArea.businessAreaName }}
+              </p>
+            </option>
+          </select>
+        </div>
+        <!-- End of Select field -->
+        <ul
+          class="text-danger list-unstyled"
+          *ngIf="
+            (formSubmitted || formGroup.controls['businessArea'].dirty) &&
+            formGroup.controls['businessArea'].invalid
+          "
+        >
+          <li
+            *ngFor="
+              let error of formGroup.getBusinessAreaValidationMessages(
+                'businessArea'
               )
             "
           >
@@ -179,7 +273,6 @@
         </div>
       </div>
     </div>
-
     <!-- Begining of test -->
 
     <!-- Tabs Content and Headers -->
@@ -281,6 +374,8 @@
                     aria-describedby="inputGroup-sizing-default"
                     formControlName="accountGroup"
                     [readonly]="readonly"
+                    placeholder="EmptyString"
+                    value="accountGroup"
                   />
                 </div>
                 <ul
@@ -331,37 +426,6 @@
                     *ngFor="
                       let error of formGroup.getFinancialStatementAccountValidationMessages(
                         ''
-                      )
-                    "
-                  >
-                    {{ error }}
-                  </li>
-                </ul>
-                <div class="input-group mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-default"
-                    >Business Area</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
-                    formControlName="businessArea"
-                    [readonly]="readonly"
-                  />
-                </div>
-                <ul
-                  class="text-danger list-unstyled"
-                  *ngIf="
-                    (formSubmitted ||
-                      formGroup.controls['businessArea'].dirty) &&
-                    formGroup.controls['businessArea'].invalid
-                  "
-                >
-                  <li
-                    *ngFor="
-                      let error of formGroup.getBusinessAreaValidationMessages(
-                        'businessArea'
                       )
                     "
                   >

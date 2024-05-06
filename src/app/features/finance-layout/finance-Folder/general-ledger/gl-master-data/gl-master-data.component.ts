@@ -19,6 +19,8 @@ import {
   CompanyCodeMasterData,
   ChartOfAccountsMasterData,
   GLAccountGroup,
+  BusinessAreaMasterData,
+  ControllingAreaMasterData,
 } from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/organization-data-models';
 import { GeneralLedgerMasterDataState } from '@app/features/finance-layout/store/state/master-data/gl-master-data.state';
 import { Store } from '@ngrx/store';
@@ -45,10 +47,10 @@ export class GlMasterDataComponent implements OnInit {
     { value: 'Assets', viewValue: 'Assets' },
     { value: 'Accounts Payable', viewValue: 'Accounts Payable' },
     { value: 'Accounts Receivable', viewValue: 'Accounts Receivable' },
-    { value: 'Petty Cash', viewValue: 'Petty Cash' },
-    { value: 'Banks', viewValue: 'Banks' },
-    { value: 'Materials Management', viewValue: 'Materials Management' },
+    { value: 'Materials', viewValue: 'Materials' },
+    { value: 'General Ledger', viewValue: 'General Ledger' },
   ];
+
   public GeneralLedgerAccountMaster!: GeneralLedgerMasterData;
   public readonly!: boolean;
   public errorMessage!: string;
@@ -57,6 +59,8 @@ export class GlMasterDataComponent implements OnInit {
   public chartOfAccounts!: ChartOfAccountsMasterData[];
   public glAccountGroup!: GLAccountGroup;
   public glAccountsMasterList!: GeneralLedgerMasterData[];
+  public BusinessArea!: BusinessAreaMasterData[];
+  public ControllingArea!: ControllingAreaMasterData[];
   public accountType!: boolean;
 
   public FinancialStatementAccount = [
@@ -113,7 +117,7 @@ export class GlMasterDataComponent implements OnInit {
     },
     {
       label: 'GL',
-      value: 'General Ledger'
+      value: 'General Ledger',
     },
   ];
 
@@ -133,6 +137,17 @@ export class GlMasterDataComponent implements OnInit {
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Complate'),
     });
+
+    this._financeService.fetchBusinessAreaData().subscribe({
+      next: (businessArea) => (this.BusinessArea = businessArea),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed'),
+    });
+     this._financeService.fetchControllingAreaData().subscribe({
+       next: (controllingArea) => (this.ControllingArea = controllingArea),
+       error: (err) => (this.errorMessage = err),
+       complete: () => console.info('Completed'),
+     });
   }
 
   public onRadioButtonChange(event: any) {
