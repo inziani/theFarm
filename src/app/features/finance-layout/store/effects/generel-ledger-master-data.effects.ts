@@ -6,6 +6,7 @@ import {
   GeneralLedgerMasterDataAPIActions,
 } from '../actions/master-data/gl-master-data.actions';
 import { catchError, exhaustMap, map, mergeMap, of } from 'rxjs';
+import { GeneralLedgerMasterData } from '../../finance-Folder/finance-models/fi-data-models/gl-account-master-model';
 
 @Injectable()
 export class GeneralLedgerMasterDataEffect {
@@ -90,14 +91,24 @@ export class GeneralLedgerMasterDataEffect {
             action.GlAccountMaster.supplementAutomaticPostings
           )
           .pipe(
-            map((GlAccountsMasters) => {
-              console.log('Is the effect being called - ', GlAccountsMasters);
-              return GeneralLedgerMasterDataAPIActions[
-                '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterSuccess'
-              ]({
-                GlAccountsMaster: GlAccountsMasters,
-              });
-            }),
+            map(
+              // (GlAccountsMasters) =>
+                (GlAccountsMasters: GeneralLedgerMasterData) =>
+                  GeneralLedgerMasterDataAPIActions[
+                    '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterSuccess'
+                  ]({
+                    GlAccountsMaster: GlAccountsMasters,
+                  })
+
+              // {
+              //   console.log('Is the effect being called - ', GlAccountsMasters);
+              //   return GeneralLedgerMasterDataAPIActions[
+              //     '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterSuccess'
+              //   ]({
+              //     GlAccountsMaster: GlAccountsMasters,
+              //   });
+              // }
+            ),
             catchError((error: string) =>
               of(
                 GeneralLedgerMasterDataAPIActions[

@@ -143,11 +143,11 @@ export class GlMasterDataComponent implements OnInit {
       error: (err) => (this.errorMessage = err),
       complete: () => console.info('Completed'),
     });
-     this._financeService.fetchControllingAreaData().subscribe({
-       next: (controllingArea) => (this.ControllingArea = controllingArea),
-       error: (err) => (this.errorMessage = err),
-       complete: () => console.info('Completed'),
-     });
+    this._financeService.fetchControllingAreaData().subscribe({
+      next: (controllingArea) => (this.ControllingArea = controllingArea),
+      error: (err) => (this.errorMessage = err),
+      complete: () => console.info('Completed'),
+    });
   }
 
   public onRadioButtonChange(event: any) {
@@ -170,10 +170,15 @@ export class GlMasterDataComponent implements OnInit {
 
   public onEnableFields() {
     this.readonly = !this.readonly;
+    // this._store.dispatch(
+    //   GeneralLedgerMasterDataPageActions[
+    //     '[GeneralLedgerMasterDataPageActions]CreateGeneralLedgerAccountsMaster'
+    //   ]({ GlAccountMaster: this.GeneralLedgerAccountMaster })
+    // );
   }
 
   public onCreateGLAccountMaster() {
-    if (this.formGroup.valid) {
+    if (!this.formGroup.valid) {
       return;
     }
     this.GeneralLedgerAccountMaster = this.formGroup.value;
@@ -182,10 +187,11 @@ export class GlMasterDataComponent implements OnInit {
         '[GeneralLedgerMasterDataPageActions]CreateGeneralLedgerAccountsMaster'
       ]({ GlAccountMaster: this.GeneralLedgerAccountMaster })
     );
-    alert('Is it getting here?');
-    console.log('Please print -', this.GeneralLedgerAccountMaster);
+    this._dialog.open(ObjectCreatedComponent, {
+      data: this.GeneralLedgerAccountMaster.accountNumber,
+    });
+    this.formGroup.reset();
   }
-
   constructor(
     private _dialog: MatDialog,
     private _financeService: FinanceService,

@@ -42,10 +42,6 @@ export const initialState: GeneralLedgerMasterDataState =
       relevantToCashFlow: true,
       houseBank: 'house Bank',
       houseBankAccountID: NaN,
-      // interestIndicator: boolean;
-      // interestCalculationFrequency: number;
-      // lastDateOfInterestCalculation: Date;
-      // keyDateofLastInterest: Date;
       controllingArea: 'Controlling Area',
       costElement: NaN,
       unitOfMeasure: 'Unit Of Measure',

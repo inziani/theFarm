@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  catchError,
-  concatMap,
-  exhaustMap,
-  map,
-  mergeMap,
-  of
-} from 'rxjs';
+import { catchError, concatMap, exhaustMap, map, mergeMap, of } from 'rxjs';
 
 import { ActivitysService } from '@app/_helpers/services/activitys.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -15,11 +8,8 @@ import {
   ActivityAPIActions,
 } from '../actions/activity.actions';
 
-
 @Injectable()
 export class ActivityEffects {
-
-
   public loadActivitiesEffects$ = createEffect(() => {
     return this._actions$.pipe(
       ofType(ActivityPageActions['[ActivityPage]LoadActivities']),
@@ -42,8 +32,6 @@ export class ActivityEffects {
     );
   });
 
-
-
   public createActivityEffect$ = createEffect(() => {
     return this._actions$.pipe(
       ofType(ActivityPageActions['[ActivityPage]CreateActivity']),
@@ -56,7 +44,8 @@ export class ActivityEffects {
             action.activity.status
           )
           .pipe(
-            map((activity) =>
+            map(
+              (activity) =>
               ActivityAPIActions['[ActivityAPI]CreateActivitySuccess']({
                 activity,
               })
@@ -125,10 +114,8 @@ export class ActivityEffects {
     );
   });
 
-
   constructor(
     private _actions$: Actions,
     private _activityService: ActivitysService
-
   ) {}
 }
