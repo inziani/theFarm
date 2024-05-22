@@ -20,7 +20,10 @@ export class GeneralLedgerMasterDataEffect {
       exhaustMap(() =>
         this._financeService.fetchGeneralLedgerAccountsList().pipe(
           map((GlAccountsMasters) => {
-            console.log('Effects General Ledger Master - ', GlAccountsMasters);
+            console.log(
+              'Effects General Ledger Master Original- ',
+              GlAccountsMasters
+            );
             return GeneralLedgerMasterDataAPIActions[
               '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterSuccess'
             ]({
@@ -31,6 +34,38 @@ export class GeneralLedgerMasterDataEffect {
             of(
               GeneralLedgerMasterDataAPIActions[
                 '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterFailure'
+              ]({ errorMessage: error })
+            )
+          )
+        )
+      )
+    );
+  });
+
+  public LoadGeneralLedgerAccountsMasterInterface$ = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(
+        GeneralLedgerMasterDataPageActions[
+          '[GeneralLedgerMasterDataPageActions]LoadGeneralLedgerAccountsMasterInterface'
+        ]
+      ),
+      exhaustMap(() =>
+        this._financeService.fetchGeneralLedgerAccountsListInterface().pipe(
+          map((GlAccountsMastersInterface) => {
+            console.log(
+              'Effects General Ledger Master Interface - ',
+              GlAccountsMastersInterface
+            );
+            return GeneralLedgerMasterDataAPIActions[
+              '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterInterfaceSuccess'
+            ]({
+              GlAccountsMastersInterface,
+            });
+          }),
+          catchError((error: string) =>
+            of(
+              GeneralLedgerMasterDataAPIActions[
+                '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterInterfaceFailure'
               ]({ errorMessage: error })
             )
           )
@@ -93,12 +128,12 @@ export class GeneralLedgerMasterDataEffect {
           .pipe(
             map(
               // (GlAccountsMasters) =>
-                (GlAccountsMasters: GeneralLedgerMasterData) =>
-                  GeneralLedgerMasterDataAPIActions[
-                    '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterSuccess'
-                  ]({
-                    GlAccountsMaster: GlAccountsMasters,
-                  })
+              (GlAccountsMasters: GeneralLedgerMasterData) =>
+                GeneralLedgerMasterDataAPIActions[
+                  '[GeneralLedgerMasterDataAPIActions]CreateGeneralLedgerAccountsMasterSuccess'
+                ]({
+                  GlAccountsMaster: GlAccountsMasters,
+                })
 
               // {
               //   console.log('Is the effect being called - ', GlAccountsMasters);

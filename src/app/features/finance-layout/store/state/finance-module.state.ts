@@ -7,6 +7,6 @@ export interface State extends AppState.State {
 }
 
 export interface FinanceModuleState {
-  generalLedgerMasterData: GeneralLedgerMasterDataState.GeneralLedgerMasterDataState;
-
+  generalLedgerMasterData: GeneralLedgerMasterDataState.GeneralLedgerMasterDataState,
+  generalLedgerMasterDataInterface: GeneralLedgerMasterDataState.GeneralLedgerMasterDataInterfaceState
 }

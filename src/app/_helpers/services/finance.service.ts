@@ -16,7 +16,10 @@ import {
   TaxCode,
 } from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/organization-data-models';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { GeneralLedgerMasterData } from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/gl-account-master-model';
+import {
+  GeneralLedgerMasterData,
+  GeneralLedgerMasterDataInterface,
+} from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/gl-account-master-model';
 
 @Injectable({
   providedIn: 'root',
@@ -498,10 +501,6 @@ export class FinanceService {
         relevantToCashFlow,
         houseBank,
         houseBankAccountID,
-        // interestIndicator,
-        // interestCalculationFrequency,
-        // lastDateOfInterestCalculation,
-        // keyDateofLastInterest,
         controllingArea,
         costElement,
         unitOfMeasure,
@@ -521,6 +520,15 @@ export class FinanceService {
     GeneralLedgerMasterData[]
   > {
     return this.http.get<GeneralLedgerMasterData[]>(
+      `${environment.apiUrl}/generalLedgerAccountMaster/`,
+      this.httpOptions
+    );
+  }
+
+  public fetchGeneralLedgerAccountsListInterface(): Observable<
+    GeneralLedgerMasterDataInterface[]
+  > {
+    return this.http.get<GeneralLedgerMasterDataInterface[]>(
       `${environment.apiUrl}/generalLedgerAccountMaster/`,
       this.httpOptions
     );

@@ -1,4 +1,7 @@
-import { GeneralLedgerMasterData } from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/gl-account-master-model';
+import {
+  GeneralLedgerMasterData,
+  GeneralLedgerMasterDataInterface,
+} from '@app/features/finance-layout/finance-Folder/finance-models/fi-data-models/gl-account-master-model';
 import { Update } from '@ngrx/entity';
 
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
@@ -6,8 +9,9 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 export const GeneralLedgerMasterDataPageActions = createActionGroup({
   source: 'General Ledger Master Data Page',
   events: {
-  
     '[GeneralLedgerMasterDataPageActions] Load General Ledger Accounts Master':
+      emptyProps(),
+    '[GeneralLedgerMasterDataPageActions] Load General Ledger Accounts Master Interface':
       emptyProps(),
     '[GeneralLedgerMasterDataPageActions] Select Single General Ledger Accounts Master':
       props<{
@@ -36,6 +40,15 @@ export const GeneralLedgerMasterDataAPIActions = createActionGroup({
         GlAccountsMasters: GeneralLedgerMasterData[];
       }>(),
     '[GeneralLedgerMasterDataAPIActions]  Load General Ledger Accounts Master Failure':
+      props<{
+        errorMessage: string;
+      }>(),
+
+    '[GeneralLedgerMasterDataAPIActions]  Load General Ledger Accounts Master Interface Success':
+      props<{
+        GlAccountsMastersInterface: GeneralLedgerMasterDataInterface[];
+      }>(),
+    '[GeneralLedgerMasterDataAPIActions]  Load General Ledger Accounts Master Interface Failure':
       props<{
         errorMessage: string;
       }>(),

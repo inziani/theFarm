@@ -1,6 +1,9 @@
+import { CompanyCodeMasterData } from './organization-data-models';
+
 export class GeneralLedgerMasterData {
   id: number;
   accountNumber: number;
+  // companyCode: CompanyCodeMasterData;
   companyCode: string;
   chartOfAccounts: string;
   accountGroup: string;
@@ -86,6 +89,12 @@ export class GeneralLedgerMasterData {
   ) {
     (this.id = id),
       (this.accountNumber = accountNumber),
+      // (this.companyCode = {
+      //   id: NaN,
+      //   companyCode: NaN,
+      //   companyCodeName: 'companyCodeName',
+      //   company: 'company',
+      // }),
       (this.companyCode = companyCode),
       (this.chartOfAccounts = chartOfAccounts),
       (this.accountGroup = accountGroup);
@@ -125,4 +134,48 @@ export class GeneralLedgerMasterData {
       (this.accountManagedinExternalSystem = 0),
       (this.supplementAutomaticPostings = true);
   }
+}
+
+export interface GeneralLedgerMasterDataInterface {
+  id: number;
+  accountNumber: number;
+  companyCode: CompanyCodeMasterData;
+  chartOfAccounts: string;
+  accountGroup: string;
+  accountType: string;
+  reconciliationAccountInput: boolean;
+  reconciliationAccountType: string;
+  alternativeGLAccount: number;
+  shortDescription: string;
+  longDescription: string;
+  profitAndLossAccount: boolean;
+  balanceSheetAccount: boolean;
+  accountCurrency: string;
+  balancesInLocalCurrency: boolean;
+  exchangeRateKey: string;
+  taxCategory: string;
+  postingWithoutTaxAllowed: boolean;
+  openItemManagement: boolean;
+  lineItemManagement: boolean;
+  blockedForPosting: boolean;
+  markedForDeletion: boolean;
+  groupAccountNumber: number;
+  tradingPartner: string;
+  sortKey: string;
+  authorizationGroup: string;
+  fieldStatusGroup: string;
+  postAutomaticallyOnly: boolean;
+  relevantToCashFlow: boolean;
+  houseBank: string;
+  houseBankAccountID: number;
+  controllingArea: string;
+  costElement: number;
+  unitOfMeasure: string;
+  businessArea: string;
+  valuationGroup: string;
+  inflationKey: string;
+  toleranceGroup: string;
+  planningLevel: string;
+  accountManagedinExternalSystem: number;
+  supplementAutomaticPostings: boolean;
 }

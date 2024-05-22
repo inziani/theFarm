@@ -51,7 +51,7 @@ export const initialState: GeneralLedgerMasterDataState =
       toleranceGroup: 'Tolerance Group',
       planningLevel: 'Planning Level',
       accountManagedinExternalSystem: NaN,
-      supplementAutomaticPostings: true
+      supplementAutomaticPostings: true,
     },
   });
 

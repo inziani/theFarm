@@ -44,8 +44,7 @@ export class ActivityEffects {
             action.activity.status
           )
           .pipe(
-            map(
-              (activity) =>
+            map((activity) =>
               ActivityAPIActions['[ActivityAPI]CreateActivitySuccess']({
                 activity,
               })

@@ -28,16 +28,17 @@
       <tbody>
         <tr
           *ngFor="
-            let GeneralLedgerMasterData of GeneralLedgerMasterDataList$ | async
+            let GeneralLedgerMasterDataList of GeneralLedgerMasterDataListInterface$
+              | async
           "
         >
-          <td>{{ GeneralLedgerMasterData.id }}</td>
-          <td>{{ GeneralLedgerMasterData.accountNumber }}</td>
-          <td>{{ GeneralLedgerMasterData.companyCode }}</td>
-          <td>{{ GeneralLedgerMasterData.chartOfAccounts }}</td>
-          <td>{{ GeneralLedgerMasterData.shortDescription }}</td>
-          <td>{{ GeneralLedgerMasterData.longDescription }}</td>
-          <td>{{ GeneralLedgerMasterData.accountCurrency }}</td>
+          <td>{{ GeneralLedgerMasterDataList.id }}</td>
+          <td>{{ GeneralLedgerMasterDataList.accountNumber }}</td>
+          <td>{{ GeneralLedgerMasterDataList.companyCode.companyCodeName }}</td>
+          <td>{{ GeneralLedgerMasterDataList.chartOfAccounts }}</td>
+          <td>{{ GeneralLedgerMasterDataList.shortDescription }}</td>
+          <td>{{ GeneralLedgerMasterDataList.longDescription }}</td>
+          <td>{{ GeneralLedgerMasterDataList.accountCurrency }}</td>
         </tr>
       </tbody>
     </table>
