@@ -7,8 +7,7 @@ export const getFinanceModuleInterfaceStore =
 
 export const selectGeneralLedgerStateInterface = createSelector(
   getFinanceModuleInterfaceStore,
-  (generalLedgerMasterDataInterface) =>
-    generalLedgerMasterDataInterface.generalLedgerMasterDataInterface
+  (FinanceModuleState) => FinanceModuleState.generalLedgerMasterDataInterface
 );
 
 const {

@@ -40,9 +40,5 @@ import * as profileReducers from './store/reducers/profile-reducer';
   ],
 })
 export class ProfileModule {
-
-
-  constructor() {
-
-  }
+  constructor() {}
 }

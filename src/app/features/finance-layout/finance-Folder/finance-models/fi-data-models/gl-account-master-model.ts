@@ -3,7 +3,6 @@ import { CompanyCodeMasterData } from './organization-data-models';
 export class GeneralLedgerMasterData {
   id: number;
   accountNumber: number;
-  // companyCode: CompanyCodeMasterData;
   companyCode: string;
   chartOfAccounts: string;
   accountGroup: string;
@@ -89,16 +88,10 @@ export class GeneralLedgerMasterData {
   ) {
     (this.id = id),
       (this.accountNumber = accountNumber),
-      // (this.companyCode = {
-      //   id: NaN,
-      //   companyCode: NaN,
-      //   companyCodeName: 'companyCodeName',
-      //   company: 'company',
-      // }),
       (this.companyCode = companyCode),
       (this.chartOfAccounts = chartOfAccounts),
       (this.accountGroup = accountGroup);
-    (this.accountType = accountType),
+      (this.accountType = accountType),
       (this.reconciliationAccountInput = true),
       (this.reconciliationAccountType = reconciliationAccountType),
       (this.alternativeGLAccount = 0),
@@ -113,8 +106,9 @@ export class GeneralLedgerMasterData {
       (this.postingWithoutTaxAllowed = true),
       (this.openItemManagement = true),
       (this.lineItemManagement = true);
-    (this.blockedForPosting = false), (this.markedForDeletion = false);
-    (this.groupAccountNumber = 0),
+      (this.blockedForPosting = false),
+      (this.markedForDeletion = false);
+      (this.groupAccountNumber = 0),
       (this.tradingPartner = tradingPartner),
       (this.sortKey = sortKey),
       (this.authorizationGroup = authorizationGroup),
@@ -122,7 +116,7 @@ export class GeneralLedgerMasterData {
       (this.postAutomaticallyOnly = false),
       (this.relevantToCashFlow = true),
       (this.houseBank = houseBank);
-    (this.houseBankAccountID = 0),
+      (this.houseBankAccountID = 0),
       (this.controllingArea = controllingArea),
       (this.costElement = 0),
       (this.unitOfMeasure = unitOfMeasure),

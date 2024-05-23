@@ -1,4 +1,4 @@
-import { GeneralLedgerMasterDataInterfaceState } from '../state/master-data/gl-master-data.state';
+import { GeneralLedgerMasterDataInterfaceState } from '../state/master-data/gl-master-data-interface-state';
 
 import { generalLedgerMasterDataInterfaceAdapter } from '../adapters/general-ledger-master-data-interface-adapter';
 
@@ -24,7 +24,7 @@ export const generalLedgerMasterDataReducerInterface =
       (state) =>
         generalLedgerMasterDataInterfaceAdapter.setAll([], {
           ...state,
-          loading: false,
+          loading: true,
           errorMessage: '',
         })
     ),
@@ -32,12 +32,15 @@ export const generalLedgerMasterDataReducerInterface =
       GeneralLedgerMasterDataAPIActions[
         '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterInterfaceSuccess'
       ],
-      (state) =>
-        generalLedgerMasterDataInterfaceAdapter.setAll([], {
-          ...state,
-          loading: false,
-          errorMessage: '',
-        })
+      (state, { GlAccountsMastersInterface }) =>
+        generalLedgerMasterDataInterfaceAdapter.setAll(
+          GlAccountsMastersInterface,
+          {
+            ...state,
+            loading: false,
+            errorMessage: '',
+          }
+        )
     ),
     on(
       GeneralLedgerMasterDataAPIActions[

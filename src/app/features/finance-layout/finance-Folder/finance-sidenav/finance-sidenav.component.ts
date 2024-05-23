@@ -71,6 +71,11 @@ export class FinanceSidenavComponent implements OnInit {
         '[GeneralLedgerMasterDataPageActions]LoadGeneralLedgerAccountsMaster'
       ]()
     );
+    this._store.dispatch(
+      GeneralLedgerMasterDataPageActions[
+        '[GeneralLedgerMasterDataPageActions]LoadGeneralLedgerAccountsMasterInterface'
+      ]()
+    );
   }
 
   // Get the nested node using the hasNestedChild

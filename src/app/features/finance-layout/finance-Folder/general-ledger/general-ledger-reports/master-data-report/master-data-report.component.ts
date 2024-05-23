@@ -40,11 +40,7 @@ export class MasterDataReportComponent implements OnInit {
       ]()
     );
 
-    console.log(
-      'GL Master Data Interface - ',
-      this.GeneralLedgerMasterDataListInterface$
-    );
-    console.log('GL Master Data List - ', this.GeneralLedgerMasterDataList$);
+
   }
 
   constructor(

@@ -42,7 +42,7 @@ import { GeneralLedgerReportsComponent } from './finance-Folder/general-ledger/g
 import { MasterDataReportComponent } from './finance-Folder/general-ledger/general-ledger-reports/master-data-report/master-data-report.component';
 import { GlLineItemsComponent } from './finance-Folder/general-ledger/general-ledger-reports/gl-line-items/gl-line-items.component';
 import { TrialBalanceComponent } from './finance-Folder/general-ledger/general-ledger-reports/trial-balance/trial-balance.component';
-import { GeneralLedgerMasterDataInterfaceEffects } from './store/effects/general-ledger-master-interface-effects';
+import { GeneralLedgerMasterDataInterfaceEffect } from './store/effects/general-ledger-master-interface-effects';
 
 @NgModule({
   declarations: [
@@ -89,8 +89,10 @@ import { GeneralLedgerMasterDataInterfaceEffects } from './store/effects/general
     StoreModule.forFeature('financeModule', financeReducers.financeReducers),
     EffectsModule.forFeature([
       GeneralLedgerMasterDataEffect,
-      GeneralLedgerMasterDataInterfaceEffects,
+      GeneralLedgerMasterDataInterfaceEffect,
     ]),
   ],
 })
-export class FinanceLayoutModule {}
+export class FinanceLayoutModule {
+  constructor() {}
+}

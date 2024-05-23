@@ -20,10 +20,6 @@ export class GeneralLedgerMasterDataEffect {
       exhaustMap(() =>
         this._financeService.fetchGeneralLedgerAccountsList().pipe(
           map((GlAccountsMasters) => {
-            console.log(
-              'Effects General Ledger Master Original- ',
-              GlAccountsMasters
-            );
             return GeneralLedgerMasterDataAPIActions[
               '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterSuccess'
             ]({

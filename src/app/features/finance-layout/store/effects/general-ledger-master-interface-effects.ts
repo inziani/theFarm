@@ -6,10 +6,9 @@ import {
   GeneralLedgerMasterDataAPIActions,
 } from '../actions/master-data/gl-master-data.actions';
 import { catchError, exhaustMap, map, mergeMap, of } from 'rxjs';
-import { GeneralLedgerMasterData } from '../../finance-Folder/finance-models/fi-data-models/gl-account-master-model';
 
 @Injectable()
-export class GeneralLedgerMasterDataInterfaceEffects {
+export class GeneralLedgerMasterDataInterfaceEffect {
   public LoadGeneralLedgerAccountsMasterInterface$ = createEffect(() => {
     return this._actions$.pipe(
       ofType(
@@ -20,10 +19,6 @@ export class GeneralLedgerMasterDataInterfaceEffects {
       exhaustMap(() =>
         this._financeService.fetchGeneralLedgerAccountsListInterface().pipe(
           map((GlAccountsMastersInterface) => {
-            console.log(
-              'Effects General Ledger Master Interface - ',
-              GlAccountsMastersInterface
-            );
             return GeneralLedgerMasterDataAPIActions[
               '[GeneralLedgerMasterDataAPIActions]LoadGeneralLedgerAccountsMasterInterfaceSuccess'
             ]({
