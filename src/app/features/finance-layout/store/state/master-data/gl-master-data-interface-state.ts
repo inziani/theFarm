@@ -13,4 +13,5 @@ export interface GeneralLedgerMasterDataInterfaceState
   extends EntityState<GeneralLedgerMasterDataInterface> {
   loading: boolean;
   errorMessage: string;
+  
 }

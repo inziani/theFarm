@@ -52,7 +52,7 @@ export const initialState: GeneralLedgerMasterDataState =
       planningLevel: 'Planning Level',
       accountManagedinExternalSystem: NaN,
       supplementAutomaticPostings: true,
-    },
+    }
   });
 
 export const generalLedgerMasterDataReducer =
