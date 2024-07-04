@@ -45,6 +45,6 @@ export class MasterDataReportComponent implements OnInit {
 
   constructor(
     private _store: Store<GeneralLedgerMasterDataState>,
-    private _financeService: FinanceService
+   
   ) {}
 }

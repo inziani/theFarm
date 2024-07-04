@@ -7,17 +7,11 @@ export const GL_TREE_DATA: SideNavNode[] = [
     routerLink: '/home',
     children: [],
   },
-  {
-    name: 'Finance Org Structures',
-    iconname: 'category',
-    routerLink: 'financeHome',
-    children: [],
-  },
 
   {
     name: 'General Ledger',
     iconname: 'business',
-    routerLink: 'glTransactionsCodes',
+    routerLink: 'glHome',
     children: [
       {
         name: 'Master Data',
@@ -29,15 +23,24 @@ export const GL_TREE_DATA: SideNavNode[] = [
         iconname: 'description',
         routerLink: 'glMasterData',
       },
-      // {
-      //   name: 'Balances',
-      //   iconname: 'list',
-      //   routerLink: 'glMasterData',
-      // },
+
       {
         name: 'Reports',
         iconname: 'analytics',
         routerLink: 'glReports',
+      },
+      {
+        name: 'GL Groupings',
+        iconname: 'group_work',
+        routerLink: 'glTransactionsCodes',
+        children: [],
+      },
+
+      {
+        name: 'Finance Org Structures',
+        iconname: 'category',
+        routerLink: 'financeOrgStructures',
+        children: [],
       },
     ],
   },

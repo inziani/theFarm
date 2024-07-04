@@ -1,3 +1,118 @@
-<div class="container">
-  <div><h1>FINANCE AND ACCOUNTING</h1></div>
-</div>
+<!-- This Page is being used as the General Ledger Landing Page -->
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <!-- <app-finance-sidenav (closeSideNav)="sidenav.close()"></app-finance-sidenav> -->
+    <app-general-ledger-sidebar
+      (closeSideNav)="sidenav.close()"
+    ></app-general-ledger-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-finance-navbar (sideNavToggle)="sidenav.toggle()"></app-finance-navbar>
+    <div class="justify-content-center container">
+      <div>
+        <h2
+          class="text-center my-3"
+          style="font-weight: lighter; color: #03045e"
+        >
+          Generel Ledger
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-2 my-3">
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-lg btn-outline-success"
+              type="button"
+              routerLink="/finance"
+            >
+              Finance Home
+            </button>
+          </div>
+        </div>
+        <div class="col-md-2 my-3">
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-lg btn-outline-success"
+              type="button"
+              (click)="OnSelectMasterData()"
+            >
+              Master Data
+            </button>
+          </div>
+        </div>
+        <div class="col-md-2 my-3">
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-lg btn-outline-success"
+              type="button"
+              (click)="OnSelectDocumentEntry()"
+            >
+              Document Entry
+            </button>
+          </div>
+        </div>
+        <div class="col-md-2 my-3">
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-lg btn-outline-success"
+              type="button"
+              (click)="OnSelectReports()"
+            >
+              GL Reports
+            </button>
+          </div>
+        </div>
+        <div class="col-md-2 my-3">
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-lg btn-outline-success"
+              type="button"
+              (click)="OnSelectGLGroupings()"
+            >
+              GL Org Structures
+            </button>
+          </div>
+        </div>
+        <div class="col-md-2 my-3">
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-lg btn-outline-success"
+              type="button"
+              (click)="OnSelectFinanceOrgStructures()"
+            >
+              Finance Org Sructures
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" [ngSwitch]="ReportSelected">
+          <div *ngSwitchCase="'masterData'">
+            <app-gl-master-data></app-gl-master-data>
+          </div>
+          <div *ngSwitchCase="'documentEntry'">
+            <app-gl-line-items></app-gl-line-items>
+          </div>
+          <div *ngSwitchCase="'generelLedgerReports'">
+            <app-trial-balance></app-trial-balance>
+          </div>
+          <div *ngSwitchCase="'generalLedgerOrgStructures'">
+            <app-gl-transaction-codes></app-gl-transaction-codes>
+          </div>
+          <div *ngSwitchCase="'financeOrgStructures'">
+            <app-finance-home></app-finance-home>
+          </div>
+
+          <div *ngSwitchDefault>
+            <app-master-data-report></app-master-data-report>
+          </div>
+        </div>
+      </div>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- </div> -->

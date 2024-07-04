@@ -18,6 +18,8 @@ import { ChangesSavedDialogComponent } from './user-feedback-dialogues/changes-s
 import { LoginDialogComponent } from './user-feedback-dialogues/login-dialog/login-dialog.component';
 import { HeaderComponent } from '../home-page/header/header.component';
 
+import { GeneralLedgerSidebarComponent } from '@app/features/finance-layout/finance-Folder/general-ledger/general-ledger-sidebar/general-ledger-sidebar.component';
+
 @NgModule({
   declarations: [
     SharedComponent,
@@ -33,6 +35,7 @@ import { HeaderComponent } from '../home-page/header/header.component';
     ChangesSavedDialogComponent,
     LoginDialogComponent,
     HeaderComponent,
+    GeneralLedgerSidebarComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +63,7 @@ import { HeaderComponent } from '../home-page/header/header.component';
     LoginDialogComponent,
     HeaderComponent,
     MaterialModule,
+    GeneralLedgerSidebarComponent,
   ],
 })
 export class SharedModule {}

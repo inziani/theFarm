@@ -45,6 +45,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ErrorsComponent } from './errors/errors.component';
 import { uiReducer } from './store/reducers/ui.reducer';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+// import { GeneralLedgerSidebarComponent } from './features/finance-layout/finance-Folder/general-ledger/general-ledger-sidebar/general-ledger-sidebar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -68,6 +69,7 @@ export function tokenGetter() {
     KnowledgeDialogueComponent,
     ErrorsComponent,
     LoadingSpinnerComponent,
+    // GeneralLedgerSidebarComponent,
   ],
   imports: [
     BrowserModule,

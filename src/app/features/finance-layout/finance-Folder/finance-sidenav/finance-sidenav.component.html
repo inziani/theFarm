@@ -1,32 +1,42 @@
-<a (click)="onClose()" class="close-sidenav">
-  <mat-icon>close</mat-icon>
-</a>
-<!-- Flat Tree -->
-<mat-tree [dataSource]="flatDataSource" [treeControl]="flatTreeControl">
-  <mat-tree-node
-    *matTreeNodeDef="let node"
-    routerLink="{{ node.routerLink }}"
-    matTreeNodePadding
-    (click)="onClose()"
-  >
-    <div class="leaf-node">
-      <mat-icon>{{ node.iconname }}</mat-icon
-      ><span class="nav-caption">{{ node.name }}</span>
-    </div>
-  </mat-tree-node>
-  <mat-tree-node
-    *matTreeNodeDef="let node; when: hasFlatChild"
-    routerLink="{{ node.routerLink }}"
-    matTreeNodePadding
-    (click)="onClose()"
-  >
-    <button mat-icon-button matTreeNodeToggle>
-      <mat-icon>{{
-        flatTreeControl.isExpanded(node) ? "expand_more" : "chevron_right"
-      }}</mat-icon>
-    </button>
-    <mat-icon>{{ node.iconname }}</mat-icon
-    ><span class="nav-caption">{{ node.name }}</span>
-  </mat-tree-node>
-</mat-tree>
+<mat-nav-list class="list-style">
+  <a (click)="onClose()" class="close-sidenav">
+    <mat-icon>close</mat-icon>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>home</mat-icon><span class="nav-caption">Home</span>
+  </a>
+  <a mat-list-item routerLink="glHome" (click)="onClose()">
+    <mat-icon>account_balance</mat-icon
+    ><span class="nav-caption">General Ledger</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>payment</mat-icon
+    ><span class="nav-caption">Acccounts Payable</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>receipt</mat-icon
+    ><span class="nav-caption">Accounts Receivable</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>videogame_asset</mat-icon
+    ><span class="nav-caption">Fixed Assets</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>money</mat-icon><span class="nav-caption">Cash and Banking</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>airline_seat_legroom_reduced</mat-icon
+    ><span class="nav-caption">Tax</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onClose()">
+    <mat-icon>attach_money</mat-icon
+    ><span class="nav-caption">Multi-Currency Management</span>
+  </a>
+  <a mat-list-item>
+    <mat-icon>business</mat-icon><span class="nav-caption">Reporting</span>
+  </a>
+  <a mat-list-item (click)="onLogOut()">
+    <mat-icon>logout</mat-icon><span class="nav-caption">Log Out</span>
+  </a>
+</mat-nav-list>
 

@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
-// import { IsoDatePipe } from '@app/_helpers/pipes/iso-date.pipe';
-
 import {
   GLAccountGroupMasterData,
   GLMasterDataFormGroup,

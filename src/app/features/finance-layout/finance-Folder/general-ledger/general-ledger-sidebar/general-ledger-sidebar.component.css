@@ -1,15 +1,14 @@
-
 .nav-caption {
   display: inline-block;
   padding-left: 6px;
 }
 
-.mat-tree{
+.mat-tree {
   margin-top: 50%;
   margin-left: 0;
 }
 
-.mat-tree-node{
+.mat-tree-node {
   color: #03045e;
   cursor: pointer;
   font-weight: lighter;
@@ -31,7 +30,7 @@
  * This padding sets alignment of the nested nodes.
  */
 
-.finance-tree .mat-nested-tree-node .nested-node{
+.finance-tree .mat-nested-tree-node .nested-node {
   padding-left: 30px;
 }
 
@@ -43,15 +42,14 @@
 .finance-tree .nested-node > .mat-tree-node {
   padding-left: 30px;
 }
-.leaf-node{
+.leaf-node {
   padding-left: 20px;
   display: inline-flex;
 }
 
 /* SideNav List Styles */
 
-.close-sidenav{
-
+.close-sidenav {
   right: 15px;
   position: absolute;
   cursor: pointer;
@@ -60,7 +58,6 @@
 }
 
 .logout {
-
   cursor: pointer;
   color: #03045e;
   font-weight: lighter;
@@ -70,7 +67,6 @@
 
 ul {
   list-style-type: none;
-
 }
 p {
   font-size: 0.875rem;
@@ -79,9 +75,4 @@ p {
 a {
   text-decoration: none;
   cursor: pointer;
-
 }
-
-
-
-

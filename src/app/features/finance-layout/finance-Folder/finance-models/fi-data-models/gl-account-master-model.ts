@@ -1,4 +1,4 @@
-import { CompanyCodeMasterData } from './organization-data-models';
+import { CompanyCodeMasterData, ChartOfAccountsMasterData, ControllingAreaMasterData, BusinessAreaMasterData,  } from './organization-data-models';
 
 export class GeneralLedgerMasterData {
   id: number;
@@ -134,7 +134,7 @@ export interface GeneralLedgerMasterDataInterface {
   id: number;
   accountNumber: number;
   companyCode: CompanyCodeMasterData;
-  chartOfAccounts: string;
+  chartOfAccounts: ChartOfAccountsMasterData;
   accountGroup: string;
   accountType: string;
   reconciliationAccountInput: boolean;
@@ -162,10 +162,10 @@ export interface GeneralLedgerMasterDataInterface {
   relevantToCashFlow: boolean;
   houseBank: string;
   houseBankAccountID: number;
-  controllingArea: string;
+  controllingArea: ControllingAreaMasterData;
   costElement: number;
   unitOfMeasure: string;
-  businessArea: string;
+  businessArea: BusinessAreaMasterData;
   valuationGroup: string;
   inflationKey: string;
   toleranceGroup: string;

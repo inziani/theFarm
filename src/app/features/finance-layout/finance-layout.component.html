@@ -1,11 +1,58 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" #sidenav role="navigation">
+  <mat-sidenav #sidenav role="navigation">
     <app-finance-sidenav (closeSideNav)="sidenav.close()"></app-finance-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-finance-navbar (sideNavToggle)="sidenav.toggle()"></app-finance-navbar>
-    <main class="container">
-      <router-outlet></router-outlet>
-    </main>
+    <!-- Finance Home Page -->
+    <div class="container my-5 justify-content-center">
+      <div>
+        <h2
+          class="text-center my-3"
+          style="font-weight: lighter; color: #03045e"
+        >
+          Finance and Accounting
+        </h2>
+      </div>
+      <div class="row justify-content-center g-5 my-3">
+        <div class="col-md-3">
+          <div class="d-grid gap-3">
+            <button
+              class="btn btn-primary mat-elevation-z8"
+              type="submit"
+              routerLink="glHome"
+            >
+              <p>General Ledger</p>
+            </button>
+            <button class="btn btn-primary mat-elevation-z8" type="button">
+              <p class="card-title">Accounts Payable</p>
+            </button>
+            <button class="btn btn-primary mat-elevation-z8" type="button">
+              <p class="card-title">Accounts Receivable</p>
+            </button>
+            <button class="btn btn-primary mat-elevation-z8" type="button">
+              <p class="card-title">Fixed Assets</p>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-grid gap-3">
+            <button class="btn btn-primary mat-elevation-z8" type="submit">
+              <p>Cash and Banking</p>
+            </button>
+            <button class="btn btn-primary mat-elevation-z8" type="button">
+              <p class="card-title">Tax</p>
+            </button>
+            <button class="btn btn-primary mat-elevation-z8" type="button">
+              <p class="card-title">Multi-Currency Management</p>
+            </button>
+            <button class="btn btn-primary mat-elevation-z8" type="button">
+              <p class="card-title">Reporting</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Finance Home Page -->
   </mat-sidenav-content>
 </mat-sidenav-container>
