@@ -71,6 +71,13 @@ const AppRoutes: Routes = [
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
+    path: 'general-ledger',
+    loadChildren: () =>
+      import(
+        './features/finance-layout/general-ledger/general-ledger.module'
+      ).then((m) => m.GeneralLedgerModule),
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full',

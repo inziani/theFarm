@@ -13,10 +13,10 @@
     <div class="col-md-10" [ngSwitch]="itemSelected">
       <!-- Beginning of Traansactions codes details -->
       <div *ngSwitchCase="'accountGroup'">
-       <app-account-group-details></app-account-group-details>
+        <app-account-group-details></app-account-group-details>
       </div>
       <div *ngSwitchCase="'taxCode'">
-       <app-tax-code-details></app-tax-code-details>
+        <app-tax-code-details></app-tax-code-details>
       </div>
       <div *ngSwitchDefault>
         <app-account-group-details></app-account-group-details>

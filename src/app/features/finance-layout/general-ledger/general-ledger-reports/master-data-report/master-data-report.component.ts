@@ -9,7 +9,7 @@ import {
 import {
   GeneralLedgerMasterData,
   GeneralLedgerMasterDataInterface,
-} from '../../../finance-models/fi-data-models/gl-account-master-model';
+} from '../../../finance-Folder/finance-models/fi-data-models/gl-account-master-model';
 import { FinanceService } from '@app/_helpers/services/finance.service';
 import { selectAllGeneralLedgerMasterDataInterface } from '@app/features/finance-layout/store/selectors/general-ledger-md-interface-selectors';
 import { GeneralLedgerMasterDataPageActions } from '@app/features/finance-layout/store/actions/master-data/gl-master-data.actions';
@@ -39,12 +39,7 @@ export class MasterDataReportComponent implements OnInit {
         '[GeneralLedgerMasterDataPageActions]LoadGeneralLedgerAccountsMasterInterface'
       ]()
     );
-
-
   }
 
-  constructor(
-    private _store: Store<GeneralLedgerMasterDataState>,
-   
-  ) {}
+  constructor(private _store: Store<GeneralLedgerMasterDataState>) {}
 }

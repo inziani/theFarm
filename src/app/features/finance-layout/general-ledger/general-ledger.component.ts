@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-finance-landing-page',
-  templateUrl: './finance-landing-page.component.html',
-  styleUrls: ['./finance-landing-page.component.css'],
+  selector: 'app-general-ledger',
+  templateUrl: './general-ledger.component.html',
+  styleUrls: ['./general-ledger.component.css'],
 })
-export class FinanceLandingPageComponent {
+export class GeneralLedgerComponent {
   public ReportSelected!: string;
   public OnSelectMasterData() {
     this.ReportSelected = 'masterData';

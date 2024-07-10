@@ -9,14 +9,14 @@ import {
 import {
   SideNavNode,
   SideNavNodeFlattener,
-} from '../../../../../shared/interfaces/sidenav-tree-interface';
-import { GL_TREE_DATA } from '../../finance-data/gl-tree-data';
+} from '../../../../shared/interfaces/sidenav-tree-interface';
+import { GL_TREE_DATA } from '../../finance-Folder/finance-data/gl-tree-data';
 import { Store } from '@ngrx/store';
 import { AuthenticationState } from '@app/authentication/store/state/authentication.state';
 import { Router } from '@angular/router';
 import { AuthenticationActions } from '@app/authentication/store/actions/authentication.actions';
-import { GeneralLedgerMasterDataPageActions } from '../..//../store/actions/master-data/gl-master-data.actions';
-import { GeneralLedgerMasterDataState } from '../../../store/state/master-data/gl-master-data.state';
+import { GeneralLedgerMasterDataPageActions } from '../../store/actions/master-data/gl-master-data.actions';
+import { GeneralLedgerMasterDataState } from '../../store/state/master-data/gl-master-data.state';
 
 @Component({
   selector: 'app-general-ledger-sidebar',
