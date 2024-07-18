@@ -1,4 +1,66 @@
-<mat-nav-list class="list-style">
+<!-- <div class="container justify-content-center">
+  <p>Testing Finance SideNav</p>
+</div> -->
+
+<div class="d-flex flex-column bd-highlight my-5 align-items-md-start">
+  <div class="p-2 bd-highlight my-5">
+    <a (click)="onClose()" class="close-sidenav">
+      <mat-icon>close</mat-icon>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight">
+    <a mat-list-item routerLink="/home" (click)="onClose()">
+      <span class="nav-caption"><p>Home</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>General Ledger</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>Accounts Payable</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>Accounts Receivable</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>Fixed Assets</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>Cash and Banking</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>Tax</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>Multi-Currency Management</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item routerLink="generalLedger" (click)="onClose()">
+      <span class="nav-caption"><p>Reporting</p></span>
+    </a>
+  </div>
+  <div class="p-2 bd-highlight" routerLink="generalLedger" (click)="onClose()">
+    <a mat-list-item (click)="onLogOut()">
+      <mat-icon>logout</mat-icon><span class="nav-caption"><p>Log Out</p></span>
+    </a>
+  </div>
+</div>
+
+<!-- <mat-nav-list class="list-style">
   <a (click)="onClose()" class="close-sidenav">
     <mat-icon>close</mat-icon>
   </a>
@@ -38,4 +100,4 @@
   <a mat-list-item (click)="onLogOut()">
     <mat-icon>logout</mat-icon><span class="nav-caption">Log Out</span>
   </a>
-</mat-nav-list>
+</mat-nav-list> -->
