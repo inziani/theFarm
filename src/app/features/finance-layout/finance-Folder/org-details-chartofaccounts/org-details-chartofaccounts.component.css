@@ -16,7 +16,6 @@
   background-color: rgb(241, 232, 232);
   font-weight: bold;
   color: #03045e;
-
 }
 
 .mat-cell {
@@ -35,9 +34,14 @@
 }
 
 .mat-raised-button {
-  color: white;
-  background-color: #03045e;
+  /* color: white; */
+  /* background-color: #03045e; */
   border-radius: 0;
+  color: #03045e;
+
   font-weight: lighter;
   border: none;
+}
+.button {
+  background-color: rgb(241, 232, 232);
 }

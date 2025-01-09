@@ -13,10 +13,8 @@
 }
 
 .mat-header-cell {
-  background-color: rgb(241, 232, 232);
-  font-weight: bold;
+  font-weight: lighter;
   color: #03045e;
-
 }
 
 .mat-cell {
@@ -29,15 +27,32 @@
   border-radius: 0;
 }
 
-.mat-paginator {
+/* .mat-paginator {
   background-color: transparent;
+  color: #03045e;
+} */
+
+.mat-raised-button {
+  font-weight: lighter;
+  border: none;
+
+}
+
+.button {
+  background-color: rgb(241, 232, 232);
+}
+
+p {
+  font-size: small;
+  font-weight: lighter;
   color: #03045e;
 }
 
-.mat-raised-button {
-  color: white;
-  background-color: #03045e;
-  border-radius: 0;
+.mat-icon {
+  color: #03045e;
+}
+
+th {
   font-weight: lighter;
-  border: none;
+  color: #03045e;
 }

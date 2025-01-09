@@ -16,7 +16,6 @@
   background-color: rgb(241, 232, 232);
   font-weight: bold;
   color: #03045e;
-
 }
 
 .mat-cell {
@@ -35,13 +34,35 @@
 }
 
 .mat-raised-button {
-  color: white;
-  background-color: #03045e;
-  border-radius: 0;
   font-weight: lighter;
+  border: none;
+
+  /* color: white;
+  background-color: #03045e; */
+  border-radius: 0;
+  /* font-weight: lighter; */
   border: none;
 }
 
-.custom-modal{
+.custom-modal {
   border-radius: 0;
+}
+
+.button {
+  background-color: rgb(241, 232, 232);
+}
+
+p {
+  font-size: small;
+  font-weight: lighter;
+  color: #03045e;
+}
+
+.mat-icon {
+  color: #03045e;
+}
+
+th {
+  font-weight: lighter;
+  color: #03045e;
 }
