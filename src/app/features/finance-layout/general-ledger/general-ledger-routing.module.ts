@@ -5,6 +5,7 @@ import { FinanceHomeComponent } from '../finance-Folder/finance-home/finance-hom
 import { GlTransactionCodesComponent } from './gl-transaction-codes/gl-transaction-codes.component';
 import { GlMasterDataComponent } from './gl-master-data/gl-master-data.component';
 import { GeneralLedgerReportsComponent } from './general-ledger-reports/general-ledger-reports.component';
+import { GeneralLedgerDocumentEntryComponent } from './general-ledger-document-entry/general-ledger-document-entry.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'glTransactionsCodes', component: GlTransactionCodesComponent },
       { path: 'glMasterData', component: GlMasterDataComponent },
       { path: 'glReports', component: GeneralLedgerReportsComponent },
+      { path: 'glDocumentEntry', component: GeneralLedgerDocumentEntryComponent}
     ],
   },
 ];
