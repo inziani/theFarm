@@ -1,1 +1,103 @@
-<p>general-ledger-document-entry works!</p>
+<div class="container p-2" style="font-weight: lighter">
+  <form class="row g-3">
+    <div class="row g-2 p-3">
+      <!-- Document Header -->
+      <div class="col-6">
+        <div class="p-3 border bg-light">
+          <h3 style="font-weight: lighter">Document Header</h3>
+
+          <div class="row mb-3">
+            <label for="docDate" class="col-sm-3 col-form-label"
+              >Document Date</label
+            >
+            <div class="col-sm-7">
+              <input type="date" class="form-control" id="docDate" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="postingDate" class="col-sm-3 col-form-label"
+              >Posting Date</label
+            >
+            <div class="col-sm-7">
+              <input type="date" class="form-control" id="postingDate" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="reference" class="col-sm-3 col-form-label"
+              >Reference</label
+            >
+            <div class="col-sm-7">
+              <input type="text" class="form-control" id="reference" />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="headerText" class="col-sm-3 col-form-label"
+              >Header Text</label
+            >
+            <div class="col-sm-7">
+              <input type="text" class="form-control" id="headerText" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3 border bg-light" style="font-weight: lighter">
+          <h3 style="font-weight: lighter">Amount Information</h3>
+
+          <div class="row mb-3">
+            <label for="currency" class="col-sm-3 col-form-label"
+              >Currency</label
+            >
+            <div class="col-sm-7">
+              <select class="form-select" id="specificSizeSelect">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="debits" class="col-sm-3 col-form-label"
+              >Total Dr.</label
+            >
+            <div class="col-sm-7">
+              <input
+                type="number"
+                class="form-control"
+                id="debits"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="credits" class="col-sm-3 col-form-label"
+              >Total Cr.</label
+            >
+            <div class="col-sm-7">
+              <input
+                type="number"
+                class="form-control"
+                id="credits"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-2 p-3">
+      <div class="col-12">
+        <div class="p-3 border bg-light">
+          <h3 style="font-weight: lighter">Line Items</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="d-grid gap-2 col-4 mx-auto">
+        <button class="btn btn-primary" type="button">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

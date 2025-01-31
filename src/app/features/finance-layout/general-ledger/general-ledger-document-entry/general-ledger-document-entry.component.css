@@ -1,0 +1,20 @@
+.form-control {
+  border-radius: 0;
+}
+.form-select {
+  border-radius: 0;
+  font-weight: lighter;
+}
+.btn-primary {
+  background-color: #03045e;
+  border-radius: 0;
+  color: #ff9e00;
+  border-color: #ff9e00;
+  font-size: medium;
+  font-weight: lighter;
+}
+.btn:active,
+.btn:focus {
+  background-color: #ff9e00;
+  color: #03045e;
+}

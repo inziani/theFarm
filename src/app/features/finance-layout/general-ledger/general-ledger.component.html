@@ -1,4 +1,3 @@
-
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
     <app-general-ledger-sidebar
@@ -90,7 +89,8 @@
             <app-gl-master-data></app-gl-master-data>
           </div>
           <div *ngSwitchCase="'documentEntry'">
-            <app-gl-line-items></app-gl-line-items>
+            <!-- <app-gl-line-items></app-gl-line-items> -->
+            <app-general-ledger-document-entry></app-general-ledger-document-entry>
           </div>
           <div *ngSwitchCase="'generelLedgerReports'">
             <app-trial-balance></app-trial-balance>
@@ -113,4 +113,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
